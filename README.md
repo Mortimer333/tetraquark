@@ -14,6 +14,6 @@ PHP Library for minifying javascript
 3. You can:
   - Indicate if script should change the name of upper functions and global attrbiutes:
     - Which means if class `Foo` has attrbitue `name` (`Foo.name`) it won't get changed into `a`, same goes for method `getName` (`Foo.getName`) but all variables inside `getName` will be changed into letters. TL;TR; All functions and attrbiutes available for usage won't get changed, anything scoped inside function (which can't be accessed) will be.
-  - Designate some methods and attributes from minifying or designate some methods and attributes which can't be minified (one or anothe; can't use both)
+  - Designate some methods and attributes for minifying or designate some methods and attributes which can't be minified (one or anothe; can't use both)
   - Choose to not include (copy the content) of its imports
   - Choose to not include one or more of imports or choose to include one or more of imports (try to allow for choosing specific functions, like copy all other stuff into this file but leave this method call like it was (so copy method `render.content()` into `ab()` but leave `render.clear()` without changes))
