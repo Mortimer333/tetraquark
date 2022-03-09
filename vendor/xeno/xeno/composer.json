@@ -1,9 +1,0 @@
-{
-    "name": "xeno/xeno",
-    "description" : "Dynamically changes native PHP functions into chain syntax",
-    "keywords": ["chain","syntax"],
-    "license": "GPL-2.0-only",
-    "autoload": {
-        "psr-4": { "Xeno\\": "src/" }
-    }
-}
