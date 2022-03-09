@@ -80,7 +80,48 @@ class Tetraquark
 
             $this->settings[$key] = $settings[$key] ?? $value['default'];
         }
+    }
 
-        var_dump($this->settings);
+    public function minify(string $path): string
+    {
+        $file = $this->getFile($path);
+        $map  = $this->mapJS($file);
+        return '';
+    }
+
+    protected function getFile(string $path)
+    {
+        if (!\is_file($path)) {
+            throw new TetraquarkException('Passed file not found, did you provide absolute path?', 404);
+        }
+
+        return \file_get_contents($path);
+    }
+
+    protected function mapJS(string $contents): array
+    {
+        $map = [];
+        for ($i=0; $i < \strlen($contents); $i++) {
+            $letter = $contents[$i];
+            if ($this->isEndChar($letter)) {
+                if ($i !== 0) {
+                    $map[] = trim(trim(substr($contents, 0, $i + 1)), ';');
+                }
+                $contents = substr($contents, $i + 1);
+                $i = -1;
+            }
+        }
+        var_dump($map);
+        return $map;
+    }
+
+    protected function isEndChar(string $letter): bool
+    {
+        $endChars = [
+            "\n" => true,
+            ";" => true,
+            // "}" This is also end letter but only for functions and classes so we will check this later
+        ];
+        return $endChars[$letter] ?? false;
     }
 }

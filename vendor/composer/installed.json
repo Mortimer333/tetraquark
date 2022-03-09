@@ -1,0 +1,45 @@
+{
+    "packages": [
+        {
+            "name": "xeno/xeno",
+            "version": "dev-main",
+            "version_normalized": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Mortimer333/Xeno.git",
+                "reference": "5336efddc8319ab563d82eb28edc3fabd77f5295"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Mortimer333/Xeno/zipball/5336efddc8319ab563d82eb28edc3fabd77f5295",
+                "reference": "5336efddc8319ab563d82eb28edc3fabd77f5295",
+                "shasum": ""
+            },
+            "time": "2021-03-31T12:09:48+00:00",
+            "default-branch": true,
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Xeno\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-only"
+            ],
+            "description": "Dynamically changes native PHP functions into chain syntax",
+            "keywords": [
+                "Chain",
+                "syntax"
+            ],
+            "support": {
+                "issues": "https://github.com/Mortimer333/Xeno/issues",
+                "source": "https://github.com/Mortimer333/Xeno/tree/main"
+            },
+            "install-path": "../xeno/xeno"
+        }
+    ],
+    "dev": true,
+    "dev-package-names": []
+}

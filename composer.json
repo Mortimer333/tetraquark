@@ -1,0 +1,20 @@
+{
+    "name": "tetraquark/tetraquark",
+    "description": "Javascript minifier",
+    "type": "library",
+    "require": {
+        "xeno/xeno": "dev-main"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tetraquark\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "michal.dzierzbicki",
+            "email": "michal.dzierzbicki@vp.pl"
+        }
+    ],
+    "minimum-stability": "dev"
+}

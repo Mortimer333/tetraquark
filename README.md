@@ -1,4 +1,4 @@
-# tetraquark-js
+# tetraquark
 PHP Library for minifying javascript
 
 # Draft

@@ -1,0 +1,57 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "2104f38923ac7a3b9136cfc67114c3eb",
+    "packages": [
+        {
+            "name": "xeno/xeno",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Mortimer333/Xeno.git",
+                "reference": "5336efddc8319ab563d82eb28edc3fabd77f5295"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Mortimer333/Xeno/zipball/5336efddc8319ab563d82eb28edc3fabd77f5295",
+                "reference": "5336efddc8319ab563d82eb28edc3fabd77f5295",
+                "shasum": ""
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Xeno\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-only"
+            ],
+            "description": "Dynamically changes native PHP functions into chain syntax",
+            "keywords": [
+                "Chain",
+                "syntax"
+            ],
+            "support": {
+                "issues": "https://github.com/Mortimer333/Xeno/issues",
+                "source": "https://github.com/Mortimer333/Xeno/tree/main"
+            },
+            "time": "2021-03-31T12:09:48+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "xeno/xeno": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.2.0"
+}
