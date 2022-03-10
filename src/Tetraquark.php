@@ -100,19 +100,34 @@ class Tetraquark
 
     protected function mapJS(string $contents): array
     {
-        $map = [];
+        $map  = [];
+        $item = [];
         for ($i=0; $i < \strlen($contents); $i++) {
             $letter = $contents[$i];
+            if ($letter == ' ') {
+                $this->getWord($item, $contents, $i);
+                continue;
+            }
             if ($this->isEndChar($letter)) {
-                if ($i !== 0) {
-                    $map[] = trim(trim(substr($contents, 0, $i + 1)), ';');
+                $this->getWord($item, $contents, $i);
+                if (\sizeof($item) > 0) {
+                    $map[] = $item;
+                    $item = [];
                 }
-                $contents = substr($contents, $i + 1);
-                $i = -1;
             }
         }
         var_dump($map);
         return $map;
+    }
+
+    private function getWord(array &$item, string &$contents, int &$i): void
+    {
+        $content = trim(trim(substr($contents, 0, $i + 1)), ';');
+        if (\strlen($content) > 0) {
+            $item[] = $content;
+        }
+        $contents = substr($contents, $i + 1);
+        $i = -1;
     }
 
     protected function isEndChar(string $letter): bool
