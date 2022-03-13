@@ -104,12 +104,16 @@ class Tetraquark
         $item = [];
         for ($i=0; $i < \strlen($contents); $i++) {
             $letter = $contents[$i];
+            if ($this->isSingle($letter)) {
+                $this->addLetter($item, $contents, $i, $letter);
+                continue;
+            }
             if ($letter == ' ') {
-                $this->getWord($item, $contents, $i);
+                $this->addWord($item, $contents, $i);
                 continue;
             }
             if ($this->isEndChar($letter)) {
-                $this->getWord($item, $contents, $i);
+                $this->addWord($item, $contents, $i);
                 if (\sizeof($item) > 0) {
                     $map[] = $item;
                     $item = [];
@@ -120,7 +124,56 @@ class Tetraquark
         return $map;
     }
 
-    private function getWord(array &$item, string &$contents, int &$i): void
+    private function isFunction(string $content): bool
+    {
+        /*
+            Possible function syntaxes:
+            - function () {}
+            - () => {}
+            - x => {}
+            - x => x + 1
+            We can check if its a function if there is `function` or `=>` sign
+        */
+    }
+
+    private function addLetter(array &$item, string &$contents, int &$i, string $letter): void
+    {
+        $i--;
+        $this->addWord($item, $contents, $i);
+        $contents = substr($contents, 1);
+        $item[] = $letter;
+    }
+
+    private function isSingle(string $letter): bool
+    {
+        $singles = [
+            "(" => true,
+            ")" => true,
+            "{" => true,
+            "}" => true,
+            "+" => true,
+            "-" => true,
+            "/" => true,
+            "*" => true,
+            "=" => true,
+            "!" => true,
+            "'" => true,
+            '"' => true,
+            '`' => true,
+            '[' => true,
+            ']' => true,
+            '%' => true,
+            '^' => true,
+            ":" => true,
+            ">" => true,
+            "<" => true,
+            "," => true,
+        ];
+
+        return $singles[$letter] ?? false;
+    }
+
+    private function addWord(array &$item, string &$contents, int &$i): void
     {
         $content = trim(trim(substr($contents, 0, $i + 1)), ';');
         if (\strlen($content) > 0) {
