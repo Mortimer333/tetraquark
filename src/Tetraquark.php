@@ -32,9 +32,9 @@ class Tetraquark
      * @var array
      */
     private array $settings = [];
-    private const DEFAULT = 'default';
-    private const OMIT    = 'omit';
-    private const ONLY    = 'only';
+    public const DEFAULT = 'default';
+    public const OMIT    = 'omit';
+    public const ONLY    = 'only';
     public function __construct(array $settings = [])
     {
         $this->validateSettings($settings);
@@ -75,7 +75,7 @@ class Tetraquark
                 && \sizeof($value['options']) > 0                     // If empty any value works
                 && !\in_array($value['options'], $settings[$key])
             ) {
-                throw new TetraquarkException("Not allowed value in " . $key, 400);
+                throw new Exception("Not allowed value in " . $key, 400);
             }
 
             $this->settings[$key] = $settings[$key] ?? $value['default'];
@@ -84,15 +84,15 @@ class Tetraquark
 
     public function minify(string $path): string
     {
-        $file = $this->getFile($path);
-        $map  = $this->mapJS($file);
+        $file  = $this->getFile($path);
+        $block = new Block\Script($file, Block::SCOPE_SCRIPT);
         return '';
     }
 
     protected function getFile(string $path)
     {
         if (!\is_file($path)) {
-            throw new TetraquarkException('Passed file not found, did you provide absolute path?', 404);
+            throw new Exception('Passed file not found, did you provide absolute path?', 404);
         }
 
         return \file_get_contents($path);
@@ -104,12 +104,19 @@ class Tetraquark
         $item = [];
         for ($i=0; $i < \strlen($contents); $i++) {
             $letter = $contents[$i];
-            if ($this->isSingle($letter)) {
-                $this->addLetter($item, $contents, $i, $letter);
-                continue;
-            }
+
+            // if ($this->isSingle($letter)) {
+            //     $this->addLetter($item, $contents, $i, $letter);
+                // if (($letter == '{' || $letter == '>') && $this->isFunction($map)) {
+                //
+                // }
+            //     continue;
+            // }
             if ($letter == ' ') {
                 $this->addWord($item, $contents, $i);
+                if ($this->isFunction($map, $letter, $contents, $i)) {
+
+                }
                 continue;
             }
             if ($this->isEndChar($letter)) {
@@ -124,7 +131,7 @@ class Tetraquark
         return $map;
     }
 
-    private function isFunction(string $content): bool
+    private function isFunction(array $map, string $letter, string $contents, int $i): bool
     {
         /*
             Possible function syntaxes:
@@ -132,8 +139,24 @@ class Tetraquark
             - () => {}
             - x => {}
             - x => x + 1
-            We can check if its a function if there is `function` or `=>` sign
+            - let x = function () {}
+            We can check if its a function if there is `)` or `=>` before {
         */
+        $lastWord = $map[\sizeof($map) - 1];
+        $funcObjSwitch = [
+            'function' => function () {
+                $this->type = Block::FUNC;
+                return true;
+            },
+            '=>' => function () {
+                $this->type = Block::FUNC_ARROW;
+                return true;
+            },
+            'default' => function () {
+                return false;
+            }
+        ];
+        return ($funcObjSwitch[$lastWord] ?? $funcObjSwitch['default'])();
     }
 
     private function addLetter(array &$item, string &$contents, int &$i, string $letter): void

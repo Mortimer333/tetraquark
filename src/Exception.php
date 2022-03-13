@@ -2,5 +2,5 @@
 
 namespace Tetraquark;
 
-class TetraquarkException extends \Exception
+class Exception extends \Exception
 {}
