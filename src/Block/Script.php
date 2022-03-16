@@ -40,5 +40,6 @@ class Script extends Block implements Contract\Block
             // }
         }
         var_dump($this->blocks);
+        var_dump($this);
     }
 }
