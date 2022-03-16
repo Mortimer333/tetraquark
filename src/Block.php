@@ -5,18 +5,26 @@ namespace Tetraquark;
 abstract class Block
 {
     protected string $content;
+    /** @var string Blocks instruction - declaration of variable, functions definition etc. */
+    protected string $instruction;
     protected string $subtype;
     protected array  $data;
     /** @var Block[] Array of Blocks */
     protected array  $blocks;
+    protected array  $endChars = [
+        "\n" => true,
+        ";" => true,
+        // "}" This is also end letter but only for functions and classes so we will check this later
+    ];
 
     public function __construct(
         string $content,
-        array $data  = []
+        int    $start = 0,
+        array  $data  = []
     ) {
         $this->content = $content;
         $this->data    = $data;
-        $this->objectify();
+        $this->objectify($start);
     }
 
     public function getContent(): string
@@ -42,12 +50,7 @@ abstract class Block
 
     protected function isEndChar(string $letter): bool
     {
-        $endChars = [
-            "\n" => true,
-            ";" => true,
-            // "}" This is also end letter but only for functions and classes so we will check this later
-        ];
-        return $endChars[$letter] ?? false;
+        return $this->endChars[$letter] ?? false;
     }
 
     protected function isNewBlock(string $letter, int $i, string $content)
@@ -67,7 +70,7 @@ abstract class Block
         }
     }
 
-    protected function BlockFactory(string $name, string $content): Block
+    protected function BlockFactory(string $name, string $content, int $start): Block
     {
         $blocks = [
             'function' => 'Tetraquark\Block\Method',
@@ -76,6 +79,31 @@ abstract class Block
         if (!isset($blocks[$name])) {
             throw new Exception("Block couldn't be created with name: " . htmlspecialchars($name), 404);
         }
-        return new $blocks[$name]($content);
+        return new $blocks[$name]($content, $start);
+    }
+
+    protected function isValidVariable(string $variable): bool
+    {
+        $regex = '/^[$_\p{L}][$_\p{L}\p{Mn}\p{Mc}\p{Nd}\p{Pc}\u200C\u200D]*+$/';
+        $res = preg_match($regex, $variable);
+        if (!$res) {
+            return false;
+        }
+
+        $notAllowedConsts = [
+            'break' => true, 'do' => true, 'instanceof' => true,
+            'typeof' => true, 'case' => true, 'else' => true, 'new' => true,
+            'var' => true, 'catch' => true, 'finally' => true, 'return' => true,
+            'void' => true, 'continue' => true, 'for' => true, 'switch' => true,
+            'while' => true, 'debugger' => true, 'function' => true, 'this' => true,
+            'with' => true, 'default' => true, 'if' => true, 'throw' => true,
+            'delete' => true, 'in' => true, 'try' => true, 'class' => true,
+            'enum' => true, 'extends' => true, 'super' => true, 'const' => true,
+            'export' => true, 'import' => true, 'implements' => true, 'let' => true,
+            'private' => true, 'public' => true, 'yield' => true, 'interface' => true,
+            'package' => true, 'protected' => true, 'static' => true, 'null' => true,
+            'true' => true, 'false' => true
+        ];
+        return !isset($notAllowedConsts[$variable]);
     }
 }

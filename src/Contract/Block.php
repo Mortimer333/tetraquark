@@ -3,5 +3,5 @@ namespace Tetraquark\Contract;
 
 interface Block
 {
-    public function objectify();
+    public function objectify(int $start = 0);
 }
