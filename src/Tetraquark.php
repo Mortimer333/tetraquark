@@ -133,15 +133,6 @@ class Tetraquark
 
     private function isFunction(array $map, string $letter, string $contents, int $i): bool
     {
-        /*
-            Possible function syntaxes:
-            - function () {}
-            - () => {}
-            - x => {}
-            - x => x + 1
-            - let x = function () {}
-            We can check if its a function if there is `)` or `=>` before {
-        */
         $lastWord = $map[\sizeof($map) - 1];
         $funcObjSwitch = [
             'function' => function () {
