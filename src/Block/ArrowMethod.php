@@ -9,6 +9,7 @@ use \Tetraquark\Block as Block;
 
 class ArrowMethod extends Block implements Contract\Block
 {
+    // protected array $endChars = ;
     /*
         Possible function syntaxes:
         - () => {}
@@ -25,7 +26,7 @@ class ArrowMethod extends Block implements Contract\Block
         $subEnd   = null;
         Log::increaseIndent();
         for ($i=$start - 2; $i >= 0; $i--) {
-            $letter = $this->content[$i];
+            $letter = self::$content[$i];
             Log::log("New letter `" . $letter . "`", 2);
             if (!$searchForBracketsStart && $letter == ')') {
                 Log::log("Start search for brackets", 2);
@@ -62,8 +63,8 @@ class ArrowMethod extends Block implements Contract\Block
         Log::log("Start search for end", 1);
         Log::increaseIndent();
         $searchForEnd = false;
-        for ($i=$start + 1; $i < strlen($this->content); $i++) {
-            $letter = $this->content[$i];
+        for ($i=$start + 1; $i < strlen(self::$content); $i++) {
+            $letter = self::$content[$i];
             Log::log("Letter " . $letter, 2);
 
             if ($searchForEnd && $this->isEndChar($letter)) {
@@ -90,10 +91,14 @@ class ArrowMethod extends Block implements Contract\Block
         }
         Log::decreaseIndent();
 
-        $instruction = (new Xeno($this->content))->substr($subStart, $subEnd - $subStart)->replace("\n", ' ');
+        $instruction = (new Xeno(self::$content))->substr($subStart, $subEnd - $subStart)->replace("\n", ' ');
         $this->setInstruction($instruction);
         if ($this->isMultiLine()) {
             $this->endFunction = true;
+            $this->endChars = [
+                '}' => true
+            ];
+            $this->createSubBlocks();
         }
     }
 

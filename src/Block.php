@@ -5,9 +5,9 @@ use \Xeno\X as Xeno;
 
 abstract class Block
 {
+    static protected string $content;
     protected int    $caret = 0;
     protected bool   $endFunction = false;
-    protected string $content;
     /** @var Xeno $instruction Actual block representation in code */
     protected Xeno   $instruction;
     protected string $subtype = '';
@@ -25,7 +25,7 @@ abstract class Block
         string $subtype = '',
         array  $data  = []
     ) {
-        $this->content = $content;
+        self::$content = $content;
         $this->subtype = $subtype;
         $this->data    = $data;
         $this->objectify($start);
@@ -33,12 +33,12 @@ abstract class Block
 
     public function getContent(): string
     {
-        return $this->content;
+        return self::$content;
     }
 
     public function setContent(string $content): self
     {
-        $this->content = $content;
+        self::$content = $content;
         return $this;
     }
 
@@ -107,7 +107,8 @@ abstract class Block
         if (!isset($blocks[$name])) {
             throw new Exception("Block couldn't be created with name: " . htmlspecialchars($name), 404);
         }
-        return new ($prefix . $blocks[$name])($content, $start, $name);
+        $class = $prefix . $blocks[$name];
+        return new $class($content, $start, $name);
     }
 
     protected function isValidVariable(string $variable): bool
@@ -140,21 +141,74 @@ abstract class Block
         return (bool) preg_match('/[\s]/', $letter);
     }
 
-    protected function findInstructionEnd(int $start, string $name, string $endchar): void
+    protected function findInstructionEnd(int $start, string $name, array $endChars): void
     {
         $properEnd = null;
-        for ($i=$start; $i < strlen($this->content); $i++) {
-            $letter = $this->content[$i];
-            if ($letter == $endchar) {
+        for ($i=$start + 1; $i < strlen(self::$content); $i++) {
+            $letter = self::$content[$i];
+            Log::log("Letter: " . $letter, 2);
+            if ($endChars[$letter] ?? false) {
+                Log::log("Proper end : " . $i, 2);
                 $properEnd = $i + 1;
-                $this->setCaret($i);
+                $this->setCaret($properEnd);
                 break;
             }
         }
 
         $properStart = $start - (strlen($name) - 1);
 
-        $instruction = (new Xeno($this->content))->substr($properStart, $properEnd - $properStart);
+        $instruction = (new Xeno(self::$content))->substr($properStart, $properEnd - $properStart);
         $this->setInstruction($instruction);
+    }
+
+    protected function constructBlock(string $word, int &$i): ?Block
+    {
+        if (!($name = $this->isNewBlock($word))) {
+            return null;
+        }
+
+        Log::increaseIndent();
+        Log::log("New block: " . $name);
+
+        $block = $this->blockFactory($name, self::$content, $i);
+
+        Log::log('Iteration count changed from ' . $i . " to " . $block->getCaret(), 1);
+        Log::log("Instruction: `". $block->getInstruction() . "`");
+
+        $i = $block->getCaret();
+        Log::decreaseIndent();
+        return $block;
+    }
+
+    protected function createSubBlocks(): void
+    {
+        $word = '';
+        for ($i=$this->getCaret(); $i < \strlen(self::$content); $i++) {
+            $letter = self::$content[$i];
+            $word  .= $letter;
+            Log::log("Letter: " . $letter . ', Word: ' . $word, 2);
+            if ($this->isWhitespace($letter) && !($this->endChars[$letter] ?? false)) {
+                Log::log("Word clear!", 2);
+                $word = '';
+                continue;
+            }
+
+            Log::log("End Check: " . implode(', ', array_keys($this->endChars)) . ' == ' . $letter, 1);
+            if ($this->endChars[$letter] ?? false) {
+                Log::log("End found!", 1);
+                break;
+            }
+
+            $block = $this->constructBlock($word, $i);
+            if ($block) {
+                Log::log("Add Block!", 1);
+                $this->blocks[] = $block;
+                $word = '';
+            }
+        }
+
+        $this->setCaret($i);
+        Log::log("Updated caret " . $this->getCaret(), 1);
+
     }
 }

@@ -11,43 +11,20 @@ class Script extends Block implements Contract\Block
     {
         $map    = [];
         $item   = [];
-        $scopes = [];
-        $scope  = $this;
         $word   = '';
-        array_unshift($scopes, $scope);
-        for ($i=$start; $i < \strlen($scope->content); $i++) {
+        for ($i=$start; $i < \strlen(self::$content); $i++) {
             $this->setCaret($i);
-            $scope  = $scopes[0];
-            $letter = $scope->content[$i];
+            $letter = self::$content[$i];
             $word  .= $letter;
             if ($this->isWhitespace($letter)) {
                 $word = '';
             }
             Log::log("Letter: " . $letter, 2);
-            if ($letter == '}' && $scope->endFunction) {
-                Log::log("Scope change! From " . get_class($scope) . " to " . get_class($scopes[1]), 1);
-                array_shift($scopes);
-                $scope = $scopes[0];
-            }
-            if ($name = $this->isNewBlock($word)) {
-                Log::increaseIndent();
-                Log::log("New block: " . $name);
-                $block = $this->blockFactory($name, $scope->content, $i);
-                if ($block instanceof Method || $block instanceof ArrowMethod) {
 
-                }
-                $scope->blocks[] = $block;
-                Log::log('Iteration count changed from ' . $i . " to " . $block->getCaret(), 1);
-                $i = $block->getCaret();
-                Log::log("Instruction: `". $block->getInstruction() . "`");
-                if ($block->endFunction) {
-                    Log::log("Block is multiline, adding another layer of scope", 1);
-                    $scope = $block;
-                    array_unshift($scopes, $scope);
-                } else {
-                    Log::log("Block is not multiline", 1);
-                }
-                Log::decreaseIndent();
+            $block = $this->constructBlock($word, $i);
+            if ($block) {
+                Log::log("Add Block!", 1);
+                $this->blocks[] = $block;
             }
         }
         Log::log("=======================");
