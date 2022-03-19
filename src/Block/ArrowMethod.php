@@ -63,13 +63,14 @@ class ArrowMethod extends Block implements Contract\Block
         Log::log("Start search for end", 1);
         Log::increaseIndent();
         $searchForEnd = false;
+        $subEnd = null;
         for ($i=$start + 1; $i < strlen(self::$content); $i++) {
             $letter = self::$content[$i];
             Log::log("Letter " . $letter, 2);
 
             if ($searchForEnd && $this->isEndChar($letter)) {
                 Log::log("End char found, setting the end...", 2);
-                $subEnd = $i + 1;
+                $subEnd = $i;
                 $this->setCaret($i + 1);
                 break;
             }
@@ -91,6 +92,10 @@ class ArrowMethod extends Block implements Contract\Block
         }
         Log::decreaseIndent();
 
+        if (\is_null($subEnd)) {
+            throw new Exception('End of arrow method not found', 404);
+        }
+
         $instruction = (new Xeno(self::$content))->substr($subStart, $subEnd - $subStart)->replace("\n", ' ');
         $this->setInstruction($instruction);
         if ($this->isMultiLine()) {
@@ -100,6 +105,8 @@ class ArrowMethod extends Block implements Contract\Block
             ];
             $this->createSubBlocks();
         }
+
+        $this->setName('');
     }
 
     public function isMultiLine(): bool

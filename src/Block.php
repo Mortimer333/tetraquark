@@ -10,12 +10,16 @@ abstract class Block
     protected bool   $endFunction = false;
     /** @var Xeno $instruction Actual block representation in code */
     protected Xeno   $instruction;
+    protected int    $instructionStart;
+    protected int    $instructionLength;
     protected string $subtype = '';
+    protected string $name;
     protected array  $data;
     /** @var Block[] $blocks Array of Blocks */
     protected array  $blocks = [];
     protected array  $endChars = [
         "\n" => true,
+        "\r" => true,
         ";" => true,
     ];
 
@@ -76,6 +80,39 @@ abstract class Block
         return $this;
     }
 
+    public function setInstructionStart(int $start): self
+    {
+        $this->instructionStart = $start;
+        return $this;
+    }
+
+    public function getInstructionStart(): int
+    {
+        return $this->instructionStart;
+    }
+
+    public function setInstructionLength(int $length): self
+    {
+        $this->instructionLength = $length;
+        return $this;
+    }
+
+    public function getInstructionLength(): int
+    {
+        return $this->instructionLength;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
     protected function isEndChar(string $letter): bool
     {
         return $this->endChars[$letter] ?? false;
@@ -90,8 +127,7 @@ abstract class Block
             'const'    => 'const',
             'var'      => 'var'
         ];
-        $name = $hints[$name] ?? false;
-        return $name;
+        return $hints[$name] ?? false;
     }
 
     protected function BlockFactory(string $name, string $content, int $start): Block
@@ -155,10 +191,15 @@ abstract class Block
             }
         }
 
-        $properStart = $start - (strlen($name) - 1);
+        if (is_null($properEnd)) {
+            throw new Exception('Proper End not found', 404);
+        }
 
-        $instruction = (new Xeno(self::$content))->substr($properStart, $properEnd - $properStart);
-        $this->setInstruction($instruction);
+        $properStart = $start - (strlen($name) - 1);
+        $instruction = (new Xeno(self::$content))->substr($properStart, $properEnd - $properStart)->trim();
+        $this->setInstructionStart($properStart)
+            ->setInstructionLength($properEnd - $properStart)
+            ->setInstruction($instruction);
     }
 
     protected function constructBlock(string $word, int &$i): ?Block
@@ -210,5 +251,20 @@ abstract class Block
         $this->setCaret($i);
         Log::log("Updated caret " . $this->getCaret(), 1);
 
+    }
+
+    protected function findAndSetName(string $prefix, array $ends): void
+    {
+        $instr = $this->instruction->get();
+        $start = \strlen($prefix);
+        for ($i=$start; $i < strlen($instr); $i++) {
+            $letter = $instr[$i];
+            if ($ends[$letter] ?? false || $this->isWhitespace($letter)) {
+                $this->setName(substr($instr, $start, $i - $start));
+                Log::log('Blocks name: ' . $this->getName());
+                return;
+            }
+        }
+        throw new Exception('Blocks name not found', 404);
     }
 }

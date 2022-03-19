@@ -8,6 +8,7 @@ use \Tetraquark\Block as Block;
 
 class Variable extends Block implements Contract\Block
 {
+    protected string $value = '';
     protected array $endChars = [
         ';' => true,
         "\n" => true
@@ -21,19 +22,22 @@ class Variable extends Block implements Contract\Block
     {
         $this->findInstructionEnd($start, $this->subtype, $this->instructionEnds);
         $this->createSubBlocks();
+        if (\sizeof($this->blocks) == 0) {
+            $instrEnd = $this->getInstructionStart() + $this->getInstructionLength();
+            $this->setValue(trim(substr(self::$content, $instrEnd, $this->getCaret() - $instrEnd)));
+        }
+        $this->findAndSetName($this->getSubtype() . ' ', ['=' => true]);
+    }
 
-        // $word = '';
-        // for ($i=$this->getCaret(); $i < strlen(self::$content); $i++) {
-        //     $letter = self::$content[$i];
-        //     // Is function - somehow check it
-        //     // Is class - new
-        //     // Is normal sequence - ;
-        //     $word .= $letter;
-        //     if ($this->isWhitespace($letter)) {
-        //         $word = '';
-        //     }
-        //     $this->constructBlock($word, $i);
-        // }
+    public function setValue(string $value): self
+    {
+        $this->value = $value;
+        return $this;
+    }
+
+    public function getValue(): string
+    {
+        return $this->value;
     }
 
     protected function isStartingString(string $letter): bool

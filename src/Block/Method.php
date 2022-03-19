@@ -20,5 +20,9 @@ class Method extends Block implements Contract\Block
     {
         $this->findInstructionEnd($start, 'function', $this->instructionEnds);
         $this->createSubBlocks();
+        $this->findAndSetName('function ', ['(' => true]);
+        if (\strlen($this->getName()) == 0) {
+            $this->setSubtype('anonymous:function');
+        }
     }
 }

@@ -4,20 +4,50 @@ namespace Tetraquark;
 
 class Log
 {
-    static protected int  $indent = 0;
-    static protected int  $verbose = 0;
-    static protected int  $maxVerbose = 3;
-    static protected int $classLimit    = 20;
-    static protected int $functionLimit = 20;
-    static protected bool $addClass     = true;
-    static protected bool $addFunction  = true;
-    static protected string $oldFunction = '';
+    static protected int     $indent        = 0;
+    static protected int     $verbose       = 0;
+    static protected int     $maxVerbose    = 0;
+    static protected int     $classLimit    = 20;
+    static protected int     $functionLimit = 20;
+    static protected ?string $timeStart     = null;
+    static protected bool    $addClass      = true;
+    static protected bool    $addFunction   = true;
+    static protected string  $oldFunction   = '';
 
     function __construct()
     {
     }
 
-    static public function log(string $output, ?int $verbose = null): void
+    static public function timeStart(): void
+    {
+        self::$timeStart = microtime();
+    }
+
+    static public function timeEnd(): void
+    {
+        $timeEnd = self::getMilliseconds(microtime());
+
+        if (\is_null(self::$timeStart)) {
+            throw new Exception('Time start is null', 400);
+        }
+
+        $timeStart = self::getMilliseconds(self::$timeStart);
+        $time = $timeEnd - $timeStart;
+        self::log('Duration: ' . ($time/1000) . 's', null, 1);
+    }
+
+    static private function getMilliseconds(string $microtime) {
+        $mt = explode(' ', $microtime);
+        return ((int)$mt[1]) * 1000 + ((int)round($mt[0] * 1000));
+    }
+
+    static public function time(): void
+    {
+        list($usec, $sec) = explode(" ", microtime());
+        self::log(date('H:i:s:') . round($usec * 1000), 0 , 1);
+    }
+
+    static public function log(string $output, ?int $verbose = null, int $traceLvl = 0): void
     {
         if (is_null($verbose)) {
             $verbose = self::$verbose;
@@ -28,12 +58,12 @@ class Log
             $classStr = '';
             $function = '';
             if (self::$addClass) {
-                $debug = debug_backtrace()[1];
+                $debug = debug_backtrace()[1 + $traceLvl];
                 $class = self::fitString($debug['class'], self::$classLimit) . ' | ';
             }
             if (self::$addFunction) {
                 if (!isset($debug)) {
-                    $debug = debug_backtrace()[1];
+                    $debug = debug_backtrace()[1 + $traceLvl];
                 }
                 $function = self::fitString($debug['function'], self::$functionLimit) . ' | ';
 

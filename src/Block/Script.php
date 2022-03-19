@@ -9,6 +9,7 @@ class Script extends Block implements Contract\Block
 {
     public function objectify(int $start = 0)
     {
+        Log::timeStart();
         $map    = [];
         $item   = [];
         $word   = '';
@@ -29,6 +30,7 @@ class Script extends Block implements Contract\Block
         }
         Log::log("=======================");
         $this->displayBlocks($this->blocks);
+        Log::timeEnd();
     }
 
     public function displayBlocks(array $blocks)
@@ -37,6 +39,10 @@ class Script extends Block implements Contract\Block
             Log::log("Block: " . get_class($block), 1);
             Log::log("Subtype: " . $block->getSubtype(), 1);
             Log::log("Instruction: " . $block->getInstruction());
+            Log::log("Name: `" . $block->getName() . "`");
+            if (method_exists($block, 'getValue')) {
+                Log::log("Value: `" . $block->getValue() . "`");
+            }
             Log::log("=======", 1);
             Log::increaseIndent();
             $this->displayBlocks($block->blocks);
