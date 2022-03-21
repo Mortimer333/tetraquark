@@ -10,6 +10,16 @@ class Script extends Block implements Contract\Block
     /** @var string Minified script */
     protected string $minified = '';
 
+    public function __construct(
+        string $content,
+        protected int    $start = 0,
+        protected string $subtype = '',
+        protected array  $data  = []
+    ) {
+        self::$content = $content;
+        parent::__construct($start, $subtype, $data);
+    }
+
     public function objectify(int $start = 0)
     {
         Log::timerStart();

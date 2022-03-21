@@ -12,11 +12,9 @@ abstract class Block
     protected string $instruction;
     protected int    $instructionStart;
     protected int    $instructionLength;
-    protected string $subtype = '';
     protected string $name;
     protected string $alias;
     protected array  $aliasesMap = [];
-    protected array  $data;
     /** @var Block[] $blocks Array of Blocks */
     protected array  $blocks = [];
     protected array  $endChars = [
@@ -40,14 +38,10 @@ abstract class Block
     ];
 
     public function __construct(
-        string $content,
-        int    $start = 0,
-        string $subtype = '',
-        array  $data  = []
+        int $start = 0,
+        protected string $subtype = '',
+        protected array  $data  = []
     ) {
-        self::$content = $content;
-        $this->subtype = $subtype;
-        $this->data    = $data;
         $this->objectify($start);
     }
 
@@ -184,7 +178,7 @@ abstract class Block
         return $hints[$name] ?? false;
     }
 
-    protected function BlockFactory(string $name, string $content, int $start): Block
+    protected function blockFactory(string $name, int $start): Block
     {
         $prefix = 'Tetraquark\Block\\';
         $blocks = [
@@ -198,7 +192,7 @@ abstract class Block
             throw new Exception("Block couldn't be created with name: " . htmlspecialchars($name), 404);
         }
         $class = $prefix . $blocks[$name];
-        return new $class($content, $start, $name);
+        return new $class($start, $name);
     }
 
     protected function isValidVariable(string $variable): bool
@@ -231,8 +225,12 @@ abstract class Block
         return (bool) preg_match('/[\s]/', $letter);
     }
 
-    protected function findInstructionEnd(int $start, string $name, array $endChars): void
+    protected function findInstructionEnd(int $start, string $name, ?array $endChars = null): void
     {
+        if (\is_null($endChars)) {
+            $endChars = $this->endChars;
+        }
+
         $properEnd = null;
         for ($i=$start + 1; $i < strlen(self::$content); $i++) {
             $letter = self::$content[$i];
@@ -265,7 +263,7 @@ abstract class Block
         Log::increaseIndent();
         Log::log("New block: " . $name, 1);
 
-        $block = $this->blockFactory($name, self::$content, $i);
+        $block = $this->blockFactory($name, $i);
 
         Log::log('Iteration count changed from ' . $i . " to " . $block->getCaret(), 1);
         Log::log("Instruction: `". $block->getInstruction() . "`", 1);
@@ -278,18 +276,29 @@ abstract class Block
     protected function createSubBlocks(): void
     {
         $word = '';
+        $lastFound = 0;
+        $possibleUndefined = '';
+        $undefinedEnds = ["\n" => true, ";" => true];
         for ($i=$this->getCaret(); $i < \strlen(self::$content); $i++) {
             $letter = self::$content[$i];
-            $word  .= $letter;
+
             Log::log("Letter: " . $letter . ', Word: ' . $word, 2);
+
             if ($this->isWhitespace($letter) && !($this->endChars[$letter] ?? false)) {
                 Log::log("Word clear!", 2);
+                if (\mb_strlen($word) > 0) {
+                    Log::log("Add undefined: `" . $word . "`", 2);
+                    $possibleUndefined .= $word . ' ';
+                }
                 $word = '';
                 continue;
             }
+            $word .= $letter;
 
             Log::log("End Check: " . implode(', ', array_keys($this->endChars)) . ' == ' . $letter, 1);
             if ($this->endChars[$letter] ?? false) {
+                Log::log("Clear undefined", 2);
+                $possibleUndefined = '';
                 Log::log("End found!", 1);
                 break;
             }
@@ -297,8 +306,18 @@ abstract class Block
             $block = $this->constructBlock($word, $i);
             if ($block) {
                 Log::log("Add Block! Current letter " . self::$content[$i - 1], 1);
+                Log::log("Clear undefined", 2);
+                $possibleUndefined = '';
                 $this->blocks[] = $block;
+                $lastFound = $i;
                 $word = '';
+            }
+
+            if ($undefinedEnds[$letter] ?? false && \mb_strlen($possibleUndefined) > 0) {
+                $possibleUndefined .= $word;
+                Log::log("Create undefined!", 2);
+                $this->blocks[] = new Block\Undefined($i - \mb_strlen($possibleUndefined), $possibleUndefined);
+                $possibleUndefined = '';
             }
         }
 

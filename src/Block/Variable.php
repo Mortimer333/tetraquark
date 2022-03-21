@@ -50,7 +50,6 @@ class Variable extends Block implements Contract\Block
         return $stringStarts[$letter] ?? false;
     }
 
-    // @TODO replace all variables to their aliases in value
     public function recreate(): string
     {
         $script = $this->getSubType() . ' ' . $this->getAlias() . '=';
