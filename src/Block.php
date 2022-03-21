@@ -296,7 +296,7 @@ abstract class Block
 
             $block = $this->constructBlock($word, $i);
             if ($block) {
-                Log::log("Add Block!", 1);
+                Log::log("Add Block! Current letter " . self::$content[$i - 1], 1);
                 $this->blocks[] = $block;
                 $word = '';
             }
@@ -391,5 +391,32 @@ abstract class Block
         }
         Log::log("Alias is not valid, generating new one...", 1);
         return $this->generateAlias($newAlias, $newAlias);
+    }
+
+    protected function getAliasForVariable(string $name): string
+    {
+        return $this->aliasesMap[$name] ?? $name;
+    }
+
+    protected function replaceVariablesWithAliases(string $value): string
+    {
+        $word = '';
+        $minifiedValue = '';
+        Log::increaseIndent();
+        for ($i=0; $i < \mb_strlen($value); $i++) {
+            $letter = $value[$i];
+            Log::log("Letter: " . $letter . " Word: " . $word, 2);
+            if ($this->isWhitespace($letter)) {
+                $alias = $this->getAliasForVariable($word);
+                Log::log("Alias: " . $alias, 2);
+                $minifiedValue .= $alias . $letter;
+                $word = '';
+                continue;
+            }
+            $word .= $letter;
+        }
+        Log::decreaseIndent();
+        $alias = $this->getAliasForVariable($word);
+        return $minifiedValue . $alias;
     }
 }

@@ -61,7 +61,7 @@ class Variable extends Block implements Contract\Block
 
         $value = $this->getValue();
         if (\mb_strlen($value) > 0) {
-            $script .= $value . ';';
+            $script .= $this->replaceVariablesWithAliases($value) . ';';
         }
         return $script;
     }

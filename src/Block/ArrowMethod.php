@@ -132,7 +132,7 @@ class ArrowMethod extends MethodBlock implements Contract\Block
             if ($searchForEnd && $this->isEndChar($letter)) {
                 Log::log("End char found, setting the end...", 2);
                 $subEnd = $i - 1;
-                $this->setCaret($i + 1);
+                $this->setCaret($i - 1);
                 break;
             }
 
@@ -198,7 +198,7 @@ class ArrowMethod extends MethodBlock implements Contract\Block
     {
         $script = '(' . $this->getAliasedArguments() . ')=>';
         if (!$this->isMultiLine()) {
-            $script .= $this->getValue() . ';';
+            $script .= $this->replaceVariablesWithAliases($this->getValue()) . ';';
         } else {
             $script .= '{';
             foreach ($this->getBlocks() as $block) {
