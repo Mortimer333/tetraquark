@@ -7,11 +7,28 @@ use \Tetraquark\Block as Block;
 
 class Script extends Block implements Contract\Block
 {
+    /** @var string Minified script */
+    protected string $minified = '';
+
     public function objectify(int $start = 0)
     {
-        Log::timeStart();
+        Log::timerStart();
+        Log::log("Mapping...");
+        $this->map($start);
+        Log::log("=======================");
+        Log::log("Creating aliases...");
+        $this->generateAliases();
+        Log::log("=======================");
+        Log::log("Recreating...");
+        $this->setMinified($this->recreate());
+        Log::log("=======================");
+        $this->displayBlocks($this->blocks);
+        Log::timerEnd();
+    }
+
+    protected function map($start): void
+    {
         $map    = [];
-        $item   = [];
         $word   = '';
         for ($i=$start; $i < \strlen(self::$content); $i++) {
             $this->setCaret($i);
@@ -28,22 +45,61 @@ class Script extends Block implements Contract\Block
                 $this->blocks[] = $block;
             }
         }
-        Log::log("=======================");
-        $this->displayBlocks($this->blocks);
-        Log::timeEnd();
+    }
+
+    protected function setMinified(string $minified): self
+    {
+        $this->minified = $minified;
+        return $this;
+    }
+
+    public function getMinified(): string
+    {
+        return $this->minified;
+    }
+
+    public function recreate(): string
+    {
+        $script = '';
+        foreach ($this->blocks as $block) {
+            $script .= $block->recreate();
+        }
+        return $script;
     }
 
     public function displayBlocks(array $blocks)
     {
         foreach ($blocks as $block) {
-            Log::log("Block: " . get_class($block), 1);
-            Log::log("Subtype: " . $block->getSubtype(), 1);
+            Log::log("Block: " . get_class($block));
+            Log::log("Subtype: " . $block->getSubtype());
             Log::log("Instruction: " . $block->getInstruction());
             Log::log("Name: `" . $block->getName() . "`");
             if (method_exists($block, 'getValue')) {
                 Log::log("Value: `" . $block->getValue() . "`");
             }
-            Log::log("=======", 1);
+            if (method_exists($block, 'getArguments')) {
+                Log::log("Arguments: [" . \sizeof($block->getArguments()) . "] `" . implode('`, `', $block->getArguments()) . "`");
+            }
+            if (method_exists($block, 'getArgumentsAliases')) {
+                $aliases = $block->getArgumentsAliases();
+                $str = "Argument Aliases: [" . \sizeof($aliases) . "] `";
+                foreach ($aliases as $key => $value) {
+                    $str .= "$key => $value, ";
+                }
+                Log::log(rtrim($str, ', ') . "`");
+            }
+            if (isset($block->alias)) {
+                Log::log("Alias: `" . $block->getAlias() . "`");
+            }
+
+            $aliases = $block->getAliasesMap();
+            $str = "Map of Aliases: [" . \sizeof($aliases) . "] `";
+            foreach ($aliases as $key => $value) {
+                $str .= "$key=$value, ";
+            }
+            Log::log(rtrim($str, ', ') . "`");
+
+            Log::log("=======");
             Log::increaseIndent();
             $this->displayBlocks($block->blocks);
             Log::decreaseIndent();

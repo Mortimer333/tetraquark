@@ -85,8 +85,8 @@ class Tetraquark
     public function minify(string $path): string
     {
         $file  = $this->getFile($path);
-        $block = new Block\Script($file);
-        return '';
+        $script = new Block\Script($file);
+        return $script->getMinified();
     }
 
     protected function getFile(string $path)

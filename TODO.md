@@ -22,3 +22,15 @@ Draft:
 
 Script is going and encouters `function`. Its new block - so create new TetraquarkBlock and get type from TetraqaurkType. Pass remaining content to Block and script goes... inside the block!
 So I should start by creating new Block of type Script and it would go inside him! Then I can recursivly just call new Block and attach him to his parent. Content would be saved in `leftcontent` of block and passed to parent after `end` method would be called.
+
+## Shared scope - how to do it?
+
+So I want to have somewhat shared scope of variables:
+function `func1` has `var1` and `var2` inside but also `func2` which has `var3` and `var4`. So here is how scopes should look like:
+- `func2` should be able to access `var1` to `var4`
+- `func1` should be able to access only `var1`, `var2` and `func2`
+And if I was to add another function it should have access to all vars and their own. So there should be... passed down variables. Pretty simple, but creating aliases will require new iteration over whole script. They might be used not in order and us changing their names in one place might break use in another.
+
+## Next stage - check for any useless statements
+
+## If script will be slow look into setting all values for functions in one iteration (instead of ~2,5)

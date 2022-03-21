@@ -8,12 +8,14 @@ abstract class Block
     static protected string $content;
     protected int    $caret = 0;
     protected bool   $endFunction = false;
-    /** @var Xeno $instruction Actual block representation in code */
-    protected Xeno   $instruction;
+    /** @var string $instruction Actual block representation in code */
+    protected string $instruction;
     protected int    $instructionStart;
     protected int    $instructionLength;
     protected string $subtype = '';
     protected string $name;
+    protected string $alias;
+    protected array  $aliasesMap = [];
     protected array  $data;
     /** @var Block[] $blocks Array of Blocks */
     protected array  $blocks = [];
@@ -21,6 +23,20 @@ abstract class Block
         "\n" => true,
         "\r" => true,
         ";" => true,
+    ];
+    /** @var array Map of possible aliases (df is to get default - the start of map), the last alias direction returns false */
+    protected array $aliasMap = [
+        'df' => 'a', 'a' => 'b', 'b' => 'c', 'c' => 'd', 'd' => 'e', 'e' => 'f', 'f' => 'g', 'g' => 'h', 'h' => 'i', 'i' => 'j', 'j' => 'k', 'k' => 'l', 'l' => 'm', 'm' => 'n', 'n' => 'o',
+        'o' => 'p', 'p' => 'r', 'r' => 's', 's' => 't', 't' => 'u', 'u' => 'w', 'w' => 'z', 'z' => 'y', 'y' => 'x', 'x' => 'q', 'q' => 'v', 'v' => 'µ', 'µ' => 'ß', 'ß' => 'à', 'à' => 'á', 'á' => 'â',
+        'â' => 'ã', 'ã' => 'ä', 'ä' => 'å', 'å' => 'æ', 'æ' => 'ç', 'ç' => 'è', 'è' => 'é', 'é' => 'ê', 'ê' => 'ë', 'ë' => 'ì', 'ì' => 'í', 'í' => 'î', 'î' => 'ï', 'ï' => 'ð', 'ð' => 'ñ', 'ñ' => 'ò',
+        'ò' => 'ó', 'ó' => 'ô', 'ô' => 'õ', 'õ' => 'ö', 'ö' => 'ø', 'ø' => 'ù', 'ù' => 'ú', 'ú' => 'û', 'û' => 'ü', 'ü' => 'ý', 'ý' => 'þ', 'þ' => 'ÿ', 'ÿ' => 'ā', 'ā' => 'ă', 'ă' => 'ą', 'ą' => 'ć',
+        'ć' => 'ĉ', 'ĉ' => 'ċ', 'ċ' => 'č', 'č' => 'ď', 'ď' => 'đ', 'đ' => 'ē', 'ē' => 'ĕ', 'ĕ' => 'ė', 'ė' => 'ę', 'ę' => 'ě', 'ě' => 'ĝ', 'ĝ' => 'ğ', 'ğ' => 'ġ', 'ġ' => 'ģ', 'ģ' => 'ĥ', 'ĥ' => 'A',
+        'A' => 'B', 'B' => 'C', 'C' => 'D', 'D' => 'E', 'E' => 'F', 'F' => 'G', 'G' => 'H', 'H' => 'I', 'I' => 'J', 'J' => 'K', 'K' => 'L', 'L' => 'M', 'M' => 'N', 'N' => 'O',
+        'O' => 'P', 'P' => 'Q', 'Q' => 'R', 'R' => 'S', 'S' => 'T', 'T' => 'U', 'U' => 'V', 'V' => 'W', 'W' => 'X', 'X' => 'Y', 'Y' => 'Z', 'Z' => 'À', 'À' => 'Á', 'Á' => 'Â', 'Â' => 'Ã', 'Ã' => 'Ä',
+        'Ä' => 'Å', 'Å' => 'Æ', 'Æ' => 'Ç', 'Ç' => 'È', 'È' => 'É', 'É' => 'Ê', 'Ê' => 'Ë', 'Ë' => 'Ì', 'Ì' => 'Í', 'Í' => 'Î', 'Î' => 'Ï', 'Ï' => 'Ð', 'Ð' => 'Ñ', 'Ñ' => 'Ò', 'Ò' => 'Ó', 'Ó' => 'Ô',
+        'Ô' => 'Õ', 'Õ' => 'Ö', 'Ö' => 'Ø', 'Ø' => 'Ù', 'Ù' => 'Ú', 'Ú' => 'Û', 'Û' => 'Ü', 'Ü' => 'Ý', 'Ý' => 'Þ', 'Þ' => 'Ā', 'Ā' => 'Ă', 'Ă' => 'Ą', 'Ą' => 'Ć', 'Ć' => 'Ĉ', 'Ĉ' => 'Ċ', 'Ċ' => 'Č',
+        'Č' => 'Ď', 'Ď' => 'Đ', 'Đ' => 'Ē', 'Ē' => 'Ĕ', 'Ĕ' => 'Ė', 'Ė' => 'Ę', 'Ę' => 'Ě', 'Ě' => 'Ĝ', 'Ĝ' => 'Ğ', 'Ğ' => 'Ġ', 'Ġ' => 'Ģ', 'Ģ' => 'Ĥ', 'Ĥ' => 'Ħ', 'Ħ' => 'Ĩ', 'Ĩ' => 'Ī', 'Ī' => '$',
+        '$' => '_', '_' => false
     ];
 
     public function __construct(
@@ -68,15 +84,53 @@ abstract class Block
         return $this;
     }
 
-    public function getInstruction(): Xeno
+    public function getBlocks(): array
+    {
+        return $this->blocks;
+    }
+
+    public function setBlocks(array $blocks): self
+    {
+        $this->blocks = $blocks;
+        return $this;
+    }
+
+    public function getAlias(): string
+    {
+        return $this->alias;
+    }
+
+    public function setAlias(string $alias): self
+    {
+        $this->alias = $alias;
+        return $this;
+    }
+
+    public function getAliasesMap(): array
+    {
+        return $this->aliasesMap;
+    }
+
+    public function setAliasesMap(array $aliasesMap): self
+    {
+        $this->aliasesMap = $aliasesMap;
+        return $this;
+    }
+
+    public function addAliasesMap(array $additionalAliasMap): self
+    {
+        $this->aliasesMap = array_merge($this->aliasesMap, $additionalAliasMap);
+        return $this;
+    }
+
+    public function getInstruction(): string
     {
         return $this->instruction;
     }
 
-    public function setInstruction(Xeno $instruction): self
+    public function setInstruction(string $instruction): self
     {
-        $this->instruction = $instruction;
-        $this->instruction->preg_replace('!\s+!', ' ');
+        $this->instruction = preg_replace('!\s+!', ' ', $instruction);
         return $this;
     }
 
@@ -149,7 +203,7 @@ abstract class Block
 
     protected function isValidVariable(string $variable): bool
     {
-        $regex = '/^[$_\p{L}][$_\p{L}\p{Mn}\p{Mc}\p{Nd}\p{Pc}\u200C\u200D]*+$/';
+        $regex = '/^[$_\p{L}][$_\p{L}\p{Mn}\p{Mc}\p{Nd}\p{Pc}\x200C\x200D]*+$/';
         $res = preg_match($regex, $variable);
         if (!$res) {
             return false;
@@ -196,7 +250,7 @@ abstract class Block
         }
 
         $properStart = $start - (strlen($name) - 1);
-        $instruction = (new Xeno(self::$content))->substr($properStart, $properEnd - $properStart)->trim();
+        $instruction = trim(substr(self::$content, $properStart, $properEnd - $properStart));
         $this->setInstructionStart($properStart)
             ->setInstructionLength($properEnd - $properStart)
             ->setInstruction($instruction);
@@ -209,12 +263,12 @@ abstract class Block
         }
 
         Log::increaseIndent();
-        Log::log("New block: " . $name);
+        Log::log("New block: " . $name, 1);
 
         $block = $this->blockFactory($name, self::$content, $i);
 
         Log::log('Iteration count changed from ' . $i . " to " . $block->getCaret(), 1);
-        Log::log("Instruction: `". $block->getInstruction() . "`");
+        Log::log("Instruction: `". $block->getInstruction() . "`", 1);
 
         $i = $block->getCaret();
         Log::decreaseIndent();
@@ -255,16 +309,87 @@ abstract class Block
 
     protected function findAndSetName(string $prefix, array $ends): void
     {
-        $instr = $this->instruction->get();
+        $instr = $this->getInstruction();
         $start = \strlen($prefix);
         for ($i=$start; $i < strlen($instr); $i++) {
             $letter = $instr[$i];
             if ($ends[$letter] ?? false || $this->isWhitespace($letter)) {
                 $this->setName(substr($instr, $start, $i - $start));
-                Log::log('Blocks name: ' . $this->getName());
+                Log::log('Blocks name: ' . $this->getName(), 1);
                 return;
             }
         }
         throw new Exception('Blocks name not found', 404);
+    }
+
+    protected function generateAliases(string $lastAlias = ''): void
+    {
+        $aliasesMap = $this->getAliasesMap();
+        Log::log("Generate aliases, starting aliasaes map: " . implode(', ', $aliasesMap), 1);
+        // Firstly set aliases to all blocks on this level
+        Log::increaseIndent();
+        foreach ($this->blocks as $block) {
+            Log::log('Aliases in block:' . implode(', ', $block->getAliasesMap()), 1);
+            $alias = $this->generateAlias($block->getName(), $lastAlias);
+            $block->setAlias($alias);
+            if (\mb_strlen($alias) > 0) {
+                $aliasesMap[$block->getName()] = $alias;
+                $lastAlias = $alias;
+            }
+        }
+        Log::decreaseIndent();
+
+        if (method_exists($this, 'getArguments')) {
+            Log::increaseIndent();
+            foreach ($this->getArguments() as $arg) {
+                $alias = $this->generateAlias($arg, $lastAlias);
+                $this->addArgumentAlias($arg, $alias);
+                if (\mb_strlen($alias) > 0) {
+                    $aliasesMap[$arg] = $alias;
+                    $lastAlias = $alias;
+                }
+            }
+            Log::decreaseIndent();
+        }
+
+        // Then to level below
+        Log::increaseIndent();
+        Log::log("Taken aliases: " . implode(', ', $aliasesMap), 1);
+        foreach ($this->blocks as $block) {
+            $block->addAliasesMap($aliasesMap);
+            $block->generateAliases($lastAlias);
+        }
+        Log::decreaseIndent();
+
+    }
+
+    protected function generateAlias(string $name, string $lastAlias): string
+    {
+        Log::log("Generate alias for " . $name, 1);
+        if (\mb_strlen($name) == 0) {
+            Log::log("Name is empty, skipping...", 1);
+            return '';
+        }
+        Log::log("Last alias: " . $lastAlias, 1);
+        if (\mb_strlen($lastAlias) != 0) {
+            $lastLetter = mb_substr($lastAlias, -1);
+        } else {
+            $lastLetter = 'df';
+        }
+        Log::log("Last letter: " . $lastLetter, 1);
+
+        if ($newAliasSufix = $this->aliasMap[$lastLetter]) {
+            Log::log("Next sufix found: " . $newAliasSufix, 1);
+            $newAlias = mb_substr($lastAlias ?? '', 0, \mb_strlen($lastAlias ?? '') - 1) . $newAliasSufix;
+        } else {
+            Log::log("Next sufix not found, adding another letter: " . $this->aliasMap['df'], 1);
+            $newAlias = ($lastAlias ?? '') . $this->aliasMap['df'];
+        }
+        Log::log("New alias: " . $newAlias, 1);
+        if ($this->isValidVariable($newAlias)) {
+            return $newAlias;
+        }
+        Log::log("Alias is not valid, generating new one...", 1);
+        return $this->generateAlias($newAlias, $newAlias);
     }
 }

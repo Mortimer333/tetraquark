@@ -4,4 +4,5 @@ namespace Tetraquark\Contract;
 interface Block
 {
     public function objectify(int $start = 0);
+    public function recreate(): string;
 }

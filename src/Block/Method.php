@@ -4,9 +4,9 @@ namespace Tetraquark\Block;
 use \Xeno\X as Xeno;
 use \Tetraquark\Log as Log;
 use \Tetraquark\Contract as Contract;
-use \Tetraquark\Block as Block;
+use \Tetraquark\MethodBlock as MethodBlock;
 
-class Method extends Block implements Contract\Block
+class Method extends MethodBlock implements Contract\Block
 {
     protected array $endChars = [
         '}' => true
@@ -24,5 +24,50 @@ class Method extends Block implements Contract\Block
         if (\strlen($this->getName()) == 0) {
             $this->setSubtype('anonymous:function');
         }
+        $this->findAndSetArguments();
+    }
+
+    protected function findAndSetArguments(): void
+    {
+        $instr = $this->getInstruction();
+        $startSettingArgs = false;
+        $word = '';
+        for ($i=\strlen($instr) - 1; $i >= 0; $i--) {
+            $letter = $instr[$i];
+            if (!$startSettingArgs && $letter == ')') {
+                $startSettingArgs = true;
+                continue;
+            }
+
+            if ($startSettingArgs && $this->isWhitespace($letter)) {
+                continue;
+            }
+
+            if ($startSettingArgs && $letter == '(') {
+                $this->addArgument(strrev($word));
+                break;
+            }
+
+            if ($startSettingArgs && $letter == ',') {
+                $this->addArgument(strrev($word));
+                $word = '';
+                continue;
+            }
+
+            if ($startSettingArgs) {
+                $word .= $letter;
+            }
+        }
+
+        $this->arguments = array_reverse($this->arguments);
+    }
+
+    public function recreate(): string
+    {
+        $script = 'function ' . $this->getAlias() . '(' . $this->getAliasedArguments() . '){';
+        foreach ($this->getBlocks() as $block) {
+            $script .= $block->recreate();
+        }
+        return $script . '}';
     }
 }

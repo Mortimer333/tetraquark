@@ -10,20 +10,20 @@ class Log
     static protected int     $classLimit    = 20;
     static protected int     $functionLimit = 20;
     static protected ?string $timeStart     = null;
-    static protected bool    $addClass      = true;
-    static protected bool    $addFunction   = true;
+    static protected bool    $addClass      = false;
+    static protected bool    $addFunction   = false;
     static protected string  $oldFunction   = '';
 
     function __construct()
     {
     }
 
-    static public function timeStart(): void
+    static public function timerStart(): void
     {
         self::$timeStart = microtime();
     }
 
-    static public function timeEnd(): void
+    static public function timerEnd(): void
     {
         $timeEnd = self::getMilliseconds(microtime());
 
@@ -49,24 +49,27 @@ class Log
 
     static public function log(string $output, ?int $verbose = null, int $traceLvl = 0): void
     {
-        if (is_null($verbose)) {
-            $verbose = self::$verbose;
-        }
+        $verbose = $verbose ?? self::$verbose;
 
         if ($verbose <= self::$maxVerbose) {
             $message = str_repeat("  ", self::$indent) . $output;
-            $classStr = '';
+            $class = '';
             $function = '';
             if (self::$addClass) {
                 $debug = debug_backtrace()[1 + $traceLvl];
-                $class = self::fitString($debug['class'], self::$classLimit) . ' | ';
+                $class = self::fitString($debug['class'], self::$classLimit);
             }
             if (self::$addFunction) {
                 if (!isset($debug)) {
                     $debug = debug_backtrace()[1 + $traceLvl];
                 }
-                $function = self::fitString($debug['function'], self::$functionLimit) . ' | ';
-
+                if (\strlen($class) > 0) {
+                    $function .= ' | ';
+                }
+                $function .= self::fitString($debug['function'], self::$functionLimit) . ' * ';
+            }
+            if (\strlen($class) > 0 && \strlen($function) == 0) {
+                $class .= ' * ';
             }
             echo $class . $function . str_replace("\r", '\r', str_replace("\n", '\n', $message))   . PHP_EOL;
         }
@@ -79,7 +82,8 @@ class Log
             $slimed = substr($string, 0, (int) (floor($size/2) - 1)) . '..';
             $slimed .= substr($string, (int) -ceil($size/2) + 1);
         } elseif (strlen($string) < $size) {
-            $slimed = $string . str_repeat(' ',  $size - strlen($string));
+            $amount = $size - strlen($string);
+            $slimed = str_repeat(' ', (int) floor($amount/2)) . $string . str_repeat(' ', (int) ceil($amount/2));
         }
         return $slimed;
     }
