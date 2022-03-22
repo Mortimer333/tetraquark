@@ -7,6 +7,7 @@ use \Tetraquark\Block as Block;
 
 class Script extends Block implements Contract\Block
 {
+    protected array  $endChars = [];
     /** @var string Minified script */
     protected string $minified = '';
 
@@ -40,21 +41,23 @@ class Script extends Block implements Contract\Block
     {
         $map    = [];
         $word   = '';
-        for ($i=$start; $i < \strlen(self::$content); $i++) {
-            $this->setCaret($i);
-            $letter = self::$content[$i];
-            $word  .= $letter;
-            if ($this->isWhitespace($letter)) {
-                $word = '';
-            }
-            Log::log("Letter: " . $letter, 2);
-
-            $block = $this->constructBlock($word, $i);
-            if ($block) {
-                Log::log("Add Block!", 1);
-                $this->blocks[] = $block;
-            }
-        }
+        // for ($i=$start; $i < \strlen(self::$content); $i++) {
+        //     $this->setCaret($i);
+        //     $letter = self::$content[$i];
+        //     $word  .= $letter;
+        //     if ($this->isWhitespace($letter)) {
+        //         $word = '';
+        //     }
+        //     Log::log("Letter: " . $letter, 2);
+        //
+        //     $block = $this->constructBlock($word, $i);
+        //     if ($block) {
+        //         Log::log("Add Block!", 1);
+        //         $this->blocks[] = $block;
+        //     }
+        // }
+        $this->setCaret($start);
+        $this->createSubBlocks();
     }
 
     protected function setMinified(string $minified): self

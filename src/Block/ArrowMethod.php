@@ -1,7 +1,6 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Xeno\X as Xeno;
 use \Tetraquark\Log as Log;
 use \Tetraquark\Exception as Exception;
 use \Tetraquark\Contract as Contract;
@@ -198,6 +197,7 @@ class ArrowMethod extends MethodBlock implements Contract\Block
     {
         $script = '(' . $this->getAliasedArguments() . ')=>';
         if (!$this->isMultiLine()) {
+            Log::log('Replace in arrow: ' . $this->getValue());
             $script .= $this->replaceVariablesWithAliases($this->getValue()) . ';';
         } else {
             $script .= '{';

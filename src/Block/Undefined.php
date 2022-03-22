@@ -1,7 +1,6 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Xeno\X as Xeno;
 use \Tetraquark\Log as Log;
 use \Tetraquark\Contract as Contract;
 use \Tetraquark\Block as Block;
@@ -23,6 +22,7 @@ class Undefined extends Block implements Contract\Block
         $instruction = $this->getInstruction();
         $this->setInstructionStart($start)
             ->setInstructionLength(\mb_strlen($instruction))
+            ->setInstruction(trim($instruction))
         ;
     }
 

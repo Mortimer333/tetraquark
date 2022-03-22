@@ -8,7 +8,7 @@ function test() { var longName = 20;
     };
     const test2 = e => 1 + 2;
     const test3 = (e2) =>
-    1 + e2; let longNameLet = 'asdasdasd'
+    1 + e2; let longNameLet = `asd ${testInline} asdasd`
     console.log(test3('s'));
     const longNameConst = ['asd','asdsad'];
     var testInline = 20; let testInline2 = {'a' : 'sd'}
@@ -18,3 +18,16 @@ function test() { var longName = 20;
 e3 => {
 
 }
+
+class ClassName {
+    constructor() {
+
+    }
+
+    func() {
+        console.log('asd');
+    }
+}
+
+const classNameInst = new ClassName();
+classNameInst.func();

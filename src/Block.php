@@ -169,11 +169,12 @@ abstract class Block
     protected function isNewBlock(string $name)
     {
         $hints = [
-            'function' => 'function',
-            '=>'       => '=>',
-            'let'      => 'let',
-            'const'    => 'const',
-            'var'      => 'var'
+            'function ' => 'function',
+            '=>'        => '=>',
+            'let '      => 'let',
+            'const '    => 'const',
+            'var '      => 'var',
+            'class '    => 'class',
         ];
         return $hints[$name] ?? false;
     }
@@ -186,7 +187,8 @@ abstract class Block
             '=>'       => 'ArrowMethod',
             'let'      => 'Variable',
             'const'    => 'Variable',
-            'var'      => 'Variable'
+            'var'      => 'Variable',
+            'class'    => 'Instance',
         ];
         if (!isset($blocks[$name])) {
             throw new Exception("Block couldn't be created with name: " . htmlspecialchars($name), 404);
@@ -232,7 +234,7 @@ abstract class Block
         }
 
         $properEnd = null;
-        for ($i=$start + 1; $i < strlen(self::$content); $i++) {
+        for ($i=$start; $i < strlen(self::$content); $i++) {
             $letter = self::$content[$i];
             Log::log("Letter: " . $letter, 2);
             if ($endChars[$letter] ?? false) {
@@ -247,7 +249,7 @@ abstract class Block
             throw new Exception('Proper End not found', 404);
         }
 
-        $properStart = $start - (strlen($name) - 1);
+        $properStart = $start - (strlen($name));
         $instruction = trim(substr(self::$content, $properStart, $properEnd - $properStart));
         $this->setInstructionStart($properStart)
             ->setInstructionLength($properEnd - $properStart)
@@ -281,6 +283,18 @@ abstract class Block
         $undefinedEnds = ["\n" => true, ";" => true];
         for ($i=$this->getCaret(); $i < \strlen(self::$content); $i++) {
             $letter = self::$content[$i];
+            $word .= $letter;
+
+            $block = $this->constructBlock($word, $i);
+            if ($block) {
+                Log::log("Add Block! Current letter " . self::$content[$i - 1], 1);
+                Log::log("Clear undefined", 2);
+                $possibleUndefined = '';
+                $this->blocks[] = $block;
+                $lastFound = $i;
+                $word = '';
+                continue;
+            }
 
             Log::log("Letter: " . $letter . ', Word: ' . $word, 2);
 
@@ -293,7 +307,6 @@ abstract class Block
                 $word = '';
                 continue;
             }
-            $word .= $letter;
 
             Log::log("End Check: " . implode(', ', array_keys($this->endChars)) . ' == ' . $letter, 1);
             if ($this->endChars[$letter] ?? false) {
@@ -301,16 +314,6 @@ abstract class Block
                 $possibleUndefined = '';
                 Log::log("End found!", 1);
                 break;
-            }
-
-            $block = $this->constructBlock($word, $i);
-            if ($block) {
-                Log::log("Add Block! Current letter " . self::$content[$i - 1], 1);
-                Log::log("Clear undefined", 2);
-                $possibleUndefined = '';
-                $this->blocks[] = $block;
-                $lastFound = $i;
-                $word = '';
             }
 
             if ($undefinedEnds[$letter] ?? false && \mb_strlen($possibleUndefined) > 0) {
@@ -358,13 +361,14 @@ abstract class Block
         }
         Log::decreaseIndent();
 
-        if (method_exists($this, 'getArguments')) {
+        if ($this instanceof MethodBlock) {
             Log::increaseIndent();
             foreach ($this->getArguments() as $arg) {
                 $alias = $this->generateAlias($arg, $lastAlias);
                 $this->addArgumentAlias($arg, $alias);
                 if (\mb_strlen($alias) > 0) {
                     $aliasesMap[$arg] = $alias;
+                    $this->aliasesMap[$arg] = $alias;
                     $lastAlias = $alias;
                 }
             }
@@ -421,21 +425,107 @@ abstract class Block
     {
         $word = '';
         $minifiedValue = '';
+        $stringInProgress = false;
+        $templateVarInProgress = false;
+        $templateLiteralInProgress = false;
         Log::increaseIndent();
         for ($i=0; $i < \mb_strlen($value); $i++) {
             $letter = $value[$i];
             Log::log("Letter: " . $letter . " Word: " . $word, 2);
-            if ($this->isWhitespace($letter)) {
+            $isLiteralLandmark = $this->isTemplateLiteralLandmark($letter, $value[$i - 1] ?? null, $templateLiteralInProgress);
+            if ($templateVarInProgress && !$isLiteralLandmark) {
+                Log::log("Literal in progress: " . $letter . " Word: " . $word, 2);
+                if ($letter == '}') {
+                    Log::log("Add literal: " . $letter . " Word: " . $word, 2);
+                    $templateVarInProgress = false;
+                    $alias = $this->getAliasForVariable($word);
+                    Log::log("Alias: " . $alias, 2);
+                    $minifiedValue .= $alias . $letter;
+                    $word = '';
+                    continue;
+                } else {
+                    $word .= $letter;
+                }
+                continue;
+            }
+
+            if ($isLiteralLandmark) {
+                $templateLiteralInProgress = !$templateLiteralInProgress;
+            } elseif ($this->isStringLandmark($letter, $value[$i - 1] ?? null, $stringInProgress)) {
+                $stringInProgress = !$stringInProgress;
+            }
+
+            if ($templateLiteralInProgress && ($value[$i - 1] ?? '') . $letter == '${') {
+                $templateVarInProgress = true;
+            }
+
+            if ($stringInProgress || $templateLiteralInProgress) {
+                $minifiedValue .= $letter;
+                $word = '';
+                continue;
+            }
+
+            if ($this->isSpecial($letter)) {
                 $alias = $this->getAliasForVariable($word);
                 Log::log("Alias: " . $alias, 2);
                 $minifiedValue .= $alias . $letter;
                 $word = '';
                 continue;
             }
+
             $word .= $letter;
         }
         Log::decreaseIndent();
+        Log::log('Last word `' . $word . '` => ' . implode(', ',array_keys($this->aliasesMap)));
         $alias = $this->getAliasForVariable($word);
         return $minifiedValue . $alias;
+    }
+
+    protected function isTemplateLiteralLandmark(string $letter, string $previousLetter, bool $inString): bool
+    {
+        return $letter === '`' && (
+            $inString && $previousLetter !== '\\'
+            || !$inString
+        );
+    }
+
+    protected function isStringLandmark(string $letter, string $previousLetter, bool $inString): bool
+    {
+        return ($letter === '"' || $letter === "'") && (
+            $inString && $previousLetter !== '\\'
+            || !$inString
+        );
+    }
+
+    protected function isSpecial(string $letter): bool
+    {
+        $singles = [
+            "(" => true,
+            ")" => true,
+            "{" => true,
+            "}" => true,
+            "+" => true,
+            "-" => true,
+            "/" => true,
+            "*" => true,
+            "=" => true,
+            "!" => true,
+            '[' => true,
+            ']' => true,
+            '%' => true,
+            '^' => true,
+            ":" => true,
+            ">" => true,
+            "<" => true,
+            "," => true,
+            ' ' => true,
+            "\n" => true,
+            "\r" => true,
+            '|' => true,
+            '&' => true,
+            '?' => true
+        ];
+
+        return $singles[$letter] ?? false;
     }
 }
