@@ -18,8 +18,8 @@ class Method extends MethodBlock implements Contract\Block
     public function objectify(int $start = 0)
     {
         $this->findInstructionEnd($start, 'function', $this->instructionEnds);
-        $this->createSubBlocks();
         $this->findAndSetName('function ', ['(' => true]);
+        $this->createSubBlocks();
         if (\strlen($this->getName()) == 0) {
             $this->setSubtype('anonymous:function');
         }

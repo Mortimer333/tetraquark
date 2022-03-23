@@ -1,23 +1,1672 @@
 Mapping...
+Letter: f Mapped Word: f
+Letter: u Mapped Word: fu
+Letter: n Mapped Word: fun
+Letter: c Mapped Word: func
+Letter: t Mapped Word: funct
+Letter: i Mapped Word: functi
+Letter: o Mapped Word: functio
+Letter: n Mapped Word: function
+Letter:   Mapped Word: function 
+  New block: Method Mapped by: function 
+  Letter:  
+  Letter: t
+  Letter: e
+  Letter: s
+  Letter: t
+  Letter: (
+  Letter: )
+  Letter:  
+  Letter: {
+  Proper end : 16
+  Start name search: function test() {, 8
+    Letter:  
+    Letter: t
+    Letter: e
+    Letter: s
+    Letter: t
+    Letter: (
+    Blocks name: test
+  Letter:   Mapped Word:  
+  Letter: v Mapped Word: v
+  Letter: a Mapped Word: va
+  Letter: r Mapped Word: var
+  Letter:   Mapped Word: var 
+    New block: Variable Mapped by: var 
+    Letter:  
+    Letter: l
+    Letter: o
+    Letter: n
+    Letter: g
+    Letter: N
+    Letter: a
+    Letter: m
+    Letter: e
+    Letter:  
+    Letter: =
+    Proper end : 31
+    Found instruction: var longName =
+    Letter:   Mapped Word:  
+    Letter: 2 Mapped Word: 2
+    Letter: 0 Mapped Word: 0
+    Letter: ; Mapped Word: ;
+    Updated caret 35
+    Start name search: var longName =, 3
+      Letter:  
+      Letter: l
+      Letter: o
+      Letter: n
+      Letter: g
+      Letter: N
+      Letter: a
+      Letter: m
+      Letter: e
+      Letter:  
+      Letter: =
+      Blocks name: longName
+    Iteration count changed from 21 to 35
+    Instruction: `var longName =`
+  Letter: \r Mapped Word: \r
+  Letter: \n Mapped Word: \n
+  Undefined check for: \r\n
+  Letter:   Mapped Word:  
+  Letter:   Mapped Word:  
+  Letter:   Mapped Word:  
+  Letter:   Mapped Word:  
+  Letter: c Mapped Word: c
+  Letter: o Mapped Word: co
+  Letter: n Mapped Word: con
+  Letter: s Mapped Word: cons
+  Letter: o Mapped Word: conso
+  Letter: l Mapped Word: l
+  Letter: e Mapped Word: le
+  Letter: . Mapped Word: le.
+  Letter: l Mapped Word: l
+  Letter: o Mapped Word: lo
+  Letter: g Mapped Word: g
+  Letter: ( Mapped Word: (
+  Letter:   Mapped Word:  
+  Letter: l Mapped Word: l
+  Letter: o Mapped Word: lo
+  Letter: n Mapped Word: n
+  Letter: g Mapped Word: g
+  Letter: N Mapped Word: N
+  Letter: a Mapped Word: a
+  Letter: m Mapped Word: m
+  Letter: e Mapped Word: e
+  Letter: ) Mapped Word: )
+  Letter: ; Mapped Word: ;
+  Undefined check for:     console.log( longName);
+  Add undefined:     console.log( longName);
+  Letter: \r Mapped Word: \r
+  Letter: \n Mapped Word: \n
+  Undefined check for: \r\n
+  Letter:   Mapped Word:  
+  Letter:   Mapped Word:  
+  Letter:   Mapped Word:  
+  Letter:   Mapped Word:  
+  Letter: c Mapped Word: c
+  Letter: o Mapped Word: co
+  Letter: n Mapped Word: con
+  Letter: s Mapped Word: cons
+  Letter: t Mapped Word: const
+  Letter:   Mapped Word: const 
+    New block: Variable Mapped by: const 
+    Letter:  
+    Letter: t
+    Letter: e
+    Letter: s
+    Letter: t
+    Letter: a
+    Letter:  
+    Letter: =
+    Proper end : 83
+    Found instruction: const testa =
+    Letter:   Mapped Word:  
+    Letter: ( Mapped Word: (
+    Letter: a Mapped Word: a
+    Letter: r Mapped Word: r
+    Letter: g Mapped Word: g
+    Letter: 1 Mapped Word: 1
+    Letter: ) Mapped Word: )
+    Letter:   Mapped Word:  
+    Letter: = Mapped Word: =
+    Letter: > Mapped Word: =>
+      New block: ArrowMethod Mapped by: =>
+      New Arrow method
+        New letter ` `
+        New letter `)`
+        Start search for brackets
+        New letter `1`
+        Start search for whitspace, letter found before bracket
+        New letter `g`
+        New letter `r`
+        New letter `a`
+        New letter `(`
+        Bracket found
+      Start search for end
+        Letter  
+        Letter {
+        Letter is bracket! Multi line function.
+      Letter: \r Mapped Word: \r
+      Letter: \n Mapped Word: \n
+      Undefined check for: \r\n
+      Letter:   Mapped Word:  
+      Letter:   Mapped Word:  
+      Letter:   Mapped Word:  
+      Letter:   Mapped Word:  
+      Letter:   Mapped Word:  
+      Letter:   Mapped Word:  
+      Letter:   Mapped Word:  
+      Letter:   Mapped Word:  
+      Letter: c Mapped Word: c
+      Letter: o Mapped Word: co
+      Letter: n Mapped Word: con
+      Letter: s Mapped Word: cons
+      Letter: t Mapped Word: const
+      Letter:   Mapped Word: const 
+        New block: Variable Mapped by: const 
+        Letter:  
+        Letter:  
+        Letter:  
+        Letter: t
+        Letter: e
+        Letter: s
+        Letter: t
+        Letter: S
+        Letter: c
+        Letter: o
+        Letter: p
+        Letter: e
+        Letter: d
+        Letter:  
+        Letter: =
+        Proper end : 125
+        Found instruction: const testScoped =
+        Letter:   Mapped Word:  
+        Letter: f Mapped Word: f
+        Letter: u Mapped Word: fu
+        Letter: n Mapped Word: fun
+        Letter: c Mapped Word: func
+        Letter: t Mapped Word: funct
+        Letter: i Mapped Word: functi
+        Letter: o Mapped Word: functio
+        Letter: n Mapped Word: function
+        Letter:   Mapped Word: function 
+          New block: Method Mapped by: function 
+          Letter:  
+          Letter: (
+          Letter: a
+          Letter: d
+          Letter: a
+          Letter: s
+          Letter: ,
+          Letter:  
+          Letter: t
+          Letter: e
+          Letter: s
+          Letter: t
+          Letter: 5
+          Letter:  
+          Letter:  
+          Letter:  
+          Letter: ,
+          Letter:  
+          Letter:  
+          Letter: t
+          Letter: e
+          Letter: s
+          Letter: t
+          Letter: 4
+          Letter: ,
+          Letter: \r
+          Letter: \n
+          Letter:  
+          Letter:  
+          Letter:  
+          Letter:  
+          Letter:  
+          Letter:  
+          Letter:  
+          Letter:  
+          Letter: f
+          Letter: g
+          Letter: d
+          Letter: f
+          Letter: g
+          Letter: )
+          Letter:  
+          Letter: {
+          Proper end : 177
+          Start name search: function (adas, test5 , test4, fgdfg) {, 8
+            Letter:  
+            Letter: (
+            Blocks name: 
+          Letter: \r Mapped Word: \r
+          Letter: \n Mapped Word: \n
+          Undefined check for: \r\n
+          Letter: \r Mapped Word: \r
+          Letter: \n Mapped Word: \n
+          Undefined check for: \r\n
+          Letter:   Mapped Word:  
+          Letter:   Mapped Word:  
+          Letter:   Mapped Word:  
+          Letter:   Mapped Word:  
+          Letter:   Mapped Word:  
+          Letter:   Mapped Word:  
+          Letter:   Mapped Word:  
+          Letter:   Mapped Word:  
+          Letter: } Mapped Word: }
+          Updated caret 190
+          Iteration count changed from 135 to 190
+          Instruction: `function (adas, test5 , test4, fgdfg) {`
+        Letter: \r Mapped Word: \r
+        Letter: \n Mapped Word: \n
+        Updated caret 192
+        Start name search: const testScoped =, 5
+          Letter:  
+          Letter: t
+          Letter: e
+          Letter: s
+          Letter: t
+          Letter: S
+          Letter: c
+          Letter: o
+          Letter: p
+          Letter: e
+          Letter: d
+          Letter:  
+          Letter: =
+          Blocks name: testScoped
+        Iteration count changed from 111 to 192
+        Instruction: `const testScoped =`
+      Letter:   Mapped Word:  
+      Letter:   Mapped Word:  
+      Letter:   Mapped Word:  
+      Letter:   Mapped Word:  
+      Letter: } Mapped Word: }
+      Updated caret 197
+        Letter: (, Word: 
+        Start parenthesis search
+        Letter: a, Word: 
+        Letter: r, Word: a
+        Letter: g, Word: ar
+        Letter: 1, Word: arg
+        Letter: ), Word: arg1
+        Stop search for parenthesis
+      Iteration count changed from 93 to 197
+      Instruction: `(arg1) => {`
+    Letter: ; Mapped Word: ;
+    Updated caret 198
+    Start name search: const testa =, 5
+      Letter:  
+      Letter: t
+      Letter: e
+      Letter: s
+      Letter: t
+      Letter: a
+      Letter:  
+      Letter: =
+      Blocks name: testa
+    Iteration count changed from 76 to 198
+    Instruction: `const testa =`
+  Letter: \r Mapped Word: \r
+  Letter: \n Mapped Word: \n
+  Undefined check for: \r\n
+  Letter:   Mapped Word:  
+  Letter:   Mapped Word:  
+  Letter:   Mapped Word:  
+  Letter:   Mapped Word:  
+  Letter: c Mapped Word: c
+  Letter: o Mapped Word: co
+  Letter: n Mapped Word: con
+  Letter: s Mapped Word: cons
+  Letter: t Mapped Word: const
+  Letter:   Mapped Word: const 
+    New block: Variable Mapped by: const 
+    Letter:  
+    Letter: t
+    Letter: e
+    Letter: s
+    Letter: t
+    Letter: 2
+    Letter:  
+    Letter: =
+    Proper end : 217
+    Found instruction: const test2 =
+    Letter:   Mapped Word:  
+    Letter: e Mapped Word: e
+    Letter:   Mapped Word:  
+    Letter: = Mapped Word: =
+    Letter: > Mapped Word: =>
+      New block: ArrowMethod Mapped by: =>
+      New Arrow method
+        New letter ` `
+        New letter `e`
+        Start search for whitspace, letter found before bracket
+        New letter ` `
+        White space found
+      Start search for end
+        Letter  
+        Letter 1
+        Found non white space and not bracket. One line arrow method
+        Letter  
+        Letter +
+        Letter  
+        Letter 2
+        Letter ;
+        End char found, setting the end...
+        Letter: e, Word: 
+        function has only one arg, start search for it...
+        Letter:  , Word: e
+        Whitespace!
+        Found next whitespace, add arg and end iteration
+      Iteration count changed from 222 to 228
+      Instruction: `e =>`
+    Letter: ; Mapped Word: ;
+    Updated caret 229
+    Start name search: const test2 =, 5
+      Letter:  
+      Letter: t
+      Letter: e
+      Letter: s
+      Letter: t
+      Letter: 2
+      Letter:  
+      Letter: =
+      Blocks name: test2
+    Iteration count changed from 210 to 229
+    Instruction: `const test2 =`
+  Letter: \r Mapped Word: \r
+  Letter: \n Mapped Word: \n
+  Undefined check for: \r\n
+  Letter:   Mapped Word:  
+  Letter:   Mapped Word:  
+  Letter:   Mapped Word:  
+  Letter:   Mapped Word:  
+  Letter: c Mapped Word: c
+  Letter: o Mapped Word: co
+  Letter: n Mapped Word: con
+  Letter: s Mapped Word: cons
+  Letter: t Mapped Word: const
+  Letter:   Mapped Word: const 
+    New block: Variable Mapped by: const 
+    Letter:  
+    Letter: t
+    Letter: e
+    Letter: s
+    Letter: t
+    Letter: 3
+    Letter:  
+    Letter: =
+    Proper end : 248
+    Found instruction: const test3 =
+    Letter:   Mapped Word:  
+    Letter: ( Mapped Word: (
+    Letter: e Mapped Word: e
+    Letter: 2 Mapped Word: 2
+    Letter: ) Mapped Word: )
+    Letter:   Mapped Word:  
+    Letter: = Mapped Word: =
+    Letter: > Mapped Word: =>
+      New block: ArrowMethod Mapped by: =>
+      New Arrow method
+        New letter ` `
+        New letter `)`
+        Start search for brackets
+        New letter `2`
+        Start search for whitspace, letter found before bracket
+        New letter `e`
+        New letter `(`
+        Bracket found
+      Start search for end
+        Letter \r
+        Letter \n
+        Letter  
+        Letter  
+        Letter  
+        Letter  
+        Letter 1
+        Found non white space and not bracket. One line arrow method
+        Letter  
+        Letter +
+        Letter  
+        Letter e
+        Letter 2
+        Letter ;
+        End char found, setting the end...
+        Letter: (, Word: 
+        Start parenthesis search
+        Letter: e, Word: 
+        Letter: 2, Word: e
+        Letter: ), Word: e2
+        Stop search for parenthesis
+      Iteration count changed from 256 to 268
+      Instruction: `(e2) =>`
+    Letter: ; Mapped Word: ;
+    Updated caret 269
+    Start name search: const test3 =, 5
+      Letter:  
+      Letter: t
+      Letter: e
+      Letter: s
+      Letter: t
+      Letter: 3
+      Letter:  
+      Letter: =
+      Blocks name: test3
+    Iteration count changed from 241 to 269
+    Instruction: `const test3 =`
+  Letter:   Mapped Word:  
+  Letter: l Mapped Word: l
+  Letter: e Mapped Word: le
+  Letter: t Mapped Word: let
+  Letter:   Mapped Word: let 
+    New block: Variable Mapped by: let 
+    Letter:  
+    Letter: l
+    Letter: o
+    Letter: n
+    Letter: g
+    Letter: N
+    Letter: a
+    Letter: m
+    Letter: e
+    Letter: L
+    Letter: e
+    Letter: t
+    Letter:  
+    Letter: =
+    Proper end : 287
+    Found instruction: let longNameLet =
+    Letter:   Mapped Word:  
+    Letter: ` Mapped Word: `
+    Letter: a Mapped Word: a
+    Letter: s Mapped Word: s
+    Letter: d Mapped Word: d
+    Letter:   Mapped Word:  
+    Letter: $ Mapped Word: $
+    Letter: { Mapped Word: {
+    Letter: t Mapped Word: t
+    Letter: e Mapped Word: e
+    Letter: s Mapped Word: s
+    Letter: t Mapped Word: t
+    Letter: I Mapped Word: I
+    Letter: n Mapped Word: n
+    Letter: l Mapped Word: l
+    Letter: i Mapped Word: li
+    Letter: n Mapped Word: n
+    Letter: e Mapped Word: e
+    Letter: } Mapped Word: }
+    Letter:   Mapped Word:  
+    Letter: a Mapped Word: a
+    Letter: s Mapped Word: s
+    Letter: d Mapped Word: d
+    Letter: a Mapped Word: a
+    Letter: s Mapped Word: s
+    Letter: d Mapped Word: d
+    Letter: ` Mapped Word: `
+    Letter: \r Mapped Word: \r
+    Letter: \n Mapped Word: \n
+    Updated caret 316
+    Start name search: let longNameLet =, 3
+      Letter:  
+      Letter: l
+      Letter: o
+      Letter: n
+      Letter: g
+      Letter: N
+      Letter: a
+      Letter: m
+      Letter: e
+      Letter: L
+      Letter: e
+      Letter: t
+      Letter:  
+      Letter: =
+      Blocks name: longNameLet
+    Iteration count changed from 274 to 316
+    Instruction: `let longNameLet =`
+  Letter:   Mapped Word:  
+  Letter:   Mapped Word:  
+  Letter:   Mapped Word:  
+  Letter:   Mapped Word:  
+  Letter: c Mapped Word: c
+  Letter: o Mapped Word: co
+  Letter: n Mapped Word: con
+  Letter: s Mapped Word: cons
+  Letter: o Mapped Word: conso
+  Letter: l Mapped Word: l
+  Letter: e Mapped Word: le
+  Letter: . Mapped Word: le.
+  Letter: l Mapped Word: l
+  Letter: o Mapped Word: lo
+  Letter: g Mapped Word: g
+  Letter: ( Mapped Word: (
+  Letter: t Mapped Word: t
+  Letter: e Mapped Word: e
+  Letter: s Mapped Word: s
+  Letter: t Mapped Word: t
+  Letter: 3 Mapped Word: 3
+  Letter: ( Mapped Word: (
+  Letter: ' Mapped Word: '
+  Letter: s Mapped Word: s
+  Letter: ' Mapped Word: '
+  Letter: ) Mapped Word: )
+  Letter: ) Mapped Word: )
+  Letter: ; Mapped Word: ;
+  Undefined check for:     console.log(test3('s'));
+  Add undefined:     console.log(test3('s'));
+  Letter: \r Mapped Word: \r
+  Letter: \n Mapped Word: \n
+  Undefined check for: \r\n
+  Letter:   Mapped Word:  
+  Letter:   Mapped Word:  
+  Letter:   Mapped Word:  
+  Letter:   Mapped Word:  
+  Letter: c Mapped Word: c
+  Letter: o Mapped Word: co
+  Letter: n Mapped Word: con
+  Letter: s Mapped Word: cons
+  Letter: t Mapped Word: const
+  Letter:   Mapped Word: const 
+    New block: Variable Mapped by: const 
+    Letter:  
+    Letter: l
+    Letter: o
+    Letter: n
+    Letter: g
+    Letter: N
+    Letter: a
+    Letter: m
+    Letter: e
+    Letter: C
+    Letter: o
+    Letter: n
+    Letter: s
+    Letter: t
+    Letter:  
+    Letter: =
+    Proper end : 371
+    Found instruction: const longNameConst =
+    Letter:   Mapped Word:  
+    Letter: [ Mapped Word: [
+    Letter: ' Mapped Word: '
+    Letter: a Mapped Word: a
+    Letter: s Mapped Word: s
+    Letter: d Mapped Word: d
+    Letter: ' Mapped Word: '
+    Letter: , Mapped Word: ,
+    Letter: ' Mapped Word: '
+    Letter: a Mapped Word: a
+    Letter: s Mapped Word: s
+    Letter: d Mapped Word: d
+    Letter: s Mapped Word: s
+    Letter: a Mapped Word: a
+    Letter: d Mapped Word: d
+    Letter: ' Mapped Word: '
+    Letter: ] Mapped Word: ]
+    Letter: ; Mapped Word: ;
+    Updated caret 389
+    Start name search: const longNameConst =, 5
+      Letter:  
+      Letter: l
+      Letter: o
+      Letter: n
+      Letter: g
+      Letter: N
+      Letter: a
+      Letter: m
+      Letter: e
+      Letter: C
+      Letter: o
+      Letter: n
+      Letter: s
+      Letter: t
+      Letter:  
+      Letter: =
+      Blocks name: longNameConst
+    Iteration count changed from 356 to 389
+    Instruction: `const longNameConst =`
+  Letter: \r Mapped Word: \r
+  Letter: \n Mapped Word: \n
+  Undefined check for: \r\n
+  Letter:   Mapped Word:  
+  Letter:   Mapped Word:  
+  Letter:   Mapped Word:  
+  Letter:   Mapped Word:  
+  Letter: v Mapped Word: v
+  Letter: a Mapped Word: va
+  Letter: r Mapped Word: var
+  Letter:   Mapped Word: var 
+    New block: Variable Mapped by: var 
+    Letter:  
+    Letter: t
+    Letter: e
+    Letter: s
+    Letter: t
+    Letter: I
+    Letter: n
+    Letter: l
+    Letter: i
+    Letter: n
+    Letter: e
+    Letter:  
+    Letter: =
+    Proper end : 411
+    Found instruction: var testInline =
+    Letter:   Mapped Word:  
+    Letter: 2 Mapped Word: 2
+    Letter: 0 Mapped Word: 0
+    Letter: ; Mapped Word: ;
+    Updated caret 415
+    Start name search: var testInline =, 3
+      Letter:  
+      Letter: t
+      Letter: e
+      Letter: s
+      Letter: t
+      Letter: I
+      Letter: n
+      Letter: l
+      Letter: i
+      Letter: n
+      Letter: e
+      Letter:  
+      Letter: =
+      Blocks name: testInline
+    Iteration count changed from 399 to 415
+    Instruction: `var testInline =`
+  Letter:   Mapped Word:  
+  Letter: l Mapped Word: l
+  Letter: e Mapped Word: le
+  Letter: t Mapped Word: let
+  Letter:   Mapped Word: let 
+    New block: Variable Mapped by: let 
+    Letter:  
+    Letter: t
+    Letter: e
+    Letter: s
+    Letter: t
+    Letter: I
+    Letter: n
+    Letter: l
+    Letter: i
+    Letter: n
+    Letter: e
+    Letter: 2
+    Letter:  
+    Letter: =
+    Proper end : 433
+    Found instruction: let testInline2 =
+    Letter:   Mapped Word:  
+    Letter: { Mapped Word: {
+    Letter: ' Mapped Word: '
+    Letter: a Mapped Word: a
+    Letter: ' Mapped Word: '
+    Letter:   Mapped Word:  
+    Letter: : Mapped Word: :
+    Letter:   Mapped Word:  
+    Letter: ' Mapped Word: '
+    Letter: s Mapped Word: s
+    Letter: d Mapped Word: d
+    Letter: ' Mapped Word: '
+    Letter: } Mapped Word: }
+    Letter: \r Mapped Word: \r
+    Letter: \n Mapped Word: \n
+    Updated caret 448
+    Start name search: let testInline2 =, 3
+      Letter:  
+      Letter: t
+      Letter: e
+      Letter: s
+      Letter: t
+      Letter: I
+      Letter: n
+      Letter: l
+      Letter: i
+      Letter: n
+      Letter: e
+      Letter: 2
+      Letter:  
+      Letter: =
+      Blocks name: testInline2
+    Iteration count changed from 420 to 448
+    Instruction: `let testInline2 =`
+  Letter:   Mapped Word:  
+  Letter:   Mapped Word:  
+  Letter:   Mapped Word:  
+  Letter:   Mapped Word:  
+  Letter: c Mapped Word: c
+  Letter: o Mapped Word: co
+  Letter: n Mapped Word: con
+  Letter: s Mapped Word: cons
+  Letter: t Mapped Word: const
+  Letter:   Mapped Word: const 
+    New block: Variable Mapped by: const 
+    Letter:  
+    Letter: t
+    Letter: e
+    Letter: s
+    Letter: t
+    Letter: A
+    Letter: d
+    Letter: d
+    Letter: A
+    Letter: l
+    Letter: i
+    Letter: a
+    Letter: s
+    Letter: e
+    Letter: s
+    Letter:  
+    Letter: =
+    Proper end : 474
+    Found instruction: const testAddAliases =
+    Letter:   Mapped Word:  
+    Letter: l Mapped Word: l
+    Letter: o Mapped Word: lo
+    Letter: n Mapped Word: n
+    Letter: g Mapped Word: g
+    Letter: N Mapped Word: N
+    Letter: a Mapped Word: a
+    Letter: m Mapped Word: m
+    Letter: e Mapped Word: e
+    Letter: L Mapped Word: L
+    Letter: e Mapped Word: e
+    Letter: t Mapped Word: t
+    Letter:   Mapped Word:  
+    Letter: + Mapped Word: +
+    Letter:   Mapped Word:  
+    Letter: t Mapped Word: t
+    Letter: e Mapped Word: e
+    Letter: s Mapped Word: s
+    Letter: t Mapped Word: t
+    Letter: I Mapped Word: I
+    Letter: n Mapped Word: n
+    Letter: l Mapped Word: l
+    Letter: i Mapped Word: li
+    Letter: n Mapped Word: n
+    Letter: e Mapped Word: e
+    Letter: \r Mapped Word: \r
+    Letter: \n Mapped Word: \n
+    Updated caret 501
+    Start name search: const testAddAliases =, 5
+      Letter:  
+      Letter: t
+      Letter: e
+      Letter: s
+      Letter: t
+      Letter: A
+      Letter: d
+      Letter: d
+      Letter: A
+      Letter: l
+      Letter: i
+      Letter: a
+      Letter: s
+      Letter: e
+      Letter: s
+      Letter:  
+      Letter: =
+      Blocks name: testAddAliases
+    Iteration count changed from 458 to 501
+    Instruction: `const testAddAliases =`
+  Letter: } Mapped Word: }
+  Updated caret 502
+  Iteration count changed from 8 to 502
+  Instruction: `function test() {`
+Letter: \r Mapped Word: \r
+Letter: \n Mapped Word: \n
+Undefined check for: \r\n
+Letter: \r Mapped Word: \r
+Letter: \n Mapped Word: \n
+Undefined check for: \r\n
+Letter: t Mapped Word: t
+Letter: e Mapped Word: e
+Letter: s Mapped Word: s
+Letter: t Mapped Word: t
+Letter: a Mapped Word: a
+Letter: = Mapped Word: =
+Letter: ' Mapped Word: ='
+  New block: Attribute Mapped by: =
+    Letter: a
+    Found closest letter, search for white space: 
+    Letter: t
+    Found closest letter, search for white space: 
+    Letter: s
+    Found closest letter, search for white space: 
+    Letter: e
+    Found closest letter, search for white space: 
+    Letter: t
+    Found closest letter, search for white space: 
+    Letter: \n
+    Start found: 512
+  Letter: \n
+  Letter: t
+  Letter: e
+  Letter: s
+  Letter: t
+  Letter: a
+  Letter: =
+  Proper end : 512
+  Found instruction: testa=
+  Letter: ' Mapped Word: '
+  Letter: b Mapped Word: b
+  Letter: ' Mapped Word: '
+  Letter: \r Mapped Word: \r
+  Letter: \n Mapped Word: \n
+  Updated caret 517
+  Start name search: testa=, 0
+    Letter: t
+    Letter: e
+    Letter: s
+    Letter: t
+    Letter: a
+    Letter: =
+    Blocks name: testa
+  Iteration count changed from 512 to 517
+  Instruction: `testa=`
+Letter: \r Mapped Word: \r
+Letter: \n Mapped Word: \n
+Undefined check for: \r\n
+Letter: e Mapped Word: e
+Letter: 3 Mapped Word: 3
+Letter: = Mapped Word: =
+Letter: > Mapped Word: =>
+  New block: ArrowMethod Mapped by: =>
+  New Arrow method
+    New letter `3`
+    Start search for whitspace, letter found before bracket
+    New letter `e`
+    New letter `\n`
+    White space found
+  Start search for end
+    Letter  
+    Letter {
+    Letter is bracket! Multi line function.
+  Letter: \r Mapped Word: \r
+  Letter: \n Mapped Word: \n
+  Undefined check for: \r\n
+  Letter: \r Mapped Word: \r
+  Letter: \n Mapped Word: \n
+  Undefined check for: \r\n
+  Letter: } Mapped Word: }
+  Updated caret 530
+    Letter: e, Word: 
+    function has only one arg, start search for it...
+    Letter: 3, Word: e
+    function has only one arg, start search for it...
+    Letter: =, Word: e3
+    function has only one arg, start search for it...
+    Letter: >, Word: e3=
+    function has only one arg, start search for it...
+    Letter:  , Word: e3=>
+    Whitespace!
+    Found next whitespace, add arg and end iteration
+  Iteration count changed from 523 to 530
+  Instruction: `e3=> {`
+Letter: \r Mapped Word: \r
+Letter: \n Mapped Word: \n
+Undefined check for: \r\n
+Letter: \r Mapped Word: \r
+Letter: \n Mapped Word: \n
+Undefined check for: \r\n
+Letter: c Mapped Word: c
+Letter: l Mapped Word: cl
+Letter: a Mapped Word: cla
+Letter: s Mapped Word: clas
+Letter: s Mapped Word: class
+Letter:   Mapped Word: class 
+  New block: Instance Mapped by: class 
+  Letter:  
+  Letter: C
+  Letter: l
+  Letter: a
+  Letter: s
+  Letter: s
+  Letter: N
+  Letter: a
+  Letter: m
+  Letter: e
+  Letter:  
+  Letter: {
+  Proper end : 551
+  Letter: \r Mapped Word: \r
+  Letter: \n Mapped Word: \n
+  Undefined check for: \r\n
+  Letter:   Mapped Word:  
+  Letter:   Mapped Word:  
+  Letter:   Mapped Word:  
+  Letter:   Mapped Word:  
+  Letter: c Mapped Word: c
+  Letter: o Mapped Word: co
+  Letter: n Mapped Word: con
+  Letter: s Mapped Word: cons
+  Letter: t Mapped Word: const
+  Letter: r Mapped Word: constr
+  Letter: u Mapped Word: u
+  Letter: c Mapped Word: c
+  Letter: t Mapped Word: ct
+  Letter: o Mapped Word: o
+  Letter: r Mapped Word: r
+  Letter: ( Mapped Word: (
+  Letter: ) Mapped Word: )
+  Letter:   Mapped Word:  
+  Letter: { Mapped Word: {
+  Letter: \r Mapped Word: \r
+  Letter: \n Mapped Word: \n
+  Undefined check for:     constructor() {\r\n
+  Add undefined:     constructor() {\r\n
+  Letter: \r Mapped Word: \r
+  Letter: \n Mapped Word: \n
+  Undefined check for: \r\n
+  Letter:   Mapped Word:  
+  Letter:   Mapped Word:  
+  Letter:   Mapped Word:  
+  Letter:   Mapped Word:  
+  Letter: } Mapped Word: }
+  Updated caret 581
+  Start name search: class ClassName {, 5
+    Letter:  
+    Letter: C
+    Letter: l
+    Letter: a
+    Letter: s
+    Letter: s
+    Letter: N
+    Letter: a
+    Letter: m
+    Letter: e
+    Letter:  
+    Letter: {
+    Blocks name: ClassName
+  Iteration count changed from 540 to 581
+  Instruction: `class ClassName {`
+Letter: \r Mapped Word: \r
+Letter: \n Mapped Word: \n
+Undefined check for: \r\n
+Letter: \r Mapped Word: \r
+Letter: \n Mapped Word: \n
+Undefined check for: \r\n
+Letter:   Mapped Word:  
+Letter:   Mapped Word:  
+Letter:   Mapped Word:  
+Letter:   Mapped Word:  
+Letter: f Mapped Word: f
+Letter: u Mapped Word: fu
+Letter: n Mapped Word: fun
+Letter: c Mapped Word: func
+Letter: ( Mapped Word: func(
+Letter: ) Mapped Word: )
+Letter:   Mapped Word:  
+Letter: { Mapped Word: {
+Letter: \r Mapped Word: \r
+Letter: \n Mapped Word: \n
+Undefined check for:     func() {\r\n
+Add undefined:     func() {\r\n
+Letter:   Mapped Word:  
+Letter:   Mapped Word:  
+Letter:   Mapped Word:  
+Letter:   Mapped Word:  
+Letter:   Mapped Word:  
+Letter:   Mapped Word:  
+Letter:   Mapped Word:  
+Letter:   Mapped Word:  
+Letter: c Mapped Word: c
+Letter: o Mapped Word: co
+Letter: n Mapped Word: con
+Letter: s Mapped Word: cons
+Letter: o Mapped Word: conso
+Letter: l Mapped Word: l
+Letter: e Mapped Word: le
+Letter: . Mapped Word: le.
+Letter: l Mapped Word: l
+Letter: o Mapped Word: lo
+Letter: g Mapped Word: g
+Letter: ( Mapped Word: (
+Letter: ' Mapped Word: '
+Letter: a Mapped Word: a
+Letter: s Mapped Word: s
+Letter: d Mapped Word: d
+Letter: ' Mapped Word: '
+Letter: ) Mapped Word: )
+Letter: ; Mapped Word: ;
+Undefined check for:         console.log('asd');
+Add undefined:         console.log('asd');
+Letter: \r Mapped Word: \r
+Letter: \n Mapped Word: \n
+Undefined check for: \r\n
+Letter:   Mapped Word:  
+Letter:   Mapped Word:  
+Letter:   Mapped Word:  
+Letter:   Mapped Word:  
+Letter: } Mapped Word: }
+Letter: \r Mapped Word: \r
+Letter: \n Mapped Word: \n
+Undefined check for:     }\r\n
+Add undefined:     }\r\n
+Letter: } Mapped Word: }
+Letter: \r Mapped Word: \r
+Letter: \n Mapped Word: \n
+Undefined check for: }\r\n
+Add undefined: }\r\n
+Letter: \r Mapped Word: \r
+Letter: \n Mapped Word: \n
+Undefined check for: \r\n
+Letter: c Mapped Word: c
+Letter: o Mapped Word: co
+Letter: n Mapped Word: con
+Letter: s Mapped Word: cons
+Letter: t Mapped Word: const
+Letter:   Mapped Word: const 
+  New block: Variable Mapped by: const 
+  Letter:  
+  Letter: c
+  Letter: l
+  Letter: a
+  Letter: s
+  Letter: s
+  Letter: N
+  Letter: a
+  Letter: m
+  Letter: e
+  Letter: I
+  Letter: n
+  Letter: s
+  Letter: t
+  Letter:  
+  Letter: =
+  Proper end : 661
+  Found instruction: const classNameInst =
+  Letter:   Mapped Word:  
+  Letter: n Mapped Word: n
+  Letter: e Mapped Word: e
+  Letter: w Mapped Word: w
+  Letter:   Mapped Word:  
+  Letter: C Mapped Word: C
+  Letter: l Mapped Word: l
+  Letter: a Mapped Word: la
+  Letter: s Mapped Word: s
+  Letter: s Mapped Word: s
+  Letter: N Mapped Word: N
+  Letter: a Mapped Word: a
+  Letter: m Mapped Word: m
+  Letter: e Mapped Word: e
+  Letter: ( Mapped Word: (
+  Letter: ) Mapped Word: )
+  Letter: ; Mapped Word: ;
+  Updated caret 678
+  Start name search: const classNameInst =, 5
+    Letter:  
+    Letter: c
+    Letter: l
+    Letter: a
+    Letter: s
+    Letter: s
+    Letter: N
+    Letter: a
+    Letter: m
+    Letter: e
+    Letter: I
+    Letter: n
+    Letter: s
+    Letter: t
+    Letter:  
+    Letter: =
+    Blocks name: classNameInst
+  Iteration count changed from 646 to 678
+  Instruction: `const classNameInst =`
+Letter: \r Mapped Word: \r
+Letter: \n Mapped Word: \n
+Undefined check for: \r\n
+Letter: c Mapped Word: c
+Letter: l Mapped Word: cl
+Letter: a Mapped Word: cla
+Letter: s Mapped Word: clas
+Letter: s Mapped Word: class
+Letter: N Mapped Word: classN
+Letter: a Mapped Word: a
+Letter: m Mapped Word: m
+Letter: e Mapped Word: e
+Letter: I Mapped Word: I
+Letter: n Mapped Word: n
+Letter: s Mapped Word: s
+Letter: t Mapped Word: t
+Letter: . Mapped Word: .
+Letter: f Mapped Word: f
+Letter: u Mapped Word: fu
+Letter: n Mapped Word: fun
+Letter: c Mapped Word: func
+Letter: ( Mapped Word: func(
+Letter: ) Mapped Word: )
+Letter: ; Mapped Word: ;
+Undefined check for: classNameInst.func();
+Add undefined: classNameInst.func();
+Letter: \r Mapped Word: \r
+Letter: \n Mapped Word: \n
+Undefined check for: \r\n
+Updated caret 704
 =======================
 Creating aliases...
+Generate aliases, starting aliasaes map: 
+  Aliases in block:
+  Generate alias for test
+  Last alias: 
+  Last letter: df
+  Next sufix found: a
+  New alias: a
+  Aliases in block:
+  Generate alias for testa
+  Last alias: a
+  Last letter: a
+  Next sufix found: b
+  New alias: b
+  Aliases in block:
+  Generate alias for 
+  Name is empty, skipping...
+  Aliases in block:
+  Generate alias for ClassName
+  Last alias: b
+  Last letter: b
+  Next sufix found: c
+  New alias: c
+  Aliases in block:
+  Generate alias for 
+  Name is empty, skipping...
+  Aliases in block:
+  Generate alias for 
+  Name is empty, skipping...
+  Aliases in block:
+  Generate alias for 
+  Name is empty, skipping...
+  Aliases in block:
+  Generate alias for 
+  Name is empty, skipping...
+  Aliases in block:
+  Generate alias for classNameInst
+  Last alias: c
+  Last letter: c
+  Next sufix found: d
+  New alias: d
+  Aliases in block:
+  Generate alias for 
+  Name is empty, skipping...
+  Taken aliases: a, b, c, d
+  Generate aliases, starting aliasaes map: a, b, c, d
+    Aliases in block:
+    Generate alias for longName
+    Last alias: d
+    Last letter: d
+    Next sufix found: e
+    New alias: e
+    Aliases in block:
+    Generate alias for 
+    Name is empty, skipping...
+    Aliases in block:
+    Generate alias for testa
+    Last alias: e
+    Last letter: e
+    Next sufix found: f
+    New alias: f
+    Aliases in block:
+    Generate alias for test2
+    Last alias: f
+    Last letter: f
+    Next sufix found: g
+    New alias: g
+    Aliases in block:
+    Generate alias for test3
+    Last alias: g
+    Last letter: g
+    Next sufix found: h
+    New alias: h
+    Aliases in block:
+    Generate alias for longNameLet
+    Last alias: h
+    Last letter: h
+    Next sufix found: i
+    New alias: i
+    Aliases in block:
+    Generate alias for 
+    Name is empty, skipping...
+    Aliases in block:
+    Generate alias for longNameConst
+    Last alias: i
+    Last letter: i
+    Next sufix found: j
+    New alias: j
+    Aliases in block:
+    Generate alias for testInline
+    Last alias: j
+    Last letter: j
+    Next sufix found: k
+    New alias: k
+    Aliases in block:
+    Generate alias for testInline2
+    Last alias: k
+    Last letter: k
+    Next sufix found: l
+    New alias: l
+    Aliases in block:
+    Generate alias for testAddAliases
+    Last alias: l
+    Last letter: l
+    Next sufix found: m
+    New alias: m
+    Taken aliases: a, f, c, d, e, g, h, i, j, k, l, m
+    Generate aliases, starting aliasaes map: a, f, c, d, e, g, h, i, j, k, l, m
+      Taken aliases: a, f, c, d, e, g, h, i, j, k, l, m
+    Generate aliases, starting aliasaes map: a, f, c, d, e, g, h, i, j, k, l, m
+      Taken aliases: a, f, c, d, e, g, h, i, j, k, l, m
+    Generate aliases, starting aliasaes map: a, f, c, d, e, g, h, i, j, k, l, m
+      Aliases in block:
+      Generate alias for 
+      Name is empty, skipping...
+      Taken aliases: a, f, c, d, e, g, h, i, j, k, l, m
+      Generate aliases, starting aliasaes map: a, f, c, d, e, g, h, i, j, k, l, m
+        Aliases in block:
+        Generate alias for testScoped
+        Last alias: m
+        Last letter: m
+        Next sufix found: n
+        New alias: n
+        Generate alias for arg1
+        Last alias: n
+        Last letter: n
+        Next sufix found: o
+        New alias: o
+        Taken aliases: a, f, c, d, e, g, h, i, j, k, l, m, n, o
+        Generate aliases, starting aliasaes map: a, f, c, d, e, g, h, i, j, k, l, m, n, o
+          Aliases in block:
+          Generate alias for 
+          Name is empty, skipping...
+          Taken aliases: a, f, c, d, e, g, h, i, j, k, l, m, n, o
+          Generate aliases, starting aliasaes map: a, f, c, d, e, g, h, i, j, k, l, m, n, o
+            Generate alias for adas
+            Last alias: o
+            Last letter: o
+            Next sufix found: p
+            New alias: p
+            Generate alias for test5
+            Last alias: p
+            Last letter: p
+            Next sufix found: r
+            New alias: r
+            Generate alias for test4
+            Last alias: r
+            Last letter: r
+            Next sufix found: s
+            New alias: s
+            Generate alias for fgdfg
+            Last alias: s
+            Last letter: s
+            Next sufix found: t
+            New alias: t
+            Taken aliases: a, f, c, d, e, g, h, i, j, k, l, m, n, o, p, r, s, t
+    Generate aliases, starting aliasaes map: a, f, c, d, e, g, h, i, j, k, l, m
+      Aliases in block:
+      Generate alias for 
+      Name is empty, skipping...
+      Taken aliases: a, f, c, d, e, g, h, i, j, k, l, m
+      Generate aliases, starting aliasaes map: a, f, c, d, e, g, h, i, j, k, l, m
+        Generate alias for e
+        Last alias: m
+        Last letter: m
+        Next sufix found: n
+        New alias: n
+        Taken aliases: a, f, c, d, e, g, h, i, j, k, l, m, n
+    Generate aliases, starting aliasaes map: a, f, c, d, e, g, h, i, j, k, l, m
+      Aliases in block:
+      Generate alias for 
+      Name is empty, skipping...
+      Taken aliases: a, f, c, d, e, g, h, i, j, k, l, m
+      Generate aliases, starting aliasaes map: a, f, c, d, e, g, h, i, j, k, l, m
+        Generate alias for e2
+        Last alias: m
+        Last letter: m
+        Next sufix found: n
+        New alias: n
+        Taken aliases: a, f, c, d, e, g, h, i, j, k, l, m, n
+    Generate aliases, starting aliasaes map: a, f, c, d, e, g, h, i, j, k, l, m
+      Taken aliases: a, f, c, d, e, g, h, i, j, k, l, m
+    Generate aliases, starting aliasaes map: a, f, c, d, e, g, h, i, j, k, l, m
+      Taken aliases: a, f, c, d, e, g, h, i, j, k, l, m
+    Generate aliases, starting aliasaes map: a, f, c, d, e, g, h, i, j, k, l, m
+      Taken aliases: a, f, c, d, e, g, h, i, j, k, l, m
+    Generate aliases, starting aliasaes map: a, f, c, d, e, g, h, i, j, k, l, m
+      Taken aliases: a, f, c, d, e, g, h, i, j, k, l, m
+    Generate aliases, starting aliasaes map: a, f, c, d, e, g, h, i, j, k, l, m
+      Taken aliases: a, f, c, d, e, g, h, i, j, k, l, m
+    Generate aliases, starting aliasaes map: a, f, c, d, e, g, h, i, j, k, l, m
+      Taken aliases: a, f, c, d, e, g, h, i, j, k, l, m
+  Generate aliases, starting aliasaes map: a, b, c, d
+    Taken aliases: a, b, c, d
+  Generate aliases, starting aliasaes map: a, b, c, d
+    Generate alias for e3=>
+    Last alias: d
+    Last letter: d
+    Next sufix found: e
+    New alias: e
+    Taken aliases: a, b, c, d, e
+  Generate aliases, starting aliasaes map: a, b, c, d
+    Aliases in block:
+    Generate alias for 
+    Name is empty, skipping...
+    Taken aliases: a, b, c, d
+    Generate aliases, starting aliasaes map: a, b, c, d
+      Taken aliases: a, b, c, d
+  Generate aliases, starting aliasaes map: a, b, c, d
+    Taken aliases: a, b, c, d
+  Generate aliases, starting aliasaes map: a, b, c, d
+    Taken aliases: a, b, c, d
+  Generate aliases, starting aliasaes map: a, b, c, d
+    Taken aliases: a, b, c, d
+  Generate aliases, starting aliasaes map: a, b, c, d
+    Taken aliases: a, b, c, d
+  Generate aliases, starting aliasaes map: a, b, c, d
+    Taken aliases: a, b, c, d
+  Generate aliases, starting aliasaes map: a, b, c, d
+    Taken aliases: a, b, c, d
 =======================
 Recreating...
-Last word `20` => test, ClassName, classNameInst, longName, testa, test2, test3, longNameLet, longNameConst, testInline, testInline2, testAddAliases
-Last word `;` => test, ClassName, classNameInst, longName, testa, test2, test3, longNameLet, longNameConst, testInline, testInline2, testAddAliases
+  Letter: 2 Word: 
+  Letter: 0 Word: 2
+Last word `20` => test, testa, ClassName, classNameInst, longName, test2, test3, longNameLet, longNameConst, testInline, testInline2, testAddAliases
+  Letter: c Word: 
+  Letter: o Word: c
+  Letter: n Word: co
+  Letter: s Word: con
+  Letter: o Word: cons
+  Letter: l Word: conso
+  Letter: e Word: consol
+  Letter: . Word: console
+  Letter: l Word: console.
+  Letter: o Word: console.l
+  Letter: g Word: console.lo
+  Letter: ( Word: console.log
+  Alias: console.log
+  Letter:   Word: 
+  Alias: 
+  Letter: l Word: 
+  Letter: o Word: l
+  Letter: n Word: lo
+  Letter: g Word: lon
+  Letter: N Word: long
+  Letter: a Word: longN
+  Letter: m Word: longNa
+  Letter: e Word: longNam
+  Letter: ) Word: longName
+  Alias: e
+  Letter: ; Word: 
+Last word `;` => test, testa, ClassName, classNameInst, longName, test2, test3, longNameLet, longNameConst, testInline, testInline2, testAddAliases
 Replace in arrow: 1 + 2
-Last word `2` => test, ClassName, classNameInst, longName, testa, test2, test3, longNameLet, longNameConst, testInline, testInline2, testAddAliases, e
+  Letter: 1 Word: 
+  Letter:   Word: 1
+  Alias: 1
+  Letter: + Word: 
+  Alias: 
+  Letter:   Word: 
+  Alias: 
+  Letter: 2 Word: 
+Last word `2` => test, testa, ClassName, classNameInst, longName, test2, test3, longNameLet, longNameConst, testInline, testInline2, testAddAliases, e
 Replace in arrow: 1 + e2
-Last word `e2` => test, ClassName, classNameInst, longName, testa, test2, test3, longNameLet, longNameConst, testInline, testInline2, testAddAliases, e2
-Last word ``` => test, ClassName, classNameInst, longName, testa, test2, test3, longNameLet, longNameConst, testInline, testInline2, testAddAliases
-Last word `;` => test, ClassName, classNameInst, longName, testa, test2, test3, longNameLet, longNameConst, testInline, testInline2, testAddAliases
-Last word `` => test, ClassName, classNameInst, longName, testa, test2, test3, longNameLet, longNameConst, testInline, testInline2, testAddAliases
-Last word `20` => test, ClassName, classNameInst, longName, testa, test2, test3, longNameLet, longNameConst, testInline, testInline2, testAddAliases
-Last word `` => test, ClassName, classNameInst, longName, testa, test2, test3, longNameLet, longNameConst, testInline, testInline2, testAddAliases
-Last word `testInline` => test, ClassName, classNameInst, longName, testa, test2, test3, longNameLet, longNameConst, testInline, testInline2, testAddAliases
-Last word `;` => test, ClassName, classNameInst
-Last word `` => test, ClassName, classNameInst
-Last word `;` => test, ClassName, classNameInst
+  Letter: 1 Word: 
+  Letter:   Word: 1
+  Alias: 1
+  Letter: + Word: 
+  Alias: 
+  Letter:   Word: 
+  Alias: 
+  Letter: e Word: 
+  Letter: 2 Word: e
+Last word `e2` => test, testa, ClassName, classNameInst, longName, test2, test3, longNameLet, longNameConst, testInline, testInline2, testAddAliases, e2
+  Letter: ` Word: 
+  Letter: a Word: 
+  Letter: s Word: 
+  Letter: d Word: 
+  Letter:   Word: 
+  Letter: $ Word: 
+  Letter: { Word: 
+  Letter: t Word: 
+  Literal in progress: t Word: 
+  Letter: e Word: t
+  Literal in progress: e Word: t
+  Letter: s Word: te
+  Literal in progress: s Word: te
+  Letter: t Word: tes
+  Literal in progress: t Word: tes
+  Letter: I Word: test
+  Literal in progress: I Word: test
+  Letter: n Word: testI
+  Literal in progress: n Word: testI
+  Letter: l Word: testIn
+  Literal in progress: l Word: testIn
+  Letter: i Word: testInl
+  Literal in progress: i Word: testInl
+  Letter: n Word: testInli
+  Literal in progress: n Word: testInli
+  Letter: e Word: testInlin
+  Literal in progress: e Word: testInlin
+  Letter: } Word: testInline
+  Literal in progress: } Word: testInline
+  Add literal: } Word: testInline
+  Alias: k
+  Letter:   Word: 
+  Letter: a Word: 
+  Letter: s Word: 
+  Letter: d Word: 
+  Letter: a Word: 
+  Letter: s Word: 
+  Letter: d Word: 
+  Letter: ` Word: 
+Last word ``` => test, testa, ClassName, classNameInst, longName, test2, test3, longNameLet, longNameConst, testInline, testInline2, testAddAliases
+  Letter: c Word: 
+  Letter: o Word: c
+  Letter: n Word: co
+  Letter: s Word: con
+  Letter: o Word: cons
+  Letter: l Word: conso
+  Letter: e Word: consol
+  Letter: . Word: console
+  Letter: l Word: console.
+  Letter: o Word: console.l
+  Letter: g Word: console.lo
+  Letter: ( Word: console.log
+  Alias: console.log
+  Letter: t Word: 
+  Letter: e Word: t
+  Letter: s Word: te
+  Letter: t Word: tes
+  Letter: 3 Word: test
+  Letter: ( Word: test3
+  Alias: h
+  Letter: ' Word: 
+  Letter: s Word: 
+  Letter: ' Word: 
+  Letter: ) Word: '
+  Alias: '
+  Letter: ) Word: 
+  Alias: 
+  Letter: ; Word: 
+Last word `;` => test, testa, ClassName, classNameInst, longName, test2, test3, longNameLet, longNameConst, testInline, testInline2, testAddAliases
+  Letter: [ Word: 
+  Alias: 
+  Letter: ' Word: 
+  Letter: a Word: 
+  Letter: s Word: 
+  Letter: d Word: 
+  Letter: ' Word: 
+  Letter: , Word: '
+  Alias: '
+  Letter: ' Word: 
+  Letter: a Word: 
+  Letter: s Word: 
+  Letter: d Word: 
+  Letter: s Word: 
+  Letter: a Word: 
+  Letter: d Word: 
+  Letter: ' Word: 
+  Letter: ] Word: '
+  Alias: '
+Last word `` => test, testa, ClassName, classNameInst, longName, test2, test3, longNameLet, longNameConst, testInline, testInline2, testAddAliases
+  Letter: 2 Word: 
+  Letter: 0 Word: 2
+Last word `20` => test, testa, ClassName, classNameInst, longName, test2, test3, longNameLet, longNameConst, testInline, testInline2, testAddAliases
+  Letter: { Word: 
+  Alias: 
+  Letter: ' Word: 
+  Letter: a Word: 
+  Letter: ' Word: 
+  Letter:   Word: '
+  Alias: '
+  Letter: : Word: 
+  Alias: 
+  Letter:   Word: 
+  Alias: 
+  Letter: ' Word: 
+  Letter: s Word: 
+  Letter: d Word: 
+  Letter: ' Word: 
+  Letter: } Word: '
+  Alias: '
+Last word `` => test, testa, ClassName, classNameInst, longName, test2, test3, longNameLet, longNameConst, testInline, testInline2, testAddAliases
+  Letter: l Word: 
+  Letter: o Word: l
+  Letter: n Word: lo
+  Letter: g Word: lon
+  Letter: N Word: long
+  Letter: a Word: longN
+  Letter: m Word: longNa
+  Letter: e Word: longNam
+  Letter: L Word: longName
+  Letter: e Word: longNameL
+  Letter: t Word: longNameLe
+  Letter:   Word: longNameLet
+  Alias: i
+  Letter: + Word: 
+  Alias: 
+  Letter:   Word: 
+  Alias: 
+  Letter: t Word: 
+  Letter: e Word: t
+  Letter: s Word: te
+  Letter: t Word: tes
+  Letter: I Word: test
+  Letter: n Word: testI
+  Letter: l Word: testIn
+  Letter: i Word: testInl
+  Letter: n Word: testInli
+  Letter: e Word: testInlin
+Last word `testInline` => test, testa, ClassName, classNameInst, longName, test2, test3, longNameLet, longNameConst, testInline, testInline2, testAddAliases
+  Letter: ' Word: 
+  Letter: b Word: 
+  Letter: ' Word: 
+Last word `'` => test, testa, ClassName, classNameInst
+  Letter: c Word: 
+  Letter: o Word: c
+  Letter: n Word: co
+  Letter: s Word: con
+  Letter: t Word: cons
+  Letter: r Word: const
+  Letter: u Word: constr
+  Letter: c Word: constru
+  Letter: t Word: construc
+  Letter: o Word: construct
+  Letter: r Word: constructo
+  Letter: ( Word: constructor
+  Alias: constructor
+  Letter: ) Word: 
+  Alias: 
+  Letter:   Word: 
+  Alias: 
+  Letter: { Word: 
+  Alias: 
+Last word `` => test, testa, ClassName, classNameInst
+  Letter: f Word: 
+  Letter: u Word: f
+  Letter: n Word: fu
+  Letter: c Word: fun
+  Letter: ( Word: func
+  Alias: func
+  Letter: ) Word: 
+  Alias: 
+  Letter:   Word: 
+  Alias: 
+  Letter: { Word: 
+  Alias: 
+Last word `` => test, testa, ClassName, classNameInst
+  Letter: c Word: 
+  Letter: o Word: c
+  Letter: n Word: co
+  Letter: s Word: con
+  Letter: o Word: cons
+  Letter: l Word: conso
+  Letter: e Word: consol
+  Letter: . Word: console
+  Letter: l Word: console.
+  Letter: o Word: console.l
+  Letter: g Word: console.lo
+  Letter: ( Word: console.log
+  Alias: console.log
+  Letter: ' Word: 
+  Letter: a Word: 
+  Letter: s Word: 
+  Letter: d Word: 
+  Letter: ' Word: 
+  Letter: ) Word: '
+  Alias: '
+  Letter: ; Word: 
+Last word `;` => test, testa, ClassName, classNameInst
+  Letter: } Word: 
+  Alias: 
+Last word `` => test, testa, ClassName, classNameInst
+  Letter: } Word: 
+  Alias: 
+Last word `` => test, testa, ClassName, classNameInst
+  Letter: n Word: 
+  Letter: e Word: n
+  Letter: w Word: ne
+  Letter:   Word: new
+  Alias: new
+  Letter: C Word: 
+  Letter: l Word: C
+  Letter: a Word: Cl
+  Letter: s Word: Cla
+  Letter: s Word: Clas
+  Letter: N Word: Class
+  Letter: a Word: ClassN
+  Letter: m Word: ClassNa
+  Letter: e Word: ClassNam
+  Letter: ( Word: ClassName
+  Alias: c
+  Letter: ) Word: 
+  Alias: 
+Last word `` => test, testa, ClassName, classNameInst
+  Letter: c Word: 
+  Letter: l Word: c
+  Letter: a Word: cl
+  Letter: s Word: cla
+  Letter: s Word: clas
+  Letter: N Word: class
+  Letter: a Word: classN
+  Letter: m Word: classNa
+  Letter: e Word: classNam
+  Letter: I Word: className
+  Letter: n Word: classNameI
+  Letter: s Word: classNameIn
+  Letter: t Word: classNameIns
+  Letter: . Word: classNameInst
+  Letter: f Word: classNameInst.
+  Letter: u Word: classNameInst.f
+  Letter: n Word: classNameInst.fu
+  Letter: c Word: classNameInst.fun
+  Letter: ( Word: classNameInst.func
+  Alias: classNameInst.func
+  Letter: ) Word: 
+  Alias: 
+  Letter: ; Word: 
+Last word `;` => test, testa, ClassName, classNameInst
 =======================
 Block: Tetraquark\Block\Method
 Subtype: function
@@ -26,30 +1675,30 @@ Name: `test`
 Arguments: [0] ``
 Argument Aliases: [0] ``
 Alias: `a`
-Map of Aliases: [3] `test=a, ClassName=b, classNameInst=c`
+Map of Aliases: [4] `test=a, testa=b, ClassName=c, classNameInst=d`
 =======
   Block: Tetraquark\Block\Variable
   Subtype: var
   Instruction: var longName =
   Name: `longName`
   Value: `20`
-  Alias: `d`
-  Map of Aliases: [12] `test=a, ClassName=b, classNameInst=c, longName=d, testa=e, test2=f, test3=g, longNameLet=h, longNameConst=i, testInline=j, testInline2=k, testAddAliases=l`
+  Alias: `e`
+  Map of Aliases: [12] `test=a, testa=f, ClassName=c, classNameInst=d, longName=e, test2=g, test3=h, longNameLet=i, longNameConst=j, testInline=k, testInline2=l, testAddAliases=m`
   =======
   Block: Tetraquark\Block\Undefined
   Subtype: 
   Instruction: console.log( longName);
   Name: ``
   Alias: ``
-  Map of Aliases: [12] `test=a, ClassName=b, classNameInst=c, longName=d, testa=e, test2=f, test3=g, longNameLet=h, longNameConst=i, testInline=j, testInline2=k, testAddAliases=l`
+  Map of Aliases: [12] `test=a, testa=f, ClassName=c, classNameInst=d, longName=e, test2=g, test3=h, longNameLet=i, longNameConst=j, testInline=k, testInline2=l, testAddAliases=m`
   =======
   Block: Tetraquark\Block\Variable
   Subtype: const
   Instruction: const testa =
   Name: `testa`
   Value: ``
-  Alias: `e`
-  Map of Aliases: [12] `test=a, ClassName=b, classNameInst=c, longName=d, testa=e, test2=f, test3=g, longNameLet=h, longNameConst=i, testInline=j, testInline2=k, testAddAliases=l`
+  Alias: `f`
+  Map of Aliases: [12] `test=a, testa=f, ClassName=c, classNameInst=d, longName=e, test2=g, test3=h, longNameLet=i, longNameConst=j, testInline=k, testInline2=l, testAddAliases=m`
   =======
     Block: Tetraquark\Block\ArrowMethod
     Subtype: parenthesis:brackets
@@ -57,34 +1706,34 @@ Map of Aliases: [3] `test=a, ClassName=b, classNameInst=c`
     Name: ``
     Value: ``
     Arguments: [1] `arg1`
-    Argument Aliases: [1] `arg1 => n`
+    Argument Aliases: [1] `arg1 => o`
     Alias: ``
-    Map of Aliases: [13] `test=a, ClassName=b, classNameInst=c, longName=d, testa=e, test2=f, test3=g, longNameLet=h, longNameConst=i, testInline=j, testInline2=k, testAddAliases=l, arg1=n`
+    Map of Aliases: [13] `test=a, testa=f, ClassName=c, classNameInst=d, longName=e, test2=g, test3=h, longNameLet=i, longNameConst=j, testInline=k, testInline2=l, testAddAliases=m, arg1=o`
     =======
       Block: Tetraquark\Block\Variable
       Subtype: const
       Instruction: const testScoped =
       Name: `testScoped`
       Value: ``
-      Alias: `m`
-      Map of Aliases: [14] `test=a, ClassName=b, classNameInst=c, longName=d, testa=e, test2=f, test3=g, longNameLet=h, longNameConst=i, testInline=j, testInline2=k, testAddAliases=l, testScoped=m, arg1=n`
+      Alias: `n`
+      Map of Aliases: [14] `test=a, testa=f, ClassName=c, classNameInst=d, longName=e, test2=g, test3=h, longNameLet=i, longNameConst=j, testInline=k, testInline2=l, testAddAliases=m, testScoped=n, arg1=o`
       =======
         Block: Tetraquark\Block\Method
         Subtype: anonymous:function
         Instruction: function (adas, test5 , test4, fgdfg) {
         Name: ``
         Arguments: [4] `adas`, `test5`, `test4`, `fgdfg`
-        Argument Aliases: [4] `adas => o, test5 => p, test4 => r, fgdfg => s`
+        Argument Aliases: [4] `adas => p, test5 => r, test4 => s, fgdfg => t`
         Alias: ``
-        Map of Aliases: [18] `test=a, ClassName=b, classNameInst=c, longName=d, testa=e, test2=f, test3=g, longNameLet=h, longNameConst=i, testInline=j, testInline2=k, testAddAliases=l, testScoped=m, arg1=n, adas=o, test5=p, test4=r, fgdfg=s`
+        Map of Aliases: [18] `test=a, testa=f, ClassName=c, classNameInst=d, longName=e, test2=g, test3=h, longNameLet=i, longNameConst=j, testInline=k, testInline2=l, testAddAliases=m, testScoped=n, arg1=o, adas=p, test5=r, test4=s, fgdfg=t`
         =======
   Block: Tetraquark\Block\Variable
   Subtype: const
   Instruction: const test2 =
   Name: `test2`
   Value: ``
-  Alias: `f`
-  Map of Aliases: [12] `test=a, ClassName=b, classNameInst=c, longName=d, testa=e, test2=f, test3=g, longNameLet=h, longNameConst=i, testInline=j, testInline2=k, testAddAliases=l`
+  Alias: `g`
+  Map of Aliases: [12] `test=a, testa=f, ClassName=c, classNameInst=d, longName=e, test2=g, test3=h, longNameLet=i, longNameConst=j, testInline=k, testInline2=l, testAddAliases=m`
   =======
     Block: Tetraquark\Block\ArrowMethod
     Subtype: no-parenthesis:no-brackets
@@ -92,17 +1741,17 @@ Map of Aliases: [3] `test=a, ClassName=b, classNameInst=c`
     Name: ``
     Value: `1 + 2`
     Arguments: [1] `e`
-    Argument Aliases: [1] `e => m`
+    Argument Aliases: [1] `e => n`
     Alias: ``
-    Map of Aliases: [13] `test=a, ClassName=b, classNameInst=c, longName=d, testa=e, test2=f, test3=g, longNameLet=h, longNameConst=i, testInline=j, testInline2=k, testAddAliases=l, e=m`
+    Map of Aliases: [13] `test=a, testa=f, ClassName=c, classNameInst=d, longName=e, test2=g, test3=h, longNameLet=i, longNameConst=j, testInline=k, testInline2=l, testAddAliases=m, e=n`
     =======
   Block: Tetraquark\Block\Variable
   Subtype: const
   Instruction: const test3 =
   Name: `test3`
   Value: ``
-  Alias: `g`
-  Map of Aliases: [12] `test=a, ClassName=b, classNameInst=c, longName=d, testa=e, test2=f, test3=g, longNameLet=h, longNameConst=i, testInline=j, testInline2=k, testAddAliases=l`
+  Alias: `h`
+  Map of Aliases: [12] `test=a, testa=f, ClassName=c, classNameInst=d, longName=e, test2=g, test3=h, longNameLet=i, longNameConst=j, testInline=k, testInline2=l, testAddAliases=m`
   =======
     Block: Tetraquark\Block\ArrowMethod
     Subtype: parenthesis:no-brackets
@@ -110,97 +1759,133 @@ Map of Aliases: [3] `test=a, ClassName=b, classNameInst=c`
     Name: ``
     Value: `1 + e2`
     Arguments: [1] `e2`
-    Argument Aliases: [1] `e2 => m`
+    Argument Aliases: [1] `e2 => n`
     Alias: ``
-    Map of Aliases: [13] `test=a, ClassName=b, classNameInst=c, longName=d, testa=e, test2=f, test3=g, longNameLet=h, longNameConst=i, testInline=j, testInline2=k, testAddAliases=l, e2=m`
+    Map of Aliases: [13] `test=a, testa=f, ClassName=c, classNameInst=d, longName=e, test2=g, test3=h, longNameLet=i, longNameConst=j, testInline=k, testInline2=l, testAddAliases=m, e2=n`
     =======
   Block: Tetraquark\Block\Variable
   Subtype: let
   Instruction: let longNameLet =
   Name: `longNameLet`
   Value: ``asd ${testInline} asdasd``
-  Alias: `h`
-  Map of Aliases: [12] `test=a, ClassName=b, classNameInst=c, longName=d, testa=e, test2=f, test3=g, longNameLet=h, longNameConst=i, testInline=j, testInline2=k, testAddAliases=l`
+  Alias: `i`
+  Map of Aliases: [12] `test=a, testa=f, ClassName=c, classNameInst=d, longName=e, test2=g, test3=h, longNameLet=i, longNameConst=j, testInline=k, testInline2=l, testAddAliases=m`
   =======
   Block: Tetraquark\Block\Undefined
   Subtype: 
   Instruction: console.log(test3('s'));
   Name: ``
   Alias: ``
-  Map of Aliases: [12] `test=a, ClassName=b, classNameInst=c, longName=d, testa=e, test2=f, test3=g, longNameLet=h, longNameConst=i, testInline=j, testInline2=k, testAddAliases=l`
+  Map of Aliases: [12] `test=a, testa=f, ClassName=c, classNameInst=d, longName=e, test2=g, test3=h, longNameLet=i, longNameConst=j, testInline=k, testInline2=l, testAddAliases=m`
   =======
   Block: Tetraquark\Block\Variable
   Subtype: const
   Instruction: const longNameConst =
   Name: `longNameConst`
   Value: `['asd','asdsad']`
-  Alias: `i`
-  Map of Aliases: [12] `test=a, ClassName=b, classNameInst=c, longName=d, testa=e, test2=f, test3=g, longNameLet=h, longNameConst=i, testInline=j, testInline2=k, testAddAliases=l`
+  Alias: `j`
+  Map of Aliases: [12] `test=a, testa=f, ClassName=c, classNameInst=d, longName=e, test2=g, test3=h, longNameLet=i, longNameConst=j, testInline=k, testInline2=l, testAddAliases=m`
   =======
   Block: Tetraquark\Block\Variable
   Subtype: var
   Instruction: var testInline =
   Name: `testInline`
   Value: `20`
-  Alias: `j`
-  Map of Aliases: [12] `test=a, ClassName=b, classNameInst=c, longName=d, testa=e, test2=f, test3=g, longNameLet=h, longNameConst=i, testInline=j, testInline2=k, testAddAliases=l`
+  Alias: `k`
+  Map of Aliases: [12] `test=a, testa=f, ClassName=c, classNameInst=d, longName=e, test2=g, test3=h, longNameLet=i, longNameConst=j, testInline=k, testInline2=l, testAddAliases=m`
   =======
   Block: Tetraquark\Block\Variable
   Subtype: let
   Instruction: let testInline2 =
   Name: `testInline2`
   Value: `{'a' : 'sd'}`
-  Alias: `k`
-  Map of Aliases: [12] `test=a, ClassName=b, classNameInst=c, longName=d, testa=e, test2=f, test3=g, longNameLet=h, longNameConst=i, testInline=j, testInline2=k, testAddAliases=l`
+  Alias: `l`
+  Map of Aliases: [12] `test=a, testa=f, ClassName=c, classNameInst=d, longName=e, test2=g, test3=h, longNameLet=i, longNameConst=j, testInline=k, testInline2=l, testAddAliases=m`
   =======
   Block: Tetraquark\Block\Variable
   Subtype: const
   Instruction: const testAddAliases =
   Name: `testAddAliases`
   Value: `longNameLet + testInline`
-  Alias: `l`
-  Map of Aliases: [12] `test=a, ClassName=b, classNameInst=c, longName=d, testa=e, test2=f, test3=g, longNameLet=h, longNameConst=i, testInline=j, testInline2=k, testAddAliases=l`
+  Alias: `m`
+  Map of Aliases: [12] `test=a, testa=f, ClassName=c, classNameInst=d, longName=e, test2=g, test3=h, longNameLet=i, longNameConst=j, testInline=k, testInline2=l, testAddAliases=m`
   =======
+Block: Tetraquark\Block\Attribute
+Subtype: 
+Instruction: testa=
+Name: `testa`
+Value: `'b'`
+Alias: `b`
+Map of Aliases: [4] `test=a, testa=b, ClassName=c, classNameInst=d`
+=======
 Block: Tetraquark\Block\ArrowMethod
 Subtype: no-parenthesis:brackets
-Instruction: e3 => {
+Instruction: e3=> {
 Name: ``
 Value: ``
-Arguments: [1] `e3`
-Argument Aliases: [1] `e3 => d`
+Arguments: [1] `e3=>`
+Argument Aliases: [1] `e3=> => e`
 Alias: ``
-Map of Aliases: [4] `test=a, ClassName=b, classNameInst=c, e3=d`
+Map of Aliases: [5] `test=a, testa=b, ClassName=c, classNameInst=d, e3=>=e`
 =======
 Block: Tetraquark\Block\Instance
 Subtype: class
 Instruction: class ClassName {
 Name: `ClassName`
-Alias: `b`
-Map of Aliases: [3] `test=a, ClassName=b, classNameInst=c`
+Alias: `c`
+Map of Aliases: [4] `test=a, testa=b, ClassName=c, classNameInst=d`
+=======
+  Block: Tetraquark\Block\Undefined
+  Subtype: 
+  Instruction: constructor() {
+  Name: ``
+  Alias: ``
+  Map of Aliases: [4] `test=a, testa=b, ClassName=c, classNameInst=d`
+  =======
+Block: Tetraquark\Block\Undefined
+Subtype: 
+Instruction: func() {
+Name: ``
+Alias: ``
+Map of Aliases: [4] `test=a, testa=b, ClassName=c, classNameInst=d`
 =======
 Block: Tetraquark\Block\Undefined
 Subtype: 
-Instruction: func() { console.log('asd');
+Instruction: console.log('asd');
 Name: ``
 Alias: ``
-Map of Aliases: [3] `test=a, ClassName=b, classNameInst=c`
+Map of Aliases: [4] `test=a, testa=b, ClassName=c, classNameInst=d`
+=======
+Block: Tetraquark\Block\Undefined
+Subtype: 
+Instruction: }
+Name: ``
+Alias: ``
+Map of Aliases: [4] `test=a, testa=b, ClassName=c, classNameInst=d`
+=======
+Block: Tetraquark\Block\Undefined
+Subtype: 
+Instruction: }
+Name: ``
+Alias: ``
+Map of Aliases: [4] `test=a, testa=b, ClassName=c, classNameInst=d`
 =======
 Block: Tetraquark\Block\Variable
 Subtype: const
 Instruction: const classNameInst =
 Name: `classNameInst`
 Value: `new ClassName()`
-Alias: `c`
-Map of Aliases: [3] `test=a, ClassName=b, classNameInst=c`
+Alias: `d`
+Map of Aliases: [4] `test=a, testa=b, ClassName=c, classNameInst=d`
 =======
 Block: Tetraquark\Block\Undefined
 Subtype: 
 Instruction: classNameInst.func();
 Name: ``
 Alias: ``
-Map of Aliases: [3] `test=a, ClassName=b, classNameInst=c`
+Map of Aliases: [4] `test=a, testa=b, ClassName=c, classNameInst=d`
 =======
-Duration: 0.003s
+Duration: 0.006s
 
 
-function a(){var d=20;console.log( d);const e=(n)=>{const m=function (o,p,r,s){}};const f=(m)=>1 + 2;const g=(m)=>1 + m;let h=`asd ${j} asdasd`;console.log(g('s'));const i=['asd','asdsad'];var j=20;let k={'a' : 'sd'};const l=h + j;}(d)=>{};class b{}func() { console.log('asd');const c=new b();classNameInst.func();
+function a(){var e=20;console.log( e);const f=(o)=>{const n=function (p,r,s,t){}};const g=(n)=>1 + 2;const h=(n)=>1 + n;let i=`asd ${k} asdasd`;console.log(h('s'));const j=['asd','asdsad'];var k=20;let l={'a' : 'sd'};const m=i + k;} b='b';(e)=>{};class c{constructor() {}func() {console.log('asd');}}const d=new c();classNameInst.func();

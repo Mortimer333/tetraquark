@@ -6,7 +6,7 @@ class Log
 {
     static protected int     $indent        = 0;
     static protected int     $verbose       = 0;
-    static protected int     $maxVerbose    = 0;
+    static protected int     $maxVerbose    = 3;
     static protected int     $classLimit    = 20;
     static protected int     $functionLimit = 20;
     static protected ?string $timeStart     = null;

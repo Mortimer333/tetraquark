@@ -15,7 +15,9 @@ function test() { var longName = 20;
     const testAddAliases = longNameLet + testInline
 }
 
-e3 => {
+testa='b'
+
+e3=> {
 
 }
 

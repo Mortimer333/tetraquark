@@ -5,7 +5,7 @@ use \Tetraquark\Log as Log;
 use \Tetraquark\Contract as Contract;
 use \Tetraquark\Block as Block;
 
-class Variable extends Block implements Contract\Block
+class Attribute extends Block implements Contract\Block
 {
     protected string $value = '';
     protected array $endChars = [
@@ -19,6 +19,23 @@ class Variable extends Block implements Contract\Block
 
     public function objectify(int $start = 0)
     {
+        $letterFound = false;
+        Log::increaseIndent();
+        for ($i=$start - 1; $i >= 0; $i--) {
+            $letter = self::$content[$i];
+            Log::log('Letter: ' . $letter, 3);
+            if ($letterFound && $this->isWhitespace($letter)) {
+                Log::log('Start found: ' . $start, 3);
+                $start = $i;
+                break;
+            }
+
+            if (!$this->isWhitespace($letter)) {
+                Log::log('Found closest letter, search for white space: ', 3);
+                $letterFound = true;
+            }
+        }
+        Log::decreaseIndent();
         $this->findInstructionEnd($start, $this->subtype, $this->instructionEnds);
         Log::log('Found instruction: ' . $this->getInstruction(), 3);
         $this->createSubBlocks();

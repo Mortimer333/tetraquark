@@ -37,11 +37,88 @@ abstract class Block
         '$' => '_', '_' => false
     ];
 
+
+    /**
+     * Map of possible blocks. For better performance I don't want to cut string and do any operations on it and decide to create a map
+     * which script has to follow to find each block. I've also added `default` option so if two blocks start with the same char (`=` as
+     * to set variable and `=>` as to create arrow function) you can actually check if script will follow different path or if its alread
+     * at the end of it.
+     * @var array
+     */
+    protected $blocksMap = [
+        'f' => [
+            'u' => [
+                'n' => [
+                    'c' => [
+                        't' => [
+                            'i' => [
+                                'o' => [
+                                    'n' => [
+                                        ' ' => 'Method',
+                                        "\n" => "Method",
+                                        "\r" => "Method",
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        '=' => [
+            '>'       => 'ArrowMethod',
+            'default' => 'Attribute'
+        ],
+        'l' => [
+            'e' => [
+                't' => [
+                    ' ' => 'Variable',
+                    "\n" => "Variable",
+                    "\r" => "Variable",
+                ]
+            ]
+        ],
+        'c' => [
+            'o' => [
+                'n' => [
+                    's' => [
+                        't' => [
+                            ' ' => 'Variable',
+                            "\n" => "Variable",
+                            "\r" => "Variable",
+                        ]
+                    ]
+                ]
+            ],
+            'l' => [
+                'a' => [
+                    's' => [
+                        's' => [
+                            ' ' => 'Instance',
+                            "\n" => "Instance",
+                            "\r" => "Instance",
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        'v' => [
+            'a' => [
+                'r' => [
+                    ' ' => 'Variable',
+                    "\n" => "Variable",
+                    "\r" => "Variable",
+                ],
+            ]
+        ]
+    ];
+
     public function __construct(
         int $start = 0,
-        protected string $subtype = '',
+        string $subtype = '',
         protected array  $data  = []
     ) {
+        $this->setSubtype($subtype);
         $this->objectify($start);
     }
 
@@ -74,7 +151,7 @@ abstract class Block
 
     public function setSubtype(string $subtype): self
     {
-        $this->subtype = $subtype;
+        $this->subtype = trim($subtype);
         return $this;
     }
 
@@ -96,7 +173,7 @@ abstract class Block
 
     public function setAlias(string $alias): self
     {
-        $this->alias = $alias;
+        $this->alias = trim($alias);
         return $this;
     }
 
@@ -152,7 +229,7 @@ abstract class Block
 
     public function setName(string $name): self
     {
-        $this->name = $name;
+        $this->name = trim($name);
         return $this;
     }
 
@@ -166,35 +243,37 @@ abstract class Block
         return $this->endChars[$letter] ?? false;
     }
 
-    protected function isNewBlock(string $name)
+    protected function journeyForBlockClassName(string $name, string &$mappedWord, int &$i, ?array $blocksMap = null): string | array | null
     {
-        $hints = [
-            'function ' => 'function',
-            '=>'        => '=>',
-            'let '      => 'let',
-            'const '    => 'const',
-            'var '      => 'var',
-            'class '    => 'class',
-        ];
-        return $hints[$name] ?? false;
+        if (\is_null($blocksMap)) {
+            $blocksMap = $this->blocksMap;
+        }
+        if (isset($blocksMap[$name])) {
+            return $blocksMap[$name];
+        }
+        if (isset($blocksMap['default'])) {
+            $mappedWord = substr($mappedWord, 0, -1);
+            $i--;
+            return $blocksMap['default'];
+        }
+        return null;
     }
 
-    protected function blockFactory(string $name, int $start): Block
+    protected function blockFactory(string $hint, string $className, int $start): Block
     {
         $prefix = 'Tetraquark\Block\\';
-        $blocks = [
-            'function' => 'Method',
-            '=>'       => 'ArrowMethod',
-            'let'      => 'Variable',
-            'const'    => 'Variable',
-            'var'      => 'Variable',
-            'class'    => 'Instance',
-        ];
-        if (!isset($blocks[$name])) {
-            throw new Exception("Block couldn't be created with name: " . htmlspecialchars($name), 404);
+        $class  = $prefix . $className;
+
+        if (!\class_exists($class)) {
+            throw new Exception("Passed class doesn't exist: " . htmlspecialchars($className), 404);
         }
-        $class = $prefix . $blocks[$name];
-        return new $class($start, $name);
+
+        // If this is variable creatiion without any type declaration then its attribute assignment and we shouldn't add anything before it
+        if ($hint == '=') {
+            $hint = '';
+        }
+
+        return new $class($start, $hint);
     }
 
     protected function isValidVariable(string $variable): bool
@@ -224,7 +303,7 @@ abstract class Block
 
     protected function isWhitespace(string $letter): bool
     {
-        return (bool) preg_match('/[\s]/', $letter);
+        return ctype_space($letter);
     }
 
     protected function findInstructionEnd(int $start, string $name, ?array $endChars = null): void
@@ -256,16 +335,12 @@ abstract class Block
             ->setInstruction($instruction);
     }
 
-    protected function constructBlock(string $word, int &$i): ?Block
+    protected function constructBlock(string $mappedWord, string $className, int &$i): ?Block
     {
-        if (!($name = $this->isNewBlock($word))) {
-            return null;
-        }
-
         Log::increaseIndent();
-        Log::log("New block: " . $name, 1);
+        Log::log("New block: " . $className . " Mapped by: " . $mappedWord, 1);
 
-        $block = $this->blockFactory($name, $i);
+        $block = $this->blockFactory($mappedWord, $className, $i);
 
         Log::log('Iteration count changed from ' . $i . " to " . $block->getCaret(), 1);
         Log::log("Instruction: `". $block->getInstruction() . "`", 1);
@@ -275,51 +350,51 @@ abstract class Block
         return $block;
     }
 
+    protected function isValidUndefined(string $undefined): bool
+    {
+        $undefinedEnds = ["\n" => true, ";" => true];
+        return \mb_strlen($undefined) > 0 && !$this->isWhitespace($undefined) && $undefined != '}' && !isset($undefinedEnds[$undefined]);
+    }
+
     protected function createSubBlocks(): void
     {
-        $word = '';
-        $lastFound = 0;
+        $map = null;
+        $mappedWord = '';
         $possibleUndefined = '';
         $undefinedEnds = ["\n" => true, ";" => true];
         for ($i=$this->getCaret(); $i < \strlen(self::$content); $i++) {
             $letter = self::$content[$i];
-            $word .= $letter;
+            $mappedWord .= $letter;
+            $possibleUndefined .= $letter;
+            Log::log("Letter: " . $letter . " Mapped Word: " . $mappedWord, 3);
 
-            $block = $this->constructBlock($word, $i);
-            if ($block) {
-                Log::log("Add Block! Current letter " . self::$content[$i - 1], 1);
-                Log::log("Clear undefined", 2);
+            $map = $this->journeyForBlockClassName($letter, $mappedWord, $i, $map);
+            if (gettype($map) == 'string') {
+                $block = $this->constructBlock($mappedWord, $map, $i);
                 $possibleUndefined = '';
                 $this->blocks[] = $block;
-                $lastFound = $i;
-                $word = '';
+                $mappedWord = '';
+                $map = null;
                 continue;
+            } elseif (\is_null($map)) {
+                $mappedWord = '';
             }
 
-            Log::log("Letter: " . $letter . ', Word: ' . $word, 2);
-
-            if ($this->isWhitespace($letter) && !($this->endChars[$letter] ?? false)) {
-                Log::log("Word clear!", 2);
-                if (\mb_strlen($word) > 0) {
-                    Log::log("Add undefined: `" . $word . "`", 2);
-                    $possibleUndefined .= $word . ' ';
-                }
-                $word = '';
-                continue;
-            }
-
-            Log::log("End Check: " . implode(', ', array_keys($this->endChars)) . ' == ' . $letter, 1);
             if ($this->endChars[$letter] ?? false) {
-                Log::log("Clear undefined", 2);
+                $possibleUndefined = substr($possibleUndefined, 0, -1);
+                // if ($this->isValidUndefined($possibleUndefined)) {
+                //     $this->blocks[] = new Block\Undefined($i - \mb_strlen($possibleUndefined), $possibleUndefined);
+                // }
                 $possibleUndefined = '';
-                Log::log("End found!", 1);
                 break;
             }
 
-            if ($undefinedEnds[$letter] ?? false && \mb_strlen($possibleUndefined) > 0) {
-                $possibleUndefined .= $word;
-                Log::log("Create undefined!", 2);
-                $this->blocks[] = new Block\Undefined($i - \mb_strlen($possibleUndefined), $possibleUndefined);
+            if ($undefinedEnds[$letter] ?? false) {
+                Log::log("Undefined check for: " . $possibleUndefined, 3);
+                if ($this->isValidUndefined($possibleUndefined)) {
+                    Log::log("Add undefined: " . $possibleUndefined, 3);
+                    $this->blocks[] = new Block\Undefined($i - \mb_strlen($possibleUndefined), $possibleUndefined);
+                }
                 $possibleUndefined = '';
             }
         }
@@ -332,15 +407,20 @@ abstract class Block
     protected function findAndSetName(string $prefix, array $ends): void
     {
         $instr = $this->getInstruction();
-        $start = \strlen($prefix);
+        $start = \strlen($prefix) - 1;
+        Log::log('Start name search: ' . $instr . ", " . $start, 3);
+        Log::increaseIndent();
         for ($i=$start; $i < strlen($instr); $i++) {
             $letter = $instr[$i];
-            if ($ends[$letter] ?? false || $this->isWhitespace($letter)) {
+            Log::log('Letter: ' . $letter, 3);
+            if ($ends[$letter] ?? false) {
                 $this->setName(substr($instr, $start, $i - $start));
                 Log::log('Blocks name: ' . $this->getName(), 1);
+                Log::decreaseIndent();
                 return;
             }
         }
+        Log::decreaseIndent();
         throw new Exception('Blocks name not found', 404);
     }
 
