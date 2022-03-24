@@ -197,7 +197,6 @@ class ArrowMethod extends MethodBlock implements Contract\Block
     {
         $script = '(' . $this->getAliasedArguments() . ')=>';
         if (!$this->isMultiLine()) {
-            Log::log('Replace in arrow: ' . $this->getValue());
             $script .= $this->replaceVariablesWithAliases($this->getValue()) . ';';
         } else {
             $script .= '{';

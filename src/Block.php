@@ -39,7 +39,9 @@ abstract class Block
 
 
     /**
-     * Map of possible blocks. For better performance I don't want to cut string and do any operations on it and decide to create a map
+     * Map of possible blocks.
+     *
+     * For better performance I don't want to cut string and do any operations on it and decide to create a map
      * which script has to follow to find each block. I've also added `default` option so if two blocks start with the same char (`=` as
      * to set variable and `=>` as to create arrow function) you can actually check if script will follow different path or if its alread
      * at the end of it.
@@ -54,7 +56,7 @@ abstract class Block
                             'i' => [
                                 'o' => [
                                     'n' => [
-                                        ' ' => 'Method',
+                                        ' '  => 'Method',
                                         "\n" => "Method",
                                         "\r" => "Method",
                                     ]
@@ -72,7 +74,7 @@ abstract class Block
         'l' => [
             'e' => [
                 't' => [
-                    ' ' => 'Variable',
+                    ' '  => 'Variable',
                     "\n" => "Variable",
                     "\r" => "Variable",
                 ]
@@ -83,7 +85,7 @@ abstract class Block
                 'n' => [
                     's' => [
                         't' => [
-                            ' ' => 'Variable',
+                            ' '  => 'Variable',
                             "\n" => "Variable",
                             "\r" => "Variable",
                         ]
@@ -94,7 +96,7 @@ abstract class Block
                 'a' => [
                     's' => [
                         's' => [
-                            ' ' => 'Instance',
+                            ' '  => 'Instance',
                             "\n" => "Instance",
                             "\r" => "Instance",
                         ]
@@ -105,12 +107,16 @@ abstract class Block
         'v' => [
             'a' => [
                 'r' => [
-                    ' ' => 'Variable',
+                    ' '  => 'Variable',
                     "\n" => "Variable",
                     "\r" => "Variable",
                 ],
             ]
         ]
+    ];
+
+    protected array $classBlocksMap = [
+        '(' => "ClassMethod"
     ];
 
     public function __construct(
@@ -556,7 +562,6 @@ abstract class Block
             $word .= $letter;
         }
         Log::decreaseIndent();
-        Log::log('Last word `' . $word . '` => ' . implode(', ',array_keys($this->aliasesMap)));
         $alias = $this->getAliasForVariable($word);
         return $minifiedValue . $alias;
     }
