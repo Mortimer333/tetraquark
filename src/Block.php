@@ -116,7 +116,7 @@ abstract class Block
     ];
 
     protected array $classBlocksMap = [
-        '(' => "ClassMethod"
+        '(' => "InstanceMethod"
     ];
 
     public function __construct(
@@ -249,20 +249,34 @@ abstract class Block
         return $this->endChars[$letter] ?? false;
     }
 
+    protected function getDefaultMap(): array
+    {
+        $blocksMap = $this->blocksMap;
+        if ($this instanceof Block\Instance) {
+            $blocksMap = array_merge($blocksMap, $this->classBlocksMap);
+        }
+        return $blocksMap;
+    }
+
     protected function journeyForBlockClassName(string $name, string &$mappedWord, int &$i, ?array $blocksMap = null): string | array | null
     {
         if (\is_null($blocksMap)) {
-            $blocksMap = $this->blocksMap;
+            $blocksMap = $this->getDefaultMap();
         }
+
         if (isset($blocksMap[$name])) {
             return $blocksMap[$name];
         }
+
         if (isset($blocksMap['default'])) {
             $mappedWord = substr($mappedWord, 0, -1);
             $i--;
             return $blocksMap['default'];
         }
-        return null;
+
+        // try to start new path with this letter
+        $blocksMap = $this->getDefaultMap();
+        return $blocksMap[$name] ?? null;
     }
 
     protected function blockFactory(string $hint, string $className, int $start): Block
@@ -334,7 +348,7 @@ abstract class Block
             throw new Exception('Proper End not found', 404);
         }
 
-        $properStart = $start - (strlen($name));
+        $properStart = $start - strlen($name);
         $instruction = trim(substr(self::$content, $properStart, $properEnd - $properStart));
         $this->setInstructionStart($properStart)
             ->setInstructionLength($properEnd - $properStart)
@@ -388,9 +402,6 @@ abstract class Block
 
             if ($this->endChars[$letter] ?? false) {
                 $possibleUndefined = substr($possibleUndefined, 0, -1);
-                // if ($this->isValidUndefined($possibleUndefined)) {
-                //     $this->blocks[] = new Block\Undefined($i - \mb_strlen($possibleUndefined), $possibleUndefined);
-                // }
                 $possibleUndefined = '';
                 break;
             }
@@ -414,6 +425,9 @@ abstract class Block
     {
         $instr = $this->getInstruction();
         $start = \strlen($prefix) - 1;
+        if ($start < 0) {
+            $start = 0;
+        }
         Log::log('Start name search: ' . $instr . ", " . $start, 3);
         Log::increaseIndent();
         for ($i=$start; $i < strlen($instr); $i++) {
