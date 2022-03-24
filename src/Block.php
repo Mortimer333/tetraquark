@@ -112,11 +112,12 @@ abstract class Block
                     "\r" => "Variable",
                 ],
             ]
-        ]
+        ],
+        '.' => 'ChainLink',
     ];
 
     protected array $classBlocksMap = [
-        '(' => "InstanceMethod"
+        '(' => "InstanceMethod",
     ];
 
     public function __construct(
@@ -292,7 +293,14 @@ abstract class Block
         if ($hint == '=') {
             $hint = '';
         }
-
+        if ($class == Block\ChainLink::class) {
+            $blocks = $this->getBlocks();
+            $lastBlock = $blocks[\sizeof($blocks) - 1] ?? null;
+            if (!($lastBlock instanceof Block\ChainLink)) {
+                $this->blocks[] = new $class($start, Block\ChainLink::FIRST);
+            }
+            return new $class($start + 1, $hint);
+        }
         return new $class($start, $hint);
     }
 
@@ -335,7 +343,7 @@ abstract class Block
         $properEnd = null;
         for ($i=$start; $i < strlen(self::$content); $i++) {
             $letter = self::$content[$i];
-            Log::log("Letter: " . $letter, 2);
+            Log::log("Letter: " . $letter . " end chars: " . implode(', ', array_keys($endChars)), 2);
             if ($endChars[$letter] ?? false) {
                 Log::log("Proper end : " . $i, 2);
                 $properEnd = $i + 1;
@@ -352,6 +360,34 @@ abstract class Block
         $instruction = trim(substr(self::$content, $properStart, $properEnd - $properStart));
         $this->setInstructionStart($properStart)
             ->setInstructionLength($properEnd - $properStart)
+            ->setInstruction($instruction);
+    }
+
+    protected function findInstructionStart(int $end, ?array $endChars = null): void
+    {
+        if (\is_null($endChars)) {
+            $endChars = $this->endChars;
+        }
+
+        $properStart = null;
+        Log::log("Find start of instruction. End: " . $end, 2);
+        for ($i=$end - 1; $i >= 0; $i--) {
+            $letter = self::$content[$i];
+            Log::log("Letter: " . $letter, 2);
+            if ($endChars[$letter] ?? false) {
+                Log::log("Proper start : " . $i, 2);
+                $properStart = $i + 1;
+                break;
+            }
+        }
+
+        if (is_null($properStart)) {
+            throw new Exception('Proper Start not found', 404);
+        }
+
+        $instruction = trim(substr(self::$content, $properStart, $end - $properStart));
+        $this->setInstructionStart($properStart)
+            ->setInstructionLength($end - $properStart)
             ->setInstruction($instruction);
     }
 

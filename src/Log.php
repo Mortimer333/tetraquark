@@ -11,7 +11,7 @@ class Log
     static protected int     $functionLimit = 20;
     static protected ?string $timeStart     = null;
     static protected bool    $addClass      = false;
-    static protected bool    $addFunction   = true;
+    static protected bool    $addFunction   = false;
     static protected string  $oldFunction   = '';
 
     function __construct()
