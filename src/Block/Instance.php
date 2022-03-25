@@ -24,7 +24,7 @@ class Instance extends Block implements Contract\Block
 
     public function recreate(): string
     {
-        $script = 'class ' . $this->getAlias() . '{';
+        $script = 'class ' . $this->getAlias($this->getName()) . '{';
         foreach ($this->getBlocks() as $block) {
             $script .= $block->recreate();
         }

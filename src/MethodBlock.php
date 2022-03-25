@@ -5,18 +5,6 @@ namespace Tetraquark;
 class MethodBlock extends Block
 {
     protected array $arguments = [];
-    protected array $argumentsAliases = [];
-
-    public function addArgumentAlias(string $arg, string $alias): self
-    {
-        $this->argumentsAliases[$arg] = $alias;
-        return $this;
-    }
-
-    public function getArgumentsAliases(): array
-    {
-        return $this->argumentsAliases;
-    }
 
     public function getArguments(): array
     {
@@ -35,9 +23,8 @@ class MethodBlock extends Block
     protected function getAliasedArguments(): string
     {
         $args = '';
-        $argAliases = $this->getArgumentsAliases();
         foreach ($this->getArguments() as $arg) {
-            $args .= $argAliases[$arg] . ',';
+            $args .= $this->getAlias($arg) . ',';
         }
         return rtrim($args, ',');
     }

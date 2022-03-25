@@ -69,7 +69,7 @@ class Attribute extends Block implements Contract\Block
 
     public function recreate(): string
     {
-        $script = $this->getSubType() . ' ' . $this->getAlias() . '=';
+        $script = $this->getSubType() . ' ' . $this->getAlias($this->getName()) . '=';
 
         foreach ($this->getBlocks() as $block) {
             $script .= $block->recreate();

@@ -30,6 +30,17 @@ class Script extends Block implements Contract\Block
         Log::log("Creating aliases...");
         $this->generateAliases();
         Log::log("=======================");
+        $aliasesStr = "Aliases: ";
+        $inc = 0;
+        foreach (self::$mappedAliases as $key => $value) {
+            if ($inc > 4) {
+                $aliasesStr .= "\n";
+            }
+
+            $aliasesStr .= "$key => $value, ";
+            $inc++;
+        }
+        Log::log($aliasesStr);
         Log::log("Recreating...");
         $this->setMinified($this->recreate());
         Log::log("=======================");
@@ -41,21 +52,6 @@ class Script extends Block implements Contract\Block
     {
         $map    = [];
         $word   = '';
-        // for ($i=$start; $i < \strlen(self::$content); $i++) {
-        //     $this->setCaret($i);
-        //     $letter = self::$content[$i];
-        //     $word  .= $letter;
-        //     if ($this->isWhitespace($letter)) {
-        //         $word = '';
-        //     }
-        //     Log::log("Letter: " . $letter, 2);
-        //
-        //     $block = $this->constructBlock($word, $i);
-        //     if ($block) {
-        //         Log::log("Add Block!", 1);
-        //         $this->blocks[] = $block;
-        //     }
-        // }
         $this->setCaret($start);
         $this->createSubBlocks();
     }
@@ -93,25 +89,7 @@ class Script extends Block implements Contract\Block
             if (method_exists($block, 'getArguments')) {
                 Log::log("Arguments: [" . \sizeof($block->getArguments()) . "] `" . implode('`, `', $block->getArguments()) . "`");
             }
-            if (method_exists($block, 'getArgumentsAliases')) {
-                $aliases = $block->getArgumentsAliases();
-                $str = "Argument Aliases: [" . \sizeof($aliases) . "] `";
-                foreach ($aliases as $key => $value) {
-                    $str .= "$key => $value, ";
-                }
-                Log::log(rtrim($str, ', ') . "`");
-            }
-            if (isset($block->alias)) {
-                Log::log("Alias: `" . $block->getAlias() . "`");
-            }
-
-            $aliases = $block->getAliasesMap();
-            $str = "Map of Aliases: [" . \sizeof($aliases) . "] `";
-            foreach ($aliases as $key => $value) {
-                $str .= "$key=$value, ";
-            }
-            Log::log(rtrim($str, ', ') . "`");
-
+            Log::log("Alias: `" . $block->getAlias($block->getName()) . "`");
             Log::log("=======");
             Log::increaseIndent();
             $this->displayBlocks($block->blocks);

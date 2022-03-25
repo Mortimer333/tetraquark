@@ -6,6 +6,7 @@ use \Xeno\X as Xeno;
 abstract class Block
 {
     static protected string $content;
+    static protected array  $mappedAliases = [];
     protected int    $caret = 0;
     protected bool   $endFunction = false;
     /** @var string $instruction Actual block representation in code */
@@ -173,31 +174,23 @@ abstract class Block
         return $this;
     }
 
-    public function getAlias(): string
+    public function aliasExists(string $name): bool
     {
-        return $this->alias;
+        return (bool) (self::$mappedAliases[$name] ?? false);
     }
 
-    public function setAlias(string $alias): self
+    public function getAlias(string $name): string
     {
-        $this->alias = trim($alias);
-        return $this;
+        $alias = self::$mappedAliases[$name] ?? null;
+        if (\is_null($alias)) {
+            throw new \Exception('Alias for ' . $name . ' not found', 404);
+        }
+        return $alias;
     }
 
-    public function getAliasesMap(): array
+    public function setAlias(string $name, string $alias): self
     {
-        return $this->aliasesMap;
-    }
-
-    public function setAliasesMap(array $aliasesMap): self
-    {
-        $this->aliasesMap = $aliasesMap;
-        return $this;
-    }
-
-    public function addAliasesMap(array $additionalAliasMap): self
-    {
-        $this->aliasesMap = array_merge($this->aliasesMap, $additionalAliasMap);
+        self::$mappedAliases[$name] = $alias;
         return $this;
     }
 
@@ -482,40 +475,40 @@ abstract class Block
 
     protected function generateAliases(string $lastAlias = ''): void
     {
-        $aliasesMap = $this->getAliasesMap();
-        Log::log("Generate aliases, starting aliasaes map: " . implode(', ', $aliasesMap), 1);
         // Firstly set aliases to all blocks on this level
         Log::increaseIndent();
         foreach ($this->blocks as $block) {
-            Log::log('Aliases in block:' . implode(', ', $block->getAliasesMap()), 1);
-            $alias = $this->generateAlias($block->getName(), $lastAlias);
-            $block->setAlias($alias);
-            if (\mb_strlen($alias) > 0) {
-                $aliasesMap[$block->getName()] = $alias;
-                $lastAlias = $alias;
+            if ($this->aliasExists($block->getName())) {
+                continue;
             }
+
+            $alias = $this->generateAlias($block->getName(), $lastAlias);
+
+            if (\mb_strlen($alias) > 0) {
+                continue;
+            }
+
+            $this->setAlias($block->getName(), $alias);
+            $lastAlias = $alias;
         }
         Log::decreaseIndent();
 
         if ($this instanceof MethodBlock) {
             Log::increaseIndent();
             foreach ($this->getArguments() as $arg) {
-                $alias = $this->generateAlias($arg, $lastAlias);
-                $this->addArgumentAlias($arg, $alias);
-                if (\mb_strlen($alias) > 0) {
-                    $aliasesMap[$arg] = $alias;
-                    $this->aliasesMap[$arg] = $alias;
-                    $lastAlias = $alias;
+                if ($this->aliasExists($arg)) {
+                    continue;
                 }
+                $alias = $this->generateAlias($arg, $lastAlias);
+                $this->setAlias($arg, $alias);
+                $lastAlias = $alias;
             }
             Log::decreaseIndent();
         }
 
         // Then to level below
         Log::increaseIndent();
-        Log::log("Taken aliases: " . implode(', ', $aliasesMap), 1);
         foreach ($this->blocks as $block) {
-            $block->addAliasesMap($aliasesMap);
             $block->generateAliases($lastAlias);
         }
         Log::decreaseIndent();
@@ -531,7 +524,7 @@ abstract class Block
         }
         Log::log("Last alias: " . $lastAlias, 1);
         if (\mb_strlen($lastAlias) != 0) {
-            $lastLetter = mb_substr($lastAlias, -1);
+            $lastLetter = \mb_substr($lastAlias, -1);
         } else {
             $lastLetter = 'df';
         }
@@ -539,7 +532,7 @@ abstract class Block
 
         if ($newAliasSufix = $this->aliasMap[$lastLetter]) {
             Log::log("Next sufix found: " . $newAliasSufix, 1);
-            $newAlias = mb_substr($lastAlias ?? '', 0, \mb_strlen($lastAlias ?? '') - 1) . $newAliasSufix;
+            $newAlias = \mb_substr($lastAlias ?? '', 0, \mb_strlen($lastAlias ?? '') - 1) . $newAliasSufix;
         } else {
             Log::log("Next sufix not found, adding another letter: " . $this->aliasMap['df'], 1);
             $newAlias = ($lastAlias ?? '') . $this->aliasMap['df'];
@@ -550,11 +543,6 @@ abstract class Block
         }
         Log::log("Alias is not valid, generating new one...", 1);
         return $this->generateAlias($newAlias, $newAlias);
-    }
-
-    protected function getAliasForVariable(string $name): string
-    {
-        return $this->aliasesMap[$name] ?? $name;
     }
 
     protected function replaceVariablesWithAliases(string $value): string
@@ -574,7 +562,7 @@ abstract class Block
                 if ($letter == '}') {
                     Log::log("Add literal: " . $letter . " Word: " . $word, 2);
                     $templateVarInProgress = false;
-                    $alias = $this->getAliasForVariable($word);
+                    $alias = $this->getAlias($word);
                     Log::log("Alias: " . $alias, 2);
                     $minifiedValue .= $alias . $letter;
                     $word = '';
@@ -602,7 +590,7 @@ abstract class Block
             }
 
             if ($this->isSpecial($letter)) {
-                $alias = $this->getAliasForVariable($word);
+                $alias = $this->getAlias($word);
                 Log::log("Alias: " . $alias, 2);
                 $minifiedValue .= $alias . $letter;
                 $word = '';
@@ -612,7 +600,7 @@ abstract class Block
             $word .= $letter;
         }
         Log::decreaseIndent();
-        $alias = $this->getAliasForVariable($word);
+        $alias = $this->getAlias($word);
         return $minifiedValue . $alias;
     }
 

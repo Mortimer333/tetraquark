@@ -63,7 +63,7 @@ class Method extends MethodBlock implements Contract\Block
 
     public function recreate(): string
     {
-        $script = 'function ' . $this->getAlias() . '(' . $this->getAliasedArguments() . '){';
+        $script = 'function ' . $this->getAlias($this->getName()) . '(' . $this->getAliasedArguments() . '){';
         foreach ($this->getBlocks() as $block) {
             $script .= $block->recreate();
         }
