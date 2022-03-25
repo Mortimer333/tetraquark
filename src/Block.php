@@ -124,7 +124,7 @@ abstract class Block
     public function __construct(
         int $start = 0,
         string $subtype = '',
-        protected array  $data  = []
+        protected array $data  = []
     ) {
         $this->setSubtype($subtype);
         $this->objectify($start);
@@ -181,11 +181,7 @@ abstract class Block
 
     public function getAlias(string $name): string
     {
-        $alias = self::$mappedAliases[$name] ?? null;
-        if (\is_null($alias)) {
-            throw new \Exception('Alias for ' . $name . ' not found', 404);
-        }
-        return $alias;
+        return self::$mappedAliases[$name] ?? $name;
     }
 
     public function setAlias(string $name, string $alias): self
@@ -475,31 +471,42 @@ abstract class Block
 
     protected function generateAliases(string $lastAlias = ''): void
     {
+        Log::log('Start generating aliases. Last Alias: ' . $lastAlias);
         // Firstly set aliases to all blocks on this level
         Log::increaseIndent();
         foreach ($this->blocks as $block) {
+            Log::log('===========');
+            Log::log('Block: ' . $block->getName());
             if ($this->aliasExists($block->getName())) {
+                Log::log('Alias for this block exists.');
                 continue;
             }
 
             $alias = $this->generateAlias($block->getName(), $lastAlias);
+            Log::log('Generated Alias:' . $alias . ", previous alias: " . $lastAlias);
 
-            if (\mb_strlen($alias) > 0) {
+            if (\mb_strlen($alias) == 0) {
+                Log::log('skip alias.');
                 continue;
             }
 
+            Log::log('Set generated alias.');
             $this->setAlias($block->getName(), $alias);
             $lastAlias = $alias;
         }
         Log::decreaseIndent();
 
         if ($this instanceof MethodBlock) {
+            Log::log('Block is an method.');
             Log::increaseIndent();
             foreach ($this->getArguments() as $arg) {
+                Log::log('Argument: ' . $arg);
                 if ($this->aliasExists($arg)) {
+                    Log::log('Argument already exists with this name.');
                     continue;
                 }
                 $alias = $this->generateAlias($arg, $lastAlias);
+                Log::log('Generated alias: ' . $alias . ", last alias: " . $lastAlias);
                 $this->setAlias($arg, $alias);
                 $lastAlias = $alias;
             }
@@ -650,5 +657,22 @@ abstract class Block
         ];
 
         return $singles[$letter] ?? false;
+    }
+
+    protected function removeAdditionalSpaces(string $instruction): string
+    {
+        $properInstr = '';
+        for ($i=0; $i < \mb_strlen($instruction); $i++) {
+            $letter = $instruction[$i];
+            if (
+                $this->isWhitespace($letter) && $this->isSpecial($instruction[$i + 1])
+                || $this->isWhitespace($letter) && $this->isWhitespace($instruction[$i + 1])
+                || $this->isWhitespace($letter) && $this->isSpecial($instruction[$i - 1])
+            ) {
+                continue;
+            }
+            $properInstr .= $letter;
+        }
+        return $properInstr;
     }
 }

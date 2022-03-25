@@ -58,7 +58,7 @@ class Variable extends Block implements Contract\Block
             $script .= $block->recreate();
         }
 
-        $value = $this->getValue();
+        $value = $this->removeAdditionalSpaces($this->getValue());
         if (\mb_strlen($value) > 0) {
             $script .= $this->replaceVariablesWithAliases($value) . ';';
         }

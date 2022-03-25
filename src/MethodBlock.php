@@ -13,6 +13,7 @@ class MethodBlock extends Block
 
     protected function addArgument(string $argument): self
     {
+        $argument = trim($argument);
         if (\mb_strlen($argument) == 0) {
             return $this;
         }

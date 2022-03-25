@@ -31,14 +31,8 @@ class Script extends Block implements Contract\Block
         $this->generateAliases();
         Log::log("=======================");
         $aliasesStr = "Aliases: ";
-        $inc = 0;
         foreach (self::$mappedAliases as $key => $value) {
-            if ($inc > 4) {
-                $aliasesStr .= "\n";
-            }
-
             $aliasesStr .= "$key => $value, ";
-            $inc++;
         }
         Log::log($aliasesStr);
         Log::log("Recreating...");

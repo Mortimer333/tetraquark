@@ -28,7 +28,11 @@ class Undefined extends Block implements Contract\Block
 
     public function recreate(): string
     {
-        $script = $this->replaceVariablesWithAliases($this->getInstruction());
+        $script = $this->removeAdditionalSpaces(
+            $this->replaceVariablesWithAliases(
+                $this->getInstruction()
+            )
+        );
 
         foreach ($this->getBlocks() as $block) {
             $script .= $block->recreate();
