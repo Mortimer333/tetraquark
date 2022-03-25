@@ -22,12 +22,13 @@ e3=> {
 }
 
 class ClassName {
+    property = 'a';
     constructor() {
 
     }
 
     func() {
-        console.log('asd');
+        console.log(this.property);
     }
 }
 

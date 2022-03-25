@@ -34,3 +34,5 @@ And if I was to add another function it should have access to all vars and their
 ## Next stage - check for any useless statements
 
 ## If script will be slow look into setting all values for functions in one iteration (instead of ~2,5)
+
+## Setting to allow changing anonymous functions `function () {}` into array functions `() => {}`

@@ -14,7 +14,6 @@ abstract class Block
     protected int    $instructionStart;
     protected int    $instructionLength;
     protected string $name;
-    protected string $alias;
     protected array  $aliasesMap = [];
     /** @var Block[] $blocks Array of Blocks */
     protected array  $blocks = [];
@@ -115,6 +114,43 @@ abstract class Block
             ]
         ],
         '.' => 'ChainLink',
+        '(' => 'Caller',
+        'n' => [
+            'e' => [
+                'w' => [
+                    ' '  => 'NewInstance',
+                    "\n" => "NewInstance",
+                    "\r" => "NewInstance",
+                ]
+            ]
+        ]
+    ];
+
+    protected array $special = [
+        "(" => true,
+        ")" => true,
+        "{" => true,
+        "}" => true,
+        "+" => true,
+        "-" => true,
+        "/" => true,
+        "*" => true,
+        "=" => true,
+        "!" => true,
+        '[' => true,
+        ']' => true,
+        '%' => true,
+        '^' => true,
+        ":" => true,
+        ">" => true,
+        "<" => true,
+        "," => true,
+        ' ' => true,
+        "\n" => true,
+        "\r" => true,
+        '|' => true,
+        '&' => true,
+        '?' => true
     ];
 
     protected array $classBlocksMap = [
@@ -427,7 +463,14 @@ abstract class Block
 
             if ($this->endChars[$letter] ?? false) {
                 $possibleUndefined = substr($possibleUndefined, 0, -1);
-                $possibleUndefined = '';
+                if (
+                    $this->isValidUndefined($possibleUndefined)
+                    && !($this instanceof Block\Variable)
+                    && !($this instanceof Block\Attribute)
+                ) {
+                    Log::log("Add undefined: " . $possibleUndefined, 3);
+                    $this->blocks[] = new Block\Undefined($i - \mb_strlen($possibleUndefined), $possibleUndefined);
+                }
                 break;
             }
 
@@ -471,42 +514,42 @@ abstract class Block
 
     protected function generateAliases(string $lastAlias = ''): void
     {
-        Log::log('Start generating aliases. Last Alias: ' . $lastAlias);
+        Log::log('Start generating aliases. Last Alias: ' . $lastAlias, 2);
         // Firstly set aliases to all blocks on this level
         Log::increaseIndent();
         foreach ($this->blocks as $block) {
-            Log::log('===========');
-            Log::log('Block: ' . $block->getName());
+            Log::log('===========', 3);
+            Log::log('Block: ' . $block->getName(), 3);
             if ($this->aliasExists($block->getName())) {
-                Log::log('Alias for this block exists.');
+                Log::log('Alias for this block exists.', 2);
                 continue;
             }
 
             $alias = $this->generateAlias($block->getName(), $lastAlias);
-            Log::log('Generated Alias:' . $alias . ", previous alias: " . $lastAlias);
+            Log::log('Generated Alias:' . $alias . ", previous alias: " . $lastAlias, 1);
 
             if (\mb_strlen($alias) == 0) {
-                Log::log('skip alias.');
+                Log::log('skip alias.', 3);
                 continue;
             }
 
-            Log::log('Set generated alias.');
+            Log::log('Set generated alias.', 3);
             $this->setAlias($block->getName(), $alias);
             $lastAlias = $alias;
         }
         Log::decreaseIndent();
 
         if ($this instanceof MethodBlock) {
-            Log::log('Block is an method.');
+            Log::log('Block is an method.', 2);
             Log::increaseIndent();
             foreach ($this->getArguments() as $arg) {
-                Log::log('Argument: ' . $arg);
+                Log::log('Argument: ' . $arg, 3);
                 if ($this->aliasExists($arg)) {
-                    Log::log('Argument already exists with this name.');
+                    Log::log('Argument already exists with this name.', 2);
                     continue;
                 }
                 $alias = $this->generateAlias($arg, $lastAlias);
-                Log::log('Generated alias: ' . $alias . ", last alias: " . $lastAlias);
+                Log::log('Generated alias: ' . $alias . ", last alias: " . $lastAlias, 1);
                 $this->setAlias($arg, $alias);
                 $lastAlias = $alias;
             }
@@ -629,34 +672,7 @@ abstract class Block
 
     protected function isSpecial(string $letter): bool
     {
-        $singles = [
-            "(" => true,
-            ")" => true,
-            "{" => true,
-            "}" => true,
-            "+" => true,
-            "-" => true,
-            "/" => true,
-            "*" => true,
-            "=" => true,
-            "!" => true,
-            '[' => true,
-            ']' => true,
-            '%' => true,
-            '^' => true,
-            ":" => true,
-            ">" => true,
-            "<" => true,
-            "," => true,
-            ' ' => true,
-            "\n" => true,
-            "\r" => true,
-            '|' => true,
-            '&' => true,
-            '?' => true
-        ];
-
-        return $singles[$letter] ?? false;
+        return $this->special[$letter] ?? false;
     }
 
     protected function removeAdditionalSpaces(string $instruction): string
