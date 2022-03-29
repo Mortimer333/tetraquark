@@ -10,7 +10,6 @@ function test() { var longName = 20;
     const test3 = (e2) =>
     1 + e2; let longNameLet = `asd ${testInline} asdasd`
     console.log(test3('s'));
-    const longNameConst = ['asd','asdsad'];
     var testInline = 20; let testInline2 = {'a' : 'sd'}
     const testAddAliases = longNameLet + testInline
 }
@@ -28,7 +27,8 @@ class ClassName {
     }
 
     func() {
-        console.log(this.property);
+        console.log(this['property']);
+        console.log(this['propert' + 'y']);
     }
 }
 

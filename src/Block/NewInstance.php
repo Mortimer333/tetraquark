@@ -56,6 +56,11 @@ class NewInstance extends MethodBlock implements Contract\Block
 
     public function recreate(): string
     {
-        return 'new ' . $this->getAlias($this->getName()) . '(' . implode(',', $this->getArguments()) . ');';
+        $script = 'new ' . $this->getAlias($this->getName());
+        $args = $this->getArguments();
+        if (\sizeof($args) == 0) {
+            return $script . ';';
+        }
+        return $script . '(' . implode(',', $args) . ');';
     }
 }

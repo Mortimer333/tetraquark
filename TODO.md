@@ -36,3 +36,34 @@ And if I was to add another function it should have access to all vars and their
 ## If script will be slow look into setting all values for functions in one iteration (instead of ~2,5)
 
 ## Setting to allow changing anonymous functions `function () {}` into array functions `() => {}`
+
+## Handle
+- chain linking with square brackets (if bracet is prefixed with `:` or `=` then its array)
+- Object,
+- if (removing brackets if it contains only one instruction),
+- for (replace vars in brackets),
+- passing anonymous functions,
+- while and do while,
+- Switch
+- import, export
+- array (used like object)
+- notes
+
+# Problems:
+- my alias replacer for globally scoped vars will not work for anything that accessed them dynamically, example:
+```js
+class Test1 {
+    varOne = 'one';
+    varTwo = 'two';
+}
+
+const newTest = new Test1();
+['One', 'Two'].forEach(suffix => {
+    console.log(newTest['var' + suffix]);
+});
+```
+Its going to be translated into something like this:
+```js
+class a{b='one';c='two';}const d=new a;['One', 'Two'].forEach(e=>{console.log(d['var' + e]);}
+```
+Which will result in error `varOne doesn't exist` because varOne got replaced with `b`.

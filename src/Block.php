@@ -123,7 +123,8 @@ abstract class Block
                     "\r" => "NewInstance",
                 ]
             ]
-        ]
+        ],
+        '[' => 'decideArrayBlockType'
     ];
 
     protected array $special = [
@@ -233,7 +234,7 @@ abstract class Block
 
     public function setInstruction(string $instruction): self
     {
-        $this->instruction = preg_replace('!\s+!', ' ', $instruction);
+        $this->instruction = trim(preg_replace('!\s+!', ' ', $instruction));
         return $this;
     }
 
@@ -291,18 +292,26 @@ abstract class Block
         }
 
         if (isset($blocksMap[$name])) {
-            return $blocksMap[$name];
+            return $this->checkMapResult($blocksMap[$name], $i);
         }
 
         if (isset($blocksMap['default'])) {
             $mappedWord = substr($mappedWord, 0, -1);
             $i--;
-            return $blocksMap['default'];
+            return $this->checkMapResult($blocksMap['default'], $i);
         }
 
         // try to start new path with this letter
         $blocksMap = $this->getDefaultMap();
-        return $blocksMap[$name] ?? null;
+        return $this->checkMapResult($blocksMap[$name] ?? null, $i);
+    }
+
+    protected function checkMapResult(array|string|null $nextStep, int $i): array|string|null
+    {
+        if (\is_string($nextStep) && \method_exists($this, $nextStep)) {
+            return $this->$nextStep($i);
+        }
+        return $nextStep;
     }
 
     protected function blockFactory(string $hint, string $className, int $start): Block
@@ -321,7 +330,16 @@ abstract class Block
         if ($class == Block\ChainLink::class) {
             $blocks = $this->getBlocks();
             $lastBlock = $blocks[\sizeof($blocks) - 1] ?? null;
-            if (!($lastBlock instanceof Block\ChainLink)) {
+            if (
+                !($lastBlock instanceof Block\ChainLink)
+                || (
+                    $lastBlock instanceof Block\ChainLink
+                    && (
+                        $lastBlock->getSubtype() == Block\ChainLink::END_METHOD
+                        || $lastBlock->getSubtype() == Block\ChainLink::END_VARIABLE
+                    )
+                )
+            ) {
                 $this->blocks[] = new $class($start, Block\ChainLink::FIRST);
             }
             return new $class($start + 1, $hint);
@@ -605,15 +623,11 @@ abstract class Block
         Log::increaseIndent();
         for ($i=0; $i < \mb_strlen($value); $i++) {
             $letter = $value[$i];
-            Log::log("Letter: " . $letter . " Word: " . $word, 2);
             $isLiteralLandmark = $this->isTemplateLiteralLandmark($letter, $value[$i - 1] ?? null, $templateLiteralInProgress);
             if ($templateVarInProgress && !$isLiteralLandmark) {
-                Log::log("Literal in progress: " . $letter . " Word: " . $word, 2);
                 if ($letter == '}') {
-                    Log::log("Add literal: " . $letter . " Word: " . $word, 2);
                     $templateVarInProgress = false;
                     $alias = $this->getAlias($word);
-                    Log::log("Alias: " . $alias, 2);
                     $minifiedValue .= $alias . $letter;
                     $word = '';
                     continue;
@@ -641,7 +655,6 @@ abstract class Block
 
             if ($this->isSpecial($letter)) {
                 $alias = $this->getAlias($word);
-                Log::log("Alias: " . $alias, 2);
                 $minifiedValue .= $alias . $letter;
                 $word = '';
                 continue;
@@ -690,5 +703,19 @@ abstract class Block
             $properInstr .= $letter;
         }
         return $properInstr;
+    }
+
+    protected function decideArrayBlockType(int $start) {
+        for ($i=$start - 1; $i >= 0; $i--) {
+            $letter = self::$content[$i];
+            if ($this->isWhitespace($letter)) {
+                continue;
+            }
+            if ($letter == '=' || $letter == ':') {
+                return 'Cluster';
+            }
+            return "ArrayChainLink";
+        }
+        throw new Exception("Couldn't decide how found bracket was used", 400);
     }
 }

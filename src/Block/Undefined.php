@@ -22,7 +22,7 @@ class Undefined extends Block implements Contract\Block
         $instruction = $this->getInstruction();
         $this->setInstructionStart($start)
             ->setInstructionLength(\mb_strlen($instruction))
-            ->setInstruction(trim($instruction))
+            ->setInstruction($instruction)
         ;
     }
 
