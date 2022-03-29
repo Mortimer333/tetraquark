@@ -23,7 +23,7 @@ e3=> {
 
 class ClassName {
     property = 'a';
-    constructor() {
+    constructor(arg1, arg2) {
 
     }
 
@@ -32,5 +32,5 @@ class ClassName {
     }
 }
 
-const classNameInst = new ClassName();
+const classNameInst = new ClassName('test', 2);
 classNameInst.func();

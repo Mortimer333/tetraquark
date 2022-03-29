@@ -62,7 +62,7 @@ class ArrowMethod extends MethodBlock implements Contract\Block
         return $this->value;
     }
 
-    protected function findAndSetArguments()
+    protected function findAndSetArguments(): void
     {
         $instr = $this->getInstruction();
         $SFParenthesis = false;

@@ -35,41 +35,6 @@ class InstanceMethod extends MethodBlock implements Contract\Block
         $this->findAndSetArguments();
     }
 
-    protected function findAndSetArguments(): void
-    {
-        $instr = $this->getInstruction();
-        $startSettingArgs = false;
-        $word = '';
-        for ($i=\strlen($instr) - 1; $i >= 0; $i--) {
-            $letter = $instr[$i];
-            if (!$startSettingArgs && $letter == ')') {
-                $startSettingArgs = true;
-                continue;
-            }
-
-            if ($startSettingArgs && $this->isWhitespace($letter)) {
-                continue;
-            }
-
-            if ($startSettingArgs && $letter == '(') {
-                $this->addArgument(strrev($word));
-                break;
-            }
-
-            if ($startSettingArgs && $letter == ',') {
-                $this->addArgument(strrev($word));
-                $word = '';
-                continue;
-            }
-
-            if ($startSettingArgs) {
-                $word .= $letter;
-            }
-        }
-
-        $this->arguments = array_reverse($this->arguments);
-    }
-
     public function recreate(): string
     {
         $script = $this->getAlias($this->getName()) . '(' . $this->getAliasedArguments() . '){';
