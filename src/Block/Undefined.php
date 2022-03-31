@@ -21,7 +21,6 @@ class Undefined extends Block implements Contract\Block
         $this->setName('');
         $instruction = $this->getInstruction();
         $this->setInstructionStart($start)
-            ->setInstructionLength(\mb_strlen($instruction))
             ->setInstruction($instruction)
         ;
     }

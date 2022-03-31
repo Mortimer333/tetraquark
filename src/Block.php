@@ -12,7 +12,6 @@ abstract class Block
     /** @var string $instruction Actual block representation in code */
     protected string $instruction;
     protected int    $instructionStart;
-    protected int    $instructionLength;
     protected string $name;
     protected array  $aliasesMap = [];
     /** @var Block[] $blocks Array of Blocks */
@@ -151,7 +150,9 @@ abstract class Block
         "\r" => true,
         '|' => true,
         '&' => true,
-        '?' => true
+        '?' => true,
+        ';' => true,
+        '.' => true
     ];
 
     protected array $classBlocksMap = [
@@ -159,7 +160,7 @@ abstract class Block
     ];
 
     public function __construct(
-        int $start = 0,
+        protected int $start = 0,
         string $subtype = '',
         protected array $data  = []
     ) {
@@ -249,17 +250,6 @@ abstract class Block
         return $this->instructionStart;
     }
 
-    public function setInstructionLength(int $length): self
-    {
-        $this->instructionLength = $length;
-        return $this;
-    }
-
-    public function getInstructionLength(): int
-    {
-        return $this->instructionLength;
-    }
-
     public function setName(string $name): self
     {
         $this->name = trim($name);
@@ -303,6 +293,7 @@ abstract class Block
 
         // try to start new path with this letter
         $blocksMap = $this->getDefaultMap();
+        $mappedWord = $name;
         return $this->checkMapResult($blocksMap[$name] ?? null, $i);
     }
 
@@ -314,7 +305,7 @@ abstract class Block
         return $nextStep;
     }
 
-    protected function blockFactory(string $hint, string $className, int $start): Block
+    protected function blockFactory(string $hint, string $className, int $start, string &$possibleUndefined): Block
     {
         $prefix = 'Tetraquark\Block\\';
         $class  = $prefix . $className;
@@ -327,6 +318,7 @@ abstract class Block
         if ($hint == '=') {
             $hint = '';
         }
+
         if ($class == Block\ChainLink::class) {
             $blocks = $this->getBlocks();
             $lastBlock = $blocks[\sizeof($blocks) - 1] ?? null;
@@ -340,7 +332,15 @@ abstract class Block
                     )
                 )
             ) {
-                $this->blocks[] = new $class($start, Block\ChainLink::FIRST);
+                $block = new $class($start, Block\ChainLink::FIRST);
+
+                $possibleUndefined = \mb_substr($possibleUndefined, 0, -(\mb_strlen($block->getInstruction()) + 1));
+                if ($this->isValidUndefined($possibleUndefined)) {
+                    $this->blocks[] = new Block\Undefined($start - \mb_strlen($possibleUndefined), $possibleUndefined);
+                }
+
+                $this->blocks[] = $block;
+                $possibleUndefined = '';
             }
             return new $class($start + 1, $hint);
         }
@@ -402,7 +402,6 @@ abstract class Block
         $properStart = $start - strlen($name);
         $instruction = trim(substr(self::$content, $properStart, $properEnd - $properStart));
         $this->setInstructionStart($properStart)
-            ->setInstructionLength($properEnd - $properStart)
             ->setInstruction($instruction);
     }
 
@@ -430,16 +429,15 @@ abstract class Block
 
         $instruction = trim(substr(self::$content, $properStart, $end - $properStart));
         $this->setInstructionStart($properStart)
-            ->setInstructionLength($end - $properStart)
             ->setInstruction($instruction);
     }
 
-    protected function constructBlock(string $mappedWord, string $className, int &$i): ?Block
+    protected function constructBlock(string $mappedWord, string $className, int &$i, string &$possibleUndefined): ?Block
     {
         Log::increaseIndent();
         Log::log("New block: " . $className . " Mapped by: " . $mappedWord, 1);
 
-        $block = $this->blockFactory($mappedWord, $className, $i);
+        $block = $this->blockFactory($mappedWord, $className, $i, $possibleUndefined);
 
         Log::log('Iteration count changed from ' . $i . " to " . $block->getCaret(), 1);
         Log::log("Instruction: `". $block->getInstruction() . "`", 1);
@@ -469,7 +467,20 @@ abstract class Block
 
             $map = $this->journeyForBlockClassName($letter, $mappedWord, $i, $map);
             if (gettype($map) == 'string') {
-                $block = $this->constructBlock($mappedWord, $map, $i);
+                $oldPos = $i;
+                $block = $this->constructBlock($mappedWord, $map, $i, $possibleUndefined);
+                $startOfBlocksInstruction = $block->getInstructionStart();
+                $oldPos; // Pos before block
+                $mappedWordLen = \mb_strlen($mappedWord);
+                if ($oldPos - $mappedWordLen < $startOfBlocksInstruction) {
+                    $possibleUndefined = \mb_substr($possibleUndefined, 0, -$mappedWordLen);
+                } else {
+                    $possibleUndefined = \mb_substr($possibleUndefined, 0, -($oldPos - ($startOfBlocksInstruction - 1)));
+                }
+                if ($this->isValidUndefined($possibleUndefined)) {
+                    $this->blocks[] = new Block\Undefined($oldPos - \mb_strlen($possibleUndefined), $possibleUndefined);
+                }
+
                 $possibleUndefined = '';
                 $this->blocks[] = $block;
                 $mappedWord = '';
@@ -557,7 +568,7 @@ abstract class Block
         }
         Log::decreaseIndent();
 
-        if ($this instanceof MethodBlock) {
+        if ($this instanceof MethodBlock && !($this instanceof Block\NewInstance)) {
             Log::log('Block is an method.', 2);
             Log::increaseIndent();
             foreach ($this->getArguments() as $arg) {
@@ -623,12 +634,15 @@ abstract class Block
         Log::increaseIndent();
         for ($i=0; $i < \mb_strlen($value); $i++) {
             $letter = $value[$i];
+            Log::log('Letter: ' . $letter . ", word: `" . $word . "`", 3);
             $isLiteralLandmark = $this->isTemplateLiteralLandmark($letter, $value[$i - 1] ?? null, $templateLiteralInProgress);
             if ($templateVarInProgress && !$isLiteralLandmark) {
                 if ($letter == '}') {
+                    Log::log('End template literal', 2);
                     $templateVarInProgress = false;
                     $alias = $this->getAlias($word);
                     $minifiedValue .= $alias . $letter;
+                    Log::log('minified value:' . $minifiedValue, 2);
                     $word = '';
                     continue;
                 } else {
@@ -643,7 +657,11 @@ abstract class Block
                 $stringInProgress = !$stringInProgress;
             }
 
-            if ($templateLiteralInProgress && ($value[$i - 1] ?? '') . $letter == '${') {
+            if (
+                $templateLiteralInProgress
+                && $this->startsTemplateLiteralVariable($letter, $value, $i)
+            ) {
+                Log::log('Start literal template', 2);
                 $templateVarInProgress = true;
             }
 
@@ -654,8 +672,10 @@ abstract class Block
             }
 
             if ($this->isSpecial($letter)) {
+                Log::log('Special Char!', 2);
                 $alias = $this->getAlias($word);
                 $minifiedValue .= $alias . $letter;
+                Log::log('minified value:' . $minifiedValue, 2);
                 $word = '';
                 continue;
             }
@@ -664,7 +684,14 @@ abstract class Block
         }
         Log::decreaseIndent();
         $alias = $this->getAlias($word);
+        Log::log('Last alias check:' . $word . " => " . $alias, 2);
         return $minifiedValue . $alias;
+    }
+
+    protected function startsTemplateLiteralVariable(string $letter, string $value, int $i): bool
+    {
+        return ($value[$i - 1] ?? '') . $letter == '${'
+            && ($value[$i - 2] ?? '') . ($value[$i - 1] ?? '') . $letter != '\${';
     }
 
     protected function isTemplateLiteralLandmark(string $letter, string $previousLetter, bool $inString): bool

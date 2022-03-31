@@ -21,14 +21,23 @@ e3=> {
 }
 
 class ClassName {
-    property = 'a';
+    property = 'y';
     constructor(arg1, arg2) {
 
     }
 
     func() {
         console.log(this['property']);
-        console.log(this['propert' + 'y']);
+        console.log(this['propert' + this.property]);
+        console.log(this[`prop${this.property}`]);
+        console.log(this[`property`]);
+        console.log(this["property"]);
+        console.log(this["property" + this.fun2('a')]);
+        console.log(this[this.fun2('a') + 'propert']);
+    }
+
+    fun2 (arg1) {
+        return arg1;
     }
 }
 

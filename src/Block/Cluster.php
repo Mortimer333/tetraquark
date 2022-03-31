@@ -9,7 +9,9 @@ class Cluster extends Block implements Contract\Block
 {
     public function objectify(int $start = 0)
     {
-        $instruction = $this->setInstruction('[]');
+        $this->setInstruction('[]')
+            ->setInstructionStart($start)
+        ;
         $this->setCaret($start + 2);
     }
 

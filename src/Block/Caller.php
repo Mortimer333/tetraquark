@@ -30,7 +30,9 @@ class Caller extends Block implements Contract\Block
                 break;
             } elseif ($searchForArrow && $letter == '=' && self::$content[$i + 1] == ">") {
                 // If this is arrow function then make this empty and skip current letter
-                $this->setInstruction('');
+                $this->setInstruction('')
+                    ->setInstructionStart($start)
+                ;
                 $this->setCaret($start);
                 return;
             }
@@ -54,7 +56,9 @@ class Caller extends Block implements Contract\Block
             }
         }
 
-        $this->setInstruction(trim(\mb_substr(self::$content, $start, $end - $start)));
+        $this->setInstruction(trim(\mb_substr(self::$content, $start, $end - $start)))
+            ->setInstructionStart($start)
+        ;
     }
 
     public function recreate(): string

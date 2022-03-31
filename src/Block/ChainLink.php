@@ -61,7 +61,6 @@ class ChainLink extends Block implements Contract\Block
         Log::log('Instruction: ' . $instruction, 1);
         $instrLen = \mb_strlen($instruction);
         $this->setInstructionStart($start)
-            ->setInstructionLength($instrLen)
             ->setInstruction($instruction);
 
         if ($this->getSubtype() == self::END_METHOD) {
@@ -85,7 +84,7 @@ class ChainLink extends Block implements Contract\Block
         }
 
         foreach ($this->getBlocks() as $block) {
-            $script .= $block->recreate();
+            $script .= rtrim($block->recreate(), ';');
         }
 
         if ($this->getSubtype() == self::END_METHOD) {

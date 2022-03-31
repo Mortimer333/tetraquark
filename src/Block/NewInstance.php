@@ -50,7 +50,9 @@ class NewInstance extends MethodBlock implements Contract\Block
         $this->setCaret($end);
 
         $instruction = \mb_substr(self::$content, $start, $end - $start);
-        $this->setInstruction($instruction);
+        $this->setInstruction($instruction)
+            ->setInstructionStart($start)
+        ;
         $this->findAndSetArguments();
     }
 

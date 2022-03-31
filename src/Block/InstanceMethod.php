@@ -17,8 +17,9 @@ class InstanceMethod extends MethodBlock implements Contract\Block
 
     public function objectify(int $start = 0)
     {
-        $searchForWhitespace = true;
-        for ($i=$start; $i >= 0; $i--) {
+        $searchForWhitespace = false;
+        Log::increaseIndent();
+        for ($i=$start - 1; $i >= 0; $i--) {
             $letter = self::$content[$i];
             if ($searchForWhitespace && $this->isWhitespace($letter)) {
                 $start = $i + 1;
@@ -28,6 +29,7 @@ class InstanceMethod extends MethodBlock implements Contract\Block
                 $searchForWhitespace = true;
             }
         }
+        Log::decreaseIndent();
         $this->findInstructionEnd($start, '', $this->instructionEnds);
         $this->findAndSetName('', ['(' => true]);
         $this->createSubBlocks();

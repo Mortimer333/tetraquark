@@ -35,9 +35,11 @@ class ArrowMethod extends MethodBlock implements Contract\Block
         } else {
             $instruction = str_replace("\n", ' ', substr(self::$content, $subStart, ($start + 1) - $subStart));
             $this->setValue(trim(str_replace("\n", ' ', substr(self::$content, $start + 1, $subEnd - $start))));
-
         }
-        $this->setInstruction($instruction);
+
+        $this->setInstruction($instruction)
+            ->setInstructionStart($subStart)
+        ;
         if ($this->isMultiLine()) {
             $this->endFunction = true;
             $this->endChars = [

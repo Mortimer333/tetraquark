@@ -112,4 +112,9 @@ class Log
     {
         self::$verbose = $level;
     }
+
+    static public function setMaxVerboseLevel(int $level): void
+    {
+        self::$maxVerbose = $level;
+    }
 }

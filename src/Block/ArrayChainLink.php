@@ -14,6 +14,7 @@ class ArrayChainLink extends Block implements Contract\Block
     public function objectify(int $start = 0)
     {
         $this->setInstruction('');
+        $this->setInstructionStart($start);
         $this->setName('');
         $end = $start;
         $string = false;
@@ -22,27 +23,36 @@ class ArrayChainLink extends Block implements Contract\Block
         $getSubBlocks = false;
         $checkFirsLetter = true;
         $start += 1;
+        Log::setMaxVerboseLevel(3);
+        Log::log("============", 1);
         for ($i=$start; $i < \mb_strlen(self::$content); $i++) {
             $letter = self::$content[$i];
             $end = $i;
-            Log::log("Letter `" . $letter . "`, i: " . $i);
+            Log::log("Letter `" . $letter . "`, i: " . $i, 3);
             if ($this->isWhitespace($letter)) {
-                Log::log("Is whitespace ");
                 continue;
             }
 
             // If first letter is not string landmark then start gathering sub blocks
             if ($checkFirsLetter) {
-                Log::log("Check first letter");
+                Log::log("Check first letter", 3);
                 if ($letter != '"' && $letter != "'" && $letter != '`') {
-                    Log::log("is not string!");
+                    Log::log("is not string!", 3);
                     $getSubBlocks = true;
-                    $end = $i - 1;
+                    $end = $i;
                     break;
                 } else {
-                    Log::log("is string!");
+                    Log::log("is string!", 3);
                     $checkFirsLetter = false;
                 }
+            }
+
+            if ($template && $this->startsTemplateLiteralVariable($letter, self::$content, $i)) {
+                $getSubBlocks = true;
+                $end = $start;
+                $string = false;
+                $template = false;
+                break;
             }
 
             // Possible syntaxes:
@@ -55,42 +65,44 @@ class ArrayChainLink extends Block implements Contract\Block
             // - [func(str) + "propert"] - replace func and str
             // Solution: check if string is the only part of this call. If not start getting subblocks after it ended
 
-
             if (!$string && !$template && !$stringEnd) {
-                Log::log("Check string!");
+                Log::log("Check string!", 3);
                 if ($letter == "'" || $letter == '"') {
-                    Log::log("is nromal stirng!");
+                    Log::log("is nromal stirng!", 3);
                     $string = true;
                     continue;
                 }
 
                 if ($letter == '`') {
-                    Log::log("is template!");
+                    Log::log("is template!", 3);
                     $template = true;
                     continue;
                 }
             } elseif (!$stringEnd && $string && $this->isStringLandmark($letter, self::$content[$i - 1], true)) {
-                Log::log("string end!");
+                Log::log("string end!", 3);
                 $stringEnd = true;
                 continue;
             } elseif (!$stringEnd && $template && $this->isTemplateLiteralLandmark($letter, self::$content[$i - 1], true)) {
-                Log::log("string template end!");
+                Log::log("string template end!", 3);
                 $stringEnd = true;
                 continue;
             }
 
             if ($letter == ']' || $stringEnd) {
-                Log::log("string end found or and of array!");
-                if ($stringEnd && $letter != ']') {
-                    Log::log("strign end but there is another letter!");
-                    $getSubBlocks = true;
-                }
+                Log::log("string end found or and of array!", 2);
                 $end = $i;
+                if ($stringEnd && $letter != ']') {
+                    $string = false;
+                    $template = false;
+                    Log::log("strign end but there is another letter!", 1);
+                    $getSubBlocks = true;
+                    $end = $start;
+                }
                 break;
             }
         }
+        Log::setMaxVerboseLevel(0);
         $this->setCaret($end);
-        echo $start . ", " .  ($end - $start);
         $name = trim(\mb_substr(self::$content, $start, $end - $start));
         if ($string) {
             $name = \mb_substr($name, 1, -1);
@@ -112,11 +124,10 @@ class ArrayChainLink extends Block implements Contract\Block
         $name = $this->getName();
         $script = '[';
         if (\mb_strlen($name)) {
-            Log::log('Replace ' . $name);
             $script .= "'" . $this->replaceVariablesWithAliases($name) . "'";
         } else {
             foreach ($this->getBlocks() as $block) {
-                $script .= $block->recreate();
+                $script .= rtrim($block->recreate(), ';');
             }
         }
 

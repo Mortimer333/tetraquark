@@ -23,7 +23,7 @@ class Variable extends Block implements Contract\Block
         Log::log('Found instruction: ' . $this->getInstruction(), 3);
         $this->createSubBlocks();
         if (\sizeof($this->blocks) == 0) {
-            $instrEnd = $this->getInstructionStart() + $this->getInstructionLength();
+            $instrEnd = $this->getInstructionStart() + \mb_strlen($this->getInstruction());
             $this->setValue(trim(substr(self::$content, $instrEnd, $this->getCaret() - $instrEnd)));
         }
         $this->findAndSetName($this->getSubtype() . ' ', $this->instructionEnds);

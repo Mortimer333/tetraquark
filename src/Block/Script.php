@@ -76,6 +76,7 @@ class Script extends Block implements Contract\Block
             Log::log("Block: " . get_class($block));
             Log::log("Subtype: " . $block->getSubtype());
             Log::log("Instruction: " . $block->getInstruction());
+            Log::log("Instruction Start: " . $block->getInstructionStart());
             Log::log("Name: `" . $block->getName() . "`");
             if (method_exists($block, 'getValue')) {
                 Log::log("Value: `" . $block->getValue() . "`");
