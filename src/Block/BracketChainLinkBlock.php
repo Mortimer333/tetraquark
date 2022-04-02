@@ -23,7 +23,6 @@ class BracketChainLinkBlock extends Block implements Contract\Block
         $getSubBlocks = false;
         $checkFirsLetter = true;
         $start += 1;
-        Log::setMaxVerboseLevel(3);
         Log::log("============", 1);
         for ($i=$start; $i < \mb_strlen(self::$content); $i++) {
             $letter = self::$content[$i];
@@ -101,7 +100,6 @@ class BracketChainLinkBlock extends Block implements Contract\Block
                 break;
             }
         }
-        Log::setMaxVerboseLevel(0);
         $this->setCaret($end);
         $name = trim(\mb_substr(self::$content, $start, $end - $start));
         if ($string) {

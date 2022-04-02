@@ -14,7 +14,11 @@ function test() { var longName = 20;
     const testAddAliases = longNameLet + testInline
 }
 
-testa='b'
+testa=[
+    'b,',
+    'b,',
+    ['v,']
+]
 
 e3=> {
 

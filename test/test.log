@@ -1,118 +1,23 @@
 Mapping...
-        ============
-        Letter `'`, i: 611
-        Check first letter
-        is string!
-        Check string!
-        is nromal stirng!
-        Letter `p`, i: 612
-        Letter `r`, i: 613
-        Letter `o`, i: 614
-        Letter `p`, i: 615
-        Letter `e`, i: 616
-        Letter `r`, i: 617
-        Letter `t`, i: 618
-        Letter `y`, i: 619
-        Letter `'`, i: 620
-        string end!
-        Letter `]`, i: 621
-        string end found or and of array!
-        ============
-        Letter `'`, i: 651
-        Check first letter
-        is string!
-        Check string!
-        is nromal stirng!
-        Letter `p`, i: 652
-        Letter `r`, i: 653
-        Letter `o`, i: 654
-        Letter `p`, i: 655
-        Letter `e`, i: 656
-        Letter `r`, i: 657
-        Letter `t`, i: 658
-        Letter `'`, i: 659
-        string end!
-        Letter ` `, i: 660
-        Letter `+`, i: 661
-        string end found or and of array!
-        strign end but there is another letter!
-        ============
-        Letter ```, i: 706
-        Check first letter
-        is string!
-        Check string!
-        is template!
-        Letter `p`, i: 707
-        Letter `r`, i: 708
-        Letter `o`, i: 709
-        Letter `p`, i: 710
-        Letter `$`, i: 711
-        Letter `{`, i: 712
-        ============
-        Letter ```, i: 758
-        Check first letter
-        is string!
-        Check string!
-        is template!
-        Letter `p`, i: 759
-        Letter `r`, i: 760
-        Letter `o`, i: 761
-        Letter `p`, i: 762
-        Letter `e`, i: 763
-        Letter `r`, i: 764
-        Letter `t`, i: 765
-        Letter `y`, i: 766
-        Letter ```, i: 767
-        string template end!
-        Letter `]`, i: 768
-        string end found or and of array!
-        ============
-        Letter `"`, i: 798
-        Check first letter
-        is string!
-        Check string!
-        is nromal stirng!
-        Letter `p`, i: 799
-        Letter `r`, i: 800
-        Letter `o`, i: 801
-        Letter `p`, i: 802
-        Letter `e`, i: 803
-        Letter `r`, i: 804
-        Letter `t`, i: 805
-        Letter `y`, i: 806
-        Letter `"`, i: 807
-        string end!
-        Letter `]`, i: 808
-        string end found or and of array!
-        ============
-        Letter `"`, i: 838
-        Check first letter
-        is string!
-        Check string!
-        is nromal stirng!
-        Letter `p`, i: 839
-        Letter `r`, i: 840
-        Letter `o`, i: 841
-        Letter `p`, i: 842
-        Letter `e`, i: 843
-        Letter `r`, i: 844
-        Letter `t`, i: 845
-        Letter `y`, i: 846
-        Letter `"`, i: 847
-        string end!
-        Letter ` `, i: 848
-        Letter `+`, i: 849
-        string end found or and of array!
-        strign end but there is another letter!
-        ============
-        Letter `t`, i: 895
-        Check first letter
-        is not string!
+    Start Array: 468
+      Start Array: 497
 =======================
 Creating aliases...
 =======================
 Aliases: test => a, testa => b, ClassName => c, classNameInst => d, longName => e, test2 => f, test3 => g, longNameLet => h, testInline => i, testInline2 => j, testAddAliases => k, testScoped => l, arg1 => m, adas => n, test5 => o, test4 => p, fgdfg => r, e => l, e2 => l, e3=> => e, property => e, constructor => f, func => g, fun2 => h, arg2 => i, 
 Recreating...
+Last letter: 0, script:var e=20
+Last letter: }, script:const l=function (n,o,p,r){}
+Last letter: ;, script:const b=(m)=>{const l=function (n,o,p,r){};};
+Last letter: ;, script:const f=(l)=>1+2;
+Last letter: ;, script:const g=(l)=>1+l;
+Last letter: `, script:let h=`asd ${i}asdasd`
+Last letter: 0, script:var i=20
+Last letter: }, script:let j={'a':'sd'}
+Last letter: i, script:const k=h+i
+Last letter: ;, script: b=['b,','b,',['v,']];
+Last letter: ', script: e='y'
+Last letter: ;, script:const d=new c('test',2);
 =======================
 Block: Tetraquark\Block\FunctionBlock
 Subtype: function
@@ -127,9 +32,16 @@ Alias: `a`
   Instruction: var longName =
   Instruction Start: 18
   Name: `longName`
-  Value: `20`
+  Value: ``
   Alias: `e`
   =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: 20
+    Instruction Start: 32
+    Name: ``
+    Alias: ``
+    =======
   Block: Tetraquark\Block\ChainLinkBlock
   Subtype: first
   Instruction: console
@@ -237,9 +149,16 @@ Alias: `a`
   Instruction: let longNameLet =
   Instruction Start: 271
   Name: `longNameLet`
-  Value: ``asd ${testInline} asdasd``
+  Value: ``
   Alias: `h`
   =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: `asd ${testInline} asdasd`
+    Instruction Start: 262
+    Name: ``
+    Alias: ``
+    =======
   Block: Tetraquark\Block\ChainLinkBlock
   Subtype: first
   Instruction: console
@@ -266,37 +185,121 @@ Alias: `a`
   Instruction: var testInline =
   Instruction Start: 351
   Name: `testInline`
-  Value: `20`
+  Value: ``
   Alias: `i`
   =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: 20
+    Instruction Start: 367
+    Name: ``
+    Alias: ``
+    =======
   Block: Tetraquark\Block\VariableBlock
   Subtype: let
   Instruction: let testInline2 =
   Instruction Start: 372
   Name: `testInline2`
-  Value: `{'a' : 'sd'}`
+  Value: ``
   Alias: `j`
   =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: {'a'
+    Instruction Start: 386
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: : 'sd'
+    Instruction Start: 390
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: }
+    Instruction Start: 401
+    Name: ``
+    Alias: ``
+    =======
   Block: Tetraquark\Block\VariableBlock
   Subtype: const
   Instruction: const testAddAliases =
   Instruction Start: 408
   Name: `testAddAliases`
-  Value: `longNameLet + testInline`
+  Value: ``
   Alias: `k`
   =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: longNameLet + testInline
+    Instruction Start: 430
+    Name: ``
+    Alias: ``
+    =======
 Block: Tetraquark\Block\AttributeBlock
 Subtype: 
 Instruction: testa=
 Instruction Start: 461
 Name: `testa`
-Value: `'b'`
+Value: ``
 Alias: `b`
 =======
+  Block: Tetraquark\Block\ArrayBlock
+  Subtype: [
+  Instruction: 
+  Instruction Start: 468
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: 'b,'
+    Instruction Start: 467
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: ,
+    Instruction Start: 478
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: 'b,'
+    Instruction Start: 478
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: ,
+    Instruction Start: 489
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ArrayBlock
+    Subtype: [
+    Instruction: 
+    Instruction Start: 497
+    Name: ``
+    Alias: ``
+    =======
+      Block: Tetraquark\Block\UndefinedBlock
+      Subtype: 
+      Instruction: 'v,'
+      Instruction Start: 494
+      Name: ``
+      Alias: ``
+      =======
 Block: Tetraquark\Block\ArrowFunctionBlock
 Subtype: no-parenthesis:brackets
 Instruction: e3=> {
-Instruction Start: 475
+Instruction Start: 510
 Name: ``
 Value: ``
 Arguments: [1] `e3=>`
@@ -305,22 +308,29 @@ Alias: ``
 Block: Tetraquark\Block\ClassBlock
 Subtype: class
 Instruction: class ClassName {
-Instruction Start: 490
+Instruction Start: 525
 Name: `ClassName`
 Alias: `c`
 =======
   Block: Tetraquark\Block\AttributeBlock
   Subtype: 
   Instruction: property =
-  Instruction Start: 512
+  Instruction Start: 547
   Name: `property`
-  Value: `'y'`
+  Value: ``
   Alias: `e`
   =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: 'y'
+    Instruction Start: 555
+    Name: ``
+    Alias: ``
+    =======
   Block: Tetraquark\Block\ClassMethodBlock
   Subtype: method
   Instruction: constructor(arg1, arg2) {
-  Instruction Start: 534
+  Instruction Start: 569
   Name: `constructor`
   Arguments: [2] `arg1`, `arg2`
   Alias: `f`
@@ -328,7 +338,7 @@ Alias: `c`
   Block: Tetraquark\Block\ClassMethodBlock
   Subtype: method
   Instruction: func() {
-  Instruction Start: 576
+  Instruction Start: 611
   Name: `func`
   Arguments: [0] ``
   Alias: `g`
@@ -336,308 +346,301 @@ Alias: `c`
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: first
     Instruction: console
-    Instruction Start: 594
+    Instruction Start: 629
     Name: ``
     Alias: ``
     =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: end:method
     Instruction: log
-    Instruction Start: 602
+    Instruction Start: 637
     Name: ``
     Alias: ``
     =======
       Block: Tetraquark\Block\UndefinedBlock
       Subtype: 
       Instruction: this
-      Instruction Start: 606
+      Instruction Start: 641
       Name: ``
       Alias: ``
       =======
       Block: Tetraquark\Block\BracketChainLinkBlock
       Subtype: [
       Instruction: 
-      Instruction Start: 610
+      Instruction Start: 645
       Name: `property`
       Alias: `e`
       =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: first
     Instruction: console
-    Instruction Start: 634
+    Instruction Start: 669
     Name: ``
     Alias: ``
     =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: end:method
     Instruction: log
-    Instruction Start: 642
+    Instruction Start: 677
     Name: ``
     Alias: ``
     =======
       Block: Tetraquark\Block\UndefinedBlock
       Subtype: 
       Instruction: this
-      Instruction Start: 646
+      Instruction Start: 681
       Name: ``
       Alias: ``
       =======
       Block: Tetraquark\Block\BracketChainLinkBlock
       Subtype: [
       Instruction: 
-      Instruction Start: 650
+      Instruction Start: 685
       Name: ``
       Alias: ``
       =======
         Block: Tetraquark\Block\UndefinedBlock
         Subtype: 
-        Instruction: 'propert' +
-        Instruction Start: 655
+        Instruction: 'propert'
+        Instruction Start: 677
+        Name: ``
+        Alias: ``
+        =======
+        Block: Tetraquark\Block\UndefinedBlock
+        Subtype: 
+        Instruction: +
+        Instruction Start: 699
         Name: ``
         Alias: ``
         =======
         Block: Tetraquark\Block\ChainLinkBlock
         Subtype: first
         Instruction: this
-        Instruction Start: 663
+        Instruction Start: 698
         Name: ``
         Alias: ``
         =======
         Block: Tetraquark\Block\ChainLinkBlock
         Subtype: .
         Instruction: property
-        Instruction Start: 668
+        Instruction Start: 703
         Name: ``
         Alias: ``
         =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: first
     Instruction: console
-    Instruction Start: 689
+    Instruction Start: 724
     Name: ``
     Alias: ``
     =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: end:method
     Instruction: log
-    Instruction Start: 697
+    Instruction Start: 732
     Name: ``
     Alias: ``
     =======
       Block: Tetraquark\Block\UndefinedBlock
       Subtype: 
       Instruction: this
-      Instruction Start: 701
+      Instruction Start: 736
       Name: ``
       Alias: ``
       =======
       Block: Tetraquark\Block\BracketChainLinkBlock
       Subtype: [
       Instruction: 
-      Instruction Start: 705
+      Instruction Start: 740
       Name: ``
       Alias: ``
       =======
         Block: Tetraquark\Block\UndefinedBlock
         Subtype: 
-        Instruction: `prop${
-        Instruction Start: 710
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: this
-        Instruction Start: 713
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: property
-        Instruction Start: 718
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction: }`
-        Instruction Start: 726
+        Instruction: `prop${this.property}`
+        Instruction Start: 719
         Name: ``
         Alias: ``
         =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: first
     Instruction: console
-    Instruction Start: 741
+    Instruction Start: 776
     Name: ``
     Alias: ``
     =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: end:method
     Instruction: log
-    Instruction Start: 749
+    Instruction Start: 784
     Name: ``
     Alias: ``
     =======
       Block: Tetraquark\Block\UndefinedBlock
       Subtype: 
       Instruction: this
-      Instruction Start: 753
+      Instruction Start: 788
       Name: ``
       Alias: ``
       =======
       Block: Tetraquark\Block\BracketChainLinkBlock
       Subtype: [
       Instruction: 
-      Instruction Start: 757
+      Instruction Start: 792
       Name: `property`
       Alias: `e`
       =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: first
     Instruction: console
-    Instruction Start: 781
+    Instruction Start: 816
     Name: ``
     Alias: ``
     =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: end:method
     Instruction: log
-    Instruction Start: 789
+    Instruction Start: 824
     Name: ``
     Alias: ``
     =======
       Block: Tetraquark\Block\UndefinedBlock
       Subtype: 
       Instruction: this
-      Instruction Start: 793
+      Instruction Start: 828
       Name: ``
       Alias: ``
       =======
       Block: Tetraquark\Block\BracketChainLinkBlock
       Subtype: [
       Instruction: 
-      Instruction Start: 797
+      Instruction Start: 832
       Name: `property`
       Alias: `e`
       =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: first
     Instruction: console
-    Instruction Start: 821
+    Instruction Start: 856
     Name: ``
     Alias: ``
     =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: end:method
     Instruction: log
-    Instruction Start: 829
+    Instruction Start: 864
     Name: ``
     Alias: ``
     =======
       Block: Tetraquark\Block\UndefinedBlock
       Subtype: 
       Instruction: this
-      Instruction Start: 833
+      Instruction Start: 868
       Name: ``
       Alias: ``
       =======
       Block: Tetraquark\Block\BracketChainLinkBlock
       Subtype: [
       Instruction: 
-      Instruction Start: 837
+      Instruction Start: 872
       Name: ``
       Alias: ``
       =======
         Block: Tetraquark\Block\UndefinedBlock
         Subtype: 
-        Instruction: "property" +
-        Instruction Start: 842
+        Instruction: "property"
+        Instruction Start: 863
+        Name: ``
+        Alias: ``
+        =======
+        Block: Tetraquark\Block\UndefinedBlock
+        Subtype: 
+        Instruction: +
+        Instruction Start: 887
         Name: ``
         Alias: ``
         =======
         Block: Tetraquark\Block\ChainLinkBlock
         Subtype: first
         Instruction: this
-        Instruction Start: 851
+        Instruction Start: 886
         Name: ``
         Alias: ``
         =======
         Block: Tetraquark\Block\ChainLinkBlock
         Subtype: end:method
         Instruction: fun2
-        Instruction Start: 856
+        Instruction Start: 891
         Name: ``
         Alias: ``
         =======
           Block: Tetraquark\Block\UndefinedBlock
           Subtype: 
           Instruction: 'a'
-          Instruction Start: 861
+          Instruction Start: 893
           Name: ``
           Alias: ``
           =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: first
     Instruction: console
-    Instruction Start: 878
+    Instruction Start: 913
     Name: ``
     Alias: ``
     =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: end:method
     Instruction: log
-    Instruction Start: 886
+    Instruction Start: 921
     Name: ``
     Alias: ``
     =======
       Block: Tetraquark\Block\UndefinedBlock
       Subtype: 
       Instruction: this
-      Instruction Start: 890
+      Instruction Start: 925
       Name: ``
       Alias: ``
       =======
       Block: Tetraquark\Block\BracketChainLinkBlock
       Subtype: [
       Instruction: 
-      Instruction Start: 894
+      Instruction Start: 929
       Name: ``
       Alias: ``
       =======
         Block: Tetraquark\Block\ChainLinkBlock
         Subtype: first
         Instruction: this
-        Instruction Start: 895
+        Instruction Start: 930
         Name: ``
         Alias: ``
         =======
         Block: Tetraquark\Block\ChainLinkBlock
         Subtype: end:method
         Instruction: fun2
-        Instruction Start: 900
+        Instruction Start: 935
         Name: ``
         Alias: ``
         =======
           Block: Tetraquark\Block\UndefinedBlock
           Subtype: 
           Instruction: 'a'
-          Instruction Start: 905
+          Instruction Start: 937
           Name: ``
           Alias: ``
           =======
         Block: Tetraquark\Block\UndefinedBlock
         Subtype: 
         Instruction: + 'propert'
-        Instruction Start: 909
+        Instruction Start: 935
         Name: ``
         Alias: ``
         =======
   Block: Tetraquark\Block\ClassMethodBlock
   Subtype: method
   Instruction: fun2 (arg1) {
-  Instruction Start: 939
+  Instruction Start: 974
   Name: `fun2`
   Arguments: [1] `arg1`
   Alias: `h`
@@ -645,14 +648,14 @@ Alias: `c`
     Block: Tetraquark\Block\UndefinedBlock
     Subtype: 
     Instruction: return arg1;
-    Instruction Start: 953
+    Instruction Start: 988
     Name: ``
     Alias: ``
     =======
 Block: Tetraquark\Block\VariableBlock
 Subtype: const
 Instruction: const classNameInst =
-Instruction Start: 988
+Instruction Start: 1023
 Name: `classNameInst`
 Value: ``
 Alias: `d`
@@ -660,7 +663,7 @@ Alias: `d`
   Block: Tetraquark\Block\NewClassBlock
   Subtype: new
   Instruction: ClassName('test', 2)
-  Instruction Start: 1013
+  Instruction Start: 1048
   Name: `ClassName`
   Arguments: [2] `'test'`, `2`
   Alias: `c`
@@ -668,18 +671,18 @@ Alias: `d`
 Block: Tetraquark\Block\ChainLinkBlock
 Subtype: first
 Instruction: classNameInst
-Instruction Start: 1037
+Instruction Start: 1072
 Name: ``
 Alias: ``
 =======
 Block: Tetraquark\Block\ChainLinkBlock
 Subtype: end:method
 Instruction: func
-Instruction Start: 1051
+Instruction Start: 1086
 Name: ``
 Alias: ``
 =======
-Duration: 0.008s
+Duration: 0.007s
 
 
-function a(){var e=20;console.log(e);const b=(m)=>{const l=function (n,o,p,r){}};const f=(l)=>1+2;const g=(l)=>1+l;let h=`asd ${i}asdasd`;console.log(g('s'));var i=20;let j={'a':'sd'};const k=h+i;} b='b';(e)=>{};class c{ e='y';f(m,i){}g(){console.log(this['e']);console.log(this['propert'+this.e]);console.log(this[`prop${this.e}`]);console.log(this['e']);console.log(this['e']);console.log(this["property"+this.h('a')]);console.log(this[this.h('a')+'propert']);}h(m){return m;}}const d=new c('test',2);d.g();
+function a(){var e=20;console.log(e);const b=(m)=>{const l=function (n,o,p,r){};};const f=(l)=>1+2;const g=(l)=>1+l;let h=`asd ${i}asdasd`;console.log(g('s'));var i=20;let j={'a':'sd'};const k=h+i;} b=['b,','b,',['v,']];(e)=>{};class c{ e='y';f(m,i){}g(){console.log(this['e']);console.log(this['propert'+this.e]);console.log(this[`prop${this.property}`]);console.log(this['e']);console.log(this['e']);console.log(this["property"+this.h('a')]);console.log(this[this.h('a')+'propert']);}h(m){return m;}}const d=new c('test',2);d.g();

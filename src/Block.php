@@ -453,14 +453,39 @@ abstract class Block
         return \mb_strlen($undefined) > 0 && !$this->isWhitespace($undefined) && $undefined != '}' && !isset($undefinedEnds[$undefined]);
     }
 
-    protected function createSubBlocks(): void
+    protected function createSubBlocks(?int $start = null, ?string $value = null): void
     {
+        if (is_null($value)) {
+            $value = self::$content;
+        }
+        if (is_null($start)) {
+            $start = $this->getCaret();
+        }
         $map = null;
         $mappedWord = '';
         $possibleUndefined = '';
         $undefinedEnds = ["\n" => true, ";" => true];
-        for ($i=$this->getCaret(); $i < \strlen(self::$content); $i++) {
+        for ($i=$start; $i < \strlen($value); $i++) {
             $letter = self::$content[$i];
+            if (
+                ($startsTemplate = $this->isTemplateLiteralLandmark($letter, ''))
+                || $this->isStringLandmark($letter, '')
+            ) {
+                $oldPos = $i;
+
+                $i = $this->skipString($i + 1, self::$content, $startsTemplate);
+                $possibleUndefined .= \mb_substr($value, $oldPos, $i - $oldPos);
+                Log::log('Add new undefined: ' . $possibleUndefined . ", starPos " . $oldPos . ", new Pos:" . $i . " length: " . $i - $oldPos, 3);
+
+                if ($this->isValidUndefined($possibleUndefined)) {
+                    $this->blocks[] = new Block\UndefinedBlock($oldPos - \mb_strlen($possibleUndefined), $possibleUndefined);
+                }
+
+                $letter = self::$content[$i];
+                $mappedWord = '';
+                $possibleUndefined = '';
+            }
+
             $mappedWord .= $letter;
             $possibleUndefined .= $letter;
             Log::log("Letter: " . $letter . " Mapped Word: " . $mappedWord, 3);
@@ -494,8 +519,7 @@ abstract class Block
                 $possibleUndefined = substr($possibleUndefined, 0, -1);
                 if (
                     $this->isValidUndefined($possibleUndefined)
-                    && !($this instanceof Block\VariableBlock)
-                    && !($this instanceof Block\AttributeBlock)
+                    // && !($this instanceof Block\AttributeBlock)
                 ) {
                     Log::log("Add undefined: " . $possibleUndefined, 3);
                     $this->blocks[] = new Block\UndefinedBlock($i - \mb_strlen($possibleUndefined), $possibleUndefined);
@@ -514,7 +538,7 @@ abstract class Block
         }
 
         $this->setCaret($i);
-        Log::log("Updated caret " . $this->getCaret(), 1);
+        Log::log("Updated caret " . $this->getCaret(),1);
 
     }
 
@@ -694,7 +718,7 @@ abstract class Block
             && ($value[$i - 2] ?? '') . ($value[$i - 1] ?? '') . $letter != '\${';
     }
 
-    protected function isTemplateLiteralLandmark(string $letter, string $previousLetter, bool $inString): bool
+    protected function isTemplateLiteralLandmark(string $letter, string $previousLetter, bool $inString = false): bool
     {
         return $letter === '`' && (
             $inString && $previousLetter !== '\\'
@@ -702,12 +726,26 @@ abstract class Block
         );
     }
 
-    protected function isStringLandmark(string $letter, string $previousLetter, bool $inString): bool
+    protected function isStringLandmark(string $letter, string $previousLetter, bool $inString = false): bool
     {
-        return ($letter === '"' || $letter === "'") && (
-            $inString && $previousLetter !== '\\'
-            || !$inString
-        );
+        return ($letter === '"' || $letter === "'")
+            && (
+                !$inString
+                || $inString && $previousLetter !== '\\'
+            );
+    }
+
+    public function skipString(int $start, string $value, bool $isTemplate = false): int
+    {
+        for ($i=$start; $i < \mb_strlen($value); $i++) {
+            $letter = $value[$i];
+            if ($isTemplate && $this->isTemplateLiteralLandmark($letter, $value[$i - 1] ?? '', true)) {
+                return $i + 1;
+            } elseif (!$isTemplate && $this->isStringLandmark($letter, $value[$i - 1] ?? '', true)) {
+                return $i + 1;
+            }
+        }
+        return $i;
     }
 
     protected function isSpecial(string $letter): bool
@@ -738,10 +776,10 @@ abstract class Block
             if ($this->isWhitespace($letter)) {
                 continue;
             }
-            if ($letter == '=' || $letter == ':') {
-                return 'ArrayBlock';
+            if (!$this->isSpecial($letter)) {
+                return 'BracketChainLinkBlock';
             }
-            return "BracketChainLinkBlock";
+            return "ArrayBlock";
         }
         throw new Exception("Couldn't decide how found bracket was used", 400);
     }

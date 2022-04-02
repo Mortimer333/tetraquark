@@ -3,9 +3,8 @@
 namespace Tetraquark\Block;
 use \Tetraquark\Log as Log;
 use \Tetraquark\Contract as Contract;
-use \Tetraquark\Block as Block;
 
-class VariableBlock extends Block implements Contract\Block
+class VariableBlock extends \Tetraquark\VariableBlock implements Contract\Block
 {
     protected string $value = '';
     protected array $endChars = [
@@ -48,20 +47,5 @@ class VariableBlock extends Block implements Contract\Block
             '`' => '`',
         ];
         return $stringStarts[$letter] ?? false;
-    }
-
-    public function recreate(): string
-    {
-        $script = $this->getSubType() . ' ' . $this->getAlias($this->getName()) . '=';
-
-        foreach ($this->getBlocks() as $block) {
-            $script .= $block->recreate();
-        }
-
-        $value = $this->removeAdditionalSpaces($this->getValue());
-        if (\mb_strlen($value) > 0) {
-            $script .= $this->replaceVariablesWithAliases($value) . ';';
-        }
-        return $script;
     }
 }
