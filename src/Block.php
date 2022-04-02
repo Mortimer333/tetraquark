@@ -123,7 +123,8 @@ abstract class Block
                 ]
             ]
         ],
-        '[' => 'decideArrayBlockType'
+        '[' => 'decideArrayBlockType',
+        '{' => 'ObjectBlock'
     ];
 
     protected array $special = [
@@ -449,8 +450,9 @@ abstract class Block
 
     protected function isValidUndefined(string $undefined): bool
     {
-        $undefinedEnds = ["\n" => true, ";" => true];
-        return \mb_strlen($undefined) > 0 && !$this->isWhitespace($undefined) && $undefined != '}' && !isset($undefinedEnds[$undefined]);
+        $undefinedEnds = ["\n" => true, ";" => true, "}" => true];
+        $undefined = trim($undefined);
+        return \mb_strlen($undefined) > 0 && !$this->isWhitespace($undefined) && !isset($undefinedEnds[$undefined]);
     }
 
     protected function createSubBlocks(?int $start = null, ?string $value = null): void
@@ -474,12 +476,12 @@ abstract class Block
                 $oldPos = $i;
 
                 $i = $this->skipString($i + 1, self::$content, $startsTemplate);
-                $possibleUndefined .= \mb_substr($value, $oldPos, $i - $oldPos);
                 Log::log('Add new undefined: ' . $possibleUndefined . ", starPos " . $oldPos . ", new Pos:" . $i . " length: " . $i - $oldPos, 3);
 
                 if ($this->isValidUndefined($possibleUndefined)) {
                     $this->blocks[] = new Block\UndefinedBlock($oldPos - \mb_strlen($possibleUndefined), $possibleUndefined);
                 }
+                $this->blocks[] = new Block\StringBlock($oldPos, \mb_substr($value, $oldPos, $i - $oldPos));
 
                 $letter = self::$content[$i];
                 $mappedWord = '';
@@ -517,24 +519,21 @@ abstract class Block
 
             if ($this->endChars[$letter] ?? false) {
                 $possibleUndefined = substr($possibleUndefined, 0, -1);
-                if (
-                    $this->isValidUndefined($possibleUndefined)
-                    // && !($this instanceof Block\AttributeBlock)
-                ) {
+                if ($this->isValidUndefined($possibleUndefined)) {
                     Log::log("Add undefined: " . $possibleUndefined, 3);
                     $this->blocks[] = new Block\UndefinedBlock($i - \mb_strlen($possibleUndefined), $possibleUndefined);
                 }
                 break;
             }
 
-            if ($undefinedEnds[$letter] ?? false) {
-                Log::log("Undefined check for: " . $possibleUndefined, 3);
-                if ($this->isValidUndefined($possibleUndefined)) {
-                    Log::log("Add undefined: " . $possibleUndefined, 3);
-                    $this->blocks[] = new Block\UndefinedBlock($i - \mb_strlen($possibleUndefined), $possibleUndefined);
-                }
-                $possibleUndefined = '';
-            }
+            // if ($undefinedEnds[$letter] ?? false) {
+            //     Log::log("Undefined check for: " . $possibleUndefined, 3);
+            //     if ($this->isValidUndefined($possibleUndefined)) {
+            //         Log::log("Add undefined: " . $possibleUndefined, 3);
+            //         $this->blocks[] = new Block\UndefinedBlock($i - \mb_strlen($possibleUndefined), $possibleUndefined);
+            //     }
+            //     $possibleUndefined = '';
+            // }
         }
 
         $this->setCaret($i);
@@ -573,7 +572,7 @@ abstract class Block
         foreach ($this->blocks as $block) {
             Log::log('===========', 3);
             Log::log('Block: ' . $block->getName(), 3);
-            if ($this->aliasExists($block->getName())) {
+            if ($this->aliasExists($block->getName()) || !$this->canBeAliased($block->getName(), $block)) {
                 Log::log('Alias for this block exists.', 2);
                 continue;
             }
@@ -781,6 +780,16 @@ abstract class Block
             }
             return "ArrayBlock";
         }
-        throw new Exception("Couldn't decide how found bracket was used", 400);
+        return "ArrayBlock";
+    }
+
+    protected function canBeAliased(string $name, Block $block): bool
+    {
+        $reserved = [];
+        if ($block instanceof Block\ClassMethodBlock) {
+            $reserved['constructor'] = false;
+        }
+
+        return $reserved[$name] ?? true;
     }
 }

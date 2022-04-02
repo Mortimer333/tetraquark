@@ -38,14 +38,4 @@ class VariableBlock extends \Tetraquark\VariableBlock implements Contract\Block
     {
         return $this->value;
     }
-
-    protected function isStartingString(string $letter): bool
-    {
-        $stringStarts = [
-            '"' => '"',
-            "'" => "'",
-            '`' => '`',
-        ];
-        return $stringStarts[$letter] ?? false;
-    }
 }

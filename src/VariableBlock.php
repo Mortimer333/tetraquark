@@ -17,7 +17,6 @@ class VariableBlock extends Block
             $script .= $this->replaceVariablesWithAliases($value);
         }
         $scriptLastLetter = $script[\mb_strlen($script) - 1];
-        Log::log('Last letter: ' .$scriptLastLetter . ", script:" . $script);
         $addSemiColon = [
             ';' => false,
             ',' => false
@@ -26,6 +25,6 @@ class VariableBlock extends Block
         if ($addSemiColon[$scriptLastLetter] ?? true) {
             $script .= ';';
         }
-        return $script;
+        return $this->removeAdditionalSpaces($script);
     }
 }

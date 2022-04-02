@@ -26,7 +26,7 @@ class ArrayBlock extends Block implements Contract\Block
     {
         $script = '[';
         foreach ($this->getBlocks() as $block) {
-            $trimmed = rtrim(rtrim($block->recreate(), ','), ';');
+            $trimmed = trim(trim($block->recreate(), ','), ';');
             if (\mb_strlen($trimmed) > 0) {
                 $script .=  $trimmed. ',';
             }

@@ -19,10 +19,10 @@ class CallerBlock extends Block implements Contract\Block
                 continue;
             }
 
-            if ($letter == ')') {
+            if (!$searchForArrow && $letter == ')') {
                 $searchForArrow = true;
-                $end = $i;
-                $this->setCaret($i - 1);
+                $end = $i + 1;
+                $this->setCaret($i);
                 continue;
             }
 
@@ -55,7 +55,7 @@ class CallerBlock extends Block implements Contract\Block
                 break;
             }
         }
-
+        Log::log('Instruction starts at ' . $start . " and ends at " . $end);
         $this->setInstruction(trim(\mb_substr(self::$content, $start, $end - $start)))
             ->setInstructionStart($start)
         ;

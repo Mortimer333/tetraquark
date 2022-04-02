@@ -197,7 +197,12 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
 
     public function recreate(): string
     {
-        $script = '(' . $this->getAliasedArguments() . ')=>';
+        $args = $this->getArguments();
+        if (\sizeof($args) == 1) {
+            $script = $this->getAliasedArguments() . '=>';
+        } else {
+            $script = '(' . $this->getAliasedArguments() . ')=>';
+        }
         if (!$this->isMultiLine()) {
             $script .= $this->removeAdditionalSpaces(
                 $this->replaceVariablesWithAliases($this->getValue()) . ';'

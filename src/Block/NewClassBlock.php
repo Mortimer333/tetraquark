@@ -44,7 +44,9 @@ class NewClassBlock extends MethodBlock implements Contract\Block
         }
 
         if (\is_null($end)) {
-            throw new Exception('End for new Class not found', 404);
+            $end = $i;
+            $this->setName(\mb_substr(self::$content, $start, $end - $start));
+            // throw new Exception('End for new Class not found', 404);
         }
 
         $this->setCaret($end);

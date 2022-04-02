@@ -9,7 +9,7 @@ function test() { var longName = 20;
     const test2 = e => 1 + 2;
     const test3 = (e2) =>
     1 + e2; let longNameLet = `asd ${testInline} asdasd`
-    console.log(test3('s'));
+    console.log(test3('s' ));
     var testInline = 20; let testInline2 = {'a' : 'sd'}
     const testAddAliases = longNameLet + testInline
 }
@@ -17,7 +17,8 @@ function test() { var longName = 20;
 testa=[
     'b,',
     'b,',
-    ['v,']
+    ['v,'],
+    () => 'a'
 ]
 
 e3=> {
