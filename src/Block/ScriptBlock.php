@@ -5,7 +5,7 @@ use \Tetraquark\Log as Log;
 use \Tetraquark\Contract as Contract;
 use \Tetraquark\Block as Block;
 
-class Script extends Block implements Contract\Block
+class ScriptBlock extends Block implements Contract\Block
 {
     protected array  $endChars = [];
     /** @var string Minified script */

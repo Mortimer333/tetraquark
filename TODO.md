@@ -38,7 +38,7 @@ And if I was to add another function it should have access to all vars and their
 ## Setting to allow changing anonymous functions `function () {}` into array functions `() => {}`
 
 ## Handle
-- chain linking with square brackets (if bracet is prefixed with `:` or `=` then its array)
+- [DONE] chain linking with square brackets (if bracet is prefixed with `:` or `=` then its array)
 - Object,
 - if (removing brackets if it contains only one instruction),
 - for (replace vars in brackets),

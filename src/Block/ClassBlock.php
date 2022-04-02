@@ -5,7 +5,7 @@ use \Tetraquark\Log as Log;
 use \Tetraquark\Contract as Contract;
 use \Tetraquark\Block as Block;
 
-class Instance extends Block implements Contract\Block
+class ClassBlock extends Block implements Contract\Block
 {
     protected array $endChars = [
         '}' => true

@@ -5,7 +5,7 @@ use \Tetraquark\Log as Log;
 use \Tetraquark\Contract as Contract;
 use \Tetraquark\Block as Block;
 
-class Cluster extends Block implements Contract\Block
+class ArrayBlock extends Block implements Contract\Block
 {
     public function objectify(int $start = 0)
     {

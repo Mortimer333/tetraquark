@@ -5,7 +5,7 @@ use \Tetraquark\Log as Log;
 use \Tetraquark\Contract as Contract;
 use \Tetraquark\Block as Block;
 
-class ArrayChainLink extends Block implements Contract\Block
+class BracketChainLinkBlock extends Block implements Contract\Block
 {
     protected array $endChars = [
         ']' => true

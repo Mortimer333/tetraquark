@@ -5,7 +5,7 @@ use \Tetraquark\Log as Log;
 use \Tetraquark\Contract as Contract;
 use \Tetraquark\Block as Block;
 
-class ChainLink extends Block implements Contract\Block
+class ChainLinkBlock extends Block implements Contract\Block
 {
     protected const FIRST = 'first';
     protected const MIDDLE = 'middle';

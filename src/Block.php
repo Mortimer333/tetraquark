@@ -55,9 +55,9 @@ abstract class Block
                             'i' => [
                                 'o' => [
                                     'n' => [
-                                        ' '  => 'Method',
-                                        "\n" => "Method",
-                                        "\r" => "Method",
+                                        ' '  => 'FunctionBlock',
+                                        "\n" => "FunctionBlock",
+                                        "\r" => "FunctionBlock",
                                     ]
                                 ]
                             ]
@@ -67,15 +67,15 @@ abstract class Block
             ]
         ],
         '=' => [
-            '>'       => 'ArrowMethod',
-            'default' => 'Attribute'
+            '>'       => 'ArrowFunctionBlock',
+            'default' => 'AttributeBlock'
         ],
         'l' => [
             'e' => [
                 't' => [
-                    ' '  => 'Variable',
-                    "\n" => "Variable",
-                    "\r" => "Variable",
+                    ' '  => 'VariableBlock',
+                    "\n" => "VariableBlock",
+                    "\r" => "VariableBlock",
                 ]
             ]
         ],
@@ -84,9 +84,9 @@ abstract class Block
                 'n' => [
                     's' => [
                         't' => [
-                            ' '  => 'Variable',
-                            "\n" => "Variable",
-                            "\r" => "Variable",
+                            ' '  => 'VariableBlock',
+                            "\n" => "VariableBlock",
+                            "\r" => "VariableBlock",
                         ]
                     ]
                 ]
@@ -95,9 +95,9 @@ abstract class Block
                 'a' => [
                     's' => [
                         's' => [
-                            ' '  => 'Instance',
-                            "\n" => "Instance",
-                            "\r" => "Instance",
+                            ' '  => 'ClassBlock',
+                            "\n" => "ClassBlock",
+                            "\r" => "ClassBlock",
                         ]
                     ]
                 ]
@@ -106,20 +106,20 @@ abstract class Block
         'v' => [
             'a' => [
                 'r' => [
-                    ' '  => 'Variable',
-                    "\n" => "Variable",
-                    "\r" => "Variable",
+                    ' '  => 'VariableBlock',
+                    "\n" => "VariableBlock",
+                    "\r" => "VariableBlock",
                 ],
             ]
         ],
-        '.' => 'ChainLink',
-        '(' => 'Caller',
+        '.' => 'ChainLinkBlock',
+        '(' => 'CallerBlock',
         'n' => [
             'e' => [
                 'w' => [
-                    ' '  => 'NewInstance',
-                    "\n" => "NewInstance",
-                    "\r" => "NewInstance",
+                    ' '  => 'NewClassBlock',
+                    "\n" => "NewClassBlock",
+                    "\r" => "NewClassBlock",
                 ]
             ]
         ],
@@ -156,7 +156,7 @@ abstract class Block
     ];
 
     protected array $classBlocksMap = [
-        '(' => "InstanceMethod",
+        '(' => "ClassMethodBlock",
     ];
 
     public function __construct(
@@ -269,7 +269,7 @@ abstract class Block
     protected function getDefaultMap(): array
     {
         $blocksMap = $this->blocksMap;
-        if ($this instanceof Block\Instance) {
+        if ($this instanceof Block\ClassBlock) {
             $blocksMap = array_merge($blocksMap, $this->classBlocksMap);
         }
         return $blocksMap;
@@ -319,24 +319,24 @@ abstract class Block
             $hint = '';
         }
 
-        if ($class == Block\ChainLink::class) {
+        if ($class == Block\ChainLinkBlock::class) {
             $blocks = $this->getBlocks();
             $lastBlock = $blocks[\sizeof($blocks) - 1] ?? null;
             if (
-                !($lastBlock instanceof Block\ChainLink)
+                !($lastBlock instanceof Block\ChainLinkBlock)
                 || (
-                    $lastBlock instanceof Block\ChainLink
+                    $lastBlock instanceof Block\ChainLinkBlock
                     && (
-                        $lastBlock->getSubtype() == Block\ChainLink::END_METHOD
-                        || $lastBlock->getSubtype() == Block\ChainLink::END_VARIABLE
+                        $lastBlock->getSubtype() == Block\ChainLinkBlock::END_METHOD
+                        || $lastBlock->getSubtype() == Block\ChainLinkBlock::END_VARIABLE
                     )
                 )
             ) {
-                $block = new $class($start, Block\ChainLink::FIRST);
+                $block = new $class($start, Block\ChainLinkBlock::FIRST);
 
                 $possibleUndefined = \mb_substr($possibleUndefined, 0, -(\mb_strlen($block->getInstruction()) + 1));
                 if ($this->isValidUndefined($possibleUndefined)) {
-                    $this->blocks[] = new Block\Undefined($start - \mb_strlen($possibleUndefined), $possibleUndefined);
+                    $this->blocks[] = new Block\UndefinedBlock($start - \mb_strlen($possibleUndefined), $possibleUndefined);
                 }
 
                 $this->blocks[] = $block;
@@ -478,7 +478,7 @@ abstract class Block
                     $possibleUndefined = \mb_substr($possibleUndefined, 0, -($oldPos - ($startOfBlocksInstruction - 1)));
                 }
                 if ($this->isValidUndefined($possibleUndefined)) {
-                    $this->blocks[] = new Block\Undefined($oldPos - \mb_strlen($possibleUndefined), $possibleUndefined);
+                    $this->blocks[] = new Block\UndefinedBlock($oldPos - \mb_strlen($possibleUndefined), $possibleUndefined);
                 }
 
                 $possibleUndefined = '';
@@ -494,11 +494,11 @@ abstract class Block
                 $possibleUndefined = substr($possibleUndefined, 0, -1);
                 if (
                     $this->isValidUndefined($possibleUndefined)
-                    && !($this instanceof Block\Variable)
-                    && !($this instanceof Block\Attribute)
+                    && !($this instanceof Block\VariableBlock)
+                    && !($this instanceof Block\AttributeBlock)
                 ) {
                     Log::log("Add undefined: " . $possibleUndefined, 3);
-                    $this->blocks[] = new Block\Undefined($i - \mb_strlen($possibleUndefined), $possibleUndefined);
+                    $this->blocks[] = new Block\UndefinedBlock($i - \mb_strlen($possibleUndefined), $possibleUndefined);
                 }
                 break;
             }
@@ -507,7 +507,7 @@ abstract class Block
                 Log::log("Undefined check for: " . $possibleUndefined, 3);
                 if ($this->isValidUndefined($possibleUndefined)) {
                     Log::log("Add undefined: " . $possibleUndefined, 3);
-                    $this->blocks[] = new Block\Undefined($i - \mb_strlen($possibleUndefined), $possibleUndefined);
+                    $this->blocks[] = new Block\UndefinedBlock($i - \mb_strlen($possibleUndefined), $possibleUndefined);
                 }
                 $possibleUndefined = '';
             }
@@ -568,7 +568,7 @@ abstract class Block
         }
         Log::decreaseIndent();
 
-        if ($this instanceof MethodBlock && !($this instanceof Block\NewInstance)) {
+        if ($this instanceof MethodBlock && !($this instanceof Block\NewClassBlock)) {
             Log::log('Block is an method.', 2);
             Log::increaseIndent();
             foreach ($this->getArguments() as $arg) {
@@ -739,9 +739,9 @@ abstract class Block
                 continue;
             }
             if ($letter == '=' || $letter == ':') {
-                return 'Cluster';
+                return 'ArrayBlock';
             }
-            return "ArrayChainLink";
+            return "BracketChainLinkBlock";
         }
         throw new Exception("Couldn't decide how found bracket was used", 400);
     }

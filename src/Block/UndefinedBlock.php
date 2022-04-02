@@ -5,7 +5,7 @@ use \Tetraquark\Log as Log;
 use \Tetraquark\Contract as Contract;
 use \Tetraquark\Block as Block;
 
-class Undefined extends Block implements Contract\Block
+class UndefinedBlock extends Block implements Contract\Block
 {
     public function __construct(
         int $start,

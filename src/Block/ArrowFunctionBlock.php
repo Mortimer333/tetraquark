@@ -6,7 +6,7 @@ use \Tetraquark\Exception as Exception;
 use \Tetraquark\Contract as Contract;
 use \Tetraquark\MethodBlock as MethodBlock;
 
-class ArrowMethod extends MethodBlock implements Contract\Block
+class ArrowFunctionBlock extends MethodBlock implements Contract\Block
 {
     protected string $value = '';
     /*

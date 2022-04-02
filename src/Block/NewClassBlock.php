@@ -6,7 +6,7 @@ use \Tetraquark\Log as Log;
 use \Tetraquark\Contract as Contract;
 use \Tetraquark\MethodBlock as MethodBlock;
 
-class NewInstance extends MethodBlock implements Contract\Block
+class NewClassBlock extends MethodBlock implements Contract\Block
 {
     public function objectify(int $start = 0)
     {
