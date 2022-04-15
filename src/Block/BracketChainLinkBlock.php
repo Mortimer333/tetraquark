@@ -113,7 +113,7 @@ class BracketChainLinkBlock extends Block implements Contract\Block
         }
 
         if ($getSubBlocks) {
-            $this->createSubBlocks();
+            $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
         }
     }
 

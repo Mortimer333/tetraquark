@@ -68,7 +68,10 @@ abstract class Block
         ],
         '=' => [
             '>'       => 'ArrowFunctionBlock',
-            'default' => 'AttributeBlock'
+            'default' => 'AttributeBlock',
+            '='       => [
+                "=" => null
+            ]
         ],
         'l' => [
             'e' => [
@@ -124,7 +127,15 @@ abstract class Block
             ]
         ],
         '[' => 'decideArrayBlockType',
-        '{' => 'ObjectBlock'
+        '{' => 'ObjectBlock',
+        'i' => [
+            'f' => [
+                ' '  => "IfBlock",
+                "\n" => "IfBlock",
+                "\r" => "IfBlock",
+                "("  => "IfBlock",
+            ]
+        ]
     ];
 
     protected array $special = [
@@ -313,7 +324,7 @@ abstract class Block
         return $nextStep;
     }
 
-    protected function blockFactory(string $hint, string $className, int $start, string &$possibleUndefined): Block
+    protected function blockFactory(string $hint, string $className, int $start, string &$possibleUndefined, array &$blocks): Block
     {
         $prefix = 'Tetraquark\Block\\';
         $class  = $prefix . $className;
@@ -328,7 +339,7 @@ abstract class Block
         }
 
         if ($class == Block\ChainLinkBlock::class) {
-            $blocks = $this->getBlocks();
+            // $allBlocks = $this->getBlocks();
             $lastBlock = $blocks[\sizeof($blocks) - 1] ?? null;
             if (
                 !($lastBlock instanceof Block\ChainLinkBlock)
@@ -344,10 +355,10 @@ abstract class Block
 
                 $possibleUndefined = \mb_substr($possibleUndefined, 0, -(\mb_strlen($block->getInstruction()) + 1));
                 if ($this->isValidUndefined($possibleUndefined)) {
-                    $this->blocks[] = new Block\UndefinedBlock($start - \mb_strlen($possibleUndefined), $possibleUndefined);
+                    $blocks[] = new Block\UndefinedBlock($start - \mb_strlen($possibleUndefined), $possibleUndefined);
                 }
 
-                $this->blocks[] = $block;
+                $blocks[] = $block;
                 $possibleUndefined = '';
             }
             return new $class($start + 1, $hint);
@@ -450,7 +461,7 @@ abstract class Block
         }
 
         if (is_null($properStart)) {
-            throw new Exception('Proper Start not found', 404);
+            $properStart = 0;
         }
 
         $instruction = trim(substr(self::$content, $properStart, $end - $properStart));
@@ -458,12 +469,12 @@ abstract class Block
             ->setInstruction($instruction);
     }
 
-    protected function constructBlock(string $mappedWord, string $className, int &$i, string &$possibleUndefined): ?Block
+    protected function constructBlock(string $mappedWord, string $className, int &$i, string &$possibleUndefined, array &$blocks): ?Block
     {
         Log::increaseIndent();
         Log::log("New block: " . $className . " Mapped by: " . $mappedWord, 1);
 
-        $block = $this->blockFactory($mappedWord, $className, $i, $possibleUndefined);
+        $block = $this->blockFactory($mappedWord, $className, $i, $possibleUndefined, $blocks);
 
         Log::log('Iteration count changed from ' . $i . " to " . $block->getCaret(), 1);
         Log::log("Instruction: `". $block->getInstruction() . "`", 1);
@@ -480,34 +491,36 @@ abstract class Block
         return \mb_strlen($undefined) > 0 && !$this->isWhitespace($undefined) && !isset($undefinedEnds[$undefined]);
     }
 
-    protected function createSubBlocks(?int $start = null, ?string $value = null): void
+    protected function createSubBlocks(?int $start = null): array
     {
-        if (is_null($value)) {
-            $value = self::$content;
-        }
         if (is_null($start)) {
             $start = $this->getCaret();
         }
+
         $map = null;
         $mappedWord = '';
         $possibleUndefined = '';
         $undefinedEnds = ["\n" => true, ";" => true];
-        for ($i=$start; $i < \strlen($value); $i++) {
+        $blocks = [];
+        for ($i=$start; $i < \mb_strlen(self::$content); $i++) {
             $letter = self::$content[$i];
             if (
                 ($startsTemplate = $this->isTemplateLiteralLandmark($letter, ''))
                 || $this->isStringLandmark($letter, '')
             ) {
                 $oldPos = $i;
-                Log::log('Try to skip string: ' .  $i + 1 . ', ' . self::$content[$i + 1] . ', ' . $startsTemplate);
                 $i = $this->skipString($i + 1, self::$content, $startsTemplate);
                 Log::log('Add new undefined: ' . $possibleUndefined . ", starPos " . $oldPos . ", new Pos:" . $i . " length: " . $i - $oldPos, 3);
 
                 if ($this->isValidUndefined($possibleUndefined)) {
-                    $this->blocks[] = new Block\UndefinedBlock($oldPos - \mb_strlen($possibleUndefined), $possibleUndefined);
+                    $blocks[] = new Block\UndefinedBlock($oldPos - \mb_strlen($possibleUndefined), $possibleUndefined);
                 }
                 if (!$this instanceof Block\ObjectBlock) {
-                    $this->blocks[] = new Block\StringBlock($oldPos, \mb_substr($value, $oldPos, $i - $oldPos));
+                    $blocks[] = new Block\StringBlock($oldPos, \mb_substr(self::$content, $oldPos, $i - $oldPos));
+                }
+
+                if (!isset(self::$content[$i])) {
+                    break;
                 }
 
                 $letter = self::$content[$i];
@@ -522,9 +535,8 @@ abstract class Block
             $map = $this->journeyForBlockClassName($letter, $mappedWord, $i, $map);
             if (gettype($map) == 'string') {
                 $oldPos = $i;
-                $block = $this->constructBlock($mappedWord, $map, $i, $possibleUndefined);
+                $block = $this->constructBlock($mappedWord, $map, $i, $possibleUndefined, $blocks);
                 $startOfBlocksInstruction = $block->getInstructionStart();
-                $oldPos; // Pos before block
                 $mappedWordLen = \mb_strlen($mappedWord);
                 if ($oldPos - $mappedWordLen < $startOfBlocksInstruction) {
                     $possibleUndefined = \mb_substr($possibleUndefined, 0, -$mappedWordLen);
@@ -532,11 +544,11 @@ abstract class Block
                     $possibleUndefined = \mb_substr($possibleUndefined, 0, -($oldPos - ($startOfBlocksInstruction - 1)));
                 }
                 if ($this->isValidUndefined($possibleUndefined)) {
-                    $this->blocks[] = new Block\UndefinedBlock($oldPos - \mb_strlen($possibleUndefined), $possibleUndefined);
+                    $blocks[] = new Block\UndefinedBlock($oldPos - \mb_strlen($possibleUndefined), $possibleUndefined);
                 }
 
                 $possibleUndefined = '';
-                $this->blocks[] = $block;
+                $blocks[] = $block;
                 $mappedWord = '';
                 $map = null;
                 continue;
@@ -548,24 +560,15 @@ abstract class Block
                 $possibleUndefined = substr($possibleUndefined, 0, -1);
                 if ($this->isValidUndefined($possibleUndefined)) {
                     Log::log("Add undefined: " . $possibleUndefined, 3);
-                    $this->blocks[] = new Block\UndefinedBlock($i - \mb_strlen($possibleUndefined), $possibleUndefined);
+                    $blocks[] = new Block\UndefinedBlock($i - \mb_strlen($possibleUndefined), $possibleUndefined);
                 }
                 break;
             }
-
-            // if ($undefinedEnds[$letter] ?? false) {
-            //     Log::log("Undefined check for: " . $possibleUndefined, 3);
-            //     if ($this->isValidUndefined($possibleUndefined)) {
-            //         Log::log("Add undefined: " . $possibleUndefined, 3);
-            //         $this->blocks[] = new Block\UndefinedBlock($i - \mb_strlen($possibleUndefined), $possibleUndefined);
-            //     }
-            //     $possibleUndefined = '';
-            // }
         }
 
         $this->setCaret($i);
         Log::log("Updated caret " . $this->getCaret(),1);
-
+        return $blocks;
     }
 
     protected function findAndSetName(string $prefix, array $ends): void

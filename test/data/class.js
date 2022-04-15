@@ -41,3 +41,8 @@ const classTest4 = new ClassName;
 const classTest6 = new ClassName
 const classTest5 = new
 ClassName
+
+if (obj.objSoloTest[0] == 'asd') {
+    console.log('found')
+    console.log('found2')
+}

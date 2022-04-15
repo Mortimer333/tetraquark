@@ -38,7 +38,7 @@ class AttributeBlock extends VariableBlock implements Contract\Block
         Log::decreaseIndent();
         $this->findInstructionEnd($start, $this->subtype, $this->instructionEnds);
         Log::log('Found instruction: ' . $this->getInstruction(), 3);
-        $this->createSubBlocks();
+        $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
         if (\sizeof($this->blocks) == 0) {
             $instrEnd = $this->getInstructionStart() + \mb_strlen($this->getInstruction()) + 1;
             $this->setValue(trim(substr(self::$content, $instrEnd, $this->getCaret() - $instrEnd)));

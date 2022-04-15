@@ -67,7 +67,7 @@ class ChainLinkBlock extends Block implements Contract\Block
             $this->endChars = [
                 ')' => true
             ];
-            $this->createSubBlocks();
+            $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
         }
     }
 

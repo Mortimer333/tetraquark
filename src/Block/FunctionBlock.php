@@ -19,7 +19,7 @@ class FunctionBlock extends MethodBlock implements Contract\Block
     {
         $this->findInstructionEnd($start, 'function', $this->instructionEnds);
         $this->findAndSetName('function ', ['(' => true]);
-        $this->createSubBlocks();
+        $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
         if (\strlen($this->getName()) == 0) {
             $this->setSubtype('anonymous:function');
         }

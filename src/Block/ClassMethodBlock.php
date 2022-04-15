@@ -32,7 +32,7 @@ class ClassMethodBlock extends MethodBlock implements Contract\Block
         Log::decreaseIndent();
         $this->findInstructionEnd($start, '', $this->instructionEnds);
         $this->findAndSetName('', ['(' => true]);
-        $this->createSubBlocks();
+        $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
         $this->setSubtype('method');
         $this->findAndSetArguments();
     }

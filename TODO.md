@@ -39,7 +39,7 @@ And if I was to add another function it should have access to all vars and their
 
 ## Handle
 - [DONE] chain linking with square brackets (if bracet is prefixed with `:` or `=` then its array)
-- Object,
+- [DONE] Object,
 - if (removing brackets if it contains only one instruction),
 - for (replace vars in brackets),
 - passing anonymous functions,

@@ -45,7 +45,7 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
             $this->endChars = [
                 '}' => true
             ];
-            $this->createSubBlocks();
+            $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
         }
 
         $this->findAndSetArguments();

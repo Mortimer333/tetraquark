@@ -1,17 +1,9 @@
 Mapping...
-      Try to skip string: 61, n, 
-      Try to skip string: 171, a, 
-    Try to skip string: 203, a, 
-    Try to skip string: 211, a, 
-      Try to skip string: 239, a, 
-      Try to skip string: 276, a, 
-        Try to skip string: 283, a, 
-      Try to skip string: 299, k, 
-    Try to skip string: 376, a, 
+      Old caret: 667, new caret 27
 =======================
 Creating aliases...
 =======================
-Aliases: ClassName => a, objSoloTest => b, obj => c, classTest => d, classTest2 => e, classTes3 => f, classTest4 => g, classTest6 => h, func1 => i, funcr2 => j, meth2 => k, attrb => l, att => m, as => n, kek@ => o, classTest5 => i, 
+Aliases: ClassName => a, objSoloTest => b, obj => c, classTest => d, classTest2 => e, classTes3 => f, classTest4 => g, classTest6 => h, func1 => i, funcr2 => j, meth2 => k, attrb => l, att => m, as => n, kek@ => o, classTest5 => i, if => j, 
 Recreating...
 =======================
 Block: Tetraquark\Block\ClassBlock
@@ -336,7 +328,56 @@ Alias: `h`
     Arguments: [0] ``
     Alias: `a`
     =======
-Duration: 0.004s
+    Block: Tetraquark\Block\IfBlock
+    Subtype: if
+    Instruction: if (obj.objSoloTest[0] == 'asd') {
+    Instruction Start: 632
+    Name: `if`
+    Alias: `j`
+    =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: first
+      Instruction: console
+      Instruction Start: 673
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: end:method
+      Instruction: log
+      Instruction Start: 681
+      Name: ``
+      Alias: ``
+      =======
+        Block: Tetraquark\Block\StringBlock
+        Subtype: 
+        Instruction: 'found'
+        Instruction Start: 685
+        Name: ``
+        Alias: ``
+        =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: first
+      Instruction: console
+      Instruction Start: 699
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: end:method
+      Instruction: log
+      Instruction Start: 707
+      Name: ``
+      Alias: ``
+      =======
+        Block: Tetraquark\Block\StringBlock
+        Subtype: 
+        Instruction: 'found2'
+        Instruction Start: 711
+        Name: ``
+        Alias: ``
+        =======
+Duration: 0.008s
 
 
-class a{constructor(){console.log('new');}i(){}j(){}k(){console.log('asdas');}l='asd'+'asd';m=['asd'];c={n:'asd',o:[1,2,3]};}const b=['asd'];let c={b};const d=new a;const e=new a;const f=new a;const g=new a;const h=new a;const i=new a;
+class a{constructor(){console.log('new');}i(){}j(){}k(){console.log('asdas');}l='asd'+'asd';m=['asd'];c={n:'asd',o:[1,2,3]};}const b=['asd'];let c={b};const d=new a;const e=new a;const f=new a;const g=new a;const h=new a;const i=new a;if(c.b[0]=='asd'){console.log('found');console.log('found2');};

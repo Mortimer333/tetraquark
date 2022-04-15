@@ -47,7 +47,7 @@ class ScriptBlock extends Block implements Contract\Block
         $map    = [];
         $word   = '';
         $this->setCaret($start);
-        $this->createSubBlocks();
+        $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
     }
 
     protected function setMinified(string $minified): self
