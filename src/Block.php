@@ -160,6 +160,11 @@ abstract class Block
         '(' => "ClassMethodBlock",
     ];
 
+    protected array $objectBlocksMap = [
+        ':' => "ObjectValueBlock",
+        ',' => "ObjectSoloValueBlock",
+    ];
+
     public function __construct(
         protected int $start = 0,
         string $subtype = '',
@@ -272,6 +277,8 @@ abstract class Block
         $blocksMap = $this->blocksMap;
         if ($this instanceof Block\ClassBlock) {
             $blocksMap = array_merge($blocksMap, $this->classBlocksMap);
+        } elseif ($this instanceof Block\ObjectBlock) {
+            $blocksMap = array_merge($blocksMap, $this->objectBlocksMap);
         }
         return $blocksMap;
     }
@@ -387,6 +394,15 @@ abstract class Block
         $properEnd = null;
         for ($i=$start; $i < strlen(self::$content); $i++) {
             $letter = self::$content[$i];
+
+            if (
+                ($startsTemplate = $this->isTemplateLiteralLandmark($letter, ''))
+                || $this->isStringLandmark($letter, '')
+            ) {
+                $i = $this->skipString($i + 1, self::$content, $startsTemplate);
+                $letter = self::$content[$i];
+            }
+
             Log::log("Letter: " . $letter . " end chars: " . implode(', ', array_keys($endChars)), 2);
             if ($endChars[$letter] ?? false) {
                 Log::log("Proper end : " . $i, 2);
@@ -416,6 +432,15 @@ abstract class Block
         Log::log("Find start of instruction. End: " . $end, 2);
         for ($i=$end - 1; $i >= 0; $i--) {
             $letter = self::$content[$i];
+
+            if (
+                ($startsTemplate = $this->isTemplateLiteralLandmark($letter, ''))
+                || $this->isStringLandmark($letter, '')
+            ) {
+                $i = $this->skipString($i - 1, self::$content, $startsTemplate, true);
+                $letter = self::$content[$i];
+            }
+
             Log::log("Letter: " . $letter, 2);
             if ($endChars[$letter] ?? false) {
                 Log::log("Proper start : " . $i, 2);
@@ -474,14 +499,16 @@ abstract class Block
                 || $this->isStringLandmark($letter, '')
             ) {
                 $oldPos = $i;
-
+                Log::log('Try to skip string: ' .  $i + 1 . ', ' . self::$content[$i + 1] . ', ' . $startsTemplate);
                 $i = $this->skipString($i + 1, self::$content, $startsTemplate);
                 Log::log('Add new undefined: ' . $possibleUndefined . ", starPos " . $oldPos . ", new Pos:" . $i . " length: " . $i - $oldPos, 3);
 
                 if ($this->isValidUndefined($possibleUndefined)) {
                     $this->blocks[] = new Block\UndefinedBlock($oldPos - \mb_strlen($possibleUndefined), $possibleUndefined);
                 }
-                $this->blocks[] = new Block\StringBlock($oldPos, \mb_substr($value, $oldPos, $i - $oldPos));
+                if (!$this instanceof Block\ObjectBlock) {
+                    $this->blocks[] = new Block\StringBlock($oldPos, \mb_substr($value, $oldPos, $i - $oldPos));
+                }
 
                 $letter = self::$content[$i];
                 $mappedWord = '';
@@ -725,6 +752,16 @@ abstract class Block
         );
     }
 
+    protected function isString(string $letter): bool
+    {
+        $strings = [
+            '"' => true,
+            "'" => true,
+            '`' => true,
+        ];
+        return $strings[$letter] ?? false;
+    }
+
     protected function isStringLandmark(string $letter, string $previousLetter, bool $inString = false): bool
     {
         return ($letter === '"' || $letter === "'")
@@ -734,14 +771,16 @@ abstract class Block
             );
     }
 
-    public function skipString(int $start, string $value, bool $isTemplate = false): int
+    public function skipString(int $start, string $value, bool $isTemplate = false, bool $reverse = false): int
     {
-        for ($i=$start; $i < \mb_strlen($value); $i++) {
+        $modifier = (((int)!$reverse) * 2) - 1;
+
+        for ($i=$start; !$reverse && $i < \mb_strlen($value) || $reverse && $i >= 0; $i += $modifier) {
             $letter = $value[$i];
             if ($isTemplate && $this->isTemplateLiteralLandmark($letter, $value[$i - 1] ?? '', true)) {
-                return $i + 1;
+                return $i + $modifier;
             } elseif (!$isTemplate && $this->isStringLandmark($letter, $value[$i - 1] ?? '', true)) {
-                return $i + 1;
+                return $i + $modifier;
             }
         }
         return $i;

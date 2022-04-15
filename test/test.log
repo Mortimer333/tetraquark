@@ -1,9 +1,16 @@
 Mapping...
-      Start Array: 227
+      Try to skip string: 61, n, 
+      Try to skip string: 171, a, 
+    Try to skip string: 203, a, 
+    Try to skip string: 211, a, 
+      Try to skip string: 239, a, 
+      Try to skip string: 276, a, 
+        Try to skip string: 283, a, 
+      Try to skip string: 299, b, 
 =======================
 Creating aliases...
 =======================
-Aliases: ClassName => a, classTest => b, classTest2 => c, classTes3 => d, classTest4 => e, classTest6 => f, func1 => g, funcr2 => h, meth2 => i, attrb => j, att => k, obj => l, classTest5 => g, 
+Aliases: ClassName => a, classTest => b, classTest2 => c, classTes3 => d, classTest4 => e, classTest6 => f, func1 => g, funcr2 => h, meth2 => i, attrb => j, att => k, obj => l, as => m, b => n, classTest5 => g, 
 Recreating...
 =======================
 Block: Tetraquark\Block\ClassBlock
@@ -153,31 +160,38 @@ Alias: `a`
     Name: ``
     Alias: ``
     =======
-      Block: Tetraquark\Block\StringBlock
-      Subtype: 
+      Block: Tetraquark\Block\ObjectValueBlock
+      Subtype: :
       Instruction: 'as'
-      Instruction Start: 275
-      Name: ``
-      Alias: ``
+      Instruction Start: 265
+      Name: `as`
+      Alias: `m`
       =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction: :
-      Instruction Start: 279
-      Name: ``
-      Alias: ``
+        Block: Tetraquark\Block\StringBlock
+        Subtype: 
+        Instruction: 'asd'
+        Instruction Start: 282
+        Name: ``
+        Alias: ``
+        =======
+      Block: Tetraquark\Block\ObjectValueBlock
+      Subtype: :
+      Instruction: "b"
+      Instruction Start: 288
+      Name: `b`
+      Alias: `n`
       =======
-      Block: Tetraquark\Block\StringBlock
-      Subtype: 
-      Instruction: 'asd'
-      Instruction Start: 282
-      Name: ``
-      Alias: ``
-      =======
+        Block: Tetraquark\Block\UndefinedBlock
+        Subtype: 
+        Instruction: 2
+        Instruction Start: 303
+        Name: ``
+        Alias: ``
+        =======
 Block: Tetraquark\Block\VariableBlock
 Subtype: const
 Instruction: const classTest =
-Instruction Start: 301
+Instruction Start: 319
 Name: `classTest`
 Value: ``
 Alias: `b`
@@ -185,7 +199,7 @@ Alias: `b`
   Block: Tetraquark\Block\NewClassBlock
   Subtype: new
   Instruction: ClassName()
-  Instruction Start: 322
+  Instruction Start: 340
   Name: `ClassName`
   Arguments: [0] ``
   Alias: `a`
@@ -193,7 +207,7 @@ Alias: `b`
 Block: Tetraquark\Block\VariableBlock
 Subtype: const
 Instruction: const classTest2 =
-Instruction Start: 337
+Instruction Start: 355
 Name: `classTest2`
 Value: ``
 Alias: `c`
@@ -201,7 +215,7 @@ Alias: `c`
   Block: Tetraquark\Block\NewClassBlock
   Subtype: new
   Instruction: ClassName()
-  Instruction Start: 359
+  Instruction Start: 377
   Name: `ClassName`
   Arguments: [0] ``
   Alias: `a`
@@ -209,7 +223,7 @@ Alias: `c`
 Block: Tetraquark\Block\VariableBlock
 Subtype: const
 Instruction: const classTes3 =
-Instruction Start: 373
+Instruction Start: 391
 Name: `classTes3`
 Value: ``
 Alias: `d`
@@ -217,7 +231,7 @@ Alias: `d`
   Block: Tetraquark\Block\NewClassBlock
   Subtype: new
   Instruction: ClassName ()
-  Instruction Start: 394
+  Instruction Start: 412
   Name: `ClassName`
   Arguments: [0] ``
   Alias: `a`
@@ -225,7 +239,7 @@ Alias: `d`
 Block: Tetraquark\Block\VariableBlock
 Subtype: const
 Instruction: const classTest4 =
-Instruction Start: 410
+Instruction Start: 428
 Name: `classTest4`
 Value: ``
 Alias: `e`
@@ -233,7 +247,7 @@ Alias: `e`
   Block: Tetraquark\Block\NewClassBlock
   Subtype: new
   Instruction: ClassName
-  Instruction Start: 432
+  Instruction Start: 450
   Name: `ClassName`
   Arguments: [0] ``
   Alias: `a`
@@ -241,7 +255,7 @@ Alias: `e`
 Block: Tetraquark\Block\VariableBlock
 Subtype: const
 Instruction: const classTest6 =
-Instruction Start: 445
+Instruction Start: 463
 Name: `classTest6`
 Value: ``
 Alias: `f`
@@ -249,7 +263,7 @@ Alias: `f`
   Block: Tetraquark\Block\NewClassBlock
   Subtype: new
   Instruction: ClassName
-  Instruction Start: 467
+  Instruction Start: 485
   Name: `ClassName`
   Arguments: [0] ``
   Alias: `a`
@@ -257,7 +271,7 @@ Alias: `f`
   Block: Tetraquark\Block\VariableBlock
   Subtype: const
   Instruction: const classTest5 =
-  Instruction Start: 479
+  Instruction Start: 497
   Name: `classTest5`
   Value: ``
   Alias: `g`
@@ -265,12 +279,12 @@ Alias: `f`
     Block: Tetraquark\Block\NewClassBlock
     Subtype: new
     Instruction: ClassName
-    Instruction Start: 501
+    Instruction Start: 519
     Name: `ClassName`
     Arguments: [0] ``
     Alias: `a`
     =======
-Duration: 0.004s
+Duration: 0.005s
 
 
-class a{constructor(){console.log('new');}g(){}h(){}i(){console.log('asdas');}j='asd'+'asd';k=['asd'];l={'as':'asd'};}const b=new a;const c=new a;const d=new a;const e=new a;const f=new a;const g=new a;
+class a{constructor(){console.log('new');}g(){}h(){}i(){console.log('asdas');}j='asd'+'asd';k=['asd'];l={m:'asd',n:2};}const b=new a;const c=new a;const d=new a;const e=new a;const f=new a;const g=new a;

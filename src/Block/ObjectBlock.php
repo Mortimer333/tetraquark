@@ -28,6 +28,8 @@ class ObjectBlock extends Block implements Contract\Block
             $script .= $block->recreate();
         }
 
+        $script = rtrim($script, ',');
+
         return $script . '};';
     }
 }

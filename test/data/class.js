@@ -21,7 +21,8 @@ class ClassName {
     ]
 
     obj = {
-        'as' : 'asd'
+        'as' : 'asd',
+        "b" : 2
     }
 }
 

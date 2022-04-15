@@ -15,7 +15,6 @@ class ArrayBlock extends Block implements Contract\Block
     {
         $this->setInstruction('');
         $this->setName('');
-        Log::log('Start Array: ' . $start);
         $this->setInstructionStart($start);
         $items = [];
         $lastCut = $start;
