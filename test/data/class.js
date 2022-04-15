@@ -22,8 +22,15 @@ class ClassName {
 
     obj = {
         'as' : 'asd',
-        "b" : 2
+        'kek@' : [
+            1, 2,3
+        ]
     }
+}
+
+const objSoloTest = [ 'asd']
+let obj = {
+    objSoloTest
 }
 
 const classTest = new ClassName();
