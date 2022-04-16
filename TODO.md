@@ -44,7 +44,7 @@ And if I was to add another function it should have access to all vars and their
 - [DONE] for (replace vars in brackets),
 - passing anonymous functions,
 - [DONE] while and [NOT DONE] do while,
-- Switch
+- [DONE] Switch
 - import, export
 - array (used like object)
 - notes

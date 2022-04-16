@@ -56,3 +56,11 @@ while (objSoloTest.length) {
     console.log(size, objSoloTest[0]);
     objSoloTest.shift();
 }
+
+switch (objSoloTest.length) {
+    case 1:
+        console.log('Obj is one')
+        break;
+    default:
+        console.log('Obj is bigger then one')
+}

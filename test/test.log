@@ -2,7 +2,7 @@ Mapping...
 =======================
 Creating aliases...
 =======================
-Aliases: ClassName => a, objSoloTest => b, obj => c, classTest => d, classTest2 => e, while => f, func1 => g, funcr2 => h, meth2 => i, attrb => j, att => k, as => l, kek@ => m, classTes3 => n, classTest4 => o, classTest6 => p, for => r, classTest5 => s, if => t, to => u, size => w, 
+Aliases: ClassName => a, objSoloTest => b, obj => c, classTest => d, classTest2 => e, while => f, switch => g, func1 => h, funcr2 => i, meth2 => j, attrb => k, att => l, as => m, kek@ => n, classTes3 => o, classTest4 => p, classTest6 => r, for => s, classTest5 => t, if => u, to => w, size => z, 
 Recreating...
 =======================
 Block: Tetraquark\Block\ClassBlock
@@ -47,7 +47,7 @@ Alias: `a`
   Instruction Start: 77
   Name: `func1`
   Arguments: [0] ``
-  Alias: `g`
+  Alias: `h`
   =======
   Block: Tetraquark\Block\ClassMethodBlock
   Subtype: method
@@ -55,7 +55,7 @@ Alias: `a`
   Instruction Start: 100
   Name: `funcr2`
   Arguments: [0] ``
-  Alias: `h`
+  Alias: `i`
   =======
   Block: Tetraquark\Block\ClassMethodBlock
   Subtype: method
@@ -63,7 +63,7 @@ Alias: `a`
   Instruction Start: 117
   Name: `meth2`
   Arguments: [0] ``
-  Alias: `i`
+  Alias: `j`
   =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: first
@@ -92,7 +92,7 @@ Alias: `a`
   Instruction Start: 176
   Name: `attrb`
   Value: ``
-  Alias: `j`
+  Alias: `k`
   =======
     Block: Tetraquark\Block\StringBlock
     Subtype: 
@@ -121,7 +121,7 @@ Alias: `a`
   Instruction Start: 202
   Name: `att`
   Value: ``
-  Alias: `k`
+  Alias: `l`
   =======
     Block: Tetraquark\Block\ArrayBlock
     Subtype: [
@@ -157,7 +157,7 @@ Alias: `a`
       Instruction: 'as'
       Instruction Start: 243
       Name: `as`
-      Alias: `l`
+      Alias: `m`
       =======
         Block: Tetraquark\Block\StringBlock
         Subtype: 
@@ -171,7 +171,7 @@ Alias: `a`
       Instruction: 'kek@'
       Instruction Start: 265
       Name: `kek@`
-      Alias: `m`
+      Alias: `n`
       =======
         Block: Tetraquark\Block\ArrayBlock
         Subtype: [
@@ -276,7 +276,7 @@ Alias: `e`
   Instruction Start: 463
   Name: `classTes3`
   Value: ``
-  Alias: `n`
+  Alias: `o`
   =======
     Block: Tetraquark\Block\NewClassBlock
     Subtype: new
@@ -292,7 +292,7 @@ Alias: `e`
     Instruction Start: 498
     Name: `classTest4`
     Value: ``
-    Alias: `o`
+    Alias: `p`
     =======
       Block: Tetraquark\Block\NewClassBlock
       Subtype: new
@@ -308,7 +308,7 @@ Alias: `e`
     Instruction Start: 532
     Name: `classTest6`
     Value: ``
-    Alias: `p`
+    Alias: `r`
     =======
       Block: Tetraquark\Block\NewClassBlock
       Subtype: new
@@ -324,7 +324,7 @@ Alias: `e`
       Instruction Start: 565
       Name: `classTest5`
       Value: ``
-      Alias: `s`
+      Alias: `t`
       =======
         Block: Tetraquark\Block\NewClassBlock
         Subtype: new
@@ -339,7 +339,7 @@ Alias: `e`
         Instruction: if (obj.objSoloTest[0] == 'asd') {
         Instruction Start: 598
         Name: `if`
-        Alias: `t`
+        Alias: `u`
         =======
           Block: Tetraquark\Block\ChainLinkBlock
           Subtype: first
@@ -394,7 +394,7 @@ Alias: `e`
       Instruction Start: 0
       Name: `to`
       Value: ``
-      Alias: `u`
+      Alias: `w`
       =======
         Block: Tetraquark\Block\UndefinedBlock
         Subtype: 
@@ -431,7 +431,7 @@ Alias: `e`
       Name: ``
       Alias: ``
       =======
-    Alias: `r`
+    Alias: `s`
     =======
       Block: Tetraquark\Block\ChainLinkBlock
       Subtype: first
@@ -495,7 +495,7 @@ Alias: `f`
   Instruction Start: 808
   Name: `size`
   Value: ``
-  Alias: `w`
+  Alias: `z`
   =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: first
@@ -560,7 +560,84 @@ Alias: `f`
   Name: ``
   Alias: ``
   =======
-Duration: 0.01s
+Block: Tetraquark\Block\SwitchBlock
+Subtype: switch
+Instruction: switch (objSoloTest.length) {
+Instruction Start: 905
+Name: `switch`
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: objSoloTest
+  Instruction Start: 0
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: .
+  Instruction: length
+  Instruction Start: 12
+  Name: ``
+  Alias: ``
+  =======
+Alias: `g`
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: case 1:
+  Instruction Start: 942
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 956
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 964
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: 'Obj is one'
+    Instruction Start: 968
+    Name: ``
+    Alias: ``
+    =======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: break; default:
+  Instruction Start: 988
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 1018
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 1026
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: 'Obj is bigger then one'
+    Instruction Start: 1030
+    Name: ``
+    Alias: ``
+    =======
+Duration: 0.011s
 
 
-class a{constructor(){console.log('new');}g(){}h(){}i(){console.log('asdas');}j='asd'+'asd';k=['asd'];c={l:'asd',m:[1,2,3]};}const b=['asd',3,2+1];let c={b};const d=new a;const e=new a;const n=new a;const o=new a;const p=new a;const s=new a;if(c.b[0]=='asd'){console.log('found');console.log('found2');};for(var u=0;u<b.length;u++){console.log(b[u]);};while(b.length){let w=b.length;console.log(w,b[0]);b.shift();}
+class a{constructor(){console.log('new');}h(){}i(){}j(){console.log('asdas');}k='asd'+'asd';l=['asd'];c={m:'asd',n:[1,2,3]};}const b=['asd',3,2+1];let c={b};const d=new a;const e=new a;const o=new a;const p=new a;const r=new a;const t=new a;if(c.b[0]=='asd'){console.log('found');console.log('found2');};for(var w=0;w<b.length;w++){console.log(b[w]);};while(b.length){let z=b.length;console.log(z,b[0]);b.shift();}switch(b.length){case 1:console.log('Obj is one');break;default:console.log('Obj is bigger then one');}

@@ -158,6 +158,22 @@ abstract class Block
                 ]
             ]
         ],
+        "s" => [
+            "w" => [
+                "i" => [
+                    "t" => [
+                        "c" => [
+                            "h" => [
+                                ' '  => 'SwitchBlock',
+                                "\n" => "SwitchBlock",
+                                "\r" => "SwitchBlock",
+                                '('  => "SwitchBlock",
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
     ];
 
     protected array $special = [
