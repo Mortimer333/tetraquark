@@ -29,9 +29,9 @@ class ForBlock extends ConditionBlock implements Contract\Block
             throw new Exception('For condition ' . htmlentities($this->getCondition()) , ' is incorrectly formated', 400);
         }
 
-        $iteratorCreationBlocks = $this->createSubBlocksForConsition($condition[0]);
-        $keepLoopingBlocks      = $this->createSubBlocksForConsition($condition[1]);
-        $counterApplyBlocks     = $this->createSubBlocksForConsition($condition[2]);
+        $iteratorCreationBlocks = $this->createSubBlocksForCondition($condition[0]);
+        $keepLoopingBlocks      = $this->createSubBlocksForCondition($condition[1]);
+        $counterApplyBlocks     = $this->createSubBlocksForCondition($condition[2]);
         $this->setCondBlocks(array_merge($iteratorCreationBlocks, $keepLoopingBlocks, $counterApplyBlocks));
 
         $this->setCondition(
@@ -44,7 +44,7 @@ class ForBlock extends ConditionBlock implements Contract\Block
         $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
     }
 
-    protected function createSubBlocksForConsition(string $condition): array
+    protected function createSubBlocksForCondition(string $condition): array
     {
         $codeSave = self::$content;
         self::$content = $condition;

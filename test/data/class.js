@@ -64,3 +64,10 @@ switch (objSoloTest.length) {
     default:
         console.log('Obj is bigger then one')
 }
+
+let whileLooped = 2;
+
+do {
+    whileLooped--;
+    console.log(whileLooped);
+} while (whileLooped);

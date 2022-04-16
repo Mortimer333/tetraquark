@@ -57,7 +57,7 @@ abstract class ConditionBlock extends Block
             }
 
             if (!\is_null($condStart) && !\is_null($condEnd)) {
-                throw new Exception("Unexcepted character when searching for condtion block start at letter $i", 401);
+                throw new Exception("Unexcepted character when searching for condition block start at letter $i => " . $this::class, 401);
             }
         }
 
@@ -109,7 +109,7 @@ abstract class ConditionBlock extends Block
         return $script;
     }
 
-    protected function createSubBlocksForConsition(string $condition): array
+    protected function createSubBlocksForCondition(string $condition): array
     {
         $codeSave = self::$content;
         self::$content = $condition;

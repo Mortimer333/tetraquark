@@ -173,6 +173,14 @@ abstract class Block
                     ]
                 ]
             ]
+        ],
+        "d" => [
+            "o" => [
+                ' '  => 'DoWhileBlock',
+                "\n" => "DoWhileBlock",
+                "\r" => "DoWhileBlock",
+                '{'  => "DoWhileBlock",
+            ]
         ]
     ];
 

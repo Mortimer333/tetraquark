@@ -43,7 +43,7 @@ And if I was to add another function it should have access to all vars and their
 - [DONE] if (removing brackets if it contains only one instruction),
 - [DONE] for (replace vars in brackets),
 - passing anonymous functions,
-- [DONE] while and [NOT DONE] do while,
+- [DONE] while and do while,
 - [DONE] Switch
 - import, export
 - array (used like object)
