@@ -40,10 +40,10 @@ And if I was to add another function it should have access to all vars and their
 ## Handle
 - [DONE] chain linking with square brackets (if bracet is prefixed with `:` or `=` then its array)
 - [DONE] Object,
-- if (removing brackets if it contains only one instruction),
-- for (replace vars in brackets),
+- [DONE] if (removing brackets if it contains only one instruction),
+- [DONE] for (replace vars in brackets),
 - passing anonymous functions,
-- while and do while,
+- [DONE] while and [NOT DONE] do while,
 - Switch
 - import, export
 - array (used like object)

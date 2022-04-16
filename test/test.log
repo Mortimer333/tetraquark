@@ -1,11 +1,8 @@
 Mapping...
-    Content was not turned into blocks => class ClassName {\n    constructor() {\n        console.log('new');\n    }\n\n    func1 () {\n\n    }\n\n    funcr2() {}\n\n    meth2\n    ()\n    {\n        console.log('asdas');\n    }\n\n    attrb = 'asd' + 'asd'\n    att = [\n        'asd'\n    ]\n\n    obj = {\n        'as' : 'asd',\n        'kek@' : [\n            1, 2,3\n        ]\n    }\n}\n\nconst objSoloTest = [ 'asd']\nlet obj = {\n    objSoloTest\n}\n\nconst classTest = new ClassName();\nconst classTest2 = new ClassName()\nconst classTes3 = new ClassName\n()\nconst classTest4 = new ClassName;\nconst classTest6 = new ClassName\nconst classTest5 = new\nClassName\n\nif (obj.objSoloTest[0] == 'asd') {\n    console.log('found')\n    console.log('found2')\n}\n\nfor (var to = 0; to < objSoloTest.length; to++) {\n    console.log(objSoloTest[to]);\n}\n
-    Content was not turned into blocks => class ClassName {\n    constructor() {\n        console.log('new');\n    }\n\n    func1 () {\n\n    }\n\n    funcr2() {}\n\n    meth2\n    ()\n    {\n        console.log('asdas');\n    }\n\n    attrb = 'asd' + 'asd'\n    att = [\n        'asd'\n    ]\n\n    obj = {\n        'as' : 'asd',\n        'kek@' : [\n            1, 2,3\n        ]\n    }\n}\n\nconst objSoloTest = [ 'asd']\nlet obj = {\n    objSoloTest\n}\n\nconst classTest = new ClassName();\nconst classTest2 = new ClassName()\nconst classTes3 = new ClassName\n()\nconst classTest4 = new ClassName;\nconst classTest6 = new ClassName\nconst classTest5 = new\nClassName\n\nif (obj.objSoloTest[0] == 'asd') {\n    console.log('found')\n    console.log('found2')\n}\n\nfor (var to = 0; to < objSoloTest.length; to++) {\n    console.log(objSoloTest[to]);\n}\n
-      1
 =======================
 Creating aliases...
 =======================
-Aliases: ClassName => a, objSoloTest => b, obj => c, classTest => d, classTest2 => e, func1 => f, funcr2 => g, meth2 => h, attrb => i, att => j, as => k, kek@ => l, classTes3 => m, classTest4 => n, classTest6 => o, for => p, classTest5 => r, if => s, to => t, 
+Aliases: ClassName => a, objSoloTest => b, obj => c, classTest => d, classTest2 => e, while => f, func1 => g, funcr2 => h, meth2 => i, attrb => j, att => k, as => l, kek@ => m, classTes3 => n, classTest4 => o, classTest6 => p, for => r, classTest5 => s, if => t, to => u, size => w, 
 Recreating...
 =======================
 Block: Tetraquark\Block\ClassBlock
@@ -50,7 +47,7 @@ Alias: `a`
   Instruction Start: 77
   Name: `func1`
   Arguments: [0] ``
-  Alias: `f`
+  Alias: `g`
   =======
   Block: Tetraquark\Block\ClassMethodBlock
   Subtype: method
@@ -58,7 +55,7 @@ Alias: `a`
   Instruction Start: 100
   Name: `funcr2`
   Arguments: [0] ``
-  Alias: `g`
+  Alias: `h`
   =======
   Block: Tetraquark\Block\ClassMethodBlock
   Subtype: method
@@ -66,7 +63,7 @@ Alias: `a`
   Instruction Start: 117
   Name: `meth2`
   Arguments: [0] ``
-  Alias: `h`
+  Alias: `i`
   =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: first
@@ -95,7 +92,7 @@ Alias: `a`
   Instruction Start: 176
   Name: `attrb`
   Value: ``
-  Alias: `i`
+  Alias: `j`
   =======
     Block: Tetraquark\Block\StringBlock
     Subtype: 
@@ -124,7 +121,7 @@ Alias: `a`
   Instruction Start: 202
   Name: `att`
   Value: ``
-  Alias: `j`
+  Alias: `k`
   =======
     Block: Tetraquark\Block\ArrayBlock
     Subtype: [
@@ -160,7 +157,7 @@ Alias: `a`
       Instruction: 'as'
       Instruction Start: 243
       Name: `as`
-      Alias: `k`
+      Alias: `l`
       =======
         Block: Tetraquark\Block\StringBlock
         Subtype: 
@@ -174,7 +171,7 @@ Alias: `a`
       Instruction: 'kek@'
       Instruction Start: 265
       Name: `kek@`
-      Alias: `l`
+      Alias: `m`
       =======
         Block: Tetraquark\Block\ArrayBlock
         Subtype: [
@@ -212,10 +209,17 @@ Alias: `b`
     Name: ``
     Alias: ``
     =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: , 3, 2 + 1
+    Instruction Start: 350
+    Name: ``
+    Alias: ``
+    =======
 Block: Tetraquark\Block\VariableBlock
 Subtype: let
 Instruction: let obj =
-Instruction Start: 352
+Instruction Start: 362
 Name: `obj`
 Value: ``
 Alias: `c`
@@ -223,21 +227,21 @@ Alias: `c`
   Block: Tetraquark\Block\ObjectBlock
   Subtype: {
   Instruction: 
-  Instruction Start: 362
+  Instruction Start: 372
   Name: ``
   Alias: ``
   =======
     Block: Tetraquark\Block\UndefinedBlock
     Subtype: 
     Instruction: objSoloTest
-    Instruction Start: 363
+    Instruction Start: 373
     Name: ``
     Alias: ``
     =======
 Block: Tetraquark\Block\VariableBlock
 Subtype: const
 Instruction: const classTest =
-Instruction Start: 383
+Instruction Start: 393
 Name: `classTest`
 Value: ``
 Alias: `d`
@@ -245,7 +249,7 @@ Alias: `d`
   Block: Tetraquark\Block\NewClassBlock
   Subtype: new
   Instruction: ClassName()
-  Instruction Start: 404
+  Instruction Start: 414
   Name: `ClassName`
   Arguments: [0] ``
   Alias: `a`
@@ -253,7 +257,7 @@ Alias: `d`
 Block: Tetraquark\Block\VariableBlock
 Subtype: const
 Instruction: const classTest2 =
-Instruction Start: 418
+Instruction Start: 428
 Name: `classTest2`
 Value: ``
 Alias: `e`
@@ -261,7 +265,7 @@ Alias: `e`
   Block: Tetraquark\Block\NewClassBlock
   Subtype: new
   Instruction: ClassName()
-  Instruction Start: 440
+  Instruction Start: 450
   Name: `ClassName`
   Arguments: [0] ``
   Alias: `a`
@@ -269,15 +273,15 @@ Alias: `e`
   Block: Tetraquark\Block\VariableBlock
   Subtype: const
   Instruction: const classTes3 =
-  Instruction Start: 453
+  Instruction Start: 463
   Name: `classTes3`
   Value: ``
-  Alias: `m`
+  Alias: `n`
   =======
     Block: Tetraquark\Block\NewClassBlock
     Subtype: new
     Instruction: ClassName ()
-    Instruction Start: 474
+    Instruction Start: 484
     Name: `ClassName`
     Arguments: [0] ``
     Alias: `a`
@@ -285,15 +289,15 @@ Alias: `e`
     Block: Tetraquark\Block\VariableBlock
     Subtype: const
     Instruction: const classTest4 =
-    Instruction Start: 488
+    Instruction Start: 498
     Name: `classTest4`
     Value: ``
-    Alias: `n`
+    Alias: `o`
     =======
       Block: Tetraquark\Block\NewClassBlock
       Subtype: new
       Instruction: ClassName
-      Instruction Start: 510
+      Instruction Start: 520
       Name: `ClassName`
       Arguments: [0] ``
       Alias: `a`
@@ -301,15 +305,15 @@ Alias: `e`
     Block: Tetraquark\Block\VariableBlock
     Subtype: const
     Instruction: const classTest6 =
-    Instruction Start: 522
+    Instruction Start: 532
     Name: `classTest6`
     Value: ``
-    Alias: `o`
+    Alias: `p`
     =======
       Block: Tetraquark\Block\NewClassBlock
       Subtype: new
       Instruction: ClassName
-      Instruction Start: 544
+      Instruction Start: 554
       Name: `ClassName`
       Arguments: [0] ``
       Alias: `a`
@@ -317,15 +321,15 @@ Alias: `e`
       Block: Tetraquark\Block\VariableBlock
       Subtype: const
       Instruction: const classTest5 =
-      Instruction Start: 555
+      Instruction Start: 565
       Name: `classTest5`
       Value: ``
-      Alias: `r`
+      Alias: `s`
       =======
         Block: Tetraquark\Block\NewClassBlock
         Subtype: new
         Instruction: ClassName
-        Instruction Start: 577
+        Instruction Start: 587
         Name: `ClassName`
         Arguments: [0] ``
         Alias: `a`
@@ -333,56 +337,56 @@ Alias: `e`
         Block: Tetraquark\Block\IfBlock
         Subtype: if
         Instruction: if (obj.objSoloTest[0] == 'asd') {
-        Instruction Start: 588
+        Instruction Start: 598
         Name: `if`
-        Alias: `s`
+        Alias: `t`
         =======
           Block: Tetraquark\Block\ChainLinkBlock
           Subtype: first
           Instruction: console
-          Instruction Start: 628
+          Instruction Start: 638
           Name: ``
           Alias: ``
           =======
           Block: Tetraquark\Block\ChainLinkBlock
           Subtype: end:method
           Instruction: log
-          Instruction Start: 636
+          Instruction Start: 646
           Name: ``
           Alias: ``
           =======
             Block: Tetraquark\Block\StringBlock
             Subtype: 
             Instruction: 'found'
-            Instruction Start: 640
+            Instruction Start: 650
             Name: ``
             Alias: ``
             =======
           Block: Tetraquark\Block\ChainLinkBlock
           Subtype: first
           Instruction: console
-          Instruction Start: 653
+          Instruction Start: 663
           Name: ``
           Alias: ``
           =======
           Block: Tetraquark\Block\ChainLinkBlock
           Subtype: end:method
           Instruction: log
-          Instruction Start: 661
+          Instruction Start: 671
           Name: ``
           Alias: ``
           =======
             Block: Tetraquark\Block\StringBlock
             Subtype: 
             Instruction: 'found2'
-            Instruction Start: 665
+            Instruction Start: 675
             Name: ``
             Alias: ``
             =======
     Block: Tetraquark\Block\ForBlock
     Subtype: for
     Instruction: for (var to = 0; to < objSoloTest.length; to++) {
-    Instruction Start: 677
+    Instruction Start: 687
     Name: `for`
       Block: Tetraquark\Block\VariableBlock
       Subtype: var
@@ -390,7 +394,7 @@ Alias: `e`
       Instruction Start: 0
       Name: `to`
       Value: ``
-      Alias: `t`
+      Alias: `u`
       =======
         Block: Tetraquark\Block\UndefinedBlock
         Subtype: 
@@ -427,44 +431,136 @@ Alias: `e`
       Name: ``
       Alias: ``
       =======
-    Alias: `p`
+    Alias: `r`
     =======
       Block: Tetraquark\Block\ChainLinkBlock
       Subtype: first
       Instruction: console
-      Instruction Start: 732
+      Instruction Start: 742
       Name: ``
       Alias: ``
       =======
       Block: Tetraquark\Block\ChainLinkBlock
       Subtype: end:method
       Instruction: log
-      Instruction Start: 740
+      Instruction Start: 750
       Name: ``
       Alias: ``
       =======
         Block: Tetraquark\Block\UndefinedBlock
         Subtype: 
         Instruction: objSoloTest
-        Instruction Start: 744
+        Instruction Start: 754
         Name: ``
         Alias: ``
         =======
         Block: Tetraquark\Block\BracketChainLinkBlock
         Subtype: [
         Instruction: 
-        Instruction Start: 755
+        Instruction Start: 765
         Name: ``
         Alias: ``
         =======
           Block: Tetraquark\Block\UndefinedBlock
           Subtype: 
           Instruction: to
-          Instruction Start: 756
+          Instruction Start: 766
           Name: ``
           Alias: ``
           =======
-Duration: 0.007s
+Block: Tetraquark\Block\WhileBlock
+Subtype: while
+Instruction: while (objSoloTest.length) {
+Instruction Start: 774
+Name: `while`
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: objSoloTest
+  Instruction Start: 0
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: .
+  Instruction: length
+  Instruction Start: 12
+  Name: ``
+  Alias: ``
+  =======
+Alias: `f`
+=======
+  Block: Tetraquark\Block\VariableBlock
+  Subtype: let
+  Instruction: let size =
+  Instruction Start: 808
+  Name: `size`
+  Value: ``
+  Alias: `w`
+  =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: first
+    Instruction: objSoloTest
+    Instruction Start: 819
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: .
+    Instruction: length
+    Instruction Start: 831
+    Name: ``
+    Alias: ``
+    =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 843
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 851
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: size, objSoloTest
+    Instruction Start: 855
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\BracketChainLinkBlock
+    Subtype: [
+    Instruction: 
+    Instruction Start: 872
+    Name: ``
+    Alias: ``
+    =======
+      Block: Tetraquark\Block\UndefinedBlock
+      Subtype: 
+      Instruction: 0
+      Instruction Start: 873
+      Name: ``
+      Alias: ``
+      =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: objSoloTest
+  Instruction Start: 882
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: shift
+  Instruction Start: 894
+  Name: ``
+  Alias: ``
+  =======
+Duration: 0.01s
 
 
-class a{constructor(){console.log('new');}f(){}g(){}h(){console.log('asdas');}i='asd'+'asd';j=['asd'];c={k:'asd',l:[1,2,3]};}const b=['asd'];let c={b};const d=new a;const e=new a;const m=new a;const n=new a;const o=new a;const r=new a;if(c.b[0]=='asd'){console.log('found');console.log('found2');};for(var t=0;t<b.length;t++){console.log(b[t]);};
+class a{constructor(){console.log('new');}g(){}h(){}i(){console.log('asdas');}j='asd'+'asd';k=['asd'];c={l:'asd',m:[1,2,3]};}const b=['asd',3,2+1];let c={b};const d=new a;const e=new a;const n=new a;const o=new a;const p=new a;const s=new a;if(c.b[0]=='asd'){console.log('found');console.log('found2');};for(var u=0;u<b.length;u++){console.log(b[u]);};while(b.length){let w=b.length;console.log(w,b[0]);b.shift();}

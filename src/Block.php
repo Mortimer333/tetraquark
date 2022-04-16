@@ -143,7 +143,21 @@ abstract class Block
                 "\r" => "IfBlock",
                 "("  => "IfBlock",
             ]
-        ]
+        ],
+        "w" => [
+            "h" => [
+                "i" => [
+                    "l" => [
+                        "e" => [
+                            ' '  => 'WhileBlock',
+                            "\n" => "WhileBlock",
+                            "\r" => "WhileBlock",
+                            '('  => "WhileBlock",
+                        ]
+                    ]
+                ]
+            ]
+        ],
     ];
 
     protected array $special = [
@@ -582,10 +596,7 @@ abstract class Block
         }
 
         $this->setCaret($i);
-        Log::log("Updated caret " . $this->getCaret(),1);
-        if (\sizeof($blocks) == 0 && \mb_strlen(self::$content) > 0) {
-            Log::log('Content was not turned into blocks => ' . self::$content);
-        }
+        Log::log("Updated caret " . $this->getCaret(), 1);
         return $blocks;
     }
 

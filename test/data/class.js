@@ -28,7 +28,7 @@ class ClassName {
     }
 }
 
-const objSoloTest = [ 'asd']
+const objSoloTest = [ 'asd', 3, 2 + 1]
 let obj = {
     objSoloTest
 }
@@ -49,4 +49,10 @@ if (obj.objSoloTest[0] == 'asd') {
 
 for (var to = 0; to < objSoloTest.length; to++) {
     console.log(objSoloTest[to]);
+}
+
+while (objSoloTest.length) {
+    let size = objSoloTest.length;
+    console.log(size, objSoloTest[0]);
+    objSoloTest.shift();
 }

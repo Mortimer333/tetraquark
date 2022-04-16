@@ -13,7 +13,7 @@ class ForBlock extends ConditionBlock implements Contract\Block
     {
         return $this->removeAdditionalSpaces(
             $this->replaceVariablesWithAliases(
-                $this->args
+                $this->getCondition()
             )
         );
     }
@@ -29,17 +29,16 @@ class ForBlock extends ConditionBlock implements Contract\Block
             throw new Exception('For condition ' . htmlentities($this->getCondition()) , ' is incorrectly formated', 400);
         }
 
-        $caret = $this->getCaret();
         $iteratorCreationBlocks = $this->createSubBlocksForConsition($condition[0]);
         $keepLoopingBlocks      = $this->createSubBlocksForConsition($condition[1]);
         $counterApplyBlocks     = $this->createSubBlocksForConsition($condition[2]);
-        Log::log(sizeof($counterApplyBlocks));
         $this->setCondBlocks(array_merge($iteratorCreationBlocks, $keepLoopingBlocks, $counterApplyBlocks));
 
-        $this->args =
+        $this->setCondition(
             $this->recreateCondBlocks($iteratorCreationBlocks)
             . ';' . $this->recreateCondBlocks($keepLoopingBlocks)
-            . ';' . $this->recreateCondBlocks($counterApplyBlocks);
+            . ';' . $this->recreateCondBlocks($counterApplyBlocks)
+        );
 
         $this->setCaret($caret);
         $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
