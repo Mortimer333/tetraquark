@@ -48,6 +48,14 @@ abstract class Block
      */
     protected $blocksMap = [
         'f' => [
+            'o' => [
+                'r' => [
+                    ' '  => 'ForBlock',
+                    "\n" => "ForBlock",
+                    "\r" => "ForBlock",
+                    '('  => "ForBlock",
+                ]
+            ],
             'u' => [
                 'n' => [
                     'c' => [
@@ -476,7 +484,7 @@ abstract class Block
 
         $block = $this->blockFactory($mappedWord, $className, $i, $possibleUndefined, $blocks);
 
-        Log::log('Iteration count changed from ' . $i . " to " . $block->getCaret(), 1);
+        Log::log('Iteration count changed from ' . $i . " to " . $block->getCaret(), 2);
         Log::log("Instruction: `". $block->getInstruction() . "`", 1);
 
         $i = $block->getCaret();
@@ -520,6 +528,7 @@ abstract class Block
                 }
 
                 if (!isset(self::$content[$i])) {
+                    $possibleUndefined = '';
                     break;
                 }
 
@@ -561,13 +570,22 @@ abstract class Block
                 if ($this->isValidUndefined($possibleUndefined)) {
                     Log::log("Add undefined: " . $possibleUndefined, 3);
                     $blocks[] = new Block\UndefinedBlock($i - \mb_strlen($possibleUndefined), $possibleUndefined);
+                    $possibleUndefined = '';
                 }
                 break;
             }
         }
 
+        if ($this->isValidUndefined($possibleUndefined)) {
+            Log::log("Add undefined: " . $possibleUndefined, 3);
+            $blocks[] = new Block\UndefinedBlock($i - \mb_strlen($possibleUndefined), $possibleUndefined);
+        }
+
         $this->setCaret($i);
         Log::log("Updated caret " . $this->getCaret(),1);
+        if (\sizeof($blocks) == 0 && \mb_strlen(self::$content) > 0) {
+            Log::log('Content was not turned into blocks => ' . self::$content);
+        }
         return $blocks;
     }
 
@@ -594,7 +612,7 @@ abstract class Block
         throw new Exception('Blocks name not found', 404);
     }
 
-    protected function generateAliases(string $lastAlias = ''): void
+    protected function generateAliases(string $lastAlias = ''): string
     {
         Log::log('Start generating aliases. Last Alias: ' . $lastAlias, 2);
         // Firstly set aliases to all blocks on this level
@@ -636,15 +654,40 @@ abstract class Block
                 $lastAlias = $alias;
             }
             Log::decreaseIndent();
+        } elseif ($this instanceof ConditionBlock) {
+            foreach ($this->getCondBlocks() as $block) {
+                if ($this->aliasExists($block->getName()) || !$this->canBeAliased($block->getName(), $block)) {
+                    Log::log('Alias for this block exists.', 2);
+                    continue;
+                }
+
+                $alias = $this->generateAlias($block->getName(), $lastAlias);
+                Log::log('Generated Alias:' . $alias . ", previous alias: " . $lastAlias, 1);
+
+                if (\mb_strlen($alias) == 0) {
+                    Log::log('skip alias.', 3);
+                    continue;
+                }
+
+                Log::log('Set generated alias.', 3);
+                $this->setAlias($block->getName(), $alias);
+                $lastAlias = $alias;
+            }
+
+            Log::increaseIndent();
+            foreach ($block->getBlocks() as $subBlock) {
+                $lastAlias = $subBlock->generateAliases($lastAlias);
+            }
+            Log::decreaseIndent();
         }
 
         // Then to level below
         Log::increaseIndent();
         foreach ($this->blocks as $block) {
-            $block->generateAliases($lastAlias);
+            $lastAlias = $block->generateAliases($lastAlias);
         }
         Log::decreaseIndent();
-
+        return $lastAlias;
     }
 
     protected function generateAlias(string $name, string $lastAlias): string
@@ -833,5 +876,32 @@ abstract class Block
         }
 
         return $reserved[$name] ?? true;
+    }
+
+    public function displayBlocks(array $blocks)
+    {
+        foreach ($blocks as $block) {
+            Log::log("Block: " . get_class($block));
+            Log::log("Subtype: " . $block->getSubtype());
+            Log::log("Instruction: " . $block->getInstruction());
+            Log::log("Instruction Start: " . $block->getInstructionStart());
+            Log::log("Name: `" . $block->getName() . "`");
+            if (method_exists($block, 'getValue')) {
+                Log::log("Value: `" . $block->getValue() . "`");
+            }
+            if (method_exists($block, 'getArguments')) {
+                Log::log("Arguments: [" . \sizeof($block->getArguments()) . "] `" . implode('`, `', $block->getArguments()) . "`");
+            }
+            if (method_exists($block, 'getCondBlocks')) {
+                Log::increaseIndent();
+                $this->displayBlocks($block->getCondBlocks());
+                Log::decreaseIndent();
+            }
+            Log::log("Alias: `" . $block->getAlias($block->getName()) . "`");
+            Log::log("=======");
+            Log::increaseIndent();
+            $this->displayBlocks($block->blocks);
+            Log::decreaseIndent();
+        }
     }
 }

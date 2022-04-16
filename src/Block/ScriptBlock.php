@@ -69,26 +69,4 @@ class ScriptBlock extends Block implements Contract\Block
         }
         return $script;
     }
-
-    public function displayBlocks(array $blocks)
-    {
-        foreach ($blocks as $block) {
-            Log::log("Block: " . get_class($block));
-            Log::log("Subtype: " . $block->getSubtype());
-            Log::log("Instruction: " . $block->getInstruction());
-            Log::log("Instruction Start: " . $block->getInstructionStart());
-            Log::log("Name: `" . $block->getName() . "`");
-            if (method_exists($block, 'getValue')) {
-                Log::log("Value: `" . $block->getValue() . "`");
-            }
-            if (method_exists($block, 'getArguments')) {
-                Log::log("Arguments: [" . \sizeof($block->getArguments()) . "] `" . implode('`, `', $block->getArguments()) . "`");
-            }
-            Log::log("Alias: `" . $block->getAlias($block->getName()) . "`");
-            Log::log("=======");
-            Log::increaseIndent();
-            $this->displayBlocks($block->blocks);
-            Log::decreaseIndent();
-        }
-    }
 }

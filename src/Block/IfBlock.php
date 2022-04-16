@@ -28,9 +28,8 @@ class IfBlock extends ConditionBlock implements Contract\Block
 
         $codeSave = self::$content;
         self::$content = $this->getCondition();
-        $this->argsBlocks = $this->createSubBlocks(0, true);
+        $this->argsBlocks = $this->createSubBlocks(0);
         self::$content = $codeSave;
-        Log::log('Old caret: ' . $caret . ', new caret ' . $this->getCaret());
         $this->setCaret($caret);
         $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
     }

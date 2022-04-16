@@ -46,3 +46,7 @@ if (obj.objSoloTest[0] == 'asd') {
     console.log('found')
     console.log('found2')
 }
+
+for (var to = 0; to < objSoloTest.length; to++) {
+    console.log(objSoloTest[to]);
+}

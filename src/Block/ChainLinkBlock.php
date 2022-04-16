@@ -25,11 +25,13 @@ class ChainLinkBlock extends Block implements Contract\Block
 
         if ($this->getSubtype() == self::FIRST) {
             $this->findInstructionStart($start, $endChars);
+            $this->setCaret($start);
             return;
         }
 
         $end = null;
         $startLetterSearch = false;
+        $caret = null;
         Log::log('Start search for end of link', 1);
         Log::increaseIndent();
         for ($i=$start; $i < \mb_strlen(self::$content); $i++) {
@@ -47,7 +49,7 @@ class ChainLinkBlock extends Block implements Contract\Block
                     $this->setSubtype(self::MIDDLE);
                 }
 
-                $this->setCaret($i - 1);
+                $caret = $i - 1;
                 break;
             }
 
@@ -56,6 +58,12 @@ class ChainLinkBlock extends Block implements Contract\Block
             }
         }
         Log::decreaseIndent();
+        if (\is_null($caret)) {
+            $this->setCaret($i);
+            $end = $i;
+        } else {
+            $this->setCaret($caret);
+        }
 
         $instruction = \mb_substr(self::$content, $start, $end - $start);
         Log::log('Instruction: ' . $instruction, 1);

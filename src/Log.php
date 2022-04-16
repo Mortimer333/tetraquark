@@ -47,7 +47,7 @@ class Log
         self::log(date('H:i:s:') . round($usec * 1000), 0 , 1);
     }
 
-    static public function log(string $output, ?int $verbose = null, int $traceLvl = 0): void
+    static public function log(string|int|float $output, ?int $verbose = null, int $traceLvl = 0): void
     {
         $verbose = $verbose ?? self::$verbose;
 

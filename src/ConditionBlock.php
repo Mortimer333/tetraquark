@@ -8,8 +8,11 @@ abstract class ConditionBlock extends Block
         '}' => true
     ];
 
-    abstract protected function getArgs(): string;
     protected string $condition = '';
+    /** @var array Here we save blocks for later aliasing */
+    protected array $condBlocks = [];
+
+    abstract protected function getArgs(): string;
 
     protected const SINGLE_CONDITION_SUBTYPE = 'single-condition';
 
@@ -76,6 +79,16 @@ abstract class ConditionBlock extends Block
     protected function getCondition(): string
     {
         return $this->condition;
+    }
+
+    protected function setCondBlocks(array $blocks): void
+    {
+        $this->condBlocks = $blocks;
+    }
+
+    public function getCondBlocks(): array
+    {
+        return $this->condBlocks;
     }
 
     public function recreate(): string
