@@ -22,14 +22,12 @@ class SwitchBlock extends ConditionBlock implements Contract\Block
     {
         $this->setName('switch');
         $this->setConditionAndInstruction($start);
-        $caret = $this->getCaret();
 
-        $condBlocks = $this->createSubBlocks($this->getCondition());
+        $condBlocks = $this->createSubBlocksWithContent($this->getCondition());
         $this->setCondBlocks($condBlocks);
         $this->setCondition(
             $this->recreateCondBlocks($condBlocks)
         );
-        $this->setCaret($caret);
         $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
     }
 }

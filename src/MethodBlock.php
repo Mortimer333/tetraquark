@@ -62,7 +62,9 @@ class MethodBlock extends Block
             }
         }
 
-        $this->arguments = array_reverse($this->arguments);
-        
+        $arguments = array_reverse($this->arguments);
+        foreach ($arguments as $argument) {
+            $this->createSubBlocksWithContent($argument);
+        }
     }
 }

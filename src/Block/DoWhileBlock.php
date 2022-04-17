@@ -61,15 +61,14 @@ class DoWhileBlock extends ConditionBlock implements Contract\Block
             throw new Exception("Couldn't find the start or end of the condition for do...while at letter : " . $start, 404);
         }
 
+        $this->setCaret($condEnd);
         $this->setCondition(\mb_substr(self::$content, $condStart, $condEnd - $condStart));
 
-        $condBlocks = $this->createSubBlocks($this->getCondition());
+        $condBlocks = $this->createSubBlocksWithContent($this->getCondition());
         $this->setCondBlocks($condBlocks);
         $this->setCondition(
             $this->recreateCondBlocks($condBlocks)
         );
-
-        $this->setCaret($condEnd);
     }
 
     public function recreate(): string

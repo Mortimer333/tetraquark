@@ -1,215 +1,714 @@
 Mapping...
-        Instruction starts at 1438 and ends at 1457 => clearTimeout(timer)
 =======================
 Creating aliases...
 =======================
-Aliases: TabJF_Hidden => a, debounce => b, timer => c, func => d, timeout=300 => e, if => f, ...args => g, 
+Aliases: ClassName => a, objSoloTest => b, obj => c, classTest => d, classTest2 => e, while => f, switch => g, whileLooped => h, do-while => i, func1 => j, funcr2 => k, meth2 => l, attrb => m, att => n, as => o, kek@ => p, classTes3 => r, classTest4 => s, classTest6 => t, for => u, classTest5 => w, if => z, to => y, size => x, 
 Recreating...
 =======================
-Block: Tetraquark\Block\MultiCommentBlock
-Subtype: /*
-Instruction: /** * Hidden class is used to hide some methods from debug tool which monitors how script behaves by attaching Proxy to all methods and attrbiutes * (omiting those starting with `_`). */
-Instruction Start: 0
-Name: ``
-Alias: ``
-=======
 Block: Tetraquark\Block\ClassBlock
 Subtype: class
-Instruction: class TabJF_Hidden {
-Instruction Start: 190
-Name: `TabJF_Hidden`
+Instruction: class ClassName {
+Instruction Start: 0
+Name: `ClassName`
 Alias: `a`
 =======
-  Block: Tetraquark\Block\MultiCommentBlock
-  Subtype: /*
-  Instruction: /** * Debounce factory. * Passed function here will be fired after set `timeout` but the timeout will be postponed for another `timeout` value each time returned * method was called. * Example: * * this.debounceTest = this.debounce(countdown, 200); // Create debounce function * this.debounceTest(); // Start the timer to fire `countdown` after 200ms * ... // 10ms later * this.debounceTest(); // Reset timer to fire `countdown` after 200ms from now so it 210ms from the * // first time `countdown` was called * * In case you started the countdown and want to prevent it can call returned function again with `clear` as first argument. This will clear * the timeout. Example: * * this.debounceTest('clear'); * * @param {function} func Function to fire * @param {Number } [timeout=300] Timeout after function should be called * @return {function} The debounce function to call if you want to start or postpone saved method */
-  Instruction Start: 213
-  Name: ``
-  Alias: ``
-  =======
   Block: Tetraquark\Block\ClassMethodBlock
   Subtype: method
-  Instruction: debounce (func, timeout = 300) {
-  Instruction Start: 1358
-  Name: `debounce`
-  Arguments: [2] `func`, `timeout=300`
-  Alias: `b`
+  Instruction: constructor() {
+  Instruction Start: 22
+  Name: `constructor`
+  Arguments: [0] ``
+  Alias: `constructor`
   =======
-    Block: Tetraquark\Block\VariableBlock
-    Subtype: let
-    Instruction: 
-    Instruction Start: 1404
-    Name: `timer`
-    Value: ``
-    Alias: `c`
-    =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction: return
-    Instruction Start: 1406
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\CallerBlock
-    Subtype: (
-    Instruction: 
-    Instruction Start: 1417
-    Name: ``
-    Alias: ``
-    =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: first
-    Instruction: 
-    Instruction Start: 1418
+    Instruction: console
+    Instruction Start: 46
     Name: ``
     Alias: ``
     =======
     Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: middle
-    Instruction: 
-    Instruction Start: 1419
+    Subtype: end:method
+    Instruction: log
+    Instruction Start: 54
     Name: ``
     Alias: ``
     =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: middle
-    Instruction: 
-    Instruction Start: 1420
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: .
-    Instruction: args
-    Instruction Start: 1421
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ArrowFunctionBlock
-    Subtype: parenthesis:brackets
-    Instruction: (...args) => {
-    Instruction Start: 1417
-    Name: ``
-    Value: ``
-    Arguments: [1] `...args`
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\CallerBlock
-      Subtype: (
-      Instruction: clearTimeout(timer)
-      Instruction Start: 1438
+      Block: Tetraquark\Block\StringBlock
+      Subtype: 
+      Instruction: 'new'
+      Instruction Start: 58
       Name: ``
       Alias: ``
       =======
-      Block: Tetraquark\Block\IfBlock
-      Subtype: if
-      Instruction: if ( args[0] === "clear" ) {
-      Instruction Start: 1464
-      Name: `if`
-      Alias: `f`
-      =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction: return;
-        Instruction Start: 1494
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\SingleCommentBlock
-        Subtype: //
-        Instruction: / if passed `clear` then stop debouncing
-        Instruction Start: 1511
-        Name: ``
-        Alias: ``
-        =======
-      Block: Tetraquark\Block\AttributeBlock
+  Block: Tetraquark\Block\ClassMethodBlock
+  Subtype: method
+  Instruction: func1 () {
+  Instruction Start: 77
+  Name: `func1`
+  Arguments: [0] ``
+  Alias: `j`
+  =======
+  Block: Tetraquark\Block\ClassMethodBlock
+  Subtype: method
+  Instruction: funcr2() {
+  Instruction Start: 100
+  Name: `funcr2`
+  Arguments: [0] ``
+  Alias: `k`
+  =======
+  Block: Tetraquark\Block\ClassMethodBlock
+  Subtype: method
+  Instruction: meth2 () {
+  Instruction Start: 117
+  Name: `meth2`
+  Arguments: [0] ``
+  Alias: `l`
+  =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: first
+    Instruction: console
+    Instruction Start: 144
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: end:method
+    Instruction: log
+    Instruction Start: 152
+    Name: ``
+    Alias: ``
+    =======
+      Block: Tetraquark\Block\StringBlock
       Subtype: 
-      Instruction: timer =
-      Instruction Start: 1566
-      Name: `timer`
-      Value: ``
-      Alias: `c`
+      Instruction: 'asdas'
+      Instruction Start: 156
+      Name: ``
+      Alias: ``
       =======
-        Block: Tetraquark\Block\UndefinedBlock
+  Block: Tetraquark\Block\AttributeBlock
+  Subtype: 
+  Instruction: attrb =
+  Instruction Start: 176
+  Name: `attrb`
+  Value: ``
+  Alias: `m`
+  =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: 'asd'
+    Instruction Start: 185
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: +
+    Instruction Start: 190
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: 'asd'
+    Instruction Start: 193
+    Name: ``
+    Alias: ``
+    =======
+  Block: Tetraquark\Block\AttributeBlock
+  Subtype: 
+  Instruction: att =
+  Instruction Start: 202
+  Name: `att`
+  Value: ``
+  Alias: `n`
+  =======
+    Block: Tetraquark\Block\ArrayBlock
+    Subtype: [
+    Instruction: 
+    Instruction Start: 209
+    Name: ``
+    Alias: ``
+    =======
+      Block: Tetraquark\Block\StringBlock
+      Subtype: 
+      Instruction: 'asd'
+      Instruction Start: 219
+      Name: ``
+      Alias: ``
+      =======
+  Block: Tetraquark\Block\AttributeBlock
+  Subtype: 
+  Instruction: obj =
+  Instruction Start: 235
+  Name: `obj`
+  Value: ``
+  Alias: `c`
+  =======
+    Block: Tetraquark\Block\ObjectBlock
+    Subtype: {
+    Instruction: 
+    Instruction Start: 242
+    Name: ``
+    Alias: ``
+    =======
+      Block: Tetraquark\Block\ObjectValueBlock
+      Subtype: :
+      Instruction: 'as'
+      Instruction Start: 243
+      Name: `as`
+      Alias: `o`
+      =======
+        Block: Tetraquark\Block\StringBlock
         Subtype: 
-        Instruction: setTimeout
-        Instruction Start: 1574
+        Instruction: 'asd'
+        Instruction Start: 259
         Name: ``
         Alias: ``
         =======
-        Block: Tetraquark\Block\CallerBlock
-        Subtype: (
+      Block: Tetraquark\Block\ObjectValueBlock
+      Subtype: :
+      Instruction: 'kek@'
+      Instruction Start: 265
+      Name: `kek@`
+      Alias: `p`
+      =======
+        Block: Tetraquark\Block\ArrayBlock
+        Subtype: [
         Instruction: 
-        Instruction Start: 1585
+        Instruction Start: 283
         Name: ``
         Alias: ``
         =======
-        Block: Tetraquark\Block\CallerBlock
-        Subtype: (
-        Instruction: 
-        Instruction Start: 1586
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ArrowFunctionBlock
-        Subtype: parenthesis:brackets
-        Instruction: () => {
-        Instruction Start: 1586
-        Name: ``
-        Value: ``
+          Block: Tetraquark\Block\UndefinedBlock
+          Subtype: 
+          Instruction: 1, 2,3
+          Instruction Start: 284
+          Name: ``
+          Alias: ``
+          =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: const
+Instruction: const objSoloTest =
+Instruction Start: 323
+Name: `objSoloTest`
+Value: ``
+Alias: `b`
+=======
+  Block: Tetraquark\Block\ArrayBlock
+  Subtype: [
+  Instruction: 
+  Instruction Start: 343
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: 'asd'
+    Instruction Start: 345
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: , 3, 2 + 1
+    Instruction Start: 350
+    Name: ``
+    Alias: ``
+    =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: let
+Instruction: let obj =
+Instruction Start: 362
+Name: `obj`
+Value: ``
+Alias: `c`
+=======
+  Block: Tetraquark\Block\ObjectBlock
+  Subtype: {
+  Instruction: 
+  Instruction Start: 372
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: objSoloTest
+    Instruction Start: 373
+    Name: ``
+    Alias: ``
+    =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: const
+Instruction: const classTest =
+Instruction Start: 393
+Name: `classTest`
+Value: ``
+Alias: `d`
+=======
+  Block: Tetraquark\Block\NewClassBlock
+  Subtype: new
+  Instruction: ClassName()
+  Instruction Start: 414
+  Name: `ClassName`
+  Arguments: [0] ``
+  Alias: `a`
+  =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: const
+Instruction: const classTest2 =
+Instruction Start: 428
+Name: `classTest2`
+Value: ``
+Alias: `e`
+=======
+  Block: Tetraquark\Block\NewClassBlock
+  Subtype: new
+  Instruction: ClassName()
+  Instruction Start: 450
+  Name: `ClassName`
+  Arguments: [0] ``
+  Alias: `a`
+  =======
+  Block: Tetraquark\Block\VariableBlock
+  Subtype: const
+  Instruction: const classTes3 =
+  Instruction Start: 463
+  Name: `classTes3`
+  Value: ``
+  Alias: `r`
+  =======
+    Block: Tetraquark\Block\NewClassBlock
+    Subtype: new
+    Instruction: ClassName ()
+    Instruction Start: 484
+    Name: `ClassName`
+    Arguments: [0] ``
+    Alias: `a`
+    =======
+    Block: Tetraquark\Block\VariableBlock
+    Subtype: const
+    Instruction: const classTest4 =
+    Instruction Start: 498
+    Name: `classTest4`
+    Value: ``
+    Alias: `s`
+    =======
+      Block: Tetraquark\Block\NewClassBlock
+      Subtype: new
+      Instruction: ClassName
+      Instruction Start: 520
+      Name: `ClassName`
+      Arguments: [0] ``
+      Alias: `a`
+      =======
+    Block: Tetraquark\Block\VariableBlock
+    Subtype: const
+    Instruction: const classTest6 =
+    Instruction Start: 532
+    Name: `classTest6`
+    Value: ``
+    Alias: `t`
+    =======
+      Block: Tetraquark\Block\NewClassBlock
+      Subtype: new
+      Instruction: ClassName
+      Instruction Start: 554
+      Name: `ClassName`
+      Arguments: [0] ``
+      Alias: `a`
+      =======
+      Block: Tetraquark\Block\VariableBlock
+      Subtype: const
+      Instruction: const classTest5 =
+      Instruction Start: 565
+      Name: `classTest5`
+      Value: ``
+      Alias: `w`
+      =======
+        Block: Tetraquark\Block\NewClassBlock
+        Subtype: new
+        Instruction: ClassName
+        Instruction Start: 587
+        Name: `ClassName`
         Arguments: [0] ``
-        Alias: ``
+        Alias: `a`
+        =======
+        Block: Tetraquark\Block\IfBlock
+        Subtype: if
+        Instruction: if (obj.objSoloTest[0] == 'asd') {
+        Instruction Start: 598
+        Name: `if`
+        Alias: `z`
         =======
           Block: Tetraquark\Block\ChainLinkBlock
           Subtype: first
-          Instruction: func
-          Instruction Start: 1594
+          Instruction: console
+          Instruction Start: 638
           Name: ``
           Alias: ``
           =======
           Block: Tetraquark\Block\ChainLinkBlock
           Subtype: end:method
-          Instruction: apply
-          Instruction Start: 1599
+          Instruction: log
+          Instruction Start: 646
           Name: ``
           Alias: ``
           =======
-            Block: Tetraquark\Block\UndefinedBlock
+            Block: Tetraquark\Block\StringBlock
             Subtype: 
-            Instruction: this, args
-            Instruction Start: 1605
+            Instruction: 'found'
+            Instruction Start: 650
             Name: ``
             Alias: ``
             =======
+          Block: Tetraquark\Block\ChainLinkBlock
+          Subtype: first
+          Instruction: console
+          Instruction Start: 663
+          Name: ``
+          Alias: ``
+          =======
+          Block: Tetraquark\Block\ChainLinkBlock
+          Subtype: end:method
+          Instruction: log
+          Instruction Start: 671
+          Name: ``
+          Alias: ``
+          =======
+            Block: Tetraquark\Block\StringBlock
+            Subtype: 
+            Instruction: 'found2'
+            Instruction Start: 675
+            Name: ``
+            Alias: ``
+            =======
+    Block: Tetraquark\Block\ForBlock
+    Subtype: for
+    Instruction: for (var to = 0; to < objSoloTest.length; to++) {
+    Instruction Start: 687
+    Name: `for`
+      Block: Tetraquark\Block\VariableBlock
+      Subtype: var
+      Instruction: var to =
+      Instruction Start: 0
+      Name: `to`
+      Value: ``
+      Alias: `y`
+      =======
         Block: Tetraquark\Block\UndefinedBlock
         Subtype: 
-        Instruction: , timeout)
-        Instruction Start: 1619
+        Instruction: 0
+        Instruction Start: 8
         Name: ``
         Alias: ``
         =======
-Block: Tetraquark\Block\UndefinedBlock
-Subtype: 
-Instruction: export
-Instruction Start: 1643
-Name: ``
-Alias: ``
-=======
-Block: Tetraquark\Block\ObjectBlock
-Subtype: {
-Instruction: 
-Instruction Start: 1651
-Name: ``
-Alias: ``
-=======
-  Block: Tetraquark\Block\UndefinedBlock
-  Subtype: 
-  Instruction: TabJF_Hidden
-  Instruction Start: 1652
+      Block: Tetraquark\Block\UndefinedBlock
+      Subtype: 
+      Instruction: to <
+      Instruction Start: 11
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: first
+      Instruction: objSoloTest
+      Instruction Start: 6
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: .
+      Instruction: length
+      Instruction Start: 18
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\UndefinedBlock
+      Subtype: 
+      Instruction: to++
+      Instruction Start: 0
+      Name: ``
+      Alias: ``
+      =======
+    Alias: `u`
+    =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: first
+      Instruction: console
+      Instruction Start: 742
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: end:method
+      Instruction: log
+      Instruction Start: 750
+      Name: ``
+      Alias: ``
+      =======
+        Block: Tetraquark\Block\UndefinedBlock
+        Subtype: 
+        Instruction: objSoloTest
+        Instruction Start: 754
+        Name: ``
+        Alias: ``
+        =======
+        Block: Tetraquark\Block\BracketChainLinkBlock
+        Subtype: [
+        Instruction: 
+        Instruction Start: 765
+        Name: ``
+        Alias: ``
+        =======
+          Block: Tetraquark\Block\UndefinedBlock
+          Subtype: 
+          Instruction: to
+          Instruction Start: 766
+          Name: ``
+          Alias: ``
+          =======
+Block: Tetraquark\Block\WhileBlock
+Subtype: while
+Instruction: while (objSoloTest.length) {
+Instruction Start: 774
+Name: `while`
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: objSoloTest
+  Instruction Start: 0
   Name: ``
   Alias: ``
   =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: .
+  Instruction: length
+  Instruction Start: 12
+  Name: ``
+  Alias: ``
+  =======
+Alias: `f`
+=======
+  Block: Tetraquark\Block\VariableBlock
+  Subtype: let
+  Instruction: let size =
+  Instruction Start: 808
+  Name: `size`
+  Value: ``
+  Alias: `x`
+  =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: first
+    Instruction: objSoloTest
+    Instruction Start: 819
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: .
+    Instruction: length
+    Instruction Start: 831
+    Name: ``
+    Alias: ``
+    =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 843
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 851
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: size, objSoloTest
+    Instruction Start: 855
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\BracketChainLinkBlock
+    Subtype: [
+    Instruction: 
+    Instruction Start: 872
+    Name: ``
+    Alias: ``
+    =======
+      Block: Tetraquark\Block\UndefinedBlock
+      Subtype: 
+      Instruction: 0
+      Instruction Start: 873
+      Name: ``
+      Alias: ``
+      =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: objSoloTest
+  Instruction Start: 882
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: shift
+  Instruction Start: 894
+  Name: ``
+  Alias: ``
+  =======
+Block: Tetraquark\Block\SwitchBlock
+Subtype: switch
+Instruction: switch (objSoloTest.length) {
+Instruction Start: 905
+Name: `switch`
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: objSoloTest
+  Instruction Start: 0
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: .
+  Instruction: length
+  Instruction Start: 12
+  Name: ``
+  Alias: ``
+  =======
+Alias: `g`
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: case 1:
+  Instruction Start: 942
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 956
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 964
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: 'Obj is one'
+    Instruction Start: 968
+    Name: ``
+    Alias: ``
+    =======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: break; default:
+  Instruction Start: 988
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 1018
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 1026
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: 'Obj is bigger then one'
+    Instruction Start: 1030
+    Name: ``
+    Alias: ``
+    =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: let
+Instruction: let whileLooped =
+Instruction Start: 1059
+Name: `whileLooped`
+Value: ``
+Alias: `h`
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: 2
+  Instruction Start: 1076
+  Name: ``
+  Alias: ``
+  =======
+Block: Tetraquark\Block\SingleCommentBlock
+Subtype: //
+Instruction: / One line test
+Instruction Start: 1081
+Name: ``
+Alias: ``
+=======
+Block: Tetraquark\Block\MultiCommentBlock
+Subtype: /*
+Instruction: /* Test Multileine */
+Instruction Start: 1097
+Name: ``
+Alias: ``
+=======
+Block: Tetraquark\Block\DoWhileBlock
+Subtype: do
+Instruction: do (
+Instruction Start: 1121
+Name: `do-while`
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: whileLooped
+  Instruction Start: 0
+  Name: ``
+  Alias: ``
+  =======
+Alias: `i`
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: whileLooped--;
+  Instruction Start: 1132
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 1149
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 1157
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: whileLooped
+    Instruction Start: 1161
+    Name: ``
+    Alias: ``
+    =======
 Duration: 0.014s
 
 
-class a{b(d,e){let c;return...argsg=>{clearTimeout(c)if(args[0]==="clear"){return;}c=setTimeout()=>{d.apply(this,args);};,timeout);};}}export{a};
+class a{constructor(){console.log('new');}j(){}k(){}l(){console.log('asdas');}m='asd'+'asd';n=['asd'];c={o:'asd',p:[1,2,3]};}const b=['asd',3,2+1];let c={b};const d=new a;const e=new a;const r=new a;const s=new a;const t=new a;const w=new a;if(c.b[0]=='asd'){console.log('found');console.log('found2');};for(var y=0;y<b.length;y++){console.log(b[y]);};while(b.length){let x=b.length;console.log(x,b[0]);b.shift();}switch(b.length){case 1:console.log('Obj is one');break;default:console.log('Obj is bigger then one');}let h=2;do{h--;console.log(h);}while(h);

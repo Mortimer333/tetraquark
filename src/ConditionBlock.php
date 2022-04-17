@@ -109,15 +109,6 @@ abstract class ConditionBlock extends Block
         return $script;
     }
 
-    protected function createSubBlocks(string $condition): array
-    {
-        $codeSave = self::$content;
-        self::$content = $condition;
-        $blocks = $this->createSubBlocks(0);
-        self::$content = $codeSave;
-        return $blocks;
-    }
-
     protected function recreateCondBlocks(array $blocks): string
     {
         $str = '';

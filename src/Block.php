@@ -975,12 +975,14 @@ abstract class Block
 
 
 
-    protected function createSubBlocks(string $content): array
+    protected function createSubBlocksWithContent(string $content): array
     {
+        $caret = $this->getCaret();
         $codeSave = self::$content;
         self::$content = $content;
         $blocks = $this->createSubBlocks(0);
         self::$content = $codeSave;
+        $this->setCaret($caret);
         return $blocks;
     }
 }
