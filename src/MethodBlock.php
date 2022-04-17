@@ -4,6 +4,7 @@ namespace Tetraquark;
 
 class MethodBlock extends Block
 {
+    /** @var array Contains arguments in form of Blocks[] so its [Blocks[], Blocks[]] */
     protected array $arguments = [];
 
     public function getArguments(): array
@@ -11,10 +12,9 @@ class MethodBlock extends Block
         return $this->arguments;
     }
 
-    protected function addArgument(string $argument): self
+    protected function addArgument(array $argument): self
     {
-        $argument = trim($argument);
-        if (\mb_strlen($argument) == 0) {
+        if (\sizeof($argument) == 0) {
             return $this;
         }
         $this->arguments[] = $argument;
@@ -25,7 +25,10 @@ class MethodBlock extends Block
     {
         $args = '';
         foreach ($this->getArguments() as $arg) {
-            $args .= $this->getAlias($arg) . ',';
+            foreach ($arg as $block) {
+                $args .= rtrim($block->recreate(), ';');
+            }
+            $args .= ',';
         }
         return rtrim($args, ',');
     }
@@ -35,6 +38,7 @@ class MethodBlock extends Block
         $instr = $this->getInstruction();
         $startSettingArgs = false;
         $word = '';
+        $arguments = [];
         for ($i=\strlen($instr) - 1; $i >= 0; $i--) {
             $letter = $instr[$i];
             if (!$startSettingArgs && $letter == ')') {
@@ -43,16 +47,17 @@ class MethodBlock extends Block
             }
 
             if ($startSettingArgs && $this->isWhitespace($letter)) {
+                $word .= $letter;
                 continue;
             }
 
             if ($startSettingArgs && $letter == '(') {
-                $this->addArgument(strrev($word));
+                $arguments[] = strrev($word);
                 break;
             }
 
             if ($startSettingArgs && $letter == ',') {
-                $this->addArgument(strrev($word));
+                $arguments[] = strrev($word);
                 $word = '';
                 continue;
             }
@@ -62,9 +67,20 @@ class MethodBlock extends Block
             }
         }
 
-        $arguments = array_reverse($this->arguments);
+        $arguments = array_reverse($arguments);
+        $this->setArgumentBlocks($arguments);
+    }
+
+    protected function setArgumentBlocks(array $arguments): void
+    {
         foreach ($arguments as $argument) {
-            $this->createSubBlocksWithContent($argument);
+            $blocks = $this->createSubBlocksWithContent($argument);
+            foreach ($blocks as &$block) {
+                if ($block instanceof Block\UndefinedBlock) {
+                    $block->setName($block->getInstruction());
+                }
+            }
+            $this->addArgument($blocks);
         }
     }
 }

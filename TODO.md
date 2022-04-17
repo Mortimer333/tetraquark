@@ -38,7 +38,8 @@ And if I was to add another function it should have access to all vars and their
 ## Setting to allow changing anonymous functions `function () {}` into array functions `() => {}`
 
 ## Handle
-- notes
+- [DONE] notes
+- ?: conditions
 - import, export
 - [DONE] chain linking with square brackets (if bracet is prefixed with `:` or `=` then its array)
 - [DONE] Object,
@@ -71,31 +72,19 @@ Which will result in error `varOne doesn't exist` because varOne got replaced wi
 After minifization:
 
 class a{
-    b(d,e){ // missing default value for parameter
-        // Missing let timer;
-        let c=>{ // It probably mixed `timer` and `return (...args)` into one `ArrowFunctionBlock`
-            clearTimeout(g) // missing semicolon
-            if(args[0]==="clear"){return;}
-            // This is just trash - anonymous function has been merged into setTimeoutCall,
-            // args didn't get minified, same with timeout even though it got alias `e` in function,
-            g=setTimeout()=>{ d.apply(this,args); };, timeout);
-        };
-    }
-}
-export{a}; // This guy got changed into SoloObjectBlock but this will be fixed when I will add export/import blocks
-
-class a{
-    b(d,e){
+    b(d,e=300){
         let c;
-        return...argsg=>{
-            clearTimeout(c)
-            if(args[0]==="clear"){return;}
-            c=setTimeout()=>{d.apply(this,args);};,timeout);
-        };
+        return(...g)=>{
+            clearTimeout(c);
+            if(g[0]==="clear"){return;}
+            c=setTimeout(
+                ()=>{d.apply(this,g);},
+                e
+            );
+        };;
     }
 }
 export{a};
-
 
 Before mini:
 

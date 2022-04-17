@@ -70,6 +70,7 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
         $SFParenthesis = false;
         $SFWhitespace = false;
         $word = '';
+        $arguments = [];
         Log::increaseIndent();
         for ($i=0; $i < \strlen($instr); $i++) {
             $letter = $instr[$i];
@@ -85,7 +86,7 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
                 Log::log("Whitespace!", 1);
                 if ($SFWhitespace) {
                     Log::log("Found next whitespace, add arg and end iteration", 1);
-                    $this->addArgument($word);
+                    $arguments[] = $word;
                     break;
                 }
                 continue;
@@ -98,7 +99,7 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
 
             if ($SFParenthesis && $letter == ',') {
                 Log::log("Arg seperator found, add arg", 1);
-                $this->addArgument($word);
+                $arguments[] = $word;
                 $word = '';
                 continue;
             }
@@ -106,13 +107,14 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
 
             if ($SFParenthesis && $letter == ')') {
                 Log::log("Stop search for parenthesis", 1);
-                $this->addArgument($word);
+                $arguments[] = $word;
                 break;
             }
 
             $word .= $letter;
         }
         Log::decreaseIndent();
+        $this->setArgumentBlocks($arguments);
     }
 
     public function isMultiLine(): bool
@@ -198,7 +200,17 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
     public function recreate(): string
     {
         $args = $this->getArguments();
-        if (\sizeof($args) == 1) {
+        Log::log('arrow function args: ' . sizeof($args));
+        $hasSpread = false;
+        foreach ($args as $arg) {
+            foreach ($arg as $block) {
+                if ($block instanceof SpreadBlock) {
+                    $hasSpread = true;
+                }
+            }
+        }
+
+        if (\sizeof($args) == 1 && !$hasSpread) {
             $script = $this->getAliasedArguments() . '=>';
         } else {
             $script = '(' . $this->getAliasedArguments() . ')=>';

@@ -20,24 +20,22 @@ class AttributeBlock extends VariableBlock implements Contract\Block
     public function objectify(int $start = 0)
     {
         $letterFound = false;
-        Log::increaseIndent();
         for ($i=$start - 1; $i >= 0; $i--) {
             $letter = self::$content[$i];
-            Log::log('Letter: ' . $letter, 3);
             if ($letterFound && $this->isWhitespace($letter)) {
-                Log::log('Start found: ' . $start, 3);
                 $start = $i;
                 break;
             }
 
             if (!$this->isWhitespace($letter)) {
-                Log::log('Found closest letter, search for white space: ', 3);
                 $letterFound = true;
             }
+
+            if ($i == 0) {
+                $start = 0;
+            }
         }
-        Log::decreaseIndent();
         $this->findInstructionEnd($start, $this->subtype, $this->instructionEnds);
-        Log::log('Found instruction: ' . $this->getInstruction(), 3);
         $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
         if (\sizeof($this->blocks) == 0) {
             $instrEnd = $this->getInstructionStart() + \mb_strlen($this->getInstruction()) + 1;
