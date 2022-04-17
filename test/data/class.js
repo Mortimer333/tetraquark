@@ -66,7 +66,10 @@ switch (objSoloTest.length) {
 }
 
 let whileLooped = 2;
-
+// One line test
+/*
+  Test Multileine
+*/
 do {
     whileLooped--;
     console.log(whileLooped);

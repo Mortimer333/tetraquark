@@ -181,7 +181,11 @@ abstract class Block
                 "\r" => "DoWhileBlock",
                 '{'  => "DoWhileBlock",
             ]
-        ]
+        ],
+        "/" => [
+            "/" => "SingleCommentBlock",
+            "*" => "MultiCommentBlock",
+        ],
     ];
 
     protected array $special = [

@@ -38,16 +38,16 @@ And if I was to add another function it should have access to all vars and their
 ## Setting to allow changing anonymous functions `function () {}` into array functions `() => {}`
 
 ## Handle
+- notes
+- import, export
 - [DONE] chain linking with square brackets (if bracet is prefixed with `:` or `=` then its array)
 - [DONE] Object,
 - [DONE] if (removing brackets if it contains only one instruction),
 - [DONE] for (replace vars in brackets),
-- passing anonymous functions,
 - [DONE] while and do while,
 - [DONE] Switch
-- import, export
+- passing anonymous functions,
 - array (used like object)
-- notes
 
 # Problems:
 - my alias replacer for globally scoped vars will not work for anything that accessed them dynamically, example:

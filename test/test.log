@@ -1,27 +1,4 @@
 Mapping...
-  }
-   
-  w
-  h
-  i
-  l
-  e
-   
-  (
-  w
-  h
-  i
-  l
-  e
-  L
-  o
-  o
-  p
-  e
-  d
-  )
-  ;
-  \n
 =======================
 Creating aliases...
 =======================
@@ -675,10 +652,24 @@ Alias: `h`
   Name: ``
   Alias: ``
   =======
+Block: Tetraquark\Block\SingleCommentBlock
+Subtype: //
+Instruction: / One line test
+Instruction Start: 1081
+Name: ``
+Alias: ``
+=======
+Block: Tetraquark\Block\MultiCommentBlock
+Subtype: /*
+Instruction: /* Test Multileine */
+Instruction Start: 1097
+Name: ``
+Alias: ``
+=======
 Block: Tetraquark\Block\DoWhileBlock
 Subtype: do
 Instruction: do (
-Instruction Start: 1081
+Instruction Start: 1121
 Name: `do-while`
   Block: Tetraquark\Block\UndefinedBlock
   Subtype: 
@@ -692,32 +683,32 @@ Alias: `i`
   Block: Tetraquark\Block\UndefinedBlock
   Subtype: 
   Instruction: whileLooped--;
-  Instruction Start: 1092
+  Instruction Start: 1132
   Name: ``
   Alias: ``
   =======
   Block: Tetraquark\Block\ChainLinkBlock
   Subtype: first
   Instruction: console
-  Instruction Start: 1109
+  Instruction Start: 1149
   Name: ``
   Alias: ``
   =======
   Block: Tetraquark\Block\ChainLinkBlock
   Subtype: end:method
   Instruction: log
-  Instruction Start: 1117
+  Instruction Start: 1157
   Name: ``
   Alias: ``
   =======
     Block: Tetraquark\Block\UndefinedBlock
     Subtype: 
     Instruction: whileLooped
-    Instruction Start: 1121
+    Instruction Start: 1161
     Name: ``
     Alias: ``
     =======
-Duration: 0.013s
+Duration: 0.014s
 
 
 class a{constructor(){console.log('new');}j(){}k(){}l(){console.log('asdas');}m='asd'+'asd';n=['asd'];c={o:'asd',p:[1,2,3]};}const b=['asd',3,2+1];let c={b};const d=new a;const e=new a;const r=new a;const s=new a;const t=new a;const w=new a;if(c.b[0]=='asd'){console.log('found');console.log('found2');};for(var y=0;y<b.length;y++){console.log(b[y]);};while(b.length){let x=b.length;console.log(x,b[0]);b.shift();}switch(b.length){case 1:console.log('Obj is one');break;default:console.log('Obj is bigger then one');}let h=2;do{h--;console.log(h);}while(h);

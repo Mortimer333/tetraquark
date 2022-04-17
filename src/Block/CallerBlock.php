@@ -55,7 +55,7 @@ class CallerBlock extends Block implements Contract\Block
                 break;
             }
         }
-        Log::log('Instruction starts at ' . $start . " and ends at " . $end);
+        Log::log('Instruction starts at ' . $start . " and ends at " . $end, 2);
         $this->setInstruction(trim(\mb_substr(self::$content, $start, $end - $start)))
             ->setInstructionStart($start)
         ;
