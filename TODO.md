@@ -65,5 +65,51 @@ const newTest = new Test1();
 Its going to be translated into something like this:
 ```js
 class a{b='one';c='two';}const d=new a;['One', 'Two'].forEach(e=>{console.log(d['var' + e]);}
-```
+``
 Which will result in error `varOne doesn't exist` because varOne got replaced with `b`.
+
+After minifization:
+
+class a{
+    b(d,e){ // missing default value for parameter
+        // Missing let timer;
+        let c=>{ // It probably mixed `timer` and `return (...args)` into one `ArrowFunctionBlock`
+            clearTimeout(g) // missing semicolon
+            if(args[0]==="clear"){return;}
+            // This is just trash - anonymous function has been merged into setTimeoutCall,
+            // args didn't get minified, same with timeout even though it got alias `e` in function,
+            g=setTimeout()=>{ d.apply(this,args); };, timeout);
+        };
+    }
+}
+export{a}; // This guy got changed into SoloObjectBlock but this will be fixed when I will add export/import blocks
+
+class a{
+    b(d,e){
+        let c;
+        return...argsg=>{
+            clearTimeout(c)
+            if(args[0]==="clear"){return;}
+            c=setTimeout()=>{d.apply(this,args);};,timeout);
+        };
+    }
+}
+export{a};
+
+
+Before mini:
+
+class TabJF_Hidden {
+  debounce (func, timeout = 300) {
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      if ( args[0] === "clear" ) {
+        return; // if passed `clear` then stop debouncing
+      }
+
+      timer = setTimeout(() => { func.apply(this, args); }, timeout);
+    };
+  }
+}
+export { TabJF_Hidden };

@@ -224,6 +224,30 @@ abstract class Block
     protected array $objectBlocksMap = [
         ':' => "ObjectValueBlock",
         ',' => "ObjectSoloValueBlock",
+        '.' => [
+            "." => [
+                "." => "SpreadBlock"
+            ],
+            "default" => 'ChainLinkBlock'
+        ],
+    ];
+
+    protected array $callerBlocksMap = [
+        '.' => [
+            "." => [
+                "." => "SpreadBlock"
+            ],
+            "default" => 'ChainLinkBlock'
+        ],
+    ];
+
+    protected array $arrayBlocksMap = [
+        '.' => [
+            "." => [
+                "." => "SpreadBlock"
+            ],
+            "default" => 'ChainLinkBlock'
+        ],
     ];
 
     public function __construct(
@@ -336,11 +360,16 @@ abstract class Block
     protected function getDefaultMap(): array
     {
         $blocksMap = $this->blocksMap;
-        if ($this instanceof Block\ClassBlock) {
-            $blocksMap = array_merge($blocksMap, $this->classBlocksMap);
-        } elseif ($this instanceof Block\ObjectBlock) {
-            $blocksMap = array_merge($blocksMap, $this->objectBlocksMap);
-        }
+
+        $additionalPaths = [
+            Block\ClassBlock ::class => $this->classBlocksMap,
+            Block\ObjectBlock::class => $this->objectBlocksMap,
+            Block\CallerBlock::class => $this->callerBlocksMap,
+            Block\ArrayBlock ::class => $this->arrayBlocksMap,
+        ];
+
+        $blocksMap = array_merge($blocksMap, $additionalPaths[$this::class] ?? []);
+
         return $blocksMap;
     }
 
@@ -942,5 +971,16 @@ abstract class Block
             $this->displayBlocks($block->blocks);
             Log::decreaseIndent();
         }
+    }
+
+
+
+    protected function createSubBlocks(string $content): array
+    {
+        $codeSave = self::$content;
+        self::$content = $content;
+        $blocks = $this->createSubBlocks(0);
+        self::$content = $codeSave;
+        return $blocks;
     }
 }

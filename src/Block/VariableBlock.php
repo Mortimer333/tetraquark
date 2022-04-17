@@ -14,10 +14,37 @@ class VariableBlock extends \Tetraquark\VariableBlock implements Contract\Block
 
     protected array $instructionEnds = [
         '=' => true,
+        ';' => true,
     ];
 
     public function objectify(int $start = 0)
     {
+        $newLineFound = false;
+        for ($i=$start + 1; $i < \mb_strlen(self::$content); $i++) {
+            $letter = self::$content[$i];
+
+            if ($this->isWhitespace($letter)) {
+                continue;
+            }
+
+            if ($letter == '=') {
+                break;
+            }
+
+            if ($letter == ';' || $newLineFound) {
+                $this->setInstruction('');
+                $this->setInstructionStart($i);
+                $this->setName(\mb_substr(self::$content, $start, $i - $start));
+                $this->setCaret($i + 1);
+                return;
+            }
+
+            if ($letter == "\n") {
+                $newLineFound = true;
+                continue;
+            }
+        }
+
         $this->findInstructionEnd($start, $this->subtype, $this->instructionEnds);
         Log::log('Found instruction: ' . $this->getInstruction(), 3);
         $this->blocks = array_merge($this->blocks, $this->createSubBlocks());

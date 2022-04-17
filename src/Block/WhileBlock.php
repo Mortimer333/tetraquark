@@ -24,7 +24,7 @@ class WhileBlock extends ConditionBlock implements Contract\Block
         $this->setConditionAndInstruction($start);
         $caret = $this->getCaret();
 
-        $condBlocks = $this->createSubBlocksForCondition($this->getCondition());
+        $condBlocks = $this->createSubBlocks($this->getCondition());
         $this->setCondBlocks($condBlocks);
         $this->setCondition(
             $this->recreateCondBlocks($condBlocks)

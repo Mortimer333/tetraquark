@@ -63,5 +63,6 @@ class MethodBlock extends Block
         }
 
         $this->arguments = array_reverse($this->arguments);
+        
     }
 }

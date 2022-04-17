@@ -109,7 +109,7 @@ abstract class ConditionBlock extends Block
         return $script;
     }
 
-    protected function createSubBlocksForCondition(string $condition): array
+    protected function createSubBlocks(string $condition): array
     {
         $codeSave = self::$content;
         self::$content = $condition;

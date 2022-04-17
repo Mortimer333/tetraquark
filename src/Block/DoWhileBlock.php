@@ -63,7 +63,7 @@ class DoWhileBlock extends ConditionBlock implements Contract\Block
 
         $this->setCondition(\mb_substr(self::$content, $condStart, $condEnd - $condStart));
 
-        $condBlocks = $this->createSubBlocksForCondition($this->getCondition());
+        $condBlocks = $this->createSubBlocks($this->getCondition());
         $this->setCondBlocks($condBlocks);
         $this->setCondition(
             $this->recreateCondBlocks($condBlocks)

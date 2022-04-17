@@ -6,7 +6,11 @@ class VariableBlock extends Block
 {
     public function recreate(): string
     {
-        $script = $this->getSubType() . ' ' . $this->getAlias($this->getName()) . '=';
+        $script = $this->getSubType() . ' ' . $this->getAlias($this->getName());
+
+        if (\sizeof($this->getBlocks()) > 0 || \mb_strlen($this->getValue()) > 0) {
+            $script .= '=';
+        }
 
         foreach ($this->getBlocks() as $block) {
             $script .= $block->recreate();
