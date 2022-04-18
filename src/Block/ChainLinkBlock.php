@@ -98,7 +98,15 @@ class ChainLinkBlock extends Block implements Contract\Block
         }
 
         if ($this->getSubtype() == self::END_METHOD) {
-            $script .= ");";
+            $parent = $this->getParent();
+            $index = $this->getChildIndex();
+            $parentChildren = $parent->getBlocks();
+            $nextChild = $parentChildren[$index + 1] ?? null;
+            if ($nextChild instanceof ChainLinkBlock || $nextChild instanceof BracketChainLinkBlock) {
+                $script .= ")";
+            } else {
+                $script .= ");";
+            }
         } elseif ($this->getSubtype() == self::END_VARIABLE) {
             $script .= ";";
         }

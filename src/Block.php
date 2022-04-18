@@ -13,6 +13,10 @@ abstract class Block
     protected string $instruction;
     protected int    $instructionStart;
     protected string $name;
+    /** @var int Queue indicator */
+    protected int    $childIndex;
+    /** @var Block Parent of this block */
+    protected Block  $parent;
     protected array  $aliasesMap = [];
     /** @var Block[] $blocks Array of Blocks */
     protected array  $blocks = [];
@@ -594,7 +598,6 @@ abstract class Block
                 $i = $this->skipString($i + 1, self::$content, $startsTemplate);
 
                 if ($this->isValidUndefined($possibleUndefined)) {
-                    Log::log("Valid undefined4: " . $possibleUndefined);
                     $blocks[] = new Block\UndefinedBlock($oldPos - \mb_strlen($possibleUndefined), $possibleUndefined);
                 }
                 if (!$this instanceof Block\ObjectBlock) {
@@ -618,6 +621,8 @@ abstract class Block
             if (gettype($map) == 'string') {
                 $oldPos = $i - \mb_strlen($possibleUndefined);
                 $block = $this->constructBlock($mappedWord, $map, $i, $possibleUndefined, $blocks);
+                $block->setChildIndex(\sizeof($blocks));
+                $block->setParent($this);
                 $mappedWordLen = \mb_strlen($mappedWord);
                 $instStart = $block->getInstructionStart();
                 $lenOfUndefined = $instStart - $oldPos;
@@ -628,8 +633,6 @@ abstract class Block
                 }
 
                 if ($this->isValidUndefined($possibleUndefined)) {
-                    Log::log("Old pos: " . $oldPos . ", mappedLen: " . $mappedWordLen);
-                    Log::log("Valid undefined: " . $possibleUndefined . ", from " . $block->getInstruction() . ", block: " . $block::class);
                     $blocks[] = new Block\UndefinedBlock($oldPos - \mb_strlen($possibleUndefined), $possibleUndefined);
                 }
 
@@ -645,7 +648,6 @@ abstract class Block
             if ($this->endChars[$letter] ?? false) {
                 $possibleUndefined = substr($possibleUndefined, 0, -1);
                 if ($this->isValidUndefined($possibleUndefined)) {
-                    Log::log("Valid undefined2: " . $possibleUndefined);
                     $blocks[] = new Block\UndefinedBlock($i - \mb_strlen($possibleUndefined), $possibleUndefined);
                     $possibleUndefined = '';
                 }
@@ -654,7 +656,6 @@ abstract class Block
         }
 
         if ($this->isValidUndefined($possibleUndefined)) {
-            Log::log("Valid undefined3: " . $possibleUndefined);
             $blocks[] = new Block\UndefinedBlock($i - \mb_strlen($possibleUndefined), $possibleUndefined);
         }
 
@@ -961,5 +962,25 @@ abstract class Block
         self::$content = $codeSave;
         $this->setCaret($caret);
         return $blocks;
+    }
+
+    public function setChildIndex(int $childIndex): void
+    {
+        $this->childIndex = $childIndex;
+    }
+
+    public function getChildIndex(): int
+    {
+        return $this->childIndex;
+    }
+
+    public function setParent(Block $parent): void
+    {
+        $this->parent = $parent;
+    }
+
+    public function getParent(): Block
+    {
+        return $this->parent;
     }
 }

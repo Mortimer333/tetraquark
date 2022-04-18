@@ -1,157 +1,383 @@
 Mapping...
-Actula start: 295, if
-Valid undefined2:  TabJF_Clear 
-Old pos: 363, mappedLen: 1
-Valid undefined: \r\nexport , from , block: Tetraquark\Block\ObjectBlock
 =======================
 Creating aliases...
 =======================
-Aliases: TabJF_Clear => a, edito2r => b, innerHTML => c, 
+Aliases: TabJF_End => a, select => b, sel => c, update => d, reverse => e, active => f, expanded => g, end => h, shift => i, ine => j, etter => k, ode => l, 
 Recreating...
 =======================
 Block: Tetraquark\Block\MultiCommentBlock
 Subtype: /*
-Instruction: /**\r\n * Holds all related methods for clearing/purging nodes\r\n */
+Instruction: /**\r\n * Holds all related functions which ends something\r\n */
 Instruction Start: 0
 Name: ``
 Alias: ``
 =======
 Block: Tetraquark\Block\ClassBlock
 Subtype: class
-Instruction: class TabJF_Clear {
-Instruction Start: 67
-Name: `TabJF_Clear`
+Instruction: class TabJF_End {
+Instruction Start: 63
+Name: `TabJF_End`
 Alias: `a`
 =======
   Block: Tetraquark\Block\MultiCommentBlock
   Subtype: /*
-  Instruction: /**\r\n   * Deletes contents of editor and adds caret (as this is only element that shouldn't be deleted)\r\n   */
-  Instruction Start: 90
+  Instruction: /**\r\n   * Ends selection\r\n   * Clear selection, resets saved selection and unpresses shift key\r\n   */
+  Instruction Start: 84
   Name: ``
   Alias: ``
   =======
   Block: Tetraquark\Block\ClassMethodBlock
   Subtype: method
-  Instruction: edito2r () {
-  Instruction Start: 204
-  Name: `edito2r`
+  Instruction: select () {
+  Instruction Start: 189
+  Name: `select`
   Arguments: [0] `
   Alias: `b`
   =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: first
+    Instruction: this
+    Instruction Start: 206
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: middle
+    Instruction: get
+    Instruction Start: 210
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: end:method
+    Instruction: selection
+    Instruction Start: 214
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: first
+    Instruction: 
+    Instruction Start: 226
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: end:method
+    Instruction: empty
+    Instruction Start: 226
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\VariableBlock
+    Subtype: const
+    Instruction: const sel    =
+    Instruction Start: 241
+    Name: `sel`
+    Value: ``
+    Alias: `c`
+    =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: first
+      Instruction: this
+      Instruction Start: 256
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: .
+      Instruction: selection
+      Instruction Start: 260
+      Name: ``
+      Alias: ``
+      =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: first
+    Instruction: sel
+    Instruction Start: 277
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: end:variable
+    Instruction: update   
+    Instruction Start: 280
+    Name: `update`
+    Alias: `d`
+    =======
+      Block: Tetraquark\Block\AttributeBlock
+      Subtype: 
+      Instruction:  sel.update   =
+      Instruction Start: 276
+      Name: ``
+      Value: ``
+      Alias: ``
+      =======
+        Block: Tetraquark\Block\UndefinedBlock
+        Subtype: 
+        Instruction:  false
+        Instruction Start: 291
+        Name: ``
+        Alias: ``
+        =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: first
+    Instruction: sel
+    Instruction Start: 304
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: end:variable
+    Instruction: reverse  
+    Instruction Start: 307
+    Name: `reverse`
+    Alias: `e`
+    =======
+      Block: Tetraquark\Block\AttributeBlock
+      Subtype: 
+      Instruction:  sel.reverse  =
+      Instruction Start: 303
+      Name: ``
+      Value: ``
+      Alias: ``
+      =======
+        Block: Tetraquark\Block\UndefinedBlock
+        Subtype: 
+        Instruction:  false
+        Instruction Start: 318
+        Name: ``
+        Alias: ``
+        =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: first
+    Instruction: sel
+    Instruction Start: 331
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: end:variable
+    Instruction: active   
+    Instruction Start: 334
+    Name: `active`
+    Alias: `f`
+    =======
+      Block: Tetraquark\Block\AttributeBlock
+      Subtype: 
+      Instruction:  sel.active   =
+      Instruction Start: 330
+      Name: ``
+      Value: ``
+      Alias: ``
+      =======
+        Block: Tetraquark\Block\UndefinedBlock
+        Subtype: 
+        Instruction:  false
+        Instruction Start: 345
+        Name: ``
+        Alias: ``
+        =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: first
+    Instruction: sel
+    Instruction Start: 358
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: end:variable
+    Instruction: expanded 
+    Instruction Start: 361
+    Name: `expanded`
+    Alias: `g`
+    =======
+      Block: Tetraquark\Block\AttributeBlock
+      Subtype: 
+      Instruction:  sel.expanded =
+      Instruction Start: 357
+      Name: ``
+      Value: ``
+      Alias: ``
+      =======
+        Block: Tetraquark\Block\UndefinedBlock
+        Subtype: 
+        Instruction:  false
+        Instruction Start: 372
+        Name: ``
+        Alias: ``
+        =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: first
+    Instruction: sel
+    Instruction Start: 385
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: end:variable
+    Instruction: end      
+    Instruction Start: 388
+    Name: `end`
+    Alias: `h`
+    =======
+      Block: Tetraquark\Block\AttributeBlock
+      Subtype: 
+      Instruction:  sel.end      =
+      Instruction Start: 384
+      Name: ``
+      Value: ``
+      Alias: ``
+      =======
+        Block: Tetraquark\Block\ObjectBlock
+        Subtype: {
+        Instruction: 
+        Instruction Start: 400
+        Name: ``
+        Alias: ``
+        =======
+          Block: Tetraquark\Block\ObjectValueBlock
+          Subtype: :
+          Instruction: line
+          Instruction Start: 401
+          Name: `ine`
+          Alias: `j`
+          =======
+            Block: Tetraquark\Block\UndefinedBlock
+            Subtype: 
+            Instruction:  -1
+            Instruction Start: 408
+            Name: ``
+            Alias: ``
+            =======
+          Block: Tetraquark\Block\ObjectValueBlock
+          Subtype: :
+          Instruction: letter
+          Instruction Start: 412
+          Name: `etter`
+          Alias: `k`
+          =======
+            Block: Tetraquark\Block\UndefinedBlock
+            Subtype: 
+            Instruction:  -1
+            Instruction Start: 421
+            Name: ``
+            Alias: ``
+            =======
+          Block: Tetraquark\Block\ObjectValueBlock
+          Subtype: :
+          Instruction: node
+          Instruction Start: 425
+          Name: `ode`
+          Alias: `l`
+          =======
+            Block: Tetraquark\Block\UndefinedBlock
+            Subtype: 
+            Instruction:  -1 
+            Instruction Start: 432
+            Name: ``
+            Alias: ``
+            =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: first
+    Instruction: this
+    Instruction Start: 444
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: middle
+    Instruction: pressed
+    Instruction Start: 448
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: end:variable
+    Instruction: shift 
+    Instruction Start: 456
+    Name: `shift`
+    Alias: `i`
+    =======
+      Block: Tetraquark\Block\AttributeBlock
+      Subtype: 
+      Instruction:  this.pressed.shift =
+      Instruction Start: 443
+      Name: ``
+      Value: ``
+      Alias: ``
+      =======
+        Block: Tetraquark\Block\UndefinedBlock
+        Subtype: 
+        Instruction:  false
+        Instruction Start: 464
+        Name: ``
+        Alias: ``
+        =======
     Block: Tetraquark\Block\SingleCommentBlock
     Subtype: //
-    Instruction: / this.editor['innerHTML'] = '';\r\n
-    Instruction Start: 222
+    Instruction: / forcing the state, might not be the same as in real world\r\n
+    Instruction Start: 472
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\SingleCommentBlock
+    Subtype: //
+    Instruction: / Updates start with current position\r\n
+    Instruction Start: 538
     Name: ``
     Alias: ``
     =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: first
     Instruction: this
-    Instruction Start: 261
+    Instruction Start: 582
     Name: ``
     Alias: ``
     =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: middle
-    Instruction: editor
-    Instruction Start: 265
+    Instruction: update
+    Instruction Start: 586
     Name: ``
     Alias: ``
     =======
     Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:variable
-    Instruction: innerHTML 
-    Instruction Start: 272
-    Name: `innerHTML`
-    Alias: `c`
-    =======
-      Block: Tetraquark\Block\AttributeBlock
-      Subtype: 
-      Instruction:  this.editor.innerHTML =
-      Instruction Start: 260
-      Name: ``
-      Value: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\StringBlock
-        Subtype: 
-        Instruction: ''
-        Instruction Start: 285
-        Name: ``
-        Alias: ``
-        =======
-    Block: Tetraquark\Block\IfBlock
-    Subtype: single-condition
-    Instruction:  if ( this.caret.el ) this.editor.appendChild(this.caret.el);
-    Instruction Start: 295
+    Subtype: middle
+    Instruction: selection
+    Instruction Start: 593
     Name: ``
     Alias: ``
     =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: this
-      Instruction Start: 1
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: editor
-      Instruction Start: 5
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: appendChild
-      Instruction Start: 12
-      Name: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: this
-        Instruction Start: 25
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: caret
-        Instruction Start: 29
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: el
-        Instruction Start: 35
-        Name: ``
-        Alias: ``
-        =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: end:method
+    Instruction: start
+    Instruction Start: 603
+    Name: ``
+    Alias: ``
+    =======
 Block: Tetraquark\Block\UndefinedBlock
 Subtype: 
 Instruction: \r\nexport 
-Instruction Start: 354
+Instruction Start: 610
 Name: ``
 Alias: ``
 =======
 Block: Tetraquark\Block\ObjectBlock
 Subtype: {
 Instruction: 
-Instruction Start: 373
+Instruction Start: 629
 Name: ``
 Alias: ``
 =======
   Block: Tetraquark\Block\UndefinedBlock
   Subtype: 
-  Instruction:  TabJF_Clear 
-  Instruction Start: 374
+  Instruction:  TabJF_End 
+  Instruction Start: 630
   Name: ``
   Alias: ``
   =======
-Duration: 0.004s
+Duration: 0.005s
 
 
-class a{b(){this.editor.c='';if(this.caret.el)this.editor.appendChild(this.caret.el);}}export{a};
+class a{b(){this.get.selection().empty();const c=this.selection;c.d=false;c.e=false;c.f=false;c.g=false;c.h={j:-1,k:-1,l:-1};this.pressed.i=false;this.d.selection.start();}}export{a};
