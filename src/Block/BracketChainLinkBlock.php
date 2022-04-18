@@ -10,6 +10,9 @@ class BracketChainLinkBlock extends Block implements Contract\Block
     protected array $endChars = [
         ']' => true
     ];
+    /** @var AttributeBlock Holder for Attribute Block which will hold assigned values */
+    protected AttributeBlock $variable;
+    protected const VARIABLE = 'variable';
 
     public function objectify(int $start = 0)
     {
@@ -23,25 +26,20 @@ class BracketChainLinkBlock extends Block implements Contract\Block
         $getSubBlocks = false;
         $checkFirsLetter = true;
         $start += 1;
-        Log::log("============", 1);
         for ($i=$start; $i < \mb_strlen(self::$content); $i++) {
             $letter = self::$content[$i];
             $end = $i;
-            Log::log("Letter `" . $letter . "`, i: " . $i, 3);
             if ($this->isWhitespace($letter)) {
                 continue;
             }
 
             // If first letter is not string landmark then start gathering sub blocks
             if ($checkFirsLetter) {
-                Log::log("Check first letter", 3);
                 if ($letter != '"' && $letter != "'" && $letter != '`') {
-                    Log::log("is not string!", 3);
                     $getSubBlocks = true;
                     $end = $i;
                     break;
                 } else {
-                    Log::log("is string!", 3);
                     $checkFirsLetter = false;
                 }
             }
@@ -65,35 +63,28 @@ class BracketChainLinkBlock extends Block implements Contract\Block
             // Solution: check if string is the only part of this call. If not start getting subblocks after it ended
 
             if (!$string && !$template && !$stringEnd) {
-                Log::log("Check string!", 3);
                 if ($letter == "'" || $letter == '"') {
-                    Log::log("is nromal stirng!", 3);
                     $string = true;
                     continue;
                 }
 
                 if ($letter == '`') {
-                    Log::log("is template!", 3);
                     $template = true;
                     continue;
                 }
             } elseif (!$stringEnd && $string && $this->isStringLandmark($letter, self::$content[$i - 1], true)) {
-                Log::log("string end!", 3);
                 $stringEnd = true;
                 continue;
             } elseif (!$stringEnd && $template && $this->isTemplateLiteralLandmark($letter, self::$content[$i - 1], true)) {
-                Log::log("string template end!", 3);
                 $stringEnd = true;
                 continue;
             }
 
             if ($letter == ']' || $stringEnd) {
-                Log::log("string end found or and of array!", 2);
                 $end = $i;
                 if ($stringEnd && $letter != ']') {
                     $string = false;
                     $template = false;
-                    Log::log("strign end but there is another letter!", 1);
                     $getSubBlocks = true;
                     $end = $start;
                 }
@@ -115,6 +106,24 @@ class BracketChainLinkBlock extends Block implements Contract\Block
         if ($getSubBlocks) {
             $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
         }
+
+        for ($i=$this->getCaret() + 1; $i < \mb_strlen(self::$content); $i++) {
+            $letter = self::$content[$i];
+            if ($this->isWhitespace($letter)) {
+                continue;
+            }
+
+            if ($letter != '=') {
+                return;
+            } else {
+                $this->setSubtype(self::VARIABLE);
+                $attribute = new AttributeBlock($i);
+                $attribute->setName('');
+                $this->variable = $attribute;
+                $this->setCaret($attribute->getCaret());
+                break;
+            }
+        }
     }
 
     public function recreate(): string
@@ -129,7 +138,12 @@ class BracketChainLinkBlock extends Block implements Contract\Block
             }
         }
 
+        $script .= ']';
 
-        return $script . ']';
+        if ($this->getSubtype() === self::VARIABLE) {
+            $script .= rtrim($this->variable->recreate(), ';') . ';';
+        }
+
+        return $script;
     }
 }

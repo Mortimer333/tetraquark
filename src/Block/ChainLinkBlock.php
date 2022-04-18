@@ -73,6 +73,7 @@ class ChainLinkBlock extends Block implements Contract\Block
         } elseif ($this->getSubtype() == self::END_VARIABLE) {
             $attribute = new AttributeBlock($caret);
             $attribute->setName('');
+            $this->setName($this->getInstruction());
             $this->setBlocks([
                 $attribute
             ]);

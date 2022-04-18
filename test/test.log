@@ -1,13 +1,12 @@
 Mapping...
-Actula start: 393, if
-Valid undefined3:  true
+Actula start: 295, if
 Valid undefined2:  TabJF_Clear 
-Old pos: 461, mappedLen: 1
+Old pos: 363, mappedLen: 1
 Valid undefined: \r\nexport , from , block: Tetraquark\Block\ObjectBlock
 =======================
 Creating aliases...
 =======================
-Aliases: TabJF_Clear => a, editor => b, onlyLines => c, 
+Aliases: TabJF_Clear => a, edito2r => b, innerHTML => c, 
 Recreating...
 =======================
 Block: Tetraquark\Block\MultiCommentBlock
@@ -26,59 +25,51 @@ Alias: `a`
 =======
   Block: Tetraquark\Block\MultiCommentBlock
   Subtype: /*
-  Instruction: /**\r\n   * Deletes contents of editor and adds caret (as this is only element that shouldn't be deleted)\r\n   * @param  {Boolean} [onlyLines=true]               [description]\r\n   * @return {[type]}                   [description]\r\n   */
+  Instruction: /**\r\n   * Deletes contents of editor and adds caret (as this is only element that shouldn't be deleted)\r\n   */
   Instruction Start: 90
   Name: ``
   Alias: ``
   =======
   Block: Tetraquark\Block\ClassMethodBlock
   Subtype: method
-  Instruction: editor (onlyLines = true) {
-  Instruction Start: 328
-  Name: `editor`
-  Arguments: [1] `
-    Block: Tetraquark\Block\AttributeBlock
-    Subtype: 
-    Instruction: onlyLines =
-    Instruction Start: 0
-    Name: `onlyLines`
-    Value: ``
-    Alias: `c`
-    =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  true
-      Instruction Start: 11
-      Name: ``
-      Alias: ``
-      =======
+  Instruction: edito2r () {
+  Instruction Start: 204
+  Name: `edito2r`
+  Arguments: [0] `
   Alias: `b`
   =======
+    Block: Tetraquark\Block\SingleCommentBlock
+    Subtype: //
+    Instruction: / this.editor['innerHTML'] = '';\r\n
+    Instruction Start: 222
+    Name: ``
+    Alias: ``
+    =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: first
     Instruction: this
-    Instruction Start: 361
+    Instruction Start: 261
     Name: ``
     Alias: ``
     =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: middle
     Instruction: editor
-    Instruction Start: 365
+    Instruction Start: 265
     Name: ``
     Alias: ``
     =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: end:variable
     Instruction: innerHTML 
-    Instruction Start: 372
-    Name: ``
-    Alias: ``
+    Instruction Start: 272
+    Name: `innerHTML`
+    Alias: `c`
     =======
       Block: Tetraquark\Block\AttributeBlock
       Subtype: 
       Instruction:  this.editor.innerHTML =
-      Instruction Start: 360
+      Instruction Start: 260
       Name: ``
       Value: ``
       Alias: ``
@@ -86,14 +77,14 @@ Alias: `a`
         Block: Tetraquark\Block\StringBlock
         Subtype: 
         Instruction: ''
-        Instruction Start: 385
+        Instruction Start: 285
         Name: ``
         Alias: ``
         =======
     Block: Tetraquark\Block\IfBlock
     Subtype: single-condition
     Instruction:  if ( this.caret.el ) this.editor.appendChild(this.caret.el);
-    Instruction Start: 393
+    Instruction Start: 295
     Name: ``
     Alias: ``
     =======
@@ -142,25 +133,25 @@ Alias: `a`
 Block: Tetraquark\Block\UndefinedBlock
 Subtype: 
 Instruction: \r\nexport 
-Instruction Start: 452
+Instruction Start: 354
 Name: ``
 Alias: ``
 =======
 Block: Tetraquark\Block\ObjectBlock
 Subtype: {
 Instruction: 
-Instruction Start: 471
+Instruction Start: 373
 Name: ``
 Alias: ``
 =======
   Block: Tetraquark\Block\UndefinedBlock
   Subtype: 
   Instruction:  TabJF_Clear 
-  Instruction Start: 472
+  Instruction Start: 374
   Name: ``
   Alias: ``
   =======
 Duration: 0.004s
 
 
-class a{b(c=true){this.b.innerHTML='';if(this.caret.el)this.b.appendChild(this.caret.el);}}export{a};
+class a{b(){this.editor.c='';if(this.caret.el)this.editor.appendChild(this.caret.el);}}export{a};
