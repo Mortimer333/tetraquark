@@ -1,283 +1,166 @@
 Mapping...
--======
-Letter: .
-Letter: .
-Letter: .
-Letter: a
-Letter: r
-Letter: g
-Letter: s
-Letter: )
-This might be arrow method, search for arrow
-Letter:  
-Whitespace
-Letter: =
-Arrow function found
--======
-Letter: t
-Letter: i
-Letter: m
-Letter: e
-Letter: r
-Letter: )
-This might be arrow method, search for arrow
-Letter: ;
-Start search for end of call 2
-Instruction starts at 1450 and ends at 1457 => (timer)
--======
-Letter: (
-Letter: )
-Letter:  
-Whitespace
-Letter: =
-Start the skip of default definition
-Letter: >
-Skip letter and find end of default deinfinition
-Letter:  
-Whitespace
-Letter: {
-Skip letter and find end of default deinfinition
-Letter:  
-Whitespace
-Letter: f
-Skip letter and find end of default deinfinition
-Letter: u
-Skip letter and find end of default deinfinition
-Letter: n
-Skip letter and find end of default deinfinition
-Letter: c
-Skip letter and find end of default deinfinition
-Letter: .
-Skip letter and find end of default deinfinition
-Letter: a
-Skip letter and find end of default deinfinition
-Letter: p
-Skip letter and find end of default deinfinition
-Letter: p
-Skip letter and find end of default deinfinition
-Letter: l
-Skip letter and find end of default deinfinition
-Letter: y
-Skip letter and find end of default deinfinition
-Letter: (
-Letter: t
-Skip letter and find end of default deinfinition
-Letter: h
-Skip letter and find end of default deinfinition
-Letter: i
-Skip letter and find end of default deinfinition
-Letter: s
-Skip letter and find end of default deinfinition
-Letter: ,
-Default definintion end found
-Letter:  
-Whitespace
-Letter: a
-Letter: r
-Letter: g
-Letter: s
-Letter: )
-Letter: ;
-Letter:  
-Whitespace
-Letter: }
-Letter: ,
-Letter:  
-Whitespace
-Letter: t
-Letter: i
-Letter: m
-Letter: e
-Letter: o
-Letter: u
-Letter: t
-Letter: )
-This might be arrow method, search for arrow
-Letter: ;
-Start search for end of call 2
-Instruction starts at 1585 and ends at 1629 => (() => { func.apply(this, args); }, timeout)
+Actula start: 382, if
+Valid undefined3:  true
+Valid undefined2:  TabJF_Clear 
+Old pos: 448, mappedLen: 1
+Valid undefined: \nexport , from , block: Tetraquark\Block\ObjectBlock
 =======================
 Creating aliases...
 =======================
-Aliases: TabJF_Hidden => a, debounce => b, timer => c, func => d, timeout => e, if => f, args => g, 
+Aliases: TabJF_Clear => a, editor => b, this.editor.innerHTML => c, onlyLines => d, 
 Recreating...
-arrow function args: 1
 =======================
 Block: Tetraquark\Block\MultiCommentBlock
 Subtype: /*
-Instruction: /**\n * Hidden class is used to hide some methods from debug tool which monitors how script behaves by attaching Proxy to all methods and attrbiutes\n * (omiting those starting with `_`).\n */
+Instruction: /**\n * Holds all related methods for clearing/purging nodes\n */
 Instruction Start: 0
 Name: ``
 Alias: ``
 =======
 Block: Tetraquark\Block\ClassBlock
 Subtype: class
-Instruction: class TabJF_Hidden {
-Instruction Start: 190
-Name: `TabJF_Hidden`
+Instruction: class TabJF_Clear {
+Instruction Start: 64
+Name: `TabJF_Clear`
 Alias: `a`
 =======
   Block: Tetraquark\Block\MultiCommentBlock
   Subtype: /*
-  Instruction: /**\n   * Debounce factory.\n   * Passed function here will be fired after set `timeout` but the timeout will be postponed for another `timeout` value each time returned\n   * method was called.\n   * Example:\n   *\n   * this.debounceTest = this.debounce(countdown, 200);      // Create debounce function\n   * this.debounceTest();                                    // Start the timer to fire `countdown` after 200ms\n   * ... // 10ms later\n   * this.debounceTest();                                    // Reset timer to fire `countdown` after 200ms from now so it 210ms from the\n   *                                                         // first time `countdown` was called\n   *\n   * In case you started the countdown and want to prevent it can call returned function again with `clear` as first argument. This will clear\n   * the timeout. Example:\n   * \n   * this.debounceTest('clear');\n   *\n   * @param  {function} func          Function to fire\n   * @param  {Number  } [timeout=300] Timeout after function should be called\n   * @return {function}               The debounce function to call if you want to start or postpone saved method\n   */
-  Instruction Start: 213
+  Instruction: /**\n   * Deletes contents of editor and adds caret (as this is only element that shouldn't be deleted)\n   * @param  {Boolean} [onlyLines=true]               [description]\n   * @return {[type]}                   [description]\n   */
+  Instruction Start: 86
   Name: ``
   Alias: ``
   =======
   Block: Tetraquark\Block\ClassMethodBlock
   Subtype: method
-  Instruction: debounce (func, timeout = 300) {
-  Instruction Start: 1358
-  Name: `debounce`
-  Arguments: [2] `
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction: func
-    Instruction Start: 0
-    Name: `func`
-    Alias: `d`
-    =======
+  Instruction: editor (onlyLines = true) {
+  Instruction Start: 319
+  Name: `editor`
+  Arguments: [1] `
     Block: Tetraquark\Block\AttributeBlock
     Subtype: 
-    Instruction:  timeout =
+    Instruction: onlyLines =
     Instruction Start: 0
-    Name: `timeout`
+    Name: `onlyLines`
     Value: ``
-    Alias: `e`
+    Alias: `d`
     =======
       Block: Tetraquark\Block\UndefinedBlock
       Subtype: 
-      Instruction:  300
-      Instruction Start: 10
+      Instruction:  true
+      Instruction Start: 11
       Name: ``
       Alias: ``
       =======
   Alias: `b`
   =======
-    Block: Tetraquark\Block\VariableBlock
-    Subtype: let
-    Instruction: 
-    Instruction Start: 1404
-    Name: `timer`
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: first
+    Instruction: this
+    Instruction Start: 351
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: middle
+    Instruction: editor
+    Instruction Start: 355
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: .
+    Instruction: innerHTML
+    Instruction Start: 362
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\AttributeBlock
+    Subtype: 
+    Instruction:  this.editor.innerHTML =
+    Instruction Start: 350
+    Name: `this.editor.innerHTML`
     Value: ``
     Alias: `c`
     =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction:     return 
-    Instruction Start: 1406
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\CallerBlock
-    Subtype: (
-    Instruction: 
-    Instruction Start: 1417
-    Name: ``
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\ArrowFunctionBlock
-      Subtype: parenthesis:brackets
-      Instruction: (...args) => {
-      Instruction Start: 1417
+      Block: Tetraquark\Block\StringBlock
+      Subtype: 
+      Instruction: ''
+      Instruction Start: 375
       Name: ``
-      Value: ``
-      Arguments: [1] `
-        Block: Tetraquark\Block\SpreadBlock
-        Subtype: ...
-        Instruction: ...
-        Instruction Start: 2
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction: args
-        Instruction Start: 3
-        Name: `args`
-        Alias: `g`
-        =======
       Alias: ``
       =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction: \n      clearTimeout
-        Instruction Start: 1431
+    Block: Tetraquark\Block\IfBlock
+    Subtype: single-condition
+    Instruction:  if ( this.caret.el ) this.editor.appendChild(this.caret.el);
+    Instruction Start: 382
+    Name: ``
+    Alias: ``
+    =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: first
+      Instruction: this
+      Instruction Start: 1
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: middle
+      Instruction: editor
+      Instruction Start: 5
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: end:method
+      Instruction: appendChild
+      Instruction Start: 12
+      Name: ``
+      Alias: ``
+      =======
+        Block: Tetraquark\Block\ChainLinkBlock
+        Subtype: first
+        Instruction: this
+        Instruction Start: 25
         Name: ``
         Alias: ``
         =======
-        Block: Tetraquark\Block\CallerBlock
-        Subtype: (
-        Instruction: (timer)
-        Instruction Start: 1450
+        Block: Tetraquark\Block\ChainLinkBlock
+        Subtype: middle
+        Instruction: caret
+        Instruction Start: 29
         Name: ``
         Alias: ``
         =======
-        Block: Tetraquark\Block\IfBlock
-        Subtype: if
-        Instruction:  if ( args[0] === "clear" ) {
-        Instruction Start: 1464
-        Name: `if`
-        Alias: `f`
+        Block: Tetraquark\Block\ChainLinkBlock
+        Subtype: .
+        Instruction: el
+        Instruction Start: 35
+        Name: ``
+        Alias: ``
         =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction: \n        return; 
-          Instruction Start: 1494
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\SingleCommentBlock
-          Subtype: //
-          Instruction: / if passed `clear` then stop debouncing\n
-          Instruction Start: 1511
-          Name: ``
-          Alias: ``
-          =======
-        Block: Tetraquark\Block\AttributeBlock
-        Subtype: 
-        Instruction:  timer =
-        Instruction Start: 1566
-        Name: `timer`
-        Value: ``
-        Alias: `c`
-        =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction:  setTimeout
-          Instruction Start: 1574
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\CallerBlock
-          Subtype: (
-          Instruction: (() => { func.apply(this, args); }, timeout)
-          Instruction Start: 1585
-          Name: ``
-          Alias: ``
-          =======
 Block: Tetraquark\Block\UndefinedBlock
 Subtype: 
 Instruction: \nexport 
-Instruction Start: 1643
+Instruction Start: 440
 Name: ``
 Alias: ``
 =======
 Block: Tetraquark\Block\ObjectBlock
 Subtype: {
 Instruction: 
-Instruction Start: 1651
+Instruction Start: 457
 Name: ``
 Alias: ``
 =======
   Block: Tetraquark\Block\UndefinedBlock
   Subtype: 
-  Instruction:  TabJF_Hidden 
-  Instruction Start: 1652
+  Instruction:  TabJF_Clear 
+  Instruction Start: 458
   Name: ``
   Alias: ``
   =======
-Duration: 0.014s
+Duration: 0.006s
 
 
-class a{b(d,e=300){let c;return(...g)=>{clearTimeout(c);if(g[0]==="clear"){return;}c=setTimeout(()=>{d.apply(this,g);},e);};}}export{a};
+class a{b(d=true){this.b.innerHTMLc='';if(this.caret.el)this.b.appendChild(this.caret.el);}}export{a};

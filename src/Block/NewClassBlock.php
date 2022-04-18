@@ -53,7 +53,7 @@ class NewClassBlock extends MethodBlock implements Contract\Block
 
         $instruction = \mb_substr(self::$content, $start, $end - $start);
         $this->setInstruction($instruction)
-            ->setInstructionStart($start)
+            ->setInstructionStart($start - \mb_strlen('new '))
         ;
         $this->findAndSetArguments();
     }

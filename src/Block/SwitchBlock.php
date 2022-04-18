@@ -20,7 +20,8 @@ class SwitchBlock extends ConditionBlock implements Contract\Block
 
     public function objectify(int $start = 0)
     {
-        $this->setName('switch');
+        $this->setName('');
+        $this->setCondType('switch');
         $this->setConditionAndInstruction($start);
 
         $condBlocks = $this->createSubBlocksWithContent($this->getCondition());

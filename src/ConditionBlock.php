@@ -11,6 +11,8 @@ abstract class ConditionBlock extends Block
     protected string $condition = '';
     /** @var array Here we save blocks for later aliasing */
     protected array $condBlocks = [];
+    protected string $condType = '';
+    protected string $singleCond = '';
 
     abstract protected function getArgs(): string;
 
@@ -18,13 +20,13 @@ abstract class ConditionBlock extends Block
 
     protected function setConditionAndInstruction(int $start)
     {
-        $actualStart = $start - \mb_strlen($this->getName()) - 1;
+        $actualStart = $start - \mb_strlen($this->getCondType()) - 1;
+        Log::log('Actula start: ' . $actualStart . ", " . $this->getCondType());
         $condStart = null;
         $condEnd   = null;
         $end       = null;
         for ($i=$start; $i < \mb_strlen(self::$content); $i++) {
             $letter = self::$content[$i];
-
             if ($this->isWhitespace($letter)) {
                 continue;
             }
@@ -36,7 +38,7 @@ abstract class ConditionBlock extends Block
                 continue;
             }
 
-            if (!\is_null($condStart) && $letter == ')') {
+            if (is_null($condEnd) && !\is_null($condStart) && $letter == ')') {
                 $condEnd = $i;
                 continue;
             }
@@ -46,7 +48,7 @@ abstract class ConditionBlock extends Block
                 && !\is_null($condEnd)
                 && (
                     $letter == '{'
-                    || $this instanceof Block\IfBlock && $letter == ';'
+                    || ($this instanceof Block\IfBlock && $letter == ';')
                 )
             ) {
                 $end = $i + 1;
@@ -56,19 +58,22 @@ abstract class ConditionBlock extends Block
                 break;
             }
 
-            if (!\is_null($condStart) && !\is_null($condEnd)) {
+            if (!\is_null($condStart) && !\is_null($condEnd) && !$this instanceof Block\IfBlock) {
                 throw new Exception("Unexcepted character when searching for condition block start at letter $i => " . $this::class, 401);
             }
         }
 
         if (\is_null($condStart) || \is_null($condEnd) || \is_null($end)) {
-            throw new Exception("Condition (" . $this->getName() . " at letter $start) was not mapped properly, stopping script", 500);
+            throw new Exception("Condition (" . $this->getCondType() . " at letter $start) was not mapped properly, stopping script", 500);
         }
 
         $this->setCaret($end);
         $this->setInstruction(\mb_substr(self::$content, $actualStart, $end - $actualStart));
         $this->setInstructionStart($actualStart);
         $this->setCondition(\mb_substr(self::$content, $condStart, $condEnd - $condStart));
+        if ($this->getSubtype() === self::SINGLE_CONDITION_SUBTYPE) {
+            $this->setSingleCond(\mb_substr(self::$content, $condEnd + 1, $end - ($condEnd + 1)));
+        }
     }
 
     protected function setCondition(string $condition): void
@@ -93,7 +98,7 @@ abstract class ConditionBlock extends Block
 
     public function recreate(): string
     {
-        $script = $this->getName() . '(' . $this->getArgs() . ')';
+        $script = $this->getCondType() . '(' . $this->getArgs() . ')';
         if ($this->getSubtype() !== self::SINGLE_CONDITION_SUBTYPE) {
             $script .= '{';
         }
@@ -116,5 +121,25 @@ abstract class ConditionBlock extends Block
             $str .= rtrim($block->recreate(), ';');
         }
         return $str;
+    }
+
+    protected function setCondType(string $type): void
+    {
+        $this->condType = $type;
+    }
+
+    public function getCondType(): string
+    {
+        return $this->condType;
+    }
+
+    protected function setSingleCond(string $single): void
+    {
+        $this->singleCond = $single;
+    }
+
+    public function getSingleCond(): string
+    {
+        return $this->singleCond;
     }
 }

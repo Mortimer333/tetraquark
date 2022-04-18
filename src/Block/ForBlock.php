@@ -20,7 +20,8 @@ class ForBlock extends ConditionBlock implements Contract\Block
 
     public function objectify(int $start = 0)
     {
-        $this->setName('for');
+        $this->setName('');
+        $this->setCondType('for');
         $this->setConditionAndInstruction($start);
 
         $condition = explode(';', $this->getCondition());

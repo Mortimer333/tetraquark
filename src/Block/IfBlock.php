@@ -22,9 +22,14 @@ class IfBlock extends ConditionBlock implements Contract\Block
 
     public function objectify(int $start = 0)
     {
-        $this->setName('if');
+        $this->setName('');
+        $this->setCondType('if');
         $this->setConditionAndInstruction($start);
         $this->argsBlocks = $this->createSubBlocksWithContent($this->getCondition());
-        $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
+        if ($this->getSubtype() === self::SINGLE_CONDITION_SUBTYPE) {
+            $this->blocks = $this->createSubBlocksWithContent($this->getSingleCond());
+        } else {
+            $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
+        }
     }
 }

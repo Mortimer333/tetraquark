@@ -71,34 +71,27 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
         $SFWhitespace = false;
         $word = '';
         $arguments = [];
-        Log::increaseIndent();
         for ($i=0; $i < \strlen($instr); $i++) {
             $letter = $instr[$i];
-            Log::log("Letter: "  . $letter . ", Word: " . $word, 1);
             if (!$SFParenthesis && $letter == '(') {
-                Log::log("Start parenthesis search", 1);
                 $SFParenthesis = true;
                 $word = '';
                 continue;
             }
 
             if ($this->isWhitespace($letter)) {
-                Log::log("Whitespace!", 1);
                 if ($SFWhitespace) {
-                    Log::log("Found next whitespace, add arg and end iteration", 1);
                     $arguments[] = $word;
                     break;
                 }
                 continue;
             } elseif (!$SFParenthesis) {
-                Log::log("function has only one arg, start search for it...", 1);
                 $word .= $letter;
                 $SFWhitespace = true;
                 continue;
             }
 
             if ($SFParenthesis && $letter == ',') {
-                Log::log("Arg seperator found, add arg", 1);
                 $arguments[] = $word;
                 $word = '';
                 continue;
@@ -106,14 +99,12 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
 
 
             if ($SFParenthesis && $letter == ')') {
-                Log::log("Stop search for parenthesis", 1);
                 $arguments[] = $word;
                 break;
             }
 
             $word .= $letter;
         }
-        Log::decreaseIndent();
         $this->setArgumentBlocks($arguments);
     }
 

@@ -20,7 +20,8 @@ class WhileBlock extends ConditionBlock implements Contract\Block
 
     public function objectify(int $start = 0)
     {
-        $this->setName('while');
+        $this->setName('');
+        $this->setCondType('while');
         $this->setConditionAndInstruction($start);
 
         $condBlocks = $this->createSubBlocksWithContent($this->getCondition());

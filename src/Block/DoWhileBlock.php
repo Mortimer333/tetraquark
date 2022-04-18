@@ -25,7 +25,8 @@ class DoWhileBlock extends ConditionBlock implements Contract\Block
 
     public function objectify(int $start = 0)
     {
-        $this->setName('do-while');
+        $this->setName('');
+        $this->setCondType('do-while');
         $this->setInstruction('do (');
         $this->setInstructionStart($start - 2);
         for ($i=$start; $i < \mb_strlen(self::$content); $i++) {

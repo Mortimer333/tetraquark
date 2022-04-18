@@ -16,6 +16,7 @@ class SingleCommentBlock extends CommentBlock implements Contract\Block
     {
         $this->setName('');
         $this->findInstructionEnd($start, '');
+        $this->setInstructionStart($start - 1);
         $this->setCaret($this->getCaret() - 1);
     }
 }

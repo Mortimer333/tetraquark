@@ -72,19 +72,14 @@ Which will result in error `varOne doesn't exist` because varOne got replaced wi
 After minifization:
 
 class a{
-    b(d,e=300){
-        let c;
-        return(...g)=>{
-            clearTimeout(c);
-            if(g[0]==="clear"){return;}
-            c=setTimeout(
-                ()=>{d.apply(this,g);},
-                e
-            );
-        };;
+    b(d=true){
+        this.b.innerHTMLc='';
+        if(this.caret.el)this.b.appendChild(this.caret.el);
     }
 }
-export{a};
+
+{a};
+
 
 Before mini:
 
