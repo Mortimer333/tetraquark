@@ -1,18 +1,18 @@
 Mapping...
-Actula start: 382, if
+Actula start: 393, if
 Valid undefined3:  true
 Valid undefined2:  TabJF_Clear 
-Old pos: 448, mappedLen: 1
-Valid undefined: \nexport , from , block: Tetraquark\Block\ObjectBlock
+Old pos: 461, mappedLen: 1
+Valid undefined: \r\nexport , from , block: Tetraquark\Block\ObjectBlock
 =======================
 Creating aliases...
 =======================
-Aliases: TabJF_Clear => a, editor => b, this.editor.innerHTML => c, onlyLines => d, 
+Aliases: TabJF_Clear => a, editor => b, onlyLines => c, 
 Recreating...
 =======================
 Block: Tetraquark\Block\MultiCommentBlock
 Subtype: /*
-Instruction: /**\n * Holds all related methods for clearing/purging nodes\n */
+Instruction: /**\r\n * Holds all related methods for clearing/purging nodes\r\n */
 Instruction Start: 0
 Name: ``
 Alias: ``
@@ -20,21 +20,21 @@ Alias: ``
 Block: Tetraquark\Block\ClassBlock
 Subtype: class
 Instruction: class TabJF_Clear {
-Instruction Start: 64
+Instruction Start: 67
 Name: `TabJF_Clear`
 Alias: `a`
 =======
   Block: Tetraquark\Block\MultiCommentBlock
   Subtype: /*
-  Instruction: /**\n   * Deletes contents of editor and adds caret (as this is only element that shouldn't be deleted)\n   * @param  {Boolean} [onlyLines=true]               [description]\n   * @return {[type]}                   [description]\n   */
-  Instruction Start: 86
+  Instruction: /**\r\n   * Deletes contents of editor and adds caret (as this is only element that shouldn't be deleted)\r\n   * @param  {Boolean} [onlyLines=true]               [description]\r\n   * @return {[type]}                   [description]\r\n   */
+  Instruction Start: 90
   Name: ``
   Alias: ``
   =======
   Block: Tetraquark\Block\ClassMethodBlock
   Subtype: method
   Instruction: editor (onlyLines = true) {
-  Instruction Start: 319
+  Instruction Start: 328
   Name: `editor`
   Arguments: [1] `
     Block: Tetraquark\Block\AttributeBlock
@@ -43,7 +43,7 @@ Alias: `a`
     Instruction Start: 0
     Name: `onlyLines`
     Value: ``
-    Alias: `d`
+    Alias: `c`
     =======
       Block: Tetraquark\Block\UndefinedBlock
       Subtype: 
@@ -57,43 +57,43 @@ Alias: `a`
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: first
     Instruction: this
-    Instruction Start: 351
+    Instruction Start: 361
     Name: ``
     Alias: ``
     =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: middle
     Instruction: editor
-    Instruction Start: 355
+    Instruction Start: 365
     Name: ``
     Alias: ``
     =======
     Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: .
-    Instruction: innerHTML
-    Instruction Start: 362
+    Subtype: end:variable
+    Instruction: innerHTML 
+    Instruction Start: 372
     Name: ``
     Alias: ``
     =======
-    Block: Tetraquark\Block\AttributeBlock
-    Subtype: 
-    Instruction:  this.editor.innerHTML =
-    Instruction Start: 350
-    Name: `this.editor.innerHTML`
-    Value: ``
-    Alias: `c`
-    =======
-      Block: Tetraquark\Block\StringBlock
+      Block: Tetraquark\Block\AttributeBlock
       Subtype: 
-      Instruction: ''
-      Instruction Start: 375
+      Instruction:  this.editor.innerHTML =
+      Instruction Start: 360
       Name: ``
+      Value: ``
       Alias: ``
       =======
+        Block: Tetraquark\Block\StringBlock
+        Subtype: 
+        Instruction: ''
+        Instruction Start: 385
+        Name: ``
+        Alias: ``
+        =======
     Block: Tetraquark\Block\IfBlock
     Subtype: single-condition
     Instruction:  if ( this.caret.el ) this.editor.appendChild(this.caret.el);
-    Instruction Start: 382
+    Instruction Start: 393
     Name: ``
     Alias: ``
     =======
@@ -141,26 +141,26 @@ Alias: `a`
         =======
 Block: Tetraquark\Block\UndefinedBlock
 Subtype: 
-Instruction: \nexport 
-Instruction Start: 440
+Instruction: \r\nexport 
+Instruction Start: 452
 Name: ``
 Alias: ``
 =======
 Block: Tetraquark\Block\ObjectBlock
 Subtype: {
 Instruction: 
-Instruction Start: 457
+Instruction Start: 471
 Name: ``
 Alias: ``
 =======
   Block: Tetraquark\Block\UndefinedBlock
   Subtype: 
   Instruction:  TabJF_Clear 
-  Instruction Start: 458
+  Instruction Start: 472
   Name: ``
   Alias: ``
   =======
-Duration: 0.006s
+Duration: 0.004s
 
 
-class a{b(d=true){this.b.innerHTMLc='';if(this.caret.el)this.b.appendChild(this.caret.el);}}export{a};
+class a{b(c=true){this.b.innerHTML='';if(this.caret.el)this.b.appendChild(this.caret.el);}}export{a};

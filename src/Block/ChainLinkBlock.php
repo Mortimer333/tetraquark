@@ -34,7 +34,7 @@ class ChainLinkBlock extends Block implements Contract\Block
         $caret = null;
         for ($i=$start; $i < \mb_strlen(self::$content); $i++) {
             $letter = self::$content[$i];
-            if ($endChars[$letter] ?? false || $startLetterSearch && !$this->isWhitespace($letter)) {
+            if (($endChars[$letter] ?? false || $startLetterSearch) && !$this->isWhitespace($letter)) {
                 $end = $i;
                 if ($letter == '=') {
                     $this->setSubtype(self::END_VARIABLE);
@@ -70,6 +70,13 @@ class ChainLinkBlock extends Block implements Contract\Block
                 ')' => true
             ];
             $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
+        } elseif ($this->getSubtype() == self::END_VARIABLE) {
+            $attribute = new AttributeBlock($caret);
+            $attribute->setName('');
+            $this->setBlocks([
+                $attribute
+            ]);
+            $this->setCaret($attribute->getCaret());
         }
     }
 
@@ -91,8 +98,10 @@ class ChainLinkBlock extends Block implements Contract\Block
 
         if ($this->getSubtype() == self::END_METHOD) {
             $script .= ");";
+        } elseif ($this->getSubtype() == self::END_VARIABLE) {
+            $script .= ";";
         }
 
-        return $script;
+        return $this->removeAdditionalSpaces($script);
     }
 }
