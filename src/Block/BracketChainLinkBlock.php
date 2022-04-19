@@ -113,7 +113,7 @@ class BracketChainLinkBlock extends Block implements Contract\Block
                 continue;
             }
 
-            if ($letter != '=') {
+            if ($letter != '=' || $letter == '=' && self::$content[$i + 1] == '=') {
                 return;
             } else {
                 $this->setSubtype(self::VARIABLE);

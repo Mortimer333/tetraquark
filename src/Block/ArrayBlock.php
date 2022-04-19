@@ -16,8 +16,6 @@ class ArrayBlock extends Block implements Contract\Block
         $this->setInstruction('');
         $this->setName('');
         $this->setInstructionStart($start);
-        $items = [];
-        $lastCut = $start;
         $this->blocks = array_merge($this->blocks, $this->createSubBlocks($start + 1)); 
     }
 

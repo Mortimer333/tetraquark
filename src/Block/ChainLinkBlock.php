@@ -36,7 +36,7 @@ class ChainLinkBlock extends Block implements Contract\Block
             $letter = self::$content[$i];
             if (($endChars[$letter] ?? false || $startLetterSearch) && !$this->isWhitespace($letter)) {
                 $end = $i;
-                if ($letter == '=') {
+                if ($letter == '=' && self::$content[$i + 1] != '=') {
                     $this->setSubtype(self::END_VARIABLE);
                 } elseif ($letter == '(') {
                     $this->setSubtype(self::END_METHOD);

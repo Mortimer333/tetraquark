@@ -16,10 +16,9 @@ class CallerBlock extends Block implements Contract\Block
         $searchFroArgsEnd = false;
         $ignorNextClose = false;
         // Check if its not arrow method
-        Log::log('-======');
+        $ignoreBrackets = 0;
         for ($i=$start + 1; $i < \mb_strlen(self::$content); $i++) {
             $letter = self::$content[$i];
-            Log::log('Letter: ' . $letter);
 
             // Skip String
             if (
@@ -31,43 +30,38 @@ class CallerBlock extends Block implements Contract\Block
             }
 
             if ($letter == '(') {
-                $ignorNextClose = true;
+                $ignoreBrackets++;
                 continue;
             }
 
-            if ($ignorNextClose && $letter == ')') {
-                $ignorNextClose = false;
+            if ($ignoreBrackets > 0 && $letter == ')') {
+                $ignoreBrackets--;
                 continue;
             }
 
             // Skip whitespace
             if ($this->isWhitespace($letter)) {
-                Log::log('Whitespace');
                 continue;
             }
 
             // If we are currently skipping default then when letter is comma it means that we are at next argument and should stop
             if ($skipDefaultDefinition && $letter == ',') {
-                Log::log('Default definintion end found');
                 $skipDefaultDefinition = false;
                 continue;
             }
 
             if ($skipDefaultDefinition) {
-                Log::log('Skip letter and find end of default deinfinition');
                 continue;
             }
 
             // If we have other function injected here then its a call and start search for its end
             if ($letter == '(') {
-                Log::log('This is not arrow method, search for end of call');
                 $searchFroArgsEnd = true;
                 continue;
             }
 
             // If we have found ) before anything else then try to find arrow and determinate if this is arrow function
             if (!$searchFroArgsEnd && !$searchForArrow && $letter == ')') {
-                Log::log('This might be arrow method, search for arrow');
                 $searchForArrow = true;
                 $end = $i + 1;
                 $this->setCaret($i);
@@ -77,24 +71,20 @@ class CallerBlock extends Block implements Contract\Block
             // If we ahve found equal sign but we are not searching for arrow or we are searching for the end of arguments
             // then start search for default of this argument
             if ((!$searchForArrow || $searchFroArgsEnd) && $letter == '=') {
-                Log::log('Start the skip of default definition');
                 $skipDefaultDefinition = true;
                 continue;
             }
 
             if ($searchFroArgsEnd && $letter == ')') {
-                Log::log('Arguments end found');
                 $end = $i;
                 break;
             }
 
             // If we are searching for arrow and the first thing we find isn't equal sign it means this isn't arrow function
             if ($searchForArrow && $letter != '=') {
-                Log::log('Start search for end of call 2');
                 $end = $i;
                 break;
             } elseif ($searchForArrow && $letter == '=' && self::$content[$i + 1] ?? '' == ">") {
-                Log::log('Arrow function found');
                 // If this is arrow function then make this empty and skip current letter
                 $this->setInstruction('')
                     ->setInstructionStart($start)
@@ -108,11 +98,14 @@ class CallerBlock extends Block implements Contract\Block
             }
         }
 
+        if (is_null($end)) {
+            $end = \mb_strlen(self::$content);
+        }
+
         $this->setCaret($end);
         $this->setInstruction(trim(\mb_substr(self::$content, $start, $end - $start)))
             ->setInstructionStart($start)
         ;
-        Log::log('Instruction starts at ' . $start . " and ends at " . $end . " => " . $this->getInstruction());
     }
 
     public function recreate(): string

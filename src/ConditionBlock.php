@@ -21,7 +21,6 @@ abstract class ConditionBlock extends Block
     protected function setConditionAndInstruction(int $start)
     {
         $actualStart = $start - \mb_strlen($this->getCondType()) - 1;
-        Log::log('Actula start: ' . $actualStart . ", " . $this->getCondType());
         $condStart = null;
         $condEnd   = null;
         $end       = null;
@@ -66,7 +65,6 @@ abstract class ConditionBlock extends Block
         if (\is_null($condStart) || \is_null($condEnd) || \is_null($end)) {
             throw new Exception("Condition (" . $this->getCondType() . " at letter $start) was not mapped properly, stopping script", 500);
         }
-
         $this->setCaret($end);
         $this->setInstruction(\mb_substr(self::$content, $actualStart, $end - $actualStart));
         $this->setInstructionStart($actualStart);
