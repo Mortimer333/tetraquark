@@ -40,10 +40,8 @@ class MethodBlock extends Block
         $word = '';
         $arguments = [];
         $skipBracket = 0;
-        Log::log('=======');
         for ($i=\strlen($instr) - 1; $i >= 0; $i--) {
             $letter = $instr[$i];
-            Log::log($letter);
             if (
                 ($startsTemplate = $this->isTemplateLiteralLandmark($letter, ''))
                 || $this->isStringLandmark($letter, '')
@@ -91,6 +89,7 @@ class MethodBlock extends Block
         }
 
         $arguments = array_reverse($arguments);
+        Log::log("Arguments:" . implode(', ', $arguments));
         $this->setArgumentBlocks($arguments);
     }
 
@@ -98,11 +97,15 @@ class MethodBlock extends Block
     {
         foreach ($arguments as $argument) {
             $blocks = $this->createSubBlocksWithContent($argument);
+            Log::log('New blocks:');
+            Log::increaseIndent();
             foreach ($blocks as &$block) {
                 if ($block instanceof Block\UndefinedBlock) {
                     $block->setName($block->getInstruction());
                 }
+                Log::log('New block for content: ' . $block->getName());
             }
+            Log::decreaseIndent();
             $this->addArgument($blocks);
         }
     }

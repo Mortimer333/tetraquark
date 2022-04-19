@@ -1,188 +1,36 @@
 Mapping...
-content: class TabJF_Event {\r\n  /**\r\n   * Dispatch custom event\r\n   * Across editor we have few custom events which this function makes easier to fire.\r\n   * @param  {String} name         Name of event\r\n   * @param  {Object} [details={}] Addtional info added to event\r\n   * @return {Object}              Configurated custom event\r\n   */\r\n  dispatch (name, details = {}) {\r\n    details = Object.assign({ instance : this }, details);\r\n    const event = this.event.create(name, details);\r\n    this.editor.dispatchEvent(event);\r\n    return event;\r\n  }\r\n\r\n  /**\r\n   * Creates custom event with acctional data\r\n   * @param  {String} name         Name of event\r\n   * @param  {Object} [details={}] Additional information about event\r\n   * @return {Object}              Custom Event\r\n   */\r\n  create (name, details={}) {\r\n    return new CustomEvent(name, {\r\n      detail     : details,\r\n      bubbles    : true,\r\n      cancelable : true,\r\n      composed   : true,\r\n    });\r\n  }\r\n}\r\nexport { TabJF_Event };\r\n
-=======
-{
- 
-)
-}
-{
- 
-=
- 
-s
-l
-i
-a
-t
-e
-d
- 
-,
-e
-m
-a
-n
-(
-=======
-)
-}
- 
- 
- 
- 
-\n
-\r
-,
-e
-u
-r
-t
- 
-:
- 
- 
- 
-d
-e
-s
-o
-p
-m
-o
-c
- 
- 
- 
- 
- 
- 
-\n
-\r
-,
-e
-u
-r
-t
- 
-:
- 
-e
-l
-b
-a
-l
-e
-c
-n
-a
-c
- 
- 
- 
- 
- 
- 
-\n
-\r
-,
-e
-u
-r
-t
- 
-:
- 
- 
- 
- 
-s
-e
-l
-b
-b
-u
-b
- 
- 
- 
- 
- 
- 
-\n
-\r
-,
-s
-l
-i
-a
-t
-e
-d
- 
-:
- 
- 
- 
- 
- 
-l
-i
-a
-t
-e
-d
- 
- 
- 
- 
- 
- 
-\n
-\r
-{
- 
-,
-e
-m
-a
-n
-(
-content:  {\r\n      detail     : details
+          Start getting subblocks for Object
+    Arguments:name,  details = {}
+    New blocks:
+      New block for content: name
+        Start getting subblocks for Object
+    New blocks:
+      New block for content: details
+      Arguments:name,  {\r\n      detail     : details, \r\n      bubbles    : true, \r\n      cancelable : true, \r\n      composed   : true, \r\n    }
+      New blocks:
+        New block for content: name
+        Start getting subblocks for Object
 PHP Warning:  Uninitialized string offset 30 in E:\xampp\htdocs\tetraquark\src\Block\ObjectValueBlock.php on line 28
 
 Warning: Uninitialized string offset 30 in E:\xampp\htdocs\tetraquark\src\Block\ObjectValueBlock.php on line 28
-=======
-{
- 
-)
-}
-{
-=
-s
-l
-i
-a
-t
-e
-d
- 
-,
-e
-m
-a
-n
-(
+      New blocks:
+        New block for content: 
+      New blocks:
+      New blocks:
+      New blocks:
+      New blocks:
+    Arguments:name,  details={}
+    New blocks:
+      New block for content: name
+        Start getting subblocks for Object
+    New blocks:
+      New block for content: details
+  Start getting subblocks for Object
 =======================
 Creating aliases...
 =======================
-Aliases: TabJF_Event => a, dispatch => b, create => c, details => d, event => e, name => f, nstance => g, CustomEvent => h, 
+Aliases: TabJF_Event => a, dispatch => b, create => c, details => d, event => e, name => f, instance => g, CustomEvent => h, 
 Recreating...
-PHP Warning:  Array to string conversion in E:\xampp\htdocs\tetraquark\src\Block\NewClassBlock.php on line 68
-
-Warning: Array to string conversion in E:\xampp\htdocs\tetraquark\src\Block\NewClassBlock.php on line 68
-PHP Warning:  Array to string conversion in E:\xampp\htdocs\tetraquark\src\Block\NewClassBlock.php on line 68
-
-Warning: Array to string conversion in E:\xampp\htdocs\tetraquark\src\Block\NewClassBlock.php on line 68
 =======================
 Block: Tetraquark\Block\ClassBlock
 Subtype: class
@@ -261,7 +109,7 @@ Alias: `a`
           Subtype: :
           Instruction: instance
           Instruction Start: 393
-          Name: `nstance`
+          Name: `instance`
           Alias: `g`
           =======
             Block: Tetraquark\Block\UndefinedBlock
@@ -417,8 +265,8 @@ Alias: `a`
         Subtype: :
         Instruction: detail
         Instruction Start: 2
-        Name: `etail`
-        Alias: `etail`
+        Name: `detail`
+        Alias: `detail`
         =======
           Block: Tetraquark\Block\UndefinedBlock
           Subtype: 
@@ -450,7 +298,7 @@ Alias: ``
   Name: ``
   Alias: ``
   =======
-Duration: 0.007s
+Duration: 0.008s
 
 
-class a{b(f,d={}){d=Object.assign({g:this},d);const e=this.e.c(f,d);this.editor.dispatchEvent(e);;return e; }c(f,d={}){return new h(Array,Array);}}export {a };
+class a{b(f,d={}){d=Object.assign({g:this},d);const e=this.e.c(f,d);this.editor.dispatchEvent(e);;return e; }c(f,d={}){return new h(f,{detail:d});}}export {a };

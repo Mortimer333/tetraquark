@@ -577,7 +577,7 @@ abstract class Block
         return \mb_strlen($undefined) > 0 && !$this->isWhitespace($undefined) && !isset($undefinedEnds[$undefined]);
     }
 
-    protected function createSubBlocks(?int $start = null): array
+    protected function createSubBlocks(?int $start = null, $special = false): array
     {
         if (is_null($start)) {
             $start = $this->getCaret();
@@ -588,6 +588,7 @@ abstract class Block
         $possibleUndefined = '';
         $undefinedEnds = ["\n" => true, ";" => true];
         $blocks = [];
+        Log::increaseIndent();
         for ($i=$start; $i < \mb_strlen(self::$content); $i++) {
             $letter = self::$content[$i];
             if (
@@ -654,6 +655,7 @@ abstract class Block
                 break;
             }
         }
+        Log::decreaseIndent();
 
         if ($this->isValidUndefined($possibleUndefined)) {
             $blocks[] = new Block\UndefinedBlock($i - \mb_strlen($possibleUndefined), $possibleUndefined);

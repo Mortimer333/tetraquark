@@ -65,6 +65,14 @@ class NewClassBlock extends MethodBlock implements Contract\Block
         if (\sizeof($args) == 0) {
             return $script . ';';
         }
-        return $script . '(' . implode(',', $args) . ');';
+        $script .= '(';
+        foreach ($args as $arg) {
+            foreach ($arg as $block) {
+                $script .= rtrim($block->recreate(), ';');
+            }
+            $script .= ',';
+        }
+        $script = $this->removeAdditionalSpaces(rtrim($script, ','));
+        return $script . ');';
     }
 }
