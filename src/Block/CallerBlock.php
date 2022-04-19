@@ -109,24 +109,6 @@ class CallerBlock extends Block implements Contract\Block
             }
         }
 
-        // // Search for start
-        // $SFWhitespace = false;
-        // for ($i=$start - 1; $i >= 0; $i--) {
-        //     $letter = self::$content[$i];
-        //     if (!$SFWhitespace && $this->isWhitespace($letter)) {
-        //         continue;
-        //     }
-        //
-        //     if (!$this->isWhitespace($letter)) {
-        //         $SFWhitespace = true;
-        //     }
-        //
-        //     if ($SFWhitespace && $this->isWhitespace($letter) || $this->isSpecial($letter)) {
-        //         $start = $i + 1;
-        //         break;
-        //     }
-        // }
-
         $this->setCaret($end);
         $this->setInstruction(trim(\mb_substr(self::$content, $start, $end - $start)))
             ->setInstructionStart($start)

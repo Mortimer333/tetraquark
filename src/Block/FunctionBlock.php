@@ -17,7 +17,7 @@ class FunctionBlock extends MethodBlock implements Contract\Block
 
     public function objectify(int $start = 0)
     {
-        $this->findInstructionEnd($start, 'function', $this->instructionEnds);
+        $this->findMethodEnd($start + \mb_strlen('function'));
         $this->findAndSetName('function ', ['(' => true]);
         $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
         if (\strlen($this->getName()) == 0) {

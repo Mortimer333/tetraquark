@@ -83,4 +83,48 @@ class MethodBlock extends Block
             $this->addArgument($blocks);
         }
     }
+
+    protected function findMethodEnd(int $start)
+    {
+        $properEnd = null;
+        $startDefaultSkip = false;
+        for ($i=$start; $i < strlen(self::$content); $i++) {
+            $letter = self::$content[$i];
+
+            if (
+                ($startsTemplate = $this->isTemplateLiteralLandmark($letter, ''))
+                || $this->isStringLandmark($letter, '')
+            ) {
+                $i = $this->skipString($i + 1, self::$content, $startsTemplate);
+                $letter = self::$content[$i];
+            }
+
+            if (($startDefaultSkip && $letter == ',') || $letter == ')') {
+                $startDefaultSkip = false;
+                continue;
+            } elseif ($startDefaultSkip) {
+                continue;
+            }
+
+            if ($letter == '=') {
+                $startDefaultSkip = true;
+                continue;
+            }
+
+            if ($letter == '{') {
+                $properEnd = $i + 1;
+                $this->setCaret($properEnd);
+                break;
+            }
+        }
+
+        if (is_null($properEnd)) {
+            throw new Exception('Proper End not found', 404);
+        }
+
+        $properStart = $start;
+        $instruction = substr(self::$content, $properStart, $properEnd - $properStart);
+        $this->setInstructionStart($properStart)
+            ->setInstruction($instruction);
+    }
 }

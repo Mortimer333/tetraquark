@@ -1,383 +1,289 @@
 Mapping...
+name,  details = {}
+name,  {\r\n      detail     : details, \r\n      bubbles    : true, \r\n      cancelable : true, \r\n      composed   : true, \r\n    }
+PHP Warning:  Uninitialized string offset 30 in E:\xampp\htdocs\tetraquark\src\Block\ObjectValueBlock.php on line 27
+
+Warning: Uninitialized string offset 30 in E:\xampp\htdocs\tetraquark\src\Block\ObjectValueBlock.php on line 27
+name,  details={}
 =======================
 Creating aliases...
 =======================
-Aliases: TabJF_End => a, select => b, sel => c, update => d, reverse => e, active => f, expanded => g, end => h, shift => i, ine => j, etter => k, ode => l, 
+Aliases: TabJF_Event => a, dispatch => b, create => c, details => d, event => e, name => f, nstance => g, CustomEvent => h, 
 Recreating...
+PHP Warning:  Array to string conversion in E:\xampp\htdocs\tetraquark\src\Block\NewClassBlock.php on line 68
+
+Warning: Array to string conversion in E:\xampp\htdocs\tetraquark\src\Block\NewClassBlock.php on line 68
+PHP Warning:  Array to string conversion in E:\xampp\htdocs\tetraquark\src\Block\NewClassBlock.php on line 68
+
+Warning: Array to string conversion in E:\xampp\htdocs\tetraquark\src\Block\NewClassBlock.php on line 68
 =======================
-Block: Tetraquark\Block\MultiCommentBlock
-Subtype: /*
-Instruction: /**\r\n * Holds all related functions which ends something\r\n */
-Instruction Start: 0
-Name: ``
-Alias: ``
-=======
 Block: Tetraquark\Block\ClassBlock
 Subtype: class
-Instruction: class TabJF_End {
-Instruction Start: 63
-Name: `TabJF_End`
+Instruction: class TabJF_Event {
+Instruction Start: 0
+Name: `TabJF_Event`
 Alias: `a`
 =======
   Block: Tetraquark\Block\MultiCommentBlock
   Subtype: /*
-  Instruction: /**\r\n   * Ends selection\r\n   * Clear selection, resets saved selection and unpresses shift key\r\n   */
-  Instruction Start: 84
+  Instruction: /**\r\n   * Dispatch custom event\r\n   * Across editor we have few custom events which this function makes easier to fire.\r\n   * @param  {String} name         Name of event\r\n   * @param  {Object} [details={}] Addtional info added to event\r\n   * @return {Object}              Configurated custom event\r\n   */
+  Instruction Start: 23
   Name: ``
   Alias: ``
   =======
   Block: Tetraquark\Block\ClassMethodBlock
   Subtype: method
-  Instruction: select () {
-  Instruction Start: 189
-  Name: `select`
-  Arguments: [0] `
+  Instruction: dispatch (name, details = {}) {
+  Instruction Start: 331
+  Name: `dispatch`
+  Arguments: [2] `
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: name
+    Instruction Start: 0
+    Name: `name`
+    Alias: `f`
+    =======
+    Block: Tetraquark\Block\AttributeBlock
+    Subtype: 
+    Instruction:  details =
+    Instruction Start: 0
+    Name: `details`
+    Value: ``
+    Alias: `d`
+    =======
+      Block: Tetraquark\Block\ObjectBlock
+      Subtype: {
+      Instruction: 
+      Instruction Start: 11
+      Name: ``
+      Alias: ``
+      =======
   Alias: `b`
   =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: this
-    Instruction Start: 206
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: middle
-    Instruction: get
-    Instruction Start: 210
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:method
-    Instruction: selection
-    Instruction Start: 214
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: 
-    Instruction Start: 226
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:method
-    Instruction: empty
-    Instruction Start: 226
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\VariableBlock
-    Subtype: const
-    Instruction: const sel    =
-    Instruction Start: 241
-    Name: `sel`
+    Block: Tetraquark\Block\AttributeBlock
+    Subtype: 
+    Instruction:  details =
+    Instruction Start: 367
+    Name: `details`
     Value: ``
-    Alias: `c`
+    Alias: `d`
     =======
       Block: Tetraquark\Block\ChainLinkBlock
       Subtype: first
-      Instruction: this
-      Instruction Start: 256
+      Instruction: Object
+      Instruction Start: 378
       Name: ``
       Alias: ``
       =======
       Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: selection
-      Instruction Start: 260
-      Name: ``
-      Alias: ``
-      =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: sel
-    Instruction Start: 277
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:variable
-    Instruction: update   
-    Instruction Start: 280
-    Name: `update`
-    Alias: `d`
-    =======
-      Block: Tetraquark\Block\AttributeBlock
-      Subtype: 
-      Instruction:  sel.update   =
-      Instruction Start: 276
-      Name: ``
-      Value: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction:  false
-        Instruction Start: 291
-        Name: ``
-        Alias: ``
-        =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: sel
-    Instruction Start: 304
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:variable
-    Instruction: reverse  
-    Instruction Start: 307
-    Name: `reverse`
-    Alias: `e`
-    =======
-      Block: Tetraquark\Block\AttributeBlock
-      Subtype: 
-      Instruction:  sel.reverse  =
-      Instruction Start: 303
-      Name: ``
-      Value: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction:  false
-        Instruction Start: 318
-        Name: ``
-        Alias: ``
-        =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: sel
-    Instruction Start: 331
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:variable
-    Instruction: active   
-    Instruction Start: 334
-    Name: `active`
-    Alias: `f`
-    =======
-      Block: Tetraquark\Block\AttributeBlock
-      Subtype: 
-      Instruction:  sel.active   =
-      Instruction Start: 330
-      Name: ``
-      Value: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction:  false
-        Instruction Start: 345
-        Name: ``
-        Alias: ``
-        =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: sel
-    Instruction Start: 358
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:variable
-    Instruction: expanded 
-    Instruction Start: 361
-    Name: `expanded`
-    Alias: `g`
-    =======
-      Block: Tetraquark\Block\AttributeBlock
-      Subtype: 
-      Instruction:  sel.expanded =
-      Instruction Start: 357
-      Name: ``
-      Value: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction:  false
-        Instruction Start: 372
-        Name: ``
-        Alias: ``
-        =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: sel
-    Instruction Start: 385
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:variable
-    Instruction: end      
-    Instruction Start: 388
-    Name: `end`
-    Alias: `h`
-    =======
-      Block: Tetraquark\Block\AttributeBlock
-      Subtype: 
-      Instruction:  sel.end      =
+      Subtype: end:method
+      Instruction: assign
       Instruction Start: 384
       Name: ``
-      Value: ``
       Alias: ``
       =======
         Block: Tetraquark\Block\ObjectBlock
         Subtype: {
         Instruction: 
-        Instruction Start: 400
+        Instruction Start: 392
         Name: ``
         Alias: ``
         =======
           Block: Tetraquark\Block\ObjectValueBlock
           Subtype: :
-          Instruction: line
-          Instruction Start: 401
-          Name: `ine`
-          Alias: `j`
+          Instruction: instance
+          Instruction Start: 393
+          Name: `nstance`
+          Alias: `g`
           =======
             Block: Tetraquark\Block\UndefinedBlock
             Subtype: 
-            Instruction:  -1
-            Instruction Start: 408
+            Instruction:  this 
+            Instruction Start: 404
             Name: ``
             Alias: ``
             =======
-          Block: Tetraquark\Block\ObjectValueBlock
-          Subtype: :
-          Instruction: letter
-          Instruction Start: 412
-          Name: `etter`
-          Alias: `k`
-          =======
-            Block: Tetraquark\Block\UndefinedBlock
-            Subtype: 
-            Instruction:  -1
-            Instruction Start: 421
-            Name: ``
-            Alias: ``
-            =======
-          Block: Tetraquark\Block\ObjectValueBlock
-          Subtype: :
-          Instruction: node
-          Instruction Start: 425
-          Name: `ode`
-          Alias: `l`
-          =======
-            Block: Tetraquark\Block\UndefinedBlock
-            Subtype: 
-            Instruction:  -1 
-            Instruction Start: 432
-            Name: ``
-            Alias: ``
-            =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: this
-    Instruction Start: 444
-    Name: ``
-    Alias: ``
+        Block: Tetraquark\Block\UndefinedBlock
+        Subtype: 
+        Instruction: , details
+        Instruction Start: 411
+        Name: ``
+        Alias: ``
+        =======
+    Block: Tetraquark\Block\VariableBlock
+    Subtype: const
+    Instruction: const event =
+    Instruction Start: 428
+    Name: `event`
+    Value: ``
+    Alias: `e`
     =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: middle
-    Instruction: pressed
-    Instruction Start: 448
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:variable
-    Instruction: shift 
-    Instruction Start: 456
-    Name: `shift`
-    Alias: `i`
-    =======
-      Block: Tetraquark\Block\AttributeBlock
-      Subtype: 
-      Instruction:  this.pressed.shift =
-      Instruction Start: 443
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: first
+      Instruction: this
+      Instruction Start: 442
       Name: ``
-      Value: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: middle
+      Instruction: event
+      Instruction Start: 446
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: end:method
+      Instruction: create
+      Instruction Start: 452
+      Name: ``
       Alias: ``
       =======
         Block: Tetraquark\Block\UndefinedBlock
         Subtype: 
-        Instruction:  false
-        Instruction Start: 464
+        Instruction: name, details
+        Instruction Start: 460
         Name: ``
         Alias: ``
         =======
-    Block: Tetraquark\Block\SingleCommentBlock
-    Subtype: //
-    Instruction: / forcing the state, might not be the same as in real world\r\n
-    Instruction Start: 472
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\SingleCommentBlock
-    Subtype: //
-    Instruction: / Updates start with current position\r\n
-    Instruction Start: 538
-    Name: ``
-    Alias: ``
-    =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: first
     Instruction: this
-    Instruction Start: 582
+    Instruction Start: 481
     Name: ``
     Alias: ``
     =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: middle
-    Instruction: update
-    Instruction Start: 586
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: middle
-    Instruction: selection
-    Instruction Start: 593
+    Instruction: editor
+    Instruction Start: 485
     Name: ``
     Alias: ``
     =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: end:method
-    Instruction: start
-    Instruction Start: 603
+    Instruction: dispatchEvent
+    Instruction Start: 492
     Name: ``
     Alias: ``
+    =======
+      Block: Tetraquark\Block\UndefinedBlock
+      Subtype: 
+      Instruction: event
+      Instruction Start: 507
+      Name: ``
+      Alias: ``
+      =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: ;\r\n    return event;\r\n  
+    Instruction Start: 513
+    Name: ``
+    Alias: ``
+    =======
+  Block: Tetraquark\Block\MultiCommentBlock
+  Subtype: /*
+  Instruction: /**\r\n   * Creates custom event with acctional data\r\n   * @param  {String} name         Name of event\r\n   * @param  {Object} [details={}] Additional information about event\r\n   * @return {Object}              Custom Event\r\n   */
+  Instruction Start: 544
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ClassMethodBlock
+  Subtype: method
+  Instruction: create (name, details={}) {
+  Instruction Start: 775
+  Name: `create`
+  Arguments: [2] `
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: name
+    Instruction Start: 0
+    Name: `name`
+    Alias: `f`
+    =======
+    Block: Tetraquark\Block\AttributeBlock
+    Subtype: 
+    Instruction:  details=
+    Instruction Start: 0
+    Name: `details`
+    Value: ``
+    Alias: `d`
+    =======
+      Block: Tetraquark\Block\ObjectBlock
+      Subtype: {
+      Instruction: 
+      Instruction Start: 9
+      Name: ``
+      Alias: ``
+      =======
+  Alias: `c`
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: \r\n    return
+    Instruction Start: 789
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\NewClassBlock
+    Subtype: new
+    Instruction:  CustomEvent(name, {\r\n      detail     : details,\r\n      bubbles    : true,\r\n      cancelable : true,\r\n      composed   : true,\r\n    })
+    Instruction Start: 814
+    Name: `CustomEvent`
+    Arguments: [2] `
+      Block: Tetraquark\Block\UndefinedBlock
+      Subtype: 
+      Instruction: name
+      Instruction Start: 0
+      Name: `name`
+      Alias: `f`
+      =======
+      Block: Tetraquark\Block\ObjectBlock
+      Subtype: {
+      Instruction: 
+      Instruction Start: 1
+      Name: ``
+      Alias: ``
+      =======
+        Block: Tetraquark\Block\ObjectValueBlock
+        Subtype: :
+        Instruction: detail
+        Instruction Start: 2
+        Name: `etail`
+        Alias: `etail`
+        =======
+          Block: Tetraquark\Block\UndefinedBlock
+          Subtype: 
+          Instruction:  details
+          Instruction Start: 22
+          Name: ``
+          Alias: ``
+          =======
+    Alias: `h`
     =======
 Block: Tetraquark\Block\UndefinedBlock
 Subtype: 
 Instruction: \r\nexport 
-Instruction Start: 610
+Instruction Start: 952
 Name: ``
 Alias: ``
 =======
 Block: Tetraquark\Block\ObjectBlock
 Subtype: {
 Instruction: 
-Instruction Start: 629
+Instruction Start: 971
 Name: ``
 Alias: ``
 =======
   Block: Tetraquark\Block\UndefinedBlock
   Subtype: 
-  Instruction:  TabJF_End 
-  Instruction Start: 630
+  Instruction:  TabJF_Event 
+  Instruction Start: 972
   Name: ``
   Alias: ``
   =======
-Duration: 0.005s
+Duration: 0.007s
 
 
-class a{b(){this.get.selection().empty();const c=this.selection;c.d=false;c.e=false;c.f=false;c.g=false;c.h={j:-1,k:-1,l:-1};this.pressed.i=false;this.d.selection.start();}}export{a};
+class a{b(f,d={}){d=Object.assign({g:this},d);const e=this.e.c(f,d);this.editor.dispatchEvent(e);;return e;}c(f,d={}){returnnew h(Array,Array);}}export{a};

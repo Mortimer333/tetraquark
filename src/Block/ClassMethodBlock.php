@@ -19,6 +19,7 @@ class ClassMethodBlock extends MethodBlock implements Contract\Block
     {
         $searchForWhitespace = false;
         Log::increaseIndent();
+        // Search for the name of the function
         for ($i=$start - 1; $i >= 0; $i--) {
             $letter = self::$content[$i];
             if ($searchForWhitespace && $this->isWhitespace($letter)) {
@@ -30,7 +31,7 @@ class ClassMethodBlock extends MethodBlock implements Contract\Block
             }
         }
         Log::decreaseIndent();
-        $this->findInstructionEnd($start, '', $this->instructionEnds);
+        $this->findMethodEnd($start);
         $this->findAndSetName('', ['(' => true]);
         $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
         $this->setSubtype('method');
