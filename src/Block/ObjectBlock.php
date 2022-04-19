@@ -17,8 +17,7 @@ class ObjectBlock extends Block implements Contract\Block
         $this->setCaret($start + 1);
         $this->setInstruction('');
         $this->setInstructionStart($start);
-        Log::log('Start getting subblocks for Object');
-        $this->blocks = array_merge($this->blocks, $this->createSubBlocks($start + 1, true));
+        $this->blocks = array_merge($this->blocks, $this->createSubBlocks($start + 1));
     }
 
     public function recreate(): string

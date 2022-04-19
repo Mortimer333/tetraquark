@@ -577,7 +577,7 @@ abstract class Block
         return \mb_strlen($undefined) > 0 && !$this->isWhitespace($undefined) && !isset($undefinedEnds[$undefined]);
     }
 
-    protected function createSubBlocks(?int $start = null, $special = false): array
+    protected function createSubBlocks(?int $start = null): array
     {
         if (is_null($start)) {
             $start = $this->getCaret();
@@ -588,7 +588,6 @@ abstract class Block
         $possibleUndefined = '';
         $undefinedEnds = ["\n" => true, ";" => true];
         $blocks = [];
-        Log::increaseIndent();
         for ($i=$start; $i < \mb_strlen(self::$content); $i++) {
             $letter = self::$content[$i];
             if (
@@ -655,7 +654,10 @@ abstract class Block
                 break;
             }
         }
-        Log::decreaseIndent();
+
+        if ($i == \mb_strlen(self::$content)) {
+            $i--;
+        }
 
         if ($this->isValidUndefined($possibleUndefined)) {
             $blocks[] = new Block\UndefinedBlock($i - \mb_strlen($possibleUndefined), $possibleUndefined);
@@ -865,8 +867,7 @@ abstract class Block
     public function skipString(int $start, string $value, bool $isTemplate = false, bool $reverse = false): int
     {
         $modifier = (((int)!$reverse) * 2) - 1;
-
-        for ($i=$start; !$reverse && $i < \mb_strlen($value) || $reverse && $i >= 0; $i += $modifier) {
+        for ($i=$start; (!$reverse && $i < \mb_strlen($value)) || ($reverse && $i >= 0); $i += $modifier) {
             $letter = $value[$i];
             if ($isTemplate && $this->isTemplateLiteralLandmark($letter, $value[$i - 1] ?? '', true)) {
                 return $i + $modifier;
@@ -984,5 +985,12 @@ abstract class Block
     public function getParent(): Block
     {
         return $this->parent;
+    }
+
+    protected function mb_strrev($text){
+        $str = iconv('UTF-8','windows-1251',$text);
+        $string = strrev($str);
+        $str = iconv('windows-1251', 'UTF-8', $string);
+        return $str;
     }
 }

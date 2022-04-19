@@ -46,18 +46,25 @@ class MethodBlock extends Block
                 ($startsTemplate = $this->isTemplateLiteralLandmark($letter, ''))
                 || $this->isStringLandmark($letter, '')
             ) {
-                $i = $this->skipString($i - 1, self::$content, $startsTemplate, true);
-                $letter = self::$content[$i];
+                $oldPos = $i;
+                $i = $this->skipString($i - 1, $instr, $startsTemplate, true);
+                $word .= $this->mb_strrev(\mb_substr($instr, $i + 1, $oldPos - $i));
+                $letter = $instr[$i];
             }
 
-            if ($startSettingArgs && $skipBracket > 0 && ($letter == '{' || $letter == '(')) {
+            if ($startSettingArgs && $skipBracket > 0 && ($letter == '{' || $letter == '(' || $letter == '[')) {
                 $skipBracket--;
                 $word .= $letter;
                 continue;
             }
 
-            if ($startSettingArgs && ($letter == '}' || $letter == ')')) {
+            if ($startSettingArgs && ($letter == '}' || $letter == ')' || $letter == ']')) {
                 $skipBracket++;
+                $word .= $letter;
+                continue;
+            }
+
+            if ($skipBracket > 0) {
                 $word .= $letter;
                 continue;
             }
@@ -73,12 +80,13 @@ class MethodBlock extends Block
             }
 
             if ($startSettingArgs && $letter == '(') {
-                $arguments[] = strrev($word);
+                $arguments[] = $this->mb_strrev($word);
+                $word = '';
                 break;
             }
 
             if ($startSettingArgs && $letter == ',') {
-                $arguments[] = strrev($word);
+                $arguments[] = $this->mb_strrev($word);
                 $word = '';
                 continue;
             }
@@ -89,7 +97,6 @@ class MethodBlock extends Block
         }
 
         $arguments = array_reverse($arguments);
-        Log::log("Arguments:" . implode(', ', $arguments));
         $this->setArgumentBlocks($arguments);
     }
 
@@ -97,15 +104,11 @@ class MethodBlock extends Block
     {
         foreach ($arguments as $argument) {
             $blocks = $this->createSubBlocksWithContent($argument);
-            Log::log('New blocks:');
-            Log::increaseIndent();
             foreach ($blocks as &$block) {
                 if ($block instanceof Block\UndefinedBlock) {
                     $block->setName($block->getInstruction());
                 }
-                Log::log('New block for content: ' . $block->getName());
             }
-            Log::decreaseIndent();
             $this->addArgument($blocks);
         }
     }

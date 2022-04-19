@@ -1,31 +1,4 @@
 Mapping...
-          Start getting subblocks for Object
-    Arguments:name,  details = {}
-    New blocks:
-      New block for content: name
-        Start getting subblocks for Object
-    New blocks:
-      New block for content: details
-      Arguments:name,  {\r\n      detail     : details, \r\n      bubbles    : true, \r\n      cancelable : true, \r\n      composed   : true, \r\n    }
-      New blocks:
-        New block for content: name
-        Start getting subblocks for Object
-PHP Warning:  Uninitialized string offset 30 in E:\xampp\htdocs\tetraquark\src\Block\ObjectValueBlock.php on line 28
-
-Warning: Uninitialized string offset 30 in E:\xampp\htdocs\tetraquark\src\Block\ObjectValueBlock.php on line 28
-      New blocks:
-        New block for content: 
-      New blocks:
-      New blocks:
-      New blocks:
-      New blocks:
-    Arguments:name,  details={}
-    New blocks:
-      New block for content: name
-        Start getting subblocks for Object
-    New blocks:
-      New block for content: details
-  Start getting subblocks for Object
 =======================
 Creating aliases...
 =======================
@@ -55,7 +28,7 @@ Alias: `a`
     Block: Tetraquark\Block\UndefinedBlock
     Subtype: 
     Instruction: name
-    Instruction Start: 0
+    Instruction Start: -1
     Name: `name`
     Alias: `f`
     =======
@@ -213,7 +186,7 @@ Alias: `a`
     Block: Tetraquark\Block\UndefinedBlock
     Subtype: 
     Instruction: name
-    Instruction Start: 0
+    Instruction Start: -1
     Name: `name`
     Alias: `f`
     =======
@@ -243,14 +216,14 @@ Alias: `a`
     =======
     Block: Tetraquark\Block\NewClassBlock
     Subtype: new
-    Instruction:  CustomEvent(name, {\r\n      detail     : details,\r\n      bubbles    : true,\r\n      cancelable : true,\r\n      composed   : true,\r\n    })
+    Instruction:  CustomEvent(name, {\r\n      detail     : details,\r\n      bubbles    : true,\r\n      cancelable : true,\r\n      composed   : true,\r\n  }, [\r\n      'bv','bvxc', 123\r\n  ])
     Instruction Start: 814
     Name: `CustomEvent`
-    Arguments: [2] `
+    Arguments: [3] `
       Block: Tetraquark\Block\UndefinedBlock
       Subtype: 
       Instruction: name
-      Instruction Start: 0
+      Instruction Start: -1
       Name: `name`
       Alias: `f`
       =======
@@ -275,30 +248,107 @@ Alias: `a`
           Name: ``
           Alias: ``
           =======
+        Block: Tetraquark\Block\ObjectValueBlock
+        Subtype: :
+        Instruction: bubbles
+        Instruction Start: 31
+        Name: `bubbles`
+        Alias: `bubbles`
+        =======
+          Block: Tetraquark\Block\UndefinedBlock
+          Subtype: 
+          Instruction:  true
+          Instruction Start: 51
+          Name: ``
+          Alias: ``
+          =======
+        Block: Tetraquark\Block\ObjectValueBlock
+        Subtype: :
+        Instruction: cancelable
+        Instruction Start: 57
+        Name: `cancelable`
+        Alias: `cancelable`
+        =======
+          Block: Tetraquark\Block\UndefinedBlock
+          Subtype: 
+          Instruction:  true
+          Instruction Start: 77
+          Name: ``
+          Alias: ``
+          =======
+        Block: Tetraquark\Block\ObjectValueBlock
+        Subtype: :
+        Instruction: composed
+        Instruction Start: 83
+        Name: `composed`
+        Alias: `composed`
+        =======
+          Block: Tetraquark\Block\UndefinedBlock
+          Subtype: 
+          Instruction:  true
+          Instruction Start: 103
+          Name: ``
+          Alias: ``
+          =======
+      Block: Tetraquark\Block\ArrayBlock
+      Subtype: [
+      Instruction: 
+      Instruction Start: 1
+      Name: ``
+      Alias: ``
+      =======
+        Block: Tetraquark\Block\StringBlock
+        Subtype: 
+        Instruction: 'bv'
+        Instruction Start: 10
+        Name: ``
+        Alias: ``
+        =======
+        Block: Tetraquark\Block\UndefinedBlock
+        Subtype: 
+        Instruction: ,
+        Instruction Start: 14
+        Name: ``
+        Alias: ``
+        =======
+        Block: Tetraquark\Block\StringBlock
+        Subtype: 
+        Instruction: 'bvxc'
+        Instruction Start: 15
+        Name: ``
+        Alias: ``
+        =======
+        Block: Tetraquark\Block\UndefinedBlock
+        Subtype: 
+        Instruction: , 123\r\n  
+        Instruction Start: 21
+        Name: ``
+        Alias: ``
+        =======
     Alias: `h`
     =======
 Block: Tetraquark\Block\UndefinedBlock
 Subtype: 
 Instruction: \r\nexport 
-Instruction Start: 952
+Instruction Start: 982
 Name: ``
 Alias: ``
 =======
 Block: Tetraquark\Block\ObjectBlock
 Subtype: {
 Instruction: 
-Instruction Start: 971
+Instruction Start: 1001
 Name: ``
 Alias: ``
 =======
   Block: Tetraquark\Block\UndefinedBlock
   Subtype: 
   Instruction:  TabJF_Event 
-  Instruction Start: 972
+  Instruction Start: 1002
   Name: ``
   Alias: ``
   =======
 Duration: 0.008s
 
 
-class a{b(f,d={}){d=Object.assign({g:this},d);const e=this.e.c(f,d);this.editor.dispatchEvent(e);;return e; }c(f,d={}){return new h(f,{detail:d});}}export {a };
+class a{b(f,d={}){d=Object.assign({g:this},d);const e=this.e.c(f,d);this.editor.dispatchEvent(e);;return e; }c(f,d={}){return new h(f,{detail:d,bubbles:true,cancelable:true,composed:true},['bv',,'bvxc',123]);}}export {a };

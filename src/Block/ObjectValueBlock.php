@@ -24,7 +24,6 @@ class ObjectValueBlock extends Block implements Contract\Block
             )
         );
         $this->blocks = array_merge($this->blocks, $this->createSubBlocks($start + 1));
-        // Log::log('ObjectValue: ' . $this->getCaret() . ', ' . self::$content);
         $lastLetter = self::$content[$this->getCaret()];
         if ($lastLetter == '}') {
             $this->setCaret($this->getCaret() - 1);
