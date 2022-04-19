@@ -23,7 +23,8 @@ class ObjectValueBlock extends Block implements Contract\Block
                 trim($this->getInstruction())
             )
         );
-        $this->blocks = array_merge($this->blocks, $this->createSubBlocks($start + 1)); 
+        Log::log('content: '  .self::$content);
+        $this->blocks = array_merge($this->blocks, $this->createSubBlocks($start + 1));
         $lastLetter = self::$content[$this->getCaret()];
         if ($lastLetter == '}') {
             $this->setCaret($this->getCaret() - 1);
@@ -49,6 +50,6 @@ class ObjectValueBlock extends Block implements Contract\Block
             $script .= rtrim($block->recreate(), ';');
         }
 
-        return $script . ",";
+        return trim($script) . ",";
     }
 }

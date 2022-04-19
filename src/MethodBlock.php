@@ -28,7 +28,7 @@ class MethodBlock extends Block
             foreach ($arg as $block) {
                 $args .= rtrim($block->recreate(), ';');
             }
-            $args .= ',';
+            $args = trim($args) . ',';
         }
         return rtrim($args, ',');
     }
@@ -39,8 +39,31 @@ class MethodBlock extends Block
         $startSettingArgs = false;
         $word = '';
         $arguments = [];
+        $skipBracket = 0;
+        Log::log('=======');
         for ($i=\strlen($instr) - 1; $i >= 0; $i--) {
             $letter = $instr[$i];
+            Log::log($letter);
+            if (
+                ($startsTemplate = $this->isTemplateLiteralLandmark($letter, ''))
+                || $this->isStringLandmark($letter, '')
+            ) {
+                $i = $this->skipString($i - 1, self::$content, $startsTemplate, true);
+                $letter = self::$content[$i];
+            }
+
+            if ($startSettingArgs && $skipBracket > 0 && ($letter == '{' || $letter == '(')) {
+                $skipBracket--;
+                $word .= $letter;
+                continue;
+            }
+
+            if ($startSettingArgs && ($letter == '}' || $letter == ')')) {
+                $skipBracket++;
+                $word .= $letter;
+                continue;
+            }
+
             if (!$startSettingArgs && $letter == ')') {
                 $startSettingArgs = true;
                 continue;

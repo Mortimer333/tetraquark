@@ -37,6 +37,6 @@ class UndefinedBlock extends Block implements Contract\Block
             $script .= $block->recreate();
         }
 
-        return $script;
+        return $script . ' ';
     }
 }

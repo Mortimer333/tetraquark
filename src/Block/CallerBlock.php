@@ -28,7 +28,6 @@ class CallerBlock extends Block implements Contract\Block
             ) {
                 $i = $this->skipString($i + 1, self::$content, $startsTemplate);
                 $letter = self::$content[$i];
-                Log::log('Skip string, new letter: ' . $letter);
             }
 
             if ($letter == '(') {
