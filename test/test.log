@@ -1,4 +1,8 @@
 Mapping...
+Letter is semicolon. Previous pos: 420, new pos: 421, letter: ;- Tetraquark\Block\ChainLinkBlock
+Letter is semicolon. Previous pos: 473, new pos: 474, letter: ;- Tetraquark\Block\ChainLinkBlock
+Letter is semicolon. Previous pos: 512, new pos: 513, letter: ;- Tetraquark\Block\ChainLinkBlock
+Letter is semicolon. Previous pos: 1015, new pos: 1016, letter: ;- Tetraquark\Block\ObjectBlock
 =======================
 Creating aliases...
 =======================
@@ -165,8 +169,8 @@ Alias: `a`
       =======
     Block: Tetraquark\Block\UndefinedBlock
     Subtype: 
-    Instruction: ;\r\n    return event;\r\n  
-    Instruction Start: 513
+    Instruction: \r\n    return event;\r\n  
+    Instruction Start: 514
     Name: ``
     Alias: ``
     =======
@@ -304,9 +308,9 @@ Alias: `a`
         Name: ``
         Alias: ``
         =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction: ,
+        Block: Tetraquark\Block\ArrayItemSeperatorBlock
+        Subtype: ,
+        Instruction: 
         Instruction Start: 14
         Name: ``
         Alias: ``
@@ -318,10 +322,17 @@ Alias: `a`
         Name: ``
         Alias: ``
         =======
+        Block: Tetraquark\Block\ArrayItemSeperatorBlock
+        Subtype: ,
+        Instruction: 
+        Instruction Start: 21
+        Name: ``
+        Alias: ``
+        =======
         Block: Tetraquark\Block\UndefinedBlock
         Subtype: 
-        Instruction: , 123\r\n  
-        Instruction Start: 21
+        Instruction:  123\r\n  
+        Instruction Start: 22
         Name: ``
         Alias: ``
         =======
@@ -348,7 +359,7 @@ Alias: ``
   Name: ``
   Alias: ``
   =======
-Duration: 0.008s
+Duration: 0.007s
 
 
-class a{b(f,d={}){d=Object.assign({g:this},d);const e=this.e.c(f,d);this.editor.dispatchEvent(e);;return e; }c(f,d={}){return new h(f,{detail:d,bubbles:true,cancelable:true,composed:true},['bv',,'bvxc',123]);}}export {a };
+class a{b(f,d={}){d=Object.assign({g:this},d);const e=this.e.c(f,d);this.editor.dispatchEvent(e);return e; }c(f,d={}){return new h(f,{detail:d,bubbles:true,cancelable:true,composed:true},['bv','bvxc',123]);}}export {a};

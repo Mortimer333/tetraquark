@@ -258,6 +258,7 @@ abstract class Block
             ],
             "default" => 'ChainLinkBlock'
         ],
+        ',' => "ArrayItemSeperatorBlock"
     ];
 
     public function __construct(
@@ -625,6 +626,12 @@ abstract class Block
                 $block->setParent($this);
                 $mappedWordLen = \mb_strlen($mappedWord);
                 $instStart = $block->getInstructionStart();
+                // Check if instruction did include semicolon
+                list($nextLetter, $pos) = $this->getNextLetter($i, self::$content);
+                if ($nextLetter == ';') {
+                    $i = $pos;
+                }
+
                 $lenOfUndefined = $instStart - $oldPos;
                 if ($lenOfUndefined - 1 > 0) {
                     $possibleUndefined = \mb_substr($possibleUndefined, 0, $lenOfUndefined - 1);
@@ -992,5 +999,17 @@ abstract class Block
         $string = strrev($str);
         $str = iconv('windows-1251', 'UTF-8', $string);
         return $str;
+    }
+
+    protected function getNextLetter(int $start, string $content): array
+    {
+        for ($i=$start + 1; $i < \mb_strlen($content); $i++) {
+            $letter = $content[$i];
+            if (!$this->isWhitespace($letter)) {
+                return [$letter, $i];
+            }
+        }
+
+        return ['', $i - 1];
     }
 }
