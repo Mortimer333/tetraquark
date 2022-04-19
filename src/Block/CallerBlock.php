@@ -127,6 +127,11 @@ class CallerBlock extends Block implements Contract\Block
             $script .= $block->recreate();
         }
 
-        return rtrim($script, ';') . ';';
+        $script = rtrim($script, ';');
+
+        if (!$this->checkIfFirstLetterInNextSiblingIsSpecial()) {
+            return $script . ';';
+        }
+        return $script;
     }
 }

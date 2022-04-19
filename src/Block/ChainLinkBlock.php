@@ -102,7 +102,11 @@ class ChainLinkBlock extends Block implements Contract\Block
             $index = $this->getChildIndex();
             $parentChildren = $parent->getBlocks();
             $nextChild = $parentChildren[$index + 1] ?? null;
-            if ($nextChild instanceof ChainLinkBlock || $nextChild instanceof BracketChainLinkBlock) {
+            if (
+                $nextChild instanceof ChainLinkBlock
+                || $nextChild instanceof BracketChainLinkBlock
+                || $this->checkIfFirstLetterInNextSiblingIsSpecial()
+            ) {
                 $script .= ")";
             } else {
                 $script .= ");";

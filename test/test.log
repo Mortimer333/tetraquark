@@ -1,365 +1,999 @@
 Mapping...
-Letter is semicolon. Previous pos: 420, new pos: 421, letter: ;- Tetraquark\Block\ChainLinkBlock
-Letter is semicolon. Previous pos: 473, new pos: 474, letter: ;- Tetraquark\Block\ChainLinkBlock
-Letter is semicolon. Previous pos: 512, new pos: 513, letter: ;- Tetraquark\Block\ChainLinkBlock
-Letter is semicolon. Previous pos: 1015, new pos: 1016, letter: ;- Tetraquark\Block\ObjectBlock
+lastblock: .
+Letter: t
+lastblock: .
+Letter: e
+lastblock: .
+Letter: t
+lastblock: .
+Letter: t
+lastblock: .
+Letter: t
+lastblock: .
+Letter: t
+lastblock: .
+Letter: b
+lastblock:     context.
+Letter:  
+Letter: t
+lastblock: .
+Letter: t
+lastblock:     return context.
+Letter:  
+Letter: =
+lastblock: .
+Letter: t
+Actula start: 1865, if
+lastblock: .
+Letter: t
+Actula start: 2019, if
+lastblock: .
+Letter: t
+Actula start: 2300, if
+lastblock:       return half.
+Letter: \n
+lastblock: + this.
+Letter:  
+Letter: +
+lastblock: .
+Letter: t
+lastblock:     return this.
+Letter: \n
+lastblock: .
+Letter: t
 =======================
 Creating aliases...
 =======================
-Aliases: TabJF_Event => a, dispatch => b, create => c, details => d, event => e, name => f, instance => g, CustomEvent => h, 
+Aliases: TabJF_Font => a, lab => b, createLab => c, getCssStyle => d, getCanvasFontSize => e, calculateWidth => f, getLetterByWidth => g, element => h, prop => i, fontWeight => j, fontSize => k, fontFamily => l, el => m, context => n, font => o, text => p, half => r, textWidth => s, left => t, singleSize => u, 
 Recreating...
 =======================
 Block: Tetraquark\Block\ClassBlock
 Subtype: class
-Instruction: class TabJF_Event {
+Instruction: class TabJF_Font {
 Instruction Start: 0
-Name: `TabJF_Event`
+Name: `TabJF_Font`
 Alias: `a`
 =======
+  Block: Tetraquark\Block\AttributeBlock
+  Subtype: 
+  Instruction:  lab =
+  Instruction Start: 21
+  Name: `lab`
+  Value: ``
+  Alias: `b`
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  null
+    Instruction Start: 27
+    Name: ``
+    Alias: ``
+    =======
+  Block: Tetraquark\Block\SingleCommentBlock
+  Subtype: //
+  Instruction: / Placeholder for lab where we calculate width of text\r\n
+  Instruction Start: 36
+  Name: ``
+  Alias: ``
+  =======
   Block: Tetraquark\Block\MultiCommentBlock
   Subtype: /*
-  Instruction: /**\r\n   * Dispatch custom event\r\n   * Across editor we have few custom events which this function makes easier to fire.\r\n   * @param  {String} name         Name of event\r\n   * @param  {Object} [details={}] Addtional info added to event\r\n   * @return {Object}              Configurated custom event\r\n   */
-  Instruction Start: 23
+  Instruction: /**\r\n   * Creates laboratory and saves it into this.font.lab\r\n   */
+  Instruction Start: 97
   Name: ``
   Alias: ``
   =======
   Block: Tetraquark\Block\ClassMethodBlock
   Subtype: method
-  Instruction: dispatch (name, details = {}) {
-  Instruction Start: 331
-  Name: `dispatch`
-  Arguments: [2] `
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction: name
-    Instruction Start: -1
-    Name: `name`
-    Alias: `f`
-    =======
-    Block: Tetraquark\Block\AttributeBlock
-    Subtype: 
-    Instruction:  details =
-    Instruction Start: 0
-    Name: `details`
-    Value: ``
-    Alias: `d`
-    =======
-      Block: Tetraquark\Block\ObjectBlock
-      Subtype: {
-      Instruction: 
-      Instruction Start: 11
-      Name: ``
-      Alias: ``
-      =======
-  Alias: `b`
+  Instruction: createLab () {
+  Instruction Start: 168
+  Name: `createLab`
+  Arguments: [0] `
+  Alias: `c`
   =======
-    Block: Tetraquark\Block\AttributeBlock
-    Subtype: 
-    Instruction:  details =
-    Instruction Start: 367
-    Name: `details`
-    Value: ``
-    Alias: `d`
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: Object
-      Instruction Start: 378
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: assign
-      Instruction Start: 384
-      Name: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\ObjectBlock
-        Subtype: {
-        Instruction: 
-        Instruction Start: 392
-        Name: ``
-        Alias: ``
-        =======
-          Block: Tetraquark\Block\ObjectValueBlock
-          Subtype: :
-          Instruction: instance
-          Instruction Start: 393
-          Name: `instance`
-          Alias: `g`
-          =======
-            Block: Tetraquark\Block\UndefinedBlock
-            Subtype: 
-            Instruction:  this 
-            Instruction Start: 404
-            Name: ``
-            Alias: ``
-            =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction: , details
-        Instruction Start: 411
-        Name: ``
-        Alias: ``
-        =======
-    Block: Tetraquark\Block\VariableBlock
-    Subtype: const
-    Instruction: const event =
-    Instruction Start: 428
-    Name: `event`
-    Value: ``
-    Alias: `e`
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: this
-      Instruction Start: 442
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: event
-      Instruction Start: 446
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: create
-      Instruction Start: 452
-      Name: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction: name, details
-        Instruction Start: 460
-        Name: ``
-        Alias: ``
-        =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: first
     Instruction: this
-    Instruction Start: 481
+    Instruction Start: 188
     Name: ``
     Alias: ``
     =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: middle
-    Instruction: editor
-    Instruction Start: 485
+    Instruction: font
+    Instruction Start: 192
     Name: ``
     Alias: ``
     =======
     Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:method
-    Instruction: dispatchEvent
-    Instruction Start: 492
-    Name: ``
-    Alias: ``
+    Subtype: end:variable
+    Instruction: lab 
+    Instruction Start: 197
+    Name: `lab`
+    Alias: `b`
     =======
-      Block: Tetraquark\Block\UndefinedBlock
+      Block: Tetraquark\Block\AttributeBlock
       Subtype: 
-      Instruction: event
-      Instruction Start: 507
+      Instruction:  this.font.lab =
+      Instruction Start: 187
       Name: ``
+      Value: ``
       Alias: ``
       =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction: \r\n    return event;\r\n  
-    Instruction Start: 514
-    Name: ``
-    Alias: ``
-    =======
+        Block: Tetraquark\Block\ChainLinkBlock
+        Subtype: first
+        Instruction: document
+        Instruction Start: 204
+        Name: ``
+        Alias: ``
+        =======
+        Block: Tetraquark\Block\ChainLinkBlock
+        Subtype: end:method
+        Instruction: createElement
+        Instruction Start: 212
+        Name: ``
+        Alias: ``
+        =======
+          Block: Tetraquark\Block\StringBlock
+          Subtype: 
+          Instruction: "canvas"
+          Instruction Start: 227
+          Name: ``
+          Alias: ``
+          =======
   Block: Tetraquark\Block\MultiCommentBlock
   Subtype: /*
-  Instruction: /**\r\n   * Creates custom event with acctional data\r\n   * @param  {String} name         Name of event\r\n   * @param  {Object} [details={}] Additional information about event\r\n   * @return {Object}              Custom Event\r\n   */
-  Instruction Start: 544
+  Instruction: /**\r\n   * Get assigned css to passed node\r\n   * @param  {Node  } element Node from which we take style\r\n   * @param  {String} prop    Name of searched style\r\n   * @return {String|Boolean} Value of searched css style or false if not found\r\n   */
+  Instruction Start: 248
   Name: ``
   Alias: ``
   =======
   Block: Tetraquark\Block\ClassMethodBlock
   Subtype: method
-  Instruction: create (name, details={}) {
-  Instruction Start: 775
-  Name: `create`
+  Instruction: getCssStyle(element, prop) {
+  Instruction Start: 496
+  Name: `getCssStyle`
   Arguments: [2] `
     Block: Tetraquark\Block\UndefinedBlock
     Subtype: 
-    Instruction: name
+    Instruction: element
     Instruction Start: -1
-    Name: `name`
-    Alias: `f`
+    Name: `element`
+    Alias: `h`
     =======
-    Block: Tetraquark\Block\AttributeBlock
+    Block: Tetraquark\Block\UndefinedBlock
     Subtype: 
-    Instruction:  details=
-    Instruction Start: 0
-    Name: `details`
-    Value: ``
-    Alias: `d`
+    Instruction:  prop
+    Instruction Start: -1
+    Name: `prop`
+    Alias: `i`
     =======
-      Block: Tetraquark\Block\ObjectBlock
-      Subtype: {
-      Instruction: 
-      Instruction Start: 9
-      Name: ``
-      Alias: ``
-      =======
-  Alias: `c`
+  Alias: `d`
   =======
     Block: Tetraquark\Block\UndefinedBlock
     Subtype: 
-    Instruction: \r\n    return
-    Instruction Start: 789
+    Instruction: \r\n    return 
+    Instruction Start: 530
     Name: ``
     Alias: ``
     =======
-    Block: Tetraquark\Block\NewClassBlock
-    Subtype: new
-    Instruction:  CustomEvent(name, {\r\n      detail     : details,\r\n      bubbles    : true,\r\n      cancelable : true,\r\n      composed   : true,\r\n  }, [\r\n      'bv','bvxc', 123\r\n  ])
-    Instruction Start: 814
-    Name: `CustomEvent`
-    Arguments: [3] `
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: first
+    Instruction: window
+    Instruction Start: 537
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: end:method
+    Instruction: getComputedStyle
+    Instruction Start: 543
+    Name: ``
+    Alias: ``
+    =======
       Block: Tetraquark\Block\UndefinedBlock
       Subtype: 
-      Instruction: name
-      Instruction Start: -1
-      Name: `name`
-      Alias: `f`
-      =======
-      Block: Tetraquark\Block\ObjectBlock
-      Subtype: {
-      Instruction: 
-      Instruction Start: 1
+      Instruction: element, null
+      Instruction Start: 561
       Name: ``
       Alias: ``
       =======
-        Block: Tetraquark\Block\ObjectValueBlock
-        Subtype: :
-        Instruction: detail
-        Instruction Start: 2
-        Name: `detail`
-        Alias: `detail`
-        =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction:  details
-          Instruction Start: 22
-          Name: ``
-          Alias: ``
-          =======
-        Block: Tetraquark\Block\ObjectValueBlock
-        Subtype: :
-        Instruction: bubbles
-        Instruction Start: 31
-        Name: `bubbles`
-        Alias: `bubbles`
-        =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction:  true
-          Instruction Start: 51
-          Name: ``
-          Alias: ``
-          =======
-        Block: Tetraquark\Block\ObjectValueBlock
-        Subtype: :
-        Instruction: cancelable
-        Instruction Start: 57
-        Name: `cancelable`
-        Alias: `cancelable`
-        =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction:  true
-          Instruction Start: 77
-          Name: ``
-          Alias: ``
-          =======
-        Block: Tetraquark\Block\ObjectValueBlock
-        Subtype: :
-        Instruction: composed
-        Instruction Start: 83
-        Name: `composed`
-        Alias: `composed`
-        =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction:  true
-          Instruction Start: 103
-          Name: ``
-          Alias: ``
-          =======
-      Block: Tetraquark\Block\ArrayBlock
-      Subtype: [
-      Instruction: 
-      Instruction Start: 1
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: first
+    Instruction: 
+    Instruction Start: 575
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: end:method
+    Instruction: getPropertyValue
+    Instruction Start: 575
+    Name: ``
+    Alias: ``
+    =======
+      Block: Tetraquark\Block\UndefinedBlock
+      Subtype: 
+      Instruction: prop
+      Instruction Start: 593
       Name: ``
       Alias: ``
       =======
-        Block: Tetraquark\Block\StringBlock
-        Subtype: 
-        Instruction: 'bv'
-        Instruction Start: 10
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ArrayItemSeperatorBlock
-        Subtype: ,
-        Instruction: 
-        Instruction Start: 14
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\StringBlock
-        Subtype: 
-        Instruction: 'bvxc'
-        Instruction Start: 15
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ArrayItemSeperatorBlock
-        Subtype: ,
-        Instruction: 
-        Instruction Start: 21
-        Name: ``
-        Alias: ``
-        =======
+  Block: Tetraquark\Block\MultiCommentBlock
+  Subtype: /*
+  Instruction: /**\r\n   * Returns font config for canvas\r\n   * @param  {Node  } el Element to take css from\r\n   * @return {String}    Config\r\n   */
+  Instruction Start: 610
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ClassMethodBlock
+  Subtype: method
+  Instruction: getCanvasFontSize(el) {
+  Instruction Start: 745
+  Name: `getCanvasFontSize`
+  Arguments: [1] `
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: el
+    Instruction Start: -1
+    Name: `el`
+    Alias: `m`
+    =======
+  Alias: `e`
+  =======
+    Block: Tetraquark\Block\VariableBlock
+    Subtype: const
+    Instruction: const fontWeight =
+    Instruction Start: 774
+    Name: `fontWeight`
+    Value: ``
+    Alias: `j`
+    =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: first
+      Instruction: this
+      Instruction Start: 793
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: middle
+      Instruction: font
+      Instruction Start: 797
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: end:method
+      Instruction: getCssStyle
+      Instruction Start: 802
+      Name: ``
+      Alias: ``
+      =======
         Block: Tetraquark\Block\UndefinedBlock
         Subtype: 
-        Instruction:  123\r\n  
-        Instruction Start: 22
+        Instruction: el, 
+        Instruction Start: 815
         Name: ``
         Alias: ``
         =======
-    Alias: `h`
+        Block: Tetraquark\Block\StringBlock
+        Subtype: 
+        Instruction: 'font-weight'
+        Instruction Start: 819
+        Name: ``
+        Alias: ``
+        =======
+      Block: Tetraquark\Block\UndefinedBlock
+      Subtype: 
+      Instruction:  || 
+      Instruction Start: 833
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\StringBlock
+      Subtype: 
+      Instruction: 'normal'
+      Instruction Start: 837
+      Name: ``
+      Alias: ``
+      =======
+    Block: Tetraquark\Block\VariableBlock
+    Subtype: const
+    Instruction: const fontSize   =
+    Instruction Start: 852
+    Name: `fontSize`
+    Value: ``
+    Alias: `k`
     =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: first
+      Instruction: this
+      Instruction Start: 871
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: middle
+      Instruction: font
+      Instruction Start: 875
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: end:method
+      Instruction: getCssStyle
+      Instruction Start: 880
+      Name: ``
+      Alias: ``
+      =======
+        Block: Tetraquark\Block\UndefinedBlock
+        Subtype: 
+        Instruction: el, 
+        Instruction Start: 893
+        Name: ``
+        Alias: ``
+        =======
+        Block: Tetraquark\Block\StringBlock
+        Subtype: 
+        Instruction: 'font-size'
+        Instruction Start: 897
+        Name: ``
+        Alias: ``
+        =======
+      Block: Tetraquark\Block\UndefinedBlock
+      Subtype: 
+      Instruction:  || 
+      Instruction Start: 911
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\StringBlock
+      Subtype: 
+      Instruction: '16px'
+      Instruction Start: 915
+      Name: ``
+      Alias: ``
+      =======
+    Block: Tetraquark\Block\VariableBlock
+    Subtype: const
+    Instruction: const fontFamily =
+    Instruction Start: 928
+    Name: `fontFamily`
+    Value: ``
+    Alias: `l`
+    =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: first
+      Instruction: this
+      Instruction Start: 947
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: middle
+      Instruction: font
+      Instruction Start: 951
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: end:method
+      Instruction: getCssStyle
+      Instruction Start: 956
+      Name: ``
+      Alias: ``
+      =======
+        Block: Tetraquark\Block\UndefinedBlock
+        Subtype: 
+        Instruction: el, 
+        Instruction Start: 969
+        Name: ``
+        Alias: ``
+        =======
+        Block: Tetraquark\Block\StringBlock
+        Subtype: 
+        Instruction: 'font-family'
+        Instruction Start: 973
+        Name: ``
+        Alias: ``
+        =======
+      Block: Tetraquark\Block\UndefinedBlock
+      Subtype: 
+      Instruction:  || 
+      Instruction Start: 987
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\StringBlock
+      Subtype: 
+      Instruction: 'Times New Roman'
+      Instruction Start: 991
+      Name: ``
+      Alias: ``
+      =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: \r\n    return 
+    Instruction Start: 1009
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: `${fontWeight} ${fontSize} ${fontFamily}`
+    Instruction Start: 1022
+    Name: ``
+    Alias: ``
+    =======
+  Block: Tetraquark\Block\MultiCommentBlock
+  Subtype: /*
+  Instruction: /**\r\n   * Calculated width of given text\r\n   * @param  {String      } text Text which length we will calculate\r\n   * @param  {Node        } el   Node from which we will take styles\r\n   * @return {Float|Number} Width of text (format depends on browser)\r\n   */
+  Instruction Start: 1075
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ClassMethodBlock
+  Subtype: method
+  Instruction: calculateWidth ( text, el ) {
+  Instruction Start: 1337
+  Name: `calculateWidth`
+  Arguments: [2] `
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  text
+    Instruction Start: -1
+    Name: `text`
+    Alias: `p`
+    =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  el 
+    Instruction Start: -1
+    Name: `el`
+    Alias: `m`
+    =======
+  Alias: `f`
+  =======
+    Block: Tetraquark\Block\VariableBlock
+    Subtype: const
+    Instruction: const context =
+    Instruction Start: 1372
+    Name: `context`
+    Value: ``
+    Alias: `n`
+    =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: first
+      Instruction: this
+      Instruction Start: 1388
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: middle
+      Instruction: font
+      Instruction Start: 1392
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: middle
+      Instruction: lab
+      Instruction Start: 1397
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: end:method
+      Instruction: getContext
+      Instruction Start: 1401
+      Name: ``
+      Alias: ``
+      =======
+        Block: Tetraquark\Block\StringBlock
+        Subtype: 
+        Instruction: "2d"
+        Instruction Start: 1413
+        Name: ``
+        Alias: ``
+        =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: first
+    Instruction: context
+    Instruction Start: 1425
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: end:variable
+    Instruction: font 
+    Instruction Start: 1432
+    Name: `font`
+    Alias: `o`
+    =======
+      Block: Tetraquark\Block\AttributeBlock
+      Subtype: 
+      Instruction:  context.font =
+      Instruction Start: 1424
+      Name: ``
+      Value: ``
+      Alias: ``
+      =======
+        Block: Tetraquark\Block\ChainLinkBlock
+        Subtype: first
+        Instruction: this
+        Instruction Start: 1440
+        Name: ``
+        Alias: ``
+        =======
+        Block: Tetraquark\Block\ChainLinkBlock
+        Subtype: middle
+        Instruction: font
+        Instruction Start: 1444
+        Name: ``
+        Alias: ``
+        =======
+        Block: Tetraquark\Block\ChainLinkBlock
+        Subtype: end:method
+        Instruction: getCanvasFontSize
+        Instruction Start: 1449
+        Name: ``
+        Alias: ``
+        =======
+          Block: Tetraquark\Block\UndefinedBlock
+          Subtype: 
+          Instruction: el
+          Instruction Start: 1468
+          Name: ``
+          Alias: ``
+          =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:     return 
+    Instruction Start: 1481
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: first
+    Instruction: context
+    Instruction Start: 1485
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: end:method
+    Instruction: measureText
+    Instruction Start: 1492
+    Name: ``
+    Alias: ``
+    =======
+      Block: Tetraquark\Block\UndefinedBlock
+      Subtype: 
+      Instruction: text
+      Instruction Start: 1505
+      Name: ``
+      Alias: ``
+      =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: first
+    Instruction: 
+    Instruction Start: 1510
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: .
+    Instruction: width
+    Instruction Start: 1510
+    Name: ``
+    Alias: ``
+    =======
+  Block: Tetraquark\Block\MultiCommentBlock
+  Subtype: /*
+  Instruction: /**\r\n   * Given position X find the position of clicked letter\r\n   * @param  {string} text Search through text\r\n   * @param  {node  } el   Node from which we can take styles\r\n   * @param  {int   } left The X pos of click event\r\n   * @return {int   }      Amount of letters before caret\r\n   */
+  Instruction Start: 1528
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ClassMethodBlock
+  Subtype: method
+  Instruction: getLetterByWidth( text, el, left ) {
+  Instruction Start: 1824
+  Name: `getLetterByWidth`
+  Arguments: [3] `
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  text
+    Instruction Start: -1
+    Name: `text`
+    Alias: `p`
+    =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  el
+    Instruction Start: -1
+    Name: `el`
+    Alias: `m`
+    =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  left 
+    Instruction Start: -1
+    Name: `left`
+    Alias: `t`
+    =======
+  Alias: `g`
+  =======
+    Block: Tetraquark\Block\IfBlock
+    Subtype: if
+    Instruction:  if (text.length <= 1) {
+    Instruction Start: 1865
+    Name: ``
+    Alias: ``
+    =======
+      Block: Tetraquark\Block\VariableBlock
+      Subtype: const
+      Instruction: const singleSize =
+      Instruction Start: 1897
+      Name: `singleSize`
+      Value: ``
+      Alias: `u`
+      =======
+        Block: Tetraquark\Block\ChainLinkBlock
+        Subtype: first
+        Instruction: this
+        Instruction Start: 1916
+        Name: ``
+        Alias: ``
+        =======
+        Block: Tetraquark\Block\ChainLinkBlock
+        Subtype: middle
+        Instruction: font
+        Instruction Start: 1920
+        Name: ``
+        Alias: ``
+        =======
+        Block: Tetraquark\Block\ChainLinkBlock
+        Subtype: end:method
+        Instruction: calculateWidth
+        Instruction Start: 1925
+        Name: ``
+        Alias: ``
+        =======
+          Block: Tetraquark\Block\UndefinedBlock
+          Subtype: 
+          Instruction:  text, el 
+          Instruction Start: 1941
+          Name: ``
+          Alias: ``
+          =======
+      Block: Tetraquark\Block\SingleCommentBlock
+      Subtype: //
+      Instruction: / Find if to positionc aret before or after letter\r\n
+      Instruction Start: 1961
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\IfBlock
+      Subtype: if
+      Instruction:  if (singleSize/2 > left) {
+      Instruction Start: 2019
+      Name: ``
+      Alias: ``
+      =======
+        Block: Tetraquark\Block\UndefinedBlock
+        Subtype: 
+        Instruction: \r\n        return 0;\r\n      
+        Instruction Start: 2046
+        Name: ``
+        Alias: ``
+        =======
+      Block: Tetraquark\Block\UndefinedBlock
+      Subtype: 
+      Instruction: \r\n      return 1;\r\n    
+      Instruction Start: 2074
+      Name: ``
+      Alias: ``
+      =======
+    Block: Tetraquark\Block\SingleCommentBlock
+    Subtype: //
+    Instruction: / Get half of the text\r\n
+    Instruction Start: 2104
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\VariableBlock
+    Subtype: const
+    Instruction: const half =
+    Instruction Start: 2133
+    Name: `half`
+    Value: ``
+    Alias: `r`
+    =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: first
+      Instruction: text
+      Instruction Start: 2146
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: end:method
+      Instruction: slice
+      Instruction Start: 2150
+      Name: ``
+      Alias: ``
+      =======
+        Block: Tetraquark\Block\UndefinedBlock
+        Subtype: 
+        Instruction: 0, 
+        Instruction Start: 2161
+        Name: ``
+        Alias: ``
+        =======
+        Block: Tetraquark\Block\ChainLinkBlock
+        Subtype: first
+        Instruction: Math
+        Instruction Start: 2160
+        Name: ``
+        Alias: ``
+        =======
+        Block: Tetraquark\Block\ChainLinkBlock
+        Subtype: end:method
+        Instruction: floor
+        Instruction Start: 2164
+        Name: ``
+        Alias: ``
+        =======
+          Block: Tetraquark\Block\ChainLinkBlock
+          Subtype: first
+          Instruction: text
+          Instruction Start: 2171
+          Name: ``
+          Alias: ``
+          =======
+          Block: Tetraquark\Block\ChainLinkBlock
+          Subtype: .
+          Instruction: length
+          Instruction Start: 2175
+          Name: ``
+          Alias: ``
+          =======
+          Block: Tetraquark\Block\UndefinedBlock
+          Subtype: 
+          Instruction: /2
+          Instruction Start: 2182
+          Name: ``
+          Alias: ``
+          =======
+    Block: Tetraquark\Block\VariableBlock
+    Subtype: const
+    Instruction: const textWidth =
+    Instruction Start: 2193
+    Name: `textWidth`
+    Value: ``
+    Alias: `s`
+    =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: first
+      Instruction: this
+      Instruction Start: 2211
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: middle
+      Instruction: font
+      Instruction Start: 2215
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: end:method
+      Instruction: calculateWidth
+      Instruction Start: 2220
+      Name: ``
+      Alias: ``
+      =======
+        Block: Tetraquark\Block\UndefinedBlock
+        Subtype: 
+        Instruction:  half, el 
+        Instruction Start: 2236
+        Name: ``
+        Alias: ``
+        =======
+    Block: Tetraquark\Block\SingleCommentBlock
+    Subtype: //
+    Instruction: / Check in which half letter was clicked\r\n
+    Instruction Start: 2254
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\IfBlock
+    Subtype: if
+    Instruction:  if (left > textWidth) {
+    Instruction Start: 2300
+    Name: ``
+    Alias: ``
+    =======
+      Block: Tetraquark\Block\SingleCommentBlock
+      Subtype: //
+      Instruction: / If click was in second half, then add half amount of letters and search again\r\n
+      Instruction Start: 2332
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\UndefinedBlock
+      Subtype: 
+      Instruction:       return 
+      Instruction Start: 2418
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: first
+      Instruction: half
+      Instruction Start: 2427
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: .
+      Instruction: length 
+      Instruction Start: 2431
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\UndefinedBlock
+      Subtype: 
+      Instruction: + 
+      Instruction Start: 2443
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: first
+      Instruction: this
+      Instruction Start: 2441
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: middle
+      Instruction: font
+      Instruction Start: 2445
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: end:method
+      Instruction: getLetterByWidth
+      Instruction Start: 2450
+      Name: ``
+      Alias: ``
+      =======
+        Block: Tetraquark\Block\ChainLinkBlock
+        Subtype: first
+        Instruction: text
+        Instruction Start: 2478
+        Name: ``
+        Alias: ``
+        =======
+        Block: Tetraquark\Block\ChainLinkBlock
+        Subtype: end:method
+        Instruction: slice
+        Instruction Start: 2482
+        Name: ``
+        Alias: ``
+        =======
+          Block: Tetraquark\Block\ChainLinkBlock
+          Subtype: first
+          Instruction: Math
+          Instruction Start: 2489
+          Name: ``
+          Alias: ``
+          =======
+          Block: Tetraquark\Block\ChainLinkBlock
+          Subtype: end:method
+          Instruction: floor
+          Instruction Start: 2493
+          Name: ``
+          Alias: ``
+          =======
+            Block: Tetraquark\Block\ChainLinkBlock
+            Subtype: first
+            Instruction: text
+            Instruction Start: 2500
+            Name: ``
+            Alias: ``
+            =======
+            Block: Tetraquark\Block\ChainLinkBlock
+            Subtype: .
+            Instruction: length
+            Instruction Start: 2504
+            Name: ``
+            Alias: ``
+            =======
+            Block: Tetraquark\Block\UndefinedBlock
+            Subtype: 
+            Instruction: /2
+            Instruction Start: 2511
+            Name: ``
+            Alias: ``
+            =======
+        Block: Tetraquark\Block\UndefinedBlock
+        Subtype: 
+        Instruction: ,\r\n        el,\r\n        left - textWidth\r\n      
+        Instruction Start: 2515
+        Name: ``
+        Alias: ``
+        =======
+    Block: Tetraquark\Block\SingleCommentBlock
+    Subtype: //
+    Instruction: / If first then just find better approximation\r\n
+    Instruction Start: 2578
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:     return 
+    Instruction Start: 2631
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: first
+    Instruction: this
+    Instruction Start: 2638
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: middle
+    Instruction: font
+    Instruction Start: 2642
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: end:method
+    Instruction: getLetterByWidth
+    Instruction Start: 2647
+    Name: ``
+    Alias: ``
+    =======
+      Block: Tetraquark\Block\UndefinedBlock
+      Subtype: 
+      Instruction: \r\n      half,\r\n      el,\r\n      left\r\n    
+      Instruction Start: 2665
+      Name: ``
+      Alias: ``
+      =======
 Block: Tetraquark\Block\UndefinedBlock
 Subtype: 
 Instruction: \r\nexport 
-Instruction Start: 982
+Instruction Start: 2707
 Name: ``
 Alias: ``
 =======
 Block: Tetraquark\Block\ObjectBlock
 Subtype: {
 Instruction: 
-Instruction Start: 1001
+Instruction Start: 2726
 Name: ``
 Alias: ``
 =======
   Block: Tetraquark\Block\UndefinedBlock
   Subtype: 
-  Instruction:  TabJF_Event 
-  Instruction Start: 1002
+  Instruction:  TabJF_Font 
+  Instruction Start: 2727
   Name: ``
   Alias: ``
   =======
-Duration: 0.007s
+Duration: 0.027s
 
 
-class a{b(f,d={}){d=Object.assign({g:this},d);const e=this.e.c(f,d);this.editor.dispatchEvent(e);return e; }c(f,d={}){return new h(f,{detail:d,bubbles:true,cancelable:true,composed:true},['bv','bvxc',123]);}}export {a};
+class a{b=null;c(){this.o.b=document.createElement("canvas");}d(h,i){return window.getComputedStyle(h,null).getPropertyValue(i);}e(m){const j=this.o.d(m,'font-weight')||'normal';const k=this.o.d(m,'font-size')||'16px';const l=this.o.d(m,'font-family')||'Times New Roman';return `${j} ${k} ${l}`;}f(p,m){const n=this.o.b.getContext("2d");n.o=this.o.e(m);return n.measureText(p).width;}g(p,m,t){if(p.length<=1){const u=this.o.f(p,m);if(u/2>t){return 0; }return 1; }const r=p.slice(0,Math.floor(p.length/2));const s=this.o.f(r,m);if(t>s){return r.length+ this.o.g(p.slice(Math.floor(p.length/2)),m,t-s);}return this.o.g(r,m,t);}}export {a};

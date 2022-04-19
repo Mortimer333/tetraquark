@@ -191,7 +191,6 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
     public function recreate(): string
     {
         $args = $this->getArguments();
-        Log::log('arrow function args: ' . sizeof($args));
         $hasSpread = false;
         foreach ($args as $arg) {
             foreach ($arg as $block) {
@@ -212,8 +211,12 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
             );
         } else {
             $script .= '{';
+            $blocks = '';
             foreach ($this->getBlocks() as $block) {
-                $script .= $block->recreate();
+                $blocks .= $block->recreate();
+            }
+            if (\mb_strlen($blocks) > 0) {
+                $script .= rtrim($blocks, ';') . ';}';
             }
             $script .= '};';
         }

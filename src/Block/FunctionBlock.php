@@ -28,10 +28,17 @@ class FunctionBlock extends MethodBlock implements Contract\Block
 
     public function recreate(): string
     {
-        $script = 'function ' . $this->getAlias($this->getName()) . '(' . $this->getAliasedArguments() . '){';
+        $script = 'function ' . $this->getAlias($this->getName()) . '(' . $this->getAliasedArguments() . '){';        
+        $blocks = '';
+
         foreach ($this->getBlocks() as $block) {
-            $script .= $block->recreate();
+            $blocks .= $block->recreate();
         }
+
+        if (\mb_strlen($blocks) > 0) {
+            return $script . rtrim($blocks, ';') . ';}';
+        }
+
         return $script . '}';
     }
 }

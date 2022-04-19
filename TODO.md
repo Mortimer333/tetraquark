@@ -71,14 +71,7 @@ Which will result in error `varOne doesn't exist` because varOne got replaced wi
 
 After minifization:
 
-class a{
-    b(d=true){
-        this.b.innerHTMLc='';
-        if(this.caret.el)this.b.appendChild(this.caret.el);
-    }
-}
-
-{a};
+if(t>s){return r.length+this o.g(p.slice(Math.floor(p.length/2)),m,t-s);}
 
 
 Before mini:

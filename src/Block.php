@@ -438,10 +438,27 @@ abstract class Block
         }
 
         if ($class == Block\ChainLinkBlock::class) {
-            // $allBlocks = $this->getBlocks();
             $lastBlock = $blocks[\sizeof($blocks) - 1] ?? null;
+
+            $first = false;
+            // Check if we are not between some equasion with at least two ChainBlocks
+            if ($lastBlock) {
+                $startBlock = $lastBlock->getInstructionStart() + \mb_strlen($lastBlock->getInstruction());
+                for ($i=$startBlock; $i < \mb_strlen(self::$content); $i++) {
+                    $letter = self::$content[$i];
+                    if ($letter == ' ') {
+                        continue;
+                    }
+                    if ($this->isSpecial($letter) || $letter == "\n") {
+                        $first = true;
+                    }
+                    break;
+                }
+            }
+
             if (
-                !($lastBlock instanceof Block\ChainLinkBlock)
+                $first
+                || !($lastBlock instanceof Block\ChainLinkBlock)
                 || (
                     $lastBlock instanceof Block\ChainLinkBlock
                     && (
@@ -454,7 +471,6 @@ abstract class Block
 
                 $possibleUndefined = \mb_substr($possibleUndefined, 0, -(\mb_strlen($block->getInstruction()) + 1));
                 if ($this->isValidUndefined($possibleUndefined)) {
-                    Log::log("Valid undefined5: " . $possibleUndefined);
                     $blocks[] = new Block\UndefinedBlock($start - \mb_strlen($possibleUndefined), $possibleUndefined);
                 }
 
@@ -627,7 +643,7 @@ abstract class Block
                 $mappedWordLen = \mb_strlen($mappedWord);
                 $instStart = $block->getInstructionStart();
                 // Check if instruction did include semicolon
-                list($nextLetter, $pos) = $this->getNextLetter($i, self::$content);
+                list($nextLetter, $pos) = $this->getNextLetter($i + 1, self::$content);
                 if ($nextLetter == ';') {
                     $i = $pos;
                 }
@@ -896,6 +912,19 @@ abstract class Block
         for ($i=0; $i < \mb_strlen($instruction); $i++) {
             $letter = $instruction[$i];
             if (
+                ($startsTemplate = $this->isTemplateLiteralLandmark($letter, ''))
+                || $this->isStringLandmark($letter, '')
+            ) {
+                $oldPos = $i;
+                $i = $this->skipString($i + 1, $instruction, $startsTemplate);
+                $properInstr .= \mb_substr($instruction, $oldPos, $i - $oldPos);
+                if (!isset($instruction[$i])) {
+                    break;
+                }
+                $letter = $instruction[$i];
+            }
+
+            if (
                 $this->isWhitespace($letter) && $this->isSpecial($instruction[$i + 1] ?? '')
                 || $this->isWhitespace($letter) && $this->isWhitespace($instruction[$i + 1] ?? '')
                 || $this->isWhitespace($letter) && $this->isSpecial($instruction[$i - 1] ?? '')
@@ -1003,7 +1032,7 @@ abstract class Block
 
     protected function getNextLetter(int $start, string $content): array
     {
-        for ($i=$start + 1; $i < \mb_strlen($content); $i++) {
+        for ($i=$start; $i < \mb_strlen($content); $i++) {
             $letter = $content[$i];
             if (!$this->isWhitespace($letter)) {
                 return [$letter, $i];
@@ -1011,5 +1040,30 @@ abstract class Block
         }
 
         return ['', $i - 1];
+    }
+
+    protected function getPreviousLetter(int $start, string $content): array
+    {
+        for ($i=$start; $i >= 0; $i--) {
+            $letter = $content[$i];
+            if (!$this->isWhitespace($letter)) {
+                return [$letter, $i];
+            }
+        }
+
+        return ['', $i - 1];
+    }
+
+    protected function checkIfFirstLetterInNextSiblingIsSpecial(): bool
+    {
+        $parent = $this->getParent();
+        $childIndex = $this->getChildIndex();
+        $nextSibling = $parent->getBlocks()[$childIndex + 1] ?? false;
+        if (!$nextSibling instanceof Block || $nextSibling instanceof CommentBlock) {
+            return false;
+        }
+        $instruction = $nextSibling->getInstruction();
+        list($letter) = $this->getNextLetter(0, $instruction);
+        return $this->isSpecial($letter);
     }
 }
