@@ -1,367 +1,304 @@
 Mapping...
+End: 23, \r
+Arro stopped at 27 with symbol: } => }\r\ne => 'a' + 'v';\r\n() => {}\r\nx => {}\r\n\r\n(x) => x + 1\r\n\r\ne => 'a' + 'v';\r\n(x) => x + 1\r\n() => {};x =, Tetraquark\Block\ArrowFunctionBlock
+Multi line caret: 27, }
+aaaaaaaa
+inst: () => {
+Arguments:
+array(0) {
+}
+End: 43, '
+aaaaaaaa
+inst: e =>
+Arguments:
+array(1) {
+  [0]=>
+  string(1) "e"
+}
+Arro stopped at 0 with symbol: e => e, Tetraquark\Block\ArrowFunctionBlock
+End: 54, }
+Arro stopped at 54 with symbol: } => }\r\nx => {}\r\n\r\n(x) => x + 1\r\n\r\ne => 'a' + 'v';\r\n(x) => x + 1\r\n() => {};x => {};x => x + 1;\r\n, Tetraquark\Block\ArrowFunctionBlock
+Multi line caret: 54, }
+aaaaaaaa
+inst: () => {
+Arguments:
+array(0) {
+}
+End: 63, }
+Arro stopped at 63 with symbol: } => }\r\n\r\n(x) => x + 1\r\n\r\ne => 'a' + 'v';\r\n(x) => x + 1\r\n() => {};x => {};x => x + 1;\r\n, Tetraquark\Block\ArrowFunctionBlock
+Multi line caret: 63, }
+aaaaaaaa
+inst: x => {
+Arguments:
+array(1) {
+  [0]=>
+  string(1) "x"
+}
+Arro stopped at 0 with symbol: x => x, Tetraquark\Block\ArrowFunctionBlock
+End: 79, 1
+aaaaaaaa
+inst: (x) =>
+Arguments:
+array(1) {
+  [0]=>
+  string(1) "x"
+}
+Arro stopped at 0 with symbol: x => x, Tetraquark\Block\ArrowFunctionBlock
+End: 97, '
+aaaaaaaa
+inst: e =>
+Arguments:
+array(1) {
+  [0]=>
+  string(1) "e"
+}
+Arro stopped at 0 with symbol: e => e, Tetraquark\Block\ArrowFunctionBlock
+End: 112, 1
+aaaaaaaa
+inst: (x) =>
+Arguments:
+array(1) {
+  [0]=>
+  string(1) "x"
+}
+Arro stopped at 0 with symbol: x => x, Tetraquark\Block\ArrowFunctionBlock
+End: 122, }
+Arro stopped at 122 with symbol: } => };x => {};x => x + 1;\r\n, Tetraquark\Block\ArrowFunctionBlock
+Multi line caret: 122, }
+aaaaaaaa
+inst: () => {
+Arguments:
+array(0) {
+}
+End: 130, }
+aaaaaaaa
+inst: x =>
+Arguments:
+array(1) {
+  [0]=>
+  string(1) "x"
+}
+Arro stopped at 0 with symbol: x => x, Tetraquark\Block\ArrowFunctionBlock
+End: 141, 1
+aaaaaaaa
+inst: x =>
+Arguments:
+array(1) {
+  [0]=>
+  string(1) "x"
+}
+Arro stopped at 0 with symbol: x => x, Tetraquark\Block\ArrowFunctionBlock
 =======================
 Creating aliases...
 =======================
-Aliases: c => a, b => b, 
+Aliases: e => a, x => b, 
 Recreating...
 =======================
-Block: Tetraquark\Block\ArrayBlock
-Subtype: [
-Instruction: 
+Block: Tetraquark\Block\SingleCommentBlock
+Subtype: //
+Instruction: /(x => x + 1)\r\n
 Instruction Start: 0
-Caret: 9
+Caret: 15
 Name: ``
 Alias: ``
 =======
-  Block: Tetraquark\Block\StringBlock
-  Subtype: 
-  Instruction: 'a'
-  Instruction Start: 1
-  Caret: 4
-  Name: ``
-  Alias: ``
-  =======
-  Block: Tetraquark\Block\ArrayItemSeperatorBlock
-  Subtype: ,
-  Instruction: 
-  Instruction Start: 4
-  Caret: 4
-  Name: ``
-  Alias: ``
-  =======
-  Block: Tetraquark\Block\UndefinedBlock
-  Subtype: 
-  Instruction: var1
-  Instruction Start: 5
-  Caret: 9
-  Name: ``
-  Alias: ``
-  =======
-Block: Tetraquark\Block\ArrayBlock
-Subtype: [
+Block: Tetraquark\Block\CallerBlock
+Subtype: (
 Instruction: 
-Instruction Start: 12
-Caret: 45
+Instruction Start: 16
+Caret: 27
 Name: ``
 Alias: ``
 =======
-  Block: Tetraquark\Block\FunctionBlock
-  Subtype: anonymous:function
-  Instruction: function () {
-  Instruction Start: 12
-  Caret: 39
+  Block: Tetraquark\Block\ArrowFunctionBlock
+  Subtype: parenthesis:brackets
+  Instruction: () => {
+  Instruction Start: 16
+  Caret: 27
   Name: ``
+  Value: ``
   Arguments: [0] `
   Alias: ``
   =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction:  return 
-    Instruction Start: 26
-    Caret: 34
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\StringBlock
-    Subtype: 
-    Instruction: 'a'
-    Instruction Start: 34
-    Caret: 37
-    Name: ``
-    Alias: ``
-    =======
-  Block: Tetraquark\Block\ArrayItemSeperatorBlock
-  Subtype: ,
-  Instruction: 
-  Instruction Start: 40
-  Caret: 40
-  Name: ``
-  Alias: ``
-  =======
-  Block: Tetraquark\Block\StringBlock
+Block: Tetraquark\Block\ArrowFunctionBlock
+Subtype: no-parenthesis:no-brackets
+Instruction: e =>
+Instruction Start: 30
+Caret: 43
+Name: ``
+Value: `'a' + 'v'`
+Arguments: [1] `
+  Block: Tetraquark\Block\UndefinedBlock
   Subtype: 
-  Instruction: 'a'
-  Instruction Start: 42
-  Caret: 45
+  Instruction: e
+  Instruction Start: -1
+  Caret: 0
+  Name: `e`
+  Alias: `a`
+  =======
+Alias: ``
+=======
+Block: Tetraquark\Block\CallerBlock
+Subtype: (
+Instruction: 
+Instruction Start: 47
+Caret: 54
+Name: ``
+Alias: ``
+=======
+  Block: Tetraquark\Block\ArrowFunctionBlock
+  Subtype: parenthesis:brackets
+  Instruction: () => {
+  Instruction Start: 47
+  Caret: 54
   Name: ``
+  Value: ``
+  Arguments: [0] `
   Alias: ``
   =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: let
-Instruction: let c =
-Instruction Start: 48
-Caret: 132
-Name: `c`
+Block: Tetraquark\Block\ArrowFunctionBlock
+Subtype: no-parenthesis:brackets
+Instruction: x => {
+Instruction Start: 57
+Caret: 63
+Name: ``
 Value: ``
-Alias: `a`
-=======
-  Block: Tetraquark\Block\ArrayBlock
-  Subtype: [
-  Instruction: 
-  Instruction Start: 56
-  Caret: 129
-  Name: ``
-  Alias: ``
+Arguments: [1] `
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: x
+  Instruction Start: -1
+  Caret: 0
+  Name: `x`
+  Alias: `b`
   =======
-    Block: Tetraquark\Block\StringBlock
-    Subtype: 
-    Instruction: 'c'
-    Instruction Start: 62
-    Caret: 65
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ArrayItemSeperatorBlock
-    Subtype: ,
-    Instruction: 
-    Instruction Start: 65
-    Caret: 65
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\CallerBlock
-    Subtype: (
-    Instruction: 
-    Instruction Start: 71
-    Caret: 108
-    Name: ``
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\ArrowFunctionBlock
-      Subtype: parenthesis:brackets
-      Instruction: () => {
-      Instruction Start: 71
-      Caret: 108
-      Name: ``
-      Value: ``
-      Arguments: [0] `
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: console
-        Instruction Start: 87
-        Caret: 94
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: end:method
-        Instruction: log
-        Instruction Start: 94
-        Caret: 102
-        Name: ``
-        Alias: ``
-        =======
-          Block: Tetraquark\Block\StringBlock
-          Subtype: 
-          Instruction: 'a'
-          Instruction Start: 99
-          Caret: 102
-          Name: ``
-          Alias: ``
-          =======
-    Block: Tetraquark\Block\ArrayItemSeperatorBlock
-    Subtype: ,
-    Instruction: 
-    Instruction Start: 109
-    Caret: 109
-    Name: ``
-    Alias: ``
-    =======
+Alias: ``
+=======
+Block: Tetraquark\Block\CallerBlock
+Subtype: (
+Instruction: 
+Instruction Start: 68
+Caret: 79
+Name: ``
+Alias: ``
+=======
+  Block: Tetraquark\Block\ArrowFunctionBlock
+  Subtype: parenthesis:no-brackets
+  Instruction: (x) =>
+  Instruction Start: 68
+  Caret: 79
+  Name: ``
+  Value: `x + 1`
+  Arguments: [1] `
     Block: Tetraquark\Block\UndefinedBlock
     Subtype: 
-    Instruction: \r\n   caller
-    Instruction Start: 98
-    Caret: 109
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\CallerBlock
-    Subtype: (
-    Instruction: ('a')
-    Instruction Start: 121
-    Caret: 126
-    Name: ``
-    Alias: ``
-    =======
-Block: Tetraquark\Block\ArrayBlock
-Subtype: [
-Instruction: 
-Instruction Start: 133
-Caret: 210
-Name: ``
-Alias: ``
-=======
-  Block: Tetraquark\Block\ArrayBlock
-  Subtype: [
-  Instruction: 
-  Instruction Start: 139
-  Caret: 207
-  Name: ``
-  Alias: ``
-  =======
-    Block: Tetraquark\Block\ArrayBlock
-    Subtype: [
-    Instruction: 
-    Instruction Start: 149
-    Caret: 175
-    Name: ``
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\StringBlock
-      Subtype: 
-      Instruction: 'a'
-      Instruction Start: 163
-      Caret: 166
-      Name: ``
-      Alias: ``
-      =======
-    Block: Tetraquark\Block\ArrayItemSeperatorBlock
-    Subtype: ,
-    Instruction: 
-    Instruction Start: 176
-    Caret: 176
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\StringBlock
-    Subtype: 
-    Instruction: 'b'
-    Instruction Start: 186
-    Caret: 189
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ArrayItemSeperatorBlock
-    Subtype: ,
-    Instruction: 
-    Instruction Start: 189
-    Caret: 189
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\StringBlock
-    Subtype: 
-    Instruction: 'v'
-    Instruction Start: 199
-    Caret: 202
-    Name: ``
-    Alias: ``
-    =======
-Block: Tetraquark\Block\ArrayBlock
-Subtype: [
-Instruction: 
-Instruction Start: 213
-Caret: 222
-Name: ``
-Alias: ``
-=======
-  Block: Tetraquark\Block\StringBlock
-  Subtype: 
-  Instruction: 'a'
-  Instruction Start: 214
-  Caret: 217
-  Name: ``
-  Alias: ``
-  =======
-  Block: Tetraquark\Block\ArrayItemSeperatorBlock
-  Subtype: ,
-  Instruction: 
-  Instruction Start: 217
-  Caret: 217
-  Name: ``
-  Alias: ``
-  =======
-  Block: Tetraquark\Block\StringBlock
-  Subtype: 
-  Instruction: 'bv'
-  Instruction Start: 218
-  Caret: 222
-  Name: ``
-  Alias: ``
-  =======
-Block: Tetraquark\Block\ArrayBlock
-Subtype: [
-Instruction: 
-Instruction Start: 226
-Caret: 251
-Name: ``
-Alias: ``
-=======
-  Block: Tetraquark\Block\ArrayBlock
-  Subtype: [
-  Instruction: 
-  Instruction Start: 227
-  Caret: 231
-  Name: ``
-  Alias: ``
-  =======
-    Block: Tetraquark\Block\StringBlock
-    Subtype: 
-    Instruction: 'v'
-    Instruction Start: 228
-    Caret: 231
-    Name: ``
-    Alias: ``
-    =======
-  Block: Tetraquark\Block\ArrayItemSeperatorBlock
-  Subtype: ,
-  Instruction: 
-  Instruction Start: 232
-  Caret: 232
-  Name: ``
-  Alias: ``
-  =======
-  Block: Tetraquark\Block\ObjectBlock
-  Subtype: {
-  Instruction: 
-  Instruction Start: 233
-  Caret: 239
-  Name: ``
-  Alias: ``
-  =======
-    Block: Tetraquark\Block\ObjectValueBlock
-    Subtype: :
-    Instruction: b
-    Instruction Start: 234
-    Caret: 238
-    Name: `b`
+    Instruction: x
+    Instruction Start: -1
+    Caret: 0
+    Name: `x`
     Alias: `b`
     =======
-      Block: Tetraquark\Block\StringBlock
-      Subtype: 
-      Instruction: 's'
-      Instruction Start: 236
-      Caret: 239
-      Name: ``
-      Alias: ``
-      =======
-  Block: Tetraquark\Block\ArrayItemSeperatorBlock
-  Subtype: ,
-  Instruction: 
-  Instruction Start: 240
-  Caret: 240
-  Name: ``
   Alias: ``
   =======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: first
-  Instruction: var3
-  Instruction Start: 242
-  Caret: 246
+Block: Tetraquark\Block\ArrowFunctionBlock
+Subtype: no-parenthesis:no-brackets
+Instruction: e =>
+Instruction Start: 84
+Caret: 97
+Name: ``
+Value: `'a' + 'v'`
+Arguments: [1] `
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: e
+  Instruction Start: -1
+  Caret: 0
+  Name: `e`
+  Alias: `a`
+  =======
+Alias: ``
+=======
+Block: Tetraquark\Block\CallerBlock
+Subtype: (
+Instruction: 
+Instruction Start: 101
+Caret: 112
+Name: ``
+Alias: ``
+=======
+  Block: Tetraquark\Block\ArrowFunctionBlock
+  Subtype: parenthesis:no-brackets
+  Instruction: (x) =>
+  Instruction Start: 101
+  Caret: 112
   Name: ``
+  Value: `x + 1`
+  Arguments: [1] `
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: x
+    Instruction Start: -1
+    Caret: 0
+    Name: `x`
+    Alias: `b`
+    =======
   Alias: ``
   =======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: .
-  Instruction: var4
-  Instruction Start: 246
-  Caret: 250
+Block: Tetraquark\Block\CallerBlock
+Subtype: (
+Instruction: 
+Instruction Start: 115
+Caret: 122
+Name: ``
+Alias: ``
+=======
+  Block: Tetraquark\Block\ArrowFunctionBlock
+  Subtype: parenthesis:brackets
+  Instruction: () => {
+  Instruction Start: 115
+  Caret: 122
   Name: ``
+  Value: ``
+  Arguments: [0] `
   Alias: ``
   =======
-Duration: 0.005s
+Block: Tetraquark\Block\ArrowFunctionBlock
+Subtype: =>:brackets
+Instruction: x =>
+Instruction Start: 124
+Caret: 130
+Name: ``
+Value: `{}`
+Arguments: [1] `
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: x
+  Instruction Start: -1
+  Caret: 0
+  Name: `x`
+  Alias: `b`
+  =======
+Alias: ``
+=======
+Block: Tetraquark\Block\ArrowFunctionBlock
+Subtype: =>:no-brackets
+Instruction: x =>
+Instruction Start: 132
+Caret: 141
+Name: ``
+Value: `x + 1`
+Arguments: [1] `
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: x
+  Instruction Start: -1
+  Caret: 0
+  Name: `x`
+  Alias: `b`
+  =======
+Alias: ``
+=======
+Duration: 0.003s
 
 
-['a',var1];[function(){return'a';},'a'];let a=['c',()=>{console.log('a');},caller('a')];[[['a'],'b','v']];['a','bv'];[['v'],{b:'s'},var3.var4];
+()=>{};a=>'a'+'v';()=>{};b=>{};b=>b+1;a=>'a'+'v';b=>b+1;()=>{};b=>{};b=>b+1;

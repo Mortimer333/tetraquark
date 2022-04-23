@@ -27,6 +27,7 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
         if (\is_null($subEnd)) {
             throw new Exception('End of arrow method not found', 404);
         }
+        Log::log('End: ' . $subEnd . ", " . (self::$content[$subEnd] ?? ''));
 
         if ($this->isMultiLine()) {
             $instruction = str_replace("\n", ' ', substr(self::$content, $subStart, $subEnd - $subStart));
@@ -44,8 +45,9 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
                 '}' => true
             ];
             $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
+            Log::log('Multi line caret: ' . $this->getCaret() . ", " . self::$content[$this->getCaret()]);
         }
-
+        Log::log('aaaaaaaa');
         $this->findAndSetArguments();
 
         $this->setName('');
@@ -65,6 +67,7 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
     protected function findAndSetArguments(): void
     {
         $instr = $this->getInstruction();
+        Log::log('inst: ' . $instr);
         $SFParenthesis = false;
         $SFWhitespace = false;
         $word = '';
@@ -79,7 +82,9 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
 
             if (Validate::isWhitespace($letter)) {
                 if ($SFWhitespace) {
-                    $arguments[] = $word;
+                    if (\mb_strlen($word) > 0) {
+                        $arguments[] = $word;
+                    }
                     break;
                 }
                 continue;
@@ -90,19 +95,25 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
             }
 
             if ($SFParenthesis && $letter == ',') {
-                $arguments[] = $word;
+                if (\mb_strlen($word) > 0) {
+                    $arguments[] = $word;
+                }
                 $word = '';
                 continue;
             }
 
 
             if ($SFParenthesis && $letter == ')') {
-                $arguments[] = $word;
+                if (\mb_strlen($word) > 0) {
+                    $arguments[] = $word;
+                }
                 break;
             }
 
             $word .= $letter;
         }
+        Log::log('Arguments:');
+        var_dump($arguments);
         $this->setArgumentBlocks($arguments);
     }
 
@@ -152,37 +163,37 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
         $searchForBracketsStart  = false;
         $searchForNextWhiteSpace = false;
         $subStart = null;
-        Log::increaseIndent();
+
         for ($i=$start - 2; $i >= 0; $i--) {
             $letter = self::$content[$i];
-            Log::log("New letter `" . $letter . "`", 2);
+
+            if ($letter == ';') {
+                $subStart = $i + 1;
+                break;
+            }
+
             if (!$searchForBracketsStart && $letter == ')') {
-                Log::log("Start search for brackets", 2);
                 $searchForBracketsStart = true;
                 continue;
             }
 
             if ($searchForBracketsStart && $letter == '(') {
-                Log::log("Bracket found", 2);
                 $subStart = $i;
                 $this->subtype = 'parenthesis';
                 break;
             }
 
             if (!$searchForNextWhiteSpace && !Validate::isWhitespace($letter)) {
-                Log::log("Start search for whitspace, letter found before bracket", 2);
                 $searchForNextWhiteSpace = true;
                 continue;
             }
 
             if ($searchForNextWhiteSpace && Validate::isWhitespace($letter)) {
-                Log::log("White space found", 2);
                 $subStart = $i + 1;
                 $this->subtype = 'no-parenthesis';
                 break;
             }
         }
-        Log::decreaseIndent();
         return $subStart;
     }
 

@@ -322,6 +322,9 @@ abstract class BlockAbstract
             $blocks[] = new Block\UndefinedBlock($i - \mb_strlen($possibleUndefined), $possibleUndefined);
         }
 
+        if ($this instanceof Block\ArrowFunctionBlock) {
+            Log::log('Arro stopped at ' . $i . " with symbol: " . (self::$content[$i] ?? '') . " => " . \mb_substr(self::$content, $i, 100) . ", " . $this::class);
+        }
         $this->setCaret($i);
         return $blocks;
     }

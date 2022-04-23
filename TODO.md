@@ -101,7 +101,7 @@ export { TabJF_Hidden };
 
 # Known bugs
 
-instructions like :
+1. instructions like :
 let a  = {
     b : 'v'
 }
@@ -109,3 +109,6 @@ let c = a.
 b
 
 are not properly recognized because script thinks that instruction ends on the dot (a.)
+
+2. Arrow Method inside parenthesis:
+(x => x + 1)

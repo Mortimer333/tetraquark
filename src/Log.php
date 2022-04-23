@@ -7,7 +7,7 @@ class Log
     static protected int     $indent        = 0;
     static protected int     $verbose       = 0;
     static protected int     $maxVerbose    = 0;
-    static protected int     $classLimit    = 20;
+    static protected int     $classLimit    = 30;
     static protected int     $functionLimit = 20;
     static protected ?string $timeStart     = null;
     static protected bool    $addClass      = false;
@@ -123,8 +123,8 @@ class Log
         foreach ($blocks as $block) {
             self::log("Block: " . get_class($block));
             self::log("Subtype: " . $block->getSubtype());
-            if ($block instanceof Block\CommentBlock) {
-                self::log("Instruction: " . \mb_substr($block->getInstruction(), 0, 100));
+            if ($block instanceof Abstract\CommentBlockAbstract) {
+                self::log("Instruction: " . \mb_substr($block->getInstruction(), 0, 60));
             } else {
                 self::log("Instruction: " . $block->getInstruction());
             }
