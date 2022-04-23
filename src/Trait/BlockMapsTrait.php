@@ -108,7 +108,7 @@ trait BlockMapsTrait
             ]
         ],
         '[' => 'decideArrayBlockType',
-        '{' => 'ObjectBlock',
+        '{' => 'ScopeBlock',
         'i' => [
             'f' => [
                 ' '  => "IfBlock",
@@ -184,6 +184,7 @@ trait BlockMapsTrait
             ],
             "default" => 'ChainLinkBlock'
         ],
+        "{" => "ObjectBlock",
     ];
     protected array $callerBlocksMap = [
         '.' => [
@@ -200,6 +201,37 @@ trait BlockMapsTrait
             ],
             "default" => 'ChainLinkBlock'
         ],
-        ',' => "ArrayItemSeperatorBlock"
+        ',' => "ArrayItemSeperatorBlock",
+        "{" => "ObjectBlock",
     ];
+    protected array $variableBlocksMap = [
+        "{" => "ObjectBlock",
+    ];
+    protected array $callerArgsBlocksMap = [
+        "{" => "ObjectBlock",
+    ];
+
+    protected function getDefaultMap(): array
+    {
+        $blocksMap = $this->blocksMap;
+
+        $additionalPaths = [
+            Block\ClassBlock ::class => $this->classBlocksMap,
+            Block\ObjectBlock::class => $this->objectBlocksMap,
+            Block\ArrayBlock ::class => $this->arrayBlocksMap,
+        ];
+
+        $blocksMap = array_merge($blocksMap, $additionalPaths[$this::class] ?? []);
+
+        if ($this instanceof MethodBlock) {
+            $blocksMap = array_merge($blocksMap, $this->callerBlocksMap);
+            if ($this->getStatus() === $this::CREATING_ARGUMENTS) {
+                $blocksMap = array_merge($blocksMap, $this->callerArgsBlocksMap);
+            }
+        } elseif ($this instanceof VariableBlock) {
+            $blocksMap = array_merge($blocksMap, $this->variableBlocksMap);
+        }
+
+        return $blocksMap;
+    }
 }

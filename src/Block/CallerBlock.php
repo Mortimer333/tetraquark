@@ -81,7 +81,7 @@ class CallerBlock extends Block implements Contract\Block
 
             // If we are searching for arrow and the first thing we find isn't equal sign it means this isn't arrow function
             if ($searchForArrow && $letter != '=') {
-                $end = $i;
+                // $end = $i;
                 break;
             } elseif ($searchForArrow && $letter == '=' && self::$content[$i + 1] ?? '' == ">") {
                 // If this is arrow function then make this empty and skip current letter
@@ -102,7 +102,7 @@ class CallerBlock extends Block implements Contract\Block
         }
 
         $this->setCaret($end);
-        $this->setInstruction(trim(\mb_substr(self::$content, $start, $end - $start)))
+        $this->setInstruction(\mb_substr(self::$content, $start, $end - $start))
             ->setInstructionStart($start)
         ;
     }
@@ -121,7 +121,7 @@ class CallerBlock extends Block implements Contract\Block
 
         $script = rtrim($script, ';');
 
-        if (!$this->checkIfFirstLetterInNextSiblingIsSpecial()) {
+        if (!$this->checkIfFirstLetterInNextSiblingIsADot()) {
             return $script . ';';
         }
         return $script;

@@ -14,7 +14,7 @@ use \Tetraquark\{Exception as Exception, Block as Block, Log as Log, Validate as
 abstract class BlockAbstract
 {
     // I've seperated related functionality to Traits to make this file more managable
-    use BlockGetSetTrait;   // Hold all get and set functions
+    use BlockGetSetTrait;   // Holds all get and set functions
     use BlockMapsTrait;     // Has $blocksMap, $classBlocksMap, $objectBlocksMap, $callerBlocksMap and $arrayBlocksMap variables
     use BlockAliasMapTrait; // Contains our alias creation map
     static protected string $content;
@@ -57,25 +57,6 @@ abstract class BlockAbstract
     public function aliasExists(string $name): bool
     {
         return (bool) (self::$mappedAliases[$name] ?? false);
-    }
-
-    protected function getDefaultMap(): array
-    {
-        $blocksMap = $this->blocksMap;
-
-        $additionalPaths = [
-            Block\ClassBlock ::class => $this->classBlocksMap,
-            Block\ObjectBlock::class => $this->objectBlocksMap,
-            Block\ArrayBlock ::class => $this->arrayBlocksMap,
-        ];
-
-        $blocksMap = array_merge($blocksMap, $additionalPaths[$this::class] ?? []);
-
-        if ($this instanceof MethodBlock) {
-            $blocksMap = array_merge($blocksMap, $this->callerBlocksMap);
-        }
-
-        return $blocksMap;
     }
 
     protected function journeyForBlockClassName(string $name, string &$mappedWord, string &$possibleUndefined, int &$i, ?array $blocksMap = null): string | array | null
@@ -361,6 +342,10 @@ abstract class BlockAbstract
                 return;
             }
         }
+        if ($this instanceof Block\FunctionBlock) {
+            $this->setName('');
+            return;
+        }
         throw new Exception('Blocks name not found', 404);
     }
 
@@ -619,7 +604,7 @@ abstract class BlockAbstract
         return ['', $i - 1];
     }
 
-    protected function checkIfFirstLetterInNextSiblingIsSpecial(): bool
+    protected function checkIfFirstLetterInNextSiblingIsADot(): bool
     {
         $parent = $this->getParent();
         $childIndex = $this->getChildIndex();
@@ -628,7 +613,7 @@ abstract class BlockAbstract
             return false;
         }
         $instruction = $nextSibling->getInstruction();
-        list($letter) = $this->getNextLetter(0, $instruction);
-        return Validate::isSpecial($letter);
+        $letter = trim($instruction)[0];
+        return $letter === '.';
     }
 }

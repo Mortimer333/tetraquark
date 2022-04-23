@@ -104,7 +104,7 @@ class ChainLinkBlock extends Block implements Contract\Block
             if (
                 $nextChild instanceof ChainLinkBlock
                 || $nextChild instanceof BracketChainLinkBlock
-                || $this->checkIfFirstLetterInNextSiblingIsSpecial()
+                || $this->checkIfFirstLetterInNextSiblingIsADot()
             ) {
                 $script .= ")";
             } else {

@@ -8,6 +8,8 @@ abstract class MethodBlockAbstract extends BlockAbstract
 {
     /** @var array Contains arguments in form of Blocks[] so its [Blocks[], Blocks[]] */
     protected array $arguments = [];
+    protected string $status = '';
+    protected const CREATING_ARGUMENTS = 'creating arguments';
 
     public function getArguments(): array
     {
@@ -104,6 +106,7 @@ abstract class MethodBlockAbstract extends BlockAbstract
 
     protected function setArgumentBlocks(array $arguments): void
     {
+        $this->setStatus(self::CREATING_ARGUMENTS);
         foreach ($arguments as $argument) {
             $blocks = $this->createSubBlocksWithContent($argument);
             foreach ($blocks as &$block) {
@@ -113,6 +116,16 @@ abstract class MethodBlockAbstract extends BlockAbstract
             }
             $this->addArgument($blocks);
         }
+    }
+
+    protected function setStatus(string $status): void
+    {
+        $this->status = $status;
+    }
+
+    protected function getStatus(): string
+    {
+        return $this->status;
     }
 
     protected function findMethodEnd(int $start)

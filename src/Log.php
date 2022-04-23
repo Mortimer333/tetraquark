@@ -129,6 +129,7 @@ class Log
                 self::log("Instruction: " . $block->getInstruction());
             }
             self::log("Instruction Start: " . $block->getInstructionStart());
+            self::log("Caret: " . $block->getCaret());
             self::log("Name: `" . $block->getName() . "`");
             if (method_exists($block, 'getValue')) {
                 self::log("Value: `" . $block->getValue() . "`");

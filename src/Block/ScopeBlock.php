@@ -4,39 +4,29 @@ namespace Tetraquark\Block;
 use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
 use \Tetraquark\Abstract\BlockAbstract as Block;
 
-class ArrayBlock extends Block implements Contract\Block
+class ScopeBlock extends Block implements Contract\Block
 {
     protected array $endChars = [
-        ']' => true,
+        "}" => true
     ];
 
     public function objectify(int $start = 0)
     {
-        $this->setInstruction('');
         $this->setName('');
+        $this->setCaret($start + 1);
+        $this->setInstruction('');
         $this->setInstructionStart($start);
         $this->blocks = array_merge($this->blocks, $this->createSubBlocks($start + 1));
     }
 
     public function recreate(): string
     {
-        $script = '[';
+        $script = '{';
+
         foreach ($this->getBlocks() as $block) {
-            $trimmed =
-            trim(
-                trim(
-                    trim(
-                        $block->recreate()
-                    ),
-                    ','
-                ),
-                ';'
-            );
-            if (\mb_strlen($trimmed) > 0) {
-                $script .=  $trimmed. ',';
-            }
+            $script .= trim($block->recreate());
         }
-        $script = rtrim($script, ',');
-        return $script . '];';
+
+        return $script . '};';
     }
 }
