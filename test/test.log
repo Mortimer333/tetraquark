@@ -2,4385 +2,783 @@ Mapping...
 =======================
 Creating aliases...
 =======================
-Aliases: TabJF_Get => a, clone => b, clonedPos => c, myself => d, visibleLines => e, selectedNodes => f, selectedLines => g, elPos => h, linePos => i, selection => j, realPos => k, line => l, lineByPos => m, lineInDirection => n, obj => o, pos => p, el => r, sLine => s, eLine => t, sel => u, revCheck => w, Error => z, start => y, end => x, linesBetween => q, startLine => v, endLine => µ, content => ê, endSpan => õ, startNode => ú, tmp => A, text => B, endNode => C, i => D, child => E, children => F, letters => G, + => H, x => I, y => J, - => K, newLine => L, dir => M, first => N, newNewLine => O, 
+Aliases: ClassName => a, objSoloTest => b, obj => c, classTest => d, classTest2 => e, classTes3 => f, classTest4 => g, classTest6 => h, whileLooped => i, func1 => j, funcr2 => k, meth2 => l, as => m, kek@ => n, classTest5 => o, to => p, size => r, 
 Recreating...
 =======================
 Block: Tetraquark\Block\ClassBlock
 Subtype: class
-Instruction: class TabJF_Get {
+Instruction: class ClassName {
 Instruction Start: 0
-Name: `TabJF_Get`
+Name: `ClassName`
 Alias: `a`
 =======
-  Block: Tetraquark\Block\MultiCommentBlock
-  Subtype: /*
-  Instruction: /**\r\n   * Creates clone of passed object. Doesn't clone functions\r\n   * @param  {Object} obj Object to clone\r\n   * @return {Object}     Cloned object\r\n   */
-  Instruction Start: 21
-  Name: ``
-  Alias: ``
-  =======
   Block: Tetraquark\Block\ClassMethodBlock
   Subtype: method
-  Instruction: clone ( obj ) {
-  Instruction Start: 181
-  Name: `clone`
-  Arguments: [1] `
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction:  obj 
-    Instruction Start: -1
-    Name: `obj`
-    Alias: `o`
-    =======
-  Alias: `b`
+  Instruction: constructor() {
+  Instruction Start: 23
+  Name: `constructor`
+  Arguments: [0] `
+  Alias: `constructor`
   =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction: \r\n    return 
-    Instruction Start: 200
-    Name: ``
-    Alias: ``
-    =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: first
-    Instruction: JSON
-    Instruction Start: 209
+    Instruction: console
+    Instruction Start: 48
     Name: ``
     Alias: ``
     =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: end:method
-    Instruction: parse
-    Instruction Start: 213
+    Instruction: log
+    Instruction Start: 55
     Name: ``
     Alias: ``
     =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: JSON
-      Instruction Start: 220
+      Block: Tetraquark\Block\StringBlock
+      Subtype: 
+      Instruction: 'new'
+      Instruction Start: 60
       Name: ``
       Alias: ``
       =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: stringify
-      Instruction Start: 224
-      Name: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction:  obj 
-        Instruction Start: 235
-        Name: ``
-        Alias: ``
-        =======
-  Block: Tetraquark\Block\MultiCommentBlock
-  Subtype: /*
-  Instruction: /**\r\n   * Clone position attribute (used for Unit tests)\r\n   * @return {Object} Cloned position of caret\r\n   */
-  Instruction Start: 254
-  Name: ``
-  Alias: ``
-  =======
   Block: Tetraquark\Block\ClassMethodBlock
   Subtype: method
-  Instruction: clonedPos () {
-  Instruction Start: 369
-  Name: `clonedPos`
-  Arguments: [0] `
-  Alias: `c`
-  =======
-    Block: Tetraquark\Block\VariableBlock
-    Subtype: const
-    Instruction: const pos =
-    Instruction Start: 389
-    Name: `pos`
-    Value: ``
-    Alias: `p`
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: Object
-      Instruction Start: 401
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: assign
-      Instruction Start: 407
-      Name: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\ObjectBlock
-        Subtype: {
-        Instruction: 
-        Instruction Start: 415
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction: , 
-        Instruction Start: 421
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: this
-        Instruction Start: 419
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: pos
-        Instruction Start: 423
-        Name: ``
-        Alias: ``
-        =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: pos
-    Instruction Start: 435
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:variable
-    Instruction: el 
-    Instruction Start: 438
-    Name: `el`
-    Alias: `r`
-    =======
-      Block: Tetraquark\Block\AttributeBlock
-      Subtype: 
-      Instruction:  pos.el =
-      Instruction Start: 434
-      Name: ``
-      Value: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: this
-        Instruction Start: 444
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: pos
-        Instruction Start: 448
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: el
-        Instruction Start: 452
-        Name: ``
-        Alias: ``
-        =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction:     return pos;\r\n  
-    Instruction Start: 458
-    Name: ``
-    Alias: ``
-    =======
-  Block: Tetraquark\Block\MultiCommentBlock
-  Subtype: /*
-  Instruction: /**\r\n   * Returns main class\r\n   * @return {Object} Main class\r\n   */
-  Instruction Start: 484
-  Name: ``
-  Alias: ``
-  =======
-  Block: Tetraquark\Block\ClassMethodBlock
-  Subtype: method
-  Instruction: myself () {
-  Instruction Start: 557
-  Name: `myself`
-  Arguments: [0] `
-  Alias: `d`
-  =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction: \r\n    return this;\r\n  
-    Instruction Start: 568
-    Name: ``
-    Alias: ``
-    =======
-  Block: Tetraquark\Block\MultiCommentBlock
-  Subtype: /*
-  Instruction: /**\r\n   * Returns all visible lines\r\n   * @return {Object} Visible lines in render content form\r\n   */
-  Instruction Start: 597
-  Name: ``
-  Alias: ``
-  =======
-  Block: Tetraquark\Block\ClassMethodBlock
-  Subtype: method
-  Instruction: visibleLines() {
-  Instruction Start: 703
-  Name: `visibleLines`
-  Arguments: [0] `
-  Alias: `e`
-  =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction: \r\n    return 
-    Instruction Start: 723
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: this
-    Instruction Start: 732
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: middle
-    Instruction: render
-    Instruction Start: 736
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: middle
-    Instruction: content
-    Instruction Start: 743
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:method
-    Instruction: slice
-    Instruction Start: 751
-    Name: ``
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: this
-      Instruction Start: 758
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: render
-      Instruction Start: 762
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: hidden
-      Instruction Start: 769
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction: , this
-      Instruction Start: 769
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: render
-      Instruction Start: 782
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: hidden 
-      Instruction Start: 789
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction: + 
-      Instruction Start: 801
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: this
-      Instruction Start: 799
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: render
-      Instruction Start: 803
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: linesLimit
-      Instruction Start: 810
-      Name: ``
-      Alias: ``
-      =======
-  Block: Tetraquark\Block\MultiCommentBlock
-  Subtype: /*
-  Instruction: /**\r\n   * Returns all selected lines (cloned)\r\n   * @param  {Node|null} [sLine=null] Node line start\r\n   * @param  {Node|null} [eLine=null] Node line end\r\n   * @return {Node[]   }              Selected nodes\r\n   */
-  Instruction Start: 834
-  Name: ``
-  Alias: ``
-  =======
-  Block: Tetraquark\Block\ClassMethodBlock
-  Subtype: method
-  Instruction: selectedNodes ( sLine = null, eLine = null ) {
-  Instruction Start: 1052
-  Name: `selectedNodes`
-  Arguments: [2] `
-    Block: Tetraquark\Block\AttributeBlock
-    Subtype: 
-    Instruction:  sLine =
-    Instruction Start: 0
-    Name: `sLine`
-    Value: ``
-    Alias: `s`
-    =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  null
-      Instruction Start: 7
-      Name: ``
-      Alias: ``
-      =======
-    Block: Tetraquark\Block\AttributeBlock
-    Subtype: 
-    Instruction:  eLine =
-    Instruction Start: 0
-    Name: `eLine`
-    Value: ``
-    Alias: `t`
-    =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  null 
-      Instruction Start: 7
-      Name: ``
-      Alias: ``
-      =======
-  Alias: `f`
-  =======
-    Block: Tetraquark\Block\IfBlock
-    Subtype: if
-    Instruction:  if ( !sLine || !eLine ) {
-    Instruction Start: 1103
-    Name: ``
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\VariableBlock
-      Subtype: const
-      Instruction: const sel =
-      Instruction Start: 1137
-      Name: `sel`
-      Value: ``
-      Alias: `u`
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: this
-        Instruction Start: 1149
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: get
-        Instruction Start: 1153
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: end:method
-        Instruction: selection
-        Instruction Start: 1157
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction: ,
-        Instruction Start: 1167
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\AttributeBlock
-        Subtype: 
-        Instruction:  revCheck =
-        Instruction Start: 1170
-        Name: `revCheck`
-        Value: ``
-        Alias: `w`
-        =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: first
-          Instruction: this
-          Instruction Start: 1182
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: middle
-          Instruction: selection
-          Instruction Start: 1186
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: .
-          Instruction: reverse 
-          Instruction Start: 1196
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction: && !
-          Instruction Start: 1209
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: first
-          Instruction: this
-          Instruction Start: 1209
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: middle
-          Instruction: selection
-          Instruction Start: 1213
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: .
-          Instruction: expanded
-          Instruction Start: 1223
-          Name: ``
-          Alias: ``
-          =======
-        Block: Tetraquark\Block\AttributeBlock
-        Subtype: 
-        Instruction:  sLine =
-        Instruction Start: 1240
-        Name: `sLine`
-        Value: ``
-        Alias: `s`
-        =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: first
-          Instruction: this
-          Instruction Start: 1249
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: middle
-          Instruction: get
-          Instruction Start: 1253
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: end:method
-          Instruction: line
-          Instruction Start: 1257
-          Name: ``
-          Alias: ``
-          =======
-            Block: Tetraquark\Block\UndefinedBlock
-            Subtype: 
-            Instruction:  revCheck ? 
-            Instruction Start: 1266
-            Name: ``
-            Alias: ``
-            =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: first
-            Instruction: sel
-            Instruction Start: 1275
-            Name: ``
-            Alias: ``
-            =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: .
-            Instruction: focusNode 
-            Instruction Start: 1278
-            Name: ``
-            Alias: ``
-            =======
-            Block: Tetraquark\Block\UndefinedBlock
-            Subtype: 
-            Instruction: : 
-            Instruction Start: 1292
-            Name: ``
-            Alias: ``
-            =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: first
-            Instruction: sel
-            Instruction Start: 1291
-            Name: ``
-            Alias: ``
-            =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: .
-            Instruction: anchorNode 
-            Instruction Start: 1294
-            Name: ``
-            Alias: ``
-            =======
-        Block: Tetraquark\Block\AttributeBlock
-        Subtype: 
-        Instruction:  eLine =
-        Instruction Start: 1315
-        Name: `eLine`
-        Value: ``
-        Alias: `t`
-        =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: first
-          Instruction: this
-          Instruction Start: 1324
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: middle
-          Instruction: get
-          Instruction Start: 1328
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: end:method
-          Instruction: line
-          Instruction Start: 1332
-          Name: ``
-          Alias: ``
-          =======
-            Block: Tetraquark\Block\UndefinedBlock
-            Subtype: 
-            Instruction:  revCheck ? 
-            Instruction Start: 1341
-            Name: ``
-            Alias: ``
-            =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: first
-            Instruction: sel
-            Instruction Start: 1350
-            Name: ``
-            Alias: ``
-            =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: .
-            Instruction: anchorNode 
-            Instruction Start: 1353
-            Name: ``
-            Alias: ``
-            =======
-            Block: Tetraquark\Block\UndefinedBlock
-            Subtype: 
-            Instruction: : 
-            Instruction Start: 1368
-            Name: ``
-            Alias: ``
-            =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: first
-            Instruction: sel
-            Instruction Start: 1367
-            Name: ``
-            Alias: ``
-            =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: .
-            Instruction: focusNode 
-            Instruction Start: 1370
-            Name: ``
-            Alias: ``
-            =======
-      Block: Tetraquark\Block\IfBlock
-      Subtype: single-condition
-      Instruction:  if ( !sLine || !eLine ) throw new Error('Couldn\'t find lines');
-      Instruction Start: 1397
-      Name: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction:  throw
-        Instruction Start: -7
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\NewClassBlock
-        Subtype: new
-        Instruction:  Error('Couldn\'t find lines')
-        Instruction Start: 6
-        Name: `Error`
-        Arguments: [1] `
-          Block: Tetraquark\Block\StringBlock
-          Subtype: 
-          Instruction: 'Couldn\'t find lines'
-          Instruction Start: 0
-          Name: ``
-          Alias: ``
-          =======
-        Alias: `z`
-        =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction: \n\r\n    return 
-      Instruction Start: 1448
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\BracketChainLinkBlock
-      Subtype: [
-      Instruction: 
-      Instruction Start: 1477
-      Name: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: sLine
-        Instruction Start: 1486
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: end:method
-        Instruction: cloneNode
-        Instruction Start: 1491
-        Name: ``
-        Alias: ``
-        =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction: true
-          Instruction Start: 1502
-          Name: ``
-          Alias: ``
-          =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction: ,\r\n      ...
-        Instruction Start: 1511
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: this
-        Instruction Start: 1519
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: get
-        Instruction Start: 1523
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: end:method
-        Instruction: selectedNodesRecursive
-        Instruction Start: 1527
-        Name: ``
-        Alias: ``
-        =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: first
-          Instruction: sLine
-          Instruction Start: 1552
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: .
-          Instruction: nextSibling
-          Instruction Start: 1557
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction: , eLine 
-          Instruction Start: 1569
-          Name: ``
-          Alias: ``
-          =======
-    Block: Tetraquark\Block\MultiCommentBlock
-    Subtype: /*
-    Instruction: /**\r\n   * Recursively gather selected nodes, starting from `node` and searching of `end` (cloned)\r\n   * @param  {Node} node Start node\r\n   * @param  {Node} end  End node\r\n   * @return {Node[]}    Found nodes\r\n   */
-    Instruction Start: 1597
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction: \n  selectedNodesRecursive 
-    Instruction Start: 1785
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\CallerBlock
-    Subtype: (
-    Instruction: ( node, end )
-    Instruction Start: 1838
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\IfBlock
-    Subtype: single-condition
-    Instruction:  if ( node === null         ) throw new Error('The node doesn\'t exist in this parent');
-    Instruction Start: 1858
-    Name: ``
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  throw
-      Instruction Start: -7
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\NewClassBlock
-      Subtype: new
-      Instruction:  Error('The node doesn\'t exist in this parent')
-      Instruction Start: 6
-      Name: `Error`
-      Arguments: [1] `
-        Block: Tetraquark\Block\StringBlock
-        Subtype: 
-        Instruction: 'The node doesn\'t exist in this parent'
-        Instruction Start: 0
-        Name: ``
-        Alias: ``
-        =======
-      Alias: `z`
-      =======
-    Block: Tetraquark\Block\IfBlock
-    Subtype: single-condition
-    Instruction:  if ( node == end           ) return [ node.cloneNode(true) ];
-    Instruction Start: 1951
-    Name: ``
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  return 
-      Instruction Start: -9
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\BracketChainLinkBlock
-      Subtype: [
-      Instruction: 
-      Instruction Start: 8
-      Name: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: node
-        Instruction Start: 10
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: end:method
-        Instruction: cloneNode
-        Instruction Start: 14
-        Name: ``
-        Alias: ``
-        =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction: true
-          Instruction Start: 25
-          Name: ``
-          Alias: ``
-          =======
-    Block: Tetraquark\Block\IfBlock
-    Subtype: single-condition
-    Instruction:  if ( node.nodeName !== "P" ) return this.get.selectedNodesRecursive( node.nextSibling, end );
-    Instruction Start: 2018
-    Name: ``
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  return 
-      Instruction Start: 4
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: this
-      Instruction Start: 8
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: get
-      Instruction Start: 12
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: selectedNodesRecursive
-      Instruction Start: 16
-      Name: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: node
-        Instruction Start: 41
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: nextSibling
-        Instruction Start: 45
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction: , end 
-        Instruction Start: 57
-        Name: ``
-        Alias: ``
-        =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction: \n    return 
-    Instruction Start: 2100
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\BracketChainLinkBlock
-    Subtype: [
-    Instruction: 
-    Instruction Start: 2125
-    Name: ``
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: node
-      Instruction Start: 2127
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: cloneNode
-      Instruction Start: 2131
-      Name: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction: true
-        Instruction Start: 2142
-        Name: ``
-        Alias: ``
-        =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction: , ...
-      Instruction Start: 2151
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: this
-      Instruction Start: 2152
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: get
-      Instruction Start: 2156
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: selectedNodesRecursive
-      Instruction Start: 2160
-      Name: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: node
-        Instruction Start: 2185
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: nextSibling
-        Instruction Start: 2189
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction: , end 
-        Instruction Start: 2201
-        Name: ``
-        Alias: ``
-        =======
-  Block: Tetraquark\Block\MultiCommentBlock
-  Subtype: /*
-  Instruction: /**\r\n   * Get seleced lines from render content based on our saved selection start and end (cloned)\r\n   * @return {Object[]} Selected nodes in content render form (cloned)\r\n   */
-  Instruction Start: 2222
-  Name: ``
-  Alias: ``
-  =======
-  Block: Tetraquark\Block\ClassMethodBlock
-  Subtype: method
-  Instruction: selectedLines () {
-  Instruction Start: 2404
-  Name: `selectedLines`
-  Arguments: [0] `
-  Alias: `g`
-  =======
-    Block: Tetraquark\Block\VariableBlock
-    Subtype: const
-    Instruction: const sel =
-    Instruction Start: 2428
-    Name: `sel`
-    Value: ``
-    Alias: `u`
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: this
-      Instruction Start: 2440
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: get
-      Instruction Start: 2444
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: selection
-      Instruction Start: 2448
-      Name: ``
-      Alias: ``
-      =======
-    Block: Tetraquark\Block\IfBlock
-    Subtype: single-condition
-    Instruction:  if ( sel.type != 'Range') return;
-    Instruction Start: 2466
-    Name: ``
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  return;
-      Instruction Start: -1
-      Name: ``
-      Alias: ``
-      =======
-    Block: Tetraquark\Block\VariableBlock
-    Subtype: let
-    Instruction: let start =
-    Instruction Start: 2506
-    Name: `start`
-    Value: ``
-    Alias: `y`
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: this
-      Instruction Start: 2518
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: get
-      Instruction Start: 2522
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: clone
-      Instruction Start: 2526
-      Name: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: this
-        Instruction Start: 2534
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: selection
-        Instruction Start: 2538
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: start 
-        Instruction Start: 2548
-        Name: ``
-        Alias: ``
-        =======
-    Block: Tetraquark\Block\VariableBlock
-    Subtype: let
-    Instruction: let end   =
-    Instruction Start: 2563
-    Name: `end`
-    Value: ``
-    Alias: `x`
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: this
-      Instruction Start: 2575
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: get
-      Instruction Start: 2579
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: clone
-      Instruction Start: 2583
-      Name: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: this
-        Instruction Start: 2591
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: selection
-        Instruction Start: 2595
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: end   
-        Instruction Start: 2605
-        Name: ``
-        Alias: ``
-        =======
-    Block: Tetraquark\Block\SingleCommentBlock
-    Subtype: //
-    Instruction: / Check if start and end are not reversed\r\n
-    Instruction Start: 2620
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\IfBlock
-    Subtype: if
-    Instruction:  if (\r\n      start.line > end.line\r\n      || (start.line == end.line && start.node > end.node)\r\n      || (start.line == end.line && start.node == end.node && start.letter > end.letter)\r\n    ) {
-    Instruction Start: 2667
-    Name: ``
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\VariableBlock
-      Subtype: let
-      Instruction: let tmp =
-      Instruction Start: 2868
-      Name: `tmp`
-      Value: ``
-      Alias: `A`
-      =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction:  start
-        Instruction Start: 2877
-        Name: ``
-        Alias: ``
-        =======
-      Block: Tetraquark\Block\AttributeBlock
-      Subtype: 
-      Instruction:  start   =
-      Instruction Start: 2891
-      Name: `start`
-      Value: ``
-      Alias: `y`
-      =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction:  end
-        Instruction Start: 2901
-        Name: ``
-        Alias: ``
-        =======
-      Block: Tetraquark\Block\AttributeBlock
-      Subtype: 
-      Instruction:  end     =
-      Instruction Start: 2913
-      Name: `end`
-      Value: ``
-      Alias: `x`
-      =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction:  tmp
-        Instruction Start: 2923
-        Name: ``
-        Alias: ``
-        =======
-    Block: Tetraquark\Block\SingleCommentBlock
-    Subtype: //
-    Instruction: / If we copy only part of one line\r\n
-    Instruction Start: 2941
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\IfBlock
-    Subtype: if
-    Instruction:  if ( start.line == end.line ) {
-    Instruction Start: 2981
-    Name: ``
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\VariableBlock
-      Subtype: const
-      Instruction: const line =
-      Instruction Start: 3021
-      Name: `line`
-      Value: ``
-      Alias: `l`
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: this
-        Instruction Start: 3034
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: get
-        Instruction Start: 3038
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: end:method
-        Instruction: clone
-        Instruction Start: 3042
-        Name: ``
-        Alias: ``
-        =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: first
-          Instruction: this
-          Instruction Start: 3050
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: middle
-          Instruction: render
-          Instruction Start: 3054
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: .
-          Instruction: content
-          Instruction Start: 3061
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\BracketChainLinkBlock
-          Subtype: [
-          Instruction: 
-          Instruction Start: 3069
-          Name: ``
-          Alias: ``
-          =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: first
-            Instruction: start
-            Instruction Start: 3071
-            Name: ``
-            Alias: ``
-            =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: .
-            Instruction: line 
-            Instruction Start: 3076
-            Name: ``
-            Alias: ``
-            =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:       delete 
-      Instruction Start: 3092
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: line
-      Instruction Start: 3101
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: ends
-      Instruction Start: 3105
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction: \r\n      delete line
-      Instruction Start: 3091
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: groupPath
-      Instruction Start: 3130
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\SingleCommentBlock
-      Subtype: //
-      Instruction: / If from the same node\r\n
-      Instruction Start: 3149
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\IfBlock
-      Subtype: if
-      Instruction:  if ( start.node == end.node ) {
-      Instruction Start: 3180
-      Name: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\VariableBlock
-        Subtype: let
-        Instruction: let content =
-        Instruction Start: 3222
-        Name: `content`
-        Value: ``
-        Alias: `ê`
-        =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: first
-          Instruction: this
-          Instruction Start: 3236
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: middle
-          Instruction: replace
-          Instruction Start: 3240
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: end:method
-          Instruction: spaceChars
-          Instruction Start: 3248
-          Name: ``
-          Alias: ``
-          =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: first
-            Instruction: line
-            Instruction Start: 3261
-            Name: ``
-            Alias: ``
-            =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: .
-            Instruction: content
-            Instruction Start: 3265
-            Name: ``
-            Alias: ``
-            =======
-            Block: Tetraquark\Block\BracketChainLinkBlock
-            Subtype: [
-            Instruction: 
-            Instruction Start: 3273
-            Name: ``
-            Alias: ``
-            =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: first
-              Instruction: start
-              Instruction Start: 3275
-              Name: ``
-              Alias: ``
-              =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: .
-              Instruction: node 
-              Instruction Start: 3280
-              Name: ``
-              Alias: ``
-              =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: first
-            Instruction: 
-            Instruction Start: 3287
-            Name: ``
-            Alias: ``
-            =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: .
-            Instruction: content 
-            Instruction Start: 3287
-            Name: ``
-            Alias: ``
-            =======
-        Block: Tetraquark\Block\VariableBlock
-        Subtype: let
-        Instruction: let text    =
-        Instruction Start: 3308
-        Name: `text`
-        Value: ``
-        Alias: `B`
-        =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: first
-          Instruction: this
-          Instruction Start: 3322
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: middle
-          Instruction: replace
-          Instruction Start: 3326
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: end:method
-          Instruction: spaces
-          Instruction Start: 3334
-          Name: ``
-          Alias: ``
-          =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: first
-            Instruction: content
-            Instruction Start: 3343
-            Name: ``
-            Alias: ``
-            =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: end:method
-            Instruction: substr
-            Instruction Start: 3350
-            Name: ``
-            Alias: ``
-            =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: first
-              Instruction: start
-              Instruction Start: 3359
-              Name: ``
-              Alias: ``
-              =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: .
-              Instruction: letter
-              Instruction Start: 3364
-              Name: ``
-              Alias: ``
-              =======
-              Block: Tetraquark\Block\UndefinedBlock
-              Subtype: 
-              Instruction: , end
-              Instruction Start: 3365
-              Name: ``
-              Alias: ``
-              =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: .
-              Instruction: letter 
-              Instruction Start: 3376
-              Name: ``
-              Alias: ``
-              =======
-              Block: Tetraquark\Block\UndefinedBlock
-              Subtype: 
-              Instruction: - 
-              Instruction Start: 3389
-              Name: ``
-              Alias: ``
-              =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: first
-              Instruction: start
-              Instruction Start: 3386
-              Name: ``
-              Alias: ``
-              =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: .
-              Instruction: letter 
-              Instruction Start: 3391
-              Name: ``
-              Alias: ``
-              =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: line
-        Instruction Start: 3413
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: end:variable
-        Instruction: content 
-        Instruction Start: 3417
-        Name: `content`
-        Alias: `ê`
-        =======
-          Block: Tetraquark\Block\AttributeBlock
-          Subtype: 
-          Instruction:  line.content =
-          Instruction Start: 3412
-          Name: ``
-          Value: ``
-          Alias: ``
-          =======
-            Block: Tetraquark\Block\ArrayBlock
-            Subtype: [
-            Instruction: 
-            Instruction Start: 3428
-            Name: ``
-            Alias: ``
-            =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: first
-              Instruction: this
-              Instruction Start: 3430
-              Name: ``
-              Alias: ``
-              =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: middle
-              Instruction: syntax
-              Instruction Start: 3434
-              Name: ``
-              Alias: ``
-              =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: middle
-              Instruction: create
-              Instruction Start: 3441
-              Name: ``
-              Alias: ``
-              =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: end:method
-              Instruction: span
-              Instruction Start: 3448
-              Name: ``
-              Alias: ``
-              =======
-                Block: Tetraquark\Block\ObjectBlock
-                Subtype: {
-                Instruction: 
-                Instruction Start: 3454
-                Name: ``
-                Alias: ``
-                =======
-                Block: Tetraquark\Block\UndefinedBlock
-                Subtype: 
-                Instruction: , text
-                Instruction Start: 3456
-                Name: ``
-                Alias: ``
-                =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction:         return 
-        Instruction Start: 3451
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\BracketChainLinkBlock
-        Subtype: [
-        Instruction: 
-        Instruction Start: 3482
-        Name: ``
-        Alias: ``
-        =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction: line 
-          Instruction Start: 3484
-          Name: ``
-          Alias: ``
-          =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  else 
-      Instruction Start: 3493
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ObjectBlock
-      Subtype: {
-      Instruction: 
-      Instruction Start: 3506
-      Name: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\VariableBlock
-        Subtype: let
-        Instruction: let startNode =
-        Instruction Start: 3517
-        Name: `startNode`
-        Value: ``
-        Alias: `ú`
-        =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: first
-          Instruction: line
-          Instruction Start: 3533
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: .
-          Instruction: content
-          Instruction Start: 3537
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\BracketChainLinkBlock
-          Subtype: [
-          Instruction: 
-          Instruction Start: 3545
-          Name: ``
-          Alias: ``
-          =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: first
-            Instruction: start
-            Instruction Start: 3547
-            Name: ``
-            Alias: ``
-            =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: .
-            Instruction: node 
-            Instruction Start: 3552
-            Name: ``
-            Alias: ``
-            =======
-        Block: Tetraquark\Block\VariableBlock
-        Subtype: let
-        Instruction: let endNode   =
-        Instruction Start: 3570
-        Name: `endNode`
-        Value: ``
-        Alias: `C`
-        =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: first
-          Instruction: line
-          Instruction Start: 3586
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: .
-          Instruction: content
-          Instruction Start: 3590
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\BracketChainLinkBlock
-          Subtype: [
-          Instruction: 
-          Instruction Start: 3598
-          Name: ``
-          Alias: ``
-          =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: first
-            Instruction: end
-            Instruction Start: 3600
-            Name: ``
-            Alias: ``
-            =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: .
-            Instruction: node   
-            Instruction Start: 3603
-            Name: ``
-            Alias: ``
-            =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: startNode
-        Instruction Start: 3623
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: end:variable
-        Instruction: content 
-        Instruction Start: 3632
-        Name: `content`
-        Alias: `ê`
-        =======
-          Block: Tetraquark\Block\AttributeBlock
-          Subtype: 
-          Instruction:  startNode.content =
-          Instruction Start: 3622
-          Name: ``
-          Value: ``
-          Alias: ``
-          =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: first
-            Instruction: this
-            Instruction Start: 3643
-            Name: ``
-            Alias: ``
-            =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: middle
-            Instruction: replace
-            Instruction Start: 3647
-            Name: ``
-            Alias: ``
-            =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: end:method
-            Instruction: spaces
-            Instruction Start: 3655
-            Name: ``
-            Alias: ``
-            =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: first
-              Instruction: this
-              Instruction Start: 3675
-              Name: ``
-              Alias: ``
-              =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: middle
-              Instruction: replace
-              Instruction Start: 3679
-              Name: ``
-              Alias: ``
-              =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: end:method
-              Instruction: spaceChars
-              Instruction Start: 3687
-              Name: ``
-              Alias: ``
-              =======
-                Block: Tetraquark\Block\ChainLinkBlock
-                Subtype: first
-                Instruction: startNode
-                Instruction Start: 3700
-                Name: ``
-                Alias: ``
-                =======
-                Block: Tetraquark\Block\ChainLinkBlock
-                Subtype: .
-                Instruction: content 
-                Instruction Start: 3709
-                Name: ``
-                Alias: ``
-                =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: first
-              Instruction: 
-              Instruction Start: 3719
-              Name: ``
-              Alias: ``
-              =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: end:method
-              Instruction: substr
-              Instruction Start: 3719
-              Name: ``
-              Alias: ``
-              =======
-                Block: Tetraquark\Block\ChainLinkBlock
-                Subtype: first
-                Instruction: start
-                Instruction Start: 3728
-                Name: ``
-                Alias: ``
-                =======
-                Block: Tetraquark\Block\ChainLinkBlock
-                Subtype: .
-                Instruction: letter 
-                Instruction Start: 3733
-                Name: ``
-                Alias: ``
-                =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: endNode
-        Instruction Start: 3764
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: end:variable
-        Instruction: content   
-        Instruction Start: 3771
-        Name: `content`
-        Alias: `ê`
-        =======
-          Block: Tetraquark\Block\AttributeBlock
-          Subtype: 
-          Instruction:  endNode.content   =
-          Instruction Start: 3763
-          Name: ``
-          Value: ``
-          Alias: ``
-          =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: first
-            Instruction: this
-            Instruction Start: 3784
-            Name: ``
-            Alias: ``
-            =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: middle
-            Instruction: replace
-            Instruction Start: 3788
-            Name: ``
-            Alias: ``
-            =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: end:method
-            Instruction: spaces
-            Instruction Start: 3796
-            Name: ``
-            Alias: ``
-            =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: first
-              Instruction: this
-              Instruction Start: 3816
-              Name: ``
-              Alias: ``
-              =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: middle
-              Instruction: replace
-              Instruction Start: 3820
-              Name: ``
-              Alias: ``
-              =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: end:method
-              Instruction: spaceChars
-              Instruction Start: 3828
-              Name: ``
-              Alias: ``
-              =======
-                Block: Tetraquark\Block\ChainLinkBlock
-                Subtype: first
-                Instruction: endNode
-                Instruction Start: 3841
-                Name: ``
-                Alias: ``
-                =======
-                Block: Tetraquark\Block\ChainLinkBlock
-                Subtype: .
-                Instruction: content   
-                Instruction Start: 3848
-                Name: ``
-                Alias: ``
-                =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: first
-              Instruction: 
-              Instruction Start: 3860
-              Name: ``
-              Alias: ``
-              =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: end:method
-              Instruction: substr
-              Instruction Start: 3860
-              Name: ``
-              Alias: ``
-              =======
-                Block: Tetraquark\Block\UndefinedBlock
-                Subtype: 
-                Instruction:  0, 
-                Instruction Start: 3871
-                Name: ``
-                Alias: ``
-                =======
-                Block: Tetraquark\Block\ChainLinkBlock
-                Subtype: first
-                Instruction: end
-                Instruction Start: 3872
-                Name: ``
-                Alias: ``
-                =======
-                Block: Tetraquark\Block\ChainLinkBlock
-                Subtype: .
-                Instruction: letter 
-                Instruction Start: 3875
-                Name: ``
-                Alias: ``
-                =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: line
-        Instruction Start: 3906
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: end:variable
-        Instruction: content 
-        Instruction Start: 3910
-        Name: `content`
-        Alias: `ê`
-        =======
-          Block: Tetraquark\Block\AttributeBlock
-          Subtype: 
-          Instruction:  line.content =
-          Instruction Start: 3905
-          Name: ``
-          Value: ``
-          Alias: ``
-          =======
-            Block: Tetraquark\Block\ArrayBlock
-            Subtype: [
-            Instruction: 
-            Instruction Start: 3921
-            Name: ``
-            Alias: ``
-            =======
-              Block: Tetraquark\Block\UndefinedBlock
-              Subtype: 
-              Instruction:  startNode 
-              Instruction Start: 3922
-              Name: ``
-              Alias: ``
-              =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: first
-            Instruction: 
-            Instruction Start: 3934
-            Name: ``
-            Alias: ``
-            =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: end:method
-            Instruction: concat
-            Instruction Start: 3934
-            Name: ``
-            Alias: ``
-            =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: first
-              Instruction: line
-              Instruction Start: 3954
-              Name: ``
-              Alias: ``
-              =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: middle
-              Instruction: content
-              Instruction Start: 3958
-              Name: ``
-              Alias: ``
-              =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: end:method
-              Instruction: slice
-              Instruction Start: 3966
-              Name: ``
-              Alias: ``
-              =======
-                Block: Tetraquark\Block\ChainLinkBlock
-                Subtype: first
-                Instruction: start
-                Instruction Start: 3974
-                Name: ``
-                Alias: ``
-                =======
-                Block: Tetraquark\Block\ChainLinkBlock
-                Subtype: .
-                Instruction: node 
-                Instruction Start: 3979
-                Name: ``
-                Alias: ``
-                =======
-                Block: Tetraquark\Block\UndefinedBlock
-                Subtype: 
-                Instruction: + 1, 
-                Instruction Start: 3988
-                Name: ``
-                Alias: ``
-                =======
-                Block: Tetraquark\Block\ChainLinkBlock
-                Subtype: first
-                Instruction: end
-                Instruction Start: 3990
-                Name: ``
-                Alias: ``
-                =======
-                Block: Tetraquark\Block\ChainLinkBlock
-                Subtype: .
-                Instruction: node 
-                Instruction Start: 3993
-                Name: ``
-                Alias: ``
-                =======
-                Block: Tetraquark\Block\UndefinedBlock
-                Subtype: 
-                Instruction: + 1 
-                Instruction Start: 3999
-                Name: ``
-                Alias: ``
-                =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction:         return 
-        Instruction Start: 4002
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\BracketChainLinkBlock
-        Subtype: [
-        Instruction: 
-        Instruction Start: 4033
-        Name: ``
-        Alias: ``
-        =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction: line 
-          Instruction Start: 4035
-          Name: ``
-          Alias: ``
-          =======
-    Block: Tetraquark\Block\VariableBlock
-    Subtype: let
-    Instruction: let linesBetween =
-    Instruction Start: 4066
-    Name: `linesBetween`
-    Value: ``
-    Alias: `q`
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: this
-      Instruction Start: 4085
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: render
-      Instruction Start: 4089
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: content
-      Instruction Start: 4096
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: slice
-      Instruction Start: 4104
-      Name: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: start
-        Instruction Start: 4112
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: line 
-        Instruction Start: 4117
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction: + 1, 
-        Instruction Start: 4126
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: end
-        Instruction Start: 4128
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: line 
-        Instruction Start: 4131
-        Name: ``
-        Alias: ``
-        =======
-    Block: Tetraquark\Block\VariableBlock
-    Subtype: let
-    Instruction: let startLine    =
-    Instruction Start: 4145
-    Name: `startLine`
-    Value: ``
-    Alias: `v`
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: this
-      Instruction Start: 4164
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: get
-      Instruction Start: 4168
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: clone
-      Instruction Start: 4172
-      Name: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: this
-        Instruction Start: 4180
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: render
-        Instruction Start: 4184
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: content
-        Instruction Start: 4191
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\BracketChainLinkBlock
-        Subtype: [
-        Instruction: 
-        Instruction Start: 4199
-        Name: ``
-        Alias: ``
-        =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: first
-          Instruction: start
-          Instruction Start: 4201
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: .
-          Instruction: line 
-          Instruction Start: 4206
-          Name: ``
-          Alias: ``
-          =======
-    Block: Tetraquark\Block\VariableBlock
-    Subtype: let
-    Instruction: let endLine      =
-    Instruction Start: 4221
-    Name: `endLine`
-    Value: ``
-    Alias: `µ`
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: this
-      Instruction Start: 4240
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: get
-      Instruction Start: 4244
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: clone
-      Instruction Start: 4248
-      Name: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: this
-        Instruction Start: 4256
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: render
-        Instruction Start: 4260
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: content
-        Instruction Start: 4267
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\BracketChainLinkBlock
-        Subtype: [
-        Instruction: 
-        Instruction Start: 4275
-        Name: ``
-        Alias: ``
-        =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: first
-          Instruction: end
-          Instruction Start: 4277
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: .
-          Instruction: line   
-          Instruction Start: 4280
-          Name: ``
-          Alias: ``
-          =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: endLine
-    Instruction Start: 4297
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:variable
-    Instruction: content 
-    Instruction Start: 4304
-    Name: `content`
-    Alias: `ê`
-    =======
-      Block: Tetraquark\Block\AttributeBlock
-      Subtype: 
-      Instruction:  endLine.content =
-      Instruction Start: 4296
-      Name: ``
-      Value: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: endLine
-        Instruction Start: 4315
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: content
-        Instruction Start: 4322
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: end:method
-        Instruction: slice
-        Instruction Start: 4330
-        Name: ``
-        Alias: ``
-        =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction:  0, 
-          Instruction Start: 4340
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: first
-          Instruction: end
-          Instruction Start: 4341
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: .
-          Instruction: node 
-          Instruction Start: 4344
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction: + 1 
-          Instruction Start: 4350
-          Name: ``
-          Alias: ``
-          =======
-    Block: Tetraquark\Block\VariableBlock
-    Subtype: let
-    Instruction: let endSpan =
-    Instruction Start: 4362
-    Name: `endSpan`
-    Value: ``
-    Alias: `õ`
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: endLine
-      Instruction Start: 4376
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: content
-      Instruction Start: 4383
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\BracketChainLinkBlock
-      Subtype: [
-      Instruction: 
-      Instruction Start: 4391
-      Name: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: endLine
-        Instruction Start: 4393
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: content
-        Instruction Start: 4400
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: length 
-        Instruction Start: 4408
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction: - 1 
-        Instruction Start: 4416
-        Name: ``
-        Alias: ``
-        =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: endSpan
-    Instruction Start: 4430
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:variable
-    Instruction: content 
-    Instruction Start: 4437
-    Name: `content`
-    Alias: `ê`
-    =======
-      Block: Tetraquark\Block\AttributeBlock
-      Subtype: 
-      Instruction:  endSpan.content =
-      Instruction Start: 4429
-      Name: ``
-      Value: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: endSpan
-        Instruction Start: 4448
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: content
-        Instruction Start: 4455
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: end:method
-        Instruction: replaceAll
-        Instruction Start: 4463
-        Name: ``
-        Alias: ``
-        =======
-          Block: Tetraquark\Block\StringBlock
-          Subtype: 
-          Instruction: '&nbsp;'
-          Instruction Start: 4475
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction: , 
-          Instruction Start: 4483
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\StringBlock
-          Subtype: 
-          Instruction: ' '
-          Instruction Start: 4485
-          Name: ``
-          Alias: ``
-          =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: endSpan
-    Instruction Start: 4496
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:variable
-    Instruction: content 
-    Instruction Start: 4503
-    Name: `content`
-    Alias: `ê`
-    =======
-      Block: Tetraquark\Block\AttributeBlock
-      Subtype: 
-      Instruction:  endSpan.content =
-      Instruction Start: 4495
-      Name: ``
-      Value: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: endSpan
-        Instruction Start: 4514
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: content
-        Instruction Start: 4521
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: end:method
-        Instruction: substr
-        Instruction Start: 4529
-        Name: ``
-        Alias: ``
-        =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction:  0, 
-          Instruction Start: 4540
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: first
-          Instruction: end
-          Instruction Start: 4541
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: .
-          Instruction: letter 
-          Instruction Start: 4544
-          Name: ``
-          Alias: ``
-          =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: endSpan
-    Instruction Start: 4560
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:variable
-    Instruction: content 
-    Instruction Start: 4567
-    Name: `content`
-    Alias: `ê`
-    =======
-      Block: Tetraquark\Block\AttributeBlock
-      Subtype: 
-      Instruction:  endSpan.content =
-      Instruction Start: 4559
-      Name: ``
-      Value: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: endSpan
-        Instruction Start: 4578
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: content
-        Instruction Start: 4585
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: end:method
-        Instruction: replaceAll
-        Instruction Start: 4593
-        Name: ``
-        Alias: ``
-        =======
-          Block: Tetraquark\Block\StringBlock
-          Subtype: 
-          Instruction: ' '
-          Instruction Start: 4605
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction: , 
-          Instruction Start: 4608
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\StringBlock
-          Subtype: 
-          Instruction: '&nbsp;'
-          Instruction Start: 4610
-          Name: ``
-          Alias: ``
-          =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: startLine
-    Instruction Start: 4628
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:variable
-    Instruction: content 
-    Instruction Start: 4637
-    Name: `content`
-    Alias: `ê`
-    =======
-      Block: Tetraquark\Block\AttributeBlock
-      Subtype: 
-      Instruction:  startLine.content =
-      Instruction Start: 4627
-      Name: ``
-      Value: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: startLine
-        Instruction Start: 4648
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: content
-        Instruction Start: 4657
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: end:method
-        Instruction: slice
-        Instruction Start: 4665
-        Name: ``
-        Alias: ``
-        =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: first
-          Instruction: start
-          Instruction Start: 4673
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: .
-          Instruction: node 
-          Instruction Start: 4678
-          Name: ``
-          Alias: ``
-          =======
-    Block: Tetraquark\Block\VariableBlock
-    Subtype: let
-    Instruction: let startNode =
-    Instruction Start: 4692
-    Name: `startNode`
-    Value: ``
-    Alias: `ú`
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: startLine
-      Instruction Start: 4708
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: content
-      Instruction Start: 4717
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\BracketChainLinkBlock
-      Subtype: [
-      Instruction: 
-      Instruction Start: 4725
-      Name: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction: 0
-        Instruction Start: 4726
-        Name: ``
-        Alias: ``
-        =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: startNode
-    Instruction Start: 4735
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:variable
-    Instruction: content 
-    Instruction Start: 4744
-    Name: `content`
-    Alias: `ê`
-    =======
-      Block: Tetraquark\Block\AttributeBlock
-      Subtype: 
-      Instruction:  startNode.content =
-      Instruction Start: 4734
-      Name: ``
-      Value: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: startNode
-        Instruction Start: 4755
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: content
-        Instruction Start: 4764
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: end:method
-        Instruction: replaceAll
-        Instruction Start: 4772
-        Name: ``
-        Alias: ``
-        =======
-          Block: Tetraquark\Block\StringBlock
-          Subtype: 
-          Instruction: '&nbsp;'
-          Instruction Start: 4784
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction: , 
-          Instruction Start: 4792
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\StringBlock
-          Subtype: 
-          Instruction: ' '
-          Instruction Start: 4794
-          Name: ``
-          Alias: ``
-          =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: startNode
-    Instruction Start: 4805
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:variable
-    Instruction: content 
-    Instruction Start: 4814
-    Name: `content`
-    Alias: `ê`
-    =======
-      Block: Tetraquark\Block\AttributeBlock
-      Subtype: 
-      Instruction:  startNode.content =
-      Instruction Start: 4804
-      Name: ``
-      Value: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: startNode
-        Instruction Start: 4825
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: content
-        Instruction Start: 4834
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: end:method
-        Instruction: substr
-        Instruction Start: 4842
-        Name: ``
-        Alias: ``
-        =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: first
-          Instruction: start
-          Instruction Start: 4851
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: .
-          Instruction: letter 
-          Instruction Start: 4856
-          Name: ``
-          Alias: ``
-          =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: startNode
-    Instruction Start: 4872
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:variable
-    Instruction: content 
-    Instruction Start: 4881
-    Name: `content`
-    Alias: `ê`
-    =======
-      Block: Tetraquark\Block\AttributeBlock
-      Subtype: 
-      Instruction:  startNode.content =
-      Instruction Start: 4871
-      Name: ``
-      Value: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: startNode
-        Instruction Start: 4892
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: content
-        Instruction Start: 4901
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: end:method
-        Instruction: replaceAll
-        Instruction Start: 4909
-        Name: ``
-        Alias: ``
-        =======
-          Block: Tetraquark\Block\StringBlock
-          Subtype: 
-          Instruction: ' '
-          Instruction Start: 4921
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction: , 
-          Instruction Start: 4924
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\StringBlock
-          Subtype: 
-          Instruction: '&nbsp;'
-          Instruction Start: 4926
-          Name: ``
-          Alias: ``
-          =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction:     return 
-    Instruction Start: 4926
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\BracketChainLinkBlock
-    Subtype: [
-    Instruction: 
-    Instruction Start: 4949
-    Name: ``
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction: startLine 
-      Instruction Start: 4951
-      Name: ``
-      Alias: ``
-      =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: 
-    Instruction Start: 4962
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:method
-    Instruction: concat
-    Instruction Start: 4962
-    Name: ``
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  linesBetween, 
-      Instruction Start: 4954
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ArrayBlock
-      Subtype: [
-      Instruction: 
-      Instruction Start: 4985
-      Name: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction:  endLine 
-        Instruction Start: 4986
-        Name: ``
-        Alias: ``
-        =======
-  Block: Tetraquark\Block\MultiCommentBlock
-  Subtype: /*
-  Instruction: /**\r\n   * Get child index of element\r\n   * @param  {Node} el Node\r\n   * @return {Number|Boolean}  Child Index or false if not found\r\n   */
-  Instruction Start: 5010
-  Name: ``
-  Alias: ``
-  =======
-  Block: Tetraquark\Block\ClassMethodBlock
-  Subtype: method
-  Instruction: elPos ( el ) {
-  Instruction Start: 5152
-  Name: `elPos`
-  Arguments: [1] `
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction:  el 
-    Instruction Start: -1
-    Name: `el`
-    Alias: `r`
-    =======
-  Alias: `h`
-  =======
-    Block: Tetraquark\Block\ForBlock
-    Subtype: for
-    Instruction:  for ( let i = 0; i < el.parentElement.children.length; i++ ) {
-    Instruction Start: 5171
-    Name: ``
-      Block: Tetraquark\Block\VariableBlock
-      Subtype: let
-      Instruction: let i =
-      Instruction Start: 0
-      Name: `i`
-      Value: ``
-      Alias: `D`
-      =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction:  0
-        Instruction Start: 6
-        Name: ``
-        Alias: ``
-        =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  i < 
-      Instruction Start: 2
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: el
-      Instruction Start: 5
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: parentElement
-      Instruction Start: 7
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: children
-      Instruction Start: 21
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: length
-      Instruction Start: 30
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  i++
-      Instruction Start: -1
-      Name: ``
-      Alias: ``
-      =======
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\IfBlock
-      Subtype: single-condition
-      Instruction:  if ( el.parentElement.children[i] == el ) return i;
-      Instruction Start: 5241
-      Name: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction:  return i;
-        Instruction Start: -1
-        Name: ``
-        Alias: ``
-        =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction: \r\n    return false;\r\n  
-    Instruction Start: 5300
-    Name: ``
-    Alias: ``
-    =======
-  Block: Tetraquark\Block\MultiCommentBlock
-  Subtype: /*
-  Instruction: /**\r\n   * Get position of line in editor\r\n   * @param  {Node}           line Line node\r\n   * @return {Number|Boolean}      Child Index if found, false if not\r\n   */
-  Instruction Start: 5330
-  Name: ``
-  Alias: ``
-  =======
-  Block: Tetraquark\Block\ClassMethodBlock
-  Subtype: method
-  Instruction: linePos ( line ) {
-  Instruction Start: 5498
-  Name: `linePos`
-  Arguments: [1] `
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction:  line 
-    Instruction Start: -1
-    Name: `line`
-    Alias: `l`
-    =======
-  Alias: `i`
-  =======
-    Block: Tetraquark\Block\VariableBlock
-    Subtype: let
-    Instruction: let linePos =
-    Instruction Start: 5522
-    Name: `linePos`
-    Value: ``
-    Alias: `i`
-    =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  0
-      Instruction Start: 5535
-      Name: ``
-      Alias: ``
-      =======
-    Block: Tetraquark\Block\ForBlock
-    Subtype: for
-    Instruction:  for ( let i = 0; i < this.editor.children.length; i++ ) {
-    Instruction Start: 5543
-    Name: ``
-      Block: Tetraquark\Block\VariableBlock
-      Subtype: let
-      Instruction: let i =
-      Instruction Start: 0
-      Name: `i`
-      Value: ``
-      Alias: `D`
-      =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction:  0
-        Instruction Start: 6
-        Name: ``
-        Alias: ``
-        =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  i < 
-      Instruction Start: 4
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: this
-      Instruction Start: 5
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: editor
-      Instruction Start: 9
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: children
-      Instruction Start: 16
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: length
-      Instruction Start: 25
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  i++
-      Instruction Start: -1
-      Name: ``
-      Alias: ``
-      =======
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\VariableBlock
-      Subtype: let
-      Instruction: let child =
-      Instruction Start: 5609
-      Name: `child`
-      Value: ``
-      Alias: `E`
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: this
-        Instruction Start: 5621
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: editor
-        Instruction Start: 5625
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: children
-        Instruction Start: 5632
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\BracketChainLinkBlock
-        Subtype: [
-        Instruction: 
-        Instruction Start: 5641
-        Name: ``
-        Alias: ``
-        =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction: i
-          Instruction Start: 5642
-          Name: ``
-          Alias: ``
-          =======
-      Block: Tetraquark\Block\IfBlock
-      Subtype: single-condition
-      Instruction:  if ( line == child ) return linePos;
-      Instruction Start: 5652
-      Name: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction:  return linePos;
-        Instruction Start: -1
-        Name: ``
-        Alias: ``
-        =======
-      Block: Tetraquark\Block\SingleCommentBlock
-      Subtype: //
-      Instruction: / we only increase if there was actual line in editor between our target\r\n
-      Instruction Start: 5697
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\IfBlock
-      Subtype: single-condition
-      Instruction:  if (child.nodeName && child.nodeName == "P") linePos++;
-      Instruction Start: 5777
-      Name: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction:  linePos++;
-        Instruction Start: -1
-        Name: ``
-        Alias: ``
-        =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction: \r\n    return false;\r\n  
-    Instruction Start: 5840
-    Name: ``
-    Alias: ``
-    =======
-  Block: Tetraquark\Block\MultiCommentBlock
-  Subtype: /*
-  Instruction: /**\r\n   * Get selection\r\n   * @return {Object} Selection object\r\n   */
-  Instruction Start: 5870
-  Name: ``
-  Alias: ``
-  =======
-  Block: Tetraquark\Block\ClassMethodBlock
-  Subtype: method
-  Instruction: selection () {
-  Instruction Start: 5944
-  Name: `selection`
+  Instruction: func1 () {
+  Instruction Start: 82
+  Name: `func1`
   Arguments: [0] `
   Alias: `j`
   =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction: \r\n    return 
-    Instruction Start: 5964
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: window
-    Instruction Start: 5971
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: .
-    Instruction: getSelection 
-    Instruction Start: 5977
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction: ? 
-    Instruction Start: 5997
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: window
-    Instruction Start: 5993
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:method
-    Instruction: getSelection
-    Instruction Start: 5999
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction:  : 
-    Instruction Start: 6022
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: document
-    Instruction Start: 6017
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: .
-    Instruction: selection
-    Instruction Start: 6025
-    Name: ``
-    Alias: ``
-    =======
-  Block: Tetraquark\Block\MultiCommentBlock
-  Subtype: /*
-  Instruction: /**\r\n   * Get real position of caret (real number of letter is the main purpose because in position element you only have on which letter he is in\r\n   * current node)\r\n   * @return {Object} { x: 0, y: 0 } - x is letters and y is lines\r\n   */
-  Instruction Start: 6047
-  Name: ``
-  Alias: ``
-  =======
   Block: Tetraquark\Block\ClassMethodBlock
   Subtype: method
-  Instruction: realPos () {
-  Instruction Start: 6292
-  Name: `realPos`
+  Instruction: funcr2() {
+  Instruction Start: 109
+  Name: `funcr2`
   Arguments: [0] `
   Alias: `k`
   =======
-    Block: Tetraquark\Block\VariableBlock
-    Subtype: const
-    Instruction: const children =
-    Instruction Start: 6310
-    Name: `children`
-    Value: ``
-    Alias: `F`
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: Object
-      Instruction Start: 6327
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: values
-      Instruction Start: 6333
-      Name: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: this
-        Instruction Start: 6342
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: pos
-        Instruction Start: 6346
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: el
-        Instruction Start: 6350
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: parentElement
-        Instruction Start: 6353
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: children 
-        Instruction Start: 6367
-        Name: ``
-        Alias: ``
-        =======
-    Block: Tetraquark\Block\VariableBlock
-    Subtype: let
-    Instruction: let letters =
-    Instruction Start: 6385
-    Name: `letters`
-    Value: ``
-    Alias: `G`
-    =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  0
-      Instruction Start: 6398
-      Name: ``
-      Alias: ``
-      =======
-    Block: Tetraquark\Block\ForBlock
-    Subtype: for
-    Instruction:  for ( let i = 0; i < children.length; i++ ) {
-    Instruction Start: 6406
-    Name: ``
-      Block: Tetraquark\Block\VariableBlock
-      Subtype: let
-      Instruction: let i =
-      Instruction Start: 0
-      Name: `i`
-      Value: ``
-      Alias: `D`
-      =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction:  0
-        Instruction Start: 6
-        Name: ``
-        Alias: ``
-        =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  i < 
-      Instruction Start: 8
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: children
-      Instruction Start: 5
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: length
-      Instruction Start: 13
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  i++
-      Instruction Start: -1
-      Name: ``
-      Alias: ``
-      =======
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\IfBlock
-      Subtype: single-condition
-      Instruction:  if ( this.pos.el == children[i] ) break;
-      Instruction Start: 6459
-      Name: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction:  break;
-        Instruction Start: -1
-        Name: ``
-        Alias: ``
-        =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction: \n      letters
-      Instruction Start: 6486
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\AttributeBlock
-      Subtype: 
-      Instruction:  +=
-      Instruction Start: 6515
-      Name: `+`
-      Value: ``
-      Alias: `H`
-      =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction:  children
-        Instruction Start: 6508
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\BracketChainLinkBlock
-        Subtype: [
-        Instruction: 
-        Instruction Start: 6527
-        Name: ``
-        Alias: ``
-        =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction: i
-          Instruction Start: 6528
-          Name: ``
-          Alias: ``
-          =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: 
-        Instruction Start: 6530
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: innerText
-        Instruction Start: 6530
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: length
-        Instruction Start: 6540
-        Name: ``
-        Alias: ``
-        =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction: \r\n    letters
-    Instruction Start: 6541
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\AttributeBlock
-    Subtype: 
-    Instruction:  +=
-    Instruction Start: 6568
-    Name: `+`
-    Value: ``
-    Alias: `H`
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: this
-      Instruction Start: 6572
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: pos
-      Instruction Start: 6576
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: letter
-      Instruction Start: 6580
-      Name: ``
-      Alias: ``
-      =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction: \r\n    return 
-    Instruction Start: 6576
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ObjectBlock
-    Subtype: {
-    Instruction: 
-    Instruction Start: 6603
-    Name: ``
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\ObjectValueBlock
-      Subtype: :
-      Instruction: x
-      Instruction Start: 6604
-      Name: `x`
-      Alias: `I`
-      =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction:  letters
-        Instruction Start: 6615
-        Name: ``
-        Alias: ``
-        =======
-      Block: Tetraquark\Block\ObjectValueBlock
-      Subtype: :
-      Instruction: y
-      Instruction Start: 6624
-      Name: `y`
-      Alias: `J`
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: this
-        Instruction Start: 6636
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: pos
-        Instruction Start: 6640
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: line\r\n    
-        Instruction Start: 6644
-        Name: ``
-        Alias: ``
-        =======
-  Block: Tetraquark\Block\MultiCommentBlock
-  Subtype: /*
-  Instruction: /**\r\n   * Given some kind og child of the line find related line\r\n   * @param  {Node        } el Lines child\r\n   * @return {Node|Boolean}    Found line or false\r\n   */
-  Instruction Start: 6667
-  Name: ``
-  Alias: ``
-  =======
   Block: Tetraquark\Block\ClassMethodBlock
   Subtype: method
-  Instruction: line ( el ) {
-  Instruction Start: 6838
-  Name: `line`
-  Arguments: [1] `
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction:  el 
-    Instruction Start: -1
-    Name: `el`
-    Alias: `r`
-    =======
+  Instruction: meth2\r\n    ()\r\n    {
+  Instruction Start: 128
+  Name: `meth2`
+  Arguments: [0] `
   Alias: `l`
   =======
-    Block: Tetraquark\Block\IfBlock
-    Subtype: single-condition
-    Instruction:  if (!el.parentElement) return false;
-    Instruction Start: 6856
-    Name: ``
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  return false;
-      Instruction Start: -1
-      Name: ``
-      Alias: ``
-      =======
-    Block: Tetraquark\Block\IfBlock
-    Subtype: single-condition
-    Instruction:  if ( el.parentElement == this.editor ) return el;
-    Instruction Start: 6898
-    Name: ``
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  return el;
-      Instruction Start: -1
-      Name: ``
-      Alias: ``
-      =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction: \n    return 
-    Instruction Start: 6953
-    Name: ``
-    Alias: ``
-    =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: first
-    Instruction: this
-    Instruction Start: 6961
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: middle
-    Instruction: get
-    Instruction Start: 6965
+    Instruction: console
+    Instruction Start: 158
     Name: ``
     Alias: ``
     =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: end:method
-    Instruction: line
-    Instruction Start: 6969
+    Instruction: log
+    Instruction Start: 165
     Name: ``
     Alias: ``
     =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: el
-      Instruction Start: 6976
+      Block: Tetraquark\Block\StringBlock
+      Subtype: 
+      Instruction: 'asdas'
+      Instruction Start: 170
       Name: ``
       Alias: ``
       =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: parentElement 
-      Instruction Start: 6978
-      Name: ``
-      Alias: ``
-      =======
-  Block: Tetraquark\Block\MultiCommentBlock
-  Subtype: /*
-  Instruction: /**\r\n   * Get line node by its position\r\n   * @param  {Number      } pos\r\n   * @return {Node|Boolean}     Line node or false\r\n   */
-  Instruction Start: 7006
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: \r\n\r\n    attrb 
+  Instruction Start: 171
   Name: ``
   Alias: ``
   =======
-  Block: Tetraquark\Block\ClassMethodBlock
-  Subtype: method
-  Instruction: lineByPos ( pos ) {
-  Instruction Start: 7141
-  Name: `lineByPos`
-  Arguments: [1] `
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction:  pos 
-    Instruction Start: -1
-    Name: `pos`
-    Alias: `p`
-    =======
-  Alias: `m`
+  Block: Tetraquark\Block\AttributeBlock
+  Subtype: 
+  Instruction: =
+  Instruction Start: 200
+  Name: ``
+  Value: ``
+  Alias: ``
   =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: 'asd'
+    Instruction Start: 202
+    Name: ``
+    Alias: ``
+    =======
     Block: Tetraquark\Block\UndefinedBlock
     Subtype: 
-    Instruction: \r\n    pos
-    Instruction Start: 7150
+    Instruction:  + 
+    Instruction Start: 207
     Name: ``
     Alias: ``
     =======
-    Block: Tetraquark\Block\AttributeBlock
+    Block: Tetraquark\Block\StringBlock
     Subtype: 
-    Instruction:  -=
-    Instruction Start: 7169
-    Name: `-`
-    Value: ``
-    Alias: `K`
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: this
-      Instruction Start: 7173
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: render
-      Instruction Start: 7177
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: hidden
-      Instruction Start: 7184
-      Name: ``
-      Alias: ``
-      =======
-    Block: Tetraquark\Block\IfBlock
-    Subtype: if
-    Instruction:  if (pos >= 0) {
-    Instruction Start: 7197
+    Instruction: 'asd'
+    Instruction Start: 210
     Name: ``
     Alias: ``
     =======
-      Block: Tetraquark\Block\VariableBlock
-      Subtype: let
-      Instruction: let linePos =
-      Instruction Start: 7221
-      Name: `linePos`
-      Value: ``
-      Alias: `i`
-      =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction:  -1
-        Instruction Start: 7234
-        Name: ``
-        Alias: ``
-        =======
-      Block: Tetraquark\Block\ForBlock
-      Subtype: for
-      Instruction:  for (var i = 0; i < this.editor.children.length; i++) {
-      Instruction Start: 7245
-      Name: ``
-        Block: Tetraquark\Block\VariableBlock
-        Subtype: var
-        Instruction: var i =
-        Instruction Start: 0
-        Name: `i`
-        Value: ``
-        Alias: `D`
-        =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction:  0
-          Instruction Start: 6
-          Name: ``
-          Alias: ``
-          =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction:  i < 
-        Instruction Start: 4
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: this
-        Instruction Start: 5
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: editor
-        Instruction Start: 9
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: children
-        Instruction Start: 16
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: length
-        Instruction Start: 25
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction:  i++
-        Instruction Start: -1
-        Name: ``
-        Alias: ``
-        =======
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\VariableBlock
-        Subtype: let
-        Instruction: let line =
-        Instruction Start: 7311
-        Name: `line`
-        Value: ``
-        Alias: `l`
-        =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: first
-          Instruction: this
-          Instruction Start: 7322
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: middle
-          Instruction: editor
-          Instruction Start: 7326
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: .
-          Instruction: children
-          Instruction Start: 7333
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\BracketChainLinkBlock
-          Subtype: [
-          Instruction: 
-          Instruction Start: 7342
-          Name: ``
-          Alias: ``
-          =======
-            Block: Tetraquark\Block\UndefinedBlock
-            Subtype: 
-            Instruction: i
-            Instruction Start: 7343
-            Name: ``
-            Alias: ``
-            =======
-        Block: Tetraquark\Block\IfBlock
-        Subtype: single-condition
-        Instruction:  if ( line.nodeName == "P") linePos++;
-        Instruction Start: 7355
-        Name: ``
-        Alias: ``
-        =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction:  linePos++;
-          Instruction Start: -1
-          Name: ``
-          Alias: ``
-          =======
-        Block: Tetraquark\Block\IfBlock
-        Subtype: single-condition
-        Instruction:  if ( linePos == pos      ) return line;
-        Instruction Start: 7402
-        Name: ``
-        Alias: ``
-        =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction:  return line;
-          Instruction Start: -1
-          Name: ``
-          Alias: ``
-          =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction:  else 
-    Instruction Start: 7451
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:     att 
+  Instruction Start: 208
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\AttributeBlock
+  Subtype: 
+  Instruction: =
+  Instruction Start: 225
+  Name: ``
+  Value: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\ArrayBlock
+    Subtype: [
+    Instruction: 
+    Instruction Start: 227
     Name: ``
     Alias: ``
     =======
+      Block: Tetraquark\Block\StringBlock
+      Subtype: 
+      Instruction: 'asd'
+      Instruction Start: 238
+      Name: ``
+      Alias: ``
+      =======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: \r\n    obj 
+  Instruction Start: 241
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\AttributeBlock
+  Subtype: 
+  Instruction: =
+  Instruction Start: 262
+  Name: ``
+  Value: ``
+  Alias: ``
+  =======
     Block: Tetraquark\Block\ObjectBlock
     Subtype: {
     Instruction: 
-    Instruction Start: 7464
+    Instruction Start: 264
     Name: ``
     Alias: ``
     =======
-      Block: Tetraquark\Block\VariableBlock
-      Subtype: let
-      Instruction: let linePos =
-      Instruction Start: 7473
-      Name: `linePos`
-      Value: ``
-      Alias: `i`
+      Block: Tetraquark\Block\ObjectValueBlock
+      Subtype: :
+      Instruction: 'as'
+      Instruction Start: 265
+      Name: `as`
+      Alias: `m`
       =======
-        Block: Tetraquark\Block\UndefinedBlock
+        Block: Tetraquark\Block\StringBlock
         Subtype: 
-        Instruction:  0
-        Instruction Start: 7486
+        Instruction: 'asd'
+        Instruction Start: 282
         Name: ``
         Alias: ``
         =======
-      Block: Tetraquark\Block\ForBlock
-      Subtype: for
-      Instruction:  for (var i = this.editor.children.length - 1; i > -1 ; i--) {
-      Instruction Start: 7496
-      Name: ``
-        Block: Tetraquark\Block\VariableBlock
-        Subtype: var
-        Instruction: var i =
-        Instruction Start: 0
-        Name: `i`
-        Value: ``
-        Alias: `D`
+      Block: Tetraquark\Block\ObjectValueBlock
+      Subtype: :
+      Instruction: 'kek@'
+      Instruction Start: 288
+      Name: `kek@`
+      Alias: `n`
+      =======
+        Block: Tetraquark\Block\ArrayBlock
+        Subtype: [
+        Instruction: 
+        Instruction Start: 307
+        Name: ``
+        Alias: ``
         =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: first
-          Instruction: this
-          Instruction Start: 8
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: middle
-          Instruction: editor
-          Instruction Start: 12
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: middle
-          Instruction: children
-          Instruction Start: 19
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: .
-          Instruction: length 
-          Instruction Start: 28
-          Name: ``
-          Alias: ``
-          =======
           Block: Tetraquark\Block\UndefinedBlock
           Subtype: 
-          Instruction: - 1
-          Instruction Start: 35
+          Instruction: \r\n            1
+          Instruction Start: 292
           Name: ``
           Alias: ``
           =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction:  i > -1 
-        Instruction Start: -1
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction:  i--
-        Instruction Start: -1
-        Name: ``
-        Alias: ``
-        =======
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\VariableBlock
-        Subtype: let
-        Instruction: let line =
-        Instruction Start: 7568
-        Name: `line`
-        Value: ``
-        Alias: `l`
-        =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: first
-          Instruction: this
-          Instruction Start: 7579
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: middle
-          Instruction: editor
-          Instruction Start: 7583
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: .
-          Instruction: children
-          Instruction Start: 7590
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\BracketChainLinkBlock
-          Subtype: [
+          Block: Tetraquark\Block\ArrayItemSeperatorBlock
+          Subtype: ,
           Instruction: 
-          Instruction Start: 7599
+          Instruction Start: 323
           Name: ``
           Alias: ``
           =======
-            Block: Tetraquark\Block\UndefinedBlock
-            Subtype: 
-            Instruction: i
-            Instruction Start: 7600
-            Name: ``
-            Alias: ``
-            =======
-        Block: Tetraquark\Block\IfBlock
-        Subtype: single-condition
-        Instruction:  if ( line.nodeName == "P") linePos++;
-        Instruction Start: 7612
-        Name: ``
-        Alias: ``
-        =======
           Block: Tetraquark\Block\UndefinedBlock
           Subtype: 
-          Instruction:  linePos++;
-          Instruction Start: -1
+          Instruction:  2
+          Instruction Start: 321
           Name: ``
           Alias: ``
           =======
-        Block: Tetraquark\Block\IfBlock
-        Subtype: single-condition
-        Instruction:  if ( linePos == pos * -1 ) return line;
-        Instruction Start: 7659
-        Name: ``
-        Alias: ``
-        =======
+          Block: Tetraquark\Block\ArrayItemSeperatorBlock
+          Subtype: ,
+          Instruction: 
+          Instruction Start: 326
+          Name: ``
+          Alias: ``
+          =======
           Block: Tetraquark\Block\UndefinedBlock
           Subtype: 
-          Instruction:  return line;
-          Instruction Start: -1
+          Instruction: 3\r\n        
+          Instruction Start: 327
           Name: ``
           Alias: ``
           =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction: \r\n    return false;\r\n  
-    Instruction Start: 7715
-    Name: ``
-    Alias: ``
-    =======
-  Block: Tetraquark\Block\MultiCommentBlock
-  Subtype: /*
-  Instruction: /**\r\n   * Get closest line in given direction (0 is up, 1 is down)\r\n   * @param  {Node     }  line        Start line\r\n   * @param  {Number   }  dir         Direction\r\n   * @param  {Boolean  } [first=true] Checks if this si first iteration\r\n   * @return {Node|null}              Line node or null\r\n   */
-  Instruction Start: 7745
+Block: Tetraquark\Block\VariableBlock
+Subtype: const
+Instruction: const objSoloTest =
+Instruction Start: 353
+Name: `objSoloTest`
+Value: ``
+Alias: `b`
+=======
+  Block: Tetraquark\Block\ArrayBlock
+  Subtype: [
+  Instruction: 
+  Instruction Start: 373
   Name: ``
   Alias: ``
   =======
-  Block: Tetraquark\Block\ClassMethodBlock
-  Subtype: method
-  Instruction: lineInDirection ( line, dir, first = true ) {
-  Instruction Start: 8051
-  Name: `lineInDirection`
-  Arguments: [3] `
-    Block: Tetraquark\Block\UndefinedBlock
+    Block: Tetraquark\Block\StringBlock
     Subtype: 
-    Instruction:  line
-    Instruction Start: -1
-    Name: `line`
-    Alias: `l`
-    =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction:  dir
-    Instruction Start: -1
-    Name: `dir`
-    Alias: `M`
-    =======
-    Block: Tetraquark\Block\AttributeBlock
-    Subtype: 
-    Instruction:  first =
-    Instruction Start: 0
-    Name: `first`
-    Value: ``
-    Alias: `N`
-    =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  true 
-      Instruction Start: 7
-      Name: ``
-      Alias: ``
-      =======
-  Alias: `n`
-  =======
-    Block: Tetraquark\Block\IfBlock
-    Subtype: single-condition
-    Instruction:  if ( first  && line?.nodeName != "P" ) throw new Error("Parent has wrong tag, can't find proper lines");
-    Instruction Start: 8101
+    Instruction: 'asd'
+    Instruction Start: 375
     Name: ``
     Alias: ``
     =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  throw
-      Instruction Start: -7
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\NewClassBlock
-      Subtype: new
-      Instruction:  Error("Parent has wrong tag, can't find proper lines")
-      Instruction Start: 6
-      Name: `Error`
-      Arguments: [1] `
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction:  can
-        Instruction Start: 0
-        Name: `can`
-        Alias: `can`
-        =======
-        Block: Tetraquark\Block\StringBlock
-        Subtype: 
-        Instruction: 't find proper lines"
-        Instruction Start: 4
-        Name: ``
-        Alias: ``
-        =======
-      Alias: `z`
-      =======
-    Block: Tetraquark\Block\IfBlock
-    Subtype: single-condition
-    Instruction:  if ( !first && line?.nodeName == "P" ) return line;
-    Instruction Start: 8211
-    Name: ``
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  return line;
-      Instruction Start: -1
-      Name: ``
-      Alias: ``
-      =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction: \n\r\n    let 
-    Instruction Start: 8252
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\VariableBlock
-    Subtype: let
+    Block: Tetraquark\Block\ArrayItemSeperatorBlock
+    Subtype: ,
     Instruction: 
-    Instruction Start: 8282
-    Name: `newLine`
-    Value: ``
-    Alias: `L`
-    =======
-    Block: Tetraquark\Block\IfBlock
-    Subtype: single-condition
-    Instruction:  if ( line === null ) return line;
-    Instruction Start: 8288
+    Instruction Start: 380
     Name: ``
     Alias: ``
     =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  return line;
-      Instruction Start: -1
-      Name: ``
-      Alias: ``
-      =======
-    Block: Tetraquark\Block\IfBlock
-    Subtype: single-condition
-    Instruction:  if ( dir < 0 ) newLine = line.previousSibling;
-    Instruction Start: 8334
-    Name: ``
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\AttributeBlock
-      Subtype: 
-      Instruction:  newLine =
-      Instruction Start: 0
-      Name: `newLine`
-      Value: ``
-      Alias: `L`
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: line
-        Instruction Start: 11
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: previousSibling
-        Instruction Start: 15
-        Name: ``
-        Alias: ``
-        =======
     Block: Tetraquark\Block\UndefinedBlock
     Subtype: 
-    Instruction: \n    else
-    Instruction Start: 8372
+    Instruction:  3
+    Instruction Start: 378
     Name: ``
     Alias: ``
     =======
-    Block: Tetraquark\Block\IfBlock
-    Subtype: single-condition
-    Instruction:  if ( dir > 0 ) newLine = line.nextSibling;
-    Instruction Start: 8391
+    Block: Tetraquark\Block\ArrayItemSeperatorBlock
+    Subtype: ,
+    Instruction: 
+    Instruction Start: 383
     Name: ``
     Alias: ``
     =======
-      Block: Tetraquark\Block\AttributeBlock
-      Subtype: 
-      Instruction:  newLine =
-      Instruction Start: 0
-      Name: `newLine`
-      Value: ``
-      Alias: `L`
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: line
-        Instruction Start: 11
-        Name: ``
-        Alias: ``
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: nextSibling
-        Instruction Start: 15
-        Name: ``
-        Alias: ``
-        =======
-    Block: Tetraquark\Block\IfBlock
-    Subtype: single-condition
-    Instruction:  if ( newLine === null ) return newLine;
-    Instruction Start: 8441
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  2 + 1
+    Instruction Start: 384
     Name: ``
     Alias: ``
     =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  return newLine;
-      Instruction Start: -1
-      Name: ``
-      Alias: ``
-      =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: let
+Instruction: let obj =
+Instruction Start: 393
+Name: `obj`
+Value: ``
+Alias: `c`
+=======
+  Block: Tetraquark\Block\ObjectBlock
+  Subtype: {
+  Instruction: 
+  Instruction Start: 403
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: \r\n    objSoloTest\r\n
+    Instruction Start: 404
+    Name: ``
+    Alias: ``
+    =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: const
+Instruction: const classTest =
+Instruction Start: 428
+Name: `classTest`
+Value: ``
+Alias: `d`
+=======
+  Block: Tetraquark\Block\NewClassBlock
+  Subtype: new
+  Instruction:  ClassName()
+  Instruction Start: 445
+  Name: `ClassName`
+  Arguments: [0] `
+  Alias: `a`
+  =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: const
+Instruction: const classTest2 =
+Instruction Start: 464
+Name: `classTest2`
+Value: ``
+Alias: `e`
+=======
+  Block: Tetraquark\Block\NewClassBlock
+  Subtype: new
+  Instruction:  ClassName()
+  Instruction Start: 482
+  Name: `ClassName`
+  Arguments: [0] `
+  Alias: `a`
+  =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: const
+Instruction: const classTes3 =
+Instruction Start: 500
+Name: `classTes3`
+Value: ``
+Alias: `f`
+=======
+  Block: Tetraquark\Block\NewClassBlock
+  Subtype: new
+  Instruction:  ClassName\r\n()
+  Instruction Start: 517
+  Name: `ClassName`
+  Arguments: [0] `
+  Alias: `a`
+  =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: const
+Instruction: const classTest4 =
+Instruction Start: 537
+Name: `classTest4`
+Value: ``
+Alias: `g`
+=======
+  Block: Tetraquark\Block\NewClassBlock
+  Subtype: new
+  Instruction:  ClassName
+  Instruction Start: 555
+  Name: `ClassName`
+  Arguments: [0] `
+  Alias: `a`
+  =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: const
+Instruction: const classTest6 =
+Instruction Start: 572
+Name: `classTest6`
+Value: ``
+Alias: `h`
+=======
+  Block: Tetraquark\Block\NewClassBlock
+  Subtype: new
+  Instruction:  ClassName\r
+  Instruction Start: 590
+  Name: `ClassName`
+  Arguments: [0] `
+  Alias: `a`
+  =======
+  Block: Tetraquark\Block\VariableBlock
+  Subtype: const
+  Instruction: const classTest5 =
+  Instruction Start: 606
+  Name: `classTest5`
+  Value: ``
+  Alias: `o`
+  =======
+    Block: Tetraquark\Block\NewClassBlock
+    Subtype: new
+    Instruction: \r\nClassName\r\n\r
+    Instruction Start: 624
+    Name: `ClassName`
+    Arguments: [0] `
+    Alias: `a`
+    =======
     Block: Tetraquark\Block\IfBlock
     Subtype: if
-    Instruction:  if ( newLine.nodeType != 1 ) {
-    Instruction Start: 8486
+    Instruction: \nif (obj.objSoloTest[0] == 'asd') {
+    Instruction Start: 642
     Name: ``
     Alias: ``
     =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction: \r\n      let 
-      Instruction Start: 8504
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\VariableBlock
-      Subtype: let
-      Instruction: 
-      Instruction Start: 8539
-      Name: `newNewLine`
-      Value: ``
-      Alias: `O`
-      =======
-      Block: Tetraquark\Block\SingleCommentBlock
-      Subtype: //
-      Instruction: / xd\r\n
-      Instruction Start: 8541
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\IfBlock
-      Subtype: single-condition
-      Instruction:  if ( dir < 0 ) newNewLine = newLine.previousSibling;
-      Instruction Start: 8558
-      Name: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\AttributeBlock
-        Subtype: 
-        Instruction:  newNewLine =
-        Instruction Start: 0
-        Name: `newNewLine`
-        Value: ``
-        Alias: `O`
-        =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: first
-          Instruction: newLine
-          Instruction Start: 14
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: .
-          Instruction: previousSibling
-          Instruction Start: 21
-          Name: ``
-          Alias: ``
-          =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction: \n      else
-      Instruction Start: 8600
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\IfBlock
-      Subtype: single-condition
-      Instruction:  if ( dir > 0 ) newNewLine = newLine.nextSibling;
-      Instruction Start: 8623
-      Name: ``
-      Alias: ``
-      =======
-        Block: Tetraquark\Block\AttributeBlock
-        Subtype: 
-        Instruction:  newNewLine =
-        Instruction Start: 0
-        Name: `newNewLine`
-        Value: ``
-        Alias: `O`
-        =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: first
-          Instruction: newLine
-          Instruction Start: 14
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: .
-          Instruction: nextSibling
-          Instruction Start: 21
-          Name: ``
-          Alias: ``
-          =======
       Block: Tetraquark\Block\ChainLinkBlock
       Subtype: first
-      Instruction: newLine
-      Instruction Start: 8680
+      Instruction: console
+      Instruction Start: 683
       Name: ``
       Alias: ``
       =======
       Block: Tetraquark\Block\ChainLinkBlock
       Subtype: end:method
-      Instruction: remove
-      Instruction Start: 8687
+      Instruction: log
+      Instruction Start: 690
       Name: ``
       Alias: ``
       =======
-      Block: Tetraquark\Block\SingleCommentBlock
-      Subtype: //
-      Instruction: / there shouldn't be any text there\r\n      return this.get.lineInDirection( newNewLine, dir, false );\r\n    }\r\n\r\n    if ( newLine.nodeName != "P" ) return this.get.lineInDirection( newLine, dir, false );\r\n    if ( dir == -1   ||   dir == 1   ) return newLine;\r\n    return this.get.lineInDirection( newLine, dir < 0 ? dir + 1 : dir - 1, true );\r\n  }\r\n\r\n  /**\r\n   * Get sibling, based on passed direction\r\n   * @param  {Node     } node\r\n   * @param  {Number   } dir  1 is next 0 is previous\r\n   * @return {Node|null}\r\n   */\r\n  sibling ( node, dir ) {\r\n         if ( dir > 0 ) return node.nextSibling;\r\n    else if ( dir < 0 ) return node.previousSibling;\r\n  }\r\n\r\n  /**\r\n   * Get child nodes index of element\r\n   * @param  {Node} el        Element to find\r\n   * @return {Number|Boolean} Found index or false\r\n   */\r\n  childIndex ( el ) {\r\n    for (var i = 0; i < el.parentElement.childNodes.length; i++) {\r\n      if ( el.parentElement.childNodes[i] == el ) return i;\r\n    }\r\n    return false;\r\n  }\r\n\r\n  /**\r\n   * Get all attributes of element and return them in key => value fashion\r\n   * @param  {Object} el\r\n   * @return {Object}    Attrbiutes\r\n   */\r\n  attributes(el) {\r\n    const attrsObj = {};\r\n    for ( let att, i = 0, atts = el.attributes, n = atts.length; i < n; i++ ){\r\n      att = atts[i];\r\n      attrsObj[att.nodeName] = att.nodeValue;\r\n    }\r\n    return attrsObj;\r\n  }\r\n\r\n  /**\r\n   * Split node based on passed position\r\n   * @param  {Number} [pos=this.pos.letter] Split position\r\n   * @return {Object}                       { pre: '', suf: '' }\r\n
-      Instruction Start: 8698
+        Block: Tetraquark\Block\StringBlock
+        Subtype: 
+        Instruction: 'found'
+        Instruction Start: 695
+        Name: ``
+        Alias: ``
+        =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: first
+      Instruction: console
+      Instruction Start: 709
       Name: ``
       Alias: ``
       =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: end:method
+      Instruction: log
+      Instruction Start: 716
+      Name: ``
+      Alias: ``
+      =======
+        Block: Tetraquark\Block\StringBlock
+        Subtype: 
+        Instruction: 'found2'
+        Instruction Start: 721
+        Name: ``
+        Alias: ``
+        =======
+Block: Tetraquark\Block\ForBlock
+Subtype: for
+Instruction: \nfor (var to = 0; to < objSoloTest.length; to++) {
+Instruction Start: 736
+Name: ``
+  Block: Tetraquark\Block\VariableBlock
+  Subtype: var
+  Instruction: var to =
+  Instruction Start: 0
+  Name: `to`
+  Value: ``
+  Alias: `p`
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  0
+    Instruction Start: 7
+    Name: ``
+    Alias: ``
+    =======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  to < 
+  Instruction Start: 11
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: objSoloTest
+  Instruction Start: 6
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: .
+  Instruction: length
+  Instruction Start: 17
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  to++
+  Instruction Start: -1
+  Name: ``
+  Alias: ``
+  =======
+Alias: ``
+=======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 792
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 799
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: objSoloTest
+    Instruction Start: 792
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\BracketChainLinkBlock
+    Subtype: [
+    Instruction: 
+    Instruction Start: 815
+    Name: ``
+    Alias: ``
+    =======
       Block: Tetraquark\Block\UndefinedBlock
       Subtype: 
-      Instruction:    */\r\n  splitNode
-      Instruction Start: 10236
+      Instruction: to
+      Instruction Start: 816
       Name: ``
       Alias: ``
       =======
-      Block: Tetraquark\Block\CallerBlock
-      Subtype: (
-      Instruction: ( pos = this.pos.letter ) {\r\n    let text = this.pos.el.innerText;\r\n    return {\r\n      pre : this.set.attributes( this.pos.el.attributes, text.substr( 0, pos ) ),\r\n      suf : this.set.attributes( this.pos.el.attributes, text.substr( pos    ) )\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Split whole row based on passed node and on which letter of this node\r\n   * @param  {Node    } [el=this.pos.el     ]\r\n   * @param  {Node    } [pos=this.pos.letter]\r\n   * @return {Object[]}                       { pre : [node], suf: [nodes] }\r\n   */\r\n  splitRow( el = this.pos.el, pos = this.pos.letter ) {\r\n    let local = this.get.splitNode( pos );\r\n    let nodes = this.get.nextSiblingAndRemove( el.nextSibling );\r\n    local.suf = [ local.suf, ...nodes ];\r\n    return local;\r\n  }\r\n\r\n  /**\r\n   * Get this element and all his next siblings and remove them all\r\n   * @param  {Node  } el\r\n   * @return {Node[]}    Nodes\r\n   */\r\n  nextSiblingAndRemove( el ) {\r\n    if ( el === null ) return [];\r\n    let nodes = [];\r\n\r\n    let span = this.set.attributes( el.attributes, el.innerText );\r\n    nodes.push( span );\r\n    if ( el.nextSibling ) {\r\n      let nextSpan = this.get.nextSiblingAndRemove( el.nextSibling );\r\n      nodes = nodes.concat( nextSpan );\r\n    }\r\n\r\n    el.remove();\r\n    return nodes;\r\n  }\r\n\r\n  /**\r\n   * Get whole line content from render content type line\r\n   * @param  {Object} line Render content type line\r\n   * @return {String}\r\n   */\r\n  sentence( line ) {\r\n    let words = '';\r\n    line.content.forEach( span => {\r\n      words += span.content;\r\n    });\r\n    return this.replace.spaceChars(words);\r\n  }\r\n\r\n  /**\r\n   * Cut senetence into words\r\n   * @param  {String  } sentence\r\n   * @return {String[]}          Words\r\n   */\r\n  words( sentence ) {\r\n    let word = '';\r\n    words = [];\r\n    let spaces = false;\r\n\r\n    if ( this.is.space( sentence[0] ) ) spaces = true;\r\n\r\n    for (let i = 0; i < sentence.length; i++) {\r\n      const letter  = sentence[i];\r\n      const isSpace = this.is.space(letter);\r\n\r\n      if ( isSpace && spaces == false || !isSpace && spaces == true ) {\r\n        words.push(word);\r\n        word = letter;\r\n      } else word += letter;\r\n\r\n      if ( isSpace ) spaces = true;\r\n      else           spaces = false;\r\n    }\r\n    words.push( word );\r\n    return words;\r\n  }\r\n\r\n  /**\r\n   * Get currently active spans content from render content\r\n   * @return {String} Spans content\r\n   */\r\n  currentSpanContent () {\r\n    return this.replace.spaceChars(this.render.content[this.pos.line].content[this.pos.childIndex].content);\r\n  }\r\n\r\n  /**\r\n   * Get closest index of space in string (be it char or actual letter)\r\n   * @param  {String} text      Text to search in\r\n   * @param  {Number} [start=0] Where to start search\r\n   * @return {Number]}          Index of space from indexOf\r\n   */\r\n  spaceIndex ( text, start = 0 ) {\r\n    const char = text.indexOf('\u00A0', start);\r\n    if ( char !== -1 ) {\r\n      return char;\r\n    }\r\n    return text.indexOf(' ', start);\r\n  }\r\n}\r\nexport { TabJF_Get };
-      Instruction Start: 10273
+Block: Tetraquark\Block\WhileBlock
+Subtype: while
+Instruction: \nwhile (objSoloTest.length) {
+Instruction Start: 827
+Name: ``
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: objSoloTest
+  Instruction Start: 0
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: .
+  Instruction: length
+  Instruction Start: 11
+  Name: ``
+  Alias: ``
+  =======
+Alias: ``
+=======
+  Block: Tetraquark\Block\VariableBlock
+  Subtype: let
+  Instruction: let size =
+  Instruction Start: 862
+  Name: `size`
+  Value: ``
+  Alias: `r`
+  =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: first
+    Instruction: objSoloTest
+    Instruction Start: 873
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: .
+    Instruction: length
+    Instruction Start: 884
+    Name: ``
+    Alias: ``
+    =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 898
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 905
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: size, objSoloTest
+    Instruction Start: 892
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\BracketChainLinkBlock
+    Subtype: [
+    Instruction: 
+    Instruction Start: 927
+    Name: ``
+    Alias: ``
+    =======
+      Block: Tetraquark\Block\UndefinedBlock
+      Subtype: 
+      Instruction: 0
+      Instruction Start: 928
       Name: ``
       Alias: ``
       =======
-Duration: 0.564s
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: objSoloTest
+  Instruction Start: 938
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: shift
+  Instruction Start: 949
+  Name: ``
+  Alias: ``
+  =======
+Block: Tetraquark\Block\SwitchBlock
+Subtype: switch
+Instruction: \nswitch (objSoloTest.length) {
+Instruction Start: 964
+Name: ``
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: objSoloTest
+  Instruction Start: 0
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: .
+  Instruction: length
+  Instruction Start: 11
+  Name: ``
+  Alias: ``
+  =======
+Alias: ``
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: \r\n    case 1:\r\n        
+  Instruction Start: 1001
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 1017
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 1024
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: 'Obj is one'
+    Instruction Start: 1029
+    Name: ``
+    Alias: ``
+    =======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: \r\n        break;\r\n    default:\r\n        
+  Instruction Start: 1049
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 1082
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 1089
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: 'Obj is bigger then one'
+    Instruction Start: 1094
+    Name: ``
+    Alias: ``
+    =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: let
+Instruction: let whileLooped =
+Instruction Start: 1126
+Name: `whileLooped`
+Value: ``
+Alias: `i`
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  2
+  Instruction Start: 1143
+  Name: ``
+  Alias: ``
+  =======
+Block: Tetraquark\Block\SingleCommentBlock
+Subtype: //
+Instruction: / One line test\r\n
+Instruction Start: 1148
+Name: ``
+Alias: ``
+=======
+Block: Tetraquark\Block\MultiCommentBlock
+Subtype: /*
+Instruction: /*\r\n  Test Multileine\r\n*/
+Instruction Start: 1166
+Name: ``
+Alias: ``
+=======
+Block: Tetraquark\Block\DoWhileBlock
+Subtype: do
+Instruction: do (
+Instruction Start: 1193
+Name: ``
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: whileLooped
+  Instruction Start: -1
+  Name: ``
+  Alias: ``
+  =======
+Alias: ``
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: \r\n    whileLooped--;\r\n    
+  Instruction Start: 1204
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 1223
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 1230
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: whileLooped
+    Instruction Start: 1235
+    Name: ``
+    Alias: ``
+    =======
+Duration: 0.016s
 
 
-class a{b(o){return JSON.parse(JSON.stringify(o));}c(){const p=Object.assign({},this.p);p.r=this.p.r;return p; ;}d(){return this; ;}e(){return this.render.êslice(this.render.hidden,this render.hidden+this.render.linesLimit);}f(s=null,t=null){if(!s||!t){const u=this.get.j(),w=this.j.reverse&&!this.j.expanded;s=this.get.l(w?u.focusNode:u.anchorNode);t=this.get.l(w?u.anchorNode:u.focusNode);if(!s||!t)throw new z('Couldn\'t find lines');return [s.cloneNode(true),... this.get.selectedNodesRecursive(s.nextSibling,t)]}selectedNodesRecursive (node,x)if(node=====null)throw new z('The node doesn\'t exist in this parent');if(node===I)return [node.cloneNode(true)]if(node.nodeName!==="P")return this.get.selectedNodesRecursive(node.nextSibling,x);return [node.cloneNode(true),... this.get.selectedNodesRecursive(node.nextSibling,x)];}g(){const u=this.get.j();if(u.type!='Range')return; let y=this.get.b(this.j.y);let x=this.get.b(this.j.x);if(J.l>I.l||(J.l==I.l&&J.node>I.node){let A=y;y=x;x=A;}if(J.l===I.l){const l=this.get.b(this.render.�[y.l])delete l.endsdelete l groupPathif(J.node===I.node){let ê=this.replace.spaceChars(l.�[y.node].let B=this.replace.spaces(êsubstr(y.letter,x letter-y.letter))l.ê=[this.,syntax.,create.,span({},B)]return [l ]}else {let ú=l.�[y.nodelet C=l.�[x.node]úê=this.replace.spaces(this.replace.spaceChars(ú�.substr(y.lettC.ê=this.replace.spaces(this.replace.spaceChars(C.ê.substr(0,x.letter)l.ê=[ú];.concat(l.êslice(y.node+1,x.node+return[l ]};}let q=this.render.êslice(y.l+1,x.l);let v=this.get.b(this.render.�[y.l])let µ=this.get.b(this.render.�[x.l]µê=µêslice(0,x.node+let õ=µ�[µêlengthõê=õêreplaceAll(nbsp;,'),);;õê=õêsubstr(0,x.letteõê=õêreplaceAll(,nb,nbsp;);;v.ê=v.êslice(y.nodelet ú=v.�[0úê=úêreplaceAll(nbsp;,'),);;úê=úêsubstr(y.letteúê=úêreplaceAll(,nb,nbsp;);;return [v ].concat(q,[µ]);}h(r){for(let D=0;D<r.parentElement.F.length;D++){if(r.parentElement.F[D]===r)return D; }return false; ;}i(l){let i=0;for(let D=0;D<this.editor.F.length;D++){let E=this.editor.F[D];if(l===E)return i; if(E.nodeName&&E.nodeName==="P")i++; }return false; ;}j(){return window.getSelection? window.getSelection(): document.j;}k(){const F=Object.values(this.p.r.parentElement.F);let G=0;for(let D=0;D<F.length;D++){if(this.p.r===F[D])break; G H=F[D].innerText.length;}G H=this.p.letter;return {I:G,J:this.p.l};}l(r){if(!r.parentElement)return false; if(r.parentElement===this.editor)return r; return this.get.l(r.parentElement);}m(p){p K=this.render.hidden;if(p>=0){let i=-1;for(var D=0;D<this.editor.F.length;D++){let l=this.editor.F[D];if(l.nodeName==="P")i++; if(D===p)return l; }}else {let i=0;for(var D=this.editor.F.length-1;D>-1;D--){let l=this.editor.F[D];if(l.nodeName==="P")i++; if(D===p*-1)return l; }};return false; ;}n(l,M,N=true){if(N&&l?.nodeName!="P")throw new z(can 't find proper lines");if(!N&&l?.nodeName==="P")return l; let let L;if(l=====null)return l; if(M<0)L=l.previousSibling;else if(M>0)L=l.nextSibling;if(L=====null)return L; if(L.nodeType!=1){let let O;if(M<0)O=L.previousSibling;else if(M>0)O=L.nextSibling;L.remove();*/splitNode (p=this.p.letter){let B=this.p.r.innerText;return{pre:this.set.attributes(this.p.r.attributes,B.substr(0,p)),suf:this.set.attributes(this.p.r.attributes,B.substr(p))}}/***Split whole row based on passed node and on which letter of this node*@param{Node}[r=this.p.r]*@param{Node}[p=this.p.letter]*@return{Object[]}{pre:[node],suf:[nodes]}*/splitRow(r=this.p.r,p=this.p.letter){let local=this.get.splitNode(p);let nodes=this.get.nextSiblingAndRemove(r.nextSibling);local.suf=[local.suf,...nodes];return local;}/***Get this element and all his next siblings and remove them all*@param{Node}r*@return{Node[]}Nodes*/nextSiblingAndRemove(r){if(r===null)return[];let nodes=[];let span=this.set.attributes(r.attributes,r.innerText);nodes.push(span);if(r.nextSibling){let nextSpan=this.get.nextSiblingAndRemove(r.nextSibling);nodes=nodes.concat(nextSpan);}r.remove();return nodes;}/***Get whole l ê from render ê type l*@param{Object}l Render ê type l*@return{String}*/sentence(l){let words=
-;l.ê.forEach(span=>{words+=span.ê;});return this.replace.spaceChars(words);}/***Cut senetence into words*@param{String}sentence*@return{String[]}Words*/words(sentence){let word=  ;words=[];let spaces=false;if(this.is.space(sentence[0]))spaces=true;for(let D=0;D<sentence.length;D++){const letter=sentence[D];const isSpace=this.is.space(letter);if(isSpace&&spaces==false||!isSpace&&spaces==true){words.push(word);word=letter;}else word+=letter;if(isSpace)spaces=true;elsespaces=false;}words.push(word);return words;}/***Get currently active spans ê from render ê*@return{String}Spans ê*/currentSpanContent(){return this.replace.spaceChars(this.render.ê[this.p.l].ê[this.p.childIndex].ê);}/***Get closest index of space in string(be it char or actual letter)*@param{String}BText to search in*@param{Number}[y=0]Where to y search*@return{Number]}Index of space from indexOf*/spaceIndex(B,y=0){const char=B.indexOf();
-    ,y);if(char!==-1){return char;}return B.indexOf( },y);}}ex};}}
+class a{constructor(){console.log('new');}j(){}k(){}l(){console.log('asdas');}attrb ='asd'+'asd';att =['asd'];c ={m:'asd',n:[1,2,3]};}const b=['asd',3,2+1];let c={b};const d=new a;const e=new a;const f=new a;const g=new a;const h=new a;const o=new a;if(c.b[0]==='asd'){console.log('found')console.log('found2');};for(var p=0;p<b.length;p++){console.log(b[p]);}while(b.length){let r=b.length;console.log(r,b[0])b.shift();}switch(b.length){case 1: console.log('Obj is one');break;default: console.log('Obj is bigger then one');}let i=2;do{i--; console.log(i);}while(i);

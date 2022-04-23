@@ -4,7 +4,7 @@ namespace Tetraquark\Block;
 use \Tetraquark\Exception as Exception;
 use \Tetraquark\Log as Log;
 use \Tetraquark\Contract as Contract;
-use \Tetraquark\CommentBlock as CommentBlock;
+use \Tetraquark\Abstract\CommentBlockAbstract as CommentBlock;
 
 class MultiCommentBlock extends CommentBlock implements Contract\Block
 {

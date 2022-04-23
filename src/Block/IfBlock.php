@@ -4,7 +4,7 @@ namespace Tetraquark\Block;
 use \Tetraquark\Exception as Exception;
 use \Tetraquark\Log as Log;
 use \Tetraquark\Contract as Contract;
-use \Tetraquark\ConditionBlock as ConditionBlock;
+use \Tetraquark\Abstract\ConditionBlockAbstract as ConditionBlock;
 
 class IfBlock extends ConditionBlock implements Contract\Block
 {

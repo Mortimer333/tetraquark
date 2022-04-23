@@ -1,264 +1,50 @@
 <?php declare(strict_types=1);
 
-namespace Tetraquark;
-use \Xeno\X as Xeno;
+namespace Tetraquark\Abstract;
 
-abstract class Block
+use \Xeno\X as Xeno;
+use \Tetraquark\Trait\{BlockGetSetTrait, BlockMapsTrait, BlockAliasMapTrait, BlockValidateTrait};
+use \Tetraquark\Abstract\{
+    CommentBlockAbstract as CommentBlock,
+    ConditionBlockAbstract as ConditionBlock,
+    MethodBlockAbstract as MethodBlock,
+    VariableBlockAbstract as VariableBlock
+};
+use \Tetraquark\{Exception as Exception, Block as Block, Log as Log};
+
+abstract class BlockAbstract
 {
+    // I've seperated related functionality to Traits to make this file more managable
+    use BlockGetSetTrait;   // Hold all get and set functions
+    use BlockMapsTrait;     // Has $blocksMap, $classBlocksMap, $objectBlocksMap, $callerBlocksMap and $arrayBlocksMap variables
+    use BlockAliasMapTrait; // Contains our alias creation map
+    use BlockValidateTrait; // Holds all validation functionality (isWhitespace, isString etc.)
     static protected string $content;
     static protected array  $mappedAliases = [];
     protected int    $caret = 0;
     protected bool   $endFunction = false;
+
     /** @var string $instruction Actual block representation in code */
     protected string $instruction;
+
     protected int    $instructionStart;
     protected string $name;
+
     /** @var int Queue indicator */
     protected int    $childIndex;
-    /** @var Block Parent of this block */
-    protected Block  $parent;
+
+    /** @var BlockAbstract Parent of this block */
+    protected BlockAbstract $parent;
+
     protected array  $aliasesMap = [];
-    /** @var Block[] $blocks Array of Blocks */
+
+    /** @var BlockAbstract[] $blocks Array of Blocks */
     protected array  $blocks = [];
+
     protected array  $endChars = [
         "\n" => true,
         "\r" => true,
         ";" => true,
-    ];
-    /** @var array Map of possible aliases (df is to get default - the start of map), the last alias direction returns false */
-    protected array $aliasMap = [
-        'df' => 'a', 'a' => 'b', 'b' => 'c', 'c' => 'd', 'd' => 'e', 'e' => 'f', 'f' => 'g', 'g' => 'h', 'h' => 'i', 'i' => 'j', 'j' => 'k', 'k' => 'l', 'l' => 'm', 'm' => 'n', 'n' => 'o',
-        'o' => 'p', 'p' => 'r', 'r' => 's', 's' => 't', 't' => 'u', 'u' => 'w', 'w' => 'z', 'z' => 'y', 'y' => 'x', 'x' => 'q', 'q' => 'v', 'v' => 'µ', 'µ' => 'ß', 'ß' => 'à', 'à' => 'á', 'á' => 'â',
-        'â' => 'ã', 'ã' => 'ä', 'ä' => 'å', 'å' => 'æ', 'æ' => 'ç', 'ç' => 'è', 'è' => 'é', 'é' => 'ê', 'ê' => 'ë', 'ë' => 'ì', 'ì' => 'í', 'í' => 'î', 'î' => 'ï', 'ï' => 'ð', 'ð' => 'ñ', 'ñ' => 'ò',
-        'ò' => 'ó', 'ó' => 'ô', 'ô' => 'õ', 'õ' => 'ö', 'ö' => 'ø', 'ø' => 'ù', 'ù' => 'ú', 'ú' => 'û', 'û' => 'ü', 'ü' => 'ý', 'ý' => 'þ', 'þ' => 'ÿ', 'ÿ' => 'ā', 'ā' => 'ă', 'ă' => 'ą', 'ą' => 'ć',
-        'ć' => 'ĉ', 'ĉ' => 'ċ', 'ċ' => 'č', 'č' => 'ď', 'ď' => 'đ', 'đ' => 'ē', 'ē' => 'ĕ', 'ĕ' => 'ė', 'ė' => 'ę', 'ę' => 'ě', 'ě' => 'ĝ', 'ĝ' => 'ğ', 'ğ' => 'ġ', 'ġ' => 'ģ', 'ģ' => 'ĥ', 'ĥ' => 'A',
-        'A' => 'B', 'B' => 'C', 'C' => 'D', 'D' => 'E', 'E' => 'F', 'F' => 'G', 'G' => 'H', 'H' => 'I', 'I' => 'J', 'J' => 'K', 'K' => 'L', 'L' => 'M', 'M' => 'N', 'N' => 'O',
-        'O' => 'P', 'P' => 'Q', 'Q' => 'R', 'R' => 'S', 'S' => 'T', 'T' => 'U', 'U' => 'V', 'V' => 'W', 'W' => 'X', 'X' => 'Y', 'Y' => 'Z', 'Z' => 'À', 'À' => 'Á', 'Á' => 'Â', 'Â' => 'Ã', 'Ã' => 'Ä',
-        'Ä' => 'Å', 'Å' => 'Æ', 'Æ' => 'Ç', 'Ç' => 'È', 'È' => 'É', 'É' => 'Ê', 'Ê' => 'Ë', 'Ë' => 'Ì', 'Ì' => 'Í', 'Í' => 'Î', 'Î' => 'Ï', 'Ï' => 'Ð', 'Ð' => 'Ñ', 'Ñ' => 'Ò', 'Ò' => 'Ó', 'Ó' => 'Ô',
-        'Ô' => 'Õ', 'Õ' => 'Ö', 'Ö' => 'Ø', 'Ø' => 'Ù', 'Ù' => 'Ú', 'Ú' => 'Û', 'Û' => 'Ü', 'Ü' => 'Ý', 'Ý' => 'Þ', 'Þ' => 'Ā', 'Ā' => 'Ă', 'Ă' => 'Ą', 'Ą' => 'Ć', 'Ć' => 'Ĉ', 'Ĉ' => 'Ċ', 'Ċ' => 'Č',
-        'Č' => 'Ď', 'Ď' => 'Đ', 'Đ' => 'Ē', 'Ē' => 'Ĕ', 'Ĕ' => 'Ė', 'Ė' => 'Ę', 'Ę' => 'Ě', 'Ě' => 'Ĝ', 'Ĝ' => 'Ğ', 'Ğ' => 'Ġ', 'Ġ' => 'Ģ', 'Ģ' => 'Ĥ', 'Ĥ' => 'Ħ', 'Ħ' => 'Ĩ', 'Ĩ' => 'Ī', 'Ī' => '$',
-        '$' => '_', '_' => false
-    ];
-
-
-    /**
-     * Map of possible blocks.
-     *
-     * For better performance I don't want to cut string and do any operations on it and decide to create a map
-     * which script has to follow to find each block. I've also added `default` option so if two blocks start with the same char (`=` as
-     * to set variable and `=>` as to create arrow function) you can actually check if script will follow different path or if its alread
-     * at the end of it.
-     * @var array
-     */
-    protected $blocksMap = [
-        'f' => [
-            'o' => [
-                'r' => [
-                    ' '  => 'ForBlock',
-                    "\n" => "ForBlock",
-                    "\r" => "ForBlock",
-                    '('  => "ForBlock",
-                ]
-            ],
-            'u' => [
-                'n' => [
-                    'c' => [
-                        't' => [
-                            'i' => [
-                                'o' => [
-                                    'n' => [
-                                        ' '  => 'FunctionBlock',
-                                        "\n" => "FunctionBlock",
-                                        "\r" => "FunctionBlock",
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ]
-        ],
-        '=' => [
-            '>'       => 'ArrowFunctionBlock',
-            'default' => 'AttributeBlock',
-            '='       => [
-                "="       => "TripleEqualBlock",
-                "default" => "DoubleEqualBlock",
-            ]
-        ],
-        'l' => [
-            'e' => [
-                't' => [
-                    ' '  => 'VariableBlock',
-                    "\n" => "VariableBlock",
-                    "\r" => "VariableBlock",
-                ]
-            ]
-        ],
-        'c' => [
-            'o' => [
-                'n' => [
-                    's' => [
-                        't' => [
-                            ' '  => 'VariableBlock',
-                            "\n" => "VariableBlock",
-                            "\r" => "VariableBlock",
-                        ]
-                    ]
-                ]
-            ],
-            'l' => [
-                'a' => [
-                    's' => [
-                        's' => [
-                            ' '  => 'ClassBlock',
-                            "\n" => "ClassBlock",
-                            "\r" => "ClassBlock",
-                        ]
-                    ]
-                ]
-            ]
-        ],
-        'v' => [
-            'a' => [
-                'r' => [
-                    ' '  => 'VariableBlock',
-                    "\n" => "VariableBlock",
-                    "\r" => "VariableBlock",
-                ],
-            ]
-        ],
-        '.' => [
-            '.' => [
-                '.' => false
-            ],
-            'default' => 'ChainLinkBlock'
-        ],
-        '(' => 'CallerBlock',
-        'n' => [
-            'e' => [
-                'w' => [
-                    ' '  => 'NewClassBlock',
-                    "\n" => "NewClassBlock",
-                    "\r" => "NewClassBlock",
-                ]
-            ]
-        ],
-        '[' => 'decideArrayBlockType',
-        '{' => 'ObjectBlock',
-        'i' => [
-            'f' => [
-                ' '  => "IfBlock",
-                "\n" => "IfBlock",
-                "\r" => "IfBlock",
-                "("  => "IfBlock",
-            ]
-        ],
-        "w" => [
-            "h" => [
-                "i" => [
-                    "l" => [
-                        "e" => [
-                            ' '  => 'WhileBlock',
-                            "\n" => "WhileBlock",
-                            "\r" => "WhileBlock",
-                            '('  => "WhileBlock",
-                        ]
-                    ]
-                ]
-            ]
-        ],
-        "s" => [
-            "w" => [
-                "i" => [
-                    "t" => [
-                        "c" => [
-                            "h" => [
-                                ' '  => 'SwitchBlock',
-                                "\n" => "SwitchBlock",
-                                "\r" => "SwitchBlock",
-                                '('  => "SwitchBlock",
-                            ]
-                        ]
-                    ]
-                ]
-            ]
-        ],
-        "d" => [
-            "o" => [
-                ' '  => 'DoWhileBlock',
-                "\n" => "DoWhileBlock",
-                "\r" => "DoWhileBlock",
-                '{'  => "DoWhileBlock",
-            ]
-        ],
-        "/" => [
-            "/" => "SingleCommentBlock",
-            "*" => "MultiCommentBlock",
-        ],
-    ];
-
-    protected array $special = [
-        "(" => true,
-        ")" => true,
-        "{" => true,
-        "}" => true,
-        "+" => true,
-        "-" => true,
-        "/" => true,
-        "*" => true,
-        "=" => true,
-        "!" => true,
-        '[' => true,
-        ']' => true,
-        '%' => true,
-        '^' => true,
-        ":" => true,
-        ">" => true,
-        "<" => true,
-        "," => true,
-        ' ' => true,
-        "\n" => true,
-        "\r" => true,
-        '|' => true,
-        '&' => true,
-        '?' => true,
-        ';' => true,
-        '.' => true
-    ];
-
-    protected array $classBlocksMap = [
-        '(' => "ClassMethodBlock",
-    ];
-
-    protected array $objectBlocksMap = [
-        ':' => "ObjectValueBlock",
-        ',' => "ObjectSoloValueBlock",
-        '.' => [
-            "." => [
-                "." => "SpreadBlock"
-            ],
-            "default" => 'ChainLinkBlock'
-        ],
-    ];
-
-    protected array $callerBlocksMap = [
-        '.' => [
-            "." => [
-                "." => "SpreadBlock"
-            ],
-            "default" => 'ChainLinkBlock'
-        ],
-    ];
-
-    protected array $arrayBlocksMap = [
-        '.' => [
-            "." => [
-                "." => "SpreadBlock"
-            ],
-            "default" => 'ChainLinkBlock'
-        ],
-        ',' => "ArrayItemSeperatorBlock"
     ];
 
     public function __construct(
@@ -270,103 +56,9 @@ abstract class Block
         $this->objectify($start);
     }
 
-    public function getContent(): string
-    {
-        return self::$content;
-    }
-
-    public function setContent(string $content): self
-    {
-        self::$content = $content;
-        return $this;
-    }
-
-    public function getCaret(): int
-    {
-        return $this->caret;
-    }
-
-    public function setCaret(int $caret): self
-    {
-        $this->caret = $caret;
-        return $this;
-    }
-
-    public function getSubtype(): string
-    {
-        return $this->subtype;
-    }
-
-    public function setSubtype(string $subtype): self
-    {
-        $this->subtype = trim($subtype);
-        return $this;
-    }
-
-    public function getBlocks(): array
-    {
-        return $this->blocks;
-    }
-
-    public function setBlocks(array $blocks): self
-    {
-        $this->blocks = $blocks;
-        return $this;
-    }
-
     public function aliasExists(string $name): bool
     {
         return (bool) (self::$mappedAliases[$name] ?? false);
-    }
-
-    public function getAlias(string $name): string
-    {
-        return self::$mappedAliases[$name] ?? $name;
-    }
-
-    public function setAlias(string $name, string $alias): self
-    {
-        self::$mappedAliases[$name] = $alias;
-        return $this;
-    }
-
-    public function getInstruction(): string
-    {
-        return $this->instruction;
-    }
-
-    public function setInstruction(string $instruction): self
-    {
-        // $this->instruction = trim(preg_replace('!\s+!', ' ', $instruction));
-        $this->instruction = $instruction;
-        return $this;
-    }
-
-    public function setInstructionStart(int $start): self
-    {
-        $this->instructionStart = $start;
-        return $this;
-    }
-
-    public function getInstructionStart(): int
-    {
-        return $this->instructionStart;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = trim($name);
-        return $this;
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    protected function isEndChar(string $letter): bool
-    {
-        return $this->endChars[$letter] ?? false;
     }
 
     protected function getDefaultMap(): array
@@ -423,7 +115,7 @@ abstract class Block
         return $nextStep;
     }
 
-    protected function blockFactory(string $hint, string $className, int $start, string &$possibleUndefined, array &$blocks): Block
+    protected function blockFactory(string $hint, string $className, int $start, string &$possibleUndefined, array &$blocks): BlockAbstract
     {
         $prefix = 'Tetraquark\Block\\';
         $class  = $prefix . $className;
@@ -482,37 +174,7 @@ abstract class Block
         return new $class($start, $hint);
     }
 
-    protected function isValidVariable(string $variable): bool
-    {
-        $regex = '/^[$_\p{L}][$_\p{L}\p{Mn}\p{Mc}\p{Nd}\p{Pc}\x200C\x200D]*+$/';
-        $res = preg_match($regex, $variable);
-        if (!$res) {
-            return false;
-        }
-
-        $notAllowedConsts = [
-            'break' => true, 'do' => true, 'instanceof' => true,
-            'typeof' => true, 'case' => true, 'else' => true, 'new' => true,
-            'var' => true, 'catch' => true, 'finally' => true, 'return' => true,
-            'void' => true, 'continue' => true, 'for' => true, 'switch' => true,
-            'while' => true, 'debugger' => true, 'function' => true, 'this' => true,
-            'with' => true, 'default' => true, 'if' => true, 'throw' => true,
-            'delete' => true, 'in' => true, 'try' => true, 'class' => true,
-            'enum' => true, 'extends' => true, 'super' => true, 'const' => true,
-            'export' => true, 'import' => true, 'implements' => true, 'let' => true,
-            'private' => true, 'public' => true, 'yield' => true, 'interface' => true,
-            'package' => true, 'protected' => true, 'static' => true, 'null' => true,
-            'true' => true, 'false' => true
-        ];
-        return !isset($notAllowedConsts[$variable]);
-    }
-
-    protected function isWhitespace(string $letter): bool
-    {
-        return ctype_space($letter);
-    }
-
-    protected function findInstructionEnd(int $start, string $name, ?array $endChars = null): void
+    protected function findInstructionEnd(int $start, string $name, ?array $endChars = null, bool $skipString = true): void
     {
         if (\is_null($endChars)) {
             $endChars = $this->endChars;
@@ -523,8 +185,11 @@ abstract class Block
             $letter = self::$content[$i];
 
             if (
-                ($startsTemplate = $this->isTemplateLiteralLandmark($letter, ''))
-                || $this->isStringLandmark($letter, '')
+                $skipString &&
+                (
+                    ($startsTemplate = $this->isTemplateLiteralLandmark($letter, ''))
+                    || $this->isStringLandmark($letter, '')
+                )
             ) {
                 $i = $this->skipString($i + 1, self::$content, $startsTemplate);
                 $letter = self::$content[$i];
@@ -580,18 +245,11 @@ abstract class Block
             ->setInstruction($instruction);
     }
 
-    protected function constructBlock(string $mappedWord, string $className, int &$i, string &$possibleUndefined, array &$blocks): ?Block
+    protected function constructBlock(string $mappedWord, string $className, int &$i, string &$possibleUndefined, array &$blocks): ?BlockAbstract
     {
         $block = $this->blockFactory($mappedWord, $className, $i, $possibleUndefined, $blocks);
         $i = $block->getCaret();
         return $block;
-    }
-
-    protected function isValidUndefined(string $undefined): bool
-    {
-        $undefinedEnds = ["\n" => true, ";" => true, "}" => true];
-        $undefined = trim($undefined);
-        return \mb_strlen($undefined) > 0 && !$this->isWhitespace($undefined) && !isset($undefinedEnds[$undefined]);
     }
 
     protected function createSubBlocks(?int $start = null): array
@@ -860,33 +518,6 @@ abstract class Block
             && ($value[$i - 2] ?? '') . ($value[$i - 1] ?? '') . $letter != '\${';
     }
 
-    protected function isTemplateLiteralLandmark(string $letter, string $previousLetter, bool $inString = false): bool
-    {
-        return $letter === '`' && (
-            $inString && $previousLetter !== '\\'
-            || !$inString
-        );
-    }
-
-    protected function isString(string $letter): bool
-    {
-        $strings = [
-            '"' => true,
-            "'" => true,
-            '`' => true,
-        ];
-        return $strings[$letter] ?? false;
-    }
-
-    protected function isStringLandmark(string $letter, string $previousLetter, bool $inString = false): bool
-    {
-        return ($letter === '"' || $letter === "'")
-            && (
-                !$inString
-                || $inString && $previousLetter !== '\\'
-            );
-    }
-
     public function skipString(int $start, string $value, bool $isTemplate = false, bool $reverse = false): int
     {
         $modifier = (((int)!$reverse) * 2) - 1;
@@ -899,11 +530,6 @@ abstract class Block
             }
         }
         return $i;
-    }
-
-    protected function isSpecial(string $letter): bool
-    {
-        return $this->special[$letter] ?? false;
     }
 
     protected function removeAdditionalSpaces(string $instruction): string
@@ -950,7 +576,7 @@ abstract class Block
         return "ArrayBlock";
     }
 
-    protected function canBeAliased(string $name, Block $block): bool
+    protected function canBeAliased(string $name, BlockAbstract $block): bool
     {
         $reserved = [];
         if ($block instanceof Block\ClassMethodBlock) {
@@ -965,7 +591,11 @@ abstract class Block
         foreach ($blocks as $block) {
             Log::log("Block: " . get_class($block));
             Log::log("Subtype: " . $block->getSubtype());
-            Log::log("Instruction: " . $block->getInstruction());
+            if ($block instanceof CommentBlock) {
+                Log::log("Instruction: " . \mb_substr($block->getInstruction(), 0, 100));
+            } else {
+                Log::log("Instruction: " . $block->getInstruction());
+            }
             Log::log("Instruction Start: " . $block->getInstructionStart());
             Log::log("Name: `" . $block->getName() . "`");
             if (method_exists($block, 'getValue')) {
@@ -1001,26 +631,6 @@ abstract class Block
         self::$content = $codeSave;
         $this->setCaret($caret);
         return $blocks;
-    }
-
-    public function setChildIndex(int $childIndex): void
-    {
-        $this->childIndex = $childIndex;
-    }
-
-    public function getChildIndex(): int
-    {
-        return $this->childIndex;
-    }
-
-    public function setParent(Block $parent): void
-    {
-        $this->parent = $parent;
-    }
-
-    public function getParent(): Block
-    {
-        return $this->parent;
     }
 
     protected function mb_strrev($text){
@@ -1059,7 +669,7 @@ abstract class Block
         $parent = $this->getParent();
         $childIndex = $this->getChildIndex();
         $nextSibling = $parent->getBlocks()[$childIndex + 1] ?? false;
-        if (!$nextSibling instanceof Block || $nextSibling instanceof CommentBlock) {
+        if (!$nextSibling instanceof BlockAbstract || $nextSibling instanceof CommentBlock) {
             return false;
         }
         $instruction = $nextSibling->getInstruction();

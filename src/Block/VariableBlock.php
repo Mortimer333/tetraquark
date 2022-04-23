@@ -3,8 +3,9 @@
 namespace Tetraquark\Block;
 use \Tetraquark\Log as Log;
 use \Tetraquark\Contract as Contract;
+use \Tetraquark\Abstract\VariableBlockAbstract;
 
-class VariableBlock extends \Tetraquark\VariableBlock implements Contract\Block
+class VariableBlock extends VariableBlockAbstract implements Contract\Block
 {
     protected string $value = '';
     protected array $endChars = [

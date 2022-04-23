@@ -4,7 +4,7 @@ namespace Tetraquark\Block;
 use \Tetraquark\Exception as Exception;
 use \Tetraquark\Log as Log;
 use \Tetraquark\Contract as Contract;
-use \Tetraquark\MethodBlock as MethodBlock;
+use \Tetraquark\Abstract\MethodBlockAbstract as MethodBlock;
 
 class NewClassBlock extends MethodBlock implements Contract\Block
 {

@@ -4,7 +4,7 @@ namespace Tetraquark\Block;
 use \Tetraquark\Log as Log;
 use \Tetraquark\Exception as Exception;
 use \Tetraquark\Contract as Contract;
-use \Tetraquark\MethodBlock as MethodBlock;
+use \Tetraquark\Abstract\MethodBlockAbstract as MethodBlock;
 
 class ArrowFunctionBlock extends MethodBlock implements Contract\Block
 {
@@ -123,7 +123,7 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
             $letter = self::$content[$i];
             Log::log("Letter " . $letter, 2);
 
-            if ($searchForEnd && $this->isEndChar($letter)) {
+            if ($searchForEnd && ($this->endChars[$letter] ?? false)) {
                 Log::log("End char found, setting the end...", 2);
                 $subEnd = $i - 1;
                 $this->setCaret($i - 1);

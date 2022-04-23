@@ -1,8 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Tetraquark;
+namespace Tetraquark\Abstract;
+use \Tetraquark\{Exception as Exception, Block as Block, Log as Log};
 
-abstract class ConditionBlock extends Block
+abstract class ConditionBlockAbstract extends BlockAbstract
 {
     protected array $endChars = [
         '}' => true

@@ -1,8 +1,3 @@
-const var1 = 'as';
-function caller(arg1) {
-    console.log(arg1);
-    return arg1;
-}
 ['a',var1]
 [function () { return 'a' }, 'a']
 [
@@ -21,3 +16,4 @@ function caller(arg1) {
         'v'
     ]
 ]
+[...var2,'bv'];[['v'],{b:'s'}, var3.var4]

@@ -4,7 +4,7 @@ namespace Tetraquark\Block;
 use \Tetraquark\Exception as Exception;
 use \Tetraquark\Log as Log;
 use \Tetraquark\Contract as Contract;
-use \Tetraquark\CommentBlock as CommentBlock;
+use \Tetraquark\Abstract\CommentBlockAbstract as CommentBlock;
 
 class SingleCommentBlock extends CommentBlock implements Contract\Block
 {
@@ -15,7 +15,7 @@ class SingleCommentBlock extends CommentBlock implements Contract\Block
     public function objectify(int $start = 0)
     {
         $this->setName('');
-        $this->findInstructionEnd($start, '');
+        $this->findInstructionEnd($start, '', skipString: false);
         $this->setInstructionStart($start - 1);
         $this->setCaret($this->getCaret() - 1);
     }

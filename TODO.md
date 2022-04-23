@@ -50,6 +50,13 @@ And if I was to add another function it should have access to all vars and their
 - passing anonymous functions,
 - array (used like object)
 
+# To fix
+
+c(){
+    const v=Object.assign({},this.v);
+    v.µ=this.v.return v; ;
+}
+
 # Problems:
 - my alias replacer for globally scoped vars will not work for anything that accessed them dynamically, example:
 ```js
@@ -90,3 +97,15 @@ class TabJF_Hidden {
   }
 }
 export { TabJF_Hidden };
+
+
+# Known bugs
+
+instructions like :
+let a  = {
+    b : 'v'
+}
+let c = a.
+b
+
+are not properly recognized because script thinks that instruction ends on the dot (a.)

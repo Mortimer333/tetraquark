@@ -3,7 +3,7 @@
 namespace Tetraquark\Block;
 use \Tetraquark\Log as Log;
 use \Tetraquark\Contract as Contract;
-use \Tetraquark\Block as Block;
+use \Tetraquark\Abstract\BlockAbstract as Block;
 
 class StringBlock extends Block implements Contract\Block
 {

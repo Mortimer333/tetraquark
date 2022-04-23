@@ -1,8 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Tetraquark;
+namespace Tetraquark\Abstract;
+use \Tetraquark\{Exception as Exception, Block as Block, Log as Log};
 
-class MethodBlock extends Block
+abstract class MethodBlockAbstract extends BlockAbstract
 {
     /** @var array Contains arguments in form of Blocks[] so its [Blocks[], Blocks[]] */
     protected array $arguments = [];
