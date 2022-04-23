@@ -538,7 +538,6 @@ abstract class BlockAbstract
             if (
                 Validate::isWhitespace($letter) && Validate::isSpecial($instruction[$i + 1] ?? '')
                 || Validate::isWhitespace($letter) && Validate::isWhitespace($instruction[$i + 1] ?? '')
-                || Validate::isWhitespace($letter) && Validate::isSpecial($instruction[$i - 1] ?? '')
             ) {
                 continue;
             }

@@ -21,17 +21,19 @@ class AttributeBlock extends VariableBlock implements Contract\Block
     public function objectify(int $start = 0)
     {
         $letterFound = false;
-        $end = $start;
         $start = $this->findAugment($start);
-
+        Log::log('start: ' . $start . ", let: " . self::$content[$start - 1] . self::$content[$start] . self::$content[$start + 1]);
         for ($i=$start; $i >= 0; $i--) {
             $letter = self::$content[$i];
+            Log::log($letter);
             if ($letterFound && Validate::isWhitespace($letter)) {
+                Log::log('Found whitespace  after letter');
                 $start = $i;
                 break;
             }
 
             if (!Validate::isWhitespace($letter)) {
+                Log::log('Not whitespace, starting search for letter');
                 $letterFound = true;
             }
 
@@ -39,7 +41,7 @@ class AttributeBlock extends VariableBlock implements Contract\Block
                 $start = 0;
             }
         }
-        $this->findInstructionEnd($end, $this->subtype, $this->instructionEnds);
+        $this->findInstructionEnd($start, $this->subtype, $this->instructionEnds);
         $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
         if (\sizeof($this->blocks) == 0) {
             $instrEnd = $this->getInstructionStart() + \mb_strlen($this->getInstruction()) + 1;

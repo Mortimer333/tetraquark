@@ -101,8 +101,6 @@ abstract class MethodBlockAbstract extends BlockAbstract
         }
 
         $arguments = array_reverse($arguments);
-        Log::log('arguments:');
-        var_dump($arguments);
         $this->setArgumentBlocks($arguments);
     }
 

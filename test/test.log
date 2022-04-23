@@ -1,230 +1,264 @@
 Mapping...
-no
+start: 199, let: b =
+ 
+b
+Not whitespace, starting search for letter
+r
+Not whitespace, starting search for letter
+t
+Not whitespace, starting search for letter
+t
+Not whitespace, starting search for letter
+a
+Not whitespace, starting search for letter
+ 
+Found whitespace  after letter
+ClassName
+ClassName
+ClassName
+ClassName
+ClassName
+ClassName
 =======================
 Creating aliases...
 =======================
-Aliases: sa => a, p => b, asa => c, 
+Aliases: ClassName => a, classTest => b, classTest2 => c, classTes3 => d, classTest4 => e, classTest6 => f, func1 => g, funcr2 => h, meth2 => i, attrb => j, classTest5 => k, 
 Recreating...
 =======================
-Block: Tetraquark\Block\MultiCommentBlock
-Subtype: /*
-Instruction: /*// let obj = {\r\n//     'sa' : 'v',\r\n//   g : () => {},\r\n//
+Block: Tetraquark\Block\ClassBlock
+Subtype: class
+Instruction: class ClassName {
 Instruction Start: 0
-Caret: 166
-Name: ``
-Alias: ``
-=======
-Block: Tetraquark\Block\ChainLinkBlock
-Subtype: first
-Instruction: obj
-Instruction Start: 170
-Caret: 173
-Name: ``
-Alias: ``
-=======
-Block: Tetraquark\Block\ChainLinkBlock
-Subtype: end:variable
-Instruction: sa 
-Instruction Start: 173
-Caret: 183
-Name: `sa`
+Caret: 217
+Name: `ClassName`
 Alias: `a`
 =======
+  Block: Tetraquark\Block\ClassMethodBlock
+  Subtype: method
+  Instruction: constructor() {
+  Instruction Start: 23
+  Caret: 73
+  Name: `constructor`
+  Arguments: [0] `
+  Alias: `constructor`
+  =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: first
+    Instruction: console
+    Instruction Start: 48
+    Caret: 55
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: end:method
+    Instruction: log
+    Instruction Start: 55
+    Caret: 65
+    Name: ``
+    Alias: ``
+    =======
+      Block: Tetraquark\Block\StringBlock
+      Subtype: 
+      Instruction: 'new'
+      Instruction Start: 60
+      Caret: 65
+      Name: ``
+      Alias: ``
+      =======
+  Block: Tetraquark\Block\ClassMethodBlock
+  Subtype: method
+  Instruction: func1 () {
+  Instruction Start: 82
+  Caret: 100
+  Name: `func1`
+  Arguments: [0] `
+  Alias: `g`
+  =======
+  Block: Tetraquark\Block\ClassMethodBlock
+  Subtype: method
+  Instruction: funcr2() {
+  Instruction Start: 109
+  Caret: 119
+  Name: `funcr2`
+  Arguments: [0] `
+  Alias: `h`
+  =======
+  Block: Tetraquark\Block\ClassMethodBlock
+  Subtype: method
+  Instruction: meth2\r\n    ()\r\n    {
+  Instruction Start: 128
+  Caret: 185
+  Name: `meth2`
+  Arguments: [0] `
+  Alias: `i`
+  =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: first
+    Instruction: console
+    Instruction Start: 158
+    Caret: 165
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: end:method
+    Instruction: log
+    Instruction Start: 165
+    Caret: 177
+    Name: ``
+    Alias: ``
+    =======
+      Block: Tetraquark\Block\StringBlock
+      Subtype: 
+      Instruction: 'asdas'
+      Instruction Start: 170
+      Caret: 177
+      Name: ``
+      Alias: ``
+      =======
   Block: Tetraquark\Block\AttributeBlock
   Subtype: 
-  Instruction:  =
-  Instruction Start: 176
-  Caret: 183
-  Name: ``
+  Instruction:  attrb =
+  Instruction Start: 193
+  Caret: 216
+  Name: `attrb`
   Value: ``
-  Alias: ``
+  Alias: `j`
   =======
     Block: Tetraquark\Block\StringBlock
     Subtype: 
-    Instruction: 'a'
-    Instruction Start: 179
-    Caret: 182
+    Instruction: 'asd'
+    Instruction Start: 202
+    Caret: 207
     Name: ``
     Alias: ``
     =======
-Block: Tetraquark\Block\ChainLinkBlock
-Subtype: first
-Instruction: obj
-Instruction Start: 184
-Caret: 187
-Name: ``
-Alias: ``
-=======
-Block: Tetraquark\Block\ChainLinkBlock
-Subtype: end:variable
-Instruction: p 
-Instruction Start: 187
-Caret: 197
-Name: `p`
-Alias: `b`
-=======
-  Block: Tetraquark\Block\AttributeBlock
-  Subtype: 
-  Instruction:  =
-  Instruction Start: 189
-  Caret: 197
-  Name: ``
-  Value: ``
-  Alias: ``
-  =======
     Block: Tetraquark\Block\UndefinedBlock
     Subtype: 
-    Instruction:  2  +1
-    Instruction Start: 191
-    Caret: 197
+    Instruction:  + 
+    Instruction Start: 207
+    Caret: 210
     Name: ``
     Alias: ``
     =======
-Block: Tetraquark\Block\ChainLinkBlock
-Subtype: first
-Instruction: obj
-Instruction Start: 200
-Caret: 203
-Name: ``
-Alias: ``
-=======
-Block: Tetraquark\Block\ChainLinkBlock
-Subtype: end:method
-Instruction: g
-Instruction Start: 203
-Caret: 206
-Name: ``
-Alias: ``
-=======
-Block: Tetraquark\Block\ChainLinkBlock
-Subtype: first
-Instruction: obj
-Instruction Start: 209
-Caret: 212
-Name: ``
-Alias: ``
-=======
-Block: Tetraquark\Block\ChainLinkBlock
-Subtype: middle
-Instruction: c
-Instruction Start: 212
-Caret: 213
-Name: ``
-Alias: ``
-=======
-Block: Tetraquark\Block\ChainLinkBlock
-Subtype: middle
-Instruction: sddf
-Instruction Start: 214
-Caret: 218
-Name: ``
-Alias: ``
-=======
-Block: Tetraquark\Block\ChainLinkBlock
-Subtype: .
-Instruction: asas\r\n
-Instruction Start: 219
-Caret: 225
-Name: ``
-Alias: ``
-=======
-Block: Tetraquark\Block\ChainLinkBlock
-Subtype: first
-Instruction: obj
-Instruction Start: 226
-Caret: 229
-Name: ``
-Alias: ``
-=======
-Block: Tetraquark\Block\ChainLinkBlock
-Subtype: middle
-Instruction: c
-Instruction Start: 229
-Caret: 230
-Name: ``
-Alias: ``
-=======
-Block: Tetraquark\Block\ChainLinkBlock
-Subtype: middle
-Instruction: sddf
-Instruction Start: 231
-Caret: 235
-Name: ``
-Alias: ``
-=======
-Block: Tetraquark\Block\ChainLinkBlock
-Subtype: middle
-Instruction: asas
-Instruction Start: 236
-Caret: 240
-Name: ``
-Alias: ``
-=======
-Block: Tetraquark\Block\ChainLinkBlock
-Subtype: middle:bracket
-Instruction: we_das
-Instruction Start: 241
-Caret: 247
-Name: ``
-Alias: ``
-=======
-Block: Tetraquark\Block\BracketChainLinkBlock
-Subtype: [
-Instruction: 
-Instruction Start: 248
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: 'asd'
+    Instruction Start: 210
+    Caret: 215
+    Name: ``
+    Alias: ``
+    =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: const
+Instruction: const classTest =
+Instruction Start: 222
 Caret: 257
-Name: ``
-Alias: ``
+Name: `classTest`
+Value: ``
+Alias: `b`
 =======
-  Block: Tetraquark\Block\StringBlock
-  Subtype: 
-  Instruction: '@varp2'
-  Instruction Start: 249
-  Caret: 257
+  Block: Tetraquark\Block\NewClassBlock
+  Subtype: new
+  Instruction:  ClassName()
+  Instruction Start: 239
+  Caret: 255
   Name: ``
+  Arguments: [0] `
   Alias: ``
   =======
-Block: Tetraquark\Block\CallerBlock
-Subtype: (
-Instruction: ()
+Block: Tetraquark\Block\VariableBlock
+Subtype: const
+Instruction: const classTest2 =
 Instruction Start: 258
-Caret: 260
-Name: ``
-Alias: ``
-=======
-Block: Tetraquark\Block\ChainLinkBlock
-Subtype: first
-Instruction: obj
-Instruction Start: 262
-Caret: 265
-Name: ``
-Alias: ``
-=======
-Block: Tetraquark\Block\ChainLinkBlock
-Subtype: middle
-Instruction: c
-Instruction Start: 265
-Caret: 266
-Name: ``
-Alias: ``
-=======
-Block: Tetraquark\Block\ChainLinkBlock
-Subtype: middle:bracket
-Instruction: sddf
-Instruction Start: 267
-Caret: 271
-Name: ``
-Alias: ``
-=======
-Block: Tetraquark\Block\BracketChainLinkBlock
-Subtype: variable
-Instruction: 
-Instruction Start: 272
-Caret: 285
-Name: `asa`
+Caret: 293
+Name: `classTest2`
+Value: ``
 Alias: `c`
 =======
-Duration: 0.003s
+  Block: Tetraquark\Block\NewClassBlock
+  Subtype: new
+  Instruction:  ClassName()
+  Instruction Start: 276
+  Caret: 292
+  Name: ``
+  Arguments: [0] `
+  Alias: ``
+  =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: const
+Instruction: const classTes3 =
+Instruction Start: 294
+Caret: 330
+Name: `classTes3`
+Value: ``
+Alias: `d`
+=======
+  Block: Tetraquark\Block\NewClassBlock
+  Subtype: new
+  Instruction:  ClassName\r\n()
+  Instruction Start: 311
+  Caret: 329
+  Name: ``
+  Arguments: [0] `
+  Alias: ``
+  =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: const
+Instruction: const classTest4 =
+Instruction Start: 331
+Caret: 365
+Name: `classTest4`
+Value: ``
+Alias: `e`
+=======
+  Block: Tetraquark\Block\NewClassBlock
+  Subtype: new
+  Instruction:  ClassName
+  Instruction Start: 349
+  Caret: 363
+  Name: ``
+  Arguments: [0] `
+  Alias: ``
+  =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: const
+Instruction: const classTest6 =
+Instruction Start: 366
+Caret: 437
+Name: `classTest6`
+Value: ``
+Alias: `f`
+=======
+  Block: Tetraquark\Block\NewClassBlock
+  Subtype: new
+  Instruction:  ClassName\r
+  Instruction Start: 384
+  Caret: 399
+  Name: ``
+  Arguments: [0] `
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\VariableBlock
+  Subtype: const
+  Instruction: const classTest5 =
+  Instruction Start: 400
+  Caret: 436
+  Name: `classTest5`
+  Value: ``
+  Alias: `k`
+  =======
+    Block: Tetraquark\Block\NewClassBlock
+    Subtype: new
+    Instruction: \r\nClassName\r\n
+    Instruction Start: 418
+    Caret: 435
+    Name: ``
+    Arguments: [0] `
+    Alias: ``
+    =======
+Duration: 0.005s
 
 
-obj.a='a';obj.b=2+1;obj.g();obj.c.sddf.asas;obj.c.sddf.asas.we_das['@varp2']();obj.c.sddf['c']=123;
+class a{constructor(){console.log('new');}g(){}h(){}i(){console.log('asdas');} j='asd'+ 'asd';}const b=new a;const c=new a;const d=new a;const e=new a;const f=new a;const k=new a;

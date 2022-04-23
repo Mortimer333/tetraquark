@@ -6,12 +6,16 @@ use \Tetraquark\Abstract\MethodBlockAbstract as MethodBlock;
 
 class NewClassBlock extends MethodBlock implements Contract\Block
 {
+    protected string $className = '';
+
     public function objectify(int $start = 0)
     {
+        $this->setName('');
         $searchForClosing = false;
         $nameStarted      = false;
         $nameEnded        = false;
         $end              = null;
+
         for ($i=$start; $i < \mb_strlen(self::$content); $i++) {
             $letter = self::$content[$i];
             if (Validate::isWhitespace($letter)) {
@@ -20,18 +24,18 @@ class NewClassBlock extends MethodBlock implements Contract\Block
                 }
                 continue;
             } elseif (!$searchForClosing && $letter == '(') {
-                $this->setName(\mb_substr(self::$content, $start, $i - $start));
+                $this->setClassName(\mb_substr(self::$content, $start, $i - $start));
                 $searchForClosing = true;
                 continue;
             } elseif ($letter == ';') {
                 $end = $i;
-                $this->setName(\mb_substr(self::$content, $start, $end - $start));
+                $this->setClassName(\mb_substr(self::$content, $start, $end - $start));
                 break;
             } elseif (!$searchForClosing) {
                 // If its non whitespace char and we don't search for ')'
                 if ($nameEnded) {
                     $end = $i - 1;
-                    $this->setName(\mb_substr(self::$content, $start, $end - $start));
+                    $this->setClassName(\mb_substr(self::$content, $start, $end - $start));
                     break;
                 }
                 $nameStarted = true;
@@ -43,12 +47,13 @@ class NewClassBlock extends MethodBlock implements Contract\Block
 
         if (\is_null($end)) {
             $end = $i;
-            $this->setName(\mb_substr(self::$content, $start, $end - $start));
+            $this->setClassName(\mb_substr(self::$content, $start, $end - $start));
         }
-
+        Log::log($this->getClassName());
         $this->setCaret($end);
 
         $instruction = \mb_substr(self::$content, $start, $end - $start);
+
         $this->setInstruction($instruction)
             ->setInstructionStart($start - \mb_strlen('new '))
         ;
@@ -57,7 +62,7 @@ class NewClassBlock extends MethodBlock implements Contract\Block
 
     public function recreate(): string
     {
-        $script = 'new ' . $this->getAlias($this->getName());
+        $script = 'new ' . $this->getAlias($this->getClassName());
         $args = $this->getArguments();
         if (\sizeof($args) == 0) {
             return $script . ';';
@@ -71,5 +76,15 @@ class NewClassBlock extends MethodBlock implements Contract\Block
         }
         $script = rtrim($script, ',');
         return $script . ');';
+    }
+
+    protected function setClassName(string $name): void
+    {
+        $this->className = trim($name);
+    }
+
+    protected function getClassName(): string
+    {
+        return $this->className;
     }
 }
