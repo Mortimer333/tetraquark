@@ -8,6 +8,7 @@ class ChainLinkBlock extends Block implements Contract\Block
 {
     protected const FIRST = 'first';
     protected const MIDDLE = 'middle';
+    protected const MIDDLE_BRACKET = 'middle:bracket';
     protected const END_METHOD = 'end:method';
     protected const END_VARIABLE = 'end:variable';
     public function __construct(
@@ -42,6 +43,8 @@ class ChainLinkBlock extends Block implements Contract\Block
                     $i += 2;
                 } elseif ($letter == '.') {
                     $this->setSubtype(self::MIDDLE);
+                } elseif ($letter == '[') {
+                    $this->setSubtype(self::MIDDLE_BRACKET);
                 }
 
                 $caret = $i - 1;
@@ -83,12 +86,13 @@ class ChainLinkBlock extends Block implements Contract\Block
     public function recreate(): string
     {
         $script = $this->replaceVariablesWithAliases($this->getInstruction());
+        $subtype = $this->getSubtype();
 
-        if ($this->getSubtype() == self::END_METHOD) {
+        if ($subtype == self::END_METHOD) {
             $script .= "(";
         }
 
-        if ($this->getSubtype() == self::MIDDLE || $this->getSubtype() == self::FIRST) {
+        if ($subtype == self::MIDDLE || $subtype == self::FIRST) {
             $script .= '.';
         }
 
@@ -96,21 +100,26 @@ class ChainLinkBlock extends Block implements Contract\Block
             $script .= rtrim($block->recreate(), ';');
         }
 
-        if ($this->getSubtype() == self::END_METHOD) {
+        if ($subtype == self::END_METHOD) {
             $parent = $this->getParent();
             $index = $this->getChildIndex();
             $parentChildren = $parent->getBlocks();
             $nextChild = $parentChildren[$index + 1] ?? null;
             if (
-                $nextChild instanceof ChainLinkBlock
-                || $nextChild instanceof BracketChainLinkBlock
+                (
+                    (
+                        $nextChild instanceof ChainLinkBlock
+                        || $nextChild instanceof BracketChainLinkBlock
+                    )
+                    && $nextChild->getSubtype() !== self::FIRST
+                )
                 || $this->checkIfFirstLetterInNextSiblingIsADot()
             ) {
                 $script .= ")";
             } else {
                 $script .= ");";
             }
-        } elseif ($this->getSubtype() == self::END_VARIABLE) {
+        } elseif ($subtype !== self::MIDDLE && $subtype !== self::FIRST && $subtype !== self::MIDDLE_BRACKET) {
             $script .= ";";
         }
 

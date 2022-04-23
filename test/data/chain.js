@@ -1,4 +1,4 @@
-// let obj = {
+/*// let obj = {
 //     'sa' : 'v',
 //   g : () => {},
 //   c : {
@@ -10,9 +10,11 @@
 // 			}
 // 		}
 // 	}
-// }
+// }*/
 
 obj.sa = 'a'
 obj.p = 2  +1;
 obj.g()
-obj.c.sddf.asas.we_das['@varp2']
+obj.c.sddf.asas
+obj.c.sddf.asas.we_das['@varp2']()
+obj.c.sddf["asa"] = 123;

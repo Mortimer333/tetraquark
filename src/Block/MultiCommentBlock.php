@@ -13,9 +13,9 @@ class MultiCommentBlock extends CommentBlock implements Contract\Block
     public function objectify(int $start = 0)
     {
         $this->setName('');
-        $previousLetter = self::$content[$start];
+        $previousLetter = self::$content[$start - 1];
         $end = null;
-        for ($i=$start + 1; $i < \mb_strlen(self::$content); $i++) {
+        for ($i=$start + 2; $i < \mb_strlen(self::$content); $i++) {
             $letter = self::$content[$i];
             if ($letter == "/" && $previousLetter == "*") {
                 $end = $i + 1;
