@@ -13,7 +13,7 @@ class ObjectValueBlock extends Block implements Contract\Block
 
     public function objectify(int $start = 0)
     {
-        $this->findInstructionStart($start - 1, [
+        $this->findInstructionStart($start, [
             "," => true,
             "{" => true,
         ]);

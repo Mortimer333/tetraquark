@@ -2,6 +2,8 @@
 
 namespace Tetraquark\Trait;
 
+use \Tetraquark\{Block as Block};
+
 trait BlockMapsTrait
 {
     /**
@@ -220,6 +222,7 @@ trait BlockMapsTrait
             Block\ObjectBlock::class => $this->objectBlocksMap,
             Block\ArrayBlock ::class => $this->arrayBlocksMap,
         ];
+
 
         $blocksMap = array_merge($blocksMap, $additionalPaths[$this::class] ?? []);
 

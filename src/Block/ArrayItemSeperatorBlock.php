@@ -21,6 +21,6 @@ class ArrayItemSeperatorBlock extends Block implements Contract\Block
 
     public function recreate(): string
     {
-        return '';
+        return ',';
     }
 }

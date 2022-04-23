@@ -2,11 +2,8 @@ Mapping...
 =======================
 Creating aliases...
 =======================
-Aliases: c => a, 
+Aliases: c => a, b => b, 
 Recreating...
-PHP Warning:  Uninitialized string offset 0 in E:\xampp\htdocs\tetraquark\src\Abstract\BlockAbstract.php on line 616
-
-Warning: Uninitialized string offset 0 in E:\xampp\htdocs\tetraquark\src\Abstract\BlockAbstract.php on line 616
 =======================
 Block: Tetraquark\Block\ArrayBlock
 Subtype: [
@@ -20,15 +17,23 @@ Alias: ``
   Subtype: 
   Instruction: 'a'
   Instruction Start: 1
-  Caret: 0
+  Caret: 4
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ArrayItemSeperatorBlock
+  Subtype: ,
+  Instruction: 
+  Instruction Start: 4
+  Caret: 4
   Name: ``
   Alias: ``
   =======
   Block: Tetraquark\Block\UndefinedBlock
   Subtype: 
-  Instruction: ,var1
-  Instruction Start: 4
-  Caret: 0
+  Instruction: var1
+  Instruction Start: 5
+  Caret: 9
   Name: ``
   Alias: ``
   =======
@@ -53,7 +58,7 @@ Alias: ``
     Subtype: 
     Instruction:  return 
     Instruction Start: 26
-    Caret: 0
+    Caret: 34
     Name: ``
     Alias: ``
     =======
@@ -61,15 +66,15 @@ Alias: ``
     Subtype: 
     Instruction: 'a'
     Instruction Start: 34
-    Caret: 0
+    Caret: 37
     Name: ``
     Alias: ``
     =======
-  Block: Tetraquark\Block\UndefinedBlock
-  Subtype: 
-  Instruction: , 
+  Block: Tetraquark\Block\ArrayItemSeperatorBlock
+  Subtype: ,
+  Instruction: 
   Instruction Start: 40
-  Caret: 0
+  Caret: 40
   Name: ``
   Alias: ``
   =======
@@ -77,7 +82,7 @@ Alias: ``
   Subtype: 
   Instruction: 'a'
   Instruction Start: 42
-  Caret: 0
+  Caret: 45
   Name: ``
   Alias: ``
   =======
@@ -102,15 +107,15 @@ Alias: `a`
     Subtype: 
     Instruction: 'c'
     Instruction Start: 62
-    Caret: 0
+    Caret: 65
     Name: ``
     Alias: ``
     =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction: ,\r\n   
-    Instruction Start: 58
-    Caret: 0
+    Block: Tetraquark\Block\ArrayItemSeperatorBlock
+    Subtype: ,
+    Instruction: 
+    Instruction Start: 65
+    Caret: 65
     Name: ``
     Alias: ``
     =======
@@ -152,15 +157,23 @@ Alias: `a`
           Subtype: 
           Instruction: 'a'
           Instruction Start: 99
-          Caret: 0
+          Caret: 102
           Name: ``
           Alias: ``
           =======
+    Block: Tetraquark\Block\ArrayItemSeperatorBlock
+    Subtype: ,
+    Instruction: 
+    Instruction Start: 109
+    Caret: 109
+    Name: ``
+    Alias: ``
+    =======
     Block: Tetraquark\Block\UndefinedBlock
     Subtype: 
-    Instruction: ,\r\n   caller
-    Instruction Start: 96
-    Caret: 0
+    Instruction: \r\n   caller
+    Instruction Start: 98
+    Caret: 109
     Name: ``
     Alias: ``
     =======
@@ -200,15 +213,15 @@ Alias: ``
       Subtype: 
       Instruction: 'a'
       Instruction Start: 163
-      Caret: 0
+      Caret: 166
       Name: ``
       Alias: ``
       =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction: ,\r\n       
+    Block: Tetraquark\Block\ArrayItemSeperatorBlock
+    Subtype: ,
+    Instruction: 
     Instruction Start: 176
-    Caret: 0
+    Caret: 176
     Name: ``
     Alias: ``
     =======
@@ -216,15 +229,15 @@ Alias: ``
     Subtype: 
     Instruction: 'b'
     Instruction Start: 186
-    Caret: 0
+    Caret: 189
     Name: ``
     Alias: ``
     =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction: ,\r\n       
+    Block: Tetraquark\Block\ArrayItemSeperatorBlock
+    Subtype: ,
+    Instruction: 
     Instruction Start: 189
-    Caret: 0
+    Caret: 189
     Name: ``
     Alias: ``
     =======
@@ -232,7 +245,7 @@ Alias: ``
     Subtype: 
     Instruction: 'v'
     Instruction Start: 199
-    Caret: 0
+    Caret: 202
     Name: ``
     Alias: ``
     =======
@@ -248,15 +261,15 @@ Alias: ``
   Subtype: 
   Instruction: 'a'
   Instruction Start: 214
-  Caret: 0
+  Caret: 217
   Name: ``
   Alias: ``
   =======
-  Block: Tetraquark\Block\UndefinedBlock
-  Subtype: 
-  Instruction: ,
+  Block: Tetraquark\Block\ArrayItemSeperatorBlock
+  Subtype: ,
+  Instruction: 
   Instruction Start: 217
-  Caret: 0
+  Caret: 217
   Name: ``
   Alias: ``
   =======
@@ -264,7 +277,7 @@ Alias: ``
   Subtype: 
   Instruction: 'bv'
   Instruction Start: 218
-  Caret: 0
+  Caret: 222
   Name: ``
   Alias: ``
   =======
@@ -288,19 +301,19 @@ Alias: ``
     Subtype: 
     Instruction: 'v'
     Instruction Start: 228
-    Caret: 0
+    Caret: 231
     Name: ``
     Alias: ``
     =======
-  Block: Tetraquark\Block\UndefinedBlock
-  Subtype: 
-  Instruction: ,
-  Instruction Start: 230
-  Caret: 0
+  Block: Tetraquark\Block\ArrayItemSeperatorBlock
+  Subtype: ,
+  Instruction: 
+  Instruction Start: 232
+  Caret: 232
   Name: ``
   Alias: ``
   =======
-  Block: Tetraquark\Block\ScopeBlock
+  Block: Tetraquark\Block\ObjectBlock
   Subtype: {
   Instruction: 
   Instruction Start: 233
@@ -308,27 +321,27 @@ Alias: ``
   Name: ``
   Alias: ``
   =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction: b:
+    Block: Tetraquark\Block\ObjectValueBlock
+    Subtype: :
+    Instruction: b
     Instruction Start: 234
-    Caret: 0
-    Name: ``
-    Alias: ``
+    Caret: 238
+    Name: `b`
+    Alias: `b`
     =======
-    Block: Tetraquark\Block\StringBlock
-    Subtype: 
-    Instruction: 's'
-    Instruction Start: 236
-    Caret: 0
-    Name: ``
-    Alias: ``
-    =======
-  Block: Tetraquark\Block\UndefinedBlock
-  Subtype: 
-  Instruction: , 
-  Instruction Start: 244
-  Caret: 0
+      Block: Tetraquark\Block\StringBlock
+      Subtype: 
+      Instruction: 's'
+      Instruction Start: 236
+      Caret: 239
+      Name: ``
+      Alias: ``
+      =======
+  Block: Tetraquark\Block\ArrayItemSeperatorBlock
+  Subtype: ,
+  Instruction: 
+  Instruction Start: 240
+  Caret: 240
   Name: ``
   Alias: ``
   =======
@@ -348,7 +361,7 @@ Alias: ``
   Name: ``
   Alias: ``
   =======
-Duration: 0.006s
+Duration: 0.005s
 
 
-['a',var1];[function(){return'a';},'a'];let a=['c',()=>{console.log('a');}},caller,('a')];[[['a'],'b','v']];['a','bv'];[['v'],{b:'s'},var3.,var4];
+['a',var1];[function(){return'a';},'a'];let a=['c',()=>{console.log('a');},caller('a')];[[['a'],'b','v']];['a','bv'];[['v'],{b:'s'},var3.var4];

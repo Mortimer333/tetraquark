@@ -212,7 +212,7 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
                 $blocks .= $block->recreate();
             }
             if (\mb_strlen($blocks) > 0) {
-                $script .= rtrim($blocks, ';') . ';}';
+                $script .= rtrim($blocks, ';') . ';';
             }
             $script .= '};';
         }

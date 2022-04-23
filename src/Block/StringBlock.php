@@ -19,6 +19,7 @@ class StringBlock extends Block implements Contract\Block
     {
         $this->setName('');
         $instruction = $this->getInstruction();
+        $this->setCaret($start + \mb_strlen($instruction));
         $this->setInstructionStart($start)
             ->setInstruction($instruction)
         ;

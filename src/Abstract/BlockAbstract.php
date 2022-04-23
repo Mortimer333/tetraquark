@@ -200,7 +200,6 @@ abstract class BlockAbstract
         $properStart = null;
         for ($i=$end - 1; $i >= 0; $i--) {
             $letter = self::$content[$i];
-
             if (
                 ($startsTemplate = Validate::isTemplateLiteralLandmark($letter, ''))
                 || Validate::isStringLandmark($letter, '')
@@ -613,7 +612,7 @@ abstract class BlockAbstract
             return false;
         }
         $instruction = $nextSibling->getInstruction();
-        $letter = trim($instruction)[0];
+        $letter = trim($instruction)[0] ?? '';
         return $letter === '.';
     }
 }
