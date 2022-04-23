@@ -66,6 +66,6 @@ class ScriptBlock extends Block implements Contract\Block
         foreach ($this->blocks as $block) {
             $script .= $block->recreate();
         }
-        return $script;
+        return $this->removeAdditionalSpaces($script);
     }
 }

@@ -13,9 +13,7 @@ class IfBlock extends ConditionBlock implements Contract\Block
         foreach ($this->argsBlocks as $block) {
             $args .= rtrim($block->recreate(), ';');
         }
-        return $this->removeAdditionalSpaces(
-            $this->replaceVariablesWithAliases($args)
-        );
+        return $this->replaceVariablesWithAliases($args);
     }
 
     public function objectify(int $start = 0)

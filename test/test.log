@@ -348,7 +348,7 @@ Alias: ``
   Name: ``
   Alias: ``
   =======
-Duration: 0.005s
+Duration: 0.006s
 
 
-['a',var1];[function (){return'a';},'a'];let a=['c',()=>{console.log('a');}},caller,('a')];[[['a'],'b','v']];['a','bv'];[['v'],{b:'s'},var3.,var4];
+['a',var1];[function(){return'a';},'a'];let a=['c',()=>{console.log('a');}},caller,('a')];[[['a'],'b','v']];['a','bv'];[['v'],{b:'s'},var3.,var4];

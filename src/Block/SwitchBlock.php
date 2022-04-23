@@ -9,10 +9,8 @@ class SwitchBlock extends ConditionBlock implements Contract\Block
     protected string $args = '';
     protected function getArgs(): string
     {
-        return $this->removeAdditionalSpaces(
-            $this->replaceVariablesWithAliases(
-                $this->getCondition()
-            )
+        return $this->replaceVariablesWithAliases(
+            $this->getCondition()
         );
     }
 

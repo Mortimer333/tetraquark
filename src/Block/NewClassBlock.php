@@ -69,7 +69,7 @@ class NewClassBlock extends MethodBlock implements Contract\Block
             }
             $script .= ',';
         }
-        $script = $this->removeAdditionalSpaces(rtrim($script, ','));
+        $script = rtrim($script, ',');
         return $script . ');';
     }
 }

@@ -23,10 +23,8 @@ class ObjectSoloValueBlock extends Block implements Contract\Block
 
     public function recreate(): string
     {
-        return $this->removeAdditionalSpaces(
-            $this->replaceVariablesWithAliases(
-                $this->getInstruction() . ","
-            )
+        return $this->replaceVariablesWithAliases(
+            $this->getInstruction() . ","
         );
     }
 }

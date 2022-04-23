@@ -17,7 +17,7 @@ abstract class VariableBlockAbstract extends BlockAbstract
             $script .= $block->recreate();
         }
 
-        $value = $this->removeAdditionalSpaces($this->getValue());
+        $value = $this->getValue();
         if (\mb_strlen($value) > 0) {
             $script .= $this->replaceVariablesWithAliases($value);
         }
@@ -30,6 +30,6 @@ abstract class VariableBlockAbstract extends BlockAbstract
         if ($addSemiColon[$scriptLastLetter] ?? true) {
             $script .= ';';
         }
-        return $this->removeAdditionalSpaces($script);
+        return $script;
     }
 }

@@ -26,10 +26,8 @@ class StringBlock extends Block implements Contract\Block
 
     public function recreate(): string
     {
-        $script = $this->removeAdditionalSpaces(
-            $this->replaceVariablesWithAliases(
-                $this->getInstruction()
-            )
+        $script = $this->replaceVariablesWithAliases(
+            $this->getInstruction()
         );
 
         foreach ($this->getBlocks() as $block) {

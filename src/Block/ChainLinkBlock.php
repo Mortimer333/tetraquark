@@ -114,6 +114,6 @@ class ChainLinkBlock extends Block implements Contract\Block
             $script .= ";";
         }
 
-        return $this->removeAdditionalSpaces($script);
+        return $script;
     }
 }

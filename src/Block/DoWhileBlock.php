@@ -14,10 +14,8 @@ class DoWhileBlock extends ConditionBlock implements Contract\Block
 
     protected function getArgs(): string
     {
-        return $this->removeAdditionalSpaces(
-            $this->replaceVariablesWithAliases(
-                $this->getCondition()
-            )
+        return $this->replaceVariablesWithAliases(
+            $this->getCondition()
         );
     }
 
