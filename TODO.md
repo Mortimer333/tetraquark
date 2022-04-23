@@ -1,41 +1,13 @@
 # TO DO
 
-## Create proper structure
-I want to have structure which informs about scope of variables, what type is it (function, object, array), name so we can rename it etc.
-Draft:
-```
-[
-    type: 'function',
-    subtype:'normal',
-    instruction: 'function test() {',
-    scope: 'global',
-    name: 'test',
-    blocks: [
-        [
-            type:'variable',
-            subtype:'const',
-            instruction:'const test1 = "test1";'
-        ]
-    ]
-]
-```
+## 1. Upgrade removeAdditionalSpaces as it doesn't reamove all not needed space - do{ whileLooped--; console.log(whileLooped);}
 
-Script is going and encouters `function`. Its new block - so create new TetraquarkBlock and get type from TetraqaurkType. Pass remaining content to Block and script goes... inside the block!
-So I should start by creating new Block of type Script and it would go inside him! Then I can recursivly just call new Block and attach him to his parent. Content would be saved in `leftcontent` of block and passed to parent after `end` method would be called.
-
-## Shared scope - how to do it?
-
-So I want to have somewhat shared scope of variables:
-function `func1` has `var1` and `var2` inside but also `func2` which has `var3` and `var4`. So here is how scopes should look like:
-- `func2` should be able to access `var1` to `var4`
-- `func1` should be able to access only `var1`, `var2` and `func2`
-And if I was to add another function it should have access to all vars and their own. So there should be... passed down variables. Pretty simple, but creating aliases will require new iteration over whole script. They might be used not in order and us changing their names in one place might break use in another.
-
-## Next stage - check for any useless statements
 
 ## If script will be slow look into setting all values for functions in one iteration (instead of ~2,5)
 
 ## Setting to allow changing anonymous functions `function () {}` into array functions `() => {}`
+
+## Next stage - check for any useless statements
 
 ## Handle
 - [DONE] notes
@@ -47,15 +19,22 @@ And if I was to add another function it should have access to all vars and their
 - [DONE] for (replace vars in brackets),
 - [DONE] while and do while,
 - [DONE] Switch
-- passing anonymous functions,
+- [DONE] passing anonymous functions,
 - array (used like object)
 
-# To fix
+# Known bugs
 
-c(){
-    const v=Object.assign({},this.v);
-    v.µ=this.v.return v; ;
+1. instructions like :
+let a  = {
+    b : 'v'
 }
+let c = a.
+b
+
+are not properly recognized because script thinks that instruction ends on the dot (a.)
+
+2. Arrow Method inside parenthesis:
+(x => x + 1)
 
 # Problems:
 - my alias replacer for globally scoped vars will not work for anything that accessed them dynamically, example:
@@ -75,40 +54,3 @@ Its going to be translated into something like this:
 class a{b='one';c='two';}const d=new a;['One', 'Two'].forEach(e=>{console.log(d['var' + e]);}
 ``
 Which will result in error `varOne doesn't exist` because varOne got replaced with `b`.
-
-After minifization:
-
-if(t>s){return r.length+this o.g(p.slice(Math.floor(p.length/2)),m,t-s);}
-
-
-Before mini:
-
-class TabJF_Hidden {
-  debounce (func, timeout = 300) {
-    let timer;
-    return (...args) => {
-      clearTimeout(timer);
-      if ( args[0] === "clear" ) {
-        return; // if passed `clear` then stop debouncing
-      }
-
-      timer = setTimeout(() => { func.apply(this, args); }, timeout);
-    };
-  }
-}
-export { TabJF_Hidden };
-
-
-# Known bugs
-
-1. instructions like :
-let a  = {
-    b : 'v'
-}
-let c = a.
-b
-
-are not properly recognized because script thinks that instruction ends on the dot (a.)
-
-2. Arrow Method inside parenthesis:
-(x => x + 1)

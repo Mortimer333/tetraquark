@@ -5,39 +5,151 @@ Creating aliases...
 Aliases: 
 Recreating...
 =======================
-Block: Tetraquark\Block\SingleCommentBlock
-Subtype: //
-Instruction: //**/** comment\r\n
+Block: Tetraquark\Block\DoWhileBlock
+Subtype: do
+Instruction: do {
 Instruction Start: 0
-Caret: 17
+Caret: 77
 Name: ``
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: whileLooped
+  Instruction Start: -1
+  Caret: 10
+  Name: ``
+  Alias: ``
+  =======
 Alias: ``
 =======
-Block: Tetraquark\Block\SingleCommentBlock
-Subtype: //
-Instruction: /** comment2\r\n
-Instruction Start: 18
-Caret: 32
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: \r\n    whileLooped--;\r\n    
+  Instruction Start: 11
+  Caret: 37
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 30
+  Caret: 37
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 37
+  Caret: 53
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: whileLooped
+    Instruction Start: 42
+    Caret: 53
+    Name: ``
+    Alias: ``
+    =======
+Block: Tetraquark\Block\DoWhileBlock
+Subtype: do
+Instruction: do {
+Instruction Start: 83
+Caret: 140
 Name: ``
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: whileLooped
+  Instruction Start: -1
+  Caret: 10
+  Name: ``
+  Alias: ``
+  =======
 Alias: ``
 =======
-Block: Tetraquark\Block\MultiCommentBlock
-Subtype: /*
-Instruction: /*/* comment 3 */
-Instruction Start: 33
-Caret: 50
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 88
+  Caret: 95
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 95
+  Caret: 117
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: whileLooped + 
+    Instruction Start: 100
+    Caret: 114
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: '2'
+    Instruction Start: 114
+    Caret: 117
+    Name: ``
+    Alias: ``
+    =======
+Block: Tetraquark\Block\DoWhileBlock
+Subtype: do
+Instruction: do {
+Instruction Start: 143
+Caret: 210
 Name: ``
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: whileLooped
+  Instruction Start: -1
+  Caret: 10
+  Name: ``
+  Alias: ``
+  =======
 Alias: ``
 =======
-Block: Tetraquark\Block\MultiCommentBlock
-Subtype: /*
-Instruction: /**\r\n * Comment 4\r\n * nasnasd\r\n * asdnansd\r\n */
-Instruction Start: 52
-Caret: 99
-Name: ``
-Alias: ``
-=======
-Duration: 0.001s
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 149
+  Caret: 156
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 156
+  Caret: 178
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: whileLooped + 
+    Instruction Start: 161
+    Caret: 175
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: '3'
+    Instruction Start: 175
+    Caret: 178
+    Name: ``
+    Alias: ``
+    =======
+Duration: 0.003s
 
 
-
+do{ whileLooped--; console.log(whileLooped);}while(whileLooped);do{console.log(whileLooped+ '2');}while(whileLooped);do{console.log(whileLooped+ '3');}while(whileLooped);

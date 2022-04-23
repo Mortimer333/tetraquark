@@ -23,7 +23,7 @@ class DoWhileBlock extends ConditionBlock implements Contract\Block
     {
         $this->setName('');
         $this->setCondType('do-while');
-        $this->setInstruction('do (');
+        $this->setInstruction('do {');
         $this->setInstructionStart($start - 2);
         for ($i=$start; $i < \mb_strlen(self::$content); $i++) {
             $letter = self::$content[$i];
@@ -51,6 +51,7 @@ class DoWhileBlock extends ConditionBlock implements Contract\Block
                 $condStart = $i + 1;
             } elseif ($sFConditionEnd && $letter == ')') {
                 $condEnd = $i;
+                break;
             }
         }
 
