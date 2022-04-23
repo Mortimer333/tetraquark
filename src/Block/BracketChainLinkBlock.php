@@ -1,8 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\Log as Log;
-use \Tetraquark\Contract as Contract;
+use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
 use \Tetraquark\Abstract\BlockAbstract as Block;
 
 class BracketChainLinkBlock extends Block implements Contract\Block
@@ -29,7 +28,7 @@ class BracketChainLinkBlock extends Block implements Contract\Block
         for ($i=$start; $i < \mb_strlen(self::$content); $i++) {
             $letter = self::$content[$i];
             $end = $i;
-            if ($this->isWhitespace($letter)) {
+            if (Validate::isWhitespace($letter)) {
                 continue;
             }
 
@@ -72,10 +71,10 @@ class BracketChainLinkBlock extends Block implements Contract\Block
                     $template = true;
                     continue;
                 }
-            } elseif (!$stringEnd && $string && $this->isStringLandmark($letter, self::$content[$i - 1], true)) {
+            } elseif (!$stringEnd && $string && Validate::isStringLandmark($letter, self::$content[$i - 1], true)) {
                 $stringEnd = true;
                 continue;
-            } elseif (!$stringEnd && $template && $this->isTemplateLiteralLandmark($letter, self::$content[$i - 1], true)) {
+            } elseif (!$stringEnd && $template && Validate::isTemplateLiteralLandmark($letter, self::$content[$i - 1], true)) {
                 $stringEnd = true;
                 continue;
             }
@@ -109,7 +108,7 @@ class BracketChainLinkBlock extends Block implements Contract\Block
 
         for ($i=$this->getCaret() + 1; $i < \mb_strlen(self::$content); $i++) {
             $letter = self::$content[$i];
-            if ($this->isWhitespace($letter)) {
+            if (Validate::isWhitespace($letter)) {
                 continue;
             }
 

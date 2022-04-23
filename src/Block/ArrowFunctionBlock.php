@@ -1,9 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\Log as Log;
-use \Tetraquark\Exception as Exception;
-use \Tetraquark\Contract as Contract;
+use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
 use \Tetraquark\Abstract\MethodBlockAbstract as MethodBlock;
 
 class ArrowFunctionBlock extends MethodBlock implements Contract\Block
@@ -79,7 +77,7 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
                 continue;
             }
 
-            if ($this->isWhitespace($letter)) {
+            if (Validate::isWhitespace($letter)) {
                 if ($SFWhitespace) {
                     $arguments[] = $word;
                     break;
@@ -138,7 +136,7 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
                 break;
             }
 
-            if (!$searchForEnd && !$this->isWhitespace($letter)) {
+            if (!$searchForEnd && !Validate::isWhitespace($letter)) {
                 Log::log("Found non white space and not bracket. One line arrow method", 2);
                 $this->subtype .= ':no-brackets';
                 $searchForEnd = true;
@@ -171,13 +169,13 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
                 break;
             }
 
-            if (!$searchForNextWhiteSpace && !$this->isWhitespace($letter)) {
+            if (!$searchForNextWhiteSpace && !Validate::isWhitespace($letter)) {
                 Log::log("Start search for whitspace, letter found before bracket", 2);
                 $searchForNextWhiteSpace = true;
                 continue;
             }
 
-            if ($searchForNextWhiteSpace && $this->isWhitespace($letter)) {
+            if ($searchForNextWhiteSpace && Validate::isWhitespace($letter)) {
                 Log::log("White space found", 2);
                 $subStart = $i + 1;
                 $this->subtype = 'no-parenthesis';

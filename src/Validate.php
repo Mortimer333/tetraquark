@@ -1,16 +1,16 @@
 <?php
-namespace Tetraquark\Trait;
+namespace Tetraquark;
 
-trait BlockValidateTrait
+class Validate
 {
-    protected array $special = [
+    protected static array $special = [
         "(" => true, ")" => true, "{" => true, "}" => true, "+" => true, "-" => true, "/" => true, "*" => true,
         "=" => true, "!" => true, '[' => true, ']' => true, '%' => true, '^' => true, ":" => true, ">" => true,
         "<" => true, "," => true, ' ' => true, "\n" => true, "\r" => true, '|' => true, '&' => true, '?' => true,
         ';' => true, '.' => true
     ];
 
-    protected array $notAllowedConsts = [
+    protected static array $notAllowedConsts = [
         'break' => true, 'do' => true, 'instanceof' => true,
         'typeof' => true, 'case' => true, 'else' => true, 'new' => true,
         'var' => true, 'catch' => true, 'finally' => true, 'return' => true,
@@ -25,7 +25,12 @@ trait BlockValidateTrait
         'true' => true, 'false' => true
     ];
 
-    protected function isValidVariable(string $variable): bool
+    public static function getSpecial(): array
+    {
+        return self::$special;
+    }
+
+    public static function isValidVariable(string $variable): bool
     {
         $regex = '/^[$_\p{L}][$_\p{L}\p{Mn}\p{Mc}\p{Nd}\p{Pc}\x200C\x200D]*+$/';
         $res = preg_match($regex, $variable);
@@ -36,19 +41,19 @@ trait BlockValidateTrait
         return !isset($notAllowedConsts[$variable]);
     }
 
-    protected function isWhitespace(string $letter): bool
+    public static function isWhitespace(string $letter): bool
     {
         return ctype_space($letter);
     }
 
-    protected function isValidUndefined(string $undefined): bool
+    public static function isValidUndefined(string $undefined): bool
     {
         $undefinedEnds = ["\n" => true, ";" => true, "}" => true];
         $undefined = trim($undefined);
-        return \mb_strlen($undefined) > 0 && !$this->isWhitespace($undefined) && !isset($undefinedEnds[$undefined]);
+        return \mb_strlen($undefined) > 0 && !self::isWhitespace($undefined) && !isset($undefinedEnds[$undefined]);
     }
 
-    protected function isTemplateLiteralLandmark(string $letter, string $previousLetter, bool $inString = false): bool
+    public static function isTemplateLiteralLandmark(string $letter, string $previousLetter, bool $inString = false): bool
     {
         return $letter === '`' && (
             $inString && $previousLetter !== '\\'
@@ -56,7 +61,7 @@ trait BlockValidateTrait
         );
     }
 
-    protected function isString(string $letter): bool
+    public static function isString(string $letter): bool
     {
         $strings = [
             '"' => true,
@@ -66,7 +71,7 @@ trait BlockValidateTrait
         return $strings[$letter] ?? false;
     }
 
-    protected function isStringLandmark(string $letter, string $previousLetter, bool $inString = false): bool
+    public static function isStringLandmark(string $letter, string $previousLetter, bool $inString = false): bool
     {
         return ($letter === '"' || $letter === "'")
             && (
@@ -75,8 +80,8 @@ trait BlockValidateTrait
             );
     }
 
-    protected function isSpecial(string $letter): bool
+    public static function isSpecial(string $letter): bool
     {
-        return $this->special[$letter] ?? false;
+        return self::$special[$letter] ?? false;
     }
 }

@@ -1,8 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\Log as Log;
-use \Tetraquark\Contract as Contract;
+use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
 use \Tetraquark\Abstract\VariableBlockAbstract;
 
 class VariableBlock extends VariableBlockAbstract implements Contract\Block
@@ -24,7 +23,7 @@ class VariableBlock extends VariableBlockAbstract implements Contract\Block
         for ($i=$start + 1; $i < \mb_strlen(self::$content); $i++) {
             $letter = self::$content[$i];
 
-            if ($this->isWhitespace($letter)) {
+            if (Validate::isWhitespace($letter)) {
                 continue;
             }
 

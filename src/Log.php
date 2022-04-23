@@ -117,4 +117,40 @@ class Log
     {
         self::$maxVerbose = $level;
     }
+
+    public static function displayBlocks(array $blocks)
+    {
+        foreach ($blocks as $block) {
+            self::log("Block: " . get_class($block));
+            self::log("Subtype: " . $block->getSubtype());
+            if ($block instanceof Block\CommentBlock) {
+                self::log("Instruction: " . \mb_substr($block->getInstruction(), 0, 100));
+            } else {
+                self::log("Instruction: " . $block->getInstruction());
+            }
+            self::log("Instruction Start: " . $block->getInstructionStart());
+            self::log("Name: `" . $block->getName() . "`");
+            if (method_exists($block, 'getValue')) {
+                self::log("Value: `" . $block->getValue() . "`");
+            }
+            if (method_exists($block, 'getArguments')) {
+                self::log("Arguments: [" . \sizeof($block->getArguments()) . "] `");
+                self::increaseIndent();
+                foreach ($block->getArguments() as $argument) {
+                    self::displayBlocks($argument);
+                }
+                self::decreaseIndent();
+            }
+            if (method_exists($block, 'getCondBlocks')) {
+                self::increaseIndent();
+                self::displayBlocks($block->getCondBlocks());
+                self::decreaseIndent();
+            }
+            self::log("Alias: `" . $block->getAlias($block->getName()) . "`");
+            self::log("=======");
+            self::increaseIndent();
+            self::displayBlocks($block->getBlocks());
+            self::decreaseIndent();
+        }
+    }
 }

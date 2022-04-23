@@ -1,8 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\Log as Log;
-use \Tetraquark\Contract as Contract;
+use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
 use \Tetraquark\Abstract\BlockAbstract as Block;
 
 class ObjectValueBlock extends Block implements Contract\Block
@@ -34,11 +33,11 @@ class ObjectValueBlock extends Block implements Contract\Block
     {
         for ($i=1; $i < \mb_strlen($name) - 1; $i++) {
             $letter = $name[$i];
-            if ($this->isWhitespace($letter) || $this->isSpecial($letter) || $this->isString($letter)) {
+            if (Validate::isWhitespace($letter) || Validate::isSpecial($letter) || Validate::isString($letter)) {
                 return $name;
             }
         }
-        if ($this->isString($name[0])) {
+        if (Validate::isString($name[0])) {
             return trim($name, $name[0]);
         }
         return $name;

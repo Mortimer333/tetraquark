@@ -1,9 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\Exception as Exception;
-use \Tetraquark\Log as Log;
-use \Tetraquark\Contract as Contract;
+use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
 use \Tetraquark\Abstract\BlockAbstract as Block;
 
 class ElseBlock extends Block implements Contract\Block
@@ -23,7 +21,7 @@ class ElseBlock extends Block implements Contract\Block
             $letter == 'i'
             && self::$content[$pos + 1] == 'f'
             && (
-                $this->isWhitespace(self::$content[$pos + 2])
+                Validate::isWhitespace(self::$content[$pos + 2])
                 || self::$content[$pos + 2]== '('
             )
         ) {

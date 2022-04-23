@@ -1,8 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\Log as Log;
-use \Tetraquark\Contract as Contract;
+use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
 use \Tetraquark\Abstract\BlockAbstract as Block;
 
 class ChainLinkBlock extends Block implements Contract\Block
@@ -21,7 +20,7 @@ class ChainLinkBlock extends Block implements Contract\Block
     public function objectify(int $start = 0)
     {
         $this->setName('');
-        $endChars = array_merge([';' => true], $this->special);
+        $endChars = array_merge([';' => true], Validate::getSpecial());
 
         if ($this->getSubtype() == self::FIRST) {
             $this->findInstructionStart($start, $endChars);
@@ -34,7 +33,7 @@ class ChainLinkBlock extends Block implements Contract\Block
         $caret = null;
         for ($i=$start; $i < \mb_strlen(self::$content); $i++) {
             $letter = self::$content[$i];
-            if (($endChars[$letter] ?? false || $startLetterSearch) && !$this->isWhitespace($letter)) {
+            if (($endChars[$letter] ?? false || $startLetterSearch) && !Validate::isWhitespace($letter)) {
                 $end = $i;
                 if ($letter == '=' && self::$content[$i + 1] != '=') {
                     $this->setSubtype(self::END_VARIABLE);
@@ -49,7 +48,7 @@ class ChainLinkBlock extends Block implements Contract\Block
                 break;
             }
 
-            if ($this->isWhitespace($letter)) {
+            if (Validate::isWhitespace($letter)) {
                 $startLetterSearch = true;
             }
         }

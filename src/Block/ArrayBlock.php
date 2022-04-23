@@ -1,8 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\Log as Log;
-use \Tetraquark\Contract as Contract;
+use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
 use \Tetraquark\Abstract\BlockAbstract as Block;
 
 class ArrayBlock extends Block implements Contract\Block
@@ -16,7 +15,7 @@ class ArrayBlock extends Block implements Contract\Block
         $this->setInstruction('');
         $this->setName('');
         $this->setInstructionStart($start);
-        $this->blocks = array_merge($this->blocks, $this->createSubBlocks($start + 1)); 
+        $this->blocks = array_merge($this->blocks, $this->createSubBlocks($start + 1));
     }
 
     public function recreate(): string

@@ -1,8 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\Log as Log;
-use \Tetraquark\Contract as Contract;
+use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
 use \Tetraquark\Abstract\BlockAbstract as Block;
 
 class ScriptBlock extends Block implements Contract\Block
@@ -38,7 +37,7 @@ class ScriptBlock extends Block implements Contract\Block
         Log::log("Recreating...");
         $this->setMinified($this->recreate());
         Log::log("=======================");
-        $this->displayBlocks($this->blocks);
+        Log::displayBlocks($this->blocks);
         Log::timerEnd();
     }
 

@@ -1,8 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\Log as Log;
-use \Tetraquark\Contract as Contract;
+use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
 use \Tetraquark\Abstract\MethodBlockAbstract as MethodBlock;
 
 class FunctionBlock extends MethodBlock implements Contract\Block
@@ -28,7 +27,7 @@ class FunctionBlock extends MethodBlock implements Contract\Block
 
     public function recreate(): string
     {
-        $script = 'function ' . $this->getAlias($this->getName()) . '(' . $this->getAliasedArguments() . '){';        
+        $script = 'function ' . $this->getAlias($this->getName()) . '(' . $this->getAliasedArguments() . '){';
         $blocks = '';
 
         foreach ($this->getBlocks() as $block) {

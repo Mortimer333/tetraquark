@@ -1,7 +1,8 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Abstract;
-use \Tetraquark\{Exception as Exception, Block as Block, Log as Log};
+use \Tetraquark\{Exception as Exception, Block as Block, Log as Log, Validate as Validate};
+use \Tetraquark\MB as MB;
 
 abstract class MethodBlockAbstract extends BlockAbstract
 {
@@ -44,12 +45,12 @@ abstract class MethodBlockAbstract extends BlockAbstract
         for ($i=\strlen($instr) - 1; $i >= 0; $i--) {
             $letter = $instr[$i];
             if (
-                ($startsTemplate = $this->isTemplateLiteralLandmark($letter, ''))
-                || $this->isStringLandmark($letter, '')
+                ($startsTemplate = Validate::isTemplateLiteralLandmark($letter, ''))
+                || Validate::isStringLandmark($letter, '')
             ) {
                 $oldPos = $i;
                 $i = $this->skipString($i - 1, $instr, $startsTemplate, true);
-                $word .= $this->mb_strrev(\mb_substr($instr, $i + 1, $oldPos - $i));
+                $word .= MB::strrev(\mb_substr($instr, $i + 1, $oldPos - $i));
                 $letter = $instr[$i];
             }
 
@@ -75,19 +76,19 @@ abstract class MethodBlockAbstract extends BlockAbstract
                 continue;
             }
 
-            if ($startSettingArgs && $this->isWhitespace($letter)) {
+            if ($startSettingArgs && Validate::isWhitespace($letter)) {
                 $word .= $letter;
                 continue;
             }
 
             if ($startSettingArgs && $letter == '(') {
-                $arguments[] = $this->mb_strrev($word);
+                $arguments[] = MB::strrev($word);
                 $word = '';
                 break;
             }
 
             if ($startSettingArgs && $letter == ',') {
-                $arguments[] = $this->mb_strrev($word);
+                $arguments[] = MB::strrev($word);
                 $word = '';
                 continue;
             }
@@ -122,8 +123,8 @@ abstract class MethodBlockAbstract extends BlockAbstract
             $letter = self::$content[$i];
 
             if (
-                ($startsTemplate = $this->isTemplateLiteralLandmark($letter, ''))
-                || $this->isStringLandmark($letter, '')
+                ($startsTemplate = Validate::isTemplateLiteralLandmark($letter, ''))
+                || Validate::isStringLandmark($letter, '')
             ) {
                 $i = $this->skipString($i + 1, self::$content, $startsTemplate);
                 $letter = self::$content[$i];

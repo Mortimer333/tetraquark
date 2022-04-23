@@ -778,7 +778,7 @@ Alias: ``
     Name: ``
     Alias: ``
     =======
-Duration: 0.016s
+Duration: 0.014s
 
 
 class a{constructor(){console.log('new');}j(){}k(){}l(){console.log('asdas');}attrb ='asd'+'asd';att =['asd'];c ={m:'asd',n:[1,2,3]};}const b=['asd',3,2+1];let c={b};const d=new a;const e=new a;const f=new a;const g=new a;const h=new a;const o=new a;if(c.b[0]==='asd'){console.log('found')console.log('found2');};for(var p=0;p<b.length;p++){console.log(b[p]);}while(b.length){let r=b.length;console.log(r,b[0])b.shift();}switch(b.length){case 1: console.log('Obj is one');break;default: console.log('Obj is bigger then one');}let i=2;do{i--; console.log(i);}while(i);

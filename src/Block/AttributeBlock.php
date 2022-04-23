@@ -1,8 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\Log as Log;
-use \Tetraquark\Contract as Contract;
+use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
 use \Tetraquark\Abstract\VariableBlockAbstract as VariableBlock;
 
 class AttributeBlock extends VariableBlock implements Contract\Block
@@ -27,12 +26,12 @@ class AttributeBlock extends VariableBlock implements Contract\Block
 
         for ($i=$start; $i >= 0; $i--) {
             $letter = self::$content[$i];
-            if ($letterFound && $this->isWhitespace($letter)) {
+            if ($letterFound && Validate::isWhitespace($letter)) {
                 $start = $i;
                 break;
             }
 
-            if (!$this->isWhitespace($letter)) {
+            if (!Validate::isWhitespace($letter)) {
                 $letterFound = true;
             }
 

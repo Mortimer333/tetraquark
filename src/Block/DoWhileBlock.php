@@ -1,9 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\Exception as Exception;
-use \Tetraquark\Log as Log;
-use \Tetraquark\Contract as Contract;
+use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
 use \Tetraquark\Abstract\ConditionBlockAbstract as ConditionBlock;
 
 class DoWhileBlock extends ConditionBlock implements Contract\Block
@@ -46,7 +44,7 @@ class DoWhileBlock extends ConditionBlock implements Contract\Block
         $condEnd = null;
         for ($i=$this->getCaret(); $i < \mb_strlen(self::$content); $i++) {
             $letter = self::$content[$i];
-            if ($this->isWhitespace($letter)) {
+            if (Validate::isWhitespace($letter)) {
                 continue;
             }
 

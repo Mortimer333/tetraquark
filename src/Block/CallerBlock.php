@@ -1,8 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\Log as Log;
-use \Tetraquark\Contract as Contract;
+use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
 use \Tetraquark\Abstract\BlockAbstract as Block;
 
 class CallerBlock extends Block implements Contract\Block
@@ -22,8 +21,8 @@ class CallerBlock extends Block implements Contract\Block
 
             // Skip String
             if (
-                ($startsTemplate = $this->isTemplateLiteralLandmark($letter, ''))
-                || $this->isStringLandmark($letter, '')
+                ($startsTemplate = Validate::isTemplateLiteralLandmark($letter, ''))
+                || Validate::isStringLandmark($letter, '')
             ) {
                 $i = $this->skipString($i + 1, self::$content, $startsTemplate);
                 $letter = self::$content[$i];
@@ -40,7 +39,7 @@ class CallerBlock extends Block implements Contract\Block
             }
 
             // Skip whitespace
-            if ($this->isWhitespace($letter)) {
+            if (Validate::isWhitespace($letter)) {
                 continue;
             }
 

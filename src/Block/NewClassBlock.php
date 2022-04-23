@@ -1,9 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\Exception as Exception;
-use \Tetraquark\Log as Log;
-use \Tetraquark\Contract as Contract;
+use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
 use \Tetraquark\Abstract\MethodBlockAbstract as MethodBlock;
 
 class NewClassBlock extends MethodBlock implements Contract\Block
@@ -16,7 +14,7 @@ class NewClassBlock extends MethodBlock implements Contract\Block
         $end              = null;
         for ($i=$start; $i < \mb_strlen(self::$content); $i++) {
             $letter = self::$content[$i];
-            if ($this->isWhitespace($letter)) {
+            if (Validate::isWhitespace($letter)) {
                 if ($nameStarted) {
                     $nameEnded = true;
                 }

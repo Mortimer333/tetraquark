@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Abstract;
-use \Tetraquark\{Exception as Exception, Block as Block, Log as Log};
+use \Tetraquark\{Exception as Exception, Block as Block, Log as Log, Validate as Validate};
 
 abstract class ConditionBlockAbstract extends BlockAbstract
 {
@@ -27,7 +27,7 @@ abstract class ConditionBlockAbstract extends BlockAbstract
         $end       = null;
         for ($i=$start; $i < \mb_strlen(self::$content); $i++) {
             $letter = self::$content[$i];
-            if ($this->isWhitespace($letter)) {
+            if (Validate::isWhitespace($letter)) {
                 continue;
             }
 
