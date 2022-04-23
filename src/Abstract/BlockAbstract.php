@@ -2,7 +2,6 @@
 
 namespace Tetraquark\Abstract;
 
-use \Xeno\X as Xeno;
 use \Tetraquark\Trait\{BlockGetSetTrait, BlockMapsTrait, BlockAliasMapTrait};
 use \Tetraquark\Abstract\{
     CommentBlockAbstract as CommentBlock,

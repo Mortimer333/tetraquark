@@ -3,7 +3,8 @@
     "description": "Javascript minifier",
     "type": "library",
     "require": {
-        "xeno/xeno": "dev-main"
+        "php": ">=8.0",
+        "ext-mbstring": "*"
     },
     "autoload": {
         "psr-4": {
