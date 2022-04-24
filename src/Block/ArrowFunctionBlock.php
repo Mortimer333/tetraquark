@@ -6,6 +6,10 @@ use \Tetraquark\Abstract\MethodBlockAbstract as MethodBlock;
 
 class ArrowFunctionBlock extends MethodBlock implements Contract\Block
 {
+    protected const PARENTHESIS = 'parenthesis';
+    protected const NO_PARENTHESIS = 'no-parenthesis';
+    protected const BRACKETS = 'brackets';
+    protected const NO_BRACKETS = 'no-brackets';
     protected string $value = '';
     /*
         Possible function syntaxes:
@@ -17,7 +21,6 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
     */
     public function objectify(int $start = 0)
     {
-        Log::log("New Arrow method", 1);
         $subStart = $this->findStart($start);
         if (\is_null($subStart)) {
             throw new Exception('Start of arrow method not found', 404);
@@ -27,7 +30,6 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
         if (\is_null($subEnd)) {
             throw new Exception('End of arrow method not found', 404);
         }
-        Log::log('End: ' . $subEnd . ", " . (self::$content[$subEnd] ?? ''));
 
         if ($this->isMultiLine()) {
             $instruction = str_replace("\n", ' ', substr(self::$content, $subStart, $subEnd - $subStart));
@@ -45,9 +47,7 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
                 '}' => true
             ];
             $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
-            Log::log('Multi line caret: ' . $this->getCaret() . ", " . self::$content[$this->getCaret()]);
         }
-        Log::log('aaaaaaaa');
         $this->findAndSetArguments();
 
         $this->setName('');
@@ -66,8 +66,13 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
 
     protected function findAndSetArguments(): void
     {
+        Log::log($this->getInstruction() . ', ' . $this->getSubtype());
+        if ($this->getSubtype() === self::PARENTHESIS . ':' . self::NO_BRACKETS || $this->getSubtype() === self::PARENTHESIS . ':' . self::BRACKETS) {
+            Log::log('a');
+            parent::findAndSetArguments();
+            return;
+        }
         $instr = $this->getInstruction();
-        Log::log('inst: ' . $instr);
         $SFParenthesis = false;
         $SFWhitespace = false;
         $word = '';
@@ -112,49 +117,40 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
 
             $word .= $letter;
         }
-        Log::log('Arguments:');
-        var_dump($arguments);
         $this->setArgumentBlocks($arguments);
     }
 
     public function isMultiLine(): bool
     {
-        return $this->subtype == 'parenthesis:brackets' || $this->subtype == 'no-parenthesis:brackets';
+        return $this->getSubtype() == self::PARENTHESIS . ":" . self::BRACKETS || $this->getSubtype() == self::NO_PARENTHESIS . ':' . self::BRACKETS;
     }
 
     protected function findEnd(int $start):? int
     {
-        Log::log("Start search for end", 1);
-        Log::increaseIndent();
         $searchForEnd = false;
         $subEnd = null;
         for ($i=$start + 1; $i < strlen(self::$content); $i++) {
             $letter = self::$content[$i];
-            Log::log("Letter " . $letter, 2);
 
             if ($searchForEnd && ($this->endChars[$letter] ?? false)) {
-                Log::log("End char found, setting the end...", 2);
                 $subEnd = $i - 1;
                 $this->setCaret($i - 1);
                 break;
             }
 
             if (!$searchForEnd && $letter == '{') {
-                Log::log("Letter is bracket! Multi line function.", 2);
-                $this->subtype .= ':brackets';
+                $this->setSubtype($this->getSubtype() . ':' . self::BRACKETS);
                 $subEnd = $i + 1;
                 $this->setCaret($i + 1);
                 break;
             }
 
             if (!$searchForEnd && !Validate::isWhitespace($letter)) {
-                Log::log("Found non white space and not bracket. One line arrow method", 2);
-                $this->subtype .= ':no-brackets';
+                $this->setSubtype($this->getSubtype() . ':' . self::NO_BRACKETS);
                 $searchForEnd = true;
                 continue;
             }
         }
-        Log::decreaseIndent();
         return $subEnd;
     }
 
@@ -163,13 +159,37 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
         $searchForBracketsStart  = false;
         $searchForNextWhiteSpace = false;
         $subStart = null;
-
+        $ignoreParenthesis = 0;
         for ($i=$start - 2; $i >= 0; $i--) {
             $letter = self::$content[$i];
+            if (
+                ($startsTemplate = Validate::isTemplateLiteralLandmark($letter, ''))
+                || Validate::isStringLandmark($letter, '')
+            ) {
+                $i = $this->skipString($i - 1, self::$content, $startsTemplate, true);
+                if (!isset(self::$content[$i])) {
+                    break;
+                }
+                $letter = self::$content[$i];
+            }
 
             if ($letter == ';') {
                 $subStart = $i + 1;
                 break;
+            }
+
+            if ($searchForBracketsStart && $letter == ')') {
+                $ignoreParenthesis++;
+                continue;
+            }
+
+            if ($ignoreParenthesis > 0 && $letter == '(') {
+                $ignoreParenthesis--;
+                continue;
+            }
+
+            if ($ignoreParenthesis > 0) {
+                continue;
             }
 
             if (!$searchForBracketsStart && $letter == ')') {
@@ -179,18 +199,18 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
 
             if ($searchForBracketsStart && $letter == '(') {
                 $subStart = $i;
-                $this->subtype = 'parenthesis';
+                $this->setSubtype(self::PARENTHESIS);
                 break;
             }
 
-            if (!$searchForNextWhiteSpace && !Validate::isWhitespace($letter)) {
+            if (!$searchForBracketsStart && !$searchForNextWhiteSpace && !Validate::isWhitespace($letter)) {
                 $searchForNextWhiteSpace = true;
                 continue;
             }
 
             if ($searchForNextWhiteSpace && Validate::isWhitespace($letter)) {
                 $subStart = $i + 1;
-                $this->subtype = 'no-parenthesis';
+                $this->setSubtype(self::NO_PARENTHESIS);
                 break;
             }
         }

@@ -15,7 +15,7 @@ class DoWhileBlock extends ConditionBlock implements Contract\Block
     protected function getArgs(): string
     {
         return $this->replaceVariablesWithAliases(
-            $this->getCondition()
+            rtrim($this->getCondition(), ';')
         );
     }
 
@@ -76,7 +76,7 @@ class DoWhileBlock extends ConditionBlock implements Contract\Block
         foreach ($this->getBlocks() as $block) {
             $script .= $block->recreate();
         }
-
+        Log::log($this->getArgs());
         $script .= '}while(' . $this->getArgs() . ');';
 
         return $script;

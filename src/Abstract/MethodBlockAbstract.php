@@ -52,6 +52,9 @@ abstract class MethodBlockAbstract extends BlockAbstract
             ) {
                 $oldPos = $i;
                 $i = $this->skipString($i - 1, $instr, $startsTemplate, true);
+                if (!isset($instr[$i])) {
+                    break;
+                }
                 $word .= MB::strrev(\mb_substr($instr, $i + 1, $oldPos - $i));
                 $letter = $instr[$i];
             }
