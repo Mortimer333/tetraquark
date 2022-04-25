@@ -2,100 +2,107 @@ Mapping...
 =======================
 Creating aliases...
 =======================
-Aliases: functionName => a, b => b, ...args => c, 
+Aliases: length => a, 
 Recreating...
 =======================
-Block: Tetraquark\Block\FunctionBlock
-Subtype: function
-Instruction: function functionName(...args) {
-Instruction Start: -1
-Caret: 36
-Name: `functionName`
-Arguments: [1] `
-  Block: Tetraquark\Block\UndefinedBlock
-  Subtype: 
-  Instruction: ...args
-  Instruction Start: -1
-  Caret: 6
-  Name: `...args`
-  Alias: `c`
-  =======
-Alias: `a`
-=======
 Block: Tetraquark\Block\VariableBlock
 Subtype: let
-Instruction: let b =
-Instruction Start: 41
-Caret: 93
-Name: `b`
+Instruction: let length =
+Instruction Start: 0
+Caret: 14
+Name: `length`
 Value: ``
-Alias: `b`
+Alias: `a`
 =======
-  Block: Tetraquark\Block\ArrayBlock
-  Subtype: [
-  Instruction: 
-  Instruction Start: 49
-  Caret: 91
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  2
+  Instruction Start: 12
+  Caret: 14
   Name: ``
   Alias: ``
   =======
-    Block: Tetraquark\Block\SpreadBlock
-    Subtype: ...
-    Instruction: ...
-    Instruction Start: 56
-    Caret: 58
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction: var1
-    Instruction Start: 54
-    Caret: 58
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ArrayItemSeperatorBlock
-    Subtype: ,
-    Instruction: 
-    Instruction Start: 63
-    Caret: 63
-    Name: ``
-    Alias: ``
-    =======
+Block: Tetraquark\Block\SwitchBlock
+Subtype: switch
+Instruction: switch (length) {
+Instruction Start: 17
+Caret: 151
+Name: ``
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: length
+  Instruction Start: -1
+  Caret: 5
+  Name: ``
+  Alias: ``
+  =======
+Alias: ``
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: \r\n    case 1:
+  Instruction Start: 41
+  Caret: 54
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 47
+  Caret: 54
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 54
+  Caret: 71
+  Name: ``
+  Alias: ``
+  =======
     Block: Tetraquark\Block\StringBlock
     Subtype: 
-    Instruction: 'asd'
-    Instruction Start: 70
-    Caret: 75
+    Instruction: 'Obj is one'
+    Instruction Start: 59
+    Caret: 71
     Name: ``
     Alias: ``
     =======
-    Block: Tetraquark\Block\ArrayItemSeperatorBlock
-    Subtype: ,
-    Instruction: 
-    Instruction Start: 75
-    Caret: 75
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\SpreadBlock
-    Subtype: ...
-    Instruction: ...
-    Instruction Start: 82
-    Caret: 84
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\UndefinedBlock
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: \r\n        break;\r\n    default:\r\n        
+  Instruction Start: 79
+  Caret: 119
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 112
+  Caret: 119
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 119
+  Caret: 148
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\StringBlock
     Subtype: 
-    Instruction: var2\r\n
-    Instruction Start: 85
-    Caret: 91
+    Instruction: 'Obj is bigger then one'
+    Instruction Start: 124
+    Caret: 148
     Name: ``
     Alias: ``
     =======
-Duration: 0.003s
+Duration: 0.002s
 
 
-function a(...args){}let b=[...var1,'asd',...var2];
+let a=2;switch(a){case 1: console.log('Obj is one');break; default: console.log('Obj is bigger then one');}
