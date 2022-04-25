@@ -1,3 +1,4 @@
+let whileLooped = 10;
 do {
     whileLooped--;
     console.log(whileLooped);

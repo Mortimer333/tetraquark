@@ -14,6 +14,7 @@ class DoWhileBlock extends ConditionBlock implements Contract\Block
 
     protected function getArgs(): string
     {
+        Log::log($this->getCondition());
         return $this->replaceVariablesWithAliases(
             rtrim($this->getCondition(), ';')
         );
@@ -40,9 +41,24 @@ class DoWhileBlock extends ConditionBlock implements Contract\Block
         $sFConditionEnd = false;
         $condStart = null;
         $condEnd = null;
+        $parenthesisOpened = 0;
         for ($i=$this->getCaret(); $i < \mb_strlen(self::$content); $i++) {
             $letter = self::$content[$i];
             if (Validate::isWhitespace($letter)) {
+                continue;
+            }
+
+            if ($parenthesisOpened > 0 && $letter == ')') {
+                $parenthesisOpened--;
+                continue;
+            }
+
+            if ($parenthesisOpened > 0) {
+                continue;
+            }
+
+            if ($sFConditionEnd && $letter == '(') {
+                $parenthesisOpened++;
                 continue;
             }
 
@@ -61,7 +77,6 @@ class DoWhileBlock extends ConditionBlock implements Contract\Block
 
         $this->setCaret($condEnd);
         $this->setCondition(\mb_substr(self::$content, $condStart, $condEnd - $condStart));
-
         $condBlocks = $this->createSubBlocksWithContent($this->getCondition());
         $this->setCondBlocks($condBlocks);
         $this->setCondition(
