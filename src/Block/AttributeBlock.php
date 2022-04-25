@@ -21,8 +21,11 @@ class AttributeBlock extends VariableBlock implements Contract\Block
     public function objectify(int $start = 0)
     {
         $letterFound = false;
+        Log::log('before agument search: ' . $start . ", letter: " . self::$content[$start]);
         $start = $this->findAugment($start);
-        for ($i=$start; $i >= 0; $i--) {
+        Log::log('after agument search: ' . $start . ", letter: " . self::$content[$start] . ", augment: " . $this->augment);
+
+        for ($i=$start - 1; $i >= 0; $i--) {
             $letter = self::$content[$i];
             if ($letterFound && Validate::isWhitespace($letter)) {
                 $start = $i;
@@ -43,7 +46,12 @@ class AttributeBlock extends VariableBlock implements Contract\Block
             $instrEnd = $this->getInstructionStart() + \mb_strlen($this->getInstruction()) + 1;
             $this->setValue(trim(substr(self::$content, $instrEnd, $this->getCaret() - $instrEnd)));
         }
+
         $this->findAndSetName($this->getSubtype() . ' ', $this->instructionEnds);
+
+        if (\mb_strlen($this->augment) > 0) {
+            $this->setName(\mb_substr($this->getName(), 0, -\mb_strlen($this->augment)));
+        }
     }
 
     /**
@@ -101,5 +109,33 @@ class AttributeBlock extends VariableBlock implements Contract\Block
     public function getValue(): string
     {
         return $this->value;
+    }
+
+    public function recreate(): string
+    {
+        $script = $this->getSubType() . ' ' . $this->getAlias($this->getName());
+
+        if (\sizeof($this->getBlocks()) > 0 || \mb_strlen($this->getValue()) > 0) {
+            $script .= $this->augment . '=';
+        }
+
+        foreach ($this->getBlocks() as $block) {
+            $script .= $block->recreate();
+        }
+
+        $value = $this->getValue();
+        if (\mb_strlen($value) > 0) {
+            $script .= $this->replaceVariablesWithAliases($value);
+        }
+        $scriptLastLetter = $script[\mb_strlen($script) - 1];
+        $addSemiColon = [
+            ';' => false,
+            ',' => false
+        ];
+
+        if ($addSemiColon[$scriptLastLetter] ?? true) {
+            $script .= ';';
+        }
+        return $script;
     }
 }

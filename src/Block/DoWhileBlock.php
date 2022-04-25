@@ -53,14 +53,15 @@ class DoWhileBlock extends ConditionBlock implements Contract\Block
                 continue;
             }
 
-            if ($parenthesisOpened > 0) {
-                continue;
-            }
-
             if ($sFConditionEnd && $letter == '(') {
                 $parenthesisOpened++;
                 continue;
             }
+            
+            if ($parenthesisOpened > 0) {
+                continue;
+            }
+
 
             if (!$sFConditionEnd && $letter == '(') {
                 $sFConditionEnd = true;

@@ -21,15 +21,31 @@ abstract class ConditionBlockAbstract extends BlockAbstract
 
     protected function setConditionAndInstruction(int $start)
     {
-        $actualStart = $start - \mb_strlen($this->getCondType()) - 1;
+        $actualStart = $start - \mb_strlen($this->getCondType());
         $condStart = null;
         $condEnd   = null;
         $end       = null;
+        $parenthesisOpen = 0;
         for ($i=$start; $i < \mb_strlen(self::$content); $i++) {
             $letter = self::$content[$i];
             if (Validate::isWhitespace($letter)) {
                 continue;
             }
+
+            if ($parenthesisOpen > 0 && $letter == ')') {
+                $parenthesisOpen--;
+                continue;
+            }
+
+            if (!\is_null($condStart) && $letter == '(') {
+                $parenthesisOpen++;
+                continue;
+            }
+
+            if ($parenthesisOpen > 0) {
+                continue;
+            }
+
 
             if (\is_null($condStart) && $letter !== '(') {
                 throw new Exception("Couldn't find start of parenthesis of condition at letter $i", 404);
