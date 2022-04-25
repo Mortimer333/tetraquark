@@ -2,143 +2,100 @@ Mapping...
 =======================
 Creating aliases...
 =======================
-Aliases: functionName => a, functionName2 => b,
+Aliases: functionName => a, b => b, ...args => c, 
 Recreating...
 =======================
 Block: Tetraquark\Block\FunctionBlock
 Subtype: function
-Instruction: function functionName() {
+Instruction: function functionName(...args) {
 Instruction Start: -1
-Caret: 29
+Caret: 36
 Name: `functionName`
-Arguments: [0] `
+Arguments: [1] `
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: ...args
+  Instruction Start: -1
+  Caret: 6
+  Name: `...args`
+  Alias: `c`
+  =======
 Alias: `a`
 =======
-Block: Tetraquark\Block\FunctionBlock
-Subtype: function
-Instruction: function\r\nfunctionName2\r\n  ()\r\n  {
-Instruction Start: 33
-Caret: 72
-Name: `functionName2`
-Arguments: [0] `
+Block: Tetraquark\Block\VariableBlock
+Subtype: let
+Instruction: let b =
+Instruction Start: 41
+Caret: 93
+Name: `b`
+Value: ``
 Alias: `b`
 =======
-Block: Tetraquark\Block\FunctionBlock
-Subtype: function
-Instruction: function functionName(){
-Instruction Start: 76
-Caret: 101
-Name: `functionName`
-Arguments: [0] `
-Alias: `a`
-=======
-Block: Tetraquark\Block\FunctionBlock
-Subtype: anonymous:function
-Instruction: function (){
-Instruction Start: 105
-Caret: 118
-Name: ``
-Arguments: [0] `
-Alias: ``
-=======
-Block: Tetraquark\Block\FunctionBlock
-Subtype: anonymous:function
-Instruction: function\r\n()\r\n{
-Instruction Start: 120
-Caret: 136
-Name: ``
-Arguments: [0] `
-Alias: ``
-=======
-Block: Tetraquark\Block\UndefinedBlock
-Subtype:
-Instruction: \r\n\r\nfunctionName
-Instruction Start: 120
-Caret: 136
-Name: ``
-Alias: ``
-=======
-Block: Tetraquark\Block\CallerBlock
-Subtype: (
-Instruction: ()
-Instruction Start: 153
-Caret: 155
-Name: ``
-Alias: ``
-=======
-Block: Tetraquark\Block\UndefinedBlock
-Subtype:
-Instruction: \nfunctionName\r\n
-Instruction Start: 140
-Caret: 155
-Name: ``
-Alias: ``
-=======
-Block: Tetraquark\Block\CallerBlock
-Subtype: (
-Instruction: ()
-Instruction Start: 171
-Caret: 173
-Name: ``
-Alias: ``
-=======
-Block: Tetraquark\Block\UndefinedBlock
-Subtype:
-Instruction: \nfunctionName2
-Instruction Start: 155
-Caret: 173
-Name: ``
-Alias: ``
-=======
-Block: Tetraquark\Block\CallerBlock
-Subtype: (
-Instruction: ()
-Instruction Start: 192
-Caret: 194
-Name: ``
-Alias: ``
-=======
-Block: Tetraquark\Block\ScopeBlock
-Subtype: {
-Instruction:
-Instruction Start: 198
-Caret: 247
-Name: ``
-Alias: ``
-=======
-  Block: Tetraquark\Block\UndefinedBlock
-  Subtype:
-  Instruction: \r\n    functionName
-  Instruction Start: 180
-  Caret: 198
+  Block: Tetraquark\Block\ArrayBlock
+  Subtype: [
+  Instruction: 
+  Instruction Start: 49
+  Caret: 91
   Name: ``
   Alias: ``
   =======
-  Block: Tetraquark\Block\CallerBlock
-  Subtype: (
-  Instruction: ()
-  Instruction Start: 217
-  Caret: 219
-  Name: ``
-  Alias: ``
-  =======
-  Block: Tetraquark\Block\UndefinedBlock
-  Subtype:
-  Instruction: \n    functionName\r\n
-  Instruction Start: 196
-  Caret: 219
-  Name: ``
-  Alias: ``
-  =======
-  Block: Tetraquark\Block\CallerBlock
-  Subtype: (
-  Instruction: ()
-  Instruction Start: 243
-  Caret: 245
-  Name: ``
-  Alias: ``
-  =======
-Duration: 0.002s
+    Block: Tetraquark\Block\SpreadBlock
+    Subtype: ...
+    Instruction: ...
+    Instruction Start: 56
+    Caret: 58
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: var1
+    Instruction Start: 54
+    Caret: 58
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ArrayItemSeperatorBlock
+    Subtype: ,
+    Instruction: 
+    Instruction Start: 63
+    Caret: 63
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: 'asd'
+    Instruction Start: 70
+    Caret: 75
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ArrayItemSeperatorBlock
+    Subtype: ,
+    Instruction: 
+    Instruction Start: 75
+    Caret: 75
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\SpreadBlock
+    Subtype: ...
+    Instruction: ...
+    Instruction Start: 82
+    Caret: 84
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: var2\r\n
+    Instruction Start: 85
+    Caret: 91
+    Name: ``
+    Alias: ``
+    =======
+Duration: 0.003s
 
 
-function a(){}function b(){}function a(){}a();a();b();{a();a();};
+function a(...args){}let b=[...var1,'asd',...var2];

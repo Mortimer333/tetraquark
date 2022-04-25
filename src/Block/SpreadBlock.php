@@ -10,7 +10,7 @@ class SpreadBlock extends Block implements Contract\Block
     {
         $this->setInstruction('...');
         $this->setName('');
-        $this->setInstructionStart($start);
+        $this->setInstructionStart($start - 2);
         $this->setCaret($start);
     }
 
