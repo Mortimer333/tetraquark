@@ -49,7 +49,7 @@ class NewClassBlock extends MethodBlock implements Contract\Block
             $end = $i;
             $this->setClassName(\mb_substr(self::$content, $start, $end - $start));
         }
-        Log::log($this->getClassName());
+
         $this->setCaret($end);
 
         $instruction = \mb_substr(self::$content, $start, $end - $start);

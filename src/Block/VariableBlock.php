@@ -46,7 +46,7 @@ class VariableBlock extends VariableBlockAbstract implements Contract\Block
         }
 
         $this->findInstructionEnd($start, $this->subtype, $this->instructionEnds);
-        Log::log('Found instruction: ' . $this->getInstruction(), 3);
+
         $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
         if (\sizeof($this->blocks) == 0) {
             $instrEnd = $this->getInstructionStart() + \mb_strlen($this->getInstruction());

@@ -103,7 +103,6 @@ class BracketChainLinkBlock extends Block implements Contract\Block
             }
 
             if ($letter != '=' || $letter == '=' && self::$content[$i + 1] == '=') {
-                Log::log($getSubBlocks ? "yest" : 'no');
                 if (!$getSubBlocks) {
                     $this->setCaret($start);
                     $this->blocks = array_merge($this->blocks, $this->createSubBlocks());

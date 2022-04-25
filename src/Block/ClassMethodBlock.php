@@ -17,7 +17,6 @@ class ClassMethodBlock extends MethodBlock implements Contract\Block
     public function objectify(int $start = 0)
     {
         $searchForWhitespace = false;
-        Log::increaseIndent();
         // Search for the name of the function
         for ($i=$start - 1; $i >= 0; $i--) {
             $letter = self::$content[$i];
@@ -29,7 +28,6 @@ class ClassMethodBlock extends MethodBlock implements Contract\Block
                 $searchForWhitespace = true;
             }
         }
-        Log::decreaseIndent();
         $this->findMethodEnd($start);
         $this->findAndSetName('', ['(' => true]);
         $this->blocks = array_merge($this->blocks, $this->createSubBlocks());

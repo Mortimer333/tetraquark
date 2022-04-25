@@ -22,18 +22,14 @@ class AttributeBlock extends VariableBlock implements Contract\Block
     {
         $letterFound = false;
         $start = $this->findAugment($start);
-        Log::log('start: ' . $start . ", let: " . self::$content[$start - 1] . self::$content[$start] . self::$content[$start + 1]);
         for ($i=$start; $i >= 0; $i--) {
             $letter = self::$content[$i];
-            Log::log($letter);
             if ($letterFound && Validate::isWhitespace($letter)) {
-                Log::log('Found whitespace  after letter');
                 $start = $i;
                 break;
             }
 
             if (!Validate::isWhitespace($letter)) {
-                Log::log('Not whitespace, starting search for letter');
                 $letterFound = true;
             }
 

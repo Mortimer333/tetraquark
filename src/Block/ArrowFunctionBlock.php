@@ -66,9 +66,7 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
 
     protected function findAndSetArguments(): void
     {
-        Log::log($this->getInstruction() . ', ' . $this->getSubtype());
         if ($this->getSubtype() === self::PARENTHESIS . ':' . self::NO_BRACKETS || $this->getSubtype() === self::PARENTHESIS . ':' . self::BRACKETS) {
-            Log::log('a');
             parent::findAndSetArguments();
             return;
         }
