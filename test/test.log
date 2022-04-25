@@ -1,334 +1,144 @@
 Mapping...
-before agument search: 4, letter: =
-after agument search: 3, letter: +, augment: +
 =======================
 Creating aliases...
 =======================
-Aliases: objSoloTest => a, start => b, reverse => c, value => d, modifier => e, strlen => f, str => g, to => h, i => i, 
+Aliases: functionName => a, functionName2 => b,
 Recreating...
 =======================
-Block: Tetraquark\Block\VariableBlock
-Subtype: let
-Instruction: let objSoloTest =
-Instruction Start: 0
-Caret: 25
-Name: `objSoloTest`
-Value: ``
-Alias: `a`
-=======
-  Block: Tetraquark\Block\ArrayBlock
-  Subtype: [
-  Instruction: 
-  Instruction Start: 18
-  Caret: 22
-  Name: ``
-  Alias: ``
-  =======
-    Block: Tetraquark\Block\StringBlock
-    Subtype: 
-    Instruction: 'a'
-    Instruction Start: 19
-    Caret: 22
-    Name: ``
-    Alias: ``
-    =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: let
-Instruction: let start =
-Instruction Start: 26
-Caret: 39
-Name: `start`
-Value: ``
-Alias: `b`
-=======
-  Block: Tetraquark\Block\UndefinedBlock
-  Subtype: 
-  Instruction:  1
-  Instruction Start: 37
-  Caret: 39
-  Name: ``
-  Alias: ``
-  =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: let
-Instruction: let reverse =
-Instruction Start: 42
-Caret: 61
-Name: `reverse`
-Value: ``
-Alias: `c`
-=======
-  Block: Tetraquark\Block\UndefinedBlock
-  Subtype: 
-  Instruction:  false
-  Instruction Start: 55
-  Caret: 61
-  Name: ``
-  Alias: ``
-  =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: let
-Instruction: let value =
-Instruction Start: 64
-Caret: 81
-Name: `value`
-Value: ``
-Alias: `d`
-=======
-  Block: Tetraquark\Block\StringBlock
-  Subtype: 
-  Instruction: 'asd'
-  Instruction Start: 76
-  Caret: 81
-  Name: ``
-  Alias: ``
-  =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: let
-Instruction: let modifier =
-Instruction Start: 84
-Caret: 100
-Name: `modifier`
-Value: ``
-Alias: `e`
-=======
-  Block: Tetraquark\Block\UndefinedBlock
-  Subtype: 
-  Instruction:  1
-  Instruction Start: 98
-  Caret: 100
-  Name: ``
-  Alias: ``
-  =======
 Block: Tetraquark\Block\FunctionBlock
 Subtype: function
-Instruction: function strlen(str) {
-Instruction Start: 102
-Caret: 151
-Name: `strlen`
-Arguments: [1] `
-  Block: Tetraquark\Block\UndefinedBlock
-  Subtype: 
-  Instruction: str
-  Instruction Start: -1
-  Caret: 2
-  Name: `str`
-  Alias: `g`
-  =======
-Alias: `f`
+Instruction: function functionName() {
+Instruction Start: -1
+Caret: 29
+Name: `functionName`
+Arguments: [0] `
+Alias: `a`
 =======
-  Block: Tetraquark\Block\UndefinedBlock
-  Subtype: 
-  Instruction: \r\n    return 
-  Instruction Start: 128
-  Caret: 141
-  Name: ``
-  Alias: ``
-  =======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: first
-  Instruction: str
-  Instruction Start: 138
-  Caret: 141
-  Name: ``
-  Alias: ``
-  =======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: .
-  Instruction: length
-  Instruction Start: 141
-  Caret: 147
-  Name: ``
-  Alias: ``
-  =======
-Block: Tetraquark\Block\ForBlock
-Subtype: for
-Instruction: for (var to = 0; to < objSoloTest.length; to++) {
-Instruction Start: 156
-Caret: 242
+Block: Tetraquark\Block\FunctionBlock
+Subtype: function
+Instruction: function\r\nfunctionName2\r\n  ()\r\n  {
+Instruction Start: 33
+Caret: 72
+Name: `functionName2`
+Arguments: [0] `
+Alias: `b`
+=======
+Block: Tetraquark\Block\FunctionBlock
+Subtype: function
+Instruction: function functionName(){
+Instruction Start: 76
+Caret: 101
+Name: `functionName`
+Arguments: [0] `
+Alias: `a`
+=======
+Block: Tetraquark\Block\FunctionBlock
+Subtype: anonymous:function
+Instruction: function (){
+Instruction Start: 105
+Caret: 118
 Name: ``
-  Block: Tetraquark\Block\VariableBlock
-  Subtype: var
-  Instruction: var to =
-  Instruction Start: 0
-  Caret: 9
-  Name: `to`
-  Value: ``
-  Alias: `h`
-  =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction:  0
-    Instruction Start: 7
-    Caret: 9
-    Name: ``
-    Alias: ``
-    =======
-  Block: Tetraquark\Block\UndefinedBlock
-  Subtype: 
-  Instruction:  to < 
-  Instruction Start: 11
-  Caret: 17
-  Name: ``
-  Alias: ``
-  =======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: first
-  Instruction: objSoloTest
-  Instruction Start: 6
-  Caret: 17
-  Name: ``
-  Alias: ``
-  =======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: .
-  Instruction: length
-  Instruction Start: 17
-  Caret: 24
-  Name: ``
-  Alias: ``
-  =======
-  Block: Tetraquark\Block\UndefinedBlock
-  Subtype: 
-  Instruction:  to++
-  Instruction Start: -1
-  Caret: 4
-  Name: ``
-  Alias: ``
-  =======
+Arguments: [0] `
 Alias: ``
 =======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: first
-  Instruction: console
-  Instruction Start: 211
-  Caret: 218
-  Name: ``
-  Alias: ``
-  =======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: end:method
-  Instruction: log
-  Instruction Start: 218
-  Caret: 238
-  Name: ``
-  Alias: ``
-  =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction: objSoloTest
-    Instruction Start: 211
-    Caret: 222
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\BracketChainLinkBlock
-    Subtype: [
-    Instruction: 
-    Instruction Start: 234
-    Caret: 237
-    Name: ``
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction: to
-      Instruction Start: 235
-      Caret: 237
-      Name: ``
-      Alias: ``
-      =======
-Block: Tetraquark\Block\ForBlock
-Subtype: for
-Instruction: for (let i=start; (!reverse && i < strlen(value)) || (reverse && i >= 0); i += modifier) {
-Instruction Start: 245
-Caret: 362
+Block: Tetraquark\Block\FunctionBlock
+Subtype: anonymous:function
+Instruction: function\r\n()\r\n{
+Instruction Start: 120
+Caret: 136
 Name: ``
-  Block: Tetraquark\Block\VariableBlock
-  Subtype: let
-  Instruction: let i=
-  Instruction Start: 0
-  Caret: 10
-  Name: `i`
-  Value: ``
-  Alias: `i`
-  =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction: start
-    Instruction Start: 5
-    Caret: 10
-    Name: ``
-    Alias: ``
-    =======
-  Block: Tetraquark\Block\CallerBlock
-  Subtype: (
-  Instruction: (!reverse && i < strlen(value))
-  Instruction Start: 1
-  Caret: 32
-  Name: ``
-  Alias: ``
-  =======
+Arguments: [0] `
+Alias: ``
+=======
+Block: Tetraquark\Block\UndefinedBlock
+Subtype:
+Instruction: \r\n\r\nfunctionName
+Instruction Start: 120
+Caret: 136
+Name: ``
+Alias: ``
+=======
+Block: Tetraquark\Block\CallerBlock
+Subtype: (
+Instruction: ()
+Instruction Start: 153
+Caret: 155
+Name: ``
+Alias: ``
+=======
+Block: Tetraquark\Block\UndefinedBlock
+Subtype:
+Instruction: \nfunctionName\r\n
+Instruction Start: 140
+Caret: 155
+Name: ``
+Alias: ``
+=======
+Block: Tetraquark\Block\CallerBlock
+Subtype: (
+Instruction: ()
+Instruction Start: 171
+Caret: 173
+Name: ``
+Alias: ``
+=======
+Block: Tetraquark\Block\UndefinedBlock
+Subtype:
+Instruction: \nfunctionName2
+Instruction Start: 155
+Caret: 173
+Name: ``
+Alias: ``
+=======
+Block: Tetraquark\Block\CallerBlock
+Subtype: (
+Instruction: ()
+Instruction Start: 192
+Caret: 194
+Name: ``
+Alias: ``
+=======
+Block: Tetraquark\Block\ScopeBlock
+Subtype: {
+Instruction:
+Instruction Start: 198
+Caret: 247
+Name: ``
+Alias: ``
+=======
   Block: Tetraquark\Block\UndefinedBlock
-  Subtype: 
-  Instruction: || 
-  Instruction Start: 29
-  Caret: 32
+  Subtype:
+  Instruction: \r\n    functionName
+  Instruction Start: 180
+  Caret: 198
   Name: ``
   Alias: ``
   =======
   Block: Tetraquark\Block\CallerBlock
   Subtype: (
-  Instruction: (reverse && i >= 0)
-  Instruction Start: 36
-  Caret: 55
+  Instruction: ()
+  Instruction Start: 217
+  Caret: 219
   Name: ``
   Alias: ``
   =======
-  Block: Tetraquark\Block\AttributeBlock
-  Subtype: 
-  Instruction:  i +=
-  Instruction Start: 0
-  Caret: 13
-  Name: `i`
-  Value: ``
-  Alias: `i`
-  =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction:  modifier
-    Instruction Start: 4
-    Caret: 13
-    Name: ``
-    Alias: ``
-    =======
-Alias: ``
-=======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: first
-  Instruction: console
-  Instruction Start: 341
-  Caret: 348
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype:
+  Instruction: \n    functionName\r\n
+  Instruction Start: 196
+  Caret: 219
   Name: ``
   Alias: ``
   =======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: end:method
-  Instruction: log
-  Instruction Start: 348
-  Caret: 359
+  Block: Tetraquark\Block\CallerBlock
+  Subtype: (
+  Instruction: ()
+  Instruction Start: 243
+  Caret: 245
   Name: ``
   Alias: ``
   =======
-    Block: Tetraquark\Block\StringBlock
-    Subtype: 
-    Instruction: 'test'
-    Instruction Start: 353
-    Caret: 359
-    Name: ``
-    Alias: ``
-    =======
-Duration: 0.005s
+Duration: 0.002s
 
 
-let a=['a'];let b= 1;let c= false;let d='asd';let e= 1;function f(g){ return g.length;}for(var h= 0; h< a.length; h++){console.log(a[h]);}for(let i=b;(!c&& i< f(d))||(c&& i>= 0); i+= e){console.log('test');}
+function a(){}function b(){}function a(){}a();a();b();{a();a();};
