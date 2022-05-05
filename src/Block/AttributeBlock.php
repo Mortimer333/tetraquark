@@ -21,9 +21,7 @@ class AttributeBlock extends VariableBlock implements Contract\Block
     public function objectify(int $start = 0)
     {
         $letterFound = false;
-        Log::log('before agument search: ' . $start . ", letter: " . self::$content[$start]);
         $start = $this->findAugment($start);
-        Log::log('after agument search: ' . $start . ", letter: " . self::$content[$start] . ", augment: " . $this->augment);
 
         for ($i=$start - 1; $i >= 0; $i--) {
             $letter = self::$content[$i];

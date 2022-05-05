@@ -14,7 +14,7 @@ abstract class VariableBlockAbstract extends BlockAbstract
         }
 
         foreach ($this->getBlocks() as $block) {
-            $script .= $block->recreate();
+            $script .= rtrim(trim($block->recreate()), ';');
         }
 
         $value = $this->getValue();

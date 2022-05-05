@@ -85,4 +85,9 @@ class Validate
     {
         return self::$special[$letter] ?? false;
     }
+
+    public static function isSymbol(string $letter): bool
+    {
+        return !preg_match('/^[a-zA-Z0-9]*$/', $letter) && !self::isWhitespace($letter);
+    }
 }

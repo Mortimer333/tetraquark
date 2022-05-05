@@ -1,108 +1,307 @@
+Prepare file...
+var var1 = 'asd';
+let var2 = 'asd';
+const var3 = 'asd';
+let let2 = {
+ const: 'asd',
+ let : 2 + 2,
+ var: [4 + 21]
+}
+const func = () => {};
+let func2 = function() {};
+const equasion = 2 +
+ 4 - 2
+ /2;
+// Variable doesn't actually end at new line. It end at any character but if this char is `;` then it also adds it to its definition
+var var1 = 'asd';\nlet var2 = 'asd';\nconst var3 = 'asd';\nlet let2 = {\n const: 'asd',\n let : 2 + 2,\n var: [4 + 21]\n}\nconst func = () => {};\nlet func2 = function() {};\nconst equasion = 2 +\n 4 - 2\n /2;\n// Variable doesn't actually end at new line. It end at any character but if this char is `;` then it also adds it to its definition\n
 Mapping...
+Start: 93
+Start search for end:  
+letter:  
+not searching for white space, but whitespace it is, skip: 94
+letter: 2
+Start search for whitespace: 95
+letter: ,
+is semi, end hrer: 96
+=================
+Start: 107
+Start search for end:  
+letter:  
+not searching for white space, but whitespace it is, skip: 108
+letter: 2
+Start search for whitespace: 109
+letter: 1
+letter: ]
+is semi, end hrer: 111
+=================
+Start: 184
+Start search for end: \n
+letter: \n
+not searching for white space, but whitespace it is, skip: 185
+letter:  
+not searching for white space, but whitespace it is, skip: 186
+letter: 4
+Start search for whitespace: 187
+letter:  
+End found:  , 188
+=================
+Start: 189
+Start search for end:  
+letter:  
+not searching for white space, but whitespace it is, skip: 190
+letter: 2
+Start search for whitespace: 191
+letter: \n
+End found: \n, 192
+=================
+Start: 194
+Start search for end: 2
+letter: 2
+Start search for whitespace: 195
+letter: ;
+is semi, end hrer: 196
+=================
 =======================
 Creating aliases...
 =======================
-Aliases: length => a, 
+Aliases: var1 => a, var2 => b, var3 => c, let2 => d, func => e, func2 => f, equasion => g, const => h, let => i, var => j, 
 Recreating...
 =======================
 Block: Tetraquark\Block\VariableBlock
-Subtype: let
-Instruction: let length =
+Subtype: var
+Instruction: var var1 =
 Instruction Start: 0
-Caret: 14
-Name: `length`
+Caret: 16
+Name: `var1`
 Value: ``
 Alias: `a`
 =======
-  Block: Tetraquark\Block\UndefinedBlock
+  Block: Tetraquark\Block\StringBlock
   Subtype: 
-  Instruction:  2
-  Instruction Start: 12
-  Caret: 14
+  Instruction: 'asd'
+  Instruction Start: 11
+  Caret: 16
   Name: ``
   Alias: ``
   =======
-Block: Tetraquark\Block\SwitchBlock
-Subtype: switch
-Instruction: switch (length) {
-Instruction Start: 17
-Caret: 151
-Name: ``
-  Block: Tetraquark\Block\UndefinedBlock
+Block: Tetraquark\Block\VariableBlock
+Subtype: let
+Instruction: let var2 =
+Instruction Start: 18
+Caret: 34
+Name: `var2`
+Value: ``
+Alias: `b`
+=======
+  Block: Tetraquark\Block\StringBlock
   Subtype: 
-  Instruction: length
-  Instruction Start: -1
-  Caret: 5
+  Instruction: 'asd'
+  Instruction Start: 29
+  Caret: 34
   Name: ``
   Alias: ``
   =======
-Alias: ``
+Block: Tetraquark\Block\VariableBlock
+Subtype: const
+Instruction: const var3 =
+Instruction Start: 36
+Caret: 54
+Name: `var3`
+Value: ``
+Alias: `c`
+=======
+  Block: Tetraquark\Block\StringBlock
+  Subtype: 
+  Instruction: 'asd'
+  Instruction Start: 49
+  Caret: 54
+  Name: ``
+  Alias: ``
+  =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: let
+Instruction: let let2 =
+Instruction Start: 56
+Caret: 114
+Name: `let2`
+Value: ``
+Alias: `d`
+=======
+  Block: Tetraquark\Block\ObjectBlock
+  Subtype: {
+  Instruction: 
+  Instruction Start: 67
+  Caret: 113
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\ObjectValueBlock
+    Subtype: :
+    Instruction: const
+    Instruction Start: 68
+    Caret: 82
+    Name: `const`
+    Alias: `h`
+    =======
+      Block: Tetraquark\Block\StringBlock
+      Subtype: 
+      Instruction: 'asd'
+      Instruction Start: 77
+      Caret: 82
+      Name: ``
+      Alias: ``
+      =======
+    Block: Tetraquark\Block\ObjectValueBlock
+    Subtype: :
+    Instruction: let
+    Instruction Start: 83
+    Caret: 96
+    Name: `let`
+    Alias: `i`
+    =======
+      Block: Tetraquark\Block\UndefinedBlock
+      Subtype: 
+      Instruction:  2 
+      Instruction Start: 86
+      Caret: 89
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\SymbolBlock
+      Subtype: +
+      Instruction: + 2
+      Instruction Start: 93
+      Caret: 95
+      Name: ``
+      Alias: ``
+      =======
+    Block: Tetraquark\Block\ObjectValueBlock
+    Subtype: :
+    Instruction: var
+    Instruction Start: 97
+    Caret: 112
+    Name: `var`
+    Alias: `j`
+    =======
+      Block: Tetraquark\Block\ArrayBlock
+      Subtype: [
+      Instruction: 
+      Instruction Start: 104
+      Caret: 111
+      Name: ``
+      Alias: ``
+      =======
+        Block: Tetraquark\Block\UndefinedBlock
+        Subtype: 
+        Instruction: 4 
+        Instruction Start: 102
+        Caret: 104
+        Name: ``
+        Alias: ``
+        =======
+        Block: Tetraquark\Block\SymbolBlock
+        Subtype: +
+        Instruction: + 21
+        Instruction Start: 107
+        Caret: 110
+        Name: ``
+        Alias: ``
+        =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: const
+Instruction: const func =
+Instruction Start: 115
+Caret: 137
+Name: `func`
+Value: ``
+Alias: `e`
+=======
+  Block: Tetraquark\Block\CallerBlock
+  Subtype: (
+  Instruction: 
+  Instruction Start: 128
+  Caret: 135
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\ArrowFunctionBlock
+    Subtype: parenthesis:brackets
+    Instruction: () => {
+    Instruction Start: 128
+    Caret: 135
+    Name: ``
+    Value: ``
+    Arguments: [0] `
+    Alias: ``
+    =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: let
+Instruction: let func2 =
+Instruction Start: 138
+Caret: 164
+Name: `func2`
+Value: ``
+Alias: `f`
+=======
+  Block: Tetraquark\Block\FunctionBlock
+  Subtype: anonymous:function
+  Instruction: function() {
+  Instruction Start: 149
+  Caret: 162
+  Name: ``
+  Arguments: [0] `
+  Alias: ``
+  =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: const
+Instruction: const equasion =
+Instruction Start: 165
+Caret: 197
+Name: `equasion`
+Value: ``
+Alias: `g`
 =======
   Block: Tetraquark\Block\UndefinedBlock
   Subtype: 
-  Instruction: \r\n    case 1:
-  Instruction Start: 41
-  Caret: 54
+  Instruction:  2 
+  Instruction Start: 177
+  Caret: 180
   Name: ``
   Alias: ``
   =======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: first
-  Instruction: console
-  Instruction Start: 47
-  Caret: 54
+  Block: Tetraquark\Block\SymbolBlock
+  Subtype: +
+  Instruction: +\n 4 
+  Instruction Start: 184
+  Caret: 188
   Name: ``
   Alias: ``
   =======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: end:method
-  Instruction: log
-  Instruction Start: 54
-  Caret: 71
+  Block: Tetraquark\Block\SymbolBlock
+  Subtype: -
+  Instruction: - 2\n
+  Instruction Start: 189
+  Caret: 192
   Name: ``
   Alias: ``
   =======
-    Block: Tetraquark\Block\StringBlock
-    Subtype: 
-    Instruction: 'Obj is one'
-    Instruction Start: 59
-    Caret: 71
-    Name: ``
-    Alias: ``
-    =======
-  Block: Tetraquark\Block\UndefinedBlock
-  Subtype: 
-  Instruction: \r\n        break;\r\n    default:\r\n        
-  Instruction Start: 79
-  Caret: 119
+  Block: Tetraquark\Block\SymbolBlock
+  Subtype: /
+  Instruction: /2
+  Instruction Start: 194
+  Caret: 195
   Name: ``
   Alias: ``
   =======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: first
-  Instruction: console
-  Instruction Start: 112
-  Caret: 119
-  Name: ``
-  Alias: ``
-  =======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: end:method
-  Instruction: log
-  Instruction Start: 119
-  Caret: 148
-  Name: ``
-  Alias: ``
-  =======
-    Block: Tetraquark\Block\StringBlock
-    Subtype: 
-    Instruction: 'Obj is bigger then one'
-    Instruction Start: 124
-    Caret: 148
-    Name: ``
-    Alias: ``
-    =======
-Duration: 0.002s
+Block: Tetraquark\Block\SingleCommentBlock
+Subtype: //
+Instruction: / Variable doesn't actually end at new line. It end at any c
+Instruction Start: 198
+Caret: 330
+Name: ``
+Alias: ``
+=======
+Duration: 0.005s
 
 
-let a=2;switch(a){case 1: console.log('Obj is one');break; default: console.log('Obj is bigger then one');}
+var a='asd';let b='asd';const c='asd';let d={h:'asd',i:2+ 2,j:[4+ 21]};const e=()=>{};let f=function(){};const g=2+ 4- 2/2;

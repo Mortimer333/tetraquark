@@ -11,8 +11,8 @@ $tetra = new Tetraquark();
 // $minified = $tetra->minify(__DIR__ . '/data/for.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
 // $minified = $tetra->minify(__DIR__ . '/data/function.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
 // $minified = $tetra->minify(__DIR__ . '/data/spread.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
-$minified = $tetra->minify(__DIR__ . '/data/switch.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
-// $minified = $tetra->minify(__DIR__ . '/data/variable.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
+// $minified = $tetra->minify(__DIR__ . '/data/switch.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
+$minified = $tetra->minify(__DIR__ . '/data/variable.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
 // $minified = $tetra->minify(__DIR__ . '/data/while.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
 
 // $minified = $tetra->minify(__DIR__ . '/data/single-function.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;

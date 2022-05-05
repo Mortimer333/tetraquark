@@ -2,7 +2,7 @@
 
 namespace Tetraquark\Trait;
 
-use \Tetraquark\{Block as Block};
+use \Tetraquark\{Block, Log, Validate};
 
 trait BlockMapsTrait
 {
@@ -21,7 +21,6 @@ trait BlockMapsTrait
                 'r' => [
                     ' '  => 'ForBlock',
                     "\n" => "ForBlock",
-                    "\r" => "ForBlock",
                     '('  => "ForBlock",
                 ]
             ],
@@ -34,7 +33,7 @@ trait BlockMapsTrait
                                     'n' => [
                                         ' '  => 'FunctionBlock',
                                         "\n" => "FunctionBlock",
-                                        "\r" => "FunctionBlock",
+                                        "("  => "FunctionBlock",
                                     ]
                                 ]
                             ]
@@ -56,7 +55,6 @@ trait BlockMapsTrait
                 't' => [
                     ' '  => 'VariableBlock',
                     "\n" => "VariableBlock",
-                    "\r" => "VariableBlock",
                 ]
             ]
         ],
@@ -67,7 +65,6 @@ trait BlockMapsTrait
                         't' => [
                             ' '  => 'VariableBlock',
                             "\n" => "VariableBlock",
-                            "\r" => "VariableBlock",
                         ]
                     ]
                 ]
@@ -78,7 +75,6 @@ trait BlockMapsTrait
                         's' => [
                             ' '  => 'ClassBlock',
                             "\n" => "ClassBlock",
-                            "\r" => "ClassBlock",
                         ]
                     ]
                 ]
@@ -89,7 +85,6 @@ trait BlockMapsTrait
                 'r' => [
                     ' '  => 'VariableBlock',
                     "\n" => "VariableBlock",
-                    "\r" => "VariableBlock",
                 ],
             ]
         ],
@@ -105,7 +100,6 @@ trait BlockMapsTrait
                 'w' => [
                     ' '  => 'NewClassBlock',
                     "\n" => "NewClassBlock",
-                    "\r" => "NewClassBlock",
                 ]
             ]
         ],
@@ -115,7 +109,6 @@ trait BlockMapsTrait
             'f' => [
                 ' '  => "IfBlock",
                 "\n" => "IfBlock",
-                "\r" => "IfBlock",
                 "("  => "IfBlock",
             ]
         ],
@@ -126,7 +119,6 @@ trait BlockMapsTrait
                         "e" => [
                             ' '  => 'WhileBlock',
                             "\n" => "WhileBlock",
-                            "\r" => "WhileBlock",
                             '('  => "WhileBlock",
                         ]
                     ]
@@ -141,7 +133,6 @@ trait BlockMapsTrait
                             "h" => [
                                 ' '  => 'SwitchBlock',
                                 "\n" => "SwitchBlock",
-                                "\r" => "SwitchBlock",
                                 '('  => "SwitchBlock",
                             ]
                         ]
@@ -153,13 +144,55 @@ trait BlockMapsTrait
             "o" => [
                 ' '  => 'DoWhileBlock',
                 "\n" => "DoWhileBlock",
-                "\r" => "DoWhileBlock",
                 '{'  => "DoWhileBlock",
             ]
         ],
+        "-" => [
+            "="       => "AttributeBlock",
+            "default" => "SymbolBlock",
+        ],
+        "+" => [
+            "="       => "AttributeBlock",
+            "default" => "SymbolBlock",
+        ],
+        "*" => [
+            "*"       => [
+                "="       => "AttributeBlock",
+                "default" => "SymbolBlock",
+            ],
+            "="       => "AttributeBlock",
+            "default" => "SymbolBlock",
+        ],
         "/" => [
-            "/" => "SingleCommentBlock",
-            "*" => "MultiCommentBlock",
+            "default" => "SymbolBlock",
+            "="       => "AttributeBlock",
+            "/"       => "SingleCommentBlock",
+            "*"       => "MultiCommentBlock",
+        ],
+        "%" => [
+            "="       => "AttributeBlock",
+            "default" => "SymbolBlock",
+        ],
+        "^" => [
+            "="       => "AttributeBlock",
+            "default" => "SymbolBlock",
+        ],
+        "|" => [
+            "="       => "AttributeBlock",
+            "default" => "SymbolBlock",
+        ],
+        "&" => [
+            "="       => "AttributeBlock",
+            "default" => "SymbolBlock",
+        ],
+        ">" => [
+            ">" => [
+                ">" => "SymbolBlock",
+            ],
+            "default" => "SymbolBlock",
+        ],
+        "<" => [
+            "<" => "SymbolBlock",
         ],
         "e" => [
             "l" => [
@@ -168,7 +201,6 @@ trait BlockMapsTrait
                         "{" => "ElseBlock",
                         ' '  => 'ElseBlock',
                         "\n" => "ElseBlock",
-                        "\r" => "ElseBlock",
                     ]
                 ]
             ]
@@ -223,16 +255,23 @@ trait BlockMapsTrait
             Block\ArrayBlock ::class => $this->arrayBlocksMap,
         ];
 
-
         $blocksMap = array_merge($blocksMap, $additionalPaths[$this::class] ?? []);
 
-        if ($this instanceof MethodBlock) {
+        if ($this instanceof Block\MethodBlock) {
             $blocksMap = array_merge($blocksMap, $this->callerBlocksMap);
             if ($this->getStatus() === $this::CREATING_ARGUMENTS) {
                 $blocksMap = array_merge($blocksMap, $this->callerArgsBlocksMap);
             }
-        } elseif ($this instanceof VariableBlock) {
+        } elseif ($this instanceof Block\VariableBlock) {
             $blocksMap = array_merge($blocksMap, $this->variableBlocksMap);
+        } elseif ($this instanceof Block\ObjectBlock) {
+            // Here we remove all directions to any Block which isn't special symbol.
+            // Obj names are free game, they can be `for` or `let` and that will break all our journey search so we have to remove it.
+            foreach ($blocksMap as $key => $value) {
+                if (!Validate::isSymbol($key)) {
+                    unset($blocksMap[$key]);
+                }
+            }
         }
 
         return $blocksMap;

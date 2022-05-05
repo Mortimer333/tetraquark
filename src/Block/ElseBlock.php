@@ -40,7 +40,6 @@ class ElseBlock extends Block implements Contract\Block
                     $this->setSubtype(self::SINGLE_LINE);
                     $this->endChars = [
                         "\n" => true,
-                        "\r" => true,
                         ";" => true,
                     ];
                 }

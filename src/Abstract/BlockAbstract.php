@@ -41,7 +41,6 @@ abstract class BlockAbstract
 
     protected array  $endChars = [
         "\n" => true,
-        "\r" => true,
         ";" => true,
     ];
 

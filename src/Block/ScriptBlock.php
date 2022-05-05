@@ -23,6 +23,8 @@ class ScriptBlock extends Block implements Contract\Block
     public function objectify(int $start = 0)
     {
         Log::timerStart();
+        Log::log("Prepare file...");
+        $this->prepare();
         Log::log("Mapping...");
         $this->map($start);
         Log::log("=======================");
@@ -39,6 +41,13 @@ class ScriptBlock extends Block implements Contract\Block
         Log::log("=======================");
         Log::displayBlocks($this->blocks);
         Log::timerEnd();
+    }
+
+    protected function prepare(): void
+    {
+        self::$content = str_replace("\r","\n", self::$content);
+        self::$content = preg_replace('/[\n]+/',"\n", self::$content);
+        self::$content = preg_replace('/[ \t]+/', ' ', self::$content);
     }
 
     protected function map($start): void

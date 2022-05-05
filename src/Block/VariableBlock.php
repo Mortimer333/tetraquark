@@ -22,7 +22,19 @@ class VariableBlock extends VariableBlockAbstract implements Contract\Block
         $newLineFound = false;
         for ($i=$start + 1; $i < \mb_strlen(self::$content); $i++) {
             $letter = self::$content[$i];
-
+            /**
+             * Possible combinations:
+             * var a = 1;
+             * var a;
+             * var a, b, c;
+             * var a, b = 2;
+             * var a = 2
+             * +2;
+             * var a = 2 +
+             * 2
+             * var a = 1
+             *
+             */
             if (Validate::isWhitespace($letter)) {
                 continue;
             }

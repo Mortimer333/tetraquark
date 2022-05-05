@@ -8,7 +8,6 @@ class ObjectSoloValueBlock extends Block implements Contract\Block
 {
     protected array $endChars = [
         "\n" => true,
-        "\r" => true,
         " " => true,
         "," => true,
         "{" => true,
