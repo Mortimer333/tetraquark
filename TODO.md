@@ -36,6 +36,11 @@ are not properly recognized because script thinks that instruction ends on the d
 2. Arrow Method inside parenthesis:
 (x => x + 1)
 
+3. When someone uses double spaces as in a value name:
+let obj = {};
+obj['a  b'] = 'v';
+This: obj['a  b'] will become this obj['a b'] in process which might cause some problems with script.
+
 # Problems:
 - my alias replacer for globally scoped vars will not work for anything that accessed them dynamically, example:
 ```js
