@@ -32,4 +32,41 @@ abstract class VariableBlockAbstract extends BlockAbstract
         }
         return $script;
     }
+
+    protected function findVariableEnd(int $start): int
+    {
+        $end = null;
+        $lastLetter = '';
+        for ($i=$start + 1; $i < \mb_strlen(self::$content); $i++) {
+            $letter = self::$content[$i];
+            if ($letter === ' ') {
+                continue;
+            }
+
+            list($letter, $i) = $this->skipIfNeccessary(self::$content, $letter, $i);
+            list($lastLetter) = $this->getPreviousLetter($i - 1, self::$content);
+
+            if ($letter === ';') {
+                $end = $i;
+                break;
+            }
+
+            if ($letter === "\n") {
+                if (Validate::isOperator($lastLetter)) {
+                    continue;
+                }
+
+                list($nextLetter) = $this->getNextLetter($i, self::$content);
+                if (Validate::isOperator($nextLetter)) {
+                    continue;
+                }
+
+                $end = $i;
+                break;
+            }
+
+        }
+
+        return $end ?? \mb_strlen(self::$content);
+    }
 }

@@ -268,7 +268,7 @@ trait BlockMapsTrait
             // Here we remove all directions to any Block which isn't special symbol.
             // Obj names are free game, they can be `for` or `let` and that will break all our journey search so we have to remove it.
             foreach ($blocksMap as $key => $value) {
-                if (!Validate::isSymbol($key)) {
+                if (!Validate::isSpecial($key)) {
                     unset($blocksMap[$key]);
                 }
             }

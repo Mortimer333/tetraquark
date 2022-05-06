@@ -11,6 +11,11 @@ class Validate
         ';' => true, '.' => true
     ];
 
+    protected static array $operators = [
+        "+" => true, "-" => true, "/" => true, "*" => true, "=" => true, "!" => true, '%' => true, '^' => true,
+        ">" => true, "<" => true, '|' => true, '&' => true, '?' => true,
+    ];
+
     protected static array $notAllowedConsts = [
         'break' => true, 'do' => true, 'instanceof' => true,
         'typeof' => true, 'case' => true, 'else' => true, 'new' => true,
@@ -89,5 +94,10 @@ class Validate
     public static function isSymbol(string $letter): bool
     {
         return !preg_match('/^[a-zA-Z0-9]*$/', $letter) && !self::isWhitespace($letter);
+    }
+
+    public static function isOperator(string $letter): bool
+    {
+        return self::$operators[$letter] ?? false;
     }
 }

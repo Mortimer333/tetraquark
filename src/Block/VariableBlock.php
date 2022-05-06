@@ -17,8 +17,12 @@ class VariableBlock extends VariableBlockAbstract implements Contract\Block
         ';' => true,
     ];
 
+    /** @var bool Is this var a multi definition (var a,b,c;) */
+    protected bool $multiDef = false;
+
     public function objectify(int $start = 0)
     {
+        $this->setInstructionStart($start - \mb_strlen($this->getSubtype()));
         /**
          * Possible combinations:
          * var a = 1;
@@ -31,31 +35,54 @@ class VariableBlock extends VariableBlockAbstract implements Contract\Block
          * 2
          * var a = 1
          * var a = b +1 + c['f'] +h.f.v + e()
+         * var a = b +1 + c['f'] +h.f.v + e(2,1), b = 'c'
          */
-        $newLineFound = false;
-        for ($i=$start + 1; $i < \mb_strlen(self::$content); $i++) {
+
+        $end = $this->findVariableEnd($start);
+
+        $this->setName('');
+        $this->setInstruction(\mb_substr(self::$content, $this->getInstructionStart(), $end - $this->getInstructionStart()));
+        $this->setCaret($end);
+        Log::log('Instr: ' . $this->getInstruction());
+        return;
+
+        $multiDefinition = false;
+        $placeholder = false;
+        $setter = false;
+        // Script has fixed the file so between variable instruction and variable name is single space
+        // which means we can start from the name and search for it end
+        for ($i=$start + 2; $i < \mb_strlen(self::$content); $i++) {
             $letter = self::$content[$i];
 
-            if (Validate::isWhitespace($letter)) {
-                continue;
-            }
+            if (Validate::isWhitespace($letter) || $letter === '=' || $letter === ',' || $letter === ';') {
+                if (Validate::isWhitespace($letter)) {
+                    list($letter) = $this->getNextLetter($i, self::$content);
+                }
 
-            if ($letter == '=') {
+                if ($letter === ',') {
+                    $multiDefinition = true;
+                } elseif ($letter === '=') {
+                    $setter = true;
+                } else {
+                    $placeholder = true;
+                }
+
+                $end = $i - 1;
                 break;
             }
+        }
 
-            if ($letter == ';' || $newLineFound) {
-                $this->setInstruction('');
-                $this->setInstructionStart($i);
-                $this->setName(\mb_substr(self::$content, $start, $i - $start));
-                $this->setCaret($i + 1);
-                return;
-            }
+        $this->setInstruction('');
+        $this->setName(\mb_substr(self::$content, $start + 2, $end));
 
-            if ($letter == "\n") {
-                $newLineFound = true;
-                continue;
-            }
+        if ($placeholder) {
+            return;
+        }
+
+        if ($multiDefinition) {
+            $this->multiDef = true;
+            $this->handleMultiDefinition($end);
+            return;
         }
 
         $this->findInstructionEnd($start, $this->subtype, $this->instructionEnds);
@@ -77,5 +104,10 @@ class VariableBlock extends VariableBlockAbstract implements Contract\Block
     public function getValue(): string
     {
         return $this->value;
+    }
+
+    protected function handleMultiDefinition(int $nameEnd): void
+    {
+
     }
 }

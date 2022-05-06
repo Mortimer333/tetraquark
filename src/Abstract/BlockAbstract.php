@@ -44,6 +44,9 @@ abstract class BlockAbstract
         ";" => true,
     ];
 
+    /** @var int Amount of opened brackets */
+    protected int $bracketsCount = 0;
+
     public function __construct(
         protected int $start = 0,
         string $subtype = '',
@@ -612,5 +615,53 @@ abstract class BlockAbstract
         $instruction = $nextSibling->getInstruction();
         $letter = trim($instruction)[0] ?? '';
         return $letter === '.';
+    }
+
+    protected function isAnyOpenBracket(string $letter): bool
+    {
+        $brackets = [
+            '{' => true,
+            '[' => true,
+            '(' => true,
+        ];
+        return $brackets[$letter] ?? false;
+    }
+
+    protected function isAnyCloseBracket(string $letter): bool
+    {
+        $brackets = [
+            '}' => true,
+            ']' => true,
+            ')' => true,
+        ];
+        return $brackets[$letter] ?? false;
+    }
+
+    protected function skipIfNeccessary(string $content, string $letter, int $i): array
+    {
+        if (
+            ($startsTemplate = Validate::isTemplateLiteralLandmark($letter, ''))
+            || Validate::isStringLandmark($letter, '')
+        ) {
+            $oldPos = $i;
+            $i = $this->skipString($i + 1, $content, $startsTemplate);
+            $letter = $content[$i];
+        }
+
+        if ($this->isAnyOpenBracket($letter)) {
+            $this->bracketsCount++;
+            $i++;
+        } elseif ($this->isAnyCloseBracket($letter)) {
+            $this->bracketsCount--;
+            $i++;
+        } elseif ($this->bracketsCount > 0) {
+            $i++;
+        }
+        $newLetter = $content[$i];
+        if ($newLetter != $letter) {
+            return $this->skipIfNeccessary($content, $newLetter, $i);
+        }
+
+        return [$newLetter, $i];
     }
 }
