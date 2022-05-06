@@ -13,4 +13,6 @@ let func2 = function() {};
 const equasion = 2 +
  4 - 2
  /2;
+var a = b +1 + c['f'] +h.f.v + e(2,1), b = 'c'
+var a, b = 'a', c;
 // Variable doesn't actually end at new line. It end at any character but if this char is `;` then it also adds it to its definition

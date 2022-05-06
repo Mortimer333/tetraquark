@@ -2,7 +2,7 @@
 
 namespace Tetraquark\Block;
 use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
-use \Tetraquark\Abstract\ConditionBlockAbstract as ConditionBlock;
+use \Tetraquark\Foundation\ConditionBlockAbstract as ConditionBlock;
 
 class DoWhileBlock extends ConditionBlock implements Contract\Block
 {
@@ -14,7 +14,6 @@ class DoWhileBlock extends ConditionBlock implements Contract\Block
 
     protected function getArgs(): string
     {
-        Log::log($this->getCondition());
         return $this->replaceVariablesWithAliases(
             rtrim($this->getCondition(), ';')
         );
@@ -57,7 +56,7 @@ class DoWhileBlock extends ConditionBlock implements Contract\Block
                 $parenthesisOpened++;
                 continue;
             }
-            
+
             if ($parenthesisOpened > 0) {
                 continue;
             }

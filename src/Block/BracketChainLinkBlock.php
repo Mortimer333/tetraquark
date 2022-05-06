@@ -2,7 +2,7 @@
 
 namespace Tetraquark\Block;
 use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
-use \Tetraquark\Abstract\BlockAbstract as Block;
+use \Tetraquark\Foundation\BlockAbstract as Block;
 
 class BracketChainLinkBlock extends Block implements Contract\Block
 {

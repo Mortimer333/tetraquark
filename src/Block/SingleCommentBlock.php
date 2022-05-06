@@ -2,7 +2,7 @@
 
 namespace Tetraquark\Block;
 use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
-use \Tetraquark\Abstract\CommentBlockAbstract as CommentBlock;
+use \Tetraquark\Foundation\CommentBlockAbstract as CommentBlock;
 
 class SingleCommentBlock extends CommentBlock implements Contract\Block
 {

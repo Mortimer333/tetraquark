@@ -123,7 +123,7 @@ class Log
         foreach ($blocks as $block) {
             self::log("Block: " . get_class($block));
             self::log("Subtype: " . $block->getSubtype());
-            if ($block instanceof Abstract\CommentBlockAbstract) {
+            if ($block instanceof Foundation\CommentBlockAbstract) {
                 self::log("Instruction: " . \mb_substr($block->getInstruction(), 0, 60));
             } else {
                 self::log("Instruction: " . $block->getInstruction());

@@ -1,584 +1,454 @@
 Prepare file...
 Mapping...
-Search for variable end
-  Letter: v
-  Letter: v
-  Letter after skip: v
-  Set last letter to r
-  Set last letter to v
-  Letter: a
-  Letter: a
-  Letter after skip: a
-  Set last letter to v
-  Set last letter to a
-  Letter: r
-  Letter: r
-  Letter after skip: r
-  Set last letter to a
-  Set last letter to r
-  Letter: 1
-  Letter: 1
-  Letter after skip: 1
-  Set last letter to r
-  Set last letter to 1
-  Letter:  
-  Whitespace
-  Letter: =
-  Letter: =
-  Letter after skip: =
-  Set last letter to 1
-  Set last letter to =
-  Letter:  
-  Whitespace
-  Letter: '
-  Letter: '
-  Is string, new letter: ;
-  Letter after skip: ;
-  Set last letter to '
-  Is semicolon, end found: 16
-Instr: var var1 = 'asd'
-Search for variable end
-  Letter: v
-  Letter: v
-  Letter after skip: v
-  Set last letter to t
-  Set last letter to v
-  Letter: a
-  Letter: a
-  Letter after skip: a
-  Set last letter to v
-  Set last letter to a
-  Letter: r
-  Letter: r
-  Letter after skip: r
-  Set last letter to a
-  Set last letter to r
-  Letter: 2
-  Letter: 2
-  Letter after skip: 2
-  Set last letter to r
-  Set last letter to 2
-  Letter:  
-  Whitespace
-  Letter: =
-  Letter: =
-  Letter after skip: =
-  Set last letter to 2
-  Set last letter to =
-  Letter:  
-  Whitespace
-  Letter: '
-  Letter: '
-  Is string, new letter: ;
-  Letter after skip: ;
-  Set last letter to '
-  Is semicolon, end found: 34
-Instr: let var2 = 'asd'
-Search for variable end
-  Letter: v
-  Letter: v
-  Letter after skip: v
-  Set last letter to t
-  Set last letter to v
-  Letter: a
-  Letter: a
-  Letter after skip: a
-  Set last letter to v
-  Set last letter to a
-  Letter: r
-  Letter: r
-  Letter after skip: r
-  Set last letter to a
-  Set last letter to r
-  Letter: 3
-  Letter: 3
-  Letter after skip: 3
-  Set last letter to r
-  Set last letter to 3
-  Letter:  
-  Whitespace
-  Letter: =
-  Letter: =
-  Letter after skip: =
-  Set last letter to 3
-  Set last letter to =
-  Letter:  
-  Whitespace
-  Letter: '
-  Letter: '
-  Is string, new letter: ;
-  Letter after skip: ;
-  Set last letter to '
-  Is semicolon, end found: 54
-Instr: const var3 = 'asd'
-Search for variable end
-  Letter: l
-  Letter: l
-  Letter after skip: l
-  Set last letter to t
-  Set last letter to l
-  Letter: e
-  Letter: e
-  Letter after skip: e
-  Set last letter to l
-  Set last letter to e
-  Letter: t
-  Letter: t
-  Letter after skip: t
-  Set last letter to e
-  Set last letter to t
-  Letter: 2
-  Letter: 2
-  Letter after skip: 2
-  Set last letter to t
-  Set last letter to 2
-  Letter:  
-  Whitespace
-  Letter: =
-  Letter: =
-  Letter after skip: =
-  Set last letter to 2
-  Set last letter to =
-  Letter:  
-  Whitespace
-  Letter: {
-  Letter: {
-  Open bracket, skip to close bracket
-  Letter: \n
-  Skip to close bracket
-  Letter:  
-  Skip to close bracket
-  Letter: c
-  Skip to close bracket
-  Letter: o
-  Skip to close bracket
-  Letter: n
-  Skip to close bracket
-  Letter: s
-  Skip to close bracket
-  Letter: t
-  Skip to close bracket
-  Letter: :
-  Skip to close bracket
-  Letter:  
-  Skip to close bracket
-  Letter: '
-  Is string, new letter: ,
-  Skip to close bracket
-  Letter: \n
-  Skip to close bracket
-  Letter:  
-  Skip to close bracket
-  Letter: l
-  Skip to close bracket
-  Letter: e
-  Skip to close bracket
-  Letter: t
-  Skip to close bracket
-  Letter:  
-  Skip to close bracket
-  Letter: :
-  Skip to close bracket
-  Letter:  
-  Skip to close bracket
-  Letter: 2
-  Skip to close bracket
-  Letter:  
-  Skip to close bracket
-  Letter: +
-  Skip to close bracket
-  Letter:  
-  Skip to close bracket
-  Letter: 2
-  Skip to close bracket
-  Letter: ,
-  Skip to close bracket
-  Letter: \n
-  Skip to close bracket
-  Letter:  
-  Skip to close bracket
-  Letter: v
-  Skip to close bracket
-  Letter: a
-  Skip to close bracket
-  Letter: r
-  Skip to close bracket
-  Letter: :
-  Skip to close bracket
-  Letter:  
-  Skip to close bracket
-  Letter: [
-  Open bracket, skip to close bracket
-  Letter: 4
-  Skip to close bracket
-  Letter:  
-  Skip to close bracket
-  Letter: +
-  Skip to close bracket
-  Letter:  
-  Skip to close bracket
-  Letter: 2
-  Skip to close bracket
-  Letter: 1
-  Skip to close bracket
-  Letter: ]
-  Close bracket, decrease bracket count
-  Letter: \n
-  Skip to close bracket
-  Letter: }
-  Close bracket, decrease bracket count
-  Letter: \n
-  Letter after skip: \n
-  Set last letter to }
-  Is new line, last letter: }
-  End found: 115
-Instr: let let2 = {\n const: 'as;d',\n let : 2 + 2,\n var: [4 + 21]\n}
-Search for variable end
-  Letter: f
-  Letter: f
-  Letter after skip: f
-  Set last letter to t
-  Set last letter to f
-  Letter: u
-  Letter: u
-  Letter after skip: u
-  Set last letter to f
-  Set last letter to u
-  Letter: n
-  Letter: n
-  Letter after skip: n
-  Set last letter to u
-  Set last letter to n
-  Letter: c
-  Letter: c
-  Letter after skip: c
-  Set last letter to n
-  Set last letter to c
-  Letter:  
-  Whitespace
-  Letter: =
-  Letter: =
-  Letter after skip: =
-  Set last letter to c
-  Set last letter to =
-  Letter:  
-  Whitespace
-  Letter: (
-  Letter: (
-  Open bracket, skip to close bracket
-  Letter: )
-  Close bracket, decrease bracket count
-  Letter:  
-  Letter after skip:  
-  Set last letter to )
-  Set last letter to  
-  Letter: =
-  Letter: =
-  Letter after skip: =
-  Set last letter to )
-  Set last letter to =
-  Letter: >
-  Letter: >
-  Letter after skip: >
-  Set last letter to =
-  Set last letter to >
-  Letter:  
-  Whitespace
-  Letter: {
-  Letter: {
-  Open bracket, skip to close bracket
-  Letter: }
-  Close bracket, decrease bracket count
-  Letter: ;
-  Letter after skip: ;
-  Set last letter to }
-  Is semicolon, end found: 137
-Instr: const func = () => {}
-Search for variable end
-  Letter: f
-  Letter: f
-  Letter after skip: f
-  Set last letter to t
-  Set last letter to f
-  Letter: u
-  Letter: u
-  Letter after skip: u
-  Set last letter to f
-  Set last letter to u
-  Letter: n
-  Letter: n
-  Letter after skip: n
-  Set last letter to u
-  Set last letter to n
-  Letter: c
-  Letter: c
-  Letter after skip: c
-  Set last letter to n
-  Set last letter to c
-  Letter: 2
-  Letter: 2
-  Letter after skip: 2
-  Set last letter to c
-  Set last letter to 2
-  Letter:  
-  Whitespace
-  Letter: =
-  Letter: =
-  Letter after skip: =
-  Set last letter to 2
-  Set last letter to =
-  Letter:  
-  Whitespace
-  Letter: f
-  Letter: f
-  Letter after skip: f
-  Set last letter to =
-  Set last letter to f
-  Letter: u
-  Letter: u
-  Letter after skip: u
-  Set last letter to f
-  Set last letter to u
-  Letter: n
-  Letter: n
-  Letter after skip: n
-  Set last letter to u
-  Set last letter to n
-  Letter: c
-  Letter: c
-  Letter after skip: c
-  Set last letter to n
-  Set last letter to c
-  Letter: t
-  Letter: t
-  Letter after skip: t
-  Set last letter to c
-  Set last letter to t
-  Letter: i
-  Letter: i
-  Letter after skip: i
-  Set last letter to t
-  Set last letter to i
-  Letter: o
-  Letter: o
-  Letter after skip: o
-  Set last letter to i
-  Set last letter to o
-  Letter: n
-  Letter: n
-  Letter after skip: n
-  Set last letter to o
-  Set last letter to n
-  Letter: (
-  Letter: (
-  Open bracket, skip to close bracket
-  Letter: )
-  Close bracket, decrease bracket count
-  Letter:  
-  Letter after skip:  
-  Set last letter to )
-  Set last letter to  
-  Letter: {
-  Letter: {
-  Open bracket, skip to close bracket
-  Letter: }
-  Close bracket, decrease bracket count
-  Letter: ;
-  Letter after skip: ;
-  Set last letter to }
-  Is semicolon, end found: 164
-Instr: let func2 = function() {}
-Search for variable end
-  Letter: e
-  Letter: e
-  Letter after skip: e
-  Set last letter to t
-  Set last letter to e
-  Letter: q
-  Letter: q
-  Letter after skip: q
-  Set last letter to e
-  Set last letter to q
-  Letter: u
-  Letter: u
-  Letter after skip: u
-  Set last letter to q
-  Set last letter to u
-  Letter: a
-  Letter: a
-  Letter after skip: a
-  Set last letter to u
-  Set last letter to a
-  Letter: s
-  Letter: s
-  Letter after skip: s
-  Set last letter to a
-  Set last letter to s
-  Letter: i
-  Letter: i
-  Letter after skip: i
-  Set last letter to s
-  Set last letter to i
-  Letter: o
-  Letter: o
-  Letter after skip: o
-  Set last letter to i
-  Set last letter to o
-  Letter: n
-  Letter: n
-  Letter after skip: n
-  Set last letter to o
-  Set last letter to n
-  Letter:  
-  Whitespace
-  Letter: =
-  Letter: =
-  Letter after skip: =
-  Set last letter to n
-  Set last letter to =
-  Letter:  
-  Whitespace
-  Letter: 2
-  Letter: 2
-  Letter after skip: 2
-  Set last letter to =
-  Set last letter to 2
-  Letter:  
-  Whitespace
-  Letter: +
-  Letter: +
-  Letter after skip: +
-  Set last letter to 2
-  Set last letter to +
-  Letter: \n
-  Letter: \n
-  Letter after skip: \n
-  Set last letter to +
-  Is new line, last letter: +
-  Last letter was special: +, searching...
-  Letter:  
-  Whitespace
-  Letter: 4
-  Letter: 4
-  Letter after skip: 4
-  Set last letter to +
-  Set last letter to 4
-  Letter:  
-  Whitespace
-  Letter: -
-  Letter: -
-  Letter after skip: -
-  Set last letter to 4
-  Set last letter to -
-  Letter:  
-  Whitespace
-  Letter: 2
-  Letter: 2
-  Letter after skip: 2
-  Set last letter to -
-  Set last letter to 2
-  Letter: \n
-  Letter: \n
-  Letter after skip: \n
-  Set last letter to 2
-  Is new line, last letter: 2
-  Next letter is special: /, searching...
-  Letter:  
-  Whitespace
-  Letter: /
-  Letter: /
-  Letter after skip: /
-  Set last letter to 2
-  Set last letter to /
-  Letter: 2
-  Letter: 2
-  Letter after skip: 2
-  Set last letter to /
-  Set last letter to 2
-  Letter: ;
-  Letter: ;
-  Letter after skip: ;
-  Set last letter to 2
-  Is semicolon, end found: 197
-Instr: const equasion = 2 +\n 4 - 2\n /2
 =======================
 Creating aliases...
 =======================
-Aliases: 
+Aliases: var1 => a, var2 => b, var3 => c, let2 => d, const => e, let => f, var => g, func => h, func2 => i, equasion => j, a => k, b => l, c => m,
 Recreating...
 =======================
 Block: Tetraquark\Block\VariableBlock
 Subtype: var
-Instruction: var var1 = 'asd'
+Instruction:
 Instruction Start: 0
 Caret: 16
 Name: ``
 Value: ``
 Alias: ``
 =======
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype:
+  Instruction:  var1 =
+  Instruction Start: 0
+  Caret: 13
+  Name: `var1`
+  Value: ``
+  Alias: `a`
+  =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype:
+    Instruction: 'asd'
+    Instruction Start: 8
+    Caret: 13
+    Name: ``
+    Alias: ``
+    =======
 Block: Tetraquark\Block\VariableBlock
 Subtype: let
-Instruction: let var2 = 'asd'
+Instruction:
 Instruction Start: 18
 Caret: 34
 Name: ``
 Value: ``
 Alias: ``
 =======
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype:
+  Instruction:  var2 =
+  Instruction Start: 0
+  Caret: 13
+  Name: `var2`
+  Value: ``
+  Alias: `b`
+  =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype:
+    Instruction: 'asd'
+    Instruction Start: 8
+    Caret: 13
+    Name: ``
+    Alias: ``
+    =======
 Block: Tetraquark\Block\VariableBlock
 Subtype: const
-Instruction: const var3 = 'asd'
+Instruction:
 Instruction Start: 36
 Caret: 54
 Name: ``
 Value: ``
 Alias: ``
 =======
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype:
+  Instruction:  var3 =
+  Instruction Start: 0
+  Caret: 13
+  Name: `var3`
+  Value: ``
+  Alias: `c`
+  =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype:
+    Instruction: 'asd'
+    Instruction Start: 8
+    Caret: 13
+    Name: ``
+    Alias: ``
+    =======
 Block: Tetraquark\Block\VariableBlock
 Subtype: let
-Instruction: let let2 = {\n const: 'as;d',\n let : 2 + 2,\n var: [4 + 21]\n}
+Instruction:
 Instruction Start: 56
 Caret: 115
 Name: ``
 Value: ``
 Alias: ``
 =======
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype:
+  Instruction:  let2 =
+  Instruction Start: 0
+  Caret: 53
+  Name: `let2`
+  Value: ``
+  Alias: `d`
+  =======
+    Block: Tetraquark\Block\ObjectBlock
+    Subtype: {
+    Instruction:
+    Instruction Start: 8
+    Caret: 52
+    Name: ``
+    Alias: ``
+    =======
+      Block: Tetraquark\Block\ObjectValueBlock
+      Subtype: :
+      Instruction: const
+      Instruction Start: 9
+      Caret: 23
+      Name: `const`
+      Alias: `e`
+      =======
+        Block: Tetraquark\Block\StringBlock
+        Subtype:
+        Instruction: 'as;d'
+        Instruction Start: 17
+        Caret: 23
+        Name: ``
+        Alias: ``
+        =======
+      Block: Tetraquark\Block\ObjectValueBlock
+      Subtype: :
+      Instruction: let
+      Instruction Start: 24
+      Caret: 36
+      Name: `let`
+      Alias: `f`
+      =======
+        Block: Tetraquark\Block\UndefinedBlock
+        Subtype:
+        Instruction:  2
+        Instruction Start: 26
+        Caret: 29
+        Name: ``
+        Alias: ``
+        =======
+        Block: Tetraquark\Block\SymbolBlock
+        Subtype: +
+        Instruction: + 2
+        Instruction Start: 33
+        Caret: 35
+        Name: ``
+        Alias: ``
+        =======
+      Block: Tetraquark\Block\ObjectValueBlock
+      Subtype: :
+      Instruction: var
+      Instruction Start: 37
+      Caret: 51
+      Name: `var`
+      Alias: `g`
+      =======
+        Block: Tetraquark\Block\ArrayBlock
+        Subtype: [
+        Instruction:
+        Instruction Start: 43
+        Caret: 50
+        Name: ``
+        Alias: ``
+        =======
+          Block: Tetraquark\Block\UndefinedBlock
+          Subtype:
+          Instruction: 4
+          Instruction Start: 41
+          Caret: 43
+          Name: ``
+          Alias: ``
+          =======
+          Block: Tetraquark\Block\SymbolBlock
+          Subtype: +
+          Instruction: + 21
+          Instruction Start: 46
+          Caret: 49
+          Name: ``
+          Alias: ``
+          =======
 Block: Tetraquark\Block\VariableBlock
 Subtype: const
-Instruction: const func = () => {}
+Instruction:
 Instruction Start: 116
 Caret: 137
 Name: ``
 Value: ``
 Alias: ``
 =======
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype:
+  Instruction:  func =
+  Instruction Start: 0
+  Caret: 16
+  Name: `func`
+  Value: ``
+  Alias: `h`
+  =======
+    Block: Tetraquark\Block\CallerBlock
+    Subtype: (
+    Instruction:
+    Instruction Start: 8
+    Caret: 15
+    Name: ``
+    Alias: ``
+    =======
+      Block: Tetraquark\Block\ArrowFunctionBlock
+      Subtype: parenthesis:brackets
+      Instruction: () => {
+      Instruction Start: 8
+      Caret: 15
+      Name: ``
+      Value: ``
+      Arguments: [0] `
+      Alias: ``
+      =======
 Block: Tetraquark\Block\VariableBlock
 Subtype: let
-Instruction: let func2 = function() {}
+Instruction:
 Instruction Start: 139
 Caret: 164
 Name: ``
 Value: ``
 Alias: ``
 =======
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype:
+  Instruction:  func2 =
+  Instruction Start: 0
+  Caret: 22
+  Name: `func2`
+  Value: ``
+  Alias: `i`
+  =======
+    Block: Tetraquark\Block\FunctionBlock
+    Subtype: anonymous:function
+    Instruction: function() {
+    Instruction Start: 8
+    Caret: 21
+    Name: ``
+    Arguments: [0] `
+    Alias: ``
+    =======
 Block: Tetraquark\Block\VariableBlock
 Subtype: const
-Instruction: const equasion = 2 +\n 4 - 2\n /2
+Instruction:
 Instruction Start: 166
 Caret: 197
 Name: ``
 Value: ``
 Alias: ``
 =======
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype:
+  Instruction:  equasion =
+  Instruction Start: 0
+  Caret: 24
+  Name: `equasion`
+  Value: ``
+  Alias: `j`
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype:
+    Instruction:  2
+    Instruction Start: 7
+    Caret: 10
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\SymbolBlock
+    Subtype: +
+    Instruction: + 4
+    Instruction Start: 14
+    Caret: 17
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\SymbolBlock
+    Subtype: -
+    Instruction: - 2
+    Instruction Start: 18
+    Caret: 21
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\SymbolBlock
+    Subtype: /
+    Instruction: /2
+    Instruction Start: 22
+    Caret: 23
+    Name: ``
+    Alias: ``
+    =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: var
+Instruction:
+Instruction Start: 199
+Caret: 245
+Name: ``
+Value: ``
+Alias: ``
+=======
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype:
+  Instruction:  a =
+  Instruction Start: 0
+  Caret: 34
+  Name: `a`
+  Value: ``
+  Alias: `k`
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype:
+    Instruction:  b
+    Instruction Start: 0
+    Caret: 3
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\SymbolBlock
+    Subtype: +
+    Instruction: +1
+    Instruction Start: 7
+    Caret: 9
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\SymbolBlock
+    Subtype: +
+    Instruction: + c['f']
+    Instruction Start: 10
+    Caret: 18
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\SymbolBlock
+    Subtype: +
+    Instruction: +h.f.v
+    Instruction Start: 19
+    Caret: 25
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\SymbolBlock
+    Subtype: +
+    Instruction: + e(2
+    Instruction Start: 26
+    Caret: 30
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype:
+    Instruction: ,1)
+    Instruction Start: 31
+    Caret: 34
+    Name: ``
+    Alias: ``
+    =======
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype:
+  Instruction:  b =
+  Instruction Start: 0
+  Caret: 8
+  Name: `b`
+  Value: ``
+  Alias: `l`
+  =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype:
+    Instruction: 'c'
+    Instruction Start: 5
+    Caret: 8
+    Name: ``
+    Alias: ``
+    =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: var
+Instruction:
+Instruction Start: 246
+Caret: 263
+Name: ``
+Value: ``
+Alias: ``
+=======
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype:
+  Instruction:
+  Instruction Start: 2
+  Caret: 3
+  Name: `a`
+  Value: ``
+  Alias: `k`
+  =======
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype:
+  Instruction:  b =
+  Instruction Start: 0
+  Caret: 8
+  Name: `b`
+  Value: ``
+  Alias: `l`
+  =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype:
+    Instruction: 'a'
+    Instruction Start: 5
+    Caret: 8
+    Name: ``
+    Alias: ``
+    =======
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype:
+  Instruction:
+  Instruction Start: 2
+  Caret: 3
+  Name: `c`
+  Value: ``
+  Alias: `m`
+  =======
 Block: Tetraquark\Block\SingleCommentBlock
 Subtype: //
 Instruction: / Variable doesn't actually end at new line. It end at any c
-Instruction Start: 199
-Caret: 331
+Instruction Start: 265
+Caret: 397
 Name: ``
 Alias: ``
 =======
-Duration: 0.005s
+Duration: 0.008s
 
 
-var;let;const;let;const;let;const;
+var a='asd';
+let b='asd';
+const c='asd';
+let d={e:'as;d',f:2+ 2,g:[4+ 21]};
+const h=()=>{};
+let i=function(){};
+const j=2+ 4- 2/2;
+var
+    k=
+        l+1+ m['f']+h.f.v+ e(2,1),
+    l=
+        'c'
+;
+var
+    k,
+    l=
+        'a',
+    m
+;

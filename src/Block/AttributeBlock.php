@@ -2,7 +2,7 @@
 
 namespace Tetraquark\Block;
 use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
-use \Tetraquark\Abstract\VariableBlockAbstract as VariableBlock;
+use \Tetraquark\Foundation\VariableBlockAbstract as VariableBlock;
 
 class AttributeBlock extends VariableBlock implements Contract\Block
 {

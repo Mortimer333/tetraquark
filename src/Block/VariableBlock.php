@@ -2,7 +2,7 @@
 
 namespace Tetraquark\Block;
 use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
-use \Tetraquark\Abstract\VariableBlockAbstract;
+use \Tetraquark\Foundation\VariableBlockAbstract;
 
 class VariableBlock extends VariableBlockAbstract implements Contract\Block
 {
@@ -38,12 +38,20 @@ class VariableBlock extends VariableBlockAbstract implements Contract\Block
          * var a = b +1 + c['f'] +h.f.v + e(2,1), b = 'c'
          */
 
-        $end = $this->findVariableEnd($start);
+        $end   = $this->findVariableEnd($start);
+        $items = $this->seperateVariableItems($start, $end);
+        $contentHolder = self::$content;
+        foreach ($items as $item) {
+            $item = preg_replace('/[\n]/', ' ', $item);
+            $item = preg_replace('/[ \t]+/', ' ', $item) . ';';
+            self::$content = $item;
+            $this->blocks[] = new VariableItemBlock();
+        }
+        self::$content = $contentHolder;
 
         $this->setName('');
-        $this->setInstruction(\mb_substr(self::$content, $this->getInstructionStart(), $end - $this->getInstructionStart()));
+        $this->setInstruction('');
         $this->setCaret($end);
-        Log::log('Instr: ' . $this->getInstruction());
         return;
 
         $multiDefinition = false;

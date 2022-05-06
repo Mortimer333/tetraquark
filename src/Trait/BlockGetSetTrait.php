@@ -2,7 +2,7 @@
 
 namespace Tetraquark\Trait;
 
-use \Tetraquark\Abstract\BlockAbstract as Block;
+use \Tetraquark\Foundation\BlockAbstract as Block;
 
 trait BlockGetSetTrait
 {

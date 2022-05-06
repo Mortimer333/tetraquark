@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Tetraquark\Abstract;
+namespace Tetraquark\Foundation;
 
 use \Tetraquark\Trait\{BlockGetSetTrait, BlockMapsTrait, BlockAliasMapTrait};
-use \Tetraquark\Abstract\{
+use \Tetraquark\Foundation\{
     CommentBlockAbstract as CommentBlock,
     ConditionBlockAbstract as ConditionBlock,
     MethodBlockAbstract as MethodBlock,
@@ -645,6 +645,9 @@ abstract class BlockAbstract
         ) {
             $oldPos = $i;
             $i = $this->skipString($i + 1, $content, $startsTemplate);
+            if (!isset($content[$i])) {
+                return [$content[$i - 1], $i - 1];
+            }
             $letter = $content[$i];
         }
 

@@ -2,7 +2,7 @@
 
 namespace Tetraquark\Block;
 use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
-use \Tetraquark\Abstract\MethodBlockAbstract as MethodBlock;
+use \Tetraquark\Foundation\MethodBlockAbstract as MethodBlock;
 
 class ClassMethodBlock extends MethodBlock implements Contract\Block
 {

@@ -2,7 +2,7 @@
 
 namespace Tetraquark\Trait;
 
-use \Tetraquark\{Block, Log, Validate};
+use \Tetraquark\{Block, Log, Validate, Foundation};
 
 trait BlockMapsTrait
 {
@@ -262,7 +262,7 @@ trait BlockMapsTrait
             if ($this->getStatus() === $this::CREATING_ARGUMENTS) {
                 $blocksMap = array_merge($blocksMap, $this->callerArgsBlocksMap);
             }
-        } elseif ($this instanceof Block\VariableBlock) {
+        } elseif ($this instanceof Foundation\VariableBlockAbstract) {
             $blocksMap = array_merge($blocksMap, $this->variableBlocksMap);
         } elseif ($this instanceof Block\ObjectBlock) {
             // Here we remove all directions to any Block which isn't special symbol.
