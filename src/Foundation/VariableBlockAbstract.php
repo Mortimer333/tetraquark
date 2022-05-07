@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Foundation;
-use \Tetraquark\{Exception as Exception, Block as Block, Log as Log, Validate as Validate};
+use \Tetraquark\{Exception, Block, Log, Validate};
 
 abstract class VariableBlockAbstract extends BlockAbstract
 {
@@ -40,7 +40,7 @@ abstract class VariableBlockAbstract extends BlockAbstract
             }
 
             list($letter, $i) = $this->skipIfNeccessary(self::$content, $letter, $i);
-            list($lastLetter) = $this->getPreviousLetter($i - 1, self::$content);
+            list($lastLetter, $lastPos) = $this->getPreviousLetter($i - 1, self::$content);
 
             if ($letter === ';') {
                 $end = $i;
@@ -48,12 +48,12 @@ abstract class VariableBlockAbstract extends BlockAbstract
             }
 
             if ($letter === "\n") {
-                if (Validate::isOperator($lastLetter)) {
+                if (Validate::isOperator($lastLetter) && !Validate::isComment($lastPos, self::$content)) {
                     continue;
                 }
 
-                list($nextLetter) = $this->getNextLetter($i, self::$content);
-                if (Validate::isOperator($nextLetter)) {
+                list($nextLetter, $nextPos) = $this->getNextLetter($i, self::$content);
+                if (Validate::isOperator($nextLetter) && !Validate::isComment($nextPos, self::$content)) {
                     continue;
                 }
 
@@ -99,5 +99,17 @@ abstract class VariableBlockAbstract extends BlockAbstract
         }
 
         return $items;
+    }
+
+    protected function addVariableItems(array $items): void
+    {
+        $contentHolder = self::$content;
+        foreach ($items as $item) {
+            $item = preg_replace('/[\n]/', ' ', $item);
+            $item = preg_replace('/[ \t]+/', ' ', $item) . ';';
+            self::$content = $item;
+            $this->blocks[] = new Block\VariableItemBlock();
+        }
+        self::$content = $contentHolder;
     }
 }

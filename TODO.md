@@ -11,9 +11,10 @@
 ## Next stage - check for any useless statements
 
 ## Handle
-- [DONE] notes
 - ?: conditions
 - import, export
+- array (used like object)
+- [DONE] notes
 - [DONE] chain linking with square brackets (if bracet is prefixed with `:` or `=` then its array)
 - [DONE] Object,
 - [DONE] if (removing brackets if it contains only one instruction),
@@ -21,7 +22,6 @@
 - [DONE] while and do while,
 - [DONE] Switch
 - [DONE] passing anonymous functions,
-- array (used like object)
 
 # Known bugs
 

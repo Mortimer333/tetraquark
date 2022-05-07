@@ -40,67 +40,11 @@ class VariableBlock extends VariableBlockAbstract implements Contract\Block
 
         $end   = $this->findVariableEnd($start);
         $items = $this->seperateVariableItems($start, $end);
-        $contentHolder = self::$content;
-        foreach ($items as $item) {
-            $item = preg_replace('/[\n]/', ' ', $item);
-            $item = preg_replace('/[ \t]+/', ' ', $item) . ';';
-            self::$content = $item;
-            $this->blocks[] = new VariableItemBlock();
-        }
-        self::$content = $contentHolder;
+        $this->addVariableItems($items);
 
         $this->setName('');
-        $this->setInstruction('');
+        $this->setInstruction(\mb_substr(self::$content, $this->getInstructionStart(), $end - $this->getInstructionStart()));
         $this->setCaret($end);
-        return;
-
-        $multiDefinition = false;
-        $placeholder = false;
-        $setter = false;
-        // Script has fixed the file so between variable instruction and variable name is single space
-        // which means we can start from the name and search for it end
-        for ($i=$start + 2; $i < \mb_strlen(self::$content); $i++) {
-            $letter = self::$content[$i];
-
-            if (Validate::isWhitespace($letter) || $letter === '=' || $letter === ',' || $letter === ';') {
-                if (Validate::isWhitespace($letter)) {
-                    list($letter) = $this->getNextLetter($i, self::$content);
-                }
-
-                if ($letter === ',') {
-                    $multiDefinition = true;
-                } elseif ($letter === '=') {
-                    $setter = true;
-                } else {
-                    $placeholder = true;
-                }
-
-                $end = $i - 1;
-                break;
-            }
-        }
-
-        $this->setInstruction('');
-        $this->setName(\mb_substr(self::$content, $start + 2, $end));
-
-        if ($placeholder) {
-            return;
-        }
-
-        if ($multiDefinition) {
-            $this->multiDef = true;
-            $this->handleMultiDefinition($end);
-            return;
-        }
-
-        $this->findInstructionEnd($start, $this->subtype, $this->instructionEnds);
-
-        $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
-        if (\sizeof($this->blocks) == 0) {
-            $instrEnd = $this->getInstructionStart() + \mb_strlen($this->getInstruction());
-            $this->setValue(trim(substr(self::$content, $instrEnd, $this->getCaret() - $instrEnd)));
-        }
-        $this->findAndSetName($this->getSubtype() . ' ', $this->instructionEnds);
     }
 
     public function setValue(string $value): self

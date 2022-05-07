@@ -9,7 +9,6 @@ class VariableItemBlock extends VariableBlockAbstract implements Contract\Block
     protected string $value = '';
     protected array $endChars = [
         ';' => true,
-        "\n" => true
     ];
 
     protected array $instructionEnds = [
@@ -46,7 +45,7 @@ class VariableItemBlock extends VariableBlockAbstract implements Contract\Block
         }
 
         $this->findInstructionEnd($start, $this->subtype, $this->instructionEnds);
-
+        Log::log('Instruction: ' . $this->getInstruction());
         $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
         if (\sizeof($this->blocks) == 0) {
             $instrEnd = $this->getInstructionStart() + \mb_strlen($this->getInstruction());

@@ -13,7 +13,7 @@ class Validate
 
     protected static array $operators = [
         "+" => true, "-" => true, "/" => true, "*" => true, "=" => true, "!" => true, '%' => true, '^' => true,
-        ">" => true, "<" => true, '|' => true, '&' => true, '?' => true,
+        ">" => true, "<" => true, '|' => true, '&' => true, '?' => true, "." => true
     ];
 
     protected static array $notAllowedConsts = [
@@ -99,5 +99,13 @@ class Validate
     public static function isOperator(string $letter): bool
     {
         return self::$operators[$letter] ?? false;
+    }
+
+    public static function isComment(int $pos, string $content): bool
+    {
+        return $content[$pos] == '/' && (
+            $content[$pos + 1] == '*'
+            || $content[$pos + 1] == '/'
+        ); 
     }
 }

@@ -21,11 +21,14 @@ class AttributeBlock extends VariableBlock implements Contract\Block
     public function objectify(int $start = 0)
     {
         $letterFound = false;
+        $equalPos = $start;
         $start = $this->findAugment($start);
+        $name = null;
 
         for ($i=$start - 1; $i >= 0; $i--) {
             $letter = self::$content[$i];
             if ($letterFound && Validate::isWhitespace($letter)) {
+                $name = \mb_substr(self::$content, $i, $start - 1 - $i);
                 $start = $i;
                 break;
             }
@@ -35,21 +38,29 @@ class AttributeBlock extends VariableBlock implements Contract\Block
             }
 
             if ($i == 0) {
+                $name = \mb_substr(self::$content, $i, $start - 1 - $i);
                 $start = 0;
             }
         }
-        $this->findInstructionEnd($start, $this->subtype, $this->instructionEnds);
-        $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
-        if (\sizeof($this->blocks) == 0) {
-            $instrEnd = $this->getInstructionStart() + \mb_strlen($this->getInstruction()) + 1;
-            $this->setValue(trim(substr(self::$content, $instrEnd, $this->getCaret() - $instrEnd)));
-        }
+        // $this->findInstructionEnd($start, $this->subtype, $this->instructionEnds);
+        $end = $this->findVariableEnd($start);
+        $value = \mb_substr(self::$content, $equalPos + 1, $end - ($equalPos + 1));
+        $this->blocks = array_merge($this->blocks, $this->createSubBlocksWithContent($value));
+        $this->setInstruction(\mb_substr(self::$content, $start, $end - $star))
+            ->setInstructionStart($start)
+            ->setName($name)
+            ->setCaret($end);
+            ;
+        // if (\sizeof($this->blocks) == 0) {
+        //     $instrEnd = $this->getInstructionStart() + \mb_strlen($this->getInstruction()) + 1;
+        //     $this->setValue(trim(\mb_substr(self::$content, $instrEnd, $this->getCaret() - $instrEnd)));
+        // }
 
-        $this->findAndSetName($this->getSubtype() . ' ', $this->instructionEnds);
+        // $this->findAndSetName($this->getSubtype() . ' ', $this->instructionEnds);
 
-        if (\mb_strlen($this->augment) > 0) {
-            $this->setName(\mb_substr($this->getName(), 0, -\mb_strlen($this->augment)));
-        }
+        // if (\mb_strlen($this->augment) > 0) {
+        //     $this->setName(\mb_substr($this->getName(), 0, -\mb_strlen($this->augment)));
+        // }
     }
 
     /**

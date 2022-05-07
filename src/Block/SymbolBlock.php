@@ -24,7 +24,7 @@ class SymbolBlock extends VariableBlock implements Contract\Block
 
         $this->setInstruction(\mb_substr(self::$content, $properStart, $start - $properStart + 1))
             ->setInstructionStart($properStart)
-            ->setCaret($start + 1);
+            ->setCaret($start);
     }
 
     public function recreate(): string

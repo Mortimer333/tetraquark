@@ -162,7 +162,7 @@ abstract class BlockAbstract
         }
 
         $properEnd = null;
-        for ($i=$start; $i < strlen(self::$content); $i++) {
+        for ($i=$start; $i < \mb_strlen(self::$content); $i++) {
             $letter = self::$content[$i];
 
             if (
@@ -184,7 +184,9 @@ abstract class BlockAbstract
         }
 
         if (is_null($properEnd)) {
-            throw new Exception('Proper End not found', 404);
+            // throw new Exception('Proper End not found', 404);
+            $properEnd = \mb_strlen(self::$content) - 1;
+            $this->setCaret($properEnd);
         }
 
         $properStart = $start - strlen($name);
