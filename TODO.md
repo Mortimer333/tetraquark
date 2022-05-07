@@ -1,6 +1,5 @@
 # TO DO
-## 0. Fix SymbolBlock (instructions look like this `+ 2` or `+ e(2`) and recheck AttributeBlock with examples from variable.js
-
+## 0. Chain link gets confused if you leave dot at the and of line (man.\nbam())
 ## 1. Upgrade removeAdditionalSpaces as it doesn't reamove all not needed space - do{ whileLooped--; console.log(whileLooped);}
 
 

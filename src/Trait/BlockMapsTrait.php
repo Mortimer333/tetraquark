@@ -156,7 +156,7 @@ trait BlockMapsTrait
             "default" => "SymbolBlock",
         ],
         "*" => [
-            "*"       => [
+            "*" => [
                 "="       => "AttributeBlock",
                 "default" => "SymbolBlock",
             ],
@@ -178,23 +178,53 @@ trait BlockMapsTrait
             "default" => "SymbolBlock",
         ],
         "|" => [
-            "|"       => "SymbolBlock",
+            "|" => [
+                "="       => "AttributeBlock",
+                "default" => "SymbolBlock",
+            ],
             "="       => "AttributeBlock",
             "default" => "SymbolBlock",
         ],
         "&" => [
-            "&"       => "SymbolBlock",
+            "&" => [
+                "="       => "AttributeBlock",
+                "default" => "SymbolBlock",
+            ],
             "="       => "AttributeBlock",
             "default" => "SymbolBlock",
         ],
         ">" => [
+            "=" => [
+                "="       => "SymbolBlock",
+                "default" => "SymbolBlock"
+            ],
             ">" => [
-                ">" => "SymbolBlock",
+                ">" => [
+                    "="       => "AttributeBlock",
+                    "default" => "SymbolBlock",
+                ],
+                "="       => "AttributeBlock",
+                "default" => "SymbolBlock",
             ],
             "default" => "SymbolBlock",
         ],
         "<" => [
-            "<" => "SymbolBlock",
+            "=" => [
+                "="       => "SymbolBlock",
+                "default" => "SymbolBlock"
+            ],
+            "<" => [
+                "="       => "AttributeBlock",
+                "default" => "SymbolBlock",
+            ],
+            "default" => "SymbolBlock",
+        ],
+        "?" => [
+            "?" => [
+                "="       => "AttributeBlock",
+                "default" => "SymbolBlock",
+            ],
+            "default" => "SymbolBlock",
         ],
         "e" => [
             "l" => [

@@ -1,665 +1,904 @@
 Prepare file...
 Mapping...
-Instruction:  asd =
-Possible undefined:  false, letteR: ;
-Instruction:  var1 =
-Instruction:  var2 =
-Instruction:  var3 =
-Instruction:  let2 =
-Possible undefined:  2, letteR: ,
-Possible undefined:  21, letteR: ]
-Instruction:  func =
-Instruction:  func2 =
-Instruction:  equasion =
-Possible undefined: 22, letteR: ;
-Instruction:  a =
-Instruction:  b =
-Instruction:  b =
-Instruction:  g =
-Possible undefined:  1, letteR: ;
 =======================
 Creating aliases...
 =======================
-Aliases: asd => a, var1 => b, var2 => c, var3 => d, let2 => e, const => f, let => g, var => h, func => i, func2 => j, equasion => k, a => l, b => m, c => n, g => o, 
+Aliases: asd => a, var1 => b, let2 => c, func => d, func2 => e, equasion => f, a => g, g => h, x => i, const => j, let => k, var => l, 
 Recreating...
 =======================
-Block: Tetraquark\Block\VariableBlock
-Subtype: let
-Instruction: let asd = true && false
+Block: Tetraquark\Block\AttributeBlock
+Subtype: 
+Instruction: asd = true && false
 Instruction Start: 0
-Caret: 23
-Name: ``
-Value: ``
-Alias: ``
+Caret: 19
+Name: `asd`
+Alias: `a`
 =======
-  Block: Tetraquark\Block\VariableItemBlock
+  Block: Tetraquark\Block\UndefinedBlock
   Subtype: 
-  Instruction:  asd =
-  Instruction Start: 0
-  Caret: 20
-  Name: `asd`
-  Value: ``
-  Alias: `a`
+  Instruction:  true 
+  Instruction Start: -7
+  Caret: -1
+  Name: ``
+  Alias: ``
   =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction:  true 
-    Instruction Start: -1
-    Caret: 5
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\SymbolBlock
-    Subtype: &&
-    Instruction: &&
-    Instruction Start: 12
-    Caret: 13
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction:  false
-    Instruction Start: 14
-    Caret: 20
-    Name: ``
-    Alias: ``
-    =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: var
-Instruction: var var1 = 'asd'
-Instruction Start: 25
-Caret: 41
-Name: ``
-Value: ``
-Alias: ``
-=======
-  Block: Tetraquark\Block\VariableItemBlock
+  Block: Tetraquark\Block\SymbolBlock
+  Subtype: &&
+  Instruction: &&
+  Instruction Start: 6
+  Caret: 7
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\UndefinedBlock
   Subtype: 
-  Instruction:  var1 =
-  Instruction Start: 0
+  Instruction:  false
+  Instruction Start: 7
   Caret: 13
-  Name: `var1`
-  Value: ``
-  Alias: `b`
+  Name: ``
+  Alias: ``
   =======
-    Block: Tetraquark\Block\StringBlock
-    Subtype: 
-    Instruction: 'asd'
-    Instruction Start: 8
-    Caret: 13
-    Name: ``
-    Alias: ``
-    =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: let
-Instruction: let var2 = 'asd'
-Instruction Start: 43
-Caret: 59
-Name: ``
-Value: ``
-Alias: ``
+Block: Tetraquark\Block\AttributeBlock
+Subtype: +=
+Instruction: asd+= 1
+Instruction Start: 21
+Caret: 28
+Name: `asd`
+Alias: `a`
 =======
-  Block: Tetraquark\Block\VariableItemBlock
+  Block: Tetraquark\Block\UndefinedBlock
   Subtype: 
-  Instruction:  var2 =
-  Instruction Start: 0
-  Caret: 13
-  Name: `var2`
-  Value: ``
-  Alias: `c`
+  Instruction:  1
+  Instruction Start: -1
+  Caret: 1
+  Name: ``
+  Alias: ``
   =======
-    Block: Tetraquark\Block\StringBlock
-    Subtype: 
-    Instruction: 'asd'
-    Instruction Start: 8
-    Caret: 13
-    Name: ``
-    Alias: ``
-    =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: const
-Instruction: const var3 = 'asd'
-Instruction Start: 61
-Caret: 79
-Name: ``
-Value: ``
-Alias: ``
+Block: Tetraquark\Block\AttributeBlock
+Subtype: -=
+Instruction: asd-= 1
+Instruction Start: 30
+Caret: 37
+Name: `asd`
+Alias: `a`
 =======
-  Block: Tetraquark\Block\VariableItemBlock
+  Block: Tetraquark\Block\UndefinedBlock
   Subtype: 
-  Instruction:  var3 =
-  Instruction Start: 0
-  Caret: 13
-  Name: `var3`
-  Value: ``
-  Alias: `d`
+  Instruction:  1
+  Instruction Start: -1
+  Caret: 1
+  Name: ``
+  Alias: ``
   =======
-    Block: Tetraquark\Block\StringBlock
-    Subtype: 
-    Instruction: 'asd'
-    Instruction Start: 8
-    Caret: 13
-    Name: ``
-    Alias: ``
-    =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: let
-Instruction: let let2 = {\n const: 'as;d',\n let : 2 + 2,\n var: [4 + 21]\n}
-Instruction Start: 81
-Caret: 140
-Name: ``
-Value: ``
-Alias: ``
+Block: Tetraquark\Block\AttributeBlock
+Subtype: **=
+Instruction: asd**= 1
+Instruction Start: 39
+Caret: 47
+Name: `asd`
+Alias: `a`
 =======
-  Block: Tetraquark\Block\VariableItemBlock
+  Block: Tetraquark\Block\UndefinedBlock
   Subtype: 
-  Instruction:  let2 =
-  Instruction Start: 0
-  Caret: 53
-  Name: `let2`
-  Value: ``
-  Alias: `e`
+  Instruction:  1
+  Instruction Start: -1
+  Caret: 1
+  Name: ``
+  Alias: ``
   =======
-    Block: Tetraquark\Block\ObjectBlock
-    Subtype: {
-    Instruction: 
-    Instruction Start: 8
-    Caret: 52
-    Name: ``
-    Alias: ``
+Block: Tetraquark\Block\AttributeBlock
+Subtype: >>>=
+Instruction: asd>>>= 1
+Instruction Start: 49
+Caret: 58
+Name: `asd`
+Alias: `a`
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  1
+  Instruction Start: -1
+  Caret: 1
+  Name: ``
+  Alias: ``
+  =======
+Block: Tetraquark\Block\AttributeBlock
+Subtype: 
+Instruction: var1 = 'asd'
+Instruction Start: 60
+Caret: 72
+Name: `var1`
+Alias: `b`
+=======
+  Block: Tetraquark\Block\StringBlock
+  Subtype: 
+  Instruction: 'asd'
+  Instruction Start: 1
+  Caret: 6
+  Name: ``
+  Alias: ``
+  =======
+Block: Tetraquark\Block\AttributeBlock
+Subtype: 
+Instruction: let2 = {\n const: 'as;d',\n let : 2 + 2,\n var: [4 + 21]\n}
+Instruction Start: 74
+Caret: 129
+Name: `let2`
+Alias: `c`
+=======
+  Block: Tetraquark\Block\ObjectBlock
+  Subtype: {
+  Instruction: 
+  Instruction Start: 1
+  Caret: 48
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\ObjectValueBlock
+    Subtype: :
+    Instruction: const
+    Instruction Start: 2
+    Caret: 17
+    Name: `const`
+    Alias: `j`
     =======
-      Block: Tetraquark\Block\ObjectValueBlock
-      Subtype: :
-      Instruction: const
-      Instruction Start: 9
-      Caret: 23
-      Name: `const`
-      Alias: `f`
+      Block: Tetraquark\Block\StringBlock
+      Subtype: 
+      Instruction: 'as;d'
+      Instruction Start: 11
+      Caret: 17
+      Name: ``
+      Alias: ``
       =======
-        Block: Tetraquark\Block\StringBlock
-        Subtype: 
-        Instruction: 'as;d'
-        Instruction Start: 17
-        Caret: 23
-        Name: ``
-        Alias: ``
-        =======
-      Block: Tetraquark\Block\ObjectValueBlock
-      Subtype: :
-      Instruction: let
-      Instruction Start: 24
-      Caret: 36
-      Name: `let`
-      Alias: `g`
+    Block: Tetraquark\Block\ObjectValueBlock
+    Subtype: :
+    Instruction: let
+    Instruction Start: 18
+    Caret: 31
+    Name: `let`
+    Alias: `k`
+    =======
+      Block: Tetraquark\Block\UndefinedBlock
+      Subtype: 
+      Instruction:  2 
+      Instruction Start: 21
+      Caret: 24
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\SymbolBlock
+      Subtype: +
+      Instruction: +
+      Instruction Start: 28
+      Caret: 28
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\UndefinedBlock
+      Subtype: 
+      Instruction:  2
+      Instruction Start: 29
+      Caret: 31
+      Name: ``
+      Alias: ``
+      =======
+    Block: Tetraquark\Block\ObjectValueBlock
+    Subtype: :
+    Instruction: var
+    Instruction Start: 32
+    Caret: 47
+    Name: `var`
+    Alias: `l`
+    =======
+      Block: Tetraquark\Block\ArrayBlock
+      Subtype: [
+      Instruction: 
+      Instruction Start: 39
+      Caret: 46
+      Name: ``
+      Alias: ``
       =======
         Block: Tetraquark\Block\UndefinedBlock
         Subtype: 
-        Instruction:  2 
-        Instruction Start: 26
-        Caret: 29
+        Instruction: 4 
+        Instruction Start: 37
+        Caret: 39
         Name: ``
         Alias: ``
         =======
         Block: Tetraquark\Block\SymbolBlock
         Subtype: +
         Instruction: +
-        Instruction Start: 33
-        Caret: 33
+        Instruction Start: 42
+        Caret: 42
         Name: ``
         Alias: ``
         =======
         Block: Tetraquark\Block\UndefinedBlock
         Subtype: 
-        Instruction:  2
-        Instruction Start: 34
-        Caret: 36
-        Name: ``
-        Alias: ``
-        =======
-      Block: Tetraquark\Block\ObjectValueBlock
-      Subtype: :
-      Instruction: var
-      Instruction Start: 37
-      Caret: 51
-      Name: `var`
-      Alias: `h`
-      =======
-        Block: Tetraquark\Block\ArrayBlock
-        Subtype: [
-        Instruction: 
+        Instruction:  21
         Instruction Start: 43
-        Caret: 50
+        Caret: 46
         Name: ``
         Alias: ``
         =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction: 4 
-          Instruction Start: 41
-          Caret: 43
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\SymbolBlock
-          Subtype: +
-          Instruction: +
-          Instruction Start: 46
-          Caret: 46
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction:  21
-          Instruction Start: 47
-          Caret: 50
-          Name: ``
-          Alias: ``
-          =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: const
-Instruction: const func = () => {}
-Instruction Start: 141
-Caret: 162
-Name: ``
-Value: ``
-Alias: ``
+Block: Tetraquark\Block\AttributeBlock
+Subtype: 
+Instruction: func = () => {}
+Instruction Start: 130
+Caret: 145
+Name: `func`
+Alias: `d`
 =======
-  Block: Tetraquark\Block\VariableItemBlock
-  Subtype: 
-  Instruction:  func =
-  Instruction Start: 0
-  Caret: 16
-  Name: `func`
-  Value: ``
-  Alias: `i`
+  Block: Tetraquark\Block\CallerBlock
+  Subtype: (
+  Instruction: 
+  Instruction Start: 1
+  Caret: 8
+  Name: ``
+  Alias: ``
   =======
-    Block: Tetraquark\Block\CallerBlock
-    Subtype: (
-    Instruction: 
-    Instruction Start: 8
-    Caret: 15
+    Block: Tetraquark\Block\ArrowFunctionBlock
+    Subtype: parenthesis:brackets
+    Instruction: () => {
+    Instruction Start: 1
+    Caret: 8
     Name: ``
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\ArrowFunctionBlock
-      Subtype: parenthesis:brackets
-      Instruction: () => {
-      Instruction Start: 8
-      Caret: 15
-      Name: ``
-      Value: ``
-      Arguments: [0] `
-      Alias: ``
-      =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: let
-Instruction: let func2 = function() {}
-Instruction Start: 164
-Caret: 189
-Name: ``
-Value: ``
-Alias: ``
-=======
-  Block: Tetraquark\Block\VariableItemBlock
-  Subtype: 
-  Instruction:  func2 =
-  Instruction Start: 0
-  Caret: 22
-  Name: `func2`
-  Value: ``
-  Alias: `j`
-  =======
-    Block: Tetraquark\Block\FunctionBlock
-    Subtype: anonymous:function
-    Instruction: function() {
-    Instruction Start: 8
-    Caret: 21
-    Name: ``
+    Value: ``
     Arguments: [0] `
     Alias: ``
     =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: const
-Instruction: const equasion = 2 +\n 4 - 2\n /22
-Instruction Start: 191
-Caret: 223
-Name: ``
-Value: ``
-Alias: ``
+Block: Tetraquark\Block\AttributeBlock
+Subtype: 
+Instruction: func2 = function() {}
+Instruction Start: 147
+Caret: 168
+Name: `func2`
+Alias: `e`
 =======
-  Block: Tetraquark\Block\VariableItemBlock
-  Subtype: 
-  Instruction:  equasion =
+  Block: Tetraquark\Block\FunctionBlock
+  Subtype: anonymous:function
+  Instruction: function() {
   Instruction Start: 0
-  Caret: 25
-  Name: `equasion`
-  Value: ``
-  Alias: `k`
+  Caret: 13
+  Name: ``
+  Arguments: [0] `
+  Alias: ``
   =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction:  2 
-    Instruction Start: 7
-    Caret: 10
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\SymbolBlock
-    Subtype: +
-    Instruction: +
-    Instruction Start: 14
-    Caret: 14
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction:  4 
-    Instruction Start: 11
-    Caret: 14
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\SymbolBlock
-    Subtype: -
-    Instruction: -
-    Instruction Start: 18
-    Caret: 18
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction:  2 
-    Instruction Start: 15
-    Caret: 18
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\SymbolBlock
-    Subtype: /
-    Instruction: /
-    Instruction Start: 22
-    Caret: 22
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction: 22
-    Instruction Start: 23
-    Caret: 25
-    Name: ``
-    Alias: ``
-    =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: var
-Instruction: var a = b +1 + c['f'] +h.f.v + e(2,1), b = 'c'
-Instruction Start: 225
-Caret: 271
-Name: ``
-Value: ``
-Alias: ``
+Block: Tetraquark\Block\AttributeBlock
+Subtype: 
+Instruction: equasion = 2 +\n 4 - 2\n /22
+Instruction Start: 170
+Caret: 196
+Name: `equasion`
+Alias: `f`
 =======
-  Block: Tetraquark\Block\VariableItemBlock
+  Block: Tetraquark\Block\UndefinedBlock
   Subtype: 
-  Instruction:  a =
-  Instruction Start: 0
-  Caret: 34
-  Name: `a`
-  Value: ``
-  Alias: `l`
+  Instruction:  2 
+  Instruction Start: -4
+  Caret: -1
+  Name: ``
+  Alias: ``
   =======
-    Block: Tetraquark\Block\UndefinedBlock
+  Block: Tetraquark\Block\SymbolBlock
+  Subtype: +
+  Instruction: +
+  Instruction Start: 3
+  Caret: 3
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: \n 4 
+  Instruction Start: -1
+  Caret: 3
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\SymbolBlock
+  Subtype: -
+  Instruction: -
+  Instruction Start: 8
+  Caret: 8
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  2\n 
+  Instruction Start: 4
+  Caret: 8
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\SymbolBlock
+  Subtype: /
+  Instruction: /
+  Instruction Start: 13
+  Caret: 13
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: 22
+  Instruction Start: 13
+  Caret: 15
+  Name: ``
+  Alias: ``
+  =======
+Block: Tetraquark\Block\AttributeBlock
+Subtype: 
+Instruction: a = b +1 + c['f'] +h.f.v + e(2,1)
+Instruction Start: 198
+Caret: 231
+Name: `a`
+Alias: `g`
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  b 
+  Instruction Start: -4
+  Caret: -1
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\SymbolBlock
+  Subtype: +
+  Instruction: +
+  Instruction Start: 3
+  Caret: 3
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: 1 
+  Instruction Start: 1
+  Caret: 3
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\SymbolBlock
+  Subtype: +
+  Instruction: +
+  Instruction Start: 6
+  Caret: 6
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  c
+  Instruction Start: 4
+  Caret: 6
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\BracketChainLinkBlock
+  Subtype: [
+  Instruction: 
+  Instruction Start: 9
+  Caret: 13
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\StringBlock
     Subtype: 
-    Instruction:  b 
-    Instruction Start: 0
-    Caret: 3
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\SymbolBlock
-    Subtype: +
-    Instruction: +
-    Instruction Start: 7
-    Caret: 7
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction: 1 
-    Instruction Start: 5
-    Caret: 7
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\SymbolBlock
-    Subtype: +
-    Instruction: +
+    Instruction: 'f'
     Instruction Start: 10
-    Caret: 10
+    Caret: 13
     Name: ``
     Alias: ``
     =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction:  c
-    Instruction Start: 8
-    Caret: 10
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\BracketChainLinkBlock
-    Subtype: [
-    Instruction: 
-    Instruction Start: 13
-    Caret: 17
-    Name: ``
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\StringBlock
-      Subtype: 
-      Instruction: 'f'
-      Instruction Start: 14
-      Caret: 17
-      Name: ``
-      Alias: ``
-      =======
-    Block: Tetraquark\Block\SymbolBlock
-    Subtype: +
-    Instruction: +
-    Instruction Start: 19
-    Caret: 19
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: h
-    Instruction Start: 20
-    Caret: 21
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: middle
-    Instruction: f
-    Instruction Start: 21
-    Caret: 22
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: .
-    Instruction: v 
-    Instruction Start: 23
-    Caret: 25
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\SymbolBlock
-    Subtype: +
-    Instruction: +
-    Instruction Start: 26
-    Caret: 26
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction:  e
-    Instruction Start: 24
-    Caret: 26
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\CallerBlock
-    Subtype: (
-    Instruction: (2,1)
-    Instruction Start: 29
-    Caret: 34
-    Name: ``
-    Alias: ``
-    =======
-  Block: Tetraquark\Block\VariableItemBlock
-  Subtype: 
-  Instruction:  b =
-  Instruction Start: 0
-  Caret: 8
-  Name: `b`
-  Value: ``
-  Alias: `m`
+  Block: Tetraquark\Block\SymbolBlock
+  Subtype: +
+  Instruction: +
+  Instruction Start: 15
+  Caret: 15
+  Name: ``
+  Alias: ``
   =======
-    Block: Tetraquark\Block\StringBlock
-    Subtype: 
-    Instruction: 'c'
-    Instruction Start: 5
-    Caret: 8
-    Name: ``
-    Alias: ``
-    =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: var
-Instruction: var a, b = 'a', c
-Instruction Start: 272
-Caret: 289
-Name: ``
-Value: ``
-Alias: ``
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: h
+  Instruction Start: 16
+  Caret: 17
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: middle
+  Instruction: f
+  Instruction Start: 17
+  Caret: 18
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: .
+  Instruction: v 
+  Instruction Start: 19
+  Caret: 21
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\SymbolBlock
+  Subtype: +
+  Instruction: +
+  Instruction Start: 22
+  Caret: 22
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  e
+  Instruction Start: 20
+  Caret: 22
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\CallerBlock
+  Subtype: (
+  Instruction: (2,1)
+  Instruction Start: 25
+  Caret: 30
+  Name: ``
+  Alias: ``
+  =======
+Block: Tetraquark\Block\AttributeBlock
+Subtype: 
+Instruction: g = man.\nfsgd() + 1
+Instruction Start: 232
+Caret: 251
+Name: `g`
+Alias: `h`
 =======
-  Block: Tetraquark\Block\VariableItemBlock
-  Subtype: 
-  Instruction: 
-  Instruction Start: 2
-  Caret: 3
-  Name: `a`
-  Value: ``
-  Alias: `l`
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: man
+  Instruction Start: 1
+  Caret: 4
+  Name: ``
+  Alias: ``
   =======
-  Block: Tetraquark\Block\VariableItemBlock
-  Subtype: 
-  Instruction:  b =
-  Instruction Start: 0
-  Caret: 8
-  Name: `b`
-  Value: ``
-  Alias: `m`
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: .
+  Instruction: \n
+  Instruction Start: 4
+  Caret: 5
+  Name: ``
+  Alias: ``
   =======
-    Block: Tetraquark\Block\StringBlock
-    Subtype: 
-    Instruction: 'a'
-    Instruction Start: 5
-    Caret: 8
-    Name: ``
-    Alias: ``
-    =======
-  Block: Tetraquark\Block\VariableItemBlock
+  Block: Tetraquark\Block\UndefinedBlock
   Subtype: 
-  Instruction: 
-  Instruction Start: 2
-  Caret: 3
-  Name: `c`
-  Value: ``
-  Alias: `n`
+  Instruction: fsgd
+  Instruction Start: 1
+  Caret: 5
+  Name: ``
+  Alias: ``
   =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: let
-Instruction: let g = man.\nfsgd() + 1
-Instruction Start: 291
-Caret: 314
-Name: ``
-Value: ``
-Alias: ``
-=======
-  Block: Tetraquark\Block\VariableItemBlock
+  Block: Tetraquark\Block\CallerBlock
+  Subtype: (
+  Instruction: ()
+  Instruction Start: 10
+  Caret: 12
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\SymbolBlock
+  Subtype: +
+  Instruction: +
+  Instruction Start: 13
+  Caret: 13
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\UndefinedBlock
   Subtype: 
-  Instruction:  g =
-  Instruction Start: 0
-  Caret: 20
-  Name: `g`
-  Value: ``
-  Alias: `o`
+  Instruction:  1
+  Instruction Start: 13
+  Caret: 15
+  Name: ``
+  Alias: ``
   =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: man
-    Instruction Start: 5
-    Caret: 8
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: .
-    Instruction:  
-    Instruction Start: 8
-    Caret: 9
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction: fsgd
-    Instruction Start: 5
-    Caret: 9
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\CallerBlock
-    Subtype: (
-    Instruction: ()
-    Instruction Start: 14
-    Caret: 16
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\SymbolBlock
-    Subtype: +
-    Instruction: +
-    Instruction Start: 17
-    Caret: 17
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction:  1
-    Instruction Start: 18
-    Caret: 20
-    Name: ``
-    Alias: ``
-    =======
 Block: Tetraquark\Block\SingleCommentBlock
 Subtype: //
 Instruction: / Variable doesn't actually end at new line. It end at any c
-Instruction Start: 315
-Caret: 447
+Instruction Start: 252
+Caret: 384
 Name: ``
 Alias: ``
 =======
-Duration: 0.011s
+Block: Tetraquark\Block\AttributeBlock
+Subtype: 
+Instruction: x = f()
+Instruction Start: 385
+Caret: 392
+Name: `x`
+Alias: `i`
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  f
+  Instruction Start: -3
+  Caret: -1
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\CallerBlock
+  Subtype: (
+  Instruction: ()
+  Instruction Start: 2
+  Caret: 4
+  Name: ``
+  Alias: ``
+  =======
+Block: Tetraquark\Block\AttributeBlock
+Subtype: +=
+Instruction: x += f()
+Instruction Start: 393
+Caret: 401
+Name: `x`
+Alias: `i`
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  f
+  Instruction Start: -3
+  Caret: -1
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\CallerBlock
+  Subtype: (
+  Instruction: ()
+  Instruction Start: 2
+  Caret: 4
+  Name: ``
+  Alias: ``
+  =======
+Block: Tetraquark\Block\AttributeBlock
+Subtype: -=
+Instruction: x -= f()
+Instruction Start: 402
+Caret: 410
+Name: `x`
+Alias: `i`
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  f
+  Instruction Start: -3
+  Caret: -1
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\CallerBlock
+  Subtype: (
+  Instruction: ()
+  Instruction Start: 2
+  Caret: 4
+  Name: ``
+  Alias: ``
+  =======
+Block: Tetraquark\Block\AttributeBlock
+Subtype: *=
+Instruction: x *= f()
+Instruction Start: 411
+Caret: 419
+Name: `x`
+Alias: `i`
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  f
+  Instruction Start: -3
+  Caret: -1
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\CallerBlock
+  Subtype: (
+  Instruction: ()
+  Instruction Start: 2
+  Caret: 4
+  Name: ``
+  Alias: ``
+  =======
+Block: Tetraquark\Block\AttributeBlock
+Subtype: /=
+Instruction: x /= f()
+Instruction Start: 420
+Caret: 428
+Name: `x`
+Alias: `i`
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  f
+  Instruction Start: -3
+  Caret: -1
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\CallerBlock
+  Subtype: (
+  Instruction: ()
+  Instruction Start: 2
+  Caret: 4
+  Name: ``
+  Alias: ``
+  =======
+Block: Tetraquark\Block\AttributeBlock
+Subtype: %=
+Instruction: x %= f()
+Instruction Start: 429
+Caret: 437
+Name: `x`
+Alias: `i`
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  f
+  Instruction Start: -3
+  Caret: -1
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\CallerBlock
+  Subtype: (
+  Instruction: ()
+  Instruction Start: 2
+  Caret: 4
+  Name: ``
+  Alias: ``
+  =======
+Block: Tetraquark\Block\AttributeBlock
+Subtype: **=
+Instruction: x **= f()
+Instruction Start: 438
+Caret: 447
+Name: `x`
+Alias: `i`
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  f
+  Instruction Start: -3
+  Caret: -1
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\CallerBlock
+  Subtype: (
+  Instruction: ()
+  Instruction Start: 2
+  Caret: 4
+  Name: ``
+  Alias: ``
+  =======
+Block: Tetraquark\Block\AttributeBlock
+Subtype: <<=
+Instruction: x <<= f()
+Instruction Start: 448
+Caret: 457
+Name: `x`
+Alias: `i`
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  f
+  Instruction Start: -3
+  Caret: -1
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\CallerBlock
+  Subtype: (
+  Instruction: ()
+  Instruction Start: 2
+  Caret: 4
+  Name: ``
+  Alias: ``
+  =======
+Block: Tetraquark\Block\AttributeBlock
+Subtype: >>=
+Instruction: x >>= f()
+Instruction Start: 458
+Caret: 467
+Name: `x`
+Alias: `i`
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  f
+  Instruction Start: -3
+  Caret: -1
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\CallerBlock
+  Subtype: (
+  Instruction: ()
+  Instruction Start: 2
+  Caret: 4
+  Name: ``
+  Alias: ``
+  =======
+Block: Tetraquark\Block\AttributeBlock
+Subtype: >>>=
+Instruction: x >>>= f()
+Instruction Start: 468
+Caret: 478
+Name: `x`
+Alias: `i`
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  f
+  Instruction Start: -3
+  Caret: -1
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\CallerBlock
+  Subtype: (
+  Instruction: ()
+  Instruction Start: 2
+  Caret: 4
+  Name: ``
+  Alias: ``
+  =======
+Block: Tetraquark\Block\AttributeBlock
+Subtype: &=
+Instruction: x &= f()
+Instruction Start: 479
+Caret: 487
+Name: `x`
+Alias: `i`
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  f
+  Instruction Start: -3
+  Caret: -1
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\CallerBlock
+  Subtype: (
+  Instruction: ()
+  Instruction Start: 2
+  Caret: 4
+  Name: ``
+  Alias: ``
+  =======
+Block: Tetraquark\Block\AttributeBlock
+Subtype: ^=
+Instruction: x ^= f()
+Instruction Start: 488
+Caret: 496
+Name: `x`
+Alias: `i`
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  f
+  Instruction Start: -3
+  Caret: -1
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\CallerBlock
+  Subtype: (
+  Instruction: ()
+  Instruction Start: 2
+  Caret: 4
+  Name: ``
+  Alias: ``
+  =======
+Block: Tetraquark\Block\AttributeBlock
+Subtype: |=
+Instruction: x |= f()
+Instruction Start: 497
+Caret: 505
+Name: `x`
+Alias: `i`
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  f
+  Instruction Start: -3
+  Caret: -1
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\CallerBlock
+  Subtype: (
+  Instruction: ()
+  Instruction Start: 2
+  Caret: 4
+  Name: ``
+  Alias: ``
+  =======
+Block: Tetraquark\Block\AttributeBlock
+Subtype: &&=
+Instruction: x &&= f()
+Instruction Start: 506
+Caret: 515
+Name: `x`
+Alias: `i`
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  f
+  Instruction Start: -3
+  Caret: -1
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\CallerBlock
+  Subtype: (
+  Instruction: ()
+  Instruction Start: 2
+  Caret: 4
+  Name: ``
+  Alias: ``
+  =======
+Block: Tetraquark\Block\AttributeBlock
+Subtype: ||=
+Instruction: x ||= f()
+Instruction Start: 516
+Caret: 525
+Name: `x`
+Alias: `i`
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  f
+  Instruction Start: -3
+  Caret: -1
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\CallerBlock
+  Subtype: (
+  Instruction: ()
+  Instruction Start: 2
+  Caret: 4
+  Name: ``
+  Alias: ``
+  =======
+Block: Tetraquark\Block\AttributeBlock
+Subtype: ??=
+Instruction: x ??= f()
+Instruction Start: 526
+Caret: 535
+Name: `x`
+Alias: `i`
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  f
+  Instruction Start: -3
+  Caret: -1
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\CallerBlock
+  Subtype: (
+  Instruction: ()
+  Instruction Start: 2
+  Caret: 4
+  Name: ``
+  Alias: ``
+  =======
+Duration: 0.016s
 
 
-let a=true&&false;var b='asd';let c='asd';const d='asd';let e={f:'as;d',g:2+2,h:[4+21]};const i=()=>{};let j=function(){};const k=2+4-2/22;var l=m+1+n['f']+h.f.v+e(2,1),m='c';var l,m='a',n;let o=man.fsgd()+1;
+a=true&&false;a+=1;a-=1;a**=1;a>>>=1;b='asd';c={j:'as;d',k:2+2,l:[4+21]};d=()=>{};e=function(){};f=2+4-2/22;g=b+1+c['f']+h.f.v+e(2,1);h=man.
+fsgd()+1;i=f();i+=f();i-=f();i*=f();i/=f();i%=f();i**=f();i<<=f();i>>=f();i>>>=f();i&=f();i^=f();i|=f();i&&=f();i||=f();i??=f();

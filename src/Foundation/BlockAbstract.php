@@ -662,6 +662,11 @@ abstract class BlockAbstract
         } elseif ($this->bracketsCount > 0) {
             $i++;
         }
+
+        if (!isset($content[$i])) {
+            return [$content[$i - 1], $i - 1];
+        }
+        
         $newLetter = $content[$i];
         if ($newLetter != $letter) {
             return $this->skipIfNeccessary($content, $newLetter, $i);
