@@ -11,7 +11,10 @@
 // 		}
 // 	}
 // }*/
-
+obj.
+ba = 'c';
+obj
+.sa = 'g'
 obj.sa = 'a'
 obj.p = 2  +1;
 obj.g()

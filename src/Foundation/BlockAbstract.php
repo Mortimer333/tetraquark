@@ -137,6 +137,7 @@ abstract class BlockAbstract
                     && (
                         $lastBlock->getSubtype() == Block\ChainLinkBlock::END_METHOD
                         || $lastBlock->getSubtype() == Block\ChainLinkBlock::END_VARIABLE
+                        || $lastBlock->getSubtype() == '.'
                     )
                 )
             ) {
@@ -666,7 +667,7 @@ abstract class BlockAbstract
         if (!isset($content[$i])) {
             return [$content[$i - 1], $i - 1];
         }
-        
+
         $newLetter = $content[$i];
         if ($newLetter != $letter) {
             return $this->skipIfNeccessary($content, $newLetter, $i);

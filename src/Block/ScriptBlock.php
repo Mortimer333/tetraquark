@@ -47,7 +47,11 @@ class ScriptBlock extends Block implements Contract\Block
     {
         self::$content = str_replace("\r","\n", self::$content);
         self::$content = preg_replace('/[\n]+/',"\n", self::$content);
+        // Change space + new line (` \n`) to just new line
         self::$content = preg_replace('/[ \t]+/', ' ', self::$content);
+        self::$content = preg_replace('/ \n+/',"\n", self::$content);
+        // This fixes all problem with prototypes that are moved to new line with trailing dot (obj\n.attr)
+        self::$content = preg_replace('/\n\./', '.', self::$content);
     }
 
     protected function map($start): void

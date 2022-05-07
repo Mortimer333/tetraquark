@@ -21,11 +21,11 @@ class AttributeBlock extends VariableBlock implements Contract\Block
         $letterFound = false;
         $equalPos = $start;
         $start = $this->findAugment($start);
-        $name = null;
+        $name = '';
 
         for ($i=$start; $i >= 0; $i--) {
             $letter = self::$content[$i];
-            if ($letterFound && Validate::isWhitespace($letter)) {
+            if ($letterFound && Validate::isWhitespace($letter) || $letterFound && $letter == '.') {
                 $name = \mb_substr(self::$content, $i + 1, $start - $i);
                 $start = $i + 1;
                 break;

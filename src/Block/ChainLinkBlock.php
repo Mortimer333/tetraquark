@@ -32,8 +32,11 @@ class ChainLinkBlock extends Block implements Contract\Block
         $end = null;
         $startLetterSearch = false;
         $caret = null;
-        for ($i=$start; $i < \mb_strlen(self::$content); $i++) {
+        Log::log('====');
+        list($letter, $linkStart) = $this->getNextLetter($start, self::$content);
+        for ($i=$linkStart; $i < \mb_strlen(self::$content); $i++) {
             $letter = self::$content[$i];
+            Log::log('Letter:' . $letter);
             if (($endChars[$letter] ?? false || $startLetterSearch) && !Validate::isWhitespace($letter)) {
                 $end = $i;
                 if ($letter == '=' && self::$content[$i + 1] != '=') {
@@ -65,7 +68,7 @@ class ChainLinkBlock extends Block implements Contract\Block
         $instruction = \mb_substr(self::$content, $start, $end - $start);
         $instrLen = \mb_strlen($instruction);
         $this->setInstructionStart($start - 1)
-            ->setInstruction($instruction);
+            ->setInstruction(trim($instruction));
 
         if ($this->getSubtype() == self::END_METHOD) {
             $this->endChars = [
@@ -73,7 +76,8 @@ class ChainLinkBlock extends Block implements Contract\Block
             ];
             $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
         } elseif ($this->getSubtype() == self::END_VARIABLE) {
-            $attribute = new AttributeBlock($caret);
+            list($equal, $equalPos) = $this->getNextLetter($caret, self::$content);
+            $attribute = new AttributeBlock($equalPos);
             $attribute->setName('');
             $this->setName($this->getInstruction());
             $this->setBlocks([
