@@ -1,3 +1,4 @@
+let asd = true && false;
 var var1 = 'asd';
 let var2 = 'asd';
 const var3 = 'asd';

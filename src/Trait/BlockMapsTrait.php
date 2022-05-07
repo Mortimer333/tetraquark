@@ -178,10 +178,12 @@ trait BlockMapsTrait
             "default" => "SymbolBlock",
         ],
         "|" => [
+            "|"       => "SymbolBlock",
             "="       => "AttributeBlock",
             "default" => "SymbolBlock",
         ],
         "&" => [
+            "&"       => "SymbolBlock",
             "="       => "AttributeBlock",
             "default" => "SymbolBlock",
         ],
