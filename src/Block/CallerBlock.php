@@ -62,8 +62,7 @@ class CallerBlock extends Block implements Contract\Block
             // If we have found ) before anything else then try to find arrow and determinate if this is arrow function
             if (!$searchFroArgsEnd && !$searchForArrow && $letter == ')') {
                 $searchForArrow = true;
-                $end = $i + 1;
-                $this->setCaret($i);
+                $end = $i;
                 continue;
             }
 
@@ -100,9 +99,9 @@ class CallerBlock extends Block implements Contract\Block
         if (is_null($end)) {
             $end = \mb_strlen(self::$content);
         }
-
+        Log::log('End: ' . $end . ', Start: ' . $start . ", end letter: " . self::$content[$end] . ', start letter: ' . self::$content[$start]);
         $this->setCaret($end);
-        $this->setInstruction(\mb_substr(self::$content, $start, $end - $start))
+        $this->setInstruction(\mb_substr(self::$content, $start, ($end - $start) + 1))
             ->setInstructionStart($start)
         ;
     }

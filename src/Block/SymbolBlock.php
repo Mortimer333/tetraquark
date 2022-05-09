@@ -8,6 +8,7 @@ class SymbolBlock extends VariableBlock implements Contract\Block
 {
     public function objectify(int $start = 0)
     {
+        Log::log($this->getSubtype());
         $this->setName('');
         // Find symbol start
         $properStart = null;

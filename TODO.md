@@ -10,7 +10,7 @@
 ## Next stage - check for any useless statements
 
 ## Handle
-- ?: conditions
+- [?DONE] ?: conditions
 - import, export
 - array (used like object)
 - [DONE] notes
