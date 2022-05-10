@@ -226,6 +226,7 @@ trait BlockMapsTrait
             ],
             "default" => "SymbolBlock",
         ],
+        ":" => "SymbolBlock",
         "e" => [
             "l" => [
                 "s" => [

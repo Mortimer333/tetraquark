@@ -2,9 +2,11 @@ Prepare file...
 Mapping...
 Instruction:  a =
 ?
+:
 Instruction:  b =
 End: 10, Start: 9, end letter: ), start letter: (
 ?
+:
 =======================
 Creating aliases...
 =======================
@@ -53,11 +55,11 @@ Alias: ``
     Name: ``
     Alias: ``
     =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction:  : 
-    Instruction Start: 18
-    Caret: 21
+    Block: Tetraquark\Block\SymbolBlock
+    Subtype: :
+    Instruction: :
+    Instruction Start: 19
+    Caret: 19
     Name: ``
     Alias: ``
     =======
@@ -105,21 +107,37 @@ Alias: ``
     =======
     Block: Tetraquark\Block\SymbolBlock
     Subtype: ?
-    Instruction: ()?
-    Instruction Start: 9
+    Instruction: ?
+    Instruction Start: 11
     Caret: 11
     Name: ``
     Alias: ``
     =======
     Block: Tetraquark\Block\UndefinedBlock
     Subtype: 
-    Instruction:  true : false
-    Instruction Start: 12
+    Instruction:  true 
+    Instruction Start: 5
+    Caret: 11
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\SymbolBlock
+    Subtype: :
+    Instruction: :
+    Instruction Start: 18
+    Caret: 18
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  false
+    Instruction Start: 19
     Caret: 25
     Name: ``
     Alias: ``
     =======
-Duration: 0.003s
+Duration: 0.002s
 
 
-let a=true?'true':'false';const b=func()()?true: false;
+let a=true?'true':'false';const b=func()?true:false;
