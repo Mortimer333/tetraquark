@@ -2,6 +2,7 @@
 
 namespace Tetraquark\Trait;
 
+use \Tetraquark\Log;
 use \Tetraquark\Foundation\BlockAbstract as Block;
 
 trait BlockGetSetTrait

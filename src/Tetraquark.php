@@ -98,39 +98,6 @@ class Tetraquark
         return \file_get_contents($path);
     }
 
-    // protected function mapJS(string $contents): array
-    // {
-    //     $map  = [];
-    //     $item = [];
-    //     for ($i=0; $i < \strlen($contents); $i++) {
-    //         $letter = $contents[$i];
-    //
-    //         // if ($this->isSingle($letter)) {
-    //         //     $this->addLetter($item, $contents, $i, $letter);
-    //             // if (($letter == '{' || $letter == '>') && $this->isFunction($map)) {
-    //             //
-    //             // }
-    //         //     continue;
-    //         // }
-    //         if ($letter == ' ') {
-    //             $this->addWord($item, $contents, $i);
-    //             if ($this->isFunction($map, $letter, $contents, $i)) {
-    //
-    //             }
-    //             continue;
-    //         }
-    //         if ($this->isEndChar($letter)) {
-    //             $this->addWord($item, $contents, $i);
-    //             if (\sizeof($item) > 0) {
-    //                 $map[] = $item;
-    //                 $item = [];
-    //             }
-    //         }
-    //     }
-    //     var_dump($map);
-    //     return $map;
-    // }
-
     private function isFunction(array $map, string $letter, string $contents, int $i): bool
     {
         $lastWord = $map[\sizeof($map) - 1];
@@ -148,14 +115,6 @@ class Tetraquark
             }
         ];
         return ($funcObjSwitch[$lastWord] ?? $funcObjSwitch['default'])();
-    }
-
-    private function addLetter(array &$item, string &$contents, int &$i, string $letter): void
-    {
-        $i--;
-        $this->addWord($item, $contents, $i);
-        $contents = substr($contents, 1);
-        $item[] = $letter;
     }
 
     private function isSingle(string $letter): bool
@@ -186,24 +145,4 @@ class Tetraquark
 
         return $singles[$letter] ?? false;
     }
-
-    private function addWord(array &$item, string &$contents, int &$i): void
-    {
-        $content = trim(trim(substr($contents, 0, $i + 1)), ';');
-        if (\strlen($content) > 0) {
-            $item[] = $content;
-        }
-        $contents = substr($contents, $i + 1);
-        $i = -1;
-    }
-
-    // protected function isEndChar(string $letter): bool
-    // {
-    //     $endChars = [
-    //         "\n" => true,
-    //         ";" => true,
-    //         // "}" This is also end letter but only for functions and classes so we will check this later
-    //     ];
-    //     return $endChars[$letter] ?? false;
-    // }
 }

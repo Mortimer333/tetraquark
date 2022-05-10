@@ -9,7 +9,7 @@ use \Tetraquark\Foundation\{
     MethodBlockAbstract as MethodBlock,
     VariableBlockAbstract as VariableBlock
 };
-use \Tetraquark\{Exception as Exception, Block as Block, Log as Log, Validate as Validate};
+use \Tetraquark\{Exception, Block, Log, Validate, Str};
 
 abstract class BlockAbstract
 {
@@ -76,8 +76,8 @@ abstract class BlockAbstract
         }
 
         if (isset($blocksMap['default'])) {
-            $mappedWord = substr($mappedWord, 0, -1);
-            $possibleUndefined = substr($possibleUndefined, 0, -1);
+            $mappedWord = \mb_substr($mappedWord, 0, -1);
+            $possibleUndefined = \mb_substr($possibleUndefined, 0, -1);
             $i--;
             return $this->checkMapResult($blocksMap['default'], $i);
         }
@@ -190,8 +190,8 @@ abstract class BlockAbstract
             $this->setCaret($properEnd);
         }
 
-        $properStart = $start - strlen($name);
-        $instruction = substr(self::$content, $properStart, $properEnd - $properStart);
+        $properStart = $start - \mb_strlen($name);
+        $instruction = \mb_substr(self::$content, $properStart, $properEnd - $properStart);
         $this->setInstructionStart($properStart)
             ->setInstruction($instruction);
     }
@@ -223,7 +223,7 @@ abstract class BlockAbstract
             $properStart = 0;
         }
 
-        $instruction = trim(substr(self::$content, $properStart, $end - $properStart));
+        $instruction = trim(\mb_substr(self::$content, $properStart, $end - $properStart));
         $this->setInstructionStart($properStart)
             ->setInstruction($instruction);
     }
@@ -235,7 +235,7 @@ abstract class BlockAbstract
         return $block;
     }
 
-    protected function createSubBlocks(?int $start = null): array
+    protected function createSubBlocks(?int $start = null, $special = false): array
     {
         if (is_null($start)) {
             $start = $this->getCaret();
@@ -310,7 +310,7 @@ abstract class BlockAbstract
             }
 
             if ($this->endChars[$letter] ?? false) {
-                $possibleUndefined = substr($possibleUndefined, 0, -1);
+                $possibleUndefined = \mb_substr($possibleUndefined, 0, -1);
                 if (Validate::isValidUndefined($possibleUndefined)) {
                     $blocks[] = new Block\UndefinedBlock($i - \mb_strlen($possibleUndefined), $possibleUndefined);
                     $possibleUndefined = '';
@@ -334,7 +334,7 @@ abstract class BlockAbstract
     protected function findAndSetName(string $prefix, array $ends): void
     {
         $instr = $this->getInstruction();
-        $start = \strlen($prefix) - 1;
+        $start = \mb_strlen($prefix) - 1;
         if ($start < 0) {
             $start = 0;
         }
@@ -342,7 +342,7 @@ abstract class BlockAbstract
         for ($i=$start; $i < strlen($instr); $i++) {
             $letter = $instr[$i];
             if ($ends[$letter] ?? false) {
-                $this->setName(substr($instr, $start, $i - $start));
+                $this->setName(\mb_substr($instr, $start, $i - $start));
                 return;
             }
         }
@@ -451,50 +451,60 @@ abstract class BlockAbstract
         $stringInProgress = false;
         $templateVarInProgress = false;
         $templateLiteralInProgress = false;
-        for ($i=0; $i < \mb_strlen($value); $i++) {
-            $letter = $value[$i];
-            $isLiteralLandmark = Validate::isTemplateLiteralLandmark($letter, $value[$i - 1] ?? null, $templateLiteralInProgress);
-            if ($templateVarInProgress && !$isLiteralLandmark) {
-                if ($letter == '}') {
-                    $templateVarInProgress = false;
+        Str::iterate(
+            $value,
+            0,
+            ['', '', false, false, false],
+            function(
+                string $letter, int $i, string &$word,
+                string &$minifiedValue, bool &$stringInProgress,
+                bool &$templateVarInProgress, bool &$templateLiteralInProgress
+            ) use ($value): void {
+                Log::log('Letter: ' . ($letter ?? 'NULL') . ', ' . $word);
+                $isLiteralLandmark = Validate::isTemplateLiteralLandmark($letter, $value[$i - 1] ?? null, $templateLiteralInProgress);
+                if ($templateVarInProgress && !$isLiteralLandmark) {
+                    if ($letter == '}') {
+                        $templateVarInProgress = false;
+                        $alias = $this->getAlias($word);
+                        $minifiedValue .= $alias . $letter;
+                        $word = '';
+                        return;
+                    } else {
+                        $word .= $letter;
+                    }
+                    return;
+                }
+
+                if ($isLiteralLandmark) {
+                    $templateLiteralInProgress = !$templateLiteralInProgress;
+                } elseif (Validate::isStringLandmark($letter, $value[$i - 1] ?? null, $stringInProgress)) {
+                    $stringInProgress = !$stringInProgress;
+                }
+
+                if (
+                    $templateLiteralInProgress
+                    && $this->startsTemplateLiteralVariable($letter, $value, $i)
+                ) {
+                    $templateVarInProgress = true;
+                }
+
+                if ($stringInProgress || $templateLiteralInProgress) {
+                    $minifiedValue .= $letter;
+                    $word = '';
+                    return;
+                }
+
+                if (Validate::isSpecial($letter)) {
                     $alias = $this->getAlias($word);
                     $minifiedValue .= $alias . $letter;
                     $word = '';
-                    continue;
-                } else {
-                    $word .= $letter;
+                    return;
                 }
-                continue;
-            }
 
-            if ($isLiteralLandmark) {
-                $templateLiteralInProgress = !$templateLiteralInProgress;
-            } elseif (Validate::isStringLandmark($letter, $value[$i - 1] ?? null, $stringInProgress)) {
-                $stringInProgress = !$stringInProgress;
+                $word .= $letter;
             }
+        );
 
-            if (
-                $templateLiteralInProgress
-                && $this->startsTemplateLiteralVariable($letter, $value, $i)
-            ) {
-                $templateVarInProgress = true;
-            }
-
-            if ($stringInProgress || $templateLiteralInProgress) {
-                $minifiedValue .= $letter;
-                $word = '';
-                continue;
-            }
-
-            if (Validate::isSpecial($letter)) {
-                $alias = $this->getAlias($word);
-                $minifiedValue .= $alias . $letter;
-                $word = '';
-                continue;
-            }
-
-            $word .= $letter;
-        }
         $alias = $this->getAlias($word);
         return $minifiedValue . $alias;
     }

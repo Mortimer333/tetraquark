@@ -32,10 +32,10 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
         }
 
         if ($this->isMultiLine()) {
-            $instruction = str_replace("\n", ' ', substr(self::$content, $subStart, $subEnd - $subStart));
+            $instruction = str_replace("\n", ' ', \mb_substr(self::$content, $subStart, $subEnd - $subStart));
         } else {
-            $instruction = str_replace("\n", ' ', substr(self::$content, $subStart, ($start + 1) - $subStart));
-            $this->setValue(trim(str_replace("\n", ' ', substr(self::$content, $start + 1, $subEnd - $start))));
+            $instruction = str_replace("\n", ' ', \mb_substr(self::$content, $subStart, ($start + 1) - $subStart));
+            $this->setValue(trim(str_replace("\n", ' ', \mb_substr(self::$content, $start + 1, $subEnd - $start))));
         }
 
         $this->setInstruction($instruction)
@@ -75,7 +75,7 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
         $SFWhitespace = false;
         $word = '';
         $arguments = [];
-        for ($i=0; $i < \strlen($instr); $i++) {
+        for ($i=0; $i < \mb_strlen($instr); $i++) {
             $letter = $instr[$i];
             if (!$SFParenthesis && $letter == '(') {
                 $SFParenthesis = true;
@@ -127,7 +127,7 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
     {
         $searchForEnd = false;
         $subEnd = null;
-        for ($i=$start + 1; $i < strlen(self::$content); $i++) {
+        for ($i=$start + 1; $i < \mb_strlen(self::$content); $i++) {
             $letter = self::$content[$i];
 
             if ($searchForEnd && ($this->endChars[$letter] ?? false)) {

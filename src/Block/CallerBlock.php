@@ -99,7 +99,6 @@ class CallerBlock extends Block implements Contract\Block
         if (is_null($end)) {
             $end = \mb_strlen(self::$content);
         }
-        Log::log('End: ' . $end . ', Start: ' . $start . ", end letter: " . self::$content[$end] . ', start letter: ' . self::$content[$start]);
         $this->setCaret($end);
         $this->setInstruction(\mb_substr(self::$content, $start, ($end - $start) + 1))
             ->setInstructionStart($start)

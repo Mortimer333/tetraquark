@@ -30,7 +30,7 @@ class VariableItemBlock extends VariableBlockAbstract implements Contract\Block
                 break;
             }
 
-            if ($letter == ';' || $newLineFound) {
+            if ($letter == ';') { //|| $newLineFound) {
                 $this->setInstruction('');
                 $this->setInstructionStart($i);
                 $this->setName(\mb_substr(self::$content, $start, $i - $start));
@@ -38,18 +38,17 @@ class VariableItemBlock extends VariableBlockAbstract implements Contract\Block
                 return;
             }
 
-            if ($letter == "\n") {
-                $newLineFound = true;
-                continue;
-            }
+            // if ($letter == "\n") {
+            //     $newLineFound = true;
+            //     continue;
+            // }
         }
 
         $this->findInstructionEnd($start, $this->subtype, $this->instructionEnds);
-        Log::log('Instruction: ' . $this->getInstruction());
-        $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
+        $this->blocks = array_merge($this->blocks, $this->createSubBlocks(null, true));
         if (\sizeof($this->blocks) == 0) {
             $instrEnd = $this->getInstructionStart() + \mb_strlen($this->getInstruction());
-            $this->setValue(trim(substr(self::$content, $instrEnd, $this->getCaret() - $instrEnd)));
+            $this->setValue(trim(\mb_substr(self::$content, $instrEnd, $this->getCaret() - $instrEnd)));
         }
         $this->findAndSetName($this->getSubtype() . ' ', $this->instructionEnds);
     }

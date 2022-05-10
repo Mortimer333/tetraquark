@@ -1,143 +1,439 @@
 Prepare file...
 Mapping...
-Instruction:  a =
-?
-:
-Instruction:  b =
-End: 10, Start: 9, end letter: ), start letter: (
-?
-:
 =======================
 Creating aliases...
 =======================
-Aliases: a => a, b => b, 
+Aliases: ClassName => a, func1 => b, funcr2 => c, meth2 => d, attrb => e, classTest => f, classTest2 => g, classTes3 => h, classTest4 => i, classTest6 => j, classTest5 => k, 
 Recreating...
+Letter: c, 
+Letter: o, c
+Letter: n, co
+Letter: s, con
+Letter: o, cons
+Letter: l, conso
+Letter: e, consol
+Letter: l, 
+Letter: o, l
+Letter: g, lo
+Letter: ', 
+Letter: n, 
+Letter: e, 
+Letter: w, 
+Letter: ', 
+Letter: c, 
+Letter: o, c
+Letter: n, co
+Letter: s, con
+Letter: o, cons
+Letter: l, conso
+Letter: e, consol
+Letter: l, 
+Letter: o, l
+Letter: g, lo
+Letter: ', 
+Letter: a, 
+Letter: s, 
+Letter: d, 
+Letter: a, 
+Letter: s, 
+Letter: ', 
+Letter: ', 
+Letter: a, 
+Letter: s, 
+Letter: d, 
+Letter: ', 
+Letter: +, 
+Letter: ', 
+Letter: a, 
+Letter: s, 
+Letter: d, 
+Letter: ', 
+Letter: (, 
+Letter: ), 
+Letter:  , 
+Letter: n, 
+Letter: e, n
+Letter: w, ne
+Letter: C, 
+Letter: l, C
+Letter: a, Cl
+Letter: s, Cla
+Letter: s, Clas
+Letter: N, Class
+Letter: a, ClassN
+Letter: m, ClassNa
+Letter: e, ClassNam
+Letter: \n, ClassName
+Letter: !, 
+Letter: õ, 
+Letter: |, 
+Letter: !, 
+Letter: !, 
+Letter: �, 
+Letter:  , 
+Letter:  , 
+Letter: h, 
+Letter: r, h
+Letter: o, hr
+Letter: w, hro
+Letter: ', 
+Letter: C, 
+Letter: o, 
+Letter: u, 
+Letter: l, 
+Letter: d, 
+Letter: n, 
+Letter: \, 
+Letter: ', 
+Letter: t, 
+Letter:  , 
+Letter: f, 
+Letter: i, 
+Letter: n, 
+Letter: d, 
+Letter:  , 
+Letter: l, 
+Letter: i, 
+Letter: n, 
+Letter: e, 
+Letter: s, 
+Letter: ', 
 =======================
-Block: Tetraquark\Block\VariableBlock
-Subtype: let
-Instruction: let a = true ? 'true' : 'false'
+Block: Tetraquark\Block\ClassBlock
+Subtype: class
+Instruction: class ClassName {
 Instruction Start: 0
-Caret: 31
-Name: ``
-Value: ``
-Alias: ``
+Caret: 150
+Name: `ClassName`
+Alias: `a`
 =======
-  Block: Tetraquark\Block\VariableItemBlock
-  Subtype: 
-  Instruction:  a =
-  Instruction Start: 0
-  Caret: 28
-  Name: `a`
-  Value: ``
-  Alias: `a`
+  Block: Tetraquark\Block\ClassMethodBlock
+  Subtype: method
+  Instruction: constructor() {
+  Instruction Start: 19
+  Caret: 57
+  Name: `constructor`
+  Arguments: [0] `
+  Alias: `constructor`
   =======
-    Block: Tetraquark\Block\UndefinedBlock
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: first
+    Instruction: console
+    Instruction Start: 36
+    Caret: 43
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: end:method
+    Instruction: log
+    Instruction Start: 43
+    Caret: 53
+    Name: ``
+    Alias: ``
+    =======
+      Block: Tetraquark\Block\StringBlock
+      Subtype: 
+      Instruction: 'new'
+      Instruction Start: 48
+      Caret: 53
+      Name: ``
+      Alias: ``
+      =======
+  Block: Tetraquark\Block\ClassMethodBlock
+  Subtype: method
+  Instruction: func1 () {
+  Instruction Start: 60
+  Caret: 72
+  Name: `func1`
+  Arguments: [0] `
+  Alias: `b`
+  =======
+  Block: Tetraquark\Block\ClassMethodBlock
+  Subtype: method
+  Instruction: funcr2() {
+  Instruction Start: 75
+  Caret: 85
+  Name: `funcr2`
+  Arguments: [0] `
+  Alias: `c`
+  =======
+  Block: Tetraquark\Block\ClassMethodBlock
+  Subtype: method
+  Instruction: meth2\n ()\n {
+  Instruction Start: 88
+  Caret: 125
+  Name: `meth2`
+  Arguments: [0] `
+  Alias: `d`
+  =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: first
+    Instruction: console
+    Instruction Start: 102
+    Caret: 109
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: end:method
+    Instruction: log
+    Instruction Start: 109
+    Caret: 121
+    Name: ``
+    Alias: ``
+    =======
+      Block: Tetraquark\Block\StringBlock
+      Subtype: 
+      Instruction: 'asdas'
+      Instruction Start: 114
+      Caret: 121
+      Name: ``
+      Alias: ``
+      =======
+  Block: Tetraquark\Block\AttributeBlock
+  Subtype: 
+  Instruction: attrb = 'asd' + 'asd'
+  Instruction Start: 128
+  Caret: 149
+  Name: `attrb`
+  Alias: `e`
+  =======
+    Block: Tetraquark\Block\StringBlock
     Subtype: 
-    Instruction:  true 
-    Instruction Start: -3
-    Caret: 3
+    Instruction: 'asd'
+    Instruction Start: 1
+    Caret: 6
     Name: ``
     Alias: ``
     =======
     Block: Tetraquark\Block\SymbolBlock
-    Subtype: ?
-    Instruction: ?
-    Instruction Start: 10
-    Caret: 10
+    Subtype: +
+    Instruction: +
+    Instruction Start: 7
+    Caret: 7
     Name: ``
     Alias: ``
     =======
     Block: Tetraquark\Block\StringBlock
     Subtype: 
-    Instruction: 'true'
-    Instruction Start: 12
-    Caret: 18
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\SymbolBlock
-    Subtype: :
-    Instruction: :
-    Instruction Start: 19
-    Caret: 19
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\StringBlock
-    Subtype: 
-    Instruction: 'false'
-    Instruction Start: 21
-    Caret: 28
+    Instruction: 'asd'
+    Instruction Start: 9
+    Caret: 14
     Name: ``
     Alias: ``
     =======
 Block: Tetraquark\Block\VariableBlock
 Subtype: const
-Instruction: const b = func()?\ntrue : false
-Instruction Start: 32
-Caret: 62
+Instruction: const classTest = new ClassName()
+Instruction Start: 152
+Caret: 185
 Name: ``
 Value: ``
 Alias: ``
 =======
   Block: Tetraquark\Block\VariableItemBlock
   Subtype: 
-  Instruction:  b =
+  Instruction:  classTest =
   Instruction Start: 0
-  Caret: 25
-  Name: `b`
+  Caret: 28
+  Name: `classTest`
   Value: ``
-  Alias: `b`
+  Alias: `f`
+  =======
+    Block: Tetraquark\Block\NewClassBlock
+    Subtype: new
+    Instruction:  ClassName()
+    Instruction Start: 12
+    Caret: 28
+    Name: ``
+    Arguments: [0] `
+    Alias: ``
+    =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: const
+Instruction: const classTest2 = new ClassName()
+Instruction Start: 187
+Caret: 221
+Name: ``
+Value: ``
+Alias: ``
+=======
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype: 
+  Instruction:  classTest2 =
+  Instruction Start: 0
+  Caret: 29
+  Name: `classTest2`
+  Value: ``
+  Alias: `g`
+  =======
+    Block: Tetraquark\Block\NewClassBlock
+    Subtype: new
+    Instruction:  ClassName()
+    Instruction Start: 13
+    Caret: 29
+    Name: ``
+    Arguments: [0] `
+    Alias: ``
+    =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: const
+Instruction: const classTes3 = new ClassName
+Instruction Start: 222
+Caret: 253
+Name: ``
+Value: ``
+Alias: ``
+=======
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype: 
+  Instruction:  classTes3 =
+  Instruction Start: 0
+  Caret: 26
+  Name: `classTes3`
+  Value: ``
+  Alias: `h`
+  =======
+    Block: Tetraquark\Block\NewClassBlock
+    Subtype: new
+    Instruction:  ClassName
+    Instruction Start: 12
+    Caret: 26
+    Name: ``
+    Arguments: [0] `
+    Alias: ``
+    =======
+Block: Tetraquark\Block\CallerBlock
+Subtype: (
+Instruction: ()
+Instruction Start: 254
+Caret: 255
+Name: ``
+Alias: ``
+=======
+Block: Tetraquark\Block\VariableBlock
+Subtype: const
+Instruction: const classTest4 = new ClassName
+Instruction Start: 257
+Caret: 289
+Name: ``
+Value: ``
+Alias: ``
+=======
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype: 
+  Instruction:  classTest4 =
+  Instruction Start: 0
+  Caret: 27
+  Name: `classTest4`
+  Value: ``
+  Alias: `i`
+  =======
+    Block: Tetraquark\Block\NewClassBlock
+    Subtype: new
+    Instruction:  ClassName
+    Instruction Start: 13
+    Caret: 27
+    Name: ``
+    Arguments: [0] `
+    Alias: ``
+    =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: const
+Instruction: const classTest6 = new ClassName
+Instruction Start: 291
+Caret: 323
+Name: ``
+Value: ``
+Alias: ``
+=======
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype: 
+  Instruction:  classTest6 =
+  Instruction Start: 0
+  Caret: 27
+  Name: `classTest6`
+  Value: ``
+  Alias: `j`
+  =======
+    Block: Tetraquark\Block\NewClassBlock
+    Subtype: new
+    Instruction:  ClassName
+    Instruction Start: 13
+    Caret: 27
+    Name: ``
+    Arguments: [0] `
+    Alias: ``
+    =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: const
+Instruction: const classTest5 = new
+Instruction Start: 324
+Caret: 346
+Name: ``
+Value: ``
+Alias: ``
+=======
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype: 
+  Instruction:  classTest5 =
+  Instruction Start: 0
+  Caret: 17
+  Name: `classTest5`
+  Value: ``
+  Alias: `k`
   =======
     Block: Tetraquark\Block\UndefinedBlock
     Subtype: 
-    Instruction:  func
-    Instruction Start: -2
-    Caret: 3
+    Instruction:  new
+    Instruction Start: 13
+    Caret: 17
     Name: ``
     Alias: ``
     =======
-    Block: Tetraquark\Block\CallerBlock
-    Subtype: (
-    Instruction: ()
-    Instruction Start: 9
-    Caret: 10
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\SymbolBlock
-    Subtype: ?
-    Instruction: ?
-    Instruction Start: 11
-    Caret: 11
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\UndefinedBlock
+Block: Tetraquark\Block\UndefinedBlock
+Subtype: 
+Instruction: ClassName\n
+Instruction Start: 336
+Caret: 346
+Name: ``
+Alias: ``
+=======
+Block: Tetraquark\Block\IfBlock
+Subtype: single-condition
+Instruction: if(!õ||!ú) throw new Error('Couldn\'t find lines');\n
+Instruction Start: 357
+Caret: 410
+Name: ``
+Alias: ``
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: hrow
+  Instruction Start: -5
+  Caret: -1
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\NewClassBlock
+  Subtype: new
+  Instruction:  Error('Couldn\'t find lines')
+  Instruction Start: 4
+  Caret: 38
+  Name: ``
+  Arguments: [1] `
+    Block: Tetraquark\Block\StringBlock
     Subtype: 
-    Instruction:  true 
-    Instruction Start: 5
-    Caret: 11
+    Instruction: 'Couldn\'t find lines'
+    Instruction Start: 0
+    Caret: 22
     Name: ``
     Alias: ``
     =======
-    Block: Tetraquark\Block\SymbolBlock
-    Subtype: :
-    Instruction: :
-    Instruction Start: 18
-    Caret: 18
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction:  false
-    Instruction Start: 19
-    Caret: 25
-    Name: ``
-    Alias: ``
-    =======
-Duration: 0.002s
+  Alias: ``
+  =======
+Duration: 0.006s
 
 
-let a=true?'true':'false';const b=func()?true:false;
+class a{constructor(){.();}b(){}c(){}d(){.();}e=;}const f=new a;const g=new a;const h=new a;;const i=new a;const j=new a;const k=; if() new Error();

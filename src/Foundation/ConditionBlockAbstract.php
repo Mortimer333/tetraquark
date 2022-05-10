@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Foundation;
-use \Tetraquark\{Exception as Exception, Block as Block, Log as Log, Validate as Validate};
+use \Tetraquark\{Exception, Block, Log, Validate, Str};
 
 abstract class ConditionBlockAbstract extends BlockAbstract
 {
@@ -26,7 +26,7 @@ abstract class ConditionBlockAbstract extends BlockAbstract
         $condEnd   = null;
         $end       = null;
         $parenthesisOpen = 0;
-        for ($i=$start; $i < \mb_strlen(self::$content); $i++) {
+        for ($i=$actualStart; $i < \strlen(self::$content); $i++) {
             $letter = self::$content[$i];
             if (Validate::isWhitespace($letter)) {
                 continue;
@@ -48,13 +48,14 @@ abstract class ConditionBlockAbstract extends BlockAbstract
 
 
             if (\is_null($condStart) && $letter !== '(') {
-                throw new Exception("Couldn't find start of parenthesis of condition at letter $i", 404);
+                continue;
+                // throw new Exception("Couldn't find start of parenthesis of condition at letter $i", 404);
             } elseif (\is_null($condStart) && $letter == '(') {
                 $condStart = $i + 1;
                 continue;
             }
 
-            if (is_null($condEnd) && !\is_null($condStart) && $letter == ')') {
+            if (\is_null($condEnd) && !\is_null($condStart) && $letter == ')') {
                 $condEnd = $i;
                 continue;
             }
@@ -64,7 +65,7 @@ abstract class ConditionBlockAbstract extends BlockAbstract
                 && !\is_null($condEnd)
                 && (
                     $letter == '{'
-                    || ($this instanceof Block\IfBlock && $letter == ';')
+                    || ($this instanceof Block\IfBlock && ($letter == ';' || $letter == "\n"))
                 )
             ) {
                 $end = $i + 1;

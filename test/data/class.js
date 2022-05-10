@@ -26,3 +26,5 @@ const classTest4 = new ClassName;
 const classTest6 = new ClassName
 const classTest5 = new
 ClassName
+
+if(!õ||!ú) throw new Error('Couldn\'t find lines');

@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Foundation;
-use \Tetraquark\{Exception as Exception, Block as Block, Log as Log, Validate as Validate};
-use \Tetraquark\MB as MB;
+use \Tetraquark\{Exception, Block, Log, Validate};
+use \Tetraquark\Str;
 
 abstract class MethodBlockAbstract extends BlockAbstract
 {
@@ -44,7 +44,7 @@ abstract class MethodBlockAbstract extends BlockAbstract
         $word = '';
         $arguments = [];
         $skipBracket = 0;
-        for ($i=\strlen($instr) - 1; $i >= 0; $i--) {
+        for ($i=\mb_strlen($instr) - 1; $i >= 0; $i--) {
             $letter = $instr[$i];
             if (
                 ($startsTemplate = Validate::isTemplateLiteralLandmark($letter, ''))
@@ -55,7 +55,7 @@ abstract class MethodBlockAbstract extends BlockAbstract
                 if (!isset($instr[$i])) {
                     break;
                 }
-                $word .= MB::strrev(\mb_substr($instr, $i + 1, $oldPos - $i));
+                $word .= Str::rev(\mb_substr($instr, $i + 1, $oldPos - $i));
                 $letter = $instr[$i];
             }
 
@@ -87,13 +87,13 @@ abstract class MethodBlockAbstract extends BlockAbstract
             }
 
             if ($startSettingArgs && $letter == '(') {
-                $arguments[] = MB::strrev($word);
+                $arguments[] = Str::rev($word);
                 $word = '';
                 break;
             }
 
             if ($startSettingArgs && $letter == ',') {
-                $arguments[] = MB::strrev($word);
+                $arguments[] = Str::rev($word);
                 $word = '';
                 continue;
             }
@@ -135,7 +135,7 @@ abstract class MethodBlockAbstract extends BlockAbstract
     {
         $properEnd = null;
         $startDefaultSkip = false;
-        for ($i=$start; $i < strlen(self::$content); $i++) {
+        for ($i=$start; $i < \mb_strlen(self::$content); $i++) {
             $letter = self::$content[$i];
 
             if (
@@ -170,7 +170,7 @@ abstract class MethodBlockAbstract extends BlockAbstract
         }
 
         $properStart = $start;
-        $instruction = substr(self::$content, $properStart, $properEnd - $properStart);
+        $instruction = \mb_substr(self::$content, $properStart, $properEnd - $properStart);
         $this->setInstructionStart($properStart)
             ->setInstruction($instruction);
     }

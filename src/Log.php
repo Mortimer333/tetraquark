@@ -63,12 +63,12 @@ class Log
                 if (!isset($debug)) {
                     $debug = debug_backtrace()[1 + $traceLvl];
                 }
-                if (\strlen($class) > 0) {
+                if (\mb_strlen($class) > 0) {
                     $function .= ' | ';
                 }
                 $function .= self::fitString($debug['function'], self::$functionLimit) . ' * ';
             }
-            if (\strlen($class) > 0 && \strlen($function) == 0) {
+            if (\mb_strlen($class) > 0 && \mb_strlen($function) == 0) {
                 $class .= ' * ';
             }
             echo $class . $function . str_replace("\r", '\r', str_replace("\n", '\n', $message))   . PHP_EOL;
@@ -78,11 +78,11 @@ class Log
     static protected function fitString(string $string, int $size): string
     {
         $slimed = '';
-        if (strlen($string) > $size) {
-            $slimed = substr($string, 0, (int) (floor($size/2) - 1)) . '..';
-            $slimed .= substr($string, (int) -ceil($size/2) + 1);
-        } elseif (strlen($string) < $size) {
-            $amount = $size - strlen($string);
+        if (\mb_strlen($string) > $size) {
+            $slimed = \mb_substr($string, 0, (int) (floor($size/2) - 1)) . '..';
+            $slimed .= \mb_substr($string, (int) -ceil($size/2) + 1);
+        } elseif (\mb_strlen($string) < $size) {
+            $amount = $size - \mb_strlen($string);
             $slimed = str_repeat(' ', (int) floor($amount/2)) . $string . str_repeat(' ', (int) ceil($amount/2));
         }
         return $slimed;

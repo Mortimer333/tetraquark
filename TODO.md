@@ -1,5 +1,5 @@
 # TO DO
-## 0. Chain link gets confused if you leave dot at the and of line (man.\nbam())
+## 0. Cut script into array (instead of using it as string) so we can easily work on UTF8 chars
 ## 1. Upgrade removeAdditionalSpaces as it doesn't reamove all not needed space - do{ whileLooped--; console.log(whileLooped);}
 
 
@@ -10,7 +10,7 @@
 ## Next stage - check for any useless statements
 
 ## Handle
-- [?DONE] ?: conditions
+- [DONE] ?: conditions
 - import, export
 - array (used like object)
 - [DONE] notes

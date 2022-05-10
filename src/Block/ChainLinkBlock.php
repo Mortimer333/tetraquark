@@ -32,11 +32,9 @@ class ChainLinkBlock extends Block implements Contract\Block
         $end = null;
         $startLetterSearch = false;
         $caret = null;
-        Log::log('====');
         list($letter, $linkStart) = $this->getNextLetter($start, self::$content);
         for ($i=$linkStart; $i < \mb_strlen(self::$content); $i++) {
             $letter = self::$content[$i];
-            Log::log('Letter:' . $letter);
             if (($endChars[$letter] ?? false || $startLetterSearch) && !Validate::isWhitespace($letter)) {
                 $end = $i;
                 if ($letter == '=' && self::$content[$i + 1] != '=') {
