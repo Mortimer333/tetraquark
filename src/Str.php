@@ -45,8 +45,9 @@ class Str
     {
         $nextLetter = $i;
         while ($letter = Str::get($content, $i, $nextLetter)) {
-            $func($letter, $i, ...$args);
+            $res = $func($letter, $i, ...$args);
             $i = $nextLetter;
         }
+        return $res;
     }
 }

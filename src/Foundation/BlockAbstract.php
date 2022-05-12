@@ -17,7 +17,7 @@ abstract class BlockAbstract
     use BlockGetSetTrait;   // Holds all get and set functions
     use BlockMapsTrait;     // Has $blocksMap, $classBlocksMap, $objectBlocksMap, $callerBlocksMap and $arrayBlocksMap variables
     use BlockAliasMapTrait; // Contains our alias creation map
-    static protected string $content;
+    static protected string|array $content;
     static protected array  $mappedAliases = [];
     protected int    $caret = 0;
     protected bool   $endFunction = false;

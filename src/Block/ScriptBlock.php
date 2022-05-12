@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
+use \Tetraquark\{Log, Exception, Contract, Validate, Str};
 use \Tetraquark\Foundation\BlockAbstract as Block;
 
 class ScriptBlock extends Block implements Contract\Block
@@ -25,6 +25,8 @@ class ScriptBlock extends Block implements Contract\Block
         Log::timerStart();
         Log::log("Prepare file...");
         $this->prepare();
+        Log::log("Cut file...");
+        $this->setContent();
         Log::log("Mapping...");
         $this->map($start);
         Log::log("=======================");
@@ -41,6 +43,18 @@ class ScriptBlock extends Block implements Contract\Block
         Log::log("=======================");
         Log::displayBlocks($this->blocks);
         Log::timerEnd();
+    }
+
+    protected function setContent(): void
+    {
+        self::$content = Str::iterate(
+            self::$content, 0, [[]],
+            function (string $letter, int $i, array &$content)
+            {
+                $content[] = $letter;
+                return $content;
+            }
+        );
     }
 
     protected function prepare(): void
