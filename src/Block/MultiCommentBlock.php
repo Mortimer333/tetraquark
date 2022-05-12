@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
+use \Tetraquark\{Log, Exception, Contract, Validate};
 use \Tetraquark\Foundation\CommentBlockAbstract as CommentBlock;
 
 class MultiCommentBlock extends CommentBlock implements Contract\Block
@@ -13,10 +13,10 @@ class MultiCommentBlock extends CommentBlock implements Contract\Block
     public function objectify(int $start = 0)
     {
         $this->setName('');
-        $previousLetter = self::$content[$start - 1];
+        $previousLetter = self::$content->getLetter($start - 1);
         $end = null;
-        for ($i=$start + 2; $i < \mb_strlen(self::$content); $i++) {
-            $letter = self::$content[$i];
+        for ($i=$start + 2; $i < self::$content->getLength(); $i++) {
+            $letter = self::$content->getLetter($i);
             if ($letter == "/" && $previousLetter == "*") {
                 $end = $i + 1;
                 break;
@@ -26,11 +26,12 @@ class MultiCommentBlock extends CommentBlock implements Contract\Block
         }
 
         if (\is_null($end)) {
-            $end = \mb_strlen(self::$content) - 1 - $start;
+            $end = self::$content->getLength() - 1 - $start;
         }
 
-        $this->setInstruction(\mb_substr(self::$content, $start - 1, $end - ($start - 1)));
-        $this->setInstructionStart($start - 1);
-        $this->setCaret($end);
+        $this->setInstruction(self::$content->iCutToContent($start - 1, $end))
+            ->setInstructionStart($start - 1)
+            ->setCaret($end)
+        ;
     }
 }

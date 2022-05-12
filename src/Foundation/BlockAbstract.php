@@ -508,10 +508,10 @@ abstract class BlockAbstract
         return $minifiedValue . $alias;
     }
 
-    protected function startsTemplateLiteralVariable(string $letter, string $value, int $i): bool
+    protected function startsTemplateLiteralVariable(string $letter, Content $value, int $i): bool
     {
-        return ($value[$i - 1] ?? '') . $letter == '${'
-            && ($value[$i - 2] ?? '') . ($value[$i - 1] ?? '') . $letter != '\${';
+        return ($value->getLetter($i - 1) ?? '') . $letter == '${'
+            && ($value->getLetter($i - 2) ?? '') . ($value->getLetter($i - 1) ?? '') . $letter != '\${';
     }
 
     public function skipString(int $start, Content $content, bool $isTemplate = false, bool $reverse = false): int

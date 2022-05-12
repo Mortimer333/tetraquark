@@ -12,7 +12,7 @@ class SymbolBlock extends VariableBlock implements Contract\Block
         // Find symbol start
         $properStart = $start - (\mb_strlen($this->getSubtype()) - 1);
 
-        $this->setInstruction(\mb_substr(self::$content, $properStart, $start - $properStart + 1))
+        $this->setInstruction(self::$content->cutToContent($properStart, $start - $properStart + 1))
             ->setInstructionStart($properStart)
             ->setCaret($start);
     }

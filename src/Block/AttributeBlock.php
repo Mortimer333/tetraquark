@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
+use \Tetraquark\{Log, Exception, Contract, Validate};
 use \Tetraquark\Foundation\VariableBlockAbstract as VariableBlock;
 
 class AttributeBlock extends VariableBlock implements Contract\Block
@@ -24,9 +24,9 @@ class AttributeBlock extends VariableBlock implements Contract\Block
         $name = '';
 
         for ($i=$start; $i >= 0; $i--) {
-            $letter = self::$content[$i];
+            $letter = self::$content->getLetter($i);
             if ($letterFound && Validate::isWhitespace($letter) || $letterFound && $letter == '.') {
-                $name = \mb_substr(self::$content, $i + 1, $start - $i);
+                $name = self::$content->subStr($i + 1, $start - $i);
                 $start = $i + 1;
                 break;
             }
@@ -36,18 +36,18 @@ class AttributeBlock extends VariableBlock implements Contract\Block
             }
 
             if ($i == 0) {
-                $name = \mb_substr(self::$content, $i, $start);
+                $name = self::$content->subStr($i, $start);
                 $start = 0;
             }
         }
 
         $end = $this->findVariableEnd($start);
-        $value = \mb_substr(self::$content, $equalPos + 1, $end - ($equalPos + 1));
+        $value = self::$content->iSubStr($equalPos + 1, $end);
         $this->blocks = array_merge($this->blocks, $this->createSubBlocksWithContent($value));
-        $this->setInstruction(\mb_substr(self::$content, $start, $end - $start))
+        $this->setInstruction(self::$content->iCutToContent($start, $end))
             ->setInstructionStart($start)
             ->setName($name)
-            ->setCaret($end);
+            ->setCaret($end)
             ;
     }
 
@@ -82,9 +82,9 @@ class AttributeBlock extends VariableBlock implements Contract\Block
             '>>>' => true,
         ];
 
-        $last  = self::$content[$start - 1];
-        $second = self::$content[$start - 2];
-        $first = self::$content[$start - 3];
+        $last  = self::$content->getLetter($start - 1);
+        $second = self::$content->getLetter($start - 2);
+        $first = self::$content->getLetter($start - 3);
         if ($tripleAugments[$first . $second . $last] ?? false) {
             $start = $start - 4;
             $this->augment = $first . $second . $last;

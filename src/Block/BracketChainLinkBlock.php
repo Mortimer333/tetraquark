@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
+use \Tetraquark\{Log, Exception, Contract, Validate, Content};
 use \Tetraquark\Foundation\BlockAbstract as Block;
 
 class BracketChainLinkBlock extends Block implements Contract\Block
@@ -15,7 +15,7 @@ class BracketChainLinkBlock extends Block implements Contract\Block
 
     public function objectify(int $start = 0)
     {
-        $this->setInstruction('');
+        $this->setInstruction(new Content(''));
         $this->setInstructionStart($start);
         $this->setName('');
         $end = $start;
@@ -25,8 +25,8 @@ class BracketChainLinkBlock extends Block implements Contract\Block
         $getSubBlocks = false;
         $checkFirsLetter = true;
         $start += 1;
-        for ($i=$start; $i < \mb_strlen(self::$content); $i++) {
-            $letter = self::$content[$i];
+        for ($i=$start; $i < self::$content->getLength(); $i++) {
+            $letter = self::$content->getLetter($i);
             $end = $i;
             if (Validate::isWhitespace($letter)) {
                 continue;
@@ -71,10 +71,10 @@ class BracketChainLinkBlock extends Block implements Contract\Block
                     $template = true;
                     continue;
                 }
-            } elseif (!$stringEnd && $string && Validate::isStringLandmark($letter, self::$content[$i - 1], true)) {
+            } elseif (!$stringEnd && $string && Validate::isStringLandmark($letter, self::$content->getLetter($i - 1), true)) {
                 $stringEnd = true;
                 continue;
-            } elseif (!$stringEnd && $template && Validate::isTemplateLiteralLandmark($letter, self::$content[$i - 1], true)) {
+            } elseif (!$stringEnd && $template && Validate::isTemplateLiteralLandmark($letter, self::$content->getLetter($i - 1), true)) {
                 $stringEnd = true;
                 continue;
             }
@@ -96,13 +96,13 @@ class BracketChainLinkBlock extends Block implements Contract\Block
             $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
         }
 
-        for ($i=$this->getCaret() + 1; $i < \mb_strlen(self::$content); $i++) {
-            $letter = self::$content[$i];
+        for ($i=$this->getCaret() + 1; $i < self::$content->getLength(); $i++) {
+            $letter = self::$content->getLetter($i);
             if (Validate::isWhitespace($letter)) {
                 continue;
             }
 
-            if ($letter != '=' || $letter == '=' && self::$content[$i + 1] == '=') {
+            if ($letter != '=' || $letter == '=' && self::$content->getLetter($i + 1) == '=') {
                 if (!$getSubBlocks) {
                     $this->setCaret($start);
                     $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
@@ -118,7 +118,7 @@ class BracketChainLinkBlock extends Block implements Contract\Block
             }
         }
 
-        $name = trim(\mb_substr(self::$content, $start, $end - $start));
+        $name = trim(self::$content->iSubStr($start, $end));
         if ($string) {
             $name = \mb_substr($name, 1, -1);
             $this->setName($name);

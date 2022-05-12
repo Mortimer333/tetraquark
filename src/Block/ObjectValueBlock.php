@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
+use \Tetraquark\{Log, Exception, Contract, Validate};
 use \Tetraquark\Foundation\BlockAbstract as Block;
 
 class ObjectValueBlock extends Block implements Contract\Block
@@ -19,28 +19,28 @@ class ObjectValueBlock extends Block implements Contract\Block
         ]);
         $this->setName(
             $this->removeStringCharsIfPossible(
-                trim($this->getInstruction())
+                $this->getInstruction()->trim()
             )
         );
         $this->blocks = array_merge($this->blocks, $this->createSubBlocks($start + 1));
-        $lastLetter = self::$content[$this->getCaret()];
+        $lastLetter = self::$content->getLetter($this->getCaret());
         if ($lastLetter == '}') {
             $this->setCaret($this->getCaret() - 1);
         }
     }
 
-    protected function removeStringCharsIfPossible(string $name): string
+    protected function removeStringCharsIfPossible(Content $name): string
     {
-        for ($i=1; $i < \mb_strlen($name) - 1; $i++) {
-            $letter = $name[$i];
+        for ($i=1; $i < $name->getLength() - 1; $i++) {
+            $letter = $name->getLetter($i);
             if (Validate::isWhitespace($letter) || Validate::isSpecial($letter) || Validate::isString($letter)) {
-                return $name;
+                return $name->__toString();
             }
         }
         if (Validate::isString($name[0])) {
-            return trim($name, $name[0]);
+            return trim($name->__toString(), $name[0]);
         }
-        return $name;
+        return $name->__toString();
     }
 
     public function recreate(): string

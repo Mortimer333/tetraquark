@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
+use \Tetraquark\{Log, Exception, Contract, Validate};
 use \Tetraquark\Foundation\VariableBlockAbstract;
 
 class VariableBlock extends VariableBlockAbstract implements Contract\Block
@@ -43,7 +43,7 @@ class VariableBlock extends VariableBlockAbstract implements Contract\Block
         $this->addVariableItems($items);
 
         $this->setName('');
-        $this->setInstruction(\mb_substr(self::$content, $this->getInstructionStart(), $end - $this->getInstructionStart()));
+        $this->setInstruction(self::$content->iCutToContent($this->getInstructionStart(), $end));
         $this->setCaret($end);
     }
 
@@ -56,10 +56,5 @@ class VariableBlock extends VariableBlockAbstract implements Contract\Block
     public function getValue(): string
     {
         return $this->value;
-    }
-
-    protected function handleMultiDefinition(int $nameEnd): void
-    {
-
     }
 }

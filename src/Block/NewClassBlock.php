@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
+use \Tetraquark\{Log, Exception, Contract, Validate};
 use \Tetraquark\Foundation\MethodBlockAbstract as MethodBlock;
 
 class NewClassBlock extends MethodBlock implements Contract\Block
@@ -16,26 +16,26 @@ class NewClassBlock extends MethodBlock implements Contract\Block
         $nameEnded        = false;
         $end              = null;
 
-        for ($i=$start; $i < \mb_strlen(self::$content); $i++) {
-            $letter = self::$content[$i];
+        for ($i=$start; $i < self::$content->getLength(); $i++) {
+            $letter = self::$content->getLetter($i);
             if (Validate::isWhitespace($letter)) {
                 if ($nameStarted) {
                     $nameEnded = true;
                 }
                 continue;
             } elseif (!$searchForClosing && $letter == '(') {
-                $this->setClassName(\mb_substr(self::$content, $start, $i - $start));
+                $this->setClassName(self::$content->iSubStr($start, $i));
                 $searchForClosing = true;
                 continue;
             } elseif ($letter == ';') {
                 $end = $i;
-                $this->setClassName(\mb_substr(self::$content, $start, $end - $start));
+                $this->setClassName(self::$content->iSubStr($start, $end));
                 break;
             } elseif (!$searchForClosing) {
                 // If its non whitespace char and we don't search for ')'
                 if ($nameEnded) {
                     $end = $i - 1;
-                    $this->setClassName(\mb_substr(self::$content, $start, $end - $start));
+                    $this->setClassName(self::$content->iSubStr($start, $end));
                     break;
                 }
                 $nameStarted = true;
@@ -47,14 +47,12 @@ class NewClassBlock extends MethodBlock implements Contract\Block
 
         if (\is_null($end)) {
             $end = $i;
-            $this->setClassName(\mb_substr(self::$content, $start, $end - $start));
+            $this->setClassName(self::$content->iSubStr($start, $end));
         }
 
         $this->setCaret($end);
 
-        $instruction = \mb_substr(self::$content, $start, $end - $start);
-
-        $this->setInstruction($instruction)
+        $this->setInstruction(self::$content->iCutToContent($start, $end))
             ->setInstructionStart($start - \mb_strlen('new '))
         ;
         $this->findAndSetArguments();

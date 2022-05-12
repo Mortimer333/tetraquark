@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
+use \Tetraquark\{Log, Exception, Contract, Validate, Content};
 use \Tetraquark\Foundation\BlockAbstract as Block;
 
 class ElseBlock extends Block implements Contract\Block
@@ -19,24 +19,24 @@ class ElseBlock extends Block implements Contract\Block
         [$letter, $pos] = $this->getNextLetter($start, self::$content);
         if (
             $letter == 'i'
-            && self::$content[$pos + 1] == 'f'
+            && self::$content->getLetter($pos + 1) == 'f'
             && (
-                Validate::isWhitespace(self::$content[$pos + 2])
-                || self::$content[$pos + 2]== '('
+                Validate::isWhitespace(self::$content->getLetter($pos + 2))
+                || self::$content->getLetter($pos + 2) == '('
             )
         ) {
             $this->setSubtype(self::ELSEIF);
             $this->setCaret($start);
-            $this->setInstruction('else ');
+            $this->setInstruction(new Content('else '));
         } else {
-            $this->setInstruction('else{');
-            if (self::$content == '{') {
+            $this->setInstruction(new Content('else{'));
+            if (self::$content->subStr(0) == '{') {
                 $this->setCaret($start);
                 $this->blocks = array_merge($this->blocks, $this->createSubBlocks($start + 1));
             } else {
                 [$letter, $pos] = $this->getNextLetter($start, self::$content);
                 if ($letter != '{') {
-                    $this->setInstruction('else');
+                    $this->setInstruction(new Content('else'));
                     $this->setSubtype(self::SINGLE_LINE);
                     $this->endChars = [
                         "\n" => true,

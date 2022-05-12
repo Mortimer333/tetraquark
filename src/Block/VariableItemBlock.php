@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
+use \Tetraquark\{Log, Exception, Contract, Validate, Content};
 use \Tetraquark\Foundation\VariableBlockAbstract;
 
 class VariableItemBlock extends VariableBlockAbstract implements Contract\Block
@@ -19,8 +19,8 @@ class VariableItemBlock extends VariableBlockAbstract implements Contract\Block
     public function objectify(int $start = 0)
     {
         $newLineFound = false;
-        for ($i=$start + 1; $i < \mb_strlen(self::$content); $i++) {
-            $letter = self::$content[$i];
+        for ($i=$start + 1; $i < self::$content->getLength(); $i++) {
+            $letter = self::$content->getLetter($i);
 
             if (Validate::isWhitespace($letter)) {
                 continue;
@@ -31,24 +31,19 @@ class VariableItemBlock extends VariableBlockAbstract implements Contract\Block
             }
 
             if ($letter == ';') { //|| $newLineFound) {
-                $this->setInstruction('');
+                $this->setInstruction(new Content(''));
                 $this->setInstructionStart($i);
-                $this->setName(\mb_substr(self::$content, $start, $i - $start));
+                $this->setName(self::$content->iSubStr($start, $i));
                 $this->setCaret($i + 1);
                 return;
             }
-
-            // if ($letter == "\n") {
-            //     $newLineFound = true;
-            //     continue;
-            // }
         }
 
         $this->findInstructionEnd($start, $this->subtype, $this->instructionEnds);
         $this->blocks = array_merge($this->blocks, $this->createSubBlocks(null, true));
         if (\sizeof($this->blocks) == 0) {
             $instrEnd = $this->getInstructionStart() + \mb_strlen($this->getInstruction());
-            $this->setValue(trim(\mb_substr(self::$content, $instrEnd, $this->getCaret() - $instrEnd)));
+            $this->setValue(trim(self::$content->iSubStr($instrEnd, $this->getCaret())));
         }
         $this->findAndSetName($this->getSubtype() . ' ', $this->instructionEnds);
     }

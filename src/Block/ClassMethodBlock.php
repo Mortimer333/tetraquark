@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
+use \Tetraquark\{Log, Exception, Contract, Validate};
 use \Tetraquark\Foundation\MethodBlockAbstract as MethodBlock;
 
 class ClassMethodBlock extends MethodBlock implements Contract\Block
@@ -19,7 +19,7 @@ class ClassMethodBlock extends MethodBlock implements Contract\Block
         $searchForWhitespace = false;
         // Search for the name of the function
         for ($i=$start - 1; $i >= 0; $i--) {
-            $letter = self::$content[$i];
+            $letter = self::$content->getLetter($i);
             if ($searchForWhitespace && Validate::isWhitespace($letter)) {
                 $start = $i + 1;
                 break;

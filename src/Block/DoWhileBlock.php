@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
+use \Tetraquark\{Log, Exception, Contract, Validate, Content};
 use \Tetraquark\Foundation\ConditionBlockAbstract as ConditionBlock;
 
 class DoWhileBlock extends ConditionBlock implements Contract\Block
@@ -23,16 +23,16 @@ class DoWhileBlock extends ConditionBlock implements Contract\Block
     {
         $this->setName('');
         $this->setCondType('do-while');
-        $this->setInstruction('do {');
+        $this->setInstruction(new Content('do {'));
         $this->setInstructionStart($start - 2);
-        for ($i=$start; $i < \mb_strlen(self::$content); $i++) {
-            $letter = self::$content[$i];
+        for ($i=$start; $i < self::$content->getLength(); $i++) {
+            $letter = self::$content->getLetter($i);
             if ($letter == '{') {
                 $start = $i + 1;
                 break;
             }
 
-            if ($i == \mb_strlen(self::$content) - 1) {
+            if ($i == self::$content->getLength() - 1) {
                 throw new Exception("Start of do..while block not found", 404);
             }
         }
@@ -41,8 +41,8 @@ class DoWhileBlock extends ConditionBlock implements Contract\Block
         $condStart = null;
         $condEnd = null;
         $parenthesisOpened = 0;
-        for ($i=$this->getCaret(); $i < \mb_strlen(self::$content); $i++) {
-            $letter = self::$content[$i];
+        for ($i=$this->getCaret(); $i < self::$content->getLength(); $i++) {
+            $letter = self::$content->getLetter($i);
             if (Validate::isWhitespace($letter)) {
                 continue;
             }
@@ -76,7 +76,7 @@ class DoWhileBlock extends ConditionBlock implements Contract\Block
         }
 
         $this->setCaret($condEnd);
-        $this->setCondition(\mb_substr(self::$content, $condStart, $condEnd - $condStart));
+        $this->setCondition(self::$content->iSubStr($condStart, $condEnd));
         $condBlocks = $this->createSubBlocksWithContent($this->getCondition());
         $this->setCondBlocks($condBlocks);
         $this->setCondition(

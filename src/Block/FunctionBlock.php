@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
+use \Tetraquark\{Log, Exception, Contract, Validate, Content};
 use \Tetraquark\Foundation\MethodBlockAbstract as MethodBlock;
 
 class FunctionBlock extends MethodBlock implements Contract\Block
@@ -17,7 +17,7 @@ class FunctionBlock extends MethodBlock implements Contract\Block
     public function objectify(int $start = 0)
     {
         $this->findMethodEnd($start);
-        $this->setInstruction('function' . $this->getInstruction());
+        $this->setInstruction(new Content('function' . $this->getInstruction()));
         $this->findAndSetName('function ', ['(' => true]);
         $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
         if (\mb_strlen($this->getName()) == 0) {

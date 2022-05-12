@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
+use \Tetraquark\{Log, Exception, Contract, Validate, Content};
 use \Tetraquark\Foundation\BlockAbstract as Block;
 
 class TripleEqualBlock extends Block implements Contract\Block
 {
     public function objectify(int $start = 0)
     {
-        $this->setInstruction('===');
+        $this->setInstruction(new Content('==='));
         $this->setName('');
         $this->setInstructionStart($start);
         $this->setCaret($start);

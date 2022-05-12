@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
+use \Tetraquark\{Log, Exception, Contract, Validate};
 use \Tetraquark\Foundation\BlockAbstract as Block;
 
 class ChainLinkBlock extends Block implements Contract\Block
@@ -33,11 +33,11 @@ class ChainLinkBlock extends Block implements Contract\Block
         $startLetterSearch = false;
         $caret = null;
         list($letter, $linkStart) = $this->getNextLetter($start, self::$content);
-        for ($i=$linkStart; $i < \mb_strlen(self::$content); $i++) {
-            $letter = self::$content[$i];
+        for ($i=$linkStart; $i < self::$content->getLength(); $i++) {
+            $letter = self::$content->getLetter($i);
             if (($endChars[$letter] ?? false || $startLetterSearch) && !Validate::isWhitespace($letter)) {
                 $end = $i;
-                if ($letter == '=' && self::$content[$i + 1] != '=') {
+                if ($letter == '=' && self::$content->getLetter($i + 1) != '=') {
                     $this->setSubtype(self::END_VARIABLE);
                 } elseif ($letter == '(') {
                     $this->setSubtype(self::END_METHOD);
@@ -63,10 +63,9 @@ class ChainLinkBlock extends Block implements Contract\Block
             $this->setCaret($caret);
         }
 
-        $instruction = \mb_substr(self::$content, $start, $end - $start);
-        $instrLen = \mb_strlen($instruction);
+        $instruction = ;
         $this->setInstructionStart($start - 1)
-            ->setInstruction(trim($instruction));
+            ->setInstruction(self::$content->iCutToContent($start, $end)->trim());
 
         if ($this->getSubtype() == self::END_METHOD) {
             $this->endChars = [
@@ -77,7 +76,7 @@ class ChainLinkBlock extends Block implements Contract\Block
             list($equal, $equalPos) = $this->getNextLetter($caret, self::$content);
             $attribute = new AttributeBlock($equalPos);
             $attribute->setName('');
-            $this->setName($this->getInstruction());
+            $this->setName($this->getInstruction()->iSubStr(0));
             $this->setBlocks([
                 $attribute
             ]);

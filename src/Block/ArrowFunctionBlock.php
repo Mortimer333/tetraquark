@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
+use \Tetraquark\{Log, Exception, Contract, Validate, Content};
 use \Tetraquark\Foundation\MethodBlockAbstract as MethodBlock;
 
 class ArrowFunctionBlock extends MethodBlock implements Contract\Block
@@ -32,13 +32,13 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
         }
 
         if ($this->isMultiLine()) {
-            $instruction = str_replace("\n", ' ', \mb_substr(self::$content, $subStart, $subEnd - $subStart));
+            $instruction = str_replace("\n", ' ', self::$content->iSubStr($subStart, $subEnd));
         } else {
-            $instruction = str_replace("\n", ' ', \mb_substr(self::$content, $subStart, ($start + 1) - $subStart));
-            $this->setValue(trim(str_replace("\n", ' ', \mb_substr(self::$content, $start + 1, $subEnd - $start))));
+            $instruction = str_replace("\n", ' ', self::$content->iSubStr($subStart, $start + 1));
+            $this->setValue(trim(str_replace("\n", ' ', self::$content->subStr($start + 1, $subEnd - $start))));
         }
 
-        $this->setInstruction($instruction)
+        $this->setInstruction(new Content($instruction))
             ->setInstructionStart($subStart)
         ;
         if ($this->isMultiLine()) {
@@ -75,8 +75,8 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
         $SFWhitespace = false;
         $word = '';
         $arguments = [];
-        for ($i=0; $i < \mb_strlen($instr); $i++) {
-            $letter = $instr[$i];
+        for ($i=0; $i < $instr->getLength(); $i++) {
+            $letter = $instr->getLetter($i);
             if (!$SFParenthesis && $letter == '(') {
                 $SFParenthesis = true;
                 $word = '';
@@ -127,8 +127,8 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
     {
         $searchForEnd = false;
         $subEnd = null;
-        for ($i=$start + 1; $i < \mb_strlen(self::$content); $i++) {
-            $letter = self::$content[$i];
+        for ($i=$start + 1; $i < self::$content->getLength(); $i++) {
+            $letter = self::$content->getLetter($i);
 
             if ($searchForEnd && ($this->endChars[$letter] ?? false)) {
                 $subEnd = $i - 1;
@@ -159,16 +159,16 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
         $subStart = null;
         $ignoreParenthesis = 0;
         for ($i=$start - 2; $i >= 0; $i--) {
-            $letter = self::$content[$i];
+            $letter = self::$content->getLetter($i);
             if (
                 ($startsTemplate = Validate::isTemplateLiteralLandmark($letter, ''))
                 || Validate::isStringLandmark($letter, '')
             ) {
                 $i = $this->skipString($i - 1, self::$content, $startsTemplate, true);
-                if (!isset(self::$content[$i])) {
+                if (\is_null(self::$content->getLetter($i))) {
                     break;
                 }
-                $letter = self::$content[$i];
+                $letter = self::$content->getLetter($i);
             }
 
             if ($letter == ';') {

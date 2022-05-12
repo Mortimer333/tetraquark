@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\{Log as Log, Exception as Exception, Contract as Contract, Validate as Validate};
+use \Tetraquark\{Log, Exception, Contract, Validate, Content};
 use \Tetraquark\Foundation\BlockAbstract as Block;
 
 class CallerBlock extends Block implements Contract\Block
@@ -16,8 +16,8 @@ class CallerBlock extends Block implements Contract\Block
         $ignorNextClose = false;
         // Check if its not arrow method
         $ignoreBrackets = 0;
-        for ($i=$start + 1; $i < \mb_strlen(self::$content); $i++) {
-            $letter = self::$content[$i];
+        for ($i=$start + 1; $i < self::$content->getLength(); $i++) {
+            $letter = self::$content->getLetter($i);
 
             // Skip String
             if (
@@ -25,7 +25,7 @@ class CallerBlock extends Block implements Contract\Block
                 || Validate::isStringLandmark($letter, '')
             ) {
                 $i = $this->skipString($i + 1, self::$content, $startsTemplate);
-                $letter = self::$content[$i];
+                $letter = self::$content->getLetter($i);
             }
 
             if ($letter == '(') {
@@ -82,9 +82,9 @@ class CallerBlock extends Block implements Contract\Block
             if ($searchForArrow && $letter != '=') {
                 // $end = $i;
                 break;
-            } elseif ($searchForArrow && $letter == '=' && self::$content[$i + 1] ?? '' == ">") {
+            } elseif ($searchForArrow && $letter == '=' && self::$content->getLetter($i + 1) ?? '' == ">") {
                 // If this is arrow function then make this empty and skip current letter
-                $this->setInstruction('')
+                $this->setInstruction(new Content(''))
                     ->setInstructionStart($start)
                 ;
                 $arrow = new ArrowFunctionBlock($i + 1);
@@ -97,10 +97,10 @@ class CallerBlock extends Block implements Contract\Block
         }
 
         if (is_null($end)) {
-            $end = \mb_strlen(self::$content);
+            $end = self::$content->getLength();
         }
         $this->setCaret($end);
-        $this->setInstruction(\mb_substr(self::$content, $start, ($end - $start) + 1))
+        $this->setInstruction(self::$content->cutToContent($start, ($end - $start) + 1))
             ->setInstructionStart($start)
         ;
     }

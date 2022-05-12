@@ -35,6 +35,11 @@ class Content
         $this->cutAndAddContent($content);
     }
 
+    public function __toString(): string
+	{
+		return implode('', $this->contents[$this->contentPointer]['content']);
+	}
+
     /**
      * Cuts string into UTF-8 letters keeping it simple and easy to get next letter
      * @param string  $content  Script
