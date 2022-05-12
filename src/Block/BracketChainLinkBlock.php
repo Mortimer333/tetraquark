@@ -135,7 +135,7 @@ class BracketChainLinkBlock extends Block implements Contract\Block
         $name = $this->getName();
         $script = '[';
         if (\mb_strlen($name)) {
-            $script .= "'" . $this->replaceVariablesWithAliases($name) . "'";
+            $script .= "'" . $this->replaceVariablesWithAliases(new Content($name)) . "'";
         } else {
             foreach ($this->getBlocks() as $block) {
                 $script .= rtrim($block->recreate(), ';');

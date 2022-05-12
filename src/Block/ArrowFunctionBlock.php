@@ -233,7 +233,7 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
             $script = '(' . $this->getAliasedArguments() . ')=>';
         }
         if (!$this->isMultiLine()) {
-            $script .= $this->replaceVariablesWithAliases($this->getValue()) . ';';
+            $script .= $this->replaceVariablesWithAliases(new Content($this->getValue())) . ';';
         } else {
             $script .= '{';
             $blocks = '';

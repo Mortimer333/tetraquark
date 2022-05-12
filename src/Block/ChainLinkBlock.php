@@ -75,7 +75,7 @@ class ChainLinkBlock extends Block implements Contract\Block
             list($equal, $equalPos) = $this->getNextLetter($caret, self::$content);
             $attribute = new AttributeBlock($equalPos);
             $attribute->setName('');
-            $this->setName($this->getInstruction()->iSubStr(0));
+            $this->setName($this->getInstruction()->subStr(0));
             $this->setBlocks([
                 $attribute
             ]);

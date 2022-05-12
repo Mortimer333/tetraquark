@@ -114,7 +114,7 @@ abstract class MethodBlockAbstract extends BlockAbstract
             $blocks = $this->createSubBlocksWithContent($argument);
             foreach ($blocks as &$block) {
                 if ($block instanceof Block\UndefinedBlock) {
-                    $block->setName($block->getInstruction());
+                    $block->setName($block->getInstruction()->__toString());
                 }
             }
             $this->addArgument($blocks);

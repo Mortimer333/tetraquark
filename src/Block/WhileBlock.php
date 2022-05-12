@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\{Log, Exception, Contract, Validate};
+use \Tetraquark\{Log, Exception, Contract, Validate, Content};
 use \Tetraquark\Foundation\ConditionBlockAbstract as ConditionBlock;
 
 class WhileBlock extends ConditionBlock implements Contract\Block
@@ -10,7 +10,7 @@ class WhileBlock extends ConditionBlock implements Contract\Block
     protected function getArgs(): string
     {
         return $this->replaceVariablesWithAliases(
-            $this->getCondition()
+            new Content($this->getCondition())
         );
     }
 

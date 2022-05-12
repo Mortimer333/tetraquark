@@ -147,7 +147,7 @@ class Content
      * @param  null|int $length How long the string should be
      * @return string
      */
-    public function subStr(int $start, ?int $length): string
+    public function subStr(int $start, ?int $length = null): string
     {
         $cut = array_slice($this->contents[$this->contentPointer]['content'], $start, $length);
         return implode('', $cut);

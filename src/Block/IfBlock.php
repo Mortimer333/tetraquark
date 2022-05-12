@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\{Log, Exception, Contract, Validate};
+use \Tetraquark\{Log, Exception, Contract, Validate, Content};
 use \Tetraquark\Foundation\ConditionBlockAbstract as ConditionBlock;
 
 class IfBlock extends ConditionBlock implements Contract\Block
@@ -13,11 +13,12 @@ class IfBlock extends ConditionBlock implements Contract\Block
         foreach ($this->argsBlocks as $block) {
             $args .= rtrim($block->recreate(), ';');
         }
-        return $this->replaceVariablesWithAliases($args);
+        return $this->replaceVariablesWithAliases(new Content($args));
     }
 
     public function objectify(int $start = 0)
     {
+        Log::log('New===');
         $this->setName('');
         $this->setCondType('if');
         $this->setConditionAndInstruction($start);
