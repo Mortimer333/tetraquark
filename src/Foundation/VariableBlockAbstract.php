@@ -33,8 +33,8 @@ abstract class VariableBlockAbstract extends BlockAbstract
     {
         $end = null;
         $lastLetter = '';
-        for ($i=$start + 1; $i < \mb_strlen(self::$content); $i++) {
-            $letter = self::$content[$i];
+        for ($i=$start + 1; $i < self::$content->getLength(); $i++) {
+            $letter = self::$content->getLetter($i);
             if ($letter === ' ') {
                 continue;
             }
@@ -63,19 +63,19 @@ abstract class VariableBlockAbstract extends BlockAbstract
 
         }
 
-        return $end ?? \mb_strlen(self::$content);
+        return $end ?? self::$content->getLength();
     }
 
     protected  function seperateVariableItems(int $start, int $end): array
     {
         $itemStart = $start;
         $items = [];
-        for ($i=$start; $i < \mb_strlen(self::$content); $i++) {
+        for ($i=$start; $i < self::$content->getLength(); $i++) {
             if ($i == $end) {
                 break;
             }
 
-            $letter = self::$content[$i];
+            $letter = self::$content->getLetter($i);
             if (Validate::isWhitespace($letter)) {
                 continue;
             }
@@ -87,13 +87,13 @@ abstract class VariableBlockAbstract extends BlockAbstract
             }
 
             if ($letter === ',') {
-                $items[] = \mb_substr(self::$content, $itemStart, $i - $itemStart);
+                $items[] = self::$content->iSubStr($itemStart, $i);
                 $itemStart = $i + 1;
                 continue;
             }
         }
 
-        $lastItem = \mb_substr(self::$content, $itemStart, $end - $itemStart);
+        $lastItem = self::$content->iSubStr($itemStart, $end);
         if (\mb_strlen($lastItem) > 0) {
             $items[] = $lastItem;
         }
@@ -103,13 +103,12 @@ abstract class VariableBlockAbstract extends BlockAbstract
 
     protected function addVariableItems(array $items): void
     {
-        $contentHolder = self::$content;
         foreach ($items as $item) {
             $item = preg_replace('/[\n]/', ' ', $item);
             $item = preg_replace('/[ \t]+/', ' ', $item) . ';';
-            self::$content = $item;
+            self::$content->setContent($item);
             $this->blocks[] = new Block\VariableItemBlock();
+            self::$content->removeContent();
         }
-        self::$content = $contentHolder;
     }
 }

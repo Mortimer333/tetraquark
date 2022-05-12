@@ -26,8 +26,8 @@ abstract class ConditionBlockAbstract extends BlockAbstract
         $condEnd   = null;
         $end       = null;
         $parenthesisOpen = 0;
-        for ($i=$actualStart; $i < \strlen(self::$content); $i++) {
-            $letter = self::$content[$i];
+        for ($i=$actualStart; $i < self::$content->getLength(); $i++) {
+            $letter = self::$content->getLetter($i);
             if (Validate::isWhitespace($letter)) {
                 continue;
             }
@@ -46,10 +46,8 @@ abstract class ConditionBlockAbstract extends BlockAbstract
                 continue;
             }
 
-
             if (\is_null($condStart) && $letter !== '(') {
                 continue;
-                // throw new Exception("Couldn't find start of parenthesis of condition at letter $i", 404);
             } elseif (\is_null($condStart) && $letter == '(') {
                 $condStart = $i + 1;
                 continue;
@@ -84,11 +82,11 @@ abstract class ConditionBlockAbstract extends BlockAbstract
             throw new Exception("Condition (" . $this->getCondType() . " at letter $start) was not mapped properly, stopping script", 500);
         }
         $this->setCaret($end);
-        $this->setInstruction(\mb_substr(self::$content, $actualStart, $end - $actualStart));
+        $this->setInstruction(self::$content->iSubStr($actualStart, $end));
         $this->setInstructionStart($actualStart);
-        $this->setCondition(\mb_substr(self::$content, $condStart, $condEnd - $condStart));
+        $this->setCondition(self::$content->iSubStr($condStart, $condEnd));
         if ($this->getSubtype() === self::SINGLE_CONDITION_SUBTYPE) {
-            $this->setSingleCond(\mb_substr(self::$content, $condEnd + 1, $end - ($condEnd + 1)));
+            $this->setSingleCond(self::$content->iSubStr($condEnd + 1, $end));
         }
     }
 

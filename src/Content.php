@@ -73,12 +73,27 @@ class Content
      * @param  boolean $clear   If set to `true` will remove all old versions
      * @return self
      */
-    public function setContent(string $content, bool $clear = false): self
+    public function setContent(string $content, bool $clear = false, bool $replace = false): self
     {
-        if ($clear) {
+        if (!$replace && $clear) {
             $this->clear();
         }
-        $this->cutAndAddContent($content);
+        $this->cutAndAddContent($content, $replace);
+        return $this;
+    }
+
+    public function setArrayContent(array $content, bool $clear = false, bool $replace = false): self
+    {
+        if (!$replace && $clear) {
+            $this->clear();
+        } elseif (!$replace) {
+            $this->contentPointer++;
+        }
+
+        $this->contents[$this->contentPointer] = [
+            'content' => $content,
+            'size'    => \sizeof($content),
+        ];
         return $this;
     }
 
@@ -143,5 +158,60 @@ class Content
     {
         $cut = array_slice($this->contents[$this->contentPointer]['content'], $start, $end - $start);
         return implode('', $cut);
+    }
+
+    /**
+     * Removes current content and decreases contentPointer
+     * @return self
+     */
+    public function removeContent(): self
+    {
+        unset($this->contents[$this->contentPointer]);
+        $this->contentPointer--;
+        return $this;
+    }
+
+    /**
+     * Similarly to subStr but it returns Content
+     * @param  int     $start
+     * @param  int     $length
+     * @return Content
+     */
+    public function cutToContent(int $start, int $length): Content
+    {
+        $cut = array_slice($this->contents[$this->contentPointer]['content'], $start, $length);
+        return (new Content(''))->setArrayContent($cut, true);
+    }
+
+    /**
+     * Similarly to iSubStr but it returns Content
+     * @param  int     $start
+     * @param  int     $end
+     * @return Content
+     */
+    public function iCutToContent(int $start, int $end): Content
+    {
+        $cut = array_slice($this->contents[$this->contentPointer]['content'], $start, $end - $start);
+        return (new Content(''))->setArrayContent($cut, true);
+    }
+
+    public function trim($letter = "\s"): Content
+    {
+        $start = null;
+        $end   = null;
+        for ($i=0; $i < $this->getLength(); $i++) {
+            $letter = $this->getLetter($i);
+            if (preg_match('/' . $letter . '/', $letter) === false) {
+                $start = $i;
+            }
+        }
+
+        for ($i=$this->getLength(); $i >= 0; $i-) {
+            $letter = $this->getLetter($i);
+            if (preg_match('/' . $letter . '/', $letter) === false) {
+                $end = $i;
+            }
+        }
+        return $this->iCutToContent($start, $end);
     }
 }

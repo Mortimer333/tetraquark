@@ -9,7 +9,7 @@ use \Tetraquark\Foundation\{
     MethodBlockAbstract as MethodBlock,
     VariableBlockAbstract as VariableBlock
 };
-use \Tetraquark\{Exception, Block, Log, Validate, Str};
+use \Tetraquark\{Exception, Block, Log, Validate, Str, Content};
 
 abstract class BlockAbstract
 {
@@ -17,13 +17,13 @@ abstract class BlockAbstract
     use BlockGetSetTrait;   // Holds all get and set functions
     use BlockMapsTrait;     // Has $blocksMap, $classBlocksMap, $objectBlocksMap, $callerBlocksMap and $arrayBlocksMap variables
     use BlockAliasMapTrait; // Contains our alias creation map
-    static protected string|array $content;
-    static protected array  $mappedAliases = [];
+    static protected Content $content;
+    static protected array   $mappedAliases = [];
     protected int    $caret = 0;
     protected bool   $endFunction = false;
 
-    /** @var string $instruction Actual block representation in code */
-    protected string $instruction;
+    /** @var Content $instruction Actual block representation in code */
+    protected Content $instruction;
 
     protected int    $instructionStart;
     protected string $name;
@@ -48,9 +48,8 @@ abstract class BlockAbstract
     protected int $bracketsCount = 0;
 
     public function __construct(
-        protected int $start = 0,
+        int $start = 0,
         string $subtype = '',
-        protected array $data  = []
     ) {
         $this->setSubtype($subtype);
         $this->objectify($start);
@@ -116,9 +115,9 @@ abstract class BlockAbstract
             $first = false;
             // Check if we are not between some equasion with at least two ChainBlocks
             if ($lastBlock) {
-                $startBlock = $lastBlock->getInstructionStart() + \mb_strlen($lastBlock->getInstruction());
-                for ($i=$startBlock; $i < \mb_strlen(self::$content); $i++) {
-                    $letter = self::$content[$i];
+                $startBlock = $lastBlock->getInstructionStart() + $lastBlock->getInstruction()->getLength();
+                for ($i=$startBlock; $i < self::$content->getLength(); $i++) {
+                    $letter = self::$content->getLetter($i);
                     if ($letter == ' ') {
                         continue;
                     }
@@ -143,7 +142,7 @@ abstract class BlockAbstract
             ) {
                 $block = new $class($start, Block\ChainLinkBlock::FIRST);
 
-                $possibleUndefined = \mb_substr($possibleUndefined, 0, -(\mb_strlen($block->getInstruction()) + 1));
+                $possibleUndefined = \mb_substr($possibleUndefined, 0, -($block->getInstruction()->getLength() + 1));
                 if (Validate::isValidUndefined($possibleUndefined)) {
                     $blocks[] = new Block\UndefinedBlock($start - \mb_strlen($possibleUndefined), $possibleUndefined);
                 }
@@ -163,8 +162,8 @@ abstract class BlockAbstract
         }
 
         $properEnd = null;
-        for ($i=$start; $i < \mb_strlen(self::$content); $i++) {
-            $letter = self::$content[$i];
+        for ($i=$start; $i < self::$content->getLength(); $i++) {
+            $letter = self::$content->getLetter($i);
 
             if (
                 $skipString &&
@@ -174,7 +173,7 @@ abstract class BlockAbstract
                 )
             ) {
                 $i = $this->skipString($i + 1, self::$content, $startsTemplate);
-                $letter = self::$content[$i];
+                $letter = self::$content->getLetter($i);
             }
 
             if ($endChars[$letter] ?? false) {
@@ -185,15 +184,13 @@ abstract class BlockAbstract
         }
 
         if (is_null($properEnd)) {
-            // throw new Exception('Proper End not found', 404);
-            $properEnd = \mb_strlen(self::$content) - 1;
+            $properEnd = self::$content->getLength() - 1;
             $this->setCaret($properEnd);
         }
 
         $properStart = $start - \mb_strlen($name);
-        $instruction = \mb_substr(self::$content, $properStart, $properEnd - $properStart);
         $this->setInstructionStart($properStart)
-            ->setInstruction($instruction);
+            ->setInstruction(self::$content->iCutToContent($properStart, $properEnd));
     }
 
     protected function findInstructionStart(int $end, ?array $endChars = null): void
@@ -204,13 +201,14 @@ abstract class BlockAbstract
 
         $properStart = null;
         for ($i=$end - 1; $i >= 0; $i--) {
-            $letter = self::$content[$i];
+            $letter = self::$content->getLetter($i);
             if (
                 ($startsTemplate = Validate::isTemplateLiteralLandmark($letter, ''))
                 || Validate::isStringLandmark($letter, '')
             ) {
+                // @TODO
                 $i = $this->skipString($i - 1, self::$content, $startsTemplate, true);
-                $letter = self::$content[$i];
+                $letter = self::$content->getLetter($i);
             }
 
             if ($endChars[$letter] ?? false) {
@@ -223,9 +221,8 @@ abstract class BlockAbstract
             $properStart = 0;
         }
 
-        $instruction = trim(\mb_substr(self::$content, $properStart, $end - $properStart));
         $this->setInstructionStart($properStart)
-            ->setInstruction($instruction);
+            ->setInstruction(self::$content->iCutToContent($properStart, $end - $properStart));
     }
 
     protected function constructBlock(string $mappedWord, string $className, int &$i, string &$possibleUndefined, array &$blocks): ?BlockAbstract
@@ -246,28 +243,29 @@ abstract class BlockAbstract
         $possibleUndefined = '';
         $undefinedEnds = ["\n" => true, ";" => true];
         $blocks = [];
-        for ($i=$start; $i < \mb_strlen(self::$content); $i++) {
-            $letter = self::$content[$i];
+        for ($i=$start; $i < self::$content->getLength(); $i++) {
+            $letter = self::$content->getLetter($i);
             if (
                 ($startsTemplate = Validate::isTemplateLiteralLandmark($letter, ''))
                 || Validate::isStringLandmark($letter, '')
             ) {
                 $oldPos = $i;
+                // @TODO
                 $i = $this->skipString($i + 1, self::$content, $startsTemplate);
 
                 if (Validate::isValidUndefined($possibleUndefined)) {
                     $blocks[] = new Block\UndefinedBlock($oldPos - \mb_strlen($possibleUndefined), $possibleUndefined);
                 }
                 if (!$this instanceof Block\ObjectBlock) {
-                    $blocks[] = new Block\StringBlock($oldPos, \mb_substr(self::$content, $oldPos, $i - $oldPos));
+                    $blocks[] = new Block\StringBlock($oldPos, self::$content->iSubStr($oldPos, $i));
                 }
 
-                if (!isset(self::$content[$i])) {
+                if (\is_null(self::$content->getLetter($i))) {
                     $possibleUndefined = '';
                     break;
                 }
 
-                $letter = self::$content[$i];
+                $letter = self::$content->getLetter($i);
                 $mappedWord = '';
                 $possibleUndefined = '';
             }
@@ -284,6 +282,7 @@ abstract class BlockAbstract
                 $mappedWordLen = \mb_strlen($mappedWord);
                 $instStart = $block->getInstructionStart();
                 // Check if instruction did include semicolon
+                // @TODO
                 list($nextLetter, $pos) = $this->getNextLetter($i + 1, self::$content);
                 if ($nextLetter == ';') {
                     $i = $pos;
@@ -319,7 +318,7 @@ abstract class BlockAbstract
             }
         }
 
-        if ($i == \mb_strlen(self::$content)) {
+        if ($i == self::$content->getLength()) {
             $i--;
         }
 
@@ -339,10 +338,10 @@ abstract class BlockAbstract
             $start = 0;
         }
 
-        for ($i=$start; $i < strlen($instr); $i++) {
-            $letter = $instr[$i];
+        for ($i=$start; $i < $instr->getLength(); $i++) {
+            $letter = $instr->getLetter($i);
             if ($ends[$letter] ?? false) {
-                $this->setName(\mb_substr($instr, $start, $i - $start));
+                $this->setName($instr->iSubStr($start, $i));
                 return;
             }
         }
@@ -515,25 +514,25 @@ abstract class BlockAbstract
             && ($value[$i - 2] ?? '') . ($value[$i - 1] ?? '') . $letter != '\${';
     }
 
-    public function skipString(int $start, string $value, bool $isTemplate = false, bool $reverse = false): int
+    public function skipString(int $start, Content $content, bool $isTemplate = false, bool $reverse = false): int
     {
         $modifier = (((int)!$reverse) * 2) - 1;
-        for ($i=$start; (!$reverse && $i < \mb_strlen($value)) || ($reverse && $i >= 0); $i += $modifier) {
-            $letter = $value[$i];
-            if ($isTemplate && Validate::isTemplateLiteralLandmark($letter, $value[$i - 1] ?? '', true)) {
+        for ($i=$start; (!$reverse && $i < $content->getLength()) || ($reverse && $i >= 0); $i += $modifier) {
+            $letter = $value->getLetter($i);
+            if ($isTemplate && Validate::isTemplateLiteralLandmark($letter, $value->getLetter($i - 1) ?? '', true)) {
                 return $i + $modifier;
-            } elseif (!$isTemplate && Validate::isStringLandmark($letter, $value[$i - 1] ?? '', true)) {
+            } elseif (!$isTemplate && Validate::isStringLandmark($letter, $value->getLetter($i - 1) ?? '', true)) {
                 return $i + $modifier;
             }
         }
         return $i;
     }
 
-    protected function removeAdditionalSpaces(string $instruction): string
+    protected function removeAdditionalSpaces(Content $instruction): string
     {
         $properInstr = '';
-        for ($i=0; $i < \mb_strlen($instruction); $i++) {
-            $letter = $instruction[$i];
+        for ($i=0; $i < $instruction->getLength(); $i++) {
+            $letter = $instruction->getLetter($i);
             if (
                 ($startsTemplate = Validate::isTemplateLiteralLandmark($letter, ''))
                 || Validate::isStringLandmark($letter, '')
@@ -541,15 +540,15 @@ abstract class BlockAbstract
                 $oldPos = $i;
                 $i = $this->skipString($i + 1, $instruction, $startsTemplate);
                 $properInstr .= \mb_substr($instruction, $oldPos, $i - $oldPos);
-                if (!isset($instruction[$i])) {
+                if (\is_null($instruction->getLetter($i))) {
                     break;
                 }
-                $letter = $instruction[$i];
+                $letter = $instruction->getLetter($i);
             }
 
             if (
-                Validate::isWhitespace($letter) && Validate::isSpecial($instruction[$i + 1] ?? '')
-                || Validate::isWhitespace($letter) && Validate::isWhitespace($instruction[$i + 1] ?? '')
+                Validate::isWhitespace($letter) && Validate::isSpecial($instruction->getLetter($i + 1) ?? '')
+                || Validate::isWhitespace($letter) && Validate::isWhitespace($instruction->getLetter($i + 1) ?? '')
             ) {
                 continue;
             }
@@ -560,7 +559,7 @@ abstract class BlockAbstract
 
     protected function decideArrayBlockType(int $start) {
         for ($i=$start - 1; $i >= 0; $i--) {
-            $letter = self::$content[$i];
+            $letter = self::$content->getLetter($i);
             if (Validate::isWhitespace($letter)) {
                 continue;
             }
@@ -585,18 +584,17 @@ abstract class BlockAbstract
     protected function createSubBlocksWithContent(string $content): array
     {
         $caret = $this->getCaret();
-        $codeSave = self::$content;
-        self::$content = $content;
+        self::$content->setContent($content);
         $blocks = $this->createSubBlocks(0);
-        self::$content = $codeSave;
+        self::$content->removeContent();
         $this->setCaret($caret);
         return $blocks;
     }
 
-    protected function getNextLetter(int $start, string $content): array
+    protected function getNextLetter(int $start, Content $content): array
     {
-        for ($i=$start; $i < \mb_strlen($content); $i++) {
-            $letter = $content[$i];
+        for ($i=$start; $i < $content->getLength(); $i++) {
+            $letter = $content->getLetter($i);
             if (!Validate::isWhitespace($letter)) {
                 return [$letter, $i];
             }
@@ -605,10 +603,10 @@ abstract class BlockAbstract
         return ['', $i - 1];
     }
 
-    protected function getPreviousLetter(int $start, string $content): array
+    protected function getPreviousLetter(int $start, Content $content): array
     {
         for ($i=$start; $i >= 0; $i--) {
-            $letter = $content[$i];
+            $letter = $content->getLetter($i);
             if (!Validate::isWhitespace($letter)) {
                 return [$letter, $i];
             }
@@ -625,8 +623,7 @@ abstract class BlockAbstract
         if (!$nextSibling instanceof BlockAbstract || $nextSibling instanceof CommentBlock) {
             return false;
         }
-        $instruction = $nextSibling->getInstruction();
-        $letter = trim($instruction)[0] ?? '';
+        $letter = $nextSibling->getInstruction()->trim()->getLetter(0) ?? '';
         return $letter === '.';
     }
 
@@ -650,7 +647,7 @@ abstract class BlockAbstract
         return $brackets[$letter] ?? false;
     }
 
-    protected function skipIfNeccessary(string $content, string $letter, int $i): array
+    protected function skipIfNeccessary(Content $content, string $letter, int $i): array
     {
         if (
             ($startsTemplate = Validate::isTemplateLiteralLandmark($letter, ''))
@@ -658,10 +655,10 @@ abstract class BlockAbstract
         ) {
             $oldPos = $i;
             $i = $this->skipString($i + 1, $content, $startsTemplate);
-            if (!isset($content[$i])) {
-                return [$content[$i - 1], $i - 1];
+            if (\is_null($content->getLetter($i))) {
+                return [$content->getLetter($i - 1), $i - 1];
             }
-            $letter = $content[$i];
+            $letter = $content->getLetter($i);
         }
 
         if ($this->isAnyOpenBracket($letter)) {
@@ -674,11 +671,11 @@ abstract class BlockAbstract
             $i++;
         }
 
-        if (!isset($content[$i])) {
-            return [$content[$i - 1], $i - 1];
+        if (\is_null($content->getLetter($i))) {
+            return [$content->getLetter($i - 1), $i - 1];
         }
 
-        $newLetter = $content[$i];
+        $newLetter = $content->getLetter($i);
         if ($newLetter != $letter) {
             return $this->skipIfNeccessary($content, $newLetter, $i);
         }

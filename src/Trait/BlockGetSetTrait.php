@@ -2,17 +2,17 @@
 
 namespace Tetraquark\Trait;
 
-use \Tetraquark\Log;
+use \Tetraquark\{Log, Content};
 use \Tetraquark\Foundation\BlockAbstract as Block;
 
 trait BlockGetSetTrait
 {
-    public function getContent(): string
+    public function getContent(): Content
     {
         return self::$content;
     }
 
-    public function setContent(string $content): self
+    public function setContent(Content $content): self
     {
         self::$content = $content;
         return $this;
@@ -62,12 +62,12 @@ trait BlockGetSetTrait
         return $this;
     }
 
-    public function getInstruction(): string
+    public function getInstruction(): Content
     {
         return $this->instruction;
     }
 
-    public function setInstruction(string $instruction): self
+    public function setInstruction(Content $instruction): self
     {
         $this->instruction = $instruction;
         return $this;

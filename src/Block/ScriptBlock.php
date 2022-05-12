@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\{Log, Exception, Contract, Validate, Str};
+use \Tetraquark\{Log, Exception, Contract, Validate, Str, Content};
 use \Tetraquark\Foundation\BlockAbstract as Block;
 
 class ScriptBlock extends Block implements Contract\Block
@@ -16,19 +16,15 @@ class ScriptBlock extends Block implements Contract\Block
         protected string $subtype = '',
         protected array  $data  = []
     ) {
-        self::$content = $content;
+        self::$content = $this->setContent($content);
         parent::__construct($start, $subtype, $data);
     }
 
     public function objectify(int $start = 0)
     {
         Log::timerStart();
-        Log::log("Prepare file...");
-        $this->prepare();
-        Log::log("Cut file...");
-        $this->setContent();
         Log::log("Mapping...");
-        $this->map($start);
+        $this->map();
         Log::log("=======================");
         Log::log("Creating aliases...");
         $this->generateAliases();
@@ -45,34 +41,27 @@ class ScriptBlock extends Block implements Contract\Block
         Log::timerEnd();
     }
 
-    protected function setContent(): void
+    protected function generateContent(): Content
     {
-        self::$content = Str::iterate(
-            self::$content, 0, [[]],
-            function (string $letter, int $i, array &$content)
-            {
-                $content[] = $letter;
-                return $content;
-            }
-        );
+        $content = $this->prepare($content);
+        return new Content($content);
     }
 
-    protected function prepare(): void
+    protected function prepare(string $content): string
     {
-        self::$content = str_replace("\r","\n", self::$content);
-        self::$content = preg_replace('/[\n]+/',"\n", self::$content);
+        $content = str_replace("\r","\n", $content);
+        $content = preg_replace('/[\n]+/',"\n", $content);
         // Change space + new line (` \n`) to just new line
-        self::$content = preg_replace('/[ \t]+/', ' ', self::$content);
-        self::$content = preg_replace('/ \n+/',"\n", self::$content);
+        $content = preg_replace('/[ \t]+/', ' ', $content);
+        $content = preg_replace('/ \n+/',"\n", $content);
         // This fixes all problem with prototypes that are moved to new line with trailing dot (obj\n.attr)
-        self::$content = preg_replace('/\n\./', '.', self::$content);
+        $content = preg_replace('/\n\./', '.', $content);
+        return $content;
     }
 
-    protected function map($start): void
+    protected function map(): void
     {
-        $map    = [];
-        $word   = '';
-        $this->setCaret($start);
+        $this->setCaret(0);
         $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
     }
 

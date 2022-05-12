@@ -101,11 +101,11 @@ class Validate
         return self::$operators[$letter] ?? false;
     }
 
-    public static function isComment(int $pos, string $content): bool
+    public static function isComment(int $pos, Content $content): bool
     {
-        return $content[$pos] == '/' && (
-            $content[$pos + 1] == '*'
-            || $content[$pos + 1] == '/'
-        ); 
+        return $content->getLetter($pos) == '/' && (
+            $content->getLetter($pos + 1) == '*'
+            || $content->getLetter($pos + 1) == '/'
+        );
     }
 }

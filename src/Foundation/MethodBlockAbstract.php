@@ -44,19 +44,19 @@ abstract class MethodBlockAbstract extends BlockAbstract
         $word = '';
         $arguments = [];
         $skipBracket = 0;
-        for ($i=\mb_strlen($instr) - 1; $i >= 0; $i--) {
-            $letter = $instr[$i];
+        for ($i=$instr->getLength() - 1; $i >= 0; $i--) {
+            $letter = $instr->getLetter($i);
             if (
                 ($startsTemplate = Validate::isTemplateLiteralLandmark($letter, ''))
                 || Validate::isStringLandmark($letter, '')
             ) {
                 $oldPos = $i;
                 $i = $this->skipString($i - 1, $instr, $startsTemplate, true);
-                if (!isset($instr[$i])) {
+                if (\is_null($instr->getLetter($i))) {
                     break;
                 }
-                $word .= Str::rev(\mb_substr($instr, $i + 1, $oldPos - $i));
-                $letter = $instr[$i];
+                $word .= Str::rev($instr->subStr($i + 1, $oldPos - $i));
+                $letter = $instr->getLetter($i);
             }
 
             if ($startSettingArgs && $skipBracket > 0 && ($letter == '{' || $letter == '(' || $letter == '[')) {
@@ -135,15 +135,15 @@ abstract class MethodBlockAbstract extends BlockAbstract
     {
         $properEnd = null;
         $startDefaultSkip = false;
-        for ($i=$start; $i < \mb_strlen(self::$content); $i++) {
-            $letter = self::$content[$i];
+        for ($i=$start; $i < self::$content->getLength(); $i++) {
+            $letter = self::$content->getLetter($i);
 
             if (
                 ($startsTemplate = Validate::isTemplateLiteralLandmark($letter, ''))
                 || Validate::isStringLandmark($letter, '')
             ) {
                 $i = $this->skipString($i + 1, self::$content, $startsTemplate);
-                $letter = self::$content[$i];
+                $letter = self::$content->getLetter($i);
             }
 
             if (($startDefaultSkip && $letter == ',') || $letter == ')') {
@@ -170,8 +170,7 @@ abstract class MethodBlockAbstract extends BlockAbstract
         }
 
         $properStart = $start;
-        $instruction = \mb_substr(self::$content, $properStart, $properEnd - $properStart);
         $this->setInstructionStart($properStart)
-            ->setInstruction($instruction);
+            ->setInstruction(self::$content->iSubStr($properStart, $properEnd));
     }
 }
