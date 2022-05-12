@@ -63,7 +63,6 @@ class ChainLinkBlock extends Block implements Contract\Block
             $this->setCaret($caret);
         }
 
-        $instruction = ;
         $this->setInstructionStart($start - 1)
             ->setInstruction(self::$content->iCutToContent($start, $end)->trim());
 

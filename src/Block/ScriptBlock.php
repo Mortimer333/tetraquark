@@ -16,7 +16,7 @@ class ScriptBlock extends Block implements Contract\Block
         protected string $subtype = '',
         protected array  $data  = []
     ) {
-        self::$content = $this->setContent($content);
+        self::$content = $this->generateContent($content);
         parent::__construct($start, $subtype, $data);
     }
 
@@ -41,7 +41,7 @@ class ScriptBlock extends Block implements Contract\Block
         Log::timerEnd();
     }
 
-    protected function generateContent(): Content
+    protected function generateContent(string $content): Content
     {
         $content = $this->prepare($content);
         return new Content($content);
@@ -82,6 +82,6 @@ class ScriptBlock extends Block implements Contract\Block
         foreach ($this->blocks as $block) {
             $script .= $block->recreate();
         }
-        return $this->removeAdditionalSpaces($script);
+        return $this->removeAdditionalSpaces(new Content($script));
     }
 }

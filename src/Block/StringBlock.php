@@ -1,17 +1,18 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\{Log, Exception, Contract, Validate};
+use \Tetraquark\{Log, Exception, Contract, Validate, Content};
 use \Tetraquark\Foundation\BlockAbstract as Block;
 
 class StringBlock extends Block implements Contract\Block
 {
     public function __construct(
         int $start,
-        protected string $instruction,
+        string $instruction,
         protected string $subtype = '',
         protected array  $data  = []
     ) {
+        $this->setInstruction(new Content($instruction));
         parent::__construct($start, $subtype, $data);
     }
 

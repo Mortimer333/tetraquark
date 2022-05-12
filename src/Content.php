@@ -59,7 +59,7 @@ class Content
                 $content[] = $letter;
                 return $content;
             }
-        );
+        ) ?? [];
         $this->contents[$this->contentPointer]['size'] = \sizeof($this->contents[$this->contentPointer]['content']);
     }
 
@@ -200,20 +200,20 @@ class Content
         return (new Content(''))->setArrayContent($cut, true);
     }
 
-    public function trim($letter = "\s"): Content
+    public function trim($regex = "\s"): Content
     {
-        $start = null;
-        $end   = null;
+        $start = 0;
+        $end   = $this->getLength() - 1;
         for ($i=0; $i < $this->getLength(); $i++) {
             $letter = $this->getLetter($i);
-            if (preg_match('/' . $letter . '/', $letter) === false) {
+            if (preg_match('/' . $regex . '/', $letter) === false) {
                 $start = $i;
             }
         }
 
-        for ($i=$this->getLength(); $i >= 0; $i-) {
+        for ($i=$this->getLength() - 1; $i >= 0; $i--) {
             $letter = $this->getLetter($i);
-            if (preg_match('/' . $letter . '/', $letter) === false) {
+            if (preg_match('/' . $regex . '/', $letter) === false) {
                 $end = $i;
             }
         }

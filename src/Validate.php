@@ -67,7 +67,7 @@ class Validate
         );
     }
 
-    public static function isString(string $letter): bool
+    public static function isStringChar(string $letter): bool
     {
         $strings = [
             '"' => true,

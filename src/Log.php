@@ -124,7 +124,7 @@ class Log
             self::log("Block: " . get_class($block));
             self::log("Subtype: " . $block->getSubtype());
             if ($block instanceof Foundation\CommentBlockAbstract) {
-                self::log("Instruction: " . \mb_substr($block->getInstruction(), 0, 60));
+                self::log("Instruction: " . $block->getInstruction()->subStr(0, 60));
             } else {
                 self::log("Instruction: " . $block->getInstruction());
             }

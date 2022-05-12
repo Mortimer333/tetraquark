@@ -44,6 +44,7 @@ class Str
     public static function iterate(string $content, int $i, array $args, callable $func)
     {
         $nextLetter = $i;
+        $res = null;
         while ($letter = Str::get($content, $i, $nextLetter)) {
             $res = $func($letter, $i, ...$args);
             $i = $nextLetter;

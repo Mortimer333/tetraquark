@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\{Log, Exception, Contract, Validate};
+use \Tetraquark\{Log, Exception, Contract, Validate, Content};
 use \Tetraquark\Foundation\BlockAbstract as Block;
 
 class ObjectBlock extends Block implements Contract\Block

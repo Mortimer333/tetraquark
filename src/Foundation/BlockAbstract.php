@@ -443,66 +443,57 @@ abstract class BlockAbstract
         return $this->generateAlias($newAlias, $newAlias);
     }
 
-    protected function replaceVariablesWithAliases(string $value): string
+    protected function replaceVariablesWithAliases(Content $content): string
     {
         $word = '';
         $minifiedValue = '';
         $stringInProgress = false;
         $templateVarInProgress = false;
         $templateLiteralInProgress = false;
-        Str::iterate(
-            $value,
-            0,
-            ['', '', false, false, false],
-            function(
-                string $letter, int $i, string &$word,
-                string &$minifiedValue, bool &$stringInProgress,
-                bool &$templateVarInProgress, bool &$templateLiteralInProgress
-            ) use ($value): void {
-                Log::log('Letter: ' . ($letter ?? 'NULL') . ', ' . $word);
-                $isLiteralLandmark = Validate::isTemplateLiteralLandmark($letter, $value[$i - 1] ?? null, $templateLiteralInProgress);
-                if ($templateVarInProgress && !$isLiteralLandmark) {
-                    if ($letter == '}') {
-                        $templateVarInProgress = false;
-                        $alias = $this->getAlias($word);
-                        $minifiedValue .= $alias . $letter;
-                        $word = '';
-                        return;
-                    } else {
-                        $word .= $letter;
-                    }
-                    return;
-                }
-
-                if ($isLiteralLandmark) {
-                    $templateLiteralInProgress = !$templateLiteralInProgress;
-                } elseif (Validate::isStringLandmark($letter, $value[$i - 1] ?? null, $stringInProgress)) {
-                    $stringInProgress = !$stringInProgress;
-                }
-
-                if (
-                    $templateLiteralInProgress
-                    && $this->startsTemplateLiteralVariable($letter, $value, $i)
-                ) {
-                    $templateVarInProgress = true;
-                }
-
-                if ($stringInProgress || $templateLiteralInProgress) {
-                    $minifiedValue .= $letter;
-                    $word = '';
-                    return;
-                }
-
-                if (Validate::isSpecial($letter)) {
+        for ($i=0; $i < $content->getLength(); $i++) {
+            $letter = $content->getLetter($i);
+            $isLiteralLandmark = Validate::isTemplateLiteralLandmark($letter, $content->getLetter($i - 1) ?? '', $templateLiteralInProgress);
+            if ($templateVarInProgress && !$isLiteralLandmark) {
+                if ($letter == '}') {
+                    $templateVarInProgress = false;
                     $alias = $this->getAlias($word);
                     $minifiedValue .= $alias . $letter;
                     $word = '';
-                    return;
+                    continue;
+                } else {
+                    $word .= $letter;
                 }
-
-                $word .= $letter;
+                continue;
             }
-        );
+
+            if ($isLiteralLandmark) {
+                $templateLiteralInProgress = !$templateLiteralInProgress;
+            } elseif (Validate::isStringLandmark($letter, $content->getLetter($i - 1) ?? '', $stringInProgress)) {
+                $stringInProgress = !$stringInProgress;
+            }
+
+            if (
+                $templateLiteralInProgress
+                && $this->startsTemplateLiteralVariable($letter, $content, $i)
+            ) {
+                $templateVarInProgress = true;
+            }
+
+            if ($stringInProgress || $templateLiteralInProgress) {
+                $minifiedValue .= $letter;
+                $word = '';
+                continue;
+            }
+
+            if (Validate::isSpecial($letter)) {
+                $alias = $this->getAlias($word);
+                $minifiedValue .= $alias . $letter;
+                $word = '';
+                continue;
+            }
+
+            $word .= $letter;
+        }
 
         $alias = $this->getAlias($word);
         return $minifiedValue . $alias;
@@ -518,10 +509,10 @@ abstract class BlockAbstract
     {
         $modifier = (((int)!$reverse) * 2) - 1;
         for ($i=$start; (!$reverse && $i < $content->getLength()) || ($reverse && $i >= 0); $i += $modifier) {
-            $letter = $value->getLetter($i);
-            if ($isTemplate && Validate::isTemplateLiteralLandmark($letter, $value->getLetter($i - 1) ?? '', true)) {
+            $letter = $content->getLetter($i);
+            if ($isTemplate && Validate::isTemplateLiteralLandmark($letter, $content->getLetter($i - 1) ?? '', true)) {
                 return $i + $modifier;
-            } elseif (!$isTemplate && Validate::isStringLandmark($letter, $value->getLetter($i - 1) ?? '', true)) {
+            } elseif (!$isTemplate && Validate::isStringLandmark($letter, $content->getLetter($i - 1) ?? '', true)) {
                 return $i + $modifier;
             }
         }
@@ -539,7 +530,7 @@ abstract class BlockAbstract
             ) {
                 $oldPos = $i;
                 $i = $this->skipString($i + 1, $instruction, $startsTemplate);
-                $properInstr .= \mb_substr($instruction, $oldPos, $i - $oldPos);
+                $properInstr .= $instruction->iSubStr($oldPos, $i);
                 if (\is_null($instruction->getLetter($i))) {
                     break;
                 }

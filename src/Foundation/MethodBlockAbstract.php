@@ -171,6 +171,6 @@ abstract class MethodBlockAbstract extends BlockAbstract
 
         $properStart = $start;
         $this->setInstructionStart($properStart)
-            ->setInstruction(self::$content->iSubStr($properStart, $properEnd));
+            ->setInstruction(self::$content->iCutToContent($properStart, $properEnd));
     }
 }

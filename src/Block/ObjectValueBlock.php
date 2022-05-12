@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\{Log, Exception, Contract, Validate};
+use \Tetraquark\{Log, Exception, Contract, Validate, Content};
 use \Tetraquark\Foundation\BlockAbstract as Block;
 
 class ObjectValueBlock extends Block implements Contract\Block
@@ -33,19 +33,19 @@ class ObjectValueBlock extends Block implements Contract\Block
     {
         for ($i=1; $i < $name->getLength() - 1; $i++) {
             $letter = $name->getLetter($i);
-            if (Validate::isWhitespace($letter) || Validate::isSpecial($letter) || Validate::isString($letter)) {
+            if (Validate::isWhitespace($letter) || Validate::isSpecial($letter) || Validate::isStringChar($letter)) {
                 return $name->__toString();
             }
         }
-        if (Validate::isString($name[0])) {
-            return trim($name->__toString(), $name[0]);
+        if (Validate::isStringChar($name->getLetter(0) ?? '')) {
+            return trim($name->__toString(), $name->getLetter(0));
         }
         return $name->__toString();
     }
 
     public function recreate(): string
     {
-        $script = $this->replaceVariablesWithAliases($this->getName()) . ":";
+        $script = $this->replaceVariablesWithAliases(new Content($this->getName())) . ":";
 
         foreach ($this->getBlocks() as $block) {
             $script .= rtrim($block->recreate(), ';');

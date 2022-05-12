@@ -1,869 +1,392 @@
-Prepare file...
-Cut file...
-array(409) {
-  [0]=>
-  string(1) "c"
-  [1]=>
-  string(1) "l"
-  [2]=>
-  string(1) "a"
-  [3]=>
-  string(1) "s"
-  [4]=>
-  string(1) "s"
-  [5]=>
-  string(1) " "
-  [6]=>
-  string(1) "C"
-  [7]=>
-  string(1) "l"
-  [8]=>
-  string(1) "a"
-  [9]=>
-  string(1) "s"
-  [10]=>
-  string(1) "s"
-  [11]=>
-  string(1) "N"
-  [12]=>
-  string(1) "a"
-  [13]=>
-  string(1) "m"
-  [14]=>
-  string(1) "e"
-  [15]=>
-  string(1) " "
-  [16]=>
-  string(1) "{"
-  [17]=>
-  string(1) "
-"
-  [18]=>
-  string(1) " "
-  [19]=>
-  string(1) "c"
-  [20]=>
-  string(1) "o"
-  [21]=>
-  string(1) "n"
-  [22]=>
-  string(1) "s"
-  [23]=>
-  string(1) "t"
-  [24]=>
-  string(1) "r"
-  [25]=>
-  string(1) "u"
-  [26]=>
-  string(1) "c"
-  [27]=>
-  string(1) "t"
-  [28]=>
-  string(1) "o"
-  [29]=>
-  string(1) "r"
-  [30]=>
-  string(1) "("
-  [31]=>
-  string(1) ")"
-  [32]=>
-  string(1) " "
-  [33]=>
-  string(1) "{"
-  [34]=>
-  string(1) "
-"
-  [35]=>
-  string(1) " "
-  [36]=>
-  string(1) "c"
-  [37]=>
-  string(1) "o"
-  [38]=>
-  string(1) "n"
-  [39]=>
-  string(1) "s"
-  [40]=>
-  string(1) "o"
-  [41]=>
-  string(1) "l"
-  [42]=>
-  string(1) "e"
-  [43]=>
-  string(1) "."
-  [44]=>
-  string(1) "l"
-  [45]=>
-  string(1) "o"
-  [46]=>
-  string(1) "g"
-  [47]=>
-  string(1) "("
-  [48]=>
-  string(1) "'"
-  [49]=>
-  string(1) "n"
-  [50]=>
-  string(1) "e"
-  [51]=>
-  string(1) "w"
-  [52]=>
-  string(1) "'"
-  [53]=>
-  string(1) ")"
-  [54]=>
-  string(1) ";"
-  [55]=>
-  string(1) "
-"
-  [56]=>
-  string(1) " "
-  [57]=>
-  string(1) "}"
-  [58]=>
-  string(1) "
-"
-  [59]=>
-  string(1) " "
-  [60]=>
-  string(1) "f"
-  [61]=>
-  string(1) "u"
-  [62]=>
-  string(1) "n"
-  [63]=>
-  string(1) "c"
-  [64]=>
-  string(1) "1"
-  [65]=>
-  string(1) " "
-  [66]=>
-  string(1) "("
-  [67]=>
-  string(1) ")"
-  [68]=>
-  string(1) " "
-  [69]=>
-  string(1) "{"
-  [70]=>
-  string(1) "
-"
-  [71]=>
-  string(1) " "
-  [72]=>
-  string(1) "}"
-  [73]=>
-  string(1) "
-"
-  [74]=>
-  string(1) " "
-  [75]=>
-  string(1) "f"
-  [76]=>
-  string(1) "u"
-  [77]=>
-  string(1) "n"
-  [78]=>
-  string(1) "c"
-  [79]=>
-  string(1) "r"
-  [80]=>
-  string(1) "2"
-  [81]=>
-  string(1) "("
-  [82]=>
-  string(1) ")"
-  [83]=>
-  string(1) " "
-  [84]=>
-  string(1) "{"
-  [85]=>
-  string(1) "}"
-  [86]=>
-  string(1) "
-"
-  [87]=>
-  string(1) " "
-  [88]=>
-  string(1) "m"
-  [89]=>
-  string(1) "e"
-  [90]=>
-  string(1) "t"
-  [91]=>
-  string(1) "h"
-  [92]=>
-  string(1) "2"
-  [93]=>
-  string(1) "
-"
-  [94]=>
-  string(1) " "
-  [95]=>
-  string(1) "("
-  [96]=>
-  string(1) ")"
-  [97]=>
-  string(1) "
-"
-  [98]=>
-  string(1) " "
-  [99]=>
-  string(1) "{"
-  [100]=>
-  string(1) "
-"
-  [101]=>
-  string(1) " "
-  [102]=>
-  string(1) "c"
-  [103]=>
-  string(1) "o"
-  [104]=>
-  string(1) "n"
-  [105]=>
-  string(1) "s"
-  [106]=>
-  string(1) "o"
-  [107]=>
-  string(1) "l"
-  [108]=>
-  string(1) "e"
-  [109]=>
-  string(1) "."
-  [110]=>
-  string(1) "l"
-  [111]=>
-  string(1) "o"
-  [112]=>
-  string(1) "g"
-  [113]=>
-  string(1) "("
-  [114]=>
-  string(1) "'"
-  [115]=>
-  string(1) "a"
-  [116]=>
-  string(1) "s"
-  [117]=>
-  string(1) "d"
-  [118]=>
-  string(1) "a"
-  [119]=>
-  string(1) "s"
-  [120]=>
-  string(1) "'"
-  [121]=>
-  string(1) ")"
-  [122]=>
-  string(1) ";"
-  [123]=>
-  string(1) "
-"
-  [124]=>
-  string(1) " "
-  [125]=>
-  string(1) "}"
-  [126]=>
-  string(1) "
-"
-  [127]=>
-  string(1) " "
-  [128]=>
-  string(1) "a"
-  [129]=>
-  string(1) "t"
-  [130]=>
-  string(1) "t"
-  [131]=>
-  string(1) "r"
-  [132]=>
-  string(1) "b"
-  [133]=>
-  string(1) " "
-  [134]=>
-  string(1) "="
-  [135]=>
-  string(1) " "
-  [136]=>
-  string(1) "'"
-  [137]=>
-  string(1) "a"
-  [138]=>
-  string(1) "s"
-  [139]=>
-  string(1) "d"
-  [140]=>
-  string(1) "'"
-  [141]=>
-  string(1) " "
-  [142]=>
-  string(1) "+"
-  [143]=>
-  string(1) " "
-  [144]=>
-  string(1) "'"
-  [145]=>
-  string(1) "a"
-  [146]=>
-  string(1) "s"
-  [147]=>
-  string(1) "d"
-  [148]=>
-  string(1) "'"
-  [149]=>
-  string(1) "
-"
-  [150]=>
-  string(1) "}"
-  [151]=>
-  string(1) "
-"
-  [152]=>
-  string(1) "c"
-  [153]=>
-  string(1) "o"
-  [154]=>
-  string(1) "n"
-  [155]=>
-  string(1) "s"
-  [156]=>
-  string(1) "t"
-  [157]=>
-  string(1) " "
-  [158]=>
-  string(1) "c"
-  [159]=>
-  string(1) "l"
-  [160]=>
-  string(1) "a"
-  [161]=>
-  string(1) "s"
-  [162]=>
-  string(1) "s"
-  [163]=>
-  string(1) "T"
-  [164]=>
-  string(1) "e"
-  [165]=>
-  string(1) "s"
-  [166]=>
-  string(1) "t"
-  [167]=>
-  string(1) " "
-  [168]=>
-  string(1) "="
-  [169]=>
-  string(1) " "
-  [170]=>
-  string(1) "n"
-  [171]=>
-  string(1) "e"
-  [172]=>
-  string(1) "w"
-  [173]=>
-  string(1) " "
-  [174]=>
-  string(1) "C"
-  [175]=>
-  string(1) "l"
-  [176]=>
-  string(1) "a"
-  [177]=>
-  string(1) "s"
-  [178]=>
-  string(1) "s"
-  [179]=>
-  string(1) "N"
-  [180]=>
-  string(1) "a"
-  [181]=>
-  string(1) "m"
-  [182]=>
-  string(1) "e"
-  [183]=>
-  string(1) "("
-  [184]=>
-  string(1) ")"
-  [185]=>
-  string(1) ";"
-  [186]=>
-  string(1) "
-"
-  [187]=>
-  string(1) "c"
-  [188]=>
-  string(1) "o"
-  [189]=>
-  string(1) "n"
-  [190]=>
-  string(1) "s"
-  [191]=>
-  string(1) "t"
-  [192]=>
-  string(1) " "
-  [193]=>
-  string(1) "c"
-  [194]=>
-  string(1) "l"
-  [195]=>
-  string(1) "a"
-  [196]=>
-  string(1) "s"
-  [197]=>
-  string(1) "s"
-  [198]=>
-  string(1) "T"
-  [199]=>
-  string(1) "e"
-  [200]=>
-  string(1) "s"
-  [201]=>
-  string(1) "t"
-  [202]=>
-  string(1) "2"
-  [203]=>
-  string(1) " "
-  [204]=>
-  string(1) "="
-  [205]=>
-  string(1) " "
-  [206]=>
-  string(1) "n"
-  [207]=>
-  string(1) "e"
-  [208]=>
-  string(1) "w"
-  [209]=>
-  string(1) " "
-  [210]=>
-  string(1) "C"
-  [211]=>
-  string(1) "l"
-  [212]=>
-  string(1) "a"
-  [213]=>
-  string(1) "s"
-  [214]=>
-  string(1) "s"
-  [215]=>
-  string(1) "N"
-  [216]=>
-  string(1) "a"
-  [217]=>
-  string(1) "m"
-  [218]=>
-  string(1) "e"
-  [219]=>
-  string(1) "("
-  [220]=>
-  string(1) ")"
-  [221]=>
-  string(1) "
-"
-  [222]=>
-  string(1) "c"
-  [223]=>
-  string(1) "o"
-  [224]=>
-  string(1) "n"
-  [225]=>
-  string(1) "s"
-  [226]=>
-  string(1) "t"
-  [227]=>
-  string(1) " "
-  [228]=>
-  string(1) "c"
-  [229]=>
-  string(1) "l"
-  [230]=>
-  string(1) "a"
-  [231]=>
-  string(1) "s"
-  [232]=>
-  string(1) "s"
-  [233]=>
-  string(1) "T"
-  [234]=>
-  string(1) "e"
-  [235]=>
-  string(1) "s"
-  [236]=>
-  string(1) "3"
-  [237]=>
-  string(1) " "
-  [238]=>
-  string(1) "="
-  [239]=>
-  string(1) " "
-  [240]=>
-  string(1) "n"
-  [241]=>
-  string(1) "e"
-  [242]=>
-  string(1) "w"
-  [243]=>
-  string(1) " "
-  [244]=>
-  string(1) "C"
-  [245]=>
-  string(1) "l"
-  [246]=>
-  string(1) "a"
-  [247]=>
-  string(1) "s"
-  [248]=>
-  string(1) "s"
-  [249]=>
-  string(1) "N"
-  [250]=>
-  string(1) "a"
-  [251]=>
-  string(1) "m"
-  [252]=>
-  string(1) "e"
-  [253]=>
-  string(1) "
-"
-  [254]=>
-  string(1) "("
-  [255]=>
-  string(1) ")"
-  [256]=>
-  string(1) "
-"
-  [257]=>
-  string(1) "c"
-  [258]=>
-  string(1) "o"
-  [259]=>
-  string(1) "n"
-  [260]=>
-  string(1) "s"
-  [261]=>
-  string(1) "t"
-  [262]=>
-  string(1) " "
-  [263]=>
-  string(1) "c"
-  [264]=>
-  string(1) "l"
-  [265]=>
-  string(1) "a"
-  [266]=>
-  string(1) "s"
-  [267]=>
-  string(1) "s"
-  [268]=>
-  string(1) "T"
-  [269]=>
-  string(1) "e"
-  [270]=>
-  string(1) "s"
-  [271]=>
-  string(1) "t"
-  [272]=>
-  string(1) "4"
-  [273]=>
-  string(1) " "
-  [274]=>
-  string(1) "="
-  [275]=>
-  string(1) " "
-  [276]=>
-  string(1) "n"
-  [277]=>
-  string(1) "e"
-  [278]=>
-  string(1) "w"
-  [279]=>
-  string(1) " "
-  [280]=>
-  string(1) "C"
-  [281]=>
-  string(1) "l"
-  [282]=>
-  string(1) "a"
-  [283]=>
-  string(1) "s"
-  [284]=>
-  string(1) "s"
-  [285]=>
-  string(1) "N"
-  [286]=>
-  string(1) "a"
-  [287]=>
-  string(1) "m"
-  [288]=>
-  string(1) "e"
-  [289]=>
-  string(1) ";"
-  [290]=>
-  string(1) "
-"
-  [291]=>
-  string(1) "c"
-  [292]=>
-  string(1) "o"
-  [293]=>
-  string(1) "n"
-  [294]=>
-  string(1) "s"
-  [295]=>
-  string(1) "t"
-  [296]=>
-  string(1) " "
-  [297]=>
-  string(1) "c"
-  [298]=>
-  string(1) "l"
-  [299]=>
-  string(1) "a"
-  [300]=>
-  string(1) "s"
-  [301]=>
-  string(1) "s"
-  [302]=>
-  string(1) "T"
-  [303]=>
-  string(1) "e"
-  [304]=>
-  string(1) "s"
-  [305]=>
-  string(1) "t"
-  [306]=>
-  string(1) "6"
-  [307]=>
-  string(1) " "
-  [308]=>
-  string(1) "="
-  [309]=>
-  string(1) " "
-  [310]=>
-  string(1) "n"
-  [311]=>
-  string(1) "e"
-  [312]=>
-  string(1) "w"
-  [313]=>
-  string(1) " "
-  [314]=>
-  string(1) "C"
-  [315]=>
-  string(1) "l"
-  [316]=>
-  string(1) "a"
-  [317]=>
-  string(1) "s"
-  [318]=>
-  string(1) "s"
-  [319]=>
-  string(1) "N"
-  [320]=>
-  string(1) "a"
-  [321]=>
-  string(1) "m"
-  [322]=>
-  string(1) "e"
-  [323]=>
-  string(1) "
-"
-  [324]=>
-  string(1) "c"
-  [325]=>
-  string(1) "o"
-  [326]=>
-  string(1) "n"
-  [327]=>
-  string(1) "s"
-  [328]=>
-  string(1) "t"
-  [329]=>
-  string(1) " "
-  [330]=>
-  string(1) "c"
-  [331]=>
-  string(1) "l"
-  [332]=>
-  string(1) "a"
-  [333]=>
-  string(1) "s"
-  [334]=>
-  string(1) "s"
-  [335]=>
-  string(1) "T"
-  [336]=>
-  string(1) "e"
-  [337]=>
-  string(1) "s"
-  [338]=>
-  string(1) "t"
-  [339]=>
-  string(1) "5"
-  [340]=>
-  string(1) " "
-  [341]=>
-  string(1) "="
-  [342]=>
-  string(1) " "
-  [343]=>
-  string(1) "n"
-  [344]=>
-  string(1) "e"
-  [345]=>
-  string(1) "w"
-  [346]=>
-  string(1) "
-"
-  [347]=>
-  string(1) "C"
-  [348]=>
-  string(1) "l"
-  [349]=>
-  string(1) "a"
-  [350]=>
-  string(1) "s"
-  [351]=>
-  string(1) "s"
-  [352]=>
-  string(1) "N"
-  [353]=>
-  string(1) "a"
-  [354]=>
-  string(1) "m"
-  [355]=>
-  string(1) "e"
-  [356]=>
-  string(1) "
-"
-  [357]=>
-  string(1) "i"
-  [358]=>
-  string(1) "f"
-  [359]=>
-  string(1) "("
-  [360]=>
-  string(1) "!"
-  [361]=>
-  string(2) "õ"
-  [362]=>
-  string(1) "|"
-  [363]=>
-  string(1) "|"
-  [364]=>
-  string(1) "!"
-  [365]=>
-  string(2) "ú"
-  [366]=>
-  string(1) ")"
-  [367]=>
-  string(1) " "
-  [368]=>
-  string(1) "t"
-  [369]=>
-  string(1) "h"
-  [370]=>
-  string(1) "r"
-  [371]=>
-  string(1) "o"
-  [372]=>
-  string(1) "w"
-  [373]=>
-  string(1) " "
-  [374]=>
-  string(1) "n"
-  [375]=>
-  string(1) "e"
-  [376]=>
-  string(1) "w"
-  [377]=>
-  string(1) " "
-  [378]=>
-  string(1) "E"
-  [379]=>
-  string(1) "r"
-  [380]=>
-  string(1) "r"
-  [381]=>
-  string(1) "o"
-  [382]=>
-  string(1) "r"
-  [383]=>
-  string(1) "("
-  [384]=>
-  string(1) "'"
-  [385]=>
-  string(1) "C"
-  [386]=>
-  string(1) "o"
-  [387]=>
-  string(1) "u"
-  [388]=>
-  string(1) "l"
-  [389]=>
-  string(1) "d"
-  [390]=>
-  string(1) "n"
-  [391]=>
-  string(1) "\"
-  [392]=>
-  string(1) "'"
-  [393]=>
-  string(1) "t"
-  [394]=>
-  string(1) " "
-  [395]=>
-  string(1) "f"
-  [396]=>
-  string(1) "i"
-  [397]=>
-  string(1) "n"
-  [398]=>
-  string(1) "d"
-  [399]=>
-  string(1) " "
-  [400]=>
-  string(1) "l"
-  [401]=>
-  string(1) "i"
-  [402]=>
-  string(1) "n"
-  [403]=>
-  string(1) "e"
-  [404]=>
-  string(1) "s"
-  [405]=>
-  string(1) "'"
-  [406]=>
-  string(1) ")"
-  [407]=>
-  string(1) ";"
-  [408]=>
-  string(1) "
-"
-}
 Mapping...
-PHP Fatal error:  Uncaught TypeError: mb_strlen(): Argument #1 ($string) must be of type string, array given in E:\xampp\htdocs\tetraquark\src\Foundation\BlockAbstract.php:249
-Stack trace:
-#0 E:\xampp\htdocs\tetraquark\src\Foundation\BlockAbstract.php(249): mb_strlen(Array)
-#1 E:\xampp\htdocs\tetraquark\src\Block\ScriptBlock.php(77): Tetraquark\Foundation\BlockAbstract->createSubBlocks()
-#2 E:\xampp\htdocs\tetraquark\src\Block\ScriptBlock.php(31): Tetraquark\Block\ScriptBlock->map(0)
-#3 E:\xampp\htdocs\tetraquark\src\Foundation\BlockAbstract.php(56): Tetraquark\Block\ScriptBlock->objectify(0)
-#4 E:\xampp\htdocs\tetraquark\src\Block\ScriptBlock.php(20): Tetraquark\Foundation\BlockAbstract->__construct(0, '', Array)
-#5 E:\xampp\htdocs\tetraquark\src\Tetraquark.php(88): Tetraquark\Block\ScriptBlock->__construct('class ClassName...')
-#6 E:\xampp\htdocs\tetraquark\test\test.php(9): Tetraquark\Tetraquark->minify('E:\\xampp\\htdocs...')
-#7 {main}
-  thrown in E:\xampp\htdocs\tetraquark\src\Foundation\BlockAbstract.php on line 249
+=======================
+Creating aliases...
+=======================
+Aliases: c => a, 
+Recreating...
+=======================
+Block: Tetraquark\Block\ArrayBlock
+Subtype: [
+Instruction: 
+Instruction Start: 0
+Caret: 9
+Name: ``
+Alias: ``
+=======
+  Block: Tetraquark\Block\StringBlock
+  Subtype: 
+  Instruction: 'a'
+  Instruction Start: 1
+  Caret: 4
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ArrayItemSeperatorBlock
+  Subtype: ,
+  Instruction: 
+  Instruction Start: 4
+  Caret: 4
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: var1
+  Instruction Start: 5
+  Caret: 9
+  Name: ``
+  Alias: ``
+  =======
+Block: Tetraquark\Block\ArrayBlock
+Subtype: [
+Instruction: 
+Instruction Start: 11
+Caret: 44
+Name: ``
+Alias: ``
+=======
+  Block: Tetraquark\Block\FunctionBlock
+  Subtype: anonymous:function
+  Instruction: function () {
+  Instruction Start: 11
+  Caret: 38
+  Name: ``
+  Arguments: [0] `
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  return 
+    Instruction Start: 25
+    Caret: 33
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: 'a'
+    Instruction Start: 33
+    Caret: 36
+    Name: ``
+    Alias: ``
+    =======
+  Block: Tetraquark\Block\ArrayItemSeperatorBlock
+  Subtype: ,
+  Instruction: 
+  Instruction Start: 39
+  Caret: 39
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\StringBlock
+  Subtype: 
+  Instruction: 'a'
+  Instruction Start: 41
+  Caret: 44
+  Name: ``
+  Alias: ``
+  =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: let
+Instruction: let c = [\n 'c',\n () => {\n console.log('a')\n },\n caller('a'),\n]
+Instruction Start: 46
+Caret: 108
+Name: ``
+Value: ``
+Alias: ``
+=======
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype: 
+  Instruction:  c =
+  Instruction Start: 0
+  Caret: 54
+  Name: `c`
+  Value: ``
+  Alias: `a`
+  =======
+    Block: Tetraquark\Block\ArrayBlock
+    Subtype: [
+    Instruction: 
+    Instruction Start: 5
+    Caret: 53
+    Name: ``
+    Alias: ``
+    =======
+      Block: Tetraquark\Block\StringBlock
+      Subtype: 
+      Instruction: 'c'
+      Instruction Start: 7
+      Caret: 10
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\ArrayItemSeperatorBlock
+      Subtype: ,
+      Instruction: 
+      Instruction Start: 10
+      Caret: 10
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\CallerBlock
+      Subtype: (
+      Instruction: 
+      Instruction Start: 12
+      Caret: 37
+      Name: ``
+      Alias: ``
+      =======
+        Block: Tetraquark\Block\ArrowFunctionBlock
+        Subtype: parenthesis:brackets
+        Instruction: () => {
+        Instruction Start: 12
+        Caret: 37
+        Name: ``
+        Value: ``
+        Arguments: [0] `
+        Alias: ``
+        =======
+          Block: Tetraquark\Block\ChainLinkBlock
+          Subtype: first
+          Instruction: console.log('a') }, ca
+          Instruction Start: 20
+          Caret: 27
+          Name: ``
+          Alias: ``
+          =======
+          Block: Tetraquark\Block\ChainLinkBlock
+          Subtype: end:method
+          Instruction: lo
+          Instruction Start: 27
+          Caret: 35
+          Name: ``
+          Alias: ``
+          =======
+            Block: Tetraquark\Block\StringBlock
+            Subtype: 
+            Instruction: 'a'
+            Instruction Start: 32
+            Caret: 35
+            Name: ``
+            Alias: ``
+            =======
+      Block: Tetraquark\Block\ArrayItemSeperatorBlock
+      Subtype: ,
+      Instruction: 
+      Instruction Start: 38
+      Caret: 38
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\UndefinedBlock
+      Subtype: 
+      Instruction:  caller
+      Instruction Start: 31
+      Caret: 38
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\CallerBlock
+      Subtype: (
+      Instruction: ('a')
+      Instruction Start: 46
+      Caret: 50
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\ArrayItemSeperatorBlock
+      Subtype: ,
+      Instruction: 
+      Instruction Start: 51
+      Caret: 51
+      Name: ``
+      Alias: ``
+      =======
+Block: Tetraquark\Block\ArrayBlock
+Subtype: [
+Instruction: 
+Instruction Start: 110
+Caret: 141
+Name: ``
+Alias: ``
+=======
+  Block: Tetraquark\Block\ArrayBlock
+  Subtype: [
+  Instruction: 
+  Instruction Start: 113
+  Caret: 139
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\ArrayBlock
+    Subtype: [
+    Instruction: 
+    Instruction Start: 116
+    Caret: 124
+    Name: ``
+    Alias: ``
+    =======
+      Block: Tetraquark\Block\StringBlock
+      Subtype: 
+      Instruction: 'a'
+      Instruction Start: 119
+      Caret: 122
+      Name: ``
+      Alias: ``
+      =======
+    Block: Tetraquark\Block\ArrayItemSeperatorBlock
+    Subtype: ,
+    Instruction: 
+    Instruction Start: 125
+    Caret: 125
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: 'b'
+    Instruction Start: 128
+    Caret: 131
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\ArrayItemSeperatorBlock
+    Subtype: ,
+    Instruction: 
+    Instruction Start: 131
+    Caret: 131
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: 'v'
+    Instruction Start: 134
+    Caret: 137
+    Name: ``
+    Alias: ``
+    =======
+Block: Tetraquark\Block\ArrayBlock
+Subtype: [
+Instruction: 
+Instruction Start: 143
+Caret: 152
+Name: ``
+Alias: ``
+=======
+  Block: Tetraquark\Block\StringBlock
+  Subtype: 
+  Instruction: 'a'
+  Instruction Start: 144
+  Caret: 147
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ArrayItemSeperatorBlock
+  Subtype: ,
+  Instruction: 
+  Instruction Start: 147
+  Caret: 147
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\StringBlock
+  Subtype: 
+  Instruction: 'bv'
+  Instruction Start: 148
+  Caret: 152
+  Name: ``
+  Alias: ``
+  =======
+Block: Tetraquark\Block\ArrayBlock
+Subtype: [
+Instruction: 
+Instruction Start: 155
+Caret: 180
+Name: ``
+Alias: ``
+=======
+  Block: Tetraquark\Block\ArrayBlock
+  Subtype: [
+  Instruction: 
+  Instruction Start: 156
+  Caret: 160
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: 'v'
+    Instruction Start: 157
+    Caret: 160
+    Name: ``
+    Alias: ``
+    =======
+  Block: Tetraquark\Block\ArrayItemSeperatorBlock
+  Subtype: ,
+  Instruction: 
+  Instruction Start: 161
+  Caret: 161
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ObjectBlock
+  Subtype: {
+  Instruction: 
+  Instruction Start: 162
+  Caret: 168
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\ObjectValueBlock
+    Subtype: :
+    Instruction: 
+    Instruction Start: 163
+    Caret: 167
+    Name: ``
+    Alias: ``
+    =======
+      Block: Tetraquark\Block\StringBlock
+      Subtype: 
+      Instruction: 's'
+      Instruction Start: 165
+      Caret: 168
+      Name: ``
+      Alias: ``
+      =======
+  Block: Tetraquark\Block\ArrayItemSeperatorBlock
+  Subtype: ,
+  Instruction: 
+  Instruction Start: 169
+  Caret: 169
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  var3
+  Instruction Start: 170
+  Caret: 175
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: 
+  Instruction Start: 171
+  Caret: 175
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: .
+  Instruction: var
+  Instruction Start: 175
+  Caret: 179
+  Name: ``
+  Alias: ``
+  =======
+Duration: 0.006s
 
-Fatal error: Uncaught TypeError: mb_strlen(): Argument #1 ($string) must be of type string, array given in E:\xampp\htdocs\tetraquark\src\Foundation\BlockAbstract.php:249
-Stack trace:
-#0 E:\xampp\htdocs\tetraquark\src\Foundation\BlockAbstract.php(249): mb_strlen(Array)
-#1 E:\xampp\htdocs\tetraquark\src\Block\ScriptBlock.php(77): Tetraquark\Foundation\BlockAbstract->createSubBlocks()
-#2 E:\xampp\htdocs\tetraquark\src\Block\ScriptBlock.php(31): Tetraquark\Block\ScriptBlock->map(0)
-#3 E:\xampp\htdocs\tetraquark\src\Foundation\BlockAbstract.php(56): Tetraquark\Block\ScriptBlock->objectify(0)
-#4 E:\xampp\htdocs\tetraquark\src\Block\ScriptBlock.php(20): Tetraquark\Foundation\BlockAbstract->__construct(0, '', Array)
-#5 E:\xampp\htdocs\tetraquark\src\Tetraquark.php(88): Tetraquark\Block\ScriptBlock->__construct('class ClassName...')
-#6 E:\xampp\htdocs\tetraquark\test\test.php(9): Tetraquark\Tetraquark->minify('E:\\xampp\\htdocs...')
-#7 {main}
-  thrown in E:\xampp\htdocs\tetraquark\src\Foundation\BlockAbstract.php on line 249
+
+['a',var1];[function(){return 'a';},'a'];let a=['c',()=>{console.log('a')}, ca.lo('a');},caller('a')];[[['a'],'b','v']];['a','bv'];[['v'],{:'s'},var3.var];
