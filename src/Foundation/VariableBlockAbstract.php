@@ -48,12 +48,23 @@ abstract class VariableBlockAbstract extends BlockAbstract
             }
 
             if ($letter === "\n") {
-                if (Validate::isOperator($lastLetter) && !Validate::isComment($lastPos, self::$content)) {
+                if (
+                    Validate::isOperator($lastLetter)
+                    // && $lastLetter != ']'
+                    // && $lastLetter != '}'
+                    // && $lastLetter != ')'
+                    && !Validate::isComment($lastPos, self::$content)
+                ) {
                     continue;
                 }
 
                 list($nextLetter, $nextPos) = $this->getNextLetter($i, self::$content);
                 if (Validate::isOperator($nextLetter) && !Validate::isComment($nextPos, self::$content)) {
+                    continue;
+                }
+
+                list($previousWord) = $this->getPreviousWord($i, self::$content);
+                if (Validate::isTakenKeyWord($previousWord)) {
                     continue;
                 }
 

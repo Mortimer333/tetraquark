@@ -1,4 +1,5 @@
 class ClassName {
+    testAttr = 1
     constructor() {
         console.log('new');
     }

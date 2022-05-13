@@ -18,7 +18,6 @@ class IfBlock extends ConditionBlock implements Contract\Block
 
     public function objectify(int $start = 0)
     {
-        Log::log('New===');
         $this->setName('');
         $this->setCondType('if');
         $this->setConditionAndInstruction($start);

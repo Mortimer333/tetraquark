@@ -537,6 +537,11 @@ abstract class BlockAbstract
                 $letter = $instruction->getLetter($i);
             }
 
+            if ($letter === "\n") {
+                $properInstr .= ' ';
+                continue;
+            }
+
             if (
                 Validate::isWhitespace($letter) && Validate::isSpecial($instruction->getLetter($i + 1) ?? '')
                 || Validate::isWhitespace($letter) && Validate::isWhitespace($instruction->getLetter($i + 1) ?? '')
@@ -603,7 +608,37 @@ abstract class BlockAbstract
             }
         }
 
-        return ['', $i - 1];
+        return ['', 0];
+    }
+
+    protected function getPreviousWord(int $start, Content $content): array
+    {
+        $letterFound = false;
+        $whitespaceFound = false;
+        $word = '';
+        for ($i=$start; $i >= 0; $i--) {
+            $letter = $content->getLetter($i);
+            if (Validate::isWhitespace($letter)) {
+                if (!$whitespaceFound) {
+                    $whitespaceFound = true;
+                } elseif ($letterFound) {
+                    return [Str::rev($word), $i];
+                }
+                continue;
+            }
+
+            if ($letterFound) {
+                $word .= $letter;
+            }
+
+            if ($whitespaceFound && !$letterFound) {
+                $word .= $letter;
+                $letterFound = true;
+                continue;
+            }
+        }
+
+        return [Str::rev($word), 0];
     }
 
     protected function checkIfFirstLetterInNextSiblingIsADot(): bool
