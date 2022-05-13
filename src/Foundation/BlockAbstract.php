@@ -222,7 +222,7 @@ abstract class BlockAbstract
         }
 
         $this->setInstructionStart($properStart)
-            ->setInstruction(self::$content->iCutToContent($properStart, $end - $properStart));
+            ->setInstruction(self::$content->iCutToContent($properStart, $end));
     }
 
     protected function constructBlock(string $mappedWord, string $className, int &$i, string &$possibleUndefined, array &$blocks): ?BlockAbstract

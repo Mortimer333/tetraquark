@@ -203,7 +203,7 @@ class Content
     public function trim($regex = "\s"): Content
     {
         $start = 0;
-        $end   = $this->getLength() - 1;
+        $end   = $this->getLength();
         for ($i=0; $i < $this->getLength(); $i++) {
             $letter = $this->getLetter($i);
             if (preg_match('/' . $regex . '/', $letter) === false) {
