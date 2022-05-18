@@ -8,6 +8,7 @@
 ## Setting to allow changing anonymous functions `function () {}` into array functions `() => {}`
 
 ## Next stage - check for any useless statements
+- not resolved methemtical equasions - 2 +2 (or more realisticly 60\*60\*24)
 
 ## Handle
 - [DONE] ?: conditions

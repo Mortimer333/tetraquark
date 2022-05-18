@@ -15,7 +15,7 @@ class DoWhileBlock extends ConditionBlock implements Contract\Block
     protected function getArgs(): string
     {
         return $this->replaceVariablesWithAliases(
-            rtrim($this->getCondition(), ';')
+            new Content(rtrim($this->getCondition(), ';'))
         );
     }
 

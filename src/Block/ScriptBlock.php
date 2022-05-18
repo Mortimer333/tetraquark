@@ -44,7 +44,6 @@ class ScriptBlock extends Block implements Contract\Block
     protected function generateContent(string $content): Content
     {
         $content = $this->prepare($content);
-        echo $content . PHP_EOL;
         return new Content($content);
     }
 

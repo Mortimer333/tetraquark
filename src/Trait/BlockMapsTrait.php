@@ -148,10 +148,12 @@ trait BlockMapsTrait
             ]
         ],
         "-" => [
+            "-"       => "OperatorBlock",
             "="       => "AttributeBlock",
             "default" => "SymbolBlock",
         ],
         "+" => [
+            "+"       => "OperatorBlock",
             "="       => "AttributeBlock",
             "default" => "SymbolBlock",
         ],

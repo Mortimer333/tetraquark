@@ -1,557 +1,205 @@
-class ClassName {
- testAttr = 1
- constructor() {
- console.log('new');
- }
- func1 () {
- }
- funcr2() {}
- meth2
- ()
- {
- console.log('asdas');
- }
- attrb = 'asd' + 'asd'
-}
-const classTest = new ClassName();
-const classTest2 = new ClassName()
-const classTes3 = new ClassName
-()
-const classTest4 = new ClassName;
-const classTest6 = new ClassName
-const classTest5 = new
-ClassName
-if(!õ||!ú) throw new Error('Couldn\'t find lines');
-
 Mapping...
-=
-name: testAttr
- 
-1
-\n
-In end
-31, 28,  1
-=
-name: attrb
- 
-'
-+
- 
-'
-In end
-163, 148,  'asd' + 'asd'
-c
-l
-a
-s
-s
-T
-e
-s
-t
- 
-=
- 
-n
-e
-w
- 
-C
-l
-a
-s
-s
-N
-a
-m
-e
-(
-c
-l
-a
-s
-s
-T
-e
-s
-t
-2
- 
-=
- 
-n
-e
-w
- 
-C
-l
-a
-s
-s
-N
-a
-m
-e
-(
-In end
-c
-l
-a
-s
-s
-T
-e
-s
-3
- 
-=
- 
-n
-e
-w
- 
-C
-l
-a
-s
-s
-N
-a
-m
-e
-\n
-In end
-Next got stopped: (
-(
-In end
-c
-l
-a
-s
-s
-T
-e
-s
-t
-4
- 
-=
- 
-n
-e
-w
- 
-C
-l
-a
-s
-s
-N
-a
-m
-e
-;
-c
-l
-a
-s
-s
-T
-e
-s
-t
-6
- 
-=
- 
-n
-e
-w
- 
-C
-l
-a
-s
-s
-N
-a
-m
-e
-\n
-In end
-c
-l
-a
-s
-s
-T
-e
-s
-t
-5
- 
-=
- 
-n
-e
-w
-\n
-In end
-Prefixed with taken word: new
-C
-l
-a
-s
-s
-N
-a
-m
-e
-\n
-In end
-New===
 =======================
 Creating aliases...
 =======================
-Aliases: ClassName => a, testAttr => b, func1 => c, funcr2 => d, meth2 => e, attrb => f, classTest => g, classTest2 => h, classTes3 => i, classTest4 => j, classTest6 => k, classTest5 => l, 
+Aliases: whileLooped => a, 
 Recreating...
 =======================
-Block: Tetraquark\Block\ClassBlock
-Subtype: class
-Instruction: class ClassName {
+Block: Tetraquark\Block\VariableBlock
+Subtype: let
+Instruction: let whileLooped = 10
 Instruction Start: 0
-Caret: 164
-Name: `ClassName`
-Alias: `a`
+Caret: 20
+Name: ``
+Value: ``
+Alias: ``
 =======
-  Block: Tetraquark\Block\AttributeBlock
+  Block: Tetraquark\Block\VariableItemBlock
   Subtype: 
-  Instruction: testAttr = 1
-  Instruction Start: 19
-  Caret: 31
-  Name: `testAttr`
-  Alias: `b`
+  Instruction:  whileLooped =
+  Instruction Start: 0
+  Caret: 17
+  Name: `whileLooped`
+  Value: ``
+  Alias: `a`
   =======
     Block: Tetraquark\Block\UndefinedBlock
     Subtype: 
-    Instruction:  1
-    Instruction Start: -1
-    Caret: 1
+    Instruction:  10
+    Instruction Start: 14
+    Caret: 17
     Name: ``
     Alias: ``
     =======
-  Block: Tetraquark\Block\ClassMethodBlock
-  Subtype: method
-  Instruction: constructor() {
-  Instruction Start: 33
-  Caret: 71
-  Name: `constructor`
-  Arguments: [0] `
-  Alias: `constructor`
+Block: Tetraquark\Block\DoWhileBlock
+Subtype: do
+Instruction: do {
+Instruction Start: 22
+Caret: 92
+Name: ``
+  Block: Tetraquark\Block\CallerBlock
+  Subtype: (
+  Instruction: (whileLooped)
+  Instruction Start: 0
+  Caret: 12
+  Name: ``
+  Alias: ``
   =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: console
-    Instruction Start: 50
-    Caret: 57
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:method
-    Instruction: log
-    Instruction Start: 57
+Alias: ``
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: \n whileLooped
+  Instruction Start: 12
+  Caret: 25
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\OperatorBlock
+  Subtype: --
+  Instruction: --
+  Instruction Start: 39
+  Caret: 41
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 44
+  Caret: 51
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 51
+  Caret: 67
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: whileLooped
+    Instruction Start: 56
     Caret: 67
     Name: ``
     Alias: ``
     =======
-      Block: Tetraquark\Block\StringBlock
-      Subtype: 
-      Instruction: 'new'
-      Instruction Start: 62
-      Caret: 67
-      Name: ``
-      Alias: ``
-      =======
-  Block: Tetraquark\Block\ClassMethodBlock
-  Subtype: method
-  Instruction: func1 () {
-  Instruction Start: 74
-  Caret: 86
-  Name: `func1`
-  Arguments: [0] `
-  Alias: `c`
-  =======
-  Block: Tetraquark\Block\ClassMethodBlock
-  Subtype: method
-  Instruction: funcr2() {
-  Instruction Start: 89
-  Caret: 99
-  Name: `funcr2`
-  Arguments: [0] `
-  Alias: `d`
-  =======
-  Block: Tetraquark\Block\ClassMethodBlock
-  Subtype: method
-  Instruction: meth2\n ()\n {
-  Instruction Start: 102
-  Caret: 139
-  Name: `meth2`
-  Arguments: [0] `
-  Alias: `e`
-  =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: console
-    Instruction Start: 116
-    Caret: 123
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:method
-    Instruction: log
-    Instruction Start: 123
-    Caret: 135
-    Name: ``
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\StringBlock
-      Subtype: 
-      Instruction: 'asdas'
-      Instruction Start: 128
-      Caret: 135
-      Name: ``
-      Alias: ``
-      =======
-  Block: Tetraquark\Block\AttributeBlock
+Block: Tetraquark\Block\DoWhileBlock
+Subtype: do
+Instruction: do {
+Instruction Start: 95
+Caret: 152
+Name: ``
+  Block: Tetraquark\Block\UndefinedBlock
   Subtype: 
-  Instruction: attrb = 'asd' + 'asd'
-  Instruction Start: 142
-  Caret: 163
-  Name: `attrb`
-  Alias: `f`
+  Instruction: whileLooped
+  Instruction Start: -1
+  Caret: 10
+  Name: ``
+  Alias: ``
   =======
-    Block: Tetraquark\Block\StringBlock
+Alias: ``
+=======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 100
+  Caret: 107
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 107
+  Caret: 129
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
     Subtype: 
-    Instruction: 'asd'
-    Instruction Start: 1
-    Caret: 6
+    Instruction: whileLooped 
+    Instruction Start: 99
+    Caret: 111
     Name: ``
     Alias: ``
     =======
     Block: Tetraquark\Block\SymbolBlock
     Subtype: +
     Instruction: +
-    Instruction Start: 7
-    Caret: 7
+    Instruction Start: 124
+    Caret: 124
     Name: ``
     Alias: ``
     =======
     Block: Tetraquark\Block\StringBlock
     Subtype: 
-    Instruction: 'asd'
-    Instruction Start: 9
-    Caret: 14
+    Instruction: '2'
+    Instruction Start: 126
+    Caret: 129
     Name: ``
     Alias: ``
     =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: const
-Instruction: const classTest = new ClassName()
-Instruction Start: 166
-Caret: 199
+Block: Tetraquark\Block\DoWhileBlock
+Subtype: do
+Instruction: do {
+Instruction Start: 154
+Caret: 213
 Name: ``
-Value: ``
-Alias: ``
-=======
-  Block: Tetraquark\Block\VariableItemBlock
-  Subtype: 
-  Instruction:  classTest =
-  Instruction Start: 0
-  Caret: 28
-  Name: `classTest`
-  Value: ``
-  Alias: `g`
-  =======
-    Block: Tetraquark\Block\NewClassBlock
-    Subtype: new
-    Instruction:  ClassName()
-    Instruction Start: 12
-    Caret: 28
-    Name: ``
-    Arguments: [0] `
-    Alias: ``
-    =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: const
-Instruction: const classTest2 = new ClassName()
-Instruction Start: 201
-Caret: 235
-Name: ``
-Value: ``
-Alias: ``
-=======
-  Block: Tetraquark\Block\VariableItemBlock
-  Subtype: 
-  Instruction:  classTest2 =
-  Instruction Start: 0
-  Caret: 29
-  Name: `classTest2`
-  Value: ``
-  Alias: `h`
-  =======
-    Block: Tetraquark\Block\NewClassBlock
-    Subtype: new
-    Instruction:  ClassName()
-    Instruction Start: 13
-    Caret: 29
-    Name: ``
-    Arguments: [0] `
-    Alias: ``
-    =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: const
-Instruction: const classTes3 = new ClassName\n()
-Instruction Start: 236
-Caret: 270
-Name: ``
-Value: ``
-Alias: ``
-=======
-  Block: Tetraquark\Block\VariableItemBlock
-  Subtype: 
-  Instruction:  classTes3 =
-  Instruction Start: 0
-  Caret: 29
-  Name: `classTes3`
-  Value: ``
-  Alias: `i`
-  =======
-    Block: Tetraquark\Block\NewClassBlock
-    Subtype: new
-    Instruction:  ClassName ()
-    Instruction Start: 12
-    Caret: 29
-    Name: ``
-    Arguments: [0] `
-    Alias: ``
-    =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: const
-Instruction: const classTest4 = new ClassName
-Instruction Start: 271
-Caret: 303
-Name: ``
-Value: ``
-Alias: ``
-=======
-  Block: Tetraquark\Block\VariableItemBlock
-  Subtype: 
-  Instruction:  classTest4 =
-  Instruction Start: 0
-  Caret: 27
-  Name: `classTest4`
-  Value: ``
-  Alias: `j`
-  =======
-    Block: Tetraquark\Block\NewClassBlock
-    Subtype: new
-    Instruction:  ClassName
-    Instruction Start: 13
-    Caret: 27
-    Name: ``
-    Arguments: [0] `
-    Alias: ``
-    =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: const
-Instruction: const classTest6 = new ClassName
-Instruction Start: 305
-Caret: 337
-Name: ``
-Value: ``
-Alias: ``
-=======
-  Block: Tetraquark\Block\VariableItemBlock
-  Subtype: 
-  Instruction:  classTest6 =
-  Instruction Start: 0
-  Caret: 27
-  Name: `classTest6`
-  Value: ``
-  Alias: `k`
-  =======
-    Block: Tetraquark\Block\NewClassBlock
-    Subtype: new
-    Instruction:  ClassName
-    Instruction Start: 13
-    Caret: 27
-    Name: ``
-    Arguments: [0] `
-    Alias: ``
-    =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: const
-Instruction: const classTest5 = new\nClassName
-Instruction Start: 338
-Caret: 370
-Name: ``
-Value: ``
-Alias: ``
-=======
-  Block: Tetraquark\Block\VariableItemBlock
-  Subtype: 
-  Instruction:  classTest5 =
-  Instruction Start: 0
-  Caret: 27
-  Name: `classTest5`
-  Value: ``
-  Alias: `l`
-  =======
-    Block: Tetraquark\Block\NewClassBlock
-    Subtype: new
-    Instruction:  ClassName
-    Instruction Start: 13
-    Caret: 27
-    Name: ``
-    Arguments: [0] `
-    Alias: ``
-    =======
-Block: Tetraquark\Block\IfBlock
-Subtype: single-condition
-Instruction: if(!õ||!ú) throw new Error('Couldn\'t find lines');
-Instruction Start: 371
-Caret: 422
-Name: ``
-Alias: ``
-=======
   Block: Tetraquark\Block\UndefinedBlock
   Subtype: 
-  Instruction:  throw
-  Instruction Start: -7
-  Caret: -1
+  Instruction: whileLooped
+  Instruction Start: -1
+  Caret: 10
   Name: ``
   Alias: ``
   =======
-  Block: Tetraquark\Block\NewClassBlock
-  Subtype: new
-  Instruction:  Error('Couldn\'t find lines')
-  Instruction Start: 6
-  Caret: 40
+Alias: ``
+=======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 159
+  Caret: 166
   Name: ``
-  Arguments: [1] `
-    Block: Tetraquark\Block\StringBlock
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 166
+  Caret: 188
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
     Subtype: 
-    Instruction: 'Couldn\'t find lines'
-    Instruction Start: 0
-    Caret: 22
+    Instruction: whileLooped 
+    Instruction Start: 158
+    Caret: 170
     Name: ``
     Alias: ``
     =======
-  Alias: ``
-  =======
-Duration: 0.007s
+    Block: Tetraquark\Block\SymbolBlock
+    Subtype: +
+    Instruction: +
+    Instruction Start: 183
+    Caret: 183
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: '3'
+    Instruction Start: 185
+    Caret: 188
+    Name: ``
+    Alias: ``
+    =======
+Duration: 0.003s
 
 
-class a{b=1;constructor(){console.log('new');}c(){}d(){}e(){console.log('asdas');}f='asd'+'asd';}const g=new a;const h=new a;const i=new a;const j=new a;const k=new a;const l=new a;if(!õ||!ú)throw new Error('Couldn\'t find lines');
+let a=10;do{a--;console.log(a);}while((a));do{console.log(a+'2');}while(a);do{console.log(a+'3');}while(a);
