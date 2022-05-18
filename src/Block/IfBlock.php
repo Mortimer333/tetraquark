@@ -28,4 +28,9 @@ class IfBlock extends ConditionBlock implements Contract\Block
             $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
         }
     }
+
+    public function getArgBlock(): array
+    {
+        return $this->argsBlocks;
+    }
 }

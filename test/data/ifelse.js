@@ -3,10 +3,10 @@ if (obj.objSoloTest[0] == 'asd') {
     console.log('found2')
 }
 if (a === b)
-    console.log('found2')
+    console.log('found3')
 
-    if (a === b) console.log('found2'); if (a === b)
-        console.log('found2')
+    if (a === b) console.log('found4'); if (a === b)
+        console.log('found5')
 
 if (true) {
     // test1
@@ -23,7 +23,7 @@ if (false) {
 if (true) console.log('as')
 else console.log('vc')
 
-if (true) console.log('as')
+if (false) console.log('as')
 else if(false)console.log('vc')
-else if (asd)
+else if ('asd')
     console.log('cxasd')

@@ -2,264 +2,561 @@ Mapping...
 =======================
 Creating aliases...
 =======================
-Aliases: strlen => a, objSoloTest => b, start => c, reverse => d, value => e, modifier => f, str => g, to => h, i => i,
+Aliases: 
 Recreating...
 =======================
-Block: Tetraquark\Block\VariableBlock
-Subtype: let
-Instruction: let objSoloTest = ['a']
+Block: Tetraquark\Block\IfBlock
+Subtype: if
+Instruction: if (obj.objSoloTest[0] == 'asd') {
 Instruction Start: 0
-Caret: 23
+Caret: 80
 Name: ``
-Value: ``
-Alias: ``
-=======
-  Block: Tetraquark\Block\VariableItemBlock
-  Subtype:
-  Instruction:  objSoloTest =
-  Instruction Start: 0
-  Caret: 20
-  Name: `objSoloTest`
-  Value: ``
-  Alias: `b`
-  =======
-    Block: Tetraquark\Block\ArrayBlock
-    Subtype: [
-    Instruction:
-    Instruction Start: 15
-    Caret: 19
-    Name: ``
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\StringBlock
-      Subtype:
-      Instruction: 'a'
-      Instruction Start: 16
-      Caret: 19
-      Name: ``
-      Alias: ``
-      =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: let
-Instruction: let start = 1
-Instruction Start: 25
-Caret: 38
-Name: ``
-Value: ``
-Alias: ``
-=======
-  Block: Tetraquark\Block\VariableItemBlock
-  Subtype:
-  Instruction:  start =
-  Instruction Start: 0
-  Caret: 10
-  Name: `start`
-  Value: ``
-  Alias: `c`
-  =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype:
-    Instruction:  1
-    Instruction Start: 8
-    Caret: 10
-    Name: ``
-    Alias: ``
-    =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: let
-Instruction: let reverse = false
-Instruction Start: 40
-Caret: 59
-Name: ``
-Value: ``
-Alias: ``
-=======
-  Block: Tetraquark\Block\VariableItemBlock
-  Subtype:
-  Instruction:  reverse =
-  Instruction Start: 0
-  Caret: 16
-  Name: `reverse`
-  Value: ``
-  Alias: `d`
-  =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype:
-    Instruction:  false
-    Instruction Start: 10
-    Caret: 16
-    Name: ``
-    Alias: ``
-    =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: let
-Instruction: let value = 'asd'
-Instruction Start: 61
-Caret: 78
-Name: ``
-Value: ``
-Alias: ``
-=======
-  Block: Tetraquark\Block\VariableItemBlock
-  Subtype:
-  Instruction:  value =
-  Instruction Start: 0
-  Caret: 14
-  Name: `value`
-  Value: ``
-  Alias: `e`
-  =======
-    Block: Tetraquark\Block\StringBlock
-    Subtype:
-    Instruction: 'asd'
-    Instruction Start: 9
-    Caret: 14
-    Name: ``
-    Alias: ``
-    =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: let
-Instruction: let modifier = 1
-Instruction Start: 80
-Caret: 96
-Name: ``
-Value: ``
-Alias: ``
-=======
-  Block: Tetraquark\Block\VariableItemBlock
-  Subtype:
-  Instruction:  modifier =
-  Instruction Start: 0
-  Caret: 13
-  Name: `modifier`
-  Value: ``
-  Alias: `f`
-  =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype:
-    Instruction:  1
-    Instruction Start: 11
-    Caret: 13
-    Name: ``
-    Alias: ``
-    =======
-Block: Tetraquark\Block\FunctionBlock
-Subtype: function
-Instruction: function strlen(str) {
-Instruction Start: 97
-Caret: 141
-Name: `strlen`
-Arguments: [1] `
-  Block: Tetraquark\Block\UndefinedBlock
-  Subtype:
-  Instruction: str
-  Instruction Start: -1
-  Caret: 2
-  Name: `str`
-  Alias: `g`
-  =======
-Alias: `a`
-=======
-  Block: Tetraquark\Block\UndefinedBlock
-  Subtype:
-  Instruction: \n return
-  Instruction Start: 123
-  Caret: 132
-  Name: ``
-  Alias: ``
-  =======
+Cond block: [0] 
+Arg block: [5] 
   Block: Tetraquark\Block\ChainLinkBlock
   Subtype: first
-  Instruction: str
-  Instruction Start: 129
-  Caret: 132
-  Name: ``
-  Alias: ``
-  =======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: .
-  Instruction: length
-  Instruction Start: 132
-  Caret: 138
-  Name: ``
-  Alias: ``
-  =======
-Block: Tetraquark\Block\ForBlock
-Subtype: for
-Instruction: for (var to = 0; to < objSoloTest.length; to++) {
-Instruction Start: 143
-Caret: 224
-Name: ``
-  Block: Tetraquark\Block\VariableBlock
-  Subtype: var
-  Instruction: var to = 0
+  Instruction: obj
   Instruction Start: 0
-  Caret: 10
-  Name: ``
-  Value: ``
-  Alias: ``
-  =======
-    Block: Tetraquark\Block\VariableItemBlock
-    Subtype:
-    Instruction:  to =
-    Instruction Start: 0
-    Caret: 7
-    Name: `to`
-    Value: ``
-    Alias: `h`
-    =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype:
-      Instruction:  0
-      Instruction Start: 5
-      Caret: 7
-      Name: ``
-      Alias: ``
-      =======
-  Block: Tetraquark\Block\UndefinedBlock
-  Subtype:
-  Instruction:  to
-  Instruction Start: -5
-  Caret: -1
-  Name: ``
-  Alias: ``
-  =======
-  Block: Tetraquark\Block\SymbolBlock
-  Subtype: <
-  Instruction: <
-  Instruction Start: 4
-  Caret: 4
+  Caret: 3
   Name: ``
   Alias: ``
   =======
   Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: first
+  Subtype: middle:bracket
   Instruction: objSoloTest
-  Instruction Start: 6
+  Instruction Start: 3
+  Caret: 14
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\BracketChainLinkBlock
+  Subtype: [
+  Instruction: 
+  Instruction Start: 15
   Caret: 17
   Name: ``
   Alias: ``
   =======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: .
-  Instruction: length
-  Instruction Start: 17
-  Caret: 24
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: 0
+    Instruction Start: 16
+    Caret: 17
+    Name: ``
+    Alias: ``
+    =======
+  Block: Tetraquark\Block\DoubleEqualBlock
+  Subtype: ==
+  Instruction: ==
+  Instruction Start: 19
+  Caret: 20
   Name: ``
   Alias: ``
   =======
+  Block: Tetraquark\Block\StringBlock
+  Subtype: 
+  Instruction: 'asd'
+  Instruction Start: 22
+  Caret: 27
+  Name: ``
+  Alias: ``
+  =======
+Alias: ``
+=======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 36
+  Caret: 43
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 43
+  Caret: 55
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: 'found'
+    Instruction Start: 48
+    Caret: 55
+    Name: ``
+    Alias: ``
+    =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 58
+  Caret: 65
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 65
+  Caret: 78
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: 'found2'
+    Instruction Start: 70
+    Caret: 78
+    Name: ``
+    Alias: ``
+    =======
+Block: Tetraquark\Block\IfBlock
+Subtype: single-condition
+Instruction: if (a === b)\n console.log('found3')
+Instruction Start: 82
+Caret: 117
+Name: ``
+Cond block: [0] 
+Arg block: [3] 
   Block: Tetraquark\Block\UndefinedBlock
-  Subtype:
-  Instruction:  to
-  Instruction Start: -4
+  Subtype: 
+  Instruction: a 
+  Instruction Start: -3
   Caret: -1
   Name: ``
   Alias: ``
   =======
-  Block: Tetraquark\Block\OperatorBlock
-  Subtype: ++
-  Instruction: ++
-  Instruction Start: 3
+  Block: Tetraquark\Block\TripleEqualBlock
+  Subtype: ===
+  Instruction: ===
+  Instruction Start: 2
+  Caret: 4
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  b
+  Instruction Start: 4
+  Caret: 6
+  Name: ``
+  Alias: ``
+  =======
+Alias: ``
+=======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 2
+  Caret: 9
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 9
+  Caret: 22
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: 'found3'
+    Instruction Start: 14
+    Caret: 22
+    Name: ``
+    Alias: ``
+    =======
+Block: Tetraquark\Block\IfBlock
+Subtype: single-condition
+Instruction: if (a === b) console.log('found4')
+Instruction Start: 119
+Caret: 153
+Name: ``
+Cond block: [0] 
+Arg block: [3] 
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: a 
+  Instruction Start: -3
+  Caret: -1
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\TripleEqualBlock
+  Subtype: ===
+  Instruction: ===
+  Instruction Start: 2
+  Caret: 4
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  b
+  Instruction Start: 4
+  Caret: 6
+  Name: ``
+  Alias: ``
+  =======
+Alias: ``
+=======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 1
+  Caret: 8
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 8
+  Caret: 21
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: 'found4'
+    Instruction Start: 13
+    Caret: 21
+    Name: ``
+    Alias: ``
+    =======
+Block: Tetraquark\Block\IfBlock
+Subtype: single-condition
+Instruction: if (a === b)\n console.log('found5')
+Instruction Start: 155
+Caret: 190
+Name: ``
+Cond block: [0] 
+Arg block: [3] 
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: a 
+  Instruction Start: -3
+  Caret: -1
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\TripleEqualBlock
+  Subtype: ===
+  Instruction: ===
+  Instruction Start: 2
+  Caret: 4
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  b
+  Instruction Start: 4
+  Caret: 6
+  Name: ``
+  Alias: ``
+  =======
+Alias: ``
+=======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 2
+  Caret: 9
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 9
+  Caret: 22
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: 'found5'
+    Instruction Start: 14
+    Caret: 22
+    Name: ``
+    Alias: ``
+    =======
+Block: Tetraquark\Block\IfBlock
+Subtype: if
+Instruction: if (true) {
+Instruction Start: 191
+Caret: 213
+Name: ``
+Cond block: [0] 
+Arg block: [1] 
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: true
+  Instruction Start: -1
+  Caret: 3
+  Name: ``
+  Alias: ``
+  =======
+Alias: ``
+=======
+  Block: Tetraquark\Block\SingleCommentBlock
+  Subtype: //
+  Instruction: / test1\n
+  Instruction Start: 204
+  Caret: 212
+  Name: ``
+  Alias: ``
+  =======
+Block: Tetraquark\Block\ElseBlock
+Subtype: else
+Instruction: else{
+Instruction Start: 214
+Caret: 231
+Name: ``
+Alias: ``
+=======
+  Block: Tetraquark\Block\SingleCommentBlock
+  Subtype: //
+  Instruction: / test\n
+  Instruction Start: 223
+  Caret: 230
+  Name: ``
+  Alias: ``
+  =======
+Block: Tetraquark\Block\IfBlock
+Subtype: if
+Instruction: if (false) {
+Instruction Start: 233
+Caret: 246
+Name: ``
+Cond block: [0] 
+Arg block: [1] 
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: false
+  Instruction Start: -1
+  Caret: 4
+  Name: ``
+  Alias: ``
+  =======
+Alias: ``
+=======
+Block: Tetraquark\Block\ElseBlock
+Subtype: elseif
+Instruction: else 
+Instruction Start: 247
+Caret: 252
+Name: ``
+Alias: ``
+=======
+Block: Tetraquark\Block\IfBlock
+Subtype: if
+Instruction: if (true) {
+Instruction Start: 253
+Caret: 265
+Name: ``
+Cond block: [0] 
+Arg block: [1] 
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: true
+  Instruction Start: -1
+  Caret: 3
+  Name: ``
+  Alias: ``
+  =======
+Alias: ``
+=======
+Block: Tetraquark\Block\IfBlock
+Subtype: single-condition
+Instruction: if (true) console.log('as')
+Instruction Start: 267
+Caret: 294
+Name: ``
+Cond block: [0] 
+Arg block: [1] 
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: true
+  Instruction Start: -1
+  Caret: 3
+  Name: ``
+  Alias: ``
+  =======
+Alias: ``
+=======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 1
+  Caret: 8
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 8
+  Caret: 17
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: 'as'
+    Instruction Start: 13
+    Caret: 17
+    Name: ``
+    Alias: ``
+    =======
+Block: Tetraquark\Block\ElseBlock
+Subtype: single line
+Instruction: else
+Instruction Start: 294
+Caret: 317
+Name: ``
+Alias: ``
+=======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 300
+  Caret: 307
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 307
+  Caret: 316
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: 'vc'
+    Instruction Start: 312
+    Caret: 316
+    Name: ``
+    Alias: ``
+    =======
+Block: Tetraquark\Block\IfBlock
+Subtype: single-condition
+Instruction: if (false) console.log('as')
+Instruction Start: 318
+Caret: 346
+Name: ``
+Cond block: [0] 
+Arg block: [1] 
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: false
+  Instruction Start: -1
+  Caret: 4
+  Name: ``
+  Alias: ``
+  =======
+Alias: ``
+=======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 1
+  Caret: 8
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 8
+  Caret: 17
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: 'as'
+    Instruction Start: 13
+    Caret: 17
+    Name: ``
+    Alias: ``
+    =======
+Block: Tetraquark\Block\ElseBlock
+Subtype: elseif
+Instruction: else 
+Instruction Start: 346
+Caret: 351
+Name: ``
+Alias: ``
+=======
+Block: Tetraquark\Block\IfBlock
+Subtype: single-condition
+Instruction: if(false)console.log('vc')
+Instruction Start: 352
+Caret: 378
+Name: ``
+Cond block: [0] 
+Arg block: [1] 
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: false
+  Instruction Start: -1
+  Caret: 4
+  Name: ``
+  Alias: ``
+  =======
+Alias: ``
+=======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 0
+  Caret: 7
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 7
+  Caret: 16
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: 'vc'
+    Instruction Start: 12
+    Caret: 16
+    Name: ``
+    Alias: ``
+    =======
+Block: Tetraquark\Block\ElseBlock
+Subtype: elseif
+Instruction: else 
+Instruction Start: 378
+Caret: 383
+Name: ``
+Alias: ``
+=======
+Block: Tetraquark\Block\IfBlock
+Subtype: single-condition
+Instruction: if ('asd')\n console.log('cxasd')
+Instruction Start: 384
+Caret: 416
+Name: ``
+Cond block: [0] 
+Arg block: [1] 
+  Block: Tetraquark\Block\StringBlock
+  Subtype: 
+  Instruction: 'asd'
+  Instruction Start: 0
   Caret: 5
   Name: ``
   Alias: ``
@@ -269,155 +566,28 @@ Alias: ``
   Block: Tetraquark\Block\ChainLinkBlock
   Subtype: first
   Instruction: console
-  Instruction Start: 194
-  Caret: 201
+  Instruction Start: 2
+  Caret: 9
   Name: ``
   Alias: ``
   =======
   Block: Tetraquark\Block\ChainLinkBlock
   Subtype: end:method
   Instruction: log
-  Instruction Start: 201
-  Caret: 221
-  Name: ``
-  Alias: ``
-  =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype:
-    Instruction: objSoloTest
-    Instruction Start: 194
-    Caret: 205
-    Name: ``
-    Alias: ``
-    =======
-    Block: Tetraquark\Block\BracketChainLinkBlock
-    Subtype: [
-    Instruction:
-    Instruction Start: 217
-    Caret: 220
-    Name: ``
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype:
-      Instruction: to
-      Instruction Start: 218
-      Caret: 220
-      Name: ``
-      Alias: ``
-      =======
-Block: Tetraquark\Block\ForBlock
-Subtype: for
-Instruction: for (let i=start; (!reverse && i < strlen(value)) || (reverse && i >= 0); i += modifier) {
-Instruction Start: 226
-Caret: 338
-Name: ``
-  Block: Tetraquark\Block\VariableBlock
-  Subtype: let
-  Instruction: let i=start
-  Instruction Start: 0
-  Caret: 11
-  Name: ``
-  Value: ``
-  Alias: ``
-  =======
-    Block: Tetraquark\Block\VariableItemBlock
-    Subtype:
-    Instruction:  i=
-    Instruction Start: 0
-    Caret: 8
-    Name: `i`
-    Value: ``
-    Alias: `i`
-    =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype:
-      Instruction: start
-      Instruction Start: 3
-      Caret: 8
-      Name: ``
-      Alias: ``
-      =======
-  Block: Tetraquark\Block\CallerBlock
-  Subtype: (
-  Instruction: (!reverse && i < strlen(value))
-  Instruction Start: 1
-  Caret: 31
-  Name: ``
-  Alias: ``
-  =======
-  Block: Tetraquark\Block\SymbolBlock
-  Subtype: ||
-  Instruction: ||
-  Instruction Start: 33
-  Caret: 34
-  Name: ``
-  Alias: ``
-  =======
-  Block: Tetraquark\Block\CallerBlock
-  Subtype: (
-  Instruction: (reverse && i >= 0)
-  Instruction Start: 36
-  Caret: 55
-  Name: ``
-  Alias: ``
-  =======
-  Block: Tetraquark\Block\AttributeBlock
-  Subtype: +=
-  Instruction: i += modifier
-  Instruction Start: 1
-  Caret: 14
-  Name: `i`
-  Alias: `i`
-  =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype:
-    Instruction:  modifier
-    Instruction Start: -1
-    Caret: 8
-    Name: ``
-    Alias: ``
-    =======
-Alias: ``
-=======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: first
-  Instruction: console
-  Instruction Start: 318
-  Caret: 325
-  Name: ``
-  Alias: ``
-  =======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: end:method
-  Instruction: log
-  Instruction Start: 325
-  Caret: 336
+  Instruction Start: 9
+  Caret: 21
   Name: ``
   Alias: ``
   =======
     Block: Tetraquark\Block\StringBlock
-    Subtype:
-    Instruction: 'test'
-    Instruction Start: 330
-    Caret: 336
+    Subtype: 
+    Instruction: 'cxasd'
+    Instruction Start: 14
+    Caret: 21
     Name: ``
     Alias: ``
     =======
 Duration: 0.006s
 
 
-let b=['a'];
-let c=1;
-let d=false;
-let e='asd';
-let f=1;
-function a(g){
-    return g.length;
-}
-for(var h=0;h<b.length;h++){
-    console.log(b[h]);
-}
-for(let i=c;(!d&& i< a(e))||(d&& i>= 0);i+=f){
-    console.log('test');
-}
+if(obj.objSoloTest[0]=='asd'){console.log('found');console.log('found2');}if(a===b)console.log('found3');if(a===b)console.log('found4');if(a===b)console.log('found5');if(true){}else{}if(false){}else if(true){}if(true)console.log('as');else console.log('vc');if(false)console.log('as');else if(false)console.log('vc');else if('asd')console.log('cxasd');

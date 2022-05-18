@@ -10,7 +10,7 @@ class DoubleEqualBlock extends Block implements Contract\Block
     {
         $this->setInstruction(new Content('=='));
         $this->setName('');
-        $this->setInstructionStart($start);
+        $this->setInstructionStart($start - 1);
         $this->setCaret($start);
     }
 

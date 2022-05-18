@@ -25,6 +25,7 @@ abstract class ConditionBlockAbstract extends BlockAbstract
         $condStart = null;
         $condEnd   = null;
         $end       = null;
+        $letterFound = false;
         $parenthesisOpen = 0;
         for ($i=$actualStart; $i < self::$content->getLength(); $i++) {
             $letter = self::$content->getLetter($i);
@@ -58,17 +59,22 @@ abstract class ConditionBlockAbstract extends BlockAbstract
                 continue;
             }
 
+            if (!\is_null($condEnd) && $letter != "\n") {
+                $letterFound = true;
+            }
+
             if (
                 !\is_null($condStart)
                 && !\is_null($condEnd)
                 && (
                     $letter == '{'
-                    || ($this instanceof Block\IfBlock && ($letter == ';' || $letter == "\n"))
+                    || ($this instanceof Block\IfBlock && ($letter == ';' || $letter == "\n") && $letterFound)
                 )
             ) {
                 $end = $i + 1;
-                if ($letter == ';') {
+                if ($letter == ';' || $letter == "\n") {
                     $this->setSubtype(self::SINGLE_CONDITION_SUBTYPE);
+                    $end--;
                 }
                 break;
             }
@@ -113,15 +119,16 @@ abstract class ConditionBlockAbstract extends BlockAbstract
     public function recreate(): string
     {
         $script = $this->getCondType() . '(' . $this->getArgs() . ')';
-        if ($this->getSubtype() !== self::SINGLE_CONDITION_SUBTYPE) {
+        $blocks = $this->getBlocks();
+        if ($this->getSubtype() !== self::SINGLE_CONDITION_SUBTYPE || sizeof($blocks) == 0) {
             $script .= '{';
         }
 
-        foreach ($this->getBlocks() as $block) {
+        foreach ($blocks as $block) {
             $script .= $block->recreate();
         }
 
-        if ($this->getSubtype() !== self::SINGLE_CONDITION_SUBTYPE) {
+        if ($this->getSubtype() !== self::SINGLE_CONDITION_SUBTYPE || sizeof($blocks) == 0) {
             $script .= '}';
         }
 

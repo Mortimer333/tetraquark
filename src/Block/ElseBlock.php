@@ -57,6 +57,8 @@ class ElseBlock extends Block implements Contract\Block
         } else {
             if ($this->getSubType() != self::SINGLE_LINE) {
                 $script .= '{';
+            } else {
+                $script .= ' ';
             }
             foreach ($blocks as $block) {
                 $script .= $block->recreate();

@@ -143,8 +143,15 @@ class Log
                 self::decreaseIndent();
             }
             if (method_exists($block, 'getCondBlocks')) {
+                self::log("Cond block: [" . \sizeof($block->getCondBlocks()) . "] ");
                 self::increaseIndent();
                 self::displayBlocks($block->getCondBlocks());
+                self::decreaseIndent();
+            }
+            if (method_exists($block, 'getArgBlock')) {
+                self::log("Arg block: [" . \sizeof($block->getArgBlock()) . "] ");
+                self::increaseIndent();
+                self::displayBlocks($block->getArgBlock());
                 self::decreaseIndent();
             }
             self::log("Alias: `" . $block->getAlias($block->getName()) . "`");
