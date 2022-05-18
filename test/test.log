@@ -2,254 +2,155 @@ Mapping...
 =======================
 Creating aliases...
 =======================
-Aliases: nem => a, obj => b, tem => c, as => d, kek@ => e, `as${meh}` => f, 
+Aliases: size => a, 
 Recreating...
+new check 100, log
+next child 129, objSoloTest
+first
+new check 140, shift
+next child , 
 =======================
-Block: Tetraquark\Block\VariableBlock
-Subtype: let
-Instruction: let nem = {\n objSoloTest,\n obj: 'boj',\n}
+Block: Tetraquark\Block\WhileBlock
+Subtype: while
+Instruction: while (objSoloTest.length) {
 Instruction Start: 0
-Caret: 40
+Caret: 29
 Name: ``
-Value: ``
-Alias: ``
-=======
-  Block: Tetraquark\Block\VariableItemBlock
-  Subtype: 
-  Instruction:  nem =
-  Instruction Start: 0
-  Caret: 35
-  Name: `nem`
-  Value: ``
-  Alias: `a`
-  =======
-    Block: Tetraquark\Block\ObjectBlock
-    Subtype: {
-    Instruction: 
-    Instruction Start: 7
-    Caret: 34
-    Name: ``
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\ObjectSoloValueBlock
-      Subtype: ,
-      Instruction: objSoloTes
-      Instruction Start: 9
-      Caret: 20
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ObjectValueBlock
-      Subtype: :
-      Instruction:  obj
-      Instruction Start: 21
-      Caret: 32
-      Name: `obj`
-      Alias: `b`
-      =======
-        Block: Tetraquark\Block\StringBlock
-        Subtype: 
-        Instruction: 'boj'
-        Instruction Start: 27
-        Caret: 32
-        Name: ``
-        Alias: ``
-        =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: let
-Instruction: let tem = {\n 'as' : 'asd',\n 'kek@' : [\n 1, 2,3\n ],\n `as${meh}` : 2\n}
-Instruction Start: 41
-Caret: 109
-Name: ``
-Value: ``
-Alias: ``
-=======
-  Block: Tetraquark\Block\VariableItemBlock
-  Subtype: 
-  Instruction:  tem =
-  Instruction Start: 0
-  Caret: 60
-  Name: `tem`
-  Value: ``
-  Alias: `c`
-  =======
-    Block: Tetraquark\Block\ObjectBlock
-    Subtype: {
-    Instruction: 
-    Instruction Start: 7
-    Caret: 59
-    Name: ``
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\ObjectValueBlock
-      Subtype: :
-      Instruction:  'as' 
-      Instruction Start: 8
-      Caret: 21
-      Name: `as`
-      Alias: `d`
-      =======
-        Block: Tetraquark\Block\StringBlock
-        Subtype: 
-        Instruction: 'asd'
-        Instruction Start: 16
-        Caret: 21
-        Name: ``
-        Alias: ``
-        =======
-      Block: Tetraquark\Block\ObjectValueBlock
-      Subtype: :
-      Instruction:  'kek@' 
-      Instruction Start: 22
-      Caret: 42
-      Name: `kek@`
-      Alias: `e`
-      =======
-        Block: Tetraquark\Block\ArrayBlock
-        Subtype: [
-        Instruction: 
-        Instruction Start: 32
-        Caret: 41
-        Name: ``
-        Alias: ``
-        =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction:  1
-          Instruction Start: 30
-          Caret: 32
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ArrayItemSeperatorBlock
-          Subtype: ,
-          Instruction: 
-          Instruction Start: 35
-          Caret: 35
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction:  2
-          Instruction Start: 33
-          Caret: 35
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\ArrayItemSeperatorBlock
-          Subtype: ,
-          Instruction: 
-          Instruction Start: 38
-          Caret: 38
-          Name: ``
-          Alias: ``
-          =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction: 3 
-          Instruction Start: 39
-          Caret: 41
-          Name: ``
-          Alias: ``
-          =======
-      Block: Tetraquark\Block\ObjectValueBlock
-      Subtype: :
-      Instruction:  `as${meh}` 
-      Instruction Start: 43
-      Caret: 58
-      Name: ``as${meh}``
-      Alias: `f`
-      =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction:  2 
-        Instruction Start: 56
-        Caret: 59
-        Name: ``
-        Alias: ``
-        =======
-Block: Tetraquark\Block\UndefinedBlock
-Subtype: 
-Instruction: tem
-Instruction Start: 106
-Caret: 109
-Name: ``
-Alias: ``
-=======
-Block: Tetraquark\Block\BracketChainLinkBlock
-Subtype: [
-Instruction: 
-Instruction Start: 113
-Caret: 124
-Name: ``
-Alias: ``
-=======
-  Block: Tetraquark\Block\StringBlock
-  Subtype: 
-  Instruction: 'as'
-  Instruction Start: 114
-  Caret: 118
-  Name: ``
-  Alias: ``
-  =======
+Cond block: [2] 
   Block: Tetraquark\Block\ChainLinkBlock
   Subtype: first
-  Instruction: 
-  Instruction Start: 119
-  Caret: 119
+  Instruction: objSoloTest
+  Instruction Start: 0
+  Caret: 11
   Name: ``
   Alias: ``
   =======
   Block: Tetraquark\Block\ChainLinkBlock
   Subtype: .
-  Instruction: meh
-  Instruction Start: 119
-  Caret: 123
+  Instruction: length
+  Instruction Start: 11
+  Caret: 18
   Name: ``
   Alias: ``
   =======
-Block: Tetraquark\Block\UndefinedBlock
-Subtype: 
-Instruction: \ntem
-Instruction Start: 120
-Caret: 124
-Name: ``
 Alias: ``
 =======
-Block: Tetraquark\Block\BracketChainLinkBlock
-Subtype: [
-Instruction: 
-Instruction Start: 129
-Caret: 140
+Block: Tetraquark\Block\WhileBlock
+Subtype: while
+Instruction: while (objSoloTest.length) {
+Instruction Start: 31
+Caret: 150
 Name: ``
+Cond block: [2] 
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: objSoloTest
+  Instruction Start: 0
+  Caret: 11
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: .
+  Instruction: length
+  Instruction Start: 11
+  Caret: 18
+  Name: ``
+  Alias: ``
+  =======
 Alias: ``
 =======
-  Block: Tetraquark\Block\StringBlock
-  Subtype: 
-  Instruction: `as${meh}`
-  Instruction Start: 130
+  Block: Tetraquark\Block\VariableBlock
+  Subtype: let
+  Instruction: let size = objSoloTest.length
+  Instruction Start: 61
+  Caret: 90
+  Name: ``
+  Value: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\VariableItemBlock
+    Subtype: 
+    Instruction:  size =
+    Instruction Start: 0
+    Caret: 26
+    Name: `size`
+    Value: ``
+    Alias: `a`
+    =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: first
+      Instruction: objSoloTest
+      Instruction Start: 8
+      Caret: 19
+      Name: ``
+      Alias: ``
+      =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: .
+      Instruction: length
+      Instruction Start: 19
+      Caret: 25
+      Name: ``
+      Alias: ``
+      =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 93
+  Caret: 100
+  Name: ``
+  Alias: ``
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 100
+  Caret: 125
+  Name: ``
+  Alias: ``
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: size, objSoloTest
+    Instruction Start: 87
+    Caret: 104
+    Name: ``
+    Alias: ``
+    =======
+    Block: Tetraquark\Block\BracketChainLinkBlock
+    Subtype: [
+    Instruction: 
+    Instruction Start: 122
+    Caret: 124
+    Name: ``
+    Alias: ``
+    =======
+      Block: Tetraquark\Block\UndefinedBlock
+      Subtype: 
+      Instruction: 0
+      Instruction Start: 123
+      Caret: 124
+      Name: ``
+      Alias: ``
+      =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: objSoloTest
+  Instruction Start: 129
   Caret: 140
   Name: ``
   Alias: ``
   =======
-Block: Tetraquark\Block\ChainLinkBlock
-Subtype: first
-Instruction: 
-Instruction Start: 141
-Caret: 141
-Name: ``
-Alias: ``
-=======
-Block: Tetraquark\Block\ChainLinkBlock
-Subtype: .
-Instruction: ga
-Instruction Start: 141
-Caret: 145
-Name: ``
-Alias: ``
-=======
-Duration: 0.004s
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: shift
+  Instruction Start: 140
+  Caret: 147
+  Name: ``
+  Alias: ``
+  =======
+Duration: 0.003s
 
 
-let a={objSoloTes,b:'boj'};let c={d:'asd',e:[1,2,3],`as${meh}`:2};c['as'.meh];c[`as${meh}`].ga;
+while(objSoloTest.length){}while(objSoloTest.length){let a=objSoloTest.length;console.log(a, objSoloTest[0]);objSoloTest.shift();}

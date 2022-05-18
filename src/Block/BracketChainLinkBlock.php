@@ -152,11 +152,15 @@ class BracketChainLinkBlock extends Block implements Contract\Block
         $index = $this->getChildIndex();
         $nextChild = $parent->getBlocks()[$index + 1] ?? null;
         if (
-            !$nextChild instanceof ChainLinkBlock
-            && $nextChild->getSubtype() !== ChainLinkBlock::MIDDLE
-            && $nextChild->getSubtype() !== ChainLinkBlock::MIDDLE_BRACKET
-            && !$nextChild instanceof BracketChainLinkBlock
-            && !$this->checkIfFirstLetterInNextSiblingIsADot()
+            is_null($nextChild)
+            ||
+            (
+                !$nextChild instanceof ChainLinkBlock
+                && $nextChild->getSubtype() !== ChainLinkBlock::MIDDLE
+                && $nextChild->getSubtype() !== ChainLinkBlock::MIDDLE_BRACKET
+                && !$nextChild instanceof BracketChainLinkBlock
+                && !$this->checkIfFirstLetterInNextSiblingIsADot()
+            )
         ) {
             $script .= ';';
         }

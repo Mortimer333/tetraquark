@@ -144,12 +144,12 @@ abstract class BlockAbstract
                 $possibleUndefined = \mb_substr($possibleUndefined, 0, -($block->getInstruction()->getLength() + 1));
                 if (Validate::isValidUndefined($possibleUndefined)) {
                     $undefinedBlock = new Block\UndefinedBlock($start - \mb_strlen($possibleUndefined), $possibleUndefined);
-                    $undefinedBlock->setChildIndex(\sizeof($blocks) + 1);
+                    $undefinedBlock->setChildIndex(\sizeof($blocks));
                     $undefinedBlock->setParent($this);
                     $blocks[] = $undefinedBlock;
                 }
 
-                $block->setChildIndex(\sizeof($blocks) + 1);
+                $block->setChildIndex(\sizeof($blocks));
                 $block->setParent($this);
 
                 $blocks[] = $block;
@@ -255,14 +255,19 @@ abstract class BlockAbstract
                 || Validate::isStringLandmark($letter, '')
             ) {
                 $oldPos = $i;
-                // @TODO
                 $i = $this->skipString($i + 1, self::$content, $startsTemplate);
 
                 if (Validate::isValidUndefined($possibleUndefined)) {
-                    $blocks[] = new Block\UndefinedBlock($oldPos - \mb_strlen($possibleUndefined), $possibleUndefined);
+                    $undefined = new Block\UndefinedBlock($oldPos - \mb_strlen($possibleUndefined), $possibleUndefined);
+                    $undefined->setChildIndex(\sizeof($blocks));
+                    $undefined->setParent($this);
+                    $blocks[] = $undefined;
                 }
                 if (!$this instanceof Block\ObjectBlock) {
-                    $blocks[] = new Block\StringBlock($oldPos, self::$content->iSubStr($oldPos, $i));
+                    $string = new Block\StringBlock($oldPos, self::$content->iSubStr($oldPos, $i));
+                    $string->setChildIndex(\sizeof($blocks));
+                    $string->setParent($this);
+                    $blocks[] = $string;
                 }
 
                 if (\is_null(self::$content->getLetter($i))) {
@@ -282,12 +287,9 @@ abstract class BlockAbstract
             if (gettype($map) == 'string') {
                 $oldPos = $i - \mb_strlen($possibleUndefined);
                 $block = $this->constructBlock($mappedWord, $map, $i, $possibleUndefined, $blocks);
-                $block->setChildIndex(\sizeof($blocks) + 1);
-                $block->setParent($this);
                 $mappedWordLen = \mb_strlen($mappedWord);
                 $instStart = $block->getInstructionStart();
                 // Check if instruction did include semicolon
-                // @TODO
                 list($nextLetter, $pos) = $this->getNextLetter($i + 1, self::$content);
                 if ($nextLetter == ';') {
                     $i = $pos;
@@ -301,10 +303,15 @@ abstract class BlockAbstract
                 }
 
                 if (Validate::isValidUndefined($possibleUndefined)) {
-                    $blocks[] = new Block\UndefinedBlock($oldPos - \mb_strlen($possibleUndefined), $possibleUndefined);
+                    $undefined = new Block\UndefinedBlock($oldPos - \mb_strlen($possibleUndefined), $possibleUndefined);
+                    $undefined->setChildIndex(\sizeof($blocks));
+                    $undefined->setParent($this);
+                    $blocks[] = $undefined;
                 }
 
                 $possibleUndefined = '';
+                $block->setChildIndex(\sizeof($blocks));
+                $block->setParent($this);
                 $blocks[] = $block;
                 $mappedWord = '';
                 $map = null;
@@ -316,7 +323,10 @@ abstract class BlockAbstract
             if ($this->endChars[$letter] ?? false) {
                 $possibleUndefined = \mb_substr($possibleUndefined, 0, -1);
                 if (Validate::isValidUndefined($possibleUndefined)) {
-                    $blocks[] = new Block\UndefinedBlock($i - \mb_strlen($possibleUndefined), $possibleUndefined);
+                    $undefined = new Block\UndefinedBlock($i - \mb_strlen($possibleUndefined), $possibleUndefined);
+                    $undefined->setChildIndex(\sizeof($blocks));
+                    $undefined->setParent($this);
+                    $blocks[] = $undefined;
                     $possibleUndefined = '';
                 }
                 break;
