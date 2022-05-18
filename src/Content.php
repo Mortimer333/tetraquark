@@ -206,15 +206,17 @@ class Content
         $end   = $this->getLength();
         for ($i=0; $i < $this->getLength(); $i++) {
             $letter = $this->getLetter($i);
-            if (preg_match('/' . $regex . '/', $letter) === false) {
+            if (preg_match('/' . $regex . '/', $letter) === 0) {
                 $start = $i;
+                break;
             }
         }
 
         for ($i=$this->getLength() - 1; $i >= 0; $i--) {
             $letter = $this->getLetter($i);
-            if (preg_match('/' . $regex . '/', $letter) === false) {
-                $end = $i;
+            if (preg_match('/' . $regex . '/', $letter) === 0) {
+                $end = $i + 1;
+                break;
             }
         }
         return $this->iCutToContent($start, $end);

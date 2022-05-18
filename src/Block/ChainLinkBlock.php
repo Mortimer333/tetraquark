@@ -6,11 +6,11 @@ use \Tetraquark\Foundation\BlockAbstract as Block;
 
 class ChainLinkBlock extends Block implements Contract\Block
 {
-    protected const FIRST = 'first';
-    protected const MIDDLE = 'middle';
-    protected const MIDDLE_BRACKET = 'middle:bracket';
-    protected const END_METHOD = 'end:method';
-    protected const END_VARIABLE = 'end:variable';
+    public const FIRST = 'first';
+    public const MIDDLE = 'middle';
+    public const MIDDLE_BRACKET = 'middle:bracket';
+    public const END_METHOD = 'end:method';
+    public const END_VARIABLE = 'end:variable';
     public function __construct(
         int $start,
         protected string $subtype = '',

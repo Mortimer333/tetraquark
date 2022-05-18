@@ -17,6 +17,7 @@ class ObjectValueBlock extends Block implements Contract\Block
             "," => true,
             "{" => true,
         ]);
+
         $this->setName(
             $this->removeStringCharsIfPossible(
                 $this->getInstruction()->trim()
@@ -37,6 +38,7 @@ class ObjectValueBlock extends Block implements Contract\Block
                 return $name->__toString();
             }
         }
+
         if (Validate::isStringChar($name->getLetter(0) ?? '')) {
             return trim($name->__toString(), $name->getLetter(0));
         }

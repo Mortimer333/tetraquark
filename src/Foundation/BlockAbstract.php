@@ -109,9 +109,8 @@ abstract class BlockAbstract
             $hint = '';
         }
 
+        $lastBlock = $blocks[\sizeof($blocks) - 1] ?? null;
         if ($class == Block\ChainLinkBlock::class) {
-            $lastBlock = $blocks[\sizeof($blocks) - 1] ?? null;
-
             $first = false;
             // Check if we are not between some equasion with at least two ChainBlocks
             if ($lastBlock) {
@@ -130,7 +129,7 @@ abstract class BlockAbstract
 
             if (
                 $first
-                || !($lastBlock instanceof Block\ChainLinkBlock)
+                || !$lastBlock instanceof Block\ChainLinkBlock
                 || (
                     $lastBlock instanceof Block\ChainLinkBlock
                     && (
@@ -144,8 +143,14 @@ abstract class BlockAbstract
 
                 $possibleUndefined = \mb_substr($possibleUndefined, 0, -($block->getInstruction()->getLength() + 1));
                 if (Validate::isValidUndefined($possibleUndefined)) {
-                    $blocks[] = new Block\UndefinedBlock($start - \mb_strlen($possibleUndefined), $possibleUndefined);
+                    $undefinedBlock = new Block\UndefinedBlock($start - \mb_strlen($possibleUndefined), $possibleUndefined);
+                    $undefinedBlock->setChildIndex(\sizeof($blocks) + 1);
+                    $undefinedBlock->setParent($this);
+                    $blocks[] = $undefinedBlock;
                 }
+
+                $block->setChildIndex(\sizeof($blocks) + 1);
+                $block->setParent($this);
 
                 $blocks[] = $block;
                 $possibleUndefined = '';
@@ -277,7 +282,7 @@ abstract class BlockAbstract
             if (gettype($map) == 'string') {
                 $oldPos = $i - \mb_strlen($possibleUndefined);
                 $block = $this->constructBlock($mappedWord, $map, $i, $possibleUndefined, $blocks);
-                $block->setChildIndex(\sizeof($blocks));
+                $block->setChildIndex(\sizeof($blocks) + 1);
                 $block->setParent($this);
                 $mappedWordLen = \mb_strlen($mappedWord);
                 $instStart = $block->getInstructionStart();
