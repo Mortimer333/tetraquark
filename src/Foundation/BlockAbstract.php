@@ -354,37 +354,39 @@ abstract class BlockAbstract
 
     protected function generateAliases(string $lastAlias = ''): string
     {
+        if (!$this->aliasExists($this->getName()) && $this->canBeAliased($this->getName(), $this)) {
+            $alias = $this->generateAlias($this->getName(), $lastAlias);
+
+            if (strlen($alias) > 0) {
+                $this->setAlias($this->getName(), $alias);
+                $lastAlias = $alias;
+            }
+        }
+
         // Firstly set aliases to all blocks on this level
         foreach ($this->blocks as $block) {
-            if ($this->aliasExists($block->getName()) || !$this->canBeAliased($block->getName(), $block)) {
-                continue;
+            if (!$this->aliasExists($block->getName()) && $this->canBeAliased($block->getName(), $block)) {
+                $alias = $this->generateAlias($block->getName(), $lastAlias);
+
+                if (strlen($alias) > 0) {
+                    $block->setAlias($block->getName(), $alias);
+                    $lastAlias = $alias;
+                }
             }
 
-            $alias = $this->generateAlias($block->getName(), $lastAlias);
-
-            if (\mb_strlen($alias) == 0) {
-                continue;
-            }
-
-            $this->setAlias($block->getName(), $alias);
-            $lastAlias = $alias;
         }
 
         if ($this instanceof MethodBlock && !($this instanceof Block\NewClassBlock)) {
             foreach ($this->getArguments() as $argument) {
                 foreach ($argument as $block) {
-                    if ($this->aliasExists($block->getName()) || !$this->canBeAliased($block->getName(), $block)) {
-                        continue;
+                    if (!$this->aliasExists($block->getName()) && $this->canBeAliased($block->getName(), $block)) {
+                        $alias = $this->generateAlias($block->getName(), $lastAlias);
+
+                        if (strlen($alias) > 0) {
+                            $block->setAlias($block->getName(), $alias);
+                            $lastAlias = $alias;
+                        }
                     }
-
-                    $alias = $this->generateAlias($block->getName(), $lastAlias);
-
-                    if (\mb_strlen($alias) == 0) {
-                        continue;
-                    }
-
-                    $this->setAlias($block->getName(), $alias);
-                    $lastAlias = $alias;
 
                     foreach ($block->getBlocks() as $subBlock) {
                         $lastAlias = $subBlock->generateAliases($lastAlias);
@@ -394,18 +396,14 @@ abstract class BlockAbstract
 
         } elseif ($this instanceof ConditionBlock) {
             foreach ($this->getCondBlocks() as $block) {
-                if ($this->aliasExists($block->getName()) || !$this->canBeAliased($block->getName(), $block)) {
-                    continue;
+                if (!$this->aliasExists($block->getName()) && $this->canBeAliased($block->getName(), $block)) {
+                    $alias = $this->generateAlias($block->getName(), $lastAlias);
+
+                    if (strlen($alias) > 0) {
+                        $block->setAlias($block->getName(), $alias);
+                        $lastAlias = $alias;
+                    }
                 }
-
-                $alias = $this->generateAlias($block->getName(), $lastAlias);
-
-                if (\mb_strlen($alias) == 0) {
-                    continue;
-                }
-
-                $this->setAlias($block->getName(), $alias);
-                $lastAlias = $alias;
 
                 foreach ($block->getBlocks() as $subBlock) {
                     $lastAlias = $subBlock->generateAliases($lastAlias);

@@ -22,6 +22,7 @@ class ScriptBlock extends Block implements Contract\Block
 
     public function objectify(int $start = 0)
     {
+        $this->setName('');
         Log::timerStart();
         Log::log("Mapping...");
         $this->map();
