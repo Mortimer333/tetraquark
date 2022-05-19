@@ -130,6 +130,8 @@ abstract class ConditionBlockAbstract extends BlockAbstract
 
         if ($this->getSubtype() !== self::SINGLE_CONDITION_SUBTYPE || sizeof($blocks) == 0) {
             $script .= '}';
+        } elseif ($this->getSubtype() === self::SINGLE_CONDITION_SUBTYPE) {
+            $script = rtrim($script, ';') . ';';
         }
 
         return $script;

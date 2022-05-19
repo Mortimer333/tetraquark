@@ -177,7 +177,7 @@ abstract class BlockAbstract
                     || Validate::isStringLandmark($letter, '')
                 )
             ) {
-                $i = $this->skipString($i + 1, self::$content, $startsTemplate);
+                $i = $this->skipString($letter, $i + 1, self::$content, $startsTemplate);
                 $letter = self::$content->getLetter($i);
             }
 
@@ -211,8 +211,7 @@ abstract class BlockAbstract
                 ($startsTemplate = Validate::isTemplateLiteralLandmark($letter, ''))
                 || Validate::isStringLandmark($letter, '')
             ) {
-                // @TODO
-                $i = $this->skipString($i - 1, self::$content, $startsTemplate, true);
+                $i = $this->skipString($letter, $i - 1, self::$content, $startsTemplate, true);
                 $letter = self::$content->getLetter($i);
             }
 
@@ -255,7 +254,7 @@ abstract class BlockAbstract
                 || Validate::isStringLandmark($letter, '')
             ) {
                 $oldPos = $i;
-                $i = $this->skipString($i + 1, self::$content, $startsTemplate);
+                $i = $this->skipString($letter, $i + 1, self::$content, $startsTemplate);
 
                 if (Validate::isValidUndefined($possibleUndefined)) {
                     $undefined = new Block\UndefinedBlock($oldPos - \mb_strlen($possibleUndefined), $possibleUndefined);
@@ -481,8 +480,15 @@ abstract class BlockAbstract
 
             if ($isLiteralLandmark) {
                 $templateLiteralInProgress = !$templateLiteralInProgress;
-            } elseif (Validate::isStringLandmark($letter, $content->getLetter($i - 1) ?? '', $stringInProgress)) {
-                $stringInProgress = !$stringInProgress;
+            } elseif (Validate::isStringLandmark($letter, $content->getLetter($i - 1) ?? '')) {
+                $oldPos = $i;
+                $i = $this->skipString($letter, $i + 1, $content, false);
+                $minifiedValue .= $letter . $word . $content->subStr($oldPos + 1, $i - $oldPos);
+                if (\is_null($content->getLetter($i))) {
+                    break;
+                }
+                $word = '';
+                $letter = $content->getLetter($i);
             }
 
             if (
@@ -490,12 +496,6 @@ abstract class BlockAbstract
                 && $this->startsTemplateLiteralVariable($letter, $content, $i)
             ) {
                 $templateVarInProgress = true;
-            }
-
-            if ($stringInProgress || $templateLiteralInProgress) {
-                $minifiedValue .= $letter;
-                $word = '';
-                continue;
             }
 
             if (Validate::isSpecial($letter)) {
@@ -518,21 +518,29 @@ abstract class BlockAbstract
             && ($value->getLetter($i - 2) ?? '') . ($value->getLetter($i - 1) ?? '') . $letter != '\${';
     }
 
-    public function skipString(int $start, Content $content, bool $isTemplate = false, bool $reverse = false): int
+    public function skipString(string $strLandmark, int $start, Content $content, bool $isTemplate = false, bool $reverse = false): int
     {
         $modifier = (((int)!$reverse) * 2) - 1;
         for ($i=$start; (!$reverse && $i < $content->getLength()) || ($reverse && $i >= 0); $i += $modifier) {
             $letter = $content->getLetter($i);
-            if ($isTemplate && Validate::isTemplateLiteralLandmark($letter, $content->getLetter($i - 1) ?? '', true)) {
+            if (
+                $isTemplate
+                && Validate::isTemplateLiteralLandmark($letter, $content->getLetter($i - 1) ?? '', true)
+                && $letter === $strLandmark
+            ) {
                 return $i + $modifier;
-            } elseif (!$isTemplate && Validate::isStringLandmark($letter, $content->getLetter($i - 1) ?? '', true)) {
+            } elseif (
+                !$isTemplate
+                && Validate::isStringLandmark($letter, $content->getLetter($i - 1) ?? '', true)
+                && $letter === $strLandmark
+            ) {
                 return $i + $modifier;
             }
         }
         return $i;
     }
 
-    protected function removeAdditionalSpaces(Content $instruction): string
+    protected function fixScript(Content $instruction): string
     {
         $properInstr = '';
         for ($i=0; $i < $instruction->getLength(); $i++) {
@@ -542,7 +550,7 @@ abstract class BlockAbstract
                 || Validate::isStringLandmark($letter, '')
             ) {
                 $oldPos = $i;
-                $i = $this->skipString($i + 1, $instruction, $startsTemplate);
+                $i = $this->skipString($letter, $i + 1, $instruction, $startsTemplate);
                 $properInstr .= $instruction->iSubStr($oldPos, $i);
                 if (\is_null($instruction->getLetter($i))) {
                     break;
@@ -555,9 +563,27 @@ abstract class BlockAbstract
                 continue;
             }
 
+            $nextLetter = $instruction->getLetter($i + 1) ?? '';
+
             if (
-                Validate::isWhitespace($letter) && Validate::isSpecial($instruction->getLetter($i + 1) ?? '')
-                || Validate::isWhitespace($letter) && Validate::isWhitespace($instruction->getLetter($i + 1) ?? '')
+                Validate::isWhitespace($letter) && Validate::isSpecial($nextLetter)
+                || Validate::isWhitespace($letter) && Validate::isWhitespace($nextLetter)
+            ) {
+                continue;
+            }
+
+            //  Fix for all special symbol prefixed with ';'
+            $blackListedSpecial = [
+                "}" => true,
+                "]" => true,
+                ")" => true,
+                "!" => true,
+                ' ' => true,
+            ];
+            if (
+                $letter == ';'
+                && Validate::isSpecial($nextLetter)
+                && !isset($blackListedSpecial[$nextLetter])
             ) {
                 continue;
             }
@@ -693,7 +719,7 @@ abstract class BlockAbstract
             || Validate::isStringLandmark($letter, '')
         ) {
             $oldPos = $i;
-            $i = $this->skipString($i + 1, $content, $startsTemplate);
+            $i = $this->skipString($letter, $i + 1, $content, $startsTemplate);
             if (\is_null($content->getLetter($i))) {
                 return [$content->getLetter($i - 1), $i - 1];
             }

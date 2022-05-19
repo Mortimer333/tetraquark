@@ -105,14 +105,7 @@ class ChainLinkBlock extends Block implements Contract\Block
             $index = $this->getChildIndex();
             $parentChildren = $parent->getBlocks();
             $nextChild = $parentChildren[$index + 1] ?? null;
-            Log::log('new check ' . $this->getInstructionStart() . ", " . $this->getInstruction());
-            Log::log('next child ' . $nextChild?->getInstructionStart() . ", " . $nextChild?->getInstruction());
-            if ($nextChild?->getInstructionStart() == $this->getInstructionStart()) {
-                Log::log('the smae stuff');
-            }
-            if (!\is_null($nextChild)) {
-                Log::log($nextChild->getSubtype());
-            }
+
             if (
                 !\is_null($nextChild)
                 && (

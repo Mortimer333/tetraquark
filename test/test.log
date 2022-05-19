@@ -2,155 +2,240 @@ Mapping...
 =======================
 Creating aliases...
 =======================
-Aliases: size => a, 
+Aliases: 
 Recreating...
-new check 100, log
-next child 129, objSoloTest
-first
-new check 140, shift
-next child , 
 =======================
-Block: Tetraquark\Block\WhileBlock
-Subtype: while
-Instruction: while (objSoloTest.length) {
+Block: Tetraquark\Block\MultiCommentBlock
+Subtype: /*
+Instruction: /*if (obj.objSoloTest[0] == 'asd') {\n console.log('found')\n 
 Instruction Start: 0
-Caret: 29
+Caret: 457
 Name: ``
-Cond block: [2] 
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: first
-  Instruction: objSoloTest
-  Instruction Start: 0
-  Caret: 11
+Alias: ``
+Blocks: [0] 
+=======
+Block: Tetraquark\Block\IfBlock
+Subtype: single-condition
+Instruction: if ( first && line?.nodeName != "P" ) throw new Error("Parent has wrong tag, can't find proper lines")
+Instruction Start: 458
+Caret: 560
+Name: ``
+Cond block: [0] 
+Arg block: [8] 
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: first 
+  Instruction Start: -7
+  Caret: -1
   Name: ``
   Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\SymbolBlock
+  Subtype: &&
+  Instruction: &&
+  Instruction Start: 6
+  Caret: 7
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  line
+  Instruction Start: 2
+  Caret: 7
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\SymbolBlock
+  Subtype: ?
+  Instruction: ?
+  Instruction Start: 13
+  Caret: 13
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: 
+  Instruction Start: 14
+  Caret: 14
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
   =======
   Block: Tetraquark\Block\ChainLinkBlock
   Subtype: .
-  Instruction: length
-  Instruction Start: 11
-  Caret: 18
+  Instruction: nodeName
+  Instruction Start: 14
+  Caret: 23
   Name: ``
   Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\SymbolBlock
+  Subtype: !=
+  Instruction: !=
+  Instruction Start: 24
+  Caret: 25
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\StringBlock
+  Subtype: 
+  Instruction: "P"
+  Instruction Start: 27
+  Caret: 30
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
   =======
 Alias: ``
+Blocks: [2] 
 =======
-Block: Tetraquark\Block\WhileBlock
-Subtype: while
-Instruction: while (objSoloTest.length) {
-Instruction Start: 31
-Caret: 150
-Name: ``
-Cond block: [2] 
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: first
-  Instruction: objSoloTest
-  Instruction Start: 0
-  Caret: 11
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  throw
+  Instruction Start: -7
+  Caret: -1
   Name: ``
   Alias: ``
+  Blocks: [0] 
   =======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: .
-  Instruction: length
-  Instruction Start: 11
-  Caret: 18
+  Block: Tetraquark\Block\NewClassBlock
+  Subtype: new
+  Instruction:  Error("Parent has wrong tag, can't find proper lines")
+  Instruction Start: 6
+  Caret: 65
   Name: ``
-  Alias: ``
-  =======
-Alias: ``
-=======
-  Block: Tetraquark\Block\VariableBlock
-  Subtype: let
-  Instruction: let size = objSoloTest.length
-  Instruction Start: 61
-  Caret: 90
-  Name: ``
-  Value: ``
-  Alias: ``
-  =======
-    Block: Tetraquark\Block\VariableItemBlock
+  Arguments: [1] `
+    Block: Tetraquark\Block\StringBlock
     Subtype: 
-    Instruction:  size =
+    Instruction: "Parent has wrong tag, can't find proper lines"
     Instruction Start: 0
-    Caret: 26
-    Name: `size`
-    Value: ``
-    Alias: `a`
+    Caret: 47
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
     =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: objSoloTest
-      Instruction Start: 8
-      Caret: 19
-      Name: ``
-      Alias: ``
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: length
-      Instruction Start: 19
-      Caret: 25
-      Name: ``
-      Alias: ``
-      =======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: first
-  Instruction: console
-  Instruction Start: 93
-  Caret: 100
+  Alias: ``
+  Blocks: [0] 
+  =======
+Block: Tetraquark\Block\IfBlock
+Subtype: single-condition
+Instruction: if ( !first && line?.nodeName == "P" ) return line
+Instruction Start: 562
+Caret: 612
+Name: ``
+Cond block: [0] 
+Arg block: [9] 
+  Block: Tetraquark\Block\SymbolBlock
+  Subtype: !
+  Instruction: !
+  Instruction Start: 0
+  Caret: 0
   Name: ``
   Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: first 
+  Instruction Start: -6
+  Caret: 0
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\SymbolBlock
+  Subtype: &&
+  Instruction: &&
+  Instruction Start: 7
+  Caret: 8
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  line
+  Instruction Start: 3
+  Caret: 8
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\SymbolBlock
+  Subtype: ?
+  Instruction: ?
+  Instruction Start: 14
+  Caret: 14
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
   =======
   Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: end:method
-  Instruction: log
-  Instruction Start: 100
-  Caret: 125
+  Subtype: first
+  Instruction: 
+  Instruction Start: 15
+  Caret: 15
   Name: ``
   Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: .
+  Instruction: nodeName
+  Instruction Start: 15
+  Caret: 24
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\DoubleEqualBlock
+  Subtype: ==
+  Instruction: ==
+  Instruction Start: 25
+  Caret: 26
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\StringBlock
+  Subtype: 
+  Instruction: "P"
+  Instruction Start: 28
+  Caret: 31
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
+Alias: ``
+Blocks: [1] 
+=======
+  Block: Tetraquark\Block\ReturnBlock
+  Subtype: return
+  Instruction: return
+  Instruction Start: 1
+  Caret: 11
+  Name: ``
+  Alias: ``
+  Blocks: [1] 
   =======
     Block: Tetraquark\Block\UndefinedBlock
     Subtype: 
-    Instruction: size, objSoloTest
-    Instruction Start: 87
-    Caret: 104
+    Instruction: line
+    Instruction Start: 7
+    Caret: 11
     Name: ``
     Alias: ``
+    Blocks: [0] 
     =======
-    Block: Tetraquark\Block\BracketChainLinkBlock
-    Subtype: [
-    Instruction: 
-    Instruction Start: 122
-    Caret: 124
-    Name: ``
-    Alias: ``
-    =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction: 0
-      Instruction Start: 123
-      Caret: 124
-      Name: ``
-      Alias: ``
-      =======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: first
-  Instruction: objSoloTest
-  Instruction Start: 129
-  Caret: 140
-  Name: ``
-  Alias: ``
-  =======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: end:method
-  Instruction: shift
-  Instruction Start: 140
-  Caret: 147
-  Name: ``
-  Alias: ``
-  =======
-Duration: 0.003s
+Duration: 0.005s
 
 
-while(objSoloTest.length){}while(objSoloTest.length){let a=objSoloTest.length;console.log(a, objSoloTest[0]);objSoloTest.shift();}
+if(first&&line?.nodeName!="P")throw new Error("Parent has wrong tag, can't find proper lines");if(!first&&line?.nodeName=="P")return line;

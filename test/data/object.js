@@ -12,3 +12,7 @@ let tem = {
 }
 tem['as' . meh]
 tem[`as${meh}`].ga
+return {
+    a: 'asd',
+    meh : 2
+};

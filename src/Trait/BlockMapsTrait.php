@@ -228,6 +228,13 @@ trait BlockMapsTrait
             ],
             "default" => "SymbolBlock",
         ],
+        "!" => [
+            "=" => [
+                "=" => "SymbolBlock",
+                "default" => "SymbolBlock",
+            ],
+            "default" => "SymbolBlock",
+        ],
         ":" => "SymbolBlock",
         "e" => [
             "l" => [
@@ -236,6 +243,20 @@ trait BlockMapsTrait
                         "{" => "ElseBlock",
                         ' '  => 'ElseBlock',
                         "\n" => "ElseBlock",
+                    ]
+                ]
+            ]
+        ],
+        "r" => [
+            "e" => [
+                "t" => [
+                    "u" => [
+                        "r" => [
+                            "n" => [
+                                ' '  => 'ReturnBlock',
+                                "\n" => "ReturnBlock",
+                            ]
+                        ]
                     ]
                 ]
             ]
@@ -279,6 +300,10 @@ trait BlockMapsTrait
     protected array $callerArgsBlocksMap = [
         "{" => "ObjectBlock",
     ];
+    protected array $returnBlocksMap = [
+        "{" => "ObjectBlock",
+        "[" => "ArrayBlock"
+    ];
 
     protected function getDefaultMap(): array
     {
@@ -307,6 +332,8 @@ trait BlockMapsTrait
                     unset($blocksMap[$key]);
                 }
             }
+        } elseif ($this instanceof Block\ReturnBlock) {
+            $blocksMap = array_merge($blocksMap, $this->returnBlocksMap);
         }
 
         return $blocksMap;

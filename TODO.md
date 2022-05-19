@@ -1,6 +1,6 @@
 # TO DO
 ## 0. Cut script into array (instead of using it as string) so we can easily work on UTF8 chars
-## 1. Upgrade removeAdditionalSpaces as it doesn't reamove all not needed space - do{ whileLooped--; console.log(whileLooped);}
+## 1. Upgrade fixScript as it doesn't reamove all not needed space - do{ whileLooped--; console.log(whileLooped);}
 
 
 ## If script will be slow look into setting all values for functions in one iteration (instead of ~2,5)

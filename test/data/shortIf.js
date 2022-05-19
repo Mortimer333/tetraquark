@@ -1,3 +1,4 @@
 let a = true ? 'true' : 'false'
 const b = func()?
-true : false; 
+true : false;
+return window.getSelection ? window.getSelection() : document.selection;

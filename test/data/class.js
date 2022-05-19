@@ -28,4 +28,5 @@ const classTest6 = new ClassName
 const classTest5 = new
 ClassName
 
-if(!õ||!ú) throw new Error('Couldn\'t find lines');
+if(!õ||!ú) throw new Error('Couldn\'t find lines'); 
+throw new Error("Parent has wrong tag, can't find proper lines");

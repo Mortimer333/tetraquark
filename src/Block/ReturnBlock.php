@@ -4,31 +4,23 @@ namespace Tetraquark\Block;
 use \Tetraquark\{Log, Exception, Contract, Validate, Content};
 use \Tetraquark\Foundation\BlockAbstract as Block;
 
-class ObjectBlock extends Block implements Contract\Block
+class ReturnBlock extends Block implements Contract\Block
 {
-    protected array $endChars = [
-        "}" => true
-    ];
-
     public function objectify(int $start = 0)
     {
+        $this->setInstruction(new Content('return'));
         $this->setName('');
-        $this->setCaret($start + 1);
-        $this->setInstruction(new Content(''));
-        $this->setInstructionStart($start);
+        $this->setInstructionStart($start - 6);
+        $this->setCaret($start);
         $this->blocks = array_merge($this->blocks, $this->createSubBlocks($start + 1));
     }
 
     public function recreate(): string
     {
-        $script = '{';
-
+        $script = 'return ';
         foreach ($this->getBlocks() as $block) {
-            $script .= rtrim(trim($block->recreate()), ';');
+            $script .= $block->recreate();
         }
-
-        $script = rtrim($script, ',');
-
-        return $script . '};';
+        return rtrim($script, ';') . ';';
     }
 }

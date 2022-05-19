@@ -155,6 +155,7 @@ class Log
                 self::decreaseIndent();
             }
             self::log("Alias: `" . $block->getAlias($block->getName()) . "`");
+            self::log("Blocks: [" . \sizeof($block->getBlocks()) . "] ");
             self::log("=======");
             self::increaseIndent();
             self::displayBlocks($block->getBlocks());

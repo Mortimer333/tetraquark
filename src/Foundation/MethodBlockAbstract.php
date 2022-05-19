@@ -51,7 +51,7 @@ abstract class MethodBlockAbstract extends BlockAbstract
                 || Validate::isStringLandmark($letter, '')
             ) {
                 $oldPos = $i;
-                $i = $this->skipString($i - 1, $instr, $startsTemplate, true);
+                $i = $this->skipString($letter, $i - 1, $instr, $startsTemplate, true);
                 if (\is_null($instr->getLetter($i))) {
                     break;
                 }
@@ -142,7 +142,7 @@ abstract class MethodBlockAbstract extends BlockAbstract
                 ($startsTemplate = Validate::isTemplateLiteralLandmark($letter, ''))
                 || Validate::isStringLandmark($letter, '')
             ) {
-                $i = $this->skipString($i + 1, self::$content, $startsTemplate);
+                $i = $this->skipString($letter, $i + 1, self::$content, $startsTemplate);
                 $letter = self::$content->getLetter($i);
             }
 
