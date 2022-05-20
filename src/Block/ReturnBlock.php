@@ -2,17 +2,21 @@
 
 namespace Tetraquark\Block;
 use \Tetraquark\{Log, Exception, Contract, Validate, Content};
-use \Tetraquark\Foundation\BlockAbstract as Block;
+use \Tetraquark\Foundation\VariableBlockAbstract as VariableBlock;
 
-class ReturnBlock extends Block implements Contract\Block
+class ReturnBlock extends VariableBlock implements Contract\Block
 {
     public function objectify(int $start = 0)
     {
-        $this->setInstruction(new Content('return'));
         $this->setName('');
         $this->setInstructionStart($start - 6);
-        $this->setCaret($start);
-        $this->blocks = array_merge($this->blocks, $this->createSubBlocks($start + 1));
+        $end = $this->findVariableEnd($start);
+        $this->setCaret($end);
+        $instr = self::$content->iSubStr($start, $end);
+        $instr = preg_replace('/[\n]/', ' ', $instr);
+        $instr = preg_replace('/[ \t]+/', ' ', $instr) . ';';
+        $this->setInstruction(new Content($instr));
+        $this->blocks = $this->createSubBlocksWithContent($instr);
     }
 
     public function recreate(): string

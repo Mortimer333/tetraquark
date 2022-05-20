@@ -1,228 +1,122 @@
 class a {
-    b(v) {
-        return JSON.parse(JSON.stringify(v));
-    }
-    c() {
-        const ê = Object.assign({}, this.ê);
-        ê.µ = this.ê.µ;
-        return ê;
-    }
-    d() {
-        return this;
-    }
-    e() {
-        return this.render.E.slice(this.render.hidden, this.render.hidden + this.render.linesLimit);
-    }
-    f(õ = null, ú = null) {
-        if (!õ || !ú) {
-            const A = this.get.k(),
-                B = this.k.reverse && !this.k.expanded;
-            õ = this.get.m(B ? A.focusNode : A.anchorNode);
-            ú = this.get.m(B ? A.anchorNode : A.focusNode);
+    b = undefined;
+    c = 0;
+    d = {
+        u: false,
+        w: {
+            J: -1,
+            K: -1,
+        },
+        z: {},
+        y: {},
+        x: {
+            v: 0,
+            D: -1,
+            E: -1,
+            F: -1,
+        },
+        q: {
+            v: 0,
+            D: -1,
+            E: -1,
+            F: -1,
         }
-        if (!õ || !ú) throw new Error('Couldn\'t find lines');
-        return [õ.cloneNode(true), ...this.get.g(õ.nextSibling, ú)];
+    };
+    e = [];
+    f = [];
+    g = [];
+    h = [];
+    i = false;
+    j = {};
+    k = {};
+    l = 100;
+    m() {
+        this._save.f = this._save.f.concat(this._save.e);
+        this._save.r();
     }
-    g(C, D) {
-        if (C === null) throw new Error('The node doesn\'t exist in this parent');
-        if (C == D) return [C.cloneNode(true)];
-        if (C.nodeName !== "P") return this.get.g(C.nextSibling, D);
-        return [C.cloneNode(true), ...this.get.g(C.nextSibling, D)];
-    }
-    h() {
-        const A = this.get.k();
-        if (A.type != 'Range') return;
-        let F = this.get.b(this.k.F);
-        let D = this.get.b(this.k.D);
-        if (F.m > D.m || (F.m == D.m && F.C > D.C) || (F.m == D.m && F.C == D.C && F._h > D._h)) {
-            let G = F;
-            F = D;
-            D = G;
+    n() {
+        const µ = this._save;
+        if (µ.c > 0) {
+            µ.g.splice(0, µ.c);
+            µ.c = 0;
         }
-        if (F.m == D.m) {
-            const m = this.get.b(this.render.E[F.m]);
-            delete m.ends;
-            delete m.groupPath;
-            if (F.C == D.C) {
-                let E = this.replace.spaceChars(m.E[F.C].E);
-                let H = this.replace._g(E.substr(F._h, D._h - F._h));
-                m.E = [this.syntax.create._d({}, H)];
-                return [m];
-            } else {
-                let I = m.E[F.C];
-                let J = m.E[D.C];
-                I.E = this.replace._g(this.replace.spaceChars(I.E).substr(F._h));
-                J.E = this.replace._g(this.replace.spaceChars(J.E).substr(0, D._h));
-                m.E = [I].concat(m.E.slice(F.C + 1, D.C + 1));
-                return [m];
-            }
-        }
-        let K = this.render.E.slice(F.m + 1, D.m);
-        let L = this.get.b(this.render.E[F.m]);
-        let M = this.get.b(this.render.E[D.m]);
-        M.E = M.E.slice(0, D.C + 1);
-        let N = M.E[M.E.length - 1];
-        N.E = N.E.replaceAll('&nbsp;', ' ');
-        N.E = N.E.substr(0, D._h);
-        N.E = N.E.replaceAll(' ', '&nbsp;');
-        L.E = L.E.slice(F.C);
-        let I = L.E[0];
-        I.E = I.E.replaceAll('&nbsp;', ' ');
-        I.E = I.E.substr(F._h);
-        I.E = I.E.replaceAll(' ', '&nbsp;');
-        return [L].concat(K, [M]);
-    }
-    i(µ) {
-        for (let O = 0; O < µ.parentElement.R.length; O++) {
-            if (µ.parentElement.R[O] == µ) return O;
-        }
-        return false;
-    }
-    j(m) {
-        let j = 0;
-        for (let O = 0; O < this.editor.R.length; O++) {
-            let P = this.editor.R[O];
-            if (m == P) return j;
-            if (P.nodeName && P.nodeName == "P") j++;
-        }
-        return false;
-    }
-    k() {
-        return window.getSelection ? window.getSelection() : document.k;
-    }
-    l() {
-        const R = Object.values(this.ê.µ.parentElement.R);
-        let Q = 0;
-        for (let O = 0; O < R.length; O++) {
-            if (this.ê.µ == R[O]) break;
-            Q += R[O].innerText.length;
-        }
-        Q += this.ê._h;
-        return {
-            S: Q,
-            T: this.ê.m
+        if (µ.f.length == 0) return;
+        µ.o();
+        µ.f[0].x.v = this.render.hidden;
+        µ.g.unshift(µ.f.reverse());
+        µ.f = [];
+        if (µ.g.length > µ.l) {
+            µ.g.splice(µ.l);
         };
     }
-    m(µ) {
-        if (!µ.parentElement) return false;
-        if (µ.parentElement == this.editor) return µ;
-        return this.get.m(µ.parentElement);
-    }
-    n(ê) {
-        ê -= this.render.hidden;
-        if (ê >= 0) {
-            let j = -1;
-            for (var O = 0; O < this.editor.R.length; O++) {
-                let m = this.editor.R[O];
-                if (m.nodeName == "P") j++;
-                if (j == ê) return m;
+    o() {
+        const f = this._save.f;
+        for (let ê = 1; ê < f.length; ê++) {
+            const õ = f[ê];
+            const ú = f[ê - 1];
+            if (this._save.p(õ, ú)) {
+                ú.z = õ.z;
+                ú.q = õ.q;
+                f.splice(ê, 1);
+                ê--;
             }
-        } else {
-            let j = 0;
-            for (var O = this.editor.R.length - 1; O > -1; O--) {
-                let m = this.editor.R[O];
-                if (m.nodeName == "P") j++;
-                if (j == ê * -1) return m;
-            }
-        }
-        return false;
-    }
-    o(m, U, V = true) {
-        if (V && m?.nodeName != "P") throw new Error("Parent has wrong tag, can't find proper lines");
-        if (!V && m?.nodeName == "P") return m;
-        let W;
-        if (m === null) return m;
-        if (U < 0) W = m.previousSibling;
-        else if (U > 0) W = m.nextSibling;
-        if (W === null) return W;
-        if (W.nodeType != 1) {
-            let X;
-            if (U < 0) X = W.previousSibling;
-            else if (U > 0) X = W.nextSibling;
-            W.remove();
-            return this.get.o(X, U, false);
-        }
-        if (W.nodeName != "P") return this.get.o(W, U, false);
-        if (U == -1 || U == 1) return W;
-        return this.get.o(W, U < 0 ? U + 1 : U - 1, true);
-    }
-    p(C, U) {
-        if (U > 0) return C.nextSibling;
-        else if (U < 0) return C.previousSibling;
-    }
-    r(µ) {
-        for (var O = 0; O < µ.parentElement.childNodes.length; O++) {
-            if (µ.parentElement.childNodes[O] == µ) return O;
-        }
-        return false;
-    }
-    s(µ) {
-        const Y = {};
-        for (let Z, O = 0, Ī = µ.s, $ = Ī.length; O < $; O++) {
-            Z = Ī[O];
-            Y[Z.nodeName] = Z.nodeValue;
-        }
-        return Y;
-    }
-    t(ê = this.ê._h) {
-        let H = this.ê.µ.innerText;
-        return {
-            _: this.set.s(this.ê.µ.s, H.substr(0, ê)),
-            _a: this.set.s(this.ê.µ.s, H.substr(ê))
         };
     }
-    u(µ = this.ê.µ, ê = this.ê._h) {
-        let _b = this.get.t(ê);
-        let _c = this.get.w(µ.nextSibling);
-        _b._a = [_b._a, ..._c];
-        return _b;
+    p(A, B) {
+        return A.u == B.u && A.u != 'mergeLine' && Object.values(A.w).toString() == Object.values(B.w).toString() && Object.H(A.y).toString() == Object.H(B.y).toString();
     }
-    w(µ) {
-        if (µ === null) return [];
-        let _c = [];
-        let _d = this.set.s(µ.s, µ.innerText);
-        _c.push(_d);
-        if (µ.nextSibling) {
-            let _e = this.get.w(µ.nextSibling);
-            _c = _c.concat(_e);
+    r() {
+        this._save.e = [];
+    }
+    s() {
+        const µ = this._save;
+        if (µ.f.length > 0) {
+            µ.n();
+            µ.b('clear');
         }
-        µ.remove();
-        return _c;
-    }
-    z(m) {
-        let y = '';
-        m.E.forEach(_d => {
-            y += _d.E;
+        if (µ.g.length == µ.c) return;
+        let c = µ.g[µ.c];
+        c.forEach(õ => {
+            µ.k.w(õ.w);
+            µ.k.y(õ.y);
         });
-        return this.replace.spaceChars(y);
-    }
-    y(z) {
-        let _f = '';
-        y = [];
-        let _g = false;
-        if (this.is.space(z[0])) _g = true;
-        for (let O = 0; O < z.length; O++) {
-            const _h = z[O];
-            const _i = this.is.space(_h);
-            if (_i && _g == false || !_i && _g == true) {
-                y.push(_f);
-                _f = _h;
-            } else _f += _h;
-            if (_i) _g = true;
-            else _g = false;
+        const x = c[c.length - 1].x;
+        this.C = x.C;
+        this.pos.D = x.D;
+        this.pos.E = x.E;
+        this.pos.F = x.F;
+        if (!this.is.E.visible(x.E)) {
+            this.render.move.page({
+                G: x.E - Math.floor(this.render.linesLimit / 2)
+            });
+        } else {
+            this.render.move.page();
         }
-        y.push(_f);
-        return y;
+        this.render.overflow.scrollTo(this.render.overflow.scrollLeft, this.render.hidden * this.settings.E);
+        µ.c++;
     }
-    x() {
-        return this.replace.spaceChars(this.render.E[this.ê.m].E[this.ê.r].E);
-    }
-    q(H, F = 0) {
-        const _j = H.indexOf('\u00A0', F);
-        if (_j !== -1) {
-            return _j;
-        }
-        return H.indexOf(' ', F);
+    t() {
+        const µ = this._save;
+        if (µ.c <= 0) return;
+        µ.c--;
+        const c = µ.g[µ.c];
+        c.reverse().forEach(õ => {
+            const H = Object.H(õ.y);
+            const I = Math.I(...H);
+            µ.k.w({
+                J: I,
+                K: Math.max(...H) - I + 1
+            });
+            µ.k.y(õ.z);
+        });
+        c.reverse();
+        const x = c[0].q;
+        if (!this.is.E.visible(x.E)) this.render.move.page({
+            G: x.E - Math.floor(this.render.linesLimit / 2)
+        });
+        else this.render.move.page();
+        this.render.overflow.scrollTo(this.render.overflow.scrollLeft, this.render.hidden * this.settings.E, );
+        this.caret.refocus(x.D, x.E, x.F);
     }
 }
 export {

@@ -100,12 +100,12 @@ class ChainLinkBlock extends Block implements Contract\Block
             $script .= rtrim($block->recreate(), ';');
         }
 
-        if ($subtype == self::END_METHOD) {
-            $parent = $this->getParent();
-            $index = $this->getChildIndex();
-            $parentChildren = $parent->getBlocks();
-            $nextChild = $parentChildren[$index + 1] ?? null;
+        $parent = $this->getParent();
+        $index = $this->getChildIndex();
+        $parentChildren = $parent->getBlocks();
+        $nextChild = $parentChildren[$index + 1] ?? null;
 
+        if ($subtype == self::END_METHOD) {
             if (
                 !\is_null($nextChild)
                 && (
@@ -124,7 +124,9 @@ class ChainLinkBlock extends Block implements Contract\Block
                 $script .= ");";
             }
         } elseif ($subtype !== self::MIDDLE && $subtype !== self::FIRST && $subtype !== self::MIDDLE_BRACKET) {
-            $script .= ";";
+            if (\is_null($nextChild) || !\is_null($nextChild) && !$nextChild instanceof SymbolBlock) {
+                $script .= ";";
+            }
         }
 
         return $script;

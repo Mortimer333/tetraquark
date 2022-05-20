@@ -304,6 +304,10 @@ trait BlockMapsTrait
         "{" => "ObjectBlock",
         "[" => "ArrayBlock"
     ];
+    protected array $chainLinkBlocksMap = [
+        "{" => "ObjectBlock",
+        "[" => "ArrayBlock"
+    ];
 
     protected function getDefaultMap(): array
     {
@@ -334,6 +338,8 @@ trait BlockMapsTrait
             }
         } elseif ($this instanceof Block\ReturnBlock) {
             $blocksMap = array_merge($blocksMap, $this->returnBlocksMap);
+        } elseif ($this instanceof Block\BracketChainLinkBlock || $this instanceof Block\ChainLinkBlock) {
+            $blocksMap = array_merge($blocksMap, $this->chainLinkBlocksMap);
         }
 
         return $blocksMap;

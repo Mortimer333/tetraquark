@@ -18,7 +18,6 @@ class ScriptBlock extends Block implements Contract\Block
     ) {
         self::$content = $this->generateContent($content);
         self::$content = $this->removeComments(self::$content);
-        echo self::$content . PHP_EOL;
         parent::__construct($start, $subtype, $data);
     }
 

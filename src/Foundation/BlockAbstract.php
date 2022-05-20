@@ -616,11 +616,11 @@ abstract class BlockAbstract
         return $reserved[$name] ?? true;
     }
 
-    protected function createSubBlocksWithContent(string $content): array
+    protected function createSubBlocksWithContent(string $content, $special = false): array
     {
         $caret = $this->getCaret();
         self::$content->setContent($content);
-        $blocks = $this->createSubBlocks(0);
+        $blocks = $this->createSubBlocks(0, $special);
         self::$content->removeContent();
         $this->setCaret($caret);
         return $blocks;

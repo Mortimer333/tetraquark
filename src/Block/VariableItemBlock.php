@@ -40,7 +40,7 @@ class VariableItemBlock extends VariableBlockAbstract implements Contract\Block
         }
 
         $this->findInstructionEnd($start, $this->subtype, $this->instructionEnds);
-        $this->blocks = array_merge($this->blocks, $this->createSubBlocks(null, true));
+        $this->blocks = array_merge($this->blocks, $this->createSubBlocks(null));
         if (\sizeof($this->blocks) == 0) {
             $instrEnd = $this->getInstructionStart() + \mb_strlen($this->getInstruction());
             $this->setValue(trim(self::$content->iSubStr($instrEnd, $this->getCaret())));
