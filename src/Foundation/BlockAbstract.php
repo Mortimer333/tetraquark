@@ -714,6 +714,7 @@ abstract class BlockAbstract
 
     protected function skipIfNeccessary(Content $content, string $letter, int $i): array
     {
+        $oldI = $i;
         if (
             ($startsTemplate = Validate::isTemplateLiteralLandmark($letter, ''))
             || Validate::isStringLandmark($letter, '')
@@ -741,7 +742,7 @@ abstract class BlockAbstract
         }
 
         $newLetter = $content->getLetter($i);
-        if ($newLetter != $letter) {
+        if ($oldI != $i) {
             return $this->skipIfNeccessary($content, $newLetter, $i);
         }
 

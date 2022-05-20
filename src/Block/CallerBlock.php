@@ -99,23 +99,28 @@ class CallerBlock extends Block implements Contract\Block
         if (is_null($end)) {
             $end = self::$content->getLength();
         }
-        $this->setCaret($end);
-        $this->setInstruction(self::$content->cutToContent($start, ($end - $start) + 1))
+        $this->setInstruction(new Content(''))
             ->setInstructionStart($start)
         ;
+        $content = self::$content->subStr($start + 1, ($end - $start) - 1);
+        if (strlen($content) > 0) {
+            $this->blocks = $this->createSubBlocksWithContent($content);
+        }
+        $this->setCaret($end);
     }
 
     public function recreate(): string
     {
-        $script = $this->replaceVariablesWithAliases(
-            $this->getInstruction()
-        );
+        $script = '(';
+        // $this->replaceVariablesWithAliases(
+        //     $this->getInstruction()
+        // );
 
         foreach ($this->getBlocks() as $block) {
             $script .= $block->recreate();
         }
 
-        $script = rtrim($script, ';');
+        $script = rtrim($script, ';') . ')';
 
         if (!$this->checkIfFirstLetterInNextSiblingIsADot()) {
             return $script . ';';

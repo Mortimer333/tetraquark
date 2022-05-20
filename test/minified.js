@@ -1,124 +1,113 @@
 class a {
-    b = undefined;
-    c = 0;
-    d = {
-        u: false,
-        w: {
-            J: -1,
-            K: -1,
-        },
-        z: {},
-        y: {},
-        x: {
-            v: 0,
-            D: -1,
-            E: -1,
-            F: -1,
-        },
-        q: {
-            v: 0,
-            D: -1,
-            E: -1,
-            F: -1,
-        }
-    };
-    e = [];
-    f = [];
-    g = [];
-    h = [];
-    i = false;
-    j = {};
-    k = {};
-    l = 100;
-    m() {
-        this._save.f = this._save.f.concat(this._save.e);
-        this._save.r();
+    b = null;
+    c() {
+        this.action.b = document.createElement('div');
+        this.render.overflow.insertBefore(this.action.b, this.editor);
     }
-    n() {
-        const µ = this._save;
-        if (µ.c > 0) {
-            µ.g.splice(0, µ.c);
-            µ.c = 0;
-        }
-        if (µ.f.length == 0) return;
-        µ.o();
-        µ.f[0].x.v = this.render.hidden;
-        µ.g.unshift(µ.f.reverse());
-        µ.f = [];
-        if (µ.g.length > µ.l) {
-            µ.g.splice(µ.l);
-        };
-    }
-    o() {
-        const f = this._save.f;
-        for (let ê = 1; ê < f.length; ê++) {
-            const õ = f[ê];
-            const ú = f[ê - 1];
-            if (this._save.p(õ, ú)) {
-                ú.z = õ.z;
-                ú.q = õ.q;
-                f.splice(ê, 1);
-                ê--;
-            }
-        };
-    }
-    p(A, B) {
-        return A.u == B.u && A.u != 'mergeLine' && Object.values(A.w).toString() == Object.values(B.w).toString() && Object.H(A.y).toString() == Object.H(B.y).toString();
-    }
-    r() {
-        this._save.e = [];
-    }
-    s() {
-        const µ = this._save;
-        if (µ.f.length > 0) {
-            µ.n();
-            µ.b('clear');
-        }
-        if (µ.g.length == µ.c) return;
-        let c = µ.g[µ.c];
-        c.forEach(õ => {
-            µ.k.w(õ.w);
-            µ.k.y(õ.y);
+    d() {
+        const f = this.get.selectedLines();
+        const h = this.h.dispatch('tabJFCopy', {
+            i: this.get.clonedPos(),
+            h: null,
+            f: this.get.clone(f)
         });
-        const x = c[c.length - 1].x;
-        this.C = x.C;
-        this.pos.D = x.D;
-        this.pos.E = x.E;
-        this.pos.F = x.F;
-        if (!this.is.E.visible(x.E)) {
-            this.render.move.page({
-                G: x.E - Math.floor(this.render.linesLimit / 2)
-            });
+        if (h.defaultPrevented) return;
+        this.f = this.get.clone(f);
+        const j = this.action.b;
+        this.truck.import(this.f, false, 0, false, false, j, false);
+        let k = j.children[0].children[0].childNodes[0];
+        let g = j.children[j.children.length - 1];
+        g = g.children[g.children.length - 1];
+        g = g.childNodes[g.childNodes.length - 1];
+        const l = new Range;
+        l.setStart(k, 0);
+        l.setEnd(g, g.nodeValue.length);
+        this.get.selection().removeAllRanges();
+        this.get.selection().addRange(l);
+        setTimeout(function() {
+            document.execCommand('copy');
+            this.m = true;
+            j.n = '';
+            this.checkSelect();
+        }.bind(this), 0);
+    }
+    e() {
+        const h = this.h.dispatch('tabJFPaste', {
+            i: this.get.clonedPos(),
+            h: null,
+            f: this.get.clone(this.f)
+        });
+        if (h.defaultPrevented) return;
+        this.remove.selected();
+        const f = this.get.clone(this.f);
+        const p = f[0];
+        const r = f[f.length - 1];
+        let s = this.render.o[this.i.line];
+        let t = s.o[this.i.childIndex];
+        let u = this.replace.spaceChars(t.o).substr(0, this.i.letter);
+        let w = this.replace.spaceChars(t.o).substr(this.i.letter);
+        t.o = u;
+        let z = s.o.splice(this.i.childIndex + 1);
+        s.o = s.o.concat(p.o);
+        let y = this.get.clone(f.slice(1, f.length - 1)) let q, vif(f.length > 1) {
+            let µ = f[f.length - 1];
+            v = µ.o.length - 1;
+            q = this.replace.spaceChars(µ.o[µ.o.length - 1].o).length;
+            µ.o[µ.o.length - 1].o;
+            o += w;
+            µ.o = µ.o.concat(z);
+            y = y.concat([µ]);
         } else {
-            this.render.move.page();
+            q = p.o[p.o.length - 1].o.length;
+            v = this.i.childIndex + p.o.length;
+            s.o[s.o.length - 1].o;
+            o += w;
+            s.o = s.o.concat(z);
         }
-        this.render.overflow.scrollTo(this.render.overflow.scrollLeft, this.render.hidden * this.settings.E);
-        µ.c++;
+        this.render.o.splice(this.i.line + 1, 0, ...y) this.render.move.page() this.render.set.overflow(null, ((this.i.line + f.length - 1) - (Math.floor(this.render.linesLimit / 2))) * this.settings.line) this.caret.refocus(q, this.i.line + f.length - 1, v) this.x = this.get.realPos().xthis.render.update.minHeight() this.render.update.scrollWidth() this.update.selection.start() this.update.page()
     }
-    t() {
-        const µ = this._save;
-        if (µ.c <= 0) return;
-        µ.c--;
-        const c = µ.g[µ.c];
-        c.reverse().forEach(õ => {
-            const H = Object.H(õ.y);
-            const I = Math.I(...H);
-            µ.k.w({
-                J: I,
-                K: Math.max(...H) - I + 1
-            });
-            µ.k.y(õ.z);
-        });
-        c.reverse();
-        const x = c[0].q;
-        if (!this.is.E.visible(x.E)) this.render.move.page({
-            G: x.E - Math.floor(this.render.linesLimit / 2)
-        });
-        else this.render.move.page();
-        this.render.overflow.scrollTo(this.render.overflow.scrollLeft, this.render.hidden * this.settings.E, );
-        this.caret.refocus(x.D, x.E, x.F);
+    cut() {
+        consth = this.h.dispatch('tabJFCut', {
+            i: this.get.clonedPos(),
+            h: null,
+            f: this.get.clone(this.f)
+        }) if (h.defaultPrevented) returnthis.action.d() this.remove.selected() this.render.update.minHeight() this.render.update.scrollWidth()
     }
+    undo {
+        const ê = this.get.clone(this._save.versions[this._save.A] ? ? {});
+        const õ = this._save.A;
+        const h = this.h.dispatch('tabJFUndo', {
+            i: this.get.clonedPos(),
+            h: null,
+            ú: this._save.A - 1,
+            A: this.get.clone(this._save.versions[this._save.A - 1] ? ? {}),
+            versionNumberBefor,
+            versionBefor
+        });
+        if (h.defaultPrevented) return;
+        this._save.restore();
+        this.x = this.get.realPos().x;
+        this.render.update.minHeight();
+        this.render.update.scrollWidth();
+    }
+    while () {
+        constê = this.get.clone(this._save.versions[this._save.A] ? ? {}) constõ = this._save.Aconsth = this.h.dispatch('tabJFRedo', {
+            i: this.get.clonedPos(),
+            h: null,
+            ú: this._save.A + 1,
+            A: this.get.clone(this._save.versions[this._save.A + 1] ? ? {}),
+            versionNumberBefor,
+            ê
+        }) if (h.defaultPrevented) returnthis._save.recall() this.x = this.get.realPos().xthis.render.update.minHeight() this.render.update.scrollWidth()
+    }
+    selectAll() {
+        consth = this.h.dispatch('tabJFSelectAll', {
+            i: this.get.clonedPos(),
+            h: null
+        }) if (h.defaultPrevented) returnthis.update.selection.start(0, 0, 0) constr = this.render.o[this.render.o.length - 1] constB = r.o[r.o.length - 1] constC = this.replace.spaceChars(B.o) this.update.selection.end(C.length, this.render.o.length - 1, r.o.length - 1) this.selection.D = true this.checkSelect()
+    };
+    export {
+        a
+    };
 }
-export {
-    a
-};
+}

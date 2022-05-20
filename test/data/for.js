@@ -1,3 +1,10 @@
+class ClassName {
+    emfor() {
+
+    }
+}
+
+
 let objSoloTest = ['a'];
 let start = 1;
 let reverse = false;

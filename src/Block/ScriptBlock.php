@@ -16,7 +16,8 @@ class ScriptBlock extends Block implements Contract\Block
         protected string $subtype = '',
         protected array  $data  = []
     ) {
-        self::$content = $this->generateContent($content);
+        // Adding space at the start for any Blocks that require space before their keys
+        self::$content = $this->generateContent(' ' . $content);
         self::$content = $this->removeComments(self::$content);
         parent::__construct($start, $subtype, $data);
     }

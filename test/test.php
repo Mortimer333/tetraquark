@@ -9,7 +9,7 @@ $tetra = new Tetraquark();
 // $minified = $tetra->minify(__DIR__ . '/data/class.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
 // $minified = $tetra->minify(__DIR__ . '/data/comment.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
 // $minified = $tetra->minify(__DIR__ . '/data/dowhile.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
-// $minified = $tetra->minify(__DIR__ . '/data/for.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
+$minified = $tetra->minify(__DIR__ . '/data/for.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
 // $minified = $tetra->minify(__DIR__ . '/data/function.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
 // $minified = $tetra->minify(__DIR__ . '/data/ifelse.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
 // $minified = $tetra->minify(__DIR__ . '/data/object.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
@@ -21,4 +21,4 @@ $tetra = new Tetraquark();
 
 // $minified = $tetra->minify(__DIR__ . '/data/single-function.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
 // $minified = $tetra->minify('/var/www/html/tab_jf/module/_hidden.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
-$minified = $tetra->minify('E:\xampp\htdocs\tab_jf\module\_save.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
+// $minified = $tetra->minify('E:\xampp\htdocs\tab_jf\module\action.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;

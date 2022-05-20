@@ -50,9 +50,6 @@ abstract class VariableBlockAbstract extends BlockAbstract
             if ($letter === "\n") {
                 if (
                     Validate::isOperator($lastLetter)
-                    // && $lastLetter != ']'
-                    // && $lastLetter != '}'
-                    // && $lastLetter != ')'
                     && !Validate::isComment($lastPos, self::$content)
                 ) {
                     continue;

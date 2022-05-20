@@ -2,43 +2,251 @@ Mapping...
 =======================
 Creating aliases...
 =======================
-Aliases: TabJF_Save => a, debounce => b, version => c, tmpDefault => d, tmp => e, pending => f, versions => g, methodsStack => h, inProgress => i, set => j, content => k, maxVersionCount => l, moveToPending => m, publish => n, squash => o, checkStepsCompatibility => p, resetTmp => r, restore => s, recall => t, fun_name => u, remove => w, after => z, add => y, focus => x, focusAfter => q, topLine => v, save => µ, i => ê, step => õ, previous => ú, stepOne => A, stepTwo => B, lastX => C, letter => D, line => E, childIndex => F, offset => G, keys => H, min => I, sLine => J, len => K, 
+Aliases: ClassName => a, strlen => b, emfor => c, objSoloTest => d, start => e, reverse => f, value => g, modifier => h, str => i, to => j, i => k, 
 Recreating...
 =======================
 Block: Tetraquark\Block\ClassBlock
 Subtype: class
-Instruction: class TabJF_Save {
+Instruction: class ClassName {
 Instruction Start: 1
-Caret: 3290
-Name: `TabJF_Save`
+Caret: 33
+Name: `ClassName`
 Alias: `a`
-Blocks: [18] 
+Blocks: [1] 
 =======
-  Block: Tetraquark\Block\AttributeBlock
+  Block: Tetraquark\Block\ClassMethodBlock
+  Subtype: method
+  Instruction: emfor() {
+  Instruction Start: 20
+  Caret: 31
+  Name: `emfor`
+  Arguments: [0] `
+  Alias: `c`
+  Blocks: [0] 
+  =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: let
+Instruction: let objSoloTest = ['a']
+Instruction Start: 35
+Caret: 58
+Name: ``
+Value: ``
+Alias: ``
+Blocks: [1] 
+=======
+  Block: Tetraquark\Block\VariableItemBlock
   Subtype: 
-  Instruction: debounce = undefined
-  Instruction Start: 21
-  Caret: 41
-  Name: `debounce`
-  Alias: `b`
+  Instruction:  objSoloTest =
+  Instruction Start: 0
+  Caret: 20
+  Name: `objSoloTest`
+  Value: ``
+  Alias: `d`
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\ArrayBlock
+    Subtype: [
+    Instruction: 
+    Instruction Start: 15
+    Caret: 19
+    Name: ``
+    Alias: ``
+    Blocks: [1] 
+    =======
+      Block: Tetraquark\Block\StringBlock
+      Subtype: 
+      Instruction: 'a'
+      Instruction Start: 16
+      Caret: 19
+      Name: ``
+      Alias: ``
+      Blocks: [0] 
+      =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: let
+Instruction: let start = 1
+Instruction Start: 60
+Caret: 73
+Name: ``
+Value: ``
+Alias: ``
+Blocks: [1] 
+=======
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype: 
+  Instruction:  start =
+  Instruction Start: 0
+  Caret: 10
+  Name: `start`
+  Value: ``
+  Alias: `e`
   Blocks: [1] 
   =======
     Block: Tetraquark\Block\UndefinedBlock
     Subtype: 
-    Instruction:  undefined
-    Instruction Start: -1
-    Caret: 9
+    Instruction:  1
+    Instruction Start: 8
+    Caret: 10
     Name: ``
     Alias: ``
     Blocks: [0] 
     =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: let
+Instruction: let reverse = false
+Instruction Start: 75
+Caret: 94
+Name: ``
+Value: ``
+Alias: ``
+Blocks: [1] 
+=======
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype: 
+  Instruction:  reverse =
+  Instruction Start: 0
+  Caret: 16
+  Name: `reverse`
+  Value: ``
+  Alias: `f`
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  false
+    Instruction Start: 10
+    Caret: 16
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: let
+Instruction: let value = 'asd'
+Instruction Start: 96
+Caret: 113
+Name: ``
+Value: ``
+Alias: ``
+Blocks: [1] 
+=======
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype: 
+  Instruction:  value =
+  Instruction Start: 0
+  Caret: 14
+  Name: `value`
+  Value: ``
+  Alias: `g`
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: 'asd'
+    Instruction Start: 9
+    Caret: 14
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: let
+Instruction: let modifier = 1
+Instruction Start: 115
+Caret: 131
+Name: ``
+Value: ``
+Alias: ``
+Blocks: [1] 
+=======
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype: 
+  Instruction:  modifier =
+  Instruction Start: 0
+  Caret: 13
+  Name: `modifier`
+  Value: ``
+  Alias: `h`
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  1
+    Instruction Start: 11
+    Caret: 13
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+Block: Tetraquark\Block\FunctionBlock
+Subtype: function
+Instruction: function strlen(str) {
+Instruction Start: 132
+Caret: 176
+Name: `strlen`
+Arguments: [1] `
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: str
+  Instruction Start: -1
+  Caret: 2
+  Name: `str`
+  Alias: `i`
+  Blocks: [0] 
+  =======
+Alias: `b`
+Blocks: [1] 
+=======
+  Block: Tetraquark\Block\ReturnBlock
+  Subtype: return
+  Instruction:  str.length;
+  Instruction Start: 157
+  Caret: 174
+  Name: ``
+  Alias: ``
+  Blocks: [2] 
+  =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: first
+    Instruction: str
+    Instruction Start: 1
+    Caret: 4
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: .
+    Instruction: length
+    Instruction Start: 4
+    Caret: 10
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+Block: Tetraquark\Block\ForBlock
+Subtype: for
+Instruction: for (var to = 0; to < objSoloTest.length; to++) {
+Instruction Start: 178
+Caret: 259
+Name: ``
+Cond block: [8] 
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: var 
+  Instruction Start: -5
+  Caret: -1
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
   Block: Tetraquark\Block\AttributeBlock
   Subtype: 
-  Instruction: version = 0
-  Instruction Start: 45
-  Caret: 56
-  Name: `version`
-  Alias: `c`
+  Instruction: to = 0
+  Instruction Start: 4
+  Caret: 10
+  Name: `to`
+  Alias: `j`
   Blocks: [1] 
   =======
     Block: Tetraquark\Block\UndefinedBlock
@@ -50,4437 +258,335 @@ Blocks: [18]
     Alias: ``
     Blocks: [0] 
     =======
-  Block: Tetraquark\Block\AttributeBlock
-  Subtype: 
-  Instruction: tmpDefault = { \n fun_name : false,\n remove : { \n sLine : -1,\n len : -1,\n },\n after : {}, \n add : {}, \n focus : { \n topLine : 0, \n letter : -1,\n line : -1,\n childIndex : -1,\n },\n focusAfter : { \n topLine : 0,\n letter : -1,\n line : -1,\n childIndex : -1,\n },\n }
-  Instruction Start: 60
-  Caret: 318
-  Name: `tmpDefault`
-  Alias: `d`
-  Blocks: [1] 
-  =======
-    Block: Tetraquark\Block\ObjectBlock
-    Subtype: {
-    Instruction: 
-    Instruction Start: 1
-    Caret: 245
-    Name: ``
-    Alias: ``
-    Blocks: [6] 
-    =======
-      Block: Tetraquark\Block\ObjectValueBlock
-      Subtype: :
-      Instruction:  \n fun_name 
-      Instruction Start: 2
-      Caret: 21
-      Name: `fun_name`
-      Alias: `u`
-      Blocks: [1] 
-      =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction:  false
-        Instruction Start: 15
-        Caret: 21
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-      Block: Tetraquark\Block\ObjectValueBlock
-      Subtype: :
-      Instruction: \n remove 
-      Instruction Start: 22
-      Caret: 62
-      Name: `remove`
-      Alias: `w`
-      Blocks: [1] 
-      =======
-        Block: Tetraquark\Block\ScopeBlock
-        Subtype: {
-        Instruction: 
-        Instruction Start: 33
-        Caret: 61
-        Name: ``
-        Alias: ``
-        Blocks: [7] 
-        =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction:  \n sLine 
-          Instruction Start: 24
-          Caret: 33
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\SymbolBlock
-          Subtype: :
-          Instruction: :
-          Instruction Start: 43
-          Caret: 43
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\SymbolBlock
-          Subtype: -
-          Instruction: -
-          Instruction Start: 45
-          Caret: 45
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction: 1,\n len 
-          Instruction Start: 37
-          Caret: 45
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\SymbolBlock
-          Subtype: :
-          Instruction: :
-          Instruction Start: 54
-          Caret: 54
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\SymbolBlock
-          Subtype: -
-          Instruction: -
-          Instruction Start: 56
-          Caret: 56
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction: 1,\n 
-          Instruction Start: 57
-          Caret: 61
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-      Block: Tetraquark\Block\ObjectValueBlock
-      Subtype: :
-      Instruction: \n after 
-      Instruction Start: 63
-      Caret: 75
-      Name: `after`
-      Alias: `z`
-      Blocks: [1] 
-      =======
-        Block: Tetraquark\Block\ScopeBlock
-        Subtype: {
-        Instruction: 
-        Instruction Start: 73
-        Caret: 74
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-      Block: Tetraquark\Block\ObjectValueBlock
-      Subtype: :
-      Instruction:  \n add 
-      Instruction Start: 76
-      Caret: 87
-      Name: `add`
-      Alias: `y`
-      Blocks: [1] 
-      =======
-        Block: Tetraquark\Block\ScopeBlock
-        Subtype: {
-        Instruction: 
-        Instruction Start: 85
-        Caret: 86
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-      Block: Tetraquark\Block\ObjectValueBlock
-      Subtype: :
-      Instruction:  \n focus 
-      Instruction Start: 88
-      Caret: 163
-      Name: `focus`
-      Alias: `x`
-      Blocks: [1] 
-      =======
-        Block: Tetraquark\Block\ScopeBlock
-        Subtype: {
-        Instruction: 
-        Instruction Start: 99
-        Caret: 162
-        Name: ``
-        Alias: ``
-        Blocks: [12] 
-        =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction:  \n topLine 
-          Instruction Start: 88
-          Caret: 99
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\SymbolBlock
-          Subtype: :
-          Instruction: :
-          Instruction Start: 111
-          Caret: 111
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction:  0, \n letter 
-          Instruction Start: 98
-          Caret: 111
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\SymbolBlock
-          Subtype: :
-          Instruction: :
-          Instruction Start: 125
-          Caret: 125
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\SymbolBlock
-          Subtype: -
-          Instruction: -
-          Instruction Start: 127
-          Caret: 127
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction: 1,\n line 
-          Instruction Start: 118
-          Caret: 127
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\SymbolBlock
-          Subtype: :
-          Instruction: :
-          Instruction Start: 137
-          Caret: 137
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\SymbolBlock
-          Subtype: -
-          Instruction: -
-          Instruction Start: 139
-          Caret: 139
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction: 1,\n childIndex 
-          Instruction Start: 124
-          Caret: 139
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\SymbolBlock
-          Subtype: :
-          Instruction: :
-          Instruction Start: 155
-          Caret: 155
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\SymbolBlock
-          Subtype: -
-          Instruction: -
-          Instruction Start: 157
-          Caret: 157
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction: 1,\n 
-          Instruction Start: 158
-          Caret: 162
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-      Block: Tetraquark\Block\ObjectValueBlock
-      Subtype: :
-      Instruction: \n focusAfter 
-      Instruction Start: 164
-      Caret: 242
-      Name: `focusAfter`
-      Alias: `q`
-      Blocks: [1] 
-      =======
-        Block: Tetraquark\Block\ScopeBlock
-        Subtype: {
-        Instruction: 
-        Instruction Start: 179
-        Caret: 241
-        Name: ``
-        Alias: ``
-        Blocks: [12] 
-        =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction:  \n topLine 
-          Instruction Start: 168
-          Caret: 179
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\SymbolBlock
-          Subtype: :
-          Instruction: :
-          Instruction Start: 191
-          Caret: 191
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction:  0,\n letter 
-          Instruction Start: 179
-          Caret: 191
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\SymbolBlock
-          Subtype: :
-          Instruction: :
-          Instruction Start: 204
-          Caret: 204
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\SymbolBlock
-          Subtype: -
-          Instruction: -
-          Instruction Start: 206
-          Caret: 206
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction: 1,\n line 
-          Instruction Start: 197
-          Caret: 206
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\SymbolBlock
-          Subtype: :
-          Instruction: :
-          Instruction Start: 216
-          Caret: 216
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\SymbolBlock
-          Subtype: -
-          Instruction: -
-          Instruction Start: 218
-          Caret: 218
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction: 1,\n childIndex 
-          Instruction Start: 203
-          Caret: 218
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\SymbolBlock
-          Subtype: :
-          Instruction: :
-          Instruction Start: 234
-          Caret: 234
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\SymbolBlock
-          Subtype: -
-          Instruction: -
-          Instruction Start: 236
-          Caret: 236
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction: 1,\n 
-          Instruction Start: 237
-          Caret: 241
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-  Block: Tetraquark\Block\AttributeBlock
-  Subtype: 
-  Instruction: tmp = []
-  Instruction Start: 320
-  Caret: 328
-  Name: `tmp`
-  Alias: `e`
-  Blocks: [1] 
-  =======
-    Block: Tetraquark\Block\ArrayBlock
-    Subtype: [
-    Instruction: 
-    Instruction Start: 1
-    Caret: 2
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-  Block: Tetraquark\Block\AttributeBlock
-  Subtype: 
-  Instruction: pending = []
-  Instruction Start: 332
-  Caret: 344
-  Name: `pending`
-  Alias: `f`
-  Blocks: [1] 
-  =======
-    Block: Tetraquark\Block\ArrayBlock
-    Subtype: [
-    Instruction: 
-    Instruction Start: 1
-    Caret: 2
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-  Block: Tetraquark\Block\AttributeBlock
-  Subtype: 
-  Instruction: versions = []
-  Instruction Start: 348
-  Caret: 361
-  Name: `versions`
-  Alias: `g`
-  Blocks: [1] 
-  =======
-    Block: Tetraquark\Block\ArrayBlock
-    Subtype: [
-    Instruction: 
-    Instruction Start: 1
-    Caret: 2
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-  Block: Tetraquark\Block\AttributeBlock
-  Subtype: 
-  Instruction: methodsStack = []
-  Instruction Start: 365
-  Caret: 382
-  Name: `methodsStack`
-  Alias: `h`
-  Blocks: [1] 
-  =======
-    Block: Tetraquark\Block\ArrayBlock
-    Subtype: [
-    Instruction: 
-    Instruction Start: 1
-    Caret: 2
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-  Block: Tetraquark\Block\AttributeBlock
-  Subtype: 
-  Instruction: inProgress = false
-  Instruction Start: 388
-  Caret: 406
-  Name: `inProgress`
-  Alias: `i`
-  Blocks: [1] 
-  =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction:  false
-    Instruction Start: -1
-    Caret: 5
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-  Block: Tetraquark\Block\AttributeBlock
-  Subtype: 
-  Instruction: set = {}
-  Instruction Start: 410
-  Caret: 418
-  Name: `set`
-  Alias: `j`
-  Blocks: [1] 
-  =======
-    Block: Tetraquark\Block\ObjectBlock
-    Subtype: {
-    Instruction: 
-    Instruction Start: 1
-    Caret: 2
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-  Block: Tetraquark\Block\AttributeBlock
-  Subtype: 
-  Instruction: content = {}
-  Instruction Start: 422
-  Caret: 434
-  Name: `content`
-  Alias: `k`
-  Blocks: [1] 
-  =======
-    Block: Tetraquark\Block\ObjectBlock
-    Subtype: {
-    Instruction: 
-    Instruction Start: 1
-    Caret: 2
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-  Block: Tetraquark\Block\AttributeBlock
-  Subtype: 
-  Instruction: maxVersionCount = 100
-  Instruction Start: 438
-  Caret: 459
-  Name: `maxVersionCount`
-  Alias: `l`
-  Blocks: [1] 
-  =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction:  100
-    Instruction Start: -1
-    Caret: 3
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-  Block: Tetraquark\Block\ClassMethodBlock
-  Subtype: method
-  Instruction: moveToPending () {
-  Instruction Start: 465
-  Caret: 576
-  Name: `moveToPending`
-  Arguments: [0] `
-  Alias: `m`
-  Blocks: [6] 
-  =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: this
-    Instruction Start: 485
-    Caret: 489
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: middle
-    Instruction: _save
-    Instruction Start: 489
-    Caret: 494
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:variable
-    Instruction: pending
-    Instruction Start: 495
-    Caret: 549
-    Name: `pending`
-    Alias: `f`
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\AttributeBlock
-      Subtype: 
-      Instruction: pending = this._save.pending.concat( this._save.tmp )
-      Instruction Start: 496
-      Caret: 549
-      Name: ``
-      Alias: ``
-      Blocks: [4] 
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: this
-        Instruction Start: 1
-        Caret: 5
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: _save
-        Instruction Start: 5
-        Caret: 10
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: pending
-        Instruction Start: 11
-        Caret: 18
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: end:method
-        Instruction: concat
-        Instruction Start: 19
-        Caret: 43
-        Name: ``
-        Alias: ``
-        Blocks: [3] 
-        =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: first
-          Instruction: this
-          Instruction Start: 28
-          Caret: 32
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: middle
-          Instruction: _save
-          Instruction Start: 32
-          Caret: 37
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: .
-          Instruction: tmp
-          Instruction Start: 38
-          Caret: 42
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: this
-    Instruction Start: 552
-    Caret: 556
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: middle
-    Instruction: _save
-    Instruction Start: 556
-    Caret: 561
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:method
-    Instruction: resetTmp
-    Instruction Start: 562
-    Caret: 572
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-  Block: Tetraquark\Block\ClassMethodBlock
-  Subtype: method
-  Instruction: publish () {
-  Instruction Start: 581
-  Caret: 1005
-  Name: `publish`
-  Arguments: [0] `
-  Alias: `n`
-  Blocks: [17] 
-  =======
-    Block: Tetraquark\Block\VariableBlock
-    Subtype: const
-    Instruction: const save = this._save
-    Instruction Start: 595
-    Caret: 618
-    Name: ``
-    Value: ``
-    Alias: ``
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\VariableItemBlock
-      Subtype: 
-      Instruction:  save =
-      Instruction Start: 0
-      Caret: 18
-      Name: `save`
-      Value: ``
-      Alias: `µ`
-      Blocks: [2] 
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: this
-        Instruction Start: 8
-        Caret: 12
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: _save
-        Instruction Start: 12
-        Caret: 17
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-    Block: Tetraquark\Block\IfBlock
-    Subtype: if
-    Instruction: if ( save.version > 0 ) {
-    Instruction Start: 627
-    Caret: 713
-    Name: ``
-    Cond block: [0] 
-    Arg block: [4] 
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: save
-      Instruction Start: 0
-      Caret: 4
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: version
-      Instruction Start: 4
-      Caret: 12
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\SymbolBlock
-      Subtype: >
-      Instruction: >
-      Instruction Start: 13
-      Caret: 13
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  0
-      Instruction Start: 13
-      Caret: 15
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-    Alias: ``
-    Blocks: [5] 
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: save
-      Instruction Start: 654
-      Caret: 658
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: versions
-      Instruction Start: 658
-      Caret: 666
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: splice
-      Instruction Start: 667
-      Caret: 690
-      Name: ``
-      Alias: ``
-      Blocks: [3] 
-      =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction: 0, 
-        Instruction Start: 679
-        Caret: 682
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: save
-        Instruction Start: 678
-        Caret: 682
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: version
-        Instruction Start: 682
-        Caret: 689
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: save
-      Instruction Start: 694
-      Caret: 698
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:variable
-      Instruction: version
-      Instruction Start: 698
-      Caret: 710
-      Name: `version`
-      Alias: `c`
-      Blocks: [1] 
-      =======
-        Block: Tetraquark\Block\AttributeBlock
-        Subtype: 
-        Instruction: version = 0
-        Instruction Start: 699
-        Caret: 710
-        Name: ``
-        Alias: ``
-        Blocks: [1] 
-        =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction:  0
-          Instruction Start: -1
-          Caret: 1
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-    Block: Tetraquark\Block\IfBlock
-    Subtype: single-condition
-    Instruction: if ( save.pending.length == 0 ) return
-    Instruction Start: 718
-    Caret: 756
-    Name: ``
-    Cond block: [0] 
-    Arg block: [5] 
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: save
-      Instruction Start: 0
-      Caret: 4
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: pending
-      Instruction Start: 4
-      Caret: 11
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: length
-      Instruction Start: 12
-      Caret: 19
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\DoubleEqualBlock
-      Subtype: ==
-      Instruction: ==
-      Instruction Start: 20
-      Caret: 21
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  0
-      Instruction Start: 21
-      Caret: 23
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-    Alias: ``
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  return
-      Instruction Start: -1
-      Caret: 6
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: save
-    Instruction Start: 761
-    Caret: 765
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:method
-    Instruction: squash
-    Instruction Start: 765
-    Caret: 773
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: save
-    Instruction Start: 778
-    Caret: 782
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: middle:bracket
-    Instruction: pending
-    Instruction Start: 782
-    Caret: 789
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\BracketChainLinkBlock
-    Subtype: [
-    Instruction: 
-    Instruction Start: 790
-    Caret: 792
-    Name: ``
-    Alias: ``
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction: 0
-      Instruction Start: 791
-      Caret: 792
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: 
-    Instruction Start: 793
-    Caret: 793
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: middle
-    Instruction: focus
-    Instruction Start: 793
-    Caret: 798
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:variable
-    Instruction: topLine
-    Instruction Start: 799
-    Caret: 828
-    Name: `topLine`
-    Alias: `v`
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\AttributeBlock
-      Subtype: 
-      Instruction: topLine = this.render.hidden
-      Instruction Start: 800
-      Caret: 828
-      Name: ``
-      Alias: ``
-      Blocks: [3] 
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: this
-        Instruction Start: 1
-        Caret: 5
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: render
-        Instruction Start: 5
-        Caret: 11
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: hidden
-        Instruction Start: 12
-        Caret: 19
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: save
-    Instruction Start: 833
-    Caret: 837
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: middle
-    Instruction: versions
-    Instruction Start: 837
-    Caret: 845
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:method
-    Instruction: unshift
-    Instruction Start: 846
-    Caret: 879
-    Name: ``
-    Alias: ``
-    Blocks: [3] 
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: save
-      Instruction Start: 856
-      Caret: 860
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: pending
-      Instruction Start: 860
-      Caret: 867
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: reverse
-      Instruction Start: 868
-      Caret: 877
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: save
-    Instruction Start: 885
-    Caret: 889
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:variable
-    Instruction: pending
-    Instruction Start: 889
-    Caret: 902
-    Name: `pending`
-    Alias: `f`
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\AttributeBlock
-      Subtype: 
-      Instruction: pending = []
-      Instruction Start: 890
-      Caret: 902
-      Name: ``
-      Alias: ``
-      Blocks: [1] 
-      =======
-        Block: Tetraquark\Block\ArrayBlock
-        Subtype: [
-        Instruction: 
-        Instruction Start: 1
-        Caret: 2
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-    Block: Tetraquark\Block\IfBlock
-    Subtype: if
-    Instruction: if (save.versions.length > save.maxVersionCount) {
-    Instruction Start: 905
-    Caret: 1002
-    Name: ``
-    Cond block: [0] 
-    Arg block: [6] 
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: save
-      Instruction Start: 0
-      Caret: 4
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: versions
-      Instruction Start: 4
-      Caret: 12
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: length
-      Instruction Start: 13
-      Caret: 20
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\SymbolBlock
-      Subtype: >
-      Instruction: >
-      Instruction Start: 21
-      Caret: 21
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: save
-      Instruction Start: 23
-      Caret: 27
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: maxVersionCount
-      Instruction Start: 27
-      Caret: 43
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-    Alias: ``
-    Blocks: [3] 
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: save
-      Instruction Start: 957
-      Caret: 961
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: versions
-      Instruction Start: 961
-      Caret: 969
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: splice
-      Instruction Start: 970
-      Caret: 998
-      Name: ``
-      Alias: ``
-      Blocks: [2] 
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: save
-        Instruction Start: 978
-        Caret: 982
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: maxVersionCount
-        Instruction Start: 982
-        Caret: 997
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-  Block: Tetraquark\Block\ClassMethodBlock
-  Subtype: method
-  Instruction: squash () {
-  Instruction Start: 1010
-  Caret: 1338
-  Name: `squash`
-  Arguments: [0] `
-  Alias: `o`
-  Blocks: [2] 
-  =======
-    Block: Tetraquark\Block\VariableBlock
-    Subtype: const
-    Instruction: const pending = this._save.pending
-    Instruction Start: 1023
-    Caret: 1057
-    Name: ``
-    Value: ``
-    Alias: ``
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\VariableItemBlock
-      Subtype: 
-      Instruction:  pending =
-      Instruction Start: 0
-      Caret: 29
-      Name: `pending`
-      Value: ``
-      Alias: `f`
-      Blocks: [3] 
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: this
-        Instruction Start: 11
-        Caret: 15
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: _save
-        Instruction Start: 15
-        Caret: 20
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: pending
-        Instruction Start: 21
-        Caret: 28
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-    Block: Tetraquark\Block\ForBlock
-    Subtype: for
-    Instruction: for (let i = 1; i < pending.length; i++) {
-    Instruction Start: 1062
-    Caret: 1335
-    Name: ``
-    Cond block: [7] 
-      Block: Tetraquark\Block\VariableBlock
-      Subtype: let
-      Instruction: let i = 1
-      Instruction Start: 0
-      Caret: 9
-      Name: ``
-      Value: ``
-      Alias: ``
-      Blocks: [1] 
-      =======
-        Block: Tetraquark\Block\VariableItemBlock
-        Subtype: 
-        Instruction:  i =
-        Instruction Start: 0
-        Caret: 6
-        Name: `i`
-        Value: ``
-        Alias: `ê`
-        Blocks: [1] 
-        =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction:  1
-          Instruction Start: 4
-          Caret: 6
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  i 
-      Instruction Start: -4
-      Caret: -1
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\SymbolBlock
-      Subtype: <
-      Instruction: <
-      Instruction Start: 3
-      Caret: 3
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: pending
-      Instruction Start: 5
-      Caret: 12
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: length
-      Instruction Start: 12
-      Caret: 19
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  i
-      Instruction Start: -3
-      Caret: -1
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\OperatorBlock
-      Subtype: ++
-      Instruction: ++
-      Instruction Start: 2
-      Caret: 4
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-    Alias: ``
-    Blocks: [3] 
-    =======
-      Block: Tetraquark\Block\VariableBlock
-      Subtype: const
-      Instruction: const step = pending[i]
-      Instruction Start: 1106
-      Caret: 1129
-      Name: ``
-      Value: ``
-      Alias: ``
-      Blocks: [1] 
-      =======
-        Block: Tetraquark\Block\VariableItemBlock
-        Subtype: 
-        Instruction:  step =
-        Instruction Start: 0
-        Caret: 18
-        Name: `step`
-        Value: ``
-        Alias: `õ`
-        Blocks: [2] 
-        =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction:  pending
-          Instruction Start: -2
-          Caret: 6
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\BracketChainLinkBlock
-          Subtype: [
-          Instruction: 
-          Instruction Start: 15
-          Caret: 17
-          Name: ``
-          Alias: ``
-          Blocks: [1] 
-          =======
-            Block: Tetraquark\Block\UndefinedBlock
-            Subtype: 
-            Instruction: i
-            Instruction Start: 16
-            Caret: 17
-            Name: ``
-            Alias: ``
-            Blocks: [0] 
-            =======
-      Block: Tetraquark\Block\VariableBlock
-      Subtype: const
-      Instruction: const previous = pending[i - 1]
-      Instruction Start: 1133
-      Caret: 1164
-      Name: ``
-      Value: ``
-      Alias: ``
-      Blocks: [1] 
-      =======
-        Block: Tetraquark\Block\VariableItemBlock
-        Subtype: 
-        Instruction:  previous =
-        Instruction Start: 0
-        Caret: 26
-        Name: `previous`
-        Value: ``
-        Alias: `ú`
-        Blocks: [2] 
-        =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction:  pending
-          Instruction Start: 2
-          Caret: 10
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\BracketChainLinkBlock
-          Subtype: [
-          Instruction: 
-          Instruction Start: 19
-          Caret: 25
-          Name: ``
-          Alias: ``
-          Blocks: [3] 
-          =======
-            Block: Tetraquark\Block\UndefinedBlock
-            Subtype: 
-            Instruction: i 
-            Instruction Start: 17
-            Caret: 19
-            Name: ``
-            Alias: ``
-            Blocks: [0] 
-            =======
-            Block: Tetraquark\Block\SymbolBlock
-            Subtype: -
-            Instruction: -
-            Instruction Start: 22
-            Caret: 22
-            Name: ``
-            Alias: ``
-            Blocks: [0] 
-            =======
-            Block: Tetraquark\Block\UndefinedBlock
-            Subtype: 
-            Instruction:  1
-            Instruction Start: 23
-            Caret: 25
-            Name: ``
-            Alias: ``
-            Blocks: [0] 
-            =======
-      Block: Tetraquark\Block\IfBlock
-      Subtype: if
-      Instruction: if ( this._save.checkStepsCompatibility( step, previous ) ) {
-      Instruction Start: 1168
-      Caret: 1332
-      Name: ``
-      Cond block: [0] 
-      Arg block: [3] 
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: this
-        Instruction Start: 0
-        Caret: 4
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: _save
-        Instruction Start: 4
-        Caret: 9
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: end:method
-        Instruction: checkStepsCompatibility
-        Instruction Start: 10
-        Caret: 51
-        Name: ``
-        Alias: ``
-        Blocks: [1] 
-        =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction:  step, previous 
-          Instruction Start: 35
-          Caret: 51
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-      Alias: ``
-      Blocks: [8] 
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: previous
-        Instruction Start: 1231
-        Caret: 1239
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: end:variable
-        Instruction: after
-        Instruction Start: 1239
-        Caret: 1258
-        Name: `after`
-        Alias: `z`
-        Blocks: [1] 
-        =======
-          Block: Tetraquark\Block\AttributeBlock
-          Subtype: 
-          Instruction: after = step.after
-          Instruction Start: 1240
-          Caret: 1258
-          Name: ``
-          Alias: ``
-          Blocks: [2] 
-          =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: first
-            Instruction: step
-            Instruction Start: 1
-            Caret: 5
-            Name: ``
-            Alias: ``
-            Blocks: [0] 
-            =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: .
-            Instruction: after
-            Instruction Start: 5
-            Caret: 11
-            Name: ``
-            Alias: ``
-            Blocks: [0] 
-            =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: previous
-        Instruction Start: 1261
-        Caret: 1269
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: end:variable
-        Instruction: focusAfter
-        Instruction Start: 1269
-        Caret: 1298
-        Name: `focusAfter`
-        Alias: `q`
-        Blocks: [1] 
-        =======
-          Block: Tetraquark\Block\AttributeBlock
-          Subtype: 
-          Instruction: focusAfter = step.focusAfter
-          Instruction Start: 1270
-          Caret: 1298
-          Name: ``
-          Alias: ``
-          Blocks: [2] 
-          =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: first
-            Instruction: step
-            Instruction Start: 1
-            Caret: 5
-            Name: ``
-            Alias: ``
-            Blocks: [0] 
-            =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: .
-            Instruction: focusAfter
-            Instruction Start: 5
-            Caret: 16
-            Name: ``
-            Alias: ``
-            Blocks: [0] 
-            =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: pending
-        Instruction Start: 1301
-        Caret: 1308
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: end:method
-        Instruction: splice
-        Instruction Start: 1308
-        Caret: 1322
-        Name: ``
-        Alias: ``
-        Blocks: [1] 
-        =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction:  i, 1 
-          Instruction Start: 1316
-          Caret: 1322
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction: \n i
-        Instruction Start: 1320
-        Caret: 1323
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\OperatorBlock
-        Subtype: --
-        Instruction: --
-        Instruction Start: 1327
-        Caret: 1329
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-  Block: Tetraquark\Block\ClassMethodBlock
-  Subtype: method
-  Instruction: checkStepsCompatibility ( stepOne, stepTwo ) {
-  Instruction Start: 1343
-  Caret: 1644
-  Name: `checkStepsCompatibility`
-  Arguments: [2] `
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction:  stepOne
-    Instruction Start: -1
-    Caret: 7
-    Name: `stepOne`
-    Alias: `A`
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\UndefinedBlock
-    Subtype: 
-    Instruction:  stepTwo 
-    Instruction Start: -1
-    Caret: 8
-    Name: `stepTwo`
-    Alias: `B`
-    Blocks: [0] 
-    =======
-  Alias: `p`
-  Blocks: [1] 
-  =======
-    Block: Tetraquark\Block\ReturnBlock
-    Subtype: return
-    Instruction:  stepOne.fun_name == stepTwo.fun_name && stepOne.fun_name != 'mergeLine' && Object.values(stepOne.remove).toString() == Object.values(stepTwo.remove).toString() && Object.keys (stepOne.add ).toString() == Object.keys (stepTwo.add ).toString();
-    Instruction Start: 1391
-    Caret: 1641
-    Name: ``
-    Alias: ``
-    Blocks: [30] 
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: stepOne
-      Instruction Start: 1
-      Caret: 8
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: fun_name
-      Instruction Start: 8
-      Caret: 17
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\DoubleEqualBlock
-      Subtype: ==
-      Instruction: ==
-      Instruction Start: 18
-      Caret: 19
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: stepTwo
-      Instruction Start: 21
-      Caret: 28
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: fun_name
-      Instruction Start: 28
-      Caret: 37
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\SymbolBlock
-      Subtype: &&
-      Instruction: &&
-      Instruction Start: 38
-      Caret: 39
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: stepOne
-      Instruction Start: 41
-      Caret: 48
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: fun_name
-      Instruction Start: 48
-      Caret: 57
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\SymbolBlock
-      Subtype: !=
-      Instruction: !=
-      Instruction Start: 58
-      Caret: 59
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\StringBlock
-      Subtype: 
-      Instruction: 'mergeLine'
-      Instruction Start: 61
-      Caret: 72
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\SymbolBlock
-      Subtype: &&
-      Instruction: &&
-      Instruction Start: 73
-      Caret: 74
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: Object
-      Instruction Start: 76
-      Caret: 82
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: values
-      Instruction Start: 82
-      Caret: 104
-      Name: ``
-      Alias: ``
-      Blocks: [2] 
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: stepOne
-        Instruction Start: 90
-        Caret: 97
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: remove
-        Instruction Start: 97
-        Caret: 103
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: 
-      Instruction Start: 105
-      Caret: 105
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: toString
-      Instruction Start: 105
-      Caret: 115
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\DoubleEqualBlock
-      Subtype: ==
-      Instruction: ==
-      Instruction Start: 117
-      Caret: 118
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: Object
-      Instruction Start: 120
-      Caret: 126
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: values
-      Instruction Start: 126
-      Caret: 148
-      Name: ``
-      Alias: ``
-      Blocks: [2] 
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: stepTwo
-        Instruction Start: 134
-        Caret: 141
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: remove
-        Instruction Start: 141
-        Caret: 147
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: 
-      Instruction Start: 149
-      Caret: 149
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: toString
-      Instruction Start: 149
-      Caret: 159
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\SymbolBlock
-      Subtype: &&
-      Instruction: &&
-      Instruction Start: 161
-      Caret: 162
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: Object
-      Instruction Start: 164
-      Caret: 170
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: keys
-      Instruction Start: 170
-      Caret: 189
-      Name: ``
-      Alias: ``
-      Blocks: [2] 
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: stepOne
-        Instruction Start: 177
-        Caret: 184
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: add
-        Instruction Start: 184
-        Caret: 188
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: 
-      Instruction Start: 190
-      Caret: 190
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: toString
-      Instruction Start: 190
-      Caret: 200
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\DoubleEqualBlock
-      Subtype: ==
-      Instruction: ==
-      Instruction Start: 202
-      Caret: 203
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: Object
-      Instruction Start: 205
-      Caret: 211
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: keys
-      Instruction Start: 211
-      Caret: 230
-      Name: ``
-      Alias: ``
-      Blocks: [2] 
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: stepTwo
-        Instruction Start: 218
-        Caret: 225
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: add
-        Instruction Start: 225
-        Caret: 229
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: 
-      Instruction Start: 231
-      Caret: 231
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: toString
-      Instruction Start: 231
-      Caret: 241
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-  Block: Tetraquark\Block\ClassMethodBlock
-  Subtype: method
-  Instruction: resetTmp () {
-  Instruction Start: 1649
-  Caret: 1686
-  Name: `resetTmp`
-  Arguments: [0] `
-  Alias: `r`
-  Blocks: [3] 
-  =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: this
-    Instruction Start: 1664
-    Caret: 1668
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: middle
-    Instruction: _save
-    Instruction Start: 1668
-    Caret: 1673
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:variable
-    Instruction: tmp
-    Instruction Start: 1674
-    Caret: 1683
-    Name: `tmp`
-    Alias: `e`
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\AttributeBlock
-      Subtype: 
-      Instruction: tmp = []
-      Instruction Start: 1675
-      Caret: 1683
-      Name: ``
-      Alias: ``
-      Blocks: [1] 
-      =======
-        Block: Tetraquark\Block\ArrayBlock
-        Subtype: [
-        Instruction: 
-        Instruction Start: 1
-        Caret: 2
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-  Block: Tetraquark\Block\ClassMethodBlock
-  Subtype: method
-  Instruction: restore () {
-  Instruction Start: 1691
-  Caret: 2505
-  Name: `restore`
-  Arguments: [0] `
-  Alias: `s`
-  Blocks: [27] 
-  =======
-    Block: Tetraquark\Block\VariableBlock
-    Subtype: const
-    Instruction: const save = this._save
-    Instruction Start: 1705
-    Caret: 1728
-    Name: ``
-    Value: ``
-    Alias: ``
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\VariableItemBlock
-      Subtype: 
-      Instruction:  save =
-      Instruction Start: 0
-      Caret: 18
-      Name: `save`
-      Value: ``
-      Alias: `µ`
-      Blocks: [2] 
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: this
-        Instruction Start: 8
-        Caret: 12
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: _save
-        Instruction Start: 12
-        Caret: 17
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-    Block: Tetraquark\Block\IfBlock
-    Subtype: if
-    Instruction: if ( save.pending.length > 0 ) {
-    Instruction Start: 1733
-    Caret: 1809
-    Name: ``
-    Cond block: [0] 
-    Arg block: [5] 
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: save
-      Instruction Start: 0
-      Caret: 4
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: pending
-      Instruction Start: 4
-      Caret: 11
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: length
-      Instruction Start: 12
-      Caret: 19
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\SymbolBlock
-      Subtype: >
-      Instruction: >
-      Instruction Start: 20
-      Caret: 20
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  0
-      Instruction Start: 20
-      Caret: 22
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-    Alias: ``
-    Blocks: [4] 
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: save
-      Instruction Start: 1767
-      Caret: 1771
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: publish
-      Instruction Start: 1771
-      Caret: 1780
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: save
-      Instruction Start: 1784
-      Caret: 1788
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: debounce
-      Instruction Start: 1788
-      Caret: 1805
-      Name: ``
-      Alias: ``
-      Blocks: [1] 
-      =======
-        Block: Tetraquark\Block\StringBlock
-        Subtype: 
-        Instruction: 'clear'
-        Instruction Start: 1798
-        Caret: 1805
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-    Block: Tetraquark\Block\IfBlock
-    Subtype: single-condition
-    Instruction: if (save.versions.length == save.version) return
-    Instruction Start: 1814
-    Caret: 1862
-    Name: ``
-    Cond block: [0] 
-    Arg block: [6] 
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: save
-      Instruction Start: 0
-      Caret: 4
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: versions
-      Instruction Start: 4
-      Caret: 12
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: length
-      Instruction Start: 13
-      Caret: 20
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\DoubleEqualBlock
-      Subtype: ==
-      Instruction: ==
-      Instruction Start: 21
-      Caret: 22
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: save
-      Instruction Start: 24
-      Caret: 28
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: version
-      Instruction Start: 28
-      Caret: 36
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-    Alias: ``
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  return
-      Instruction Start: -1
-      Caret: 6
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-    Block: Tetraquark\Block\VariableBlock
-    Subtype: let
-    Instruction: let version = save.versions[ save.version ]
-    Instruction Start: 1867
-    Caret: 1910
-    Name: ``
-    Value: ``
-    Alias: ``
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\VariableItemBlock
-      Subtype: 
-      Instruction:  version =
-      Instruction Start: 0
-      Caret: 40
-      Name: `version`
-      Value: ``
-      Alias: `c`
-      Blocks: [3] 
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: save
-        Instruction Start: 11
-        Caret: 15
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle:bracket
-        Instruction: versions
-        Instruction Start: 15
-        Caret: 23
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\BracketChainLinkBlock
-        Subtype: [
-        Instruction: 
-        Instruction Start: 24
-        Caret: 39
-        Name: ``
-        Alias: ``
-        Blocks: [2] 
-        =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: first
-          Instruction: save
-          Instruction Start: 26
-          Caret: 30
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: .
-          Instruction: version
-          Instruction Start: 30
-          Caret: 38
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: version
-    Instruction Start: 1915
-    Caret: 1922
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:method
-    Instruction: forEach
-    Instruction Start: 1922
-    Caret: 2012
-    Name: ``
-    Alias: ``
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\ArrowFunctionBlock
-      Subtype: no-parenthesis:brackets
-      Instruction: version.forEach(step => {
-      Instruction Start: 1915
-      Caret: 2011
-      Name: ``
-      Value: ``
-      Arguments: [1] `
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction: step
-        Instruction Start: -1
-        Caret: 3
-        Name: `step`
-        Alias: `õ`
-        Blocks: [0] 
-        =======
-      Alias: ``
-      Blocks: [6] 
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: save
-        Instruction Start: 1942
-        Caret: 1946
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: content
-        Instruction Start: 1946
-        Caret: 1953
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: end:method
-        Instruction: remove
-        Instruction Start: 1954
-        Caret: 1975
-        Name: ``
-        Alias: ``
-        Blocks: [2] 
-        =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: first
-          Instruction: step
-          Instruction Start: 1963
-          Caret: 1967
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: .
-          Instruction: remove
-          Instruction Start: 1967
-          Caret: 1974
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: save
-        Instruction Start: 1979
-        Caret: 1983
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: content
-        Instruction Start: 1983
-        Caret: 1990
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: end:method
-        Instruction: add
-        Instruction Start: 1991
-        Caret: 2007
-        Name: ``
-        Alias: ``
-        Blocks: [2] 
-        =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: first
-          Instruction: step
-          Instruction Start: 1998
-          Caret: 2002
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: .
-          Instruction: add
-          Instruction Start: 2002
-          Caret: 2006
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-    Block: Tetraquark\Block\VariableBlock
-    Subtype: const
-    Instruction: const focus = version[ version.length - 1 ].focus
-    Instruction Start: 2018
-    Caret: 2067
-    Name: ``
-    Value: ``
-    Alias: ``
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\VariableItemBlock
-      Subtype: 
-      Instruction:  focus =
-      Instruction Start: 0
-      Caret: 44
-      Name: `focus`
-      Value: ``
-      Alias: `x`
-      Blocks: [4] 
-      =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction:  version
-        Instruction Start: -1
-        Caret: 7
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\BracketChainLinkBlock
-        Subtype: [
-        Instruction: 
-        Instruction Start: 16
-        Caret: 37
-        Name: ``
-        Alias: ``
-        Blocks: [4] 
-        =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: first
-          Instruction: version
-          Instruction Start: 18
-          Caret: 25
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: .
-          Instruction: length
-          Instruction Start: 25
-          Caret: 32
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\SymbolBlock
-          Subtype: -
-          Instruction: -
-          Instruction Start: 33
-          Caret: 33
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction:  1 
-          Instruction Start: 34
-          Caret: 37
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: 
-        Instruction Start: 38
-        Caret: 38
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: focus
-        Instruction Start: 38
-        Caret: 43
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: this
-    Instruction Start: 2070
-    Caret: 2074
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:variable
-    Instruction: lastX
-    Instruction Start: 2074
-    Caret: 2094
-    Name: `lastX`
-    Alias: `C`
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\AttributeBlock
-      Subtype: 
-      Instruction: lastX = focus.lastX
-      Instruction Start: 2075
-      Caret: 2094
-      Name: ``
-      Alias: ``
-      Blocks: [2] 
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: focus
-        Instruction Start: 1
-        Caret: 6
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: lastX
-        Instruction Start: 6
-        Caret: 12
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: this
-    Instruction Start: 2097
-    Caret: 2101
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: middle
-    Instruction: pos
-    Instruction Start: 2101
-    Caret: 2104
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:variable
-    Instruction: letter
-    Instruction Start: 2105
-    Caret: 2127
-    Name: `letter`
-    Alias: `D`
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\AttributeBlock
-      Subtype: 
-      Instruction: letter = focus.letter
-      Instruction Start: 2106
-      Caret: 2127
-      Name: ``
-      Alias: ``
-      Blocks: [2] 
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: focus
-        Instruction Start: 1
-        Caret: 6
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: letter
-        Instruction Start: 6
-        Caret: 13
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: this
-    Instruction Start: 2130
-    Caret: 2134
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: middle
-    Instruction: pos
-    Instruction Start: 2134
-    Caret: 2137
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:variable
-    Instruction: line
-    Instruction Start: 2138
-    Caret: 2156
-    Name: `line`
-    Alias: `E`
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\AttributeBlock
-      Subtype: 
-      Instruction: line = focus.line
-      Instruction Start: 2139
-      Caret: 2156
-      Name: ``
-      Alias: ``
-      Blocks: [2] 
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: focus
-        Instruction Start: 1
-        Caret: 6
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: line
-        Instruction Start: 6
-        Caret: 11
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: this
-    Instruction Start: 2159
-    Caret: 2163
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: middle
-    Instruction: pos
-    Instruction Start: 2163
-    Caret: 2166
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:variable
-    Instruction: childIndex
-    Instruction Start: 2167
-    Caret: 2197
-    Name: `childIndex`
-    Alias: `F`
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\AttributeBlock
-      Subtype: 
-      Instruction: childIndex = focus.childIndex
-      Instruction Start: 2168
-      Caret: 2197
-      Name: ``
-      Alias: ``
-      Blocks: [2] 
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: focus
-        Instruction Start: 1
-        Caret: 6
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: childIndex
-        Instruction Start: 6
-        Caret: 17
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-    Block: Tetraquark\Block\IfBlock
-    Subtype: if
-    Instruction: if ( !this.is.line.visible( focus.line ) ) {
-    Instruction Start: 2202
-    Caret: 2338
-    Name: ``
-    Cond block: [0] 
-    Arg block: [5] 
-      Block: Tetraquark\Block\SymbolBlock
-      Subtype: !
-      Instruction: !
-      Instruction Start: 0
-      Caret: 0
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: this
-      Instruction Start: 1
-      Caret: 5
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: is
-      Instruction Start: 5
-      Caret: 7
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: line
-      Instruction Start: 8
-      Caret: 12
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: visible
-      Instruction Start: 13
-      Caret: 34
-      Name: ``
-      Alias: ``
-      Blocks: [2] 
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: focus
-        Instruction Start: 23
-        Caret: 28
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: line
-        Instruction Start: 28
-        Caret: 33
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-    Alias: ``
-    Blocks: [4] 
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: this
-      Instruction Start: 2248
-      Caret: 2252
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: render
-      Instruction Start: 2252
-      Caret: 2258
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: move
-      Instruction Start: 2259
-      Caret: 2263
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: page
-      Instruction Start: 2264
-      Caret: 2334
-      Name: ``
-      Alias: ``
-      Blocks: [1] 
-      =======
-        Block: Tetraquark\Block\ObjectBlock
-        Subtype: {
-        Instruction: 
-        Instruction Start: 2270
-        Caret: 2333
-        Name: ``
-        Alias: ``
-        Blocks: [1] 
-        =======
-          Block: Tetraquark\Block\ObjectValueBlock
-          Subtype: :
-          Instruction:  offset 
-          Instruction Start: 2271
-          Caret: 2332
-          Name: `offset`
-          Alias: `G`
-          Blocks: [5] 
-          =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: first
-            Instruction: focus
-            Instruction Start: 2281
-            Caret: 2286
-            Name: ``
-            Alias: ``
-            Blocks: [0] 
-            =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: .
-            Instruction: line
-            Instruction Start: 2286
-            Caret: 2291
-            Name: ``
-            Alias: ``
-            Blocks: [0] 
-            =======
-            Block: Tetraquark\Block\SymbolBlock
-            Subtype: -
-            Instruction: -
-            Instruction Start: 2292
-            Caret: 2292
-            Name: ``
-            Alias: ``
-            Blocks: [0] 
-            =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: first
-            Instruction: Math
-            Instruction Start: 2294
-            Caret: 2298
-            Name: ``
-            Alias: ``
-            Blocks: [0] 
-            =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: end:method
-            Instruction: floor
-            Instruction Start: 2298
-            Caret: 2331
-            Name: ``
-            Alias: ``
-            Blocks: [5] 
-            =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: first
-              Instruction: this
-              Instruction Start: 2306
-              Caret: 2310
-              Name: ``
-              Alias: ``
-              Blocks: [0] 
-              =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: middle
-              Instruction: render
-              Instruction Start: 2310
-              Caret: 2316
-              Name: ``
-              Alias: ``
-              Blocks: [0] 
-              =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: .
-              Instruction: linesLimit
-              Instruction Start: 2317
-              Caret: 2327
-              Name: ``
-              Alias: ``
-              Blocks: [0] 
-              =======
-              Block: Tetraquark\Block\SymbolBlock
-              Subtype: /
-              Instruction: /
-              Instruction Start: 2328
-              Caret: 2328
-              Name: ``
-              Alias: ``
-              Blocks: [0] 
-              =======
-              Block: Tetraquark\Block\UndefinedBlock
-              Subtype: 
-              Instruction: 2 
-              Instruction Start: 2329
-              Caret: 2331
-              Name: ``
-              Alias: ``
-              Blocks: [0] 
-              =======
-    Block: Tetraquark\Block\ElseBlock
-    Subtype: else
-    Instruction: else{
-    Instruction Start: 2339
-    Caret: 2374
-    Name: ``
-    Alias: ``
-    Blocks: [4] 
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: this
-      Instruction Start: 2348
-      Caret: 2352
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: render
-      Instruction Start: 2352
-      Caret: 2358
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: move
-      Instruction Start: 2359
-      Caret: 2363
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: page
-      Instruction Start: 2364
-      Caret: 2370
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: this
-    Instruction Start: 2377
-    Caret: 2381
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: middle
-    Instruction: render
-    Instruction Start: 2381
-    Caret: 2387
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: middle
-    Instruction: overflow
-    Instruction Start: 2388
-    Caret: 2396
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:method
-    Instruction: scrollTo
-    Instruction Start: 2397
-    Caret: 2484
-    Name: ``
-    Alias: ``
-    Blocks: [12] 
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: this
-      Instruction Start: 2409
-      Caret: 2413
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: render
-      Instruction Start: 2413
-      Caret: 2419
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: overflow
-      Instruction Start: 2420
-      Caret: 2428
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: scrollLeft
-      Instruction Start: 2429
-      Caret: 2439
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction: ,\n 
-      Instruction Start: 2444
-      Caret: 2447
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: this
-      Instruction Start: 2443
-      Caret: 2447
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: render
-      Instruction Start: 2447
-      Caret: 2453
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: hidden
-      Instruction Start: 2454
-      Caret: 2461
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\SymbolBlock
-      Subtype: *
-      Instruction: *
-      Instruction Start: 2462
-      Caret: 2462
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: this
-      Instruction Start: 2464
-      Caret: 2468
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: settings
-      Instruction Start: 2468
-      Caret: 2476
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: line
-      Instruction Start: 2477
-      Caret: 2483
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: save
-    Instruction Start: 2488
-    Caret: 2492
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: .
-    Instruction: version
-    Instruction Start: 2492
-    Caret: 2499
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\OperatorBlock
-    Subtype: ++
-    Instruction: ++
-    Instruction Start: 2500
-    Caret: 2502
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-  Block: Tetraquark\Block\ClassMethodBlock
-  Subtype: method
-  Instruction: recall () {
-  Instruction Start: 2510
-  Caret: 3288
-  Name: `recall`
-  Arguments: [0] `
-  Alias: `t`
-  Blocks: [22] 
-  =======
-    Block: Tetraquark\Block\VariableBlock
-    Subtype: const
-    Instruction: const save = this._save
-    Instruction Start: 2523
-    Caret: 2546
-    Name: ``
-    Value: ``
-    Alias: ``
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\VariableItemBlock
-      Subtype: 
-      Instruction:  save =
-      Instruction Start: 0
-      Caret: 18
-      Name: `save`
-      Value: ``
-      Alias: `µ`
-      Blocks: [2] 
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: this
-        Instruction Start: 8
-        Caret: 12
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: _save
-        Instruction Start: 12
-        Caret: 17
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-    Block: Tetraquark\Block\IfBlock
-    Subtype: single-condition
-    Instruction: if ( save.version <= 0 ) return
-    Instruction Start: 2551
-    Caret: 2582
-    Name: ``
-    Cond block: [0] 
-    Arg block: [4] 
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: save
-      Instruction Start: 0
-      Caret: 4
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: version
-      Instruction Start: 4
-      Caret: 12
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\SymbolBlock
-      Subtype: <=
-      Instruction: <=
-      Instruction Start: 13
-      Caret: 14
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  0
-      Instruction Start: 14
-      Caret: 16
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-    Alias: ``
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction:  return
-      Instruction Start: -1
-      Caret: 6
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: save
-    Instruction Start: 2585
-    Caret: 2589
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: .
-    Instruction: version
-    Instruction Start: 2589
-    Caret: 2596
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\OperatorBlock
-    Subtype: --
-    Instruction: --
-    Instruction Start: 2597
-    Caret: 2599
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\VariableBlock
-    Subtype: const
-    Instruction: const version = save.versions[ save.version ]
-    Instruction Start: 2602
-    Caret: 2647
-    Name: ``
-    Value: ``
-    Alias: ``
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\VariableItemBlock
-      Subtype: 
-      Instruction:  version =
-      Instruction Start: 0
-      Caret: 40
-      Name: `version`
-      Value: ``
-      Alias: `c`
-      Blocks: [3] 
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: save
-        Instruction Start: 11
-        Caret: 15
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle:bracket
-        Instruction: versions
-        Instruction Start: 15
-        Caret: 23
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\BracketChainLinkBlock
-        Subtype: [
-        Instruction: 
-        Instruction Start: 24
-        Caret: 39
-        Name: ``
-        Alias: ``
-        Blocks: [2] 
-        =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: first
-          Instruction: save
-          Instruction Start: 26
-          Caret: 30
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: .
-          Instruction: version
-          Instruction Start: 30
-          Caret: 38
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: version
-    Instruction Start: 2654
-    Caret: 2661
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:method
-    Instruction: reverse
-    Instruction Start: 2661
-    Caret: 2670
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: 
-    Instruction Start: 2671
-    Caret: 2671
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:method
-    Instruction: forEach
-    Instruction Start: 2671
-    Caret: 2876
-    Name: ``
-    Alias: ``
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\ArrowFunctionBlock
-      Subtype: no-parenthesis:brackets
-      Instruction: step => {
-      Instruction Start: 2681
-      Caret: 2875
-      Name: ``
-      Value: ``
-      Arguments: [1] `
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction: step
-        Instruction Start: -1
-        Caret: 3
-        Name: `step`
-        Alias: `õ`
-        Blocks: [0] 
-        =======
-      Alias: ``
-      Blocks: [8] 
-      =======
-        Block: Tetraquark\Block\VariableBlock
-        Subtype: const
-        Instruction: const keys = Object.keys( step.add )
-        Instruction Start: 2692
-        Caret: 2728
-        Name: ``
-        Value: ``
-        Alias: ``
-        Blocks: [1] 
-        =======
-          Block: Tetraquark\Block\VariableItemBlock
-          Subtype: 
-          Instruction:  keys =
-          Instruction Start: 0
-          Caret: 31
-          Name: `keys`
-          Value: ``
-          Alias: `H`
-          Blocks: [2] 
-          =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: first
-            Instruction: Object
-            Instruction Start: 8
-            Caret: 14
-            Name: ``
-            Alias: ``
-            Blocks: [0] 
-            =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: end:method
-            Instruction: keys
-            Instruction Start: 14
-            Caret: 30
-            Name: ``
-            Alias: ``
-            Blocks: [2] 
-            =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: first
-              Instruction: step
-              Instruction Start: 21
-              Caret: 25
-              Name: ``
-              Alias: ``
-              Blocks: [0] 
-              =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: .
-              Instruction: add
-              Instruction Start: 25
-              Caret: 29
-              Name: ``
-              Alias: ``
-              Blocks: [0] 
-              =======
-        Block: Tetraquark\Block\VariableBlock
-        Subtype: const
-        Instruction: const min = Math.min(...keys)
-        Instruction Start: 2730
-        Caret: 2759
-        Name: ``
-        Value: ``
-        Alias: ``
-        Blocks: [1] 
-        =======
-          Block: Tetraquark\Block\VariableItemBlock
-          Subtype: 
-          Instruction:  min =
-          Instruction Start: 0
-          Caret: 24
-          Name: `min`
-          Value: ``
-          Alias: `I`
-          Blocks: [2] 
-          =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: first
-            Instruction: Math
-            Instruction Start: 7
-            Caret: 11
-            Name: ``
-            Alias: ``
-            Blocks: [0] 
-            =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: end:method
-            Instruction: min
-            Instruction Start: 11
-            Caret: 23
-            Name: ``
-            Alias: ``
-            Blocks: [1] 
-            =======
-              Block: Tetraquark\Block\UndefinedBlock
-              Subtype: 
-              Instruction: ...keys
-              Instruction Start: 16
-              Caret: 23
-              Name: ``
-              Alias: ``
-              Blocks: [0] 
-              =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: save
-        Instruction Start: 2764
-        Caret: 2768
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: content
-        Instruction Start: 2768
-        Caret: 2775
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: end:method
-        Instruction: remove
-        Instruction Start: 2776
-        Caret: 2838
-        Name: ``
-        Alias: ``
-        Blocks: [1] 
-        =======
-          Block: Tetraquark\Block\ObjectBlock
-          Subtype: {
-          Instruction: 
-          Instruction Start: 2784
-          Caret: 2837
-          Name: ``
-          Alias: ``
-          Blocks: [2] 
-          =======
-            Block: Tetraquark\Block\ObjectValueBlock
-            Subtype: :
-            Instruction: \n sLine 
-            Instruction Start: 2785
-            Caret: 2798
-            Name: `sLine`
-            Alias: `J`
-            Blocks: [1] 
-            =======
-              Block: Tetraquark\Block\UndefinedBlock
-              Subtype: 
-              Instruction:  min
-              Instruction Start: 2794
-              Caret: 2798
-              Name: ``
-              Alias: ``
-              Blocks: [0] 
-              =======
-            Block: Tetraquark\Block\ObjectValueBlock
-            Subtype: :
-            Instruction: \n len 
-            Instruction Start: 2799
-            Caret: 2834
-            Name: `len`
-            Alias: `K`
-            Blocks: [6] 
-            =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: first
-              Instruction: Math
-              Instruction Start: 2807
-              Caret: 2811
-              Name: ``
-              Alias: ``
-              Blocks: [0] 
-              =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: end:method
-              Instruction: max
-              Instruction Start: 2811
-              Caret: 2823
-              Name: ``
-              Alias: ``
-              Blocks: [1] 
-              =======
-                Block: Tetraquark\Block\UndefinedBlock
-                Subtype: 
-                Instruction: ...keys
-                Instruction Start: 2816
-                Caret: 2823
-                Name: ``
-                Alias: ``
-                Blocks: [0] 
-                =======
-              Block: Tetraquark\Block\SymbolBlock
-              Subtype: -
-              Instruction: -
-              Instruction Start: 2825
-              Caret: 2825
-              Name: ``
-              Alias: ``
-              Blocks: [0] 
-              =======
-              Block: Tetraquark\Block\UndefinedBlock
-              Subtype: 
-              Instruction:  min 
-              Instruction Start: 2820
-              Caret: 2825
-              Name: ``
-              Alias: ``
-              Blocks: [0] 
-              =======
-              Block: Tetraquark\Block\SymbolBlock
-              Subtype: +
-              Instruction: +
-              Instruction Start: 2831
-              Caret: 2831
-              Name: ``
-              Alias: ``
-              Blocks: [0] 
-              =======
-              Block: Tetraquark\Block\UndefinedBlock
-              Subtype: 
-              Instruction:  1
-              Instruction Start: 2832
-              Caret: 2834
-              Name: ``
-              Alias: ``
-              Blocks: [0] 
-              =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: save
-        Instruction Start: 2842
-        Caret: 2846
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: middle
-        Instruction: content
-        Instruction Start: 2846
-        Caret: 2853
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: end:method
-        Instruction: add
-        Instruction Start: 2854
-        Caret: 2871
-        Name: ``
-        Alias: ``
-        Blocks: [2] 
-        =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: first
-          Instruction: step
-          Instruction Start: 2860
-          Caret: 2864
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: .
-          Instruction: after
-          Instruction Start: 2864
-          Caret: 2870
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: version
-    Instruction Start: 2880
-    Caret: 2887
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:method
-    Instruction: reverse
-    Instruction Start: 2887
-    Caret: 2896
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\VariableBlock
-    Subtype: const
-    Instruction: const focus = version[0].focusAfter
-    Instruction Start: 2901
-    Caret: 2936
-    Name: ``
-    Value: ``
-    Alias: ``
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\VariableItemBlock
-      Subtype: 
-      Instruction:  focus =
-      Instruction Start: 0
-      Caret: 30
-      Name: `focus`
-      Value: ``
-      Alias: `x`
-      Blocks: [4] 
-      =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction:  version
-        Instruction Start: -1
-        Caret: 7
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\BracketChainLinkBlock
-        Subtype: [
-        Instruction: 
-        Instruction Start: 16
-        Caret: 18
-        Name: ``
-        Alias: ``
-        Blocks: [1] 
-        =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction: 0
-          Instruction Start: 17
-          Caret: 18
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: 
-        Instruction Start: 19
-        Caret: 19
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: focusAfter
-        Instruction Start: 19
-        Caret: 29
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-    Block: Tetraquark\Block\IfBlock
-    Subtype: single-condition
-    Instruction: if ( !this.is.line.visible( focus.line ) )\n this.render.move.page({ offset : focus.line - Math.floor( this.render.linesLimit/2 ) })
-    Instruction Start: 2939
-    Caret: 3070
-    Name: ``
-    Cond block: [0] 
-    Arg block: [5] 
-      Block: Tetraquark\Block\SymbolBlock
-      Subtype: !
-      Instruction: !
-      Instruction Start: 0
-      Caret: 0
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: this
-      Instruction Start: 1
-      Caret: 5
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: is
-      Instruction Start: 5
-      Caret: 7
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: line
-      Instruction Start: 8
-      Caret: 12
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: visible
-      Instruction Start: 13
-      Caret: 34
-      Name: ``
-      Alias: ``
-      Blocks: [2] 
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: focus
-        Instruction Start: 23
-        Caret: 28
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: line
-        Instruction Start: 28
-        Caret: 33
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-    Alias: ``
-    Blocks: [4] 
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: this
-      Instruction Start: 2
-      Caret: 6
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: render
-      Instruction Start: 6
-      Caret: 12
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: move
-      Instruction Start: 13
-      Caret: 17
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: page
-      Instruction Start: 18
-      Caret: 88
-      Name: ``
-      Alias: ``
-      Blocks: [1] 
-      =======
-        Block: Tetraquark\Block\ObjectBlock
-        Subtype: {
-        Instruction: 
-        Instruction Start: 24
-        Caret: 87
-        Name: ``
-        Alias: ``
-        Blocks: [1] 
-        =======
-          Block: Tetraquark\Block\ObjectValueBlock
-          Subtype: :
-          Instruction:  offset 
-          Instruction Start: 25
-          Caret: 86
-          Name: `offset`
-          Alias: `G`
-          Blocks: [5] 
-          =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: first
-            Instruction: focus
-            Instruction Start: 35
-            Caret: 40
-            Name: ``
-            Alias: ``
-            Blocks: [0] 
-            =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: .
-            Instruction: line
-            Instruction Start: 40
-            Caret: 45
-            Name: ``
-            Alias: ``
-            Blocks: [0] 
-            =======
-            Block: Tetraquark\Block\SymbolBlock
-            Subtype: -
-            Instruction: -
-            Instruction Start: 46
-            Caret: 46
-            Name: ``
-            Alias: ``
-            Blocks: [0] 
-            =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: first
-            Instruction: Math
-            Instruction Start: 48
-            Caret: 52
-            Name: ``
-            Alias: ``
-            Blocks: [0] 
-            =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: end:method
-            Instruction: floor
-            Instruction Start: 52
-            Caret: 85
-            Name: ``
-            Alias: ``
-            Blocks: [5] 
-            =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: first
-              Instruction: this
-              Instruction Start: 60
-              Caret: 64
-              Name: ``
-              Alias: ``
-              Blocks: [0] 
-              =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: middle
-              Instruction: render
-              Instruction Start: 64
-              Caret: 70
-              Name: ``
-              Alias: ``
-              Blocks: [0] 
-              =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: .
-              Instruction: linesLimit
-              Instruction Start: 71
-              Caret: 81
-              Name: ``
-              Alias: ``
-              Blocks: [0] 
-              =======
-              Block: Tetraquark\Block\SymbolBlock
-              Subtype: /
-              Instruction: /
-              Instruction Start: 82
-              Caret: 82
-              Name: ``
-              Alias: ``
-              Blocks: [0] 
-              =======
-              Block: Tetraquark\Block\UndefinedBlock
-              Subtype: 
-              Instruction: 2 
-              Instruction Start: 83
-              Caret: 85
-              Name: ``
-              Alias: ``
-              Blocks: [0] 
-              =======
-    Block: Tetraquark\Block\ElseBlock
-    Subtype: single line
-    Instruction: else
-    Instruction Start: 3072
-    Caret: 3103
-    Name: ``
-    Alias: ``
-    Blocks: [4] 
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: this
-      Instruction Start: 3079
-      Caret: 3083
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: render
-      Instruction Start: 3083
-      Caret: 3089
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: move
-      Instruction Start: 3090
-      Caret: 3094
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: page
-      Instruction Start: 3095
-      Caret: 3101
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: this
-    Instruction Start: 3105
-    Caret: 3109
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: middle
-    Instruction: render
-    Instruction Start: 3109
-    Caret: 3115
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: middle
-    Instruction: overflow
-    Instruction Start: 3116
-    Caret: 3124
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:method
-    Instruction: scrollTo
-    Instruction Start: 3125
-    Caret: 3213
-    Name: ``
-    Alias: ``
-    Blocks: [13] 
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: this
-      Instruction Start: 3137
-      Caret: 3141
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: render
-      Instruction Start: 3141
-      Caret: 3147
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: overflow
-      Instruction Start: 3148
-      Caret: 3156
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: scrollLeft
-      Instruction Start: 3157
-      Caret: 3167
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction: ,\n 
-      Instruction Start: 3172
-      Caret: 3175
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: this
-      Instruction Start: 3171
-      Caret: 3175
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: render
-      Instruction Start: 3175
-      Caret: 3181
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: hidden
-      Instruction Start: 3182
-      Caret: 3189
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\SymbolBlock
-      Subtype: *
-      Instruction: *
-      Instruction Start: 3190
-      Caret: 3190
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: this
-      Instruction Start: 3192
-      Caret: 3196
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: settings
-      Instruction Start: 3196
-      Caret: 3204
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: line
-      Instruction Start: 3205
-      Caret: 3209
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction: ,\n 
-      Instruction Start: 3210
-      Caret: 3213
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: this
-    Instruction Start: 3217
-    Caret: 3221
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: middle
-    Instruction: caret
-    Instruction Start: 3221
-    Caret: 3226
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:method
-    Instruction: refocus
-    Instruction Start: 3227
-    Caret: 3284
-    Name: ``
-    Alias: ``
-    Blocks: [8] 
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: focus
-      Instruction Start: 3238
-      Caret: 3243
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: letter
-      Instruction Start: 3243
-      Caret: 3249
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction: ,\n 
-      Instruction Start: 3255
-      Caret: 3258
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: focus
-      Instruction Start: 3253
-      Caret: 3258
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: line
-      Instruction Start: 3258
-      Caret: 3262
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction: ,\n 
-      Instruction Start: 3268
-      Caret: 3271
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: focus
-      Instruction Start: 3266
-      Caret: 3271
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: childIndex
-      Instruction Start: 3271
-      Caret: 3283
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-Block: Tetraquark\Block\UndefinedBlock
-Subtype: 
-Instruction: \nexport 
-Instruction Start: 3282
-Caret: 3290
-Name: ``
-Alias: ``
-Blocks: [0] 
-=======
-Block: Tetraquark\Block\ScopeBlock
-Subtype: {
-Instruction: 
-Instruction Start: 3299
-Caret: 3312
-Name: ``
-Alias: ``
-Blocks: [1] 
-=======
   Block: Tetraquark\Block\UndefinedBlock
   Subtype: 
-  Instruction:  TabJF_Save 
-  Instruction Start: 3300
-  Caret: 3312
+  Instruction:  to 
+  Instruction Start: -5
+  Caret: -1
   Name: ``
   Alias: ``
   Blocks: [0] 
   =======
-Duration: 0.031s
+  Block: Tetraquark\Block\SymbolBlock
+  Subtype: <
+  Instruction: <
+  Instruction Start: 4
+  Caret: 4
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: objSoloTest
+  Instruction Start: 6
+  Caret: 17
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: .
+  Instruction: length
+  Instruction Start: 17
+  Caret: 24
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  to
+  Instruction Start: -4
+  Caret: -1
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\OperatorBlock
+  Subtype: ++
+  Instruction: ++
+  Instruction Start: 3
+  Caret: 5
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
+Alias: ``
+Blocks: [2] 
+=======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 229
+  Caret: 236
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 236
+  Caret: 256
+  Name: ``
+  Alias: ``
+  Blocks: [2] 
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: objSoloTest
+    Instruction Start: 229
+    Caret: 240
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\ArrayBlock
+    Subtype: [
+    Instruction: 
+    Instruction Start: 252
+    Caret: 255
+    Name: ``
+    Alias: ``
+    Blocks: [1] 
+    =======
+      Block: Tetraquark\Block\UndefinedBlock
+      Subtype: 
+      Instruction: to
+      Instruction Start: 253
+      Caret: 255
+      Name: ``
+      Alias: ``
+      Blocks: [0] 
+      =======
+Block: Tetraquark\Block\ForBlock
+Subtype: for
+Instruction: for (let i=start; (!reverse && i < strlen(value)) || (reverse && i >= 0); i += modifier) {
+Instruction Start: 261
+Caret: 373
+Name: ``
+Cond block: [6] 
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: let 
+  Instruction Start: -5
+  Caret: -1
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\AttributeBlock
+  Subtype: 
+  Instruction: i=start
+  Instruction Start: 4
+  Caret: 11
+  Name: ``
+  Alias: ``
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: start
+    Instruction Start: -1
+    Caret: 4
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+  Block: Tetraquark\Block\CallerBlock
+  Subtype: (
+  Instruction: 
+  Instruction Start: 1
+  Caret: 31
+  Name: ``
+  Alias: ``
+  Blocks: [7] 
+  =======
+    Block: Tetraquark\Block\SymbolBlock
+    Subtype: !
+    Instruction: !
+    Instruction Start: 0
+    Caret: 0
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: reverse 
+    Instruction Start: -8
+    Caret: 0
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\SymbolBlock
+    Subtype: &&
+    Instruction: &&
+    Instruction Start: 9
+    Caret: 10
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  i 
+    Instruction Start: 7
+    Caret: 10
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\SymbolBlock
+    Subtype: <
+    Instruction: <
+    Instruction Start: 14
+    Caret: 14
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  strlen
+    Instruction Start: 7
+    Caret: 14
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\CallerBlock
+    Subtype: (
+    Instruction: 
+    Instruction Start: 22
+    Caret: 28
+    Name: ``
+    Alias: ``
+    Blocks: [1] 
+    =======
+      Block: Tetraquark\Block\UndefinedBlock
+      Subtype: 
+      Instruction: value
+      Instruction Start: -1
+      Caret: 4
+      Name: ``
+      Alias: ``
+      Blocks: [0] 
+      =======
+  Block: Tetraquark\Block\SymbolBlock
+  Subtype: ||
+  Instruction: ||
+  Instruction Start: 33
+  Caret: 34
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\CallerBlock
+  Subtype: (
+  Instruction: 
+  Instruction Start: 36
+  Caret: 55
+  Name: ``
+  Alias: ``
+  Blocks: [5] 
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction: reverse 
+    Instruction Start: -9
+    Caret: -1
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\SymbolBlock
+    Subtype: &&
+    Instruction: &&
+    Instruction Start: 8
+    Caret: 9
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  i 
+    Instruction Start: 6
+    Caret: 9
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\SymbolBlock
+    Subtype: >=
+    Instruction: >=
+    Instruction Start: 13
+    Caret: 14
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  0)
+    Instruction Start: 14
+    Caret: 17
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+  Block: Tetraquark\Block\AttributeBlock
+  Subtype: +=
+  Instruction: i += modifier
+  Instruction Start: 1
+  Caret: 14
+  Name: `i`
+  Alias: `k`
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  modifier
+    Instruction Start: -1
+    Caret: 8
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+Alias: ``
+Blocks: [2] 
+=======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 353
+  Caret: 360
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: end:method
+  Instruction: log
+  Instruction Start: 360
+  Caret: 371
+  Name: ``
+  Alias: ``
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: 'test'
+    Instruction Start: 365
+    Caret: 371
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+Duration: 0.007s
 
 
-class a{b=undefined;c=0;d={u:false,w:{J:-1,  K:-1,},z:{},y:{},x:{v:0,  D:-1,  E:-1,  F:-1,},q:{v:0,  D:-1,  E:-1,  F:-1,}};e=[];f=[];g=[];h=[];i=false;j={};k={};l=100;m(){this._save.f=this._save.f.concat(this._save.e);this._save.r();}n(){const µ=this._save;if(µ.c>0){µ.g.splice(0, µ.c);µ.c=0;}if(µ.f.length==0)return;µ.o();µ.f[0].x.v=this.render.hidden;µ.g.unshift(µ.f.reverse());µ.f=[];if(µ.g.length>µ.l){µ.g.splice(µ.l);};}o(){const f=this._save.f;for(let ê=1;ê<f.length;ê++){const õ=f[ê];const ú=f[ê-1];if(this._save.p(õ, ú)){ú.z=õ.z;ú.q=õ.q;f.splice(ê, 1);ê--;}};}p(A,B){return A.u==B.u&&A.u!='mergeLine'&&Object.values(A.w).toString()==Object.values(B.w).toString()&&Object.H(A.y).toString()==Object.H(B.y).toString();}r(){this._save.e=[];}s(){const µ=this._save;if(µ.f.length>0){µ.n();µ.b('clear');}if(µ.g.length==µ.c)return;let c=µ.g[µ.c];c.forEach(õ=>{µ.k.w(õ.w);µ.k.y(õ.y);});const x=c[c.length-1].x;this.C=x.C;this.pos.D=x.D;this.pos.E=x.E;this.pos.F=x.F;if(!this.is.E.visible(x.E)){this.render.move.page({G:x.E-Math.floor(this.render.linesLimit/2)});}else{this.render.move.page();}this.render.overflow.scrollTo(this.render.overflow.scrollLeft, this.render.hidden*this.settings.E);µ.c++;}t(){const µ=this._save;if(µ.c<=0)return;µ.c--;const c=µ.g[µ.c];c.reverse().forEach(õ=>{const H=Object.H(õ.y);const I=Math.I(...H);µ.k.w({J:I,K:Math.max(...H)-I+1});µ.k.y(õ.z);});c.reverse();const x=c[0].q;if(!this.is.E.visible(x.E))this.render.move.page({G:x.E-Math.floor(this.render.linesLimit/2)});else this.render.move.page();this.render.overflow.scrollTo(this.render.overflow.scrollLeft, this.render.hidden*this.settings.E,);this.caret.refocus(x.D, x.E, x.F);}}export{a};
+class a{c(){}}let d=['a'];let e=1;let f=false;let g='asd';let h=1;function b(i){return i.length;}for(var j=0;j<d.length;j++){console.log(d[j]);}for(let=e(!f&&k<b(g))||(f&&k>=0));k+=h){console.log('test');}

@@ -7,7 +7,7 @@ use \Tetraquark\{Block, Log, Validate, Foundation};
 trait BlockMapsTrait
 {
     /**
-     * Map of possible blocks.
+     * Map of possible blocks prefixed with whitespace.
      *
      * For better performance I don't want to cut string and do any operations on it and decide to create a map
      * which script has to follow to find each block. I've also added `default` option so if two blocks start with the same char (`=` as
@@ -15,7 +15,7 @@ trait BlockMapsTrait
      * at the end of it.
      * @var array
      */
-    protected array $blocksMap = [
+    protected array $blocksMapWhiteSpacePrefix = [
         'f' => [
             'o' => [
                 'r' => [
@@ -42,14 +42,7 @@ trait BlockMapsTrait
                 ]
             ]
         ],
-        '=' => [
-            '>'       => 'ArrowFunctionBlock',
-            'default' => 'AttributeBlock',
-            '='       => [
-                "="       => "TripleEqualBlock",
-                "default" => "DoubleEqualBlock",
-            ]
-        ],
+
         'l' => [
             'e' => [
                 't' => [
@@ -88,13 +81,6 @@ trait BlockMapsTrait
                 ],
             ]
         ],
-        '.' => [
-            '.' => [
-                '.' => false
-            ],
-            'default' => 'ChainLinkBlock'
-        ],
-        '(' => 'CallerBlock',
         'n' => [
             'e' => [
                 'w' => [
@@ -103,8 +89,7 @@ trait BlockMapsTrait
                 ]
             ]
         ],
-        '[' => 'decideArrayBlockType',
-        '{' => 'ScopeBlock',
+
         'i' => [
             'f' => [
                 ' '  => "IfBlock",
@@ -147,6 +132,51 @@ trait BlockMapsTrait
                 '{'  => "DoWhileBlock",
             ]
         ],
+        "e" => [
+            "l" => [
+                "s" => [
+                    "e" => [
+                        "{" => "ElseBlock",
+                        ' '  => 'ElseBlock',
+                        "\n" => "ElseBlock",
+                    ]
+                ]
+            ]
+        ],
+        "r" => [
+            "e" => [
+                "t" => [
+                    "u" => [
+                        "r" => [
+                            "n" => [
+                                ' '  => 'ReturnBlock',
+                                "\n" => "ReturnBlock",
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ];
+
+    protected array $blocksMapNoWhiteSpacePrefix = [
+        '=' => [
+            '>'       => 'ArrowFunctionBlock',
+            'default' => 'AttributeBlock',
+            '='       => [
+                "="       => "TripleEqualBlock",
+                "default" => "DoubleEqualBlock",
+            ]
+        ],
+        '.' => [
+            '.' => [
+                '.' => false
+            ],
+            'default' => 'ChainLinkBlock'
+        ],
+        '(' => 'CallerBlock',
+        '[' => 'decideArrayBlockType',
+        '{' => 'ScopeBlock',
         "-" => [
             "-"       => "OperatorBlock",
             "="       => "AttributeBlock",
@@ -236,32 +266,8 @@ trait BlockMapsTrait
             "default" => "SymbolBlock",
         ],
         ":" => "SymbolBlock",
-        "e" => [
-            "l" => [
-                "s" => [
-                    "e" => [
-                        "{" => "ElseBlock",
-                        ' '  => 'ElseBlock',
-                        "\n" => "ElseBlock",
-                    ]
-                ]
-            ]
-        ],
-        "r" => [
-            "e" => [
-                "t" => [
-                    "u" => [
-                        "r" => [
-                            "n" => [
-                                ' '  => 'ReturnBlock',
-                                "\n" => "ReturnBlock",
-                            ]
-                        ]
-                    ]
-                ]
-            ]
-        ]
     ];
+
     protected array $classBlocksMap  = [
         '(' => "ClassMethodBlock",
     ];
@@ -311,7 +317,11 @@ trait BlockMapsTrait
 
     protected function getDefaultMap(): array
     {
-        $blocksMap = $this->blocksMap;
+        $blocksMap = [
+            " " => $this->blocksMapWhiteSpacePrefix,
+            "\n" => $this->blocksMapWhiteSpacePrefix,
+            ...$this->blocksMapNoWhiteSpacePrefix
+        ];
 
         $additionalPaths = [
             Block\ClassBlock ::class => $this->classBlocksMap,
@@ -319,29 +329,42 @@ trait BlockMapsTrait
             Block\ArrayBlock ::class => $this->arrayBlocksMap,
         ];
 
-        $blocksMap = array_merge($blocksMap, $additionalPaths[$this::class] ?? []);
+        $blocksMap = $this->mergeBlockMaps($blocksMap, $additionalPaths[$this::class] ?? []);
 
         if ($this instanceof Block\MethodBlock) {
-            $blocksMap = array_merge($blocksMap, $this->callerBlocksMap);
+            $blocksMap = $this->mergeBlockMaps($blocksMap, $this->callerBlocksMap);
             if ($this->getStatus() === $this::CREATING_ARGUMENTS) {
-                $blocksMap = array_merge($blocksMap, $this->callerArgsBlocksMap);
+                $blocksMap = $this->mergeBlockMaps($blocksMap, $this->callerArgsBlocksMap);
             }
         } elseif ($this instanceof Foundation\VariableBlockAbstract) {
-            $blocksMap = array_merge($blocksMap, $this->variableBlocksMap);
+            $blocksMap = $this->mergeBlockMaps($blocksMap, $this->variableBlocksMap);
         } elseif ($this instanceof Block\ObjectBlock) {
             // Here we remove all directions to any Block which isn't special symbol.
             // Obj names are free game, they can be `for` or `let` and that will break all our journey search so we have to remove it.
             foreach ($blocksMap as $key => $value) {
+                if (Validate::isWhitespace($key)) {
+                    continue;
+                }
+
                 if (!Validate::isSpecial($key)) {
                     unset($blocksMap[$key]);
                 }
             }
         } elseif ($this instanceof Block\ReturnBlock) {
-            $blocksMap = array_merge($blocksMap, $this->returnBlocksMap);
+            $blocksMap = $this->mergeBlockMaps($blocksMap, $this->returnBlocksMap);
         } elseif ($this instanceof Block\BracketChainLinkBlock || $this instanceof Block\ChainLinkBlock) {
-            $blocksMap = array_merge($blocksMap, $this->chainLinkBlocksMap);
+            $blocksMap = $this->mergeBlockMaps($blocksMap, $this->chainLinkBlocksMap);
         }
 
         return $blocksMap;
+    }
+
+    private function mergeBlockMaps(array $map1, array $map2): array
+    {
+        $map1[' ']  = array_merge($map1[' '], $map2[' '] ?? []);
+        $map1["\n"] = array_merge($map1["\n"], $map2["\n"] ?? []);
+        unset($map2[' ']);
+        unset($map2["\n"]);
+        return array_merge($map1, $map2);
     }
 }
