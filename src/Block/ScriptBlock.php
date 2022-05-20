@@ -17,6 +17,8 @@ class ScriptBlock extends Block implements Contract\Block
         protected array  $data  = []
     ) {
         self::$content = $this->generateContent($content);
+        self::$content = $this->removeComments(self::$content);
+        echo self::$content . PHP_EOL;
         parent::__construct($start, $subtype, $data);
     }
 

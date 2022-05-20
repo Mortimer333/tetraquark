@@ -747,4 +747,55 @@ abstract class BlockAbstract
 
         return [$newLetter, $i];
     }
+
+    protected function removeComments(Content $content): Content
+    {
+        $purgedContentArray = [];
+        $commentInProggress = false;
+        $commentType = '';
+        $lastStart = 0;
+        for ($i=0; $i < $content->getLength(); $i++) {
+            $currentLetter   = $content->getLetter($i);
+            $nextLetter      = $content->getLetter($i + 1);
+            $possibleComment = $currentLetter . $nextLetter;
+
+            if (
+                $commentInProggress
+                && (
+                    $commentType === 'multi' && $possibleComment === "*/"
+                    || $commentType === 'single' && $currentLetter === "\n"
+                )
+            ) {
+                if ($commentType === 'multi') {
+                    $lastStart = $i + 2;
+                } else {
+                    $lastStart = $i;
+                }
+                $commentInProggress = false;
+                continue;
+            }
+
+            if (
+                !$commentInProggress
+                && (
+                    $possibleComment === "/*"
+                    || $possibleComment === "//"
+                )
+            ) {
+                if ($possibleComment === "/*") {
+                    $commentType = 'multi';
+                } else {
+                    $commentType = 'single';
+                }
+                $commentInProggress = true;
+                $purgedContentArray = array_merge($purgedContentArray, $content->iCutToArray($lastStart, $i));
+                // skip two
+                $i++;
+                continue;
+            }
+        }
+        $purgedContentArray = array_merge($purgedContentArray, $content->iCutToArray($lastStart, $i));
+
+        return (new Content(''))->setArrayContent($purgedContentArray, true);
+    }
 }

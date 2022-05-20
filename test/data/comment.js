@@ -6,3 +6,4 @@
  * nasnasd
  * asdnansd
  */
+let a /* asd*/ = 2;

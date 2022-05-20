@@ -200,6 +200,28 @@ class Content
         return (new Content(''))->setArrayContent($cut, true);
     }
 
+    /**
+     * Similarly to subStr but it returns array
+     * @param  int     $start
+     * @param  int     $length
+     * @return array
+     */
+    public function cutToArray(int $start, int $length): array
+    {
+        return array_slice($this->contents[$this->contentPointer]['content'], $start, $length);
+    }
+
+    /**
+     * Similarly to iSubStr but it returns array
+     * @param  int     $start
+     * @param  int     $end
+     * @return array
+     */
+    public function iCutToArray(int $start, int $end): array
+    {
+        return array_slice($this->contents[$this->contentPointer]['content'], $start, $end - $start);
+    }
+
     public function trim($regex = "\s"): Content
     {
         $start = 0;
