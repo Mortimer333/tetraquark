@@ -17,7 +17,7 @@ class ObjectSoloValueBlock extends Block implements Contract\Block
     {
         $this->setName('');
         $this->setCaret($start);
-        $this->findInstructionStart($start - 1);
+        $this->findInstructionStart($start);
     }
 
     public function recreate(): string

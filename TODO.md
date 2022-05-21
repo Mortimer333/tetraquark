@@ -1,5 +1,5 @@
 # TO DO
-## 0. Cut script into array (instead of using it as string) so we can easily work on UTF8 chars
+## 0. Add all key words so when object has property "typeof" it won't get replaced with its alias
 ## 1. Upgrade fixScript as it doesn't reamove all not needed space - do{ whileLooped--; console.log(whileLooped);}
 
 

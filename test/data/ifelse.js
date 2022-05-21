@@ -30,7 +30,37 @@ else if ('asd')
 
 if ( char !== -1 ) {
     return char;
-}*/
+}
 
 if ( first  && line?.nodeName != "P" ) throw new Error("Parent has wrong tag, can't find proper lines");
 if ( !first && line?.nodeName == "P" ) return line;
+
+
+if (
+  sentence[0] == group.start
+  || (
+    sentence[0] == this.syntax.groups[0].end
+    || (
+      typeof this.syntax.groups[0].end == 'object'
+      && this.syntax.groups[0].end[sentence[0]]
+    )
+  )
+) {
+  index = 0;
+}
+
+
+if (false) {
+
+} else if (true) {
+
+} else if (true) {
+
+}*/
+
+if (true
+    ) {
+
+    } else {
+     
+    }

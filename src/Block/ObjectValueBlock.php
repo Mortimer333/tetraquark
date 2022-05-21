@@ -13,18 +13,29 @@ class ObjectValueBlock extends Block implements Contract\Block
 
     public function objectify(int $start = 0)
     {
-        $this->findInstructionStart($start, [
-            "," => true,
-            "{" => true,
-        ]);
+        list($previousLetter) = $this->getPreviousLetter($start - 1, self::$content);
+        if ($previousLetter !== ']') {
+            $this->findInstructionStart($start, [
+                "," => true,
+                "{" => true,
+            ]);
 
-        $this->setName(
-            $this->removeStringCharsIfPossible(
-                $this->getInstruction()->trim()
-            )
-        );
+            $this->setName(
+                $this->removeStringCharsIfPossible(
+                    $this->getInstruction()->trim()
+                )
+            );
+        } else {
+            $this->setName('')
+                ->setInstruction(new Content(''))
+                ->setInstructionStart($start)
+                ->setCaret($start);
+        }
+
+
         $this->blocks = array_merge($this->blocks, $this->createSubBlocks($start + 1));
         $lastLetter = self::$content->getLetter($this->getCaret());
+        $nextLastLetter = self::$content->getLetter($this->getCaret() + 1) ?? '';
         if ($lastLetter == '}') {
             $this->setCaret($this->getCaret() - 1);
         }

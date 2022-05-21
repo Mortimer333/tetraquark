@@ -18,15 +18,14 @@ class ElseBlock extends Block implements Contract\Block
         $this->setInstructionStart($start - \mb_strlen('else '));
         [$letter, $pos] = $this->getNextLetter($start, self::$content);
         if (
-            $letter == 'i'
-            && self::$content->getLetter($pos + 1) == 'f'
+            $letter . self::$content->getLetter($pos + 1) == 'if'
             && (
                 Validate::isWhitespace(self::$content->getLetter($pos + 2))
                 || self::$content->getLetter($pos + 2) == '('
             )
         ) {
             $this->setSubtype(self::ELSEIF);
-            $this->setCaret($start);
+            $this->setCaret($start - 1);
             $this->setInstruction(new Content('else '));
         } else {
             $this->setInstruction(new Content('else{'));
@@ -42,8 +41,10 @@ class ElseBlock extends Block implements Contract\Block
                         "\n" => true,
                         ";" => true,
                     ];
+                } else {
+                    $pos++;
                 }
-                $this->blocks = array_merge($this->blocks, $this->createSubBlocks($pos + 1));
+                $this->blocks = array_merge($this->blocks, $this->createSubBlocks($pos));
             }
         }
     }

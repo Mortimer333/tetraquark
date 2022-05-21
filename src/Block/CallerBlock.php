@@ -6,6 +6,11 @@ use \Tetraquark\Foundation\BlockAbstract as Block;
 
 class CallerBlock extends Block implements Contract\Block
 {
+    public const ARROW_FUNCTION = 'arrow-function';
+    protected array $endChars = [
+        ';' => true,
+    ];
+
     public function objectify(int $start = 0)
     {
         $this->setName('');
@@ -18,6 +23,11 @@ class CallerBlock extends Block implements Contract\Block
         $ignoreBrackets = 0;
         for ($i=$start + 1; $i < self::$content->getLength(); $i++) {
             $letter = self::$content->getLetter($i);
+
+            // Skip whitespace
+            if (Validate::isWhitespace($letter)) {
+                continue;
+            }
 
             // Skip String
             if (
@@ -35,11 +45,6 @@ class CallerBlock extends Block implements Contract\Block
 
             if ($ignoreBrackets > 0 && $letter == ')') {
                 $ignoreBrackets--;
-                continue;
-            }
-
-            // Skip whitespace
-            if (Validate::isWhitespace($letter)) {
                 continue;
             }
 
@@ -68,7 +73,7 @@ class CallerBlock extends Block implements Contract\Block
 
             // If we ahve found equal sign but we are not searching for arrow or we are searching for the end of arguments
             // then start search for default of this argument
-            if ((!$searchForArrow || $searchFroArgsEnd) && $letter == '=') {
+            if ((!$searchForArrow || $searchFroArgsEnd) && $letter == '=' && !Validate::isSpecial(self::$content->getLetter($i - 1))) {
                 $skipDefaultDefinition = true;
                 continue;
             }
@@ -80,7 +85,6 @@ class CallerBlock extends Block implements Contract\Block
 
             // If we are searching for arrow and the first thing we find isn't equal sign it means this isn't arrow function
             if ($searchForArrow && $letter != '=') {
-                // $end = $i;
                 break;
             } elseif ($searchForArrow && $letter == '=' && self::$content->getLetter($i + 1) ?? '' == ">") {
                 // If this is arrow function then make this empty and skip current letter
@@ -91,6 +95,7 @@ class CallerBlock extends Block implements Contract\Block
                 $this->setBlocks([
                     $arrow
                 ]);
+                $this->setSubtype(self::ARROW_FUNCTION);
                 $this->setCaret($arrow->getCaret());
                 return;
             }
@@ -104,23 +109,28 @@ class CallerBlock extends Block implements Contract\Block
         ;
         $content = self::$content->subStr($start + 1, ($end - $start) - 1);
         if (strlen($content) > 0) {
-            $this->blocks = $this->createSubBlocksWithContent($content);
+            // $content = preg_replace('/[\n]/', ' ', $content);
+            // $content = preg_replace('/[ \t]+/', ' ', $content) . ';';
+            $this->blocks = $this->createSubBlocksWithContent($content . ';');
         }
         $this->setCaret($end);
     }
 
     public function recreate(): string
     {
-        $script = '(';
-        // $this->replaceVariablesWithAliases(
-        //     $this->getInstruction()
-        // );
+        $script = '';
+        if ($this->getSubtype() !== self::ARROW_FUNCTION) {
+            $script .= '(';
+        }
 
         foreach ($this->getBlocks() as $block) {
             $script .= $block->recreate();
         }
 
-        $script = rtrim($script, ';') . ')';
+        $script = rtrim($script, ';');
+        if ($this->getSubtype() !== self::ARROW_FUNCTION) {
+            $script .= ')';
+        }
 
         if (!$this->checkIfFirstLetterInNextSiblingIsADot()) {
             return $script . ';';

@@ -42,7 +42,6 @@ trait BlockMapsTrait
                 ]
             ]
         ],
-
         'l' => [
             'e' => [
                 't' => [
@@ -177,6 +176,19 @@ trait BlockMapsTrait
         '(' => 'CallerBlock',
         '[' => 'decideArrayBlockType',
         '{' => 'ScopeBlock',
+        '}' => [
+            "e" => [
+                "l" => [
+                    "s" => [
+                        "e" => [
+                            "{" => "ElseBlock",
+                            ' '  => 'ElseBlock',
+                            "\n" => "ElseBlock",
+                        ]
+                    ]
+                ]
+            ]
+        ],
         "-" => [
             "-"       => "OperatorBlock",
             "="       => "AttributeBlock",
@@ -324,9 +336,12 @@ trait BlockMapsTrait
         ];
 
         $additionalPaths = [
-            Block\ClassBlock ::class => $this->classBlocksMap,
-            Block\ObjectBlock::class => $this->objectBlocksMap,
-            Block\ArrayBlock ::class => $this->arrayBlocksMap,
+            Block\ArrayBlock           ::class => $this->arrayBlocksMap,
+            Block\BracketChainLinkBlock::class => $this->chainLinkBlocksMap,
+            Block\ChainLinkBlock       ::class => $this->chainLinkBlocksMap,
+            Block\ClassBlock           ::class => $this->classBlocksMap,
+            Block\ObjectBlock          ::class => $this->objectBlocksMap,
+            Block\ReturnBlock          ::class => $this->returnBlocksMap,
         ];
 
         $blocksMap = $this->mergeBlockMaps($blocksMap, $additionalPaths[$this::class] ?? []);
@@ -350,10 +365,18 @@ trait BlockMapsTrait
                     unset($blocksMap[$key]);
                 }
             }
-        } elseif ($this instanceof Block\ReturnBlock) {
-            $blocksMap = $this->mergeBlockMaps($blocksMap, $this->returnBlocksMap);
-        } elseif ($this instanceof Block\BracketChainLinkBlock || $this instanceof Block\ChainLinkBlock) {
-            $blocksMap = $this->mergeBlockMaps($blocksMap, $this->chainLinkBlocksMap);
+
+            foreach ($blocksMap[' '] as $key => $value) {
+                if (!Validate::isSpecial($key)) {
+                    unset($blocksMap[' '][$key]);
+                }
+            }
+
+            foreach ($blocksMap["\n"] as $key => $value) {
+                if (!Validate::isSpecial($key)) {
+                    unset($blocksMap["\n"][$key]);
+                }
+            }
         }
 
         return $blocksMap;

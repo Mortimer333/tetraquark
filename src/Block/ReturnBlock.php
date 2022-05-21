@@ -6,6 +6,10 @@ use \Tetraquark\Foundation\VariableBlockAbstract as VariableBlock;
 
 class ReturnBlock extends VariableBlock implements Contract\Block
 {
+    protected array $endChars = [
+        ';' => true,
+    ];
+    
     public function objectify(int $start = 0)
     {
         $this->setName('');
@@ -13,9 +17,9 @@ class ReturnBlock extends VariableBlock implements Contract\Block
         $end = $this->findVariableEnd($start);
         $this->setCaret($end);
         $instr = self::$content->iSubStr($start, $end);
-        $instr = preg_replace('/[\n]/', ' ', $instr);
-        $instr = preg_replace('/[ \t]+/', ' ', $instr) . ';';
-        $this->setInstruction(new Content($instr));
+        // $instr = preg_replace('/[\n]/', ' ', $instr);
+        // $instr = preg_replace('/[ \t]+/', ' ', $instr) . ';';
+        $this->setInstruction(new Content($instr . ';'));
         $this->blocks = $this->createSubBlocksWithContent($instr);
     }
 

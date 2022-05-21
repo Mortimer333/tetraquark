@@ -11,22 +11,13 @@ abstract class VariableBlockAbstract extends BlockAbstract
 
         foreach ($this->getBlocks() as $i => $block) {
             if ($i == 0) {
-                $script .= $block->recreate();
+                $script .= rtrim(rtrim($block->recreate(), ';'), ',');
             } else {
-                $script .= ',' . $block->recreate();
+                $script .= ',' . rtrim(rtrim($block->recreate(), ';'), ',');
             }
         }
 
-        $scriptLastLetter = $script[\mb_strlen($script) - 1];
-        $addSemiColon = [
-            ';' => false,
-            ',' => false
-        ];
-
-        if ($addSemiColon[$scriptLastLetter] ?? true) {
-            $script .= ';';
-        }
-        return $script;
+        return $script . ';';
     }
 
     protected function findVariableEnd(int $start): int
@@ -112,9 +103,9 @@ abstract class VariableBlockAbstract extends BlockAbstract
     protected function addVariableItems(array $items): void
     {
         foreach ($items as $item) {
-            $item = preg_replace('/[\n]/', ' ', $item);
-            $item = preg_replace('/[ \t]+/', ' ', $item) . ';';
-            self::$content->setContent($item);
+            // $item = preg_replace('/[\n]/', ' ', $item);
+            // $item = preg_replace('/[ \t]+/', ' ', $item) . ';';
+            self::$content->setContent($item . ';');
             $this->blocks[] = new Block\VariableItemBlock();
             self::$content->removeContent();
         }

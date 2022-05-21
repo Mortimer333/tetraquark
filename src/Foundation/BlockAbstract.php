@@ -483,7 +483,7 @@ abstract class BlockAbstract
             } elseif (Validate::isStringLandmark($letter, $content->getLetter($i - 1) ?? '')) {
                 $oldPos = $i;
                 $i = $this->skipString($letter, $i + 1, $content, false);
-                $minifiedValue .= $letter . $word . $content->subStr($oldPos + 1, $i - $oldPos);
+                $minifiedValue .= $letter . $word . $content->subStr($oldPos + 1, $i - $oldPos - 1);
                 if (\is_null($content->getLetter($i))) {
                     break;
                 }
