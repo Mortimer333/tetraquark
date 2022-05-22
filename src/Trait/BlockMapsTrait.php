@@ -294,6 +294,15 @@ trait BlockMapsTrait
         ],
         "{" => "ObjectBlock",
     ];
+    protected array $objectValueBlocksMap = [
+        '.' => [
+            "." => [
+                "." => "SpreadBlock"
+            ],
+            "default" => 'ChainLinkBlock'
+        ],
+        "{" => "ObjectBlock",
+    ];
     protected array $callerBlocksMap = [
         '.' => [
             "." => [
@@ -341,6 +350,7 @@ trait BlockMapsTrait
             Block\ChainLinkBlock       ::class => $this->chainLinkBlocksMap,
             Block\ClassBlock           ::class => $this->classBlocksMap,
             Block\ObjectBlock          ::class => $this->objectBlocksMap,
+            Block\ObjectValueBlock     ::class => $this->objectValueBlocksMap,
             Block\ReturnBlock          ::class => $this->returnBlocksMap,
         ];
 

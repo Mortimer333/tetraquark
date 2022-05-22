@@ -4,6 +4,7 @@ namespace Tetraquark\Trait;
 
 use \Tetraquark\{Log, Content};
 use \Tetraquark\Foundation\BlockAbstract as Block;
+use \Tetraquark\Contract\{Block as BlockInterface};
 
 trait BlockGetSetTrait
 {
@@ -105,12 +106,12 @@ trait BlockGetSetTrait
         return $this->childIndex;
     }
 
-    public function setParent(Block $parent): void
+    public function setParent(BlockInterface $parent): void
     {
         $this->parent = $parent;
     }
 
-    public function getParent(): Block
+    public function getParent(): ?BlockInterface
     {
         return $this->parent;
     }

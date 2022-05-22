@@ -3,6 +3,7 @@
 namespace Tetraquark\Block;
 use \Tetraquark\{Log, Exception, Contract, Validate, Content};
 use \Tetraquark\Foundation\BlockAbstract as Block;
+use \Tetraquark\Contract\{Block as BlockInterface};
 
 class UndefinedBlock extends Block implements Contract\Block
 {
@@ -10,10 +11,10 @@ class UndefinedBlock extends Block implements Contract\Block
         int $start,
         string $instruction,
         protected string $subtype = '',
-        protected array  $data  = []
+        protected ?BlockInterface $parent = null,
     ) {
         $this->setInstruction(new Content($instruction));
-        parent::__construct($start, $subtype, $data);
+        parent::__construct($start, $subtype, $parent);
     }
 
     public function objectify(int $start = 0)

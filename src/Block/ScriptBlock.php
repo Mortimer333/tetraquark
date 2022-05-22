@@ -12,14 +12,13 @@ class ScriptBlock extends Block implements Contract\Block
 
     public function __construct(
         string $content,
-        protected int    $start = 0,
-        protected string $subtype = '',
-        protected array  $data  = []
+        int    $start = 0,
+        string $subtype = '',
     ) {
         // Adding space at the start for any Blocks that require space before their keys
         self::$content = $this->generateContent(' ' . $content);
         self::$content = $this->removeComments(self::$content);
-        parent::__construct($start, $subtype, $data);
+        parent::__construct($start, $subtype);
     }
 
     public function objectify(int $start = 0)

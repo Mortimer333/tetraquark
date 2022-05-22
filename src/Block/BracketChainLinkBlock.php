@@ -110,7 +110,7 @@ class BracketChainLinkBlock extends Block implements Contract\Block
                 return;
             } else {
                 $this->setSubtype(self::VARIABLE);
-                $attribute = new AttributeBlock($i);
+                $attribute = new AttributeBlock($i, '', $this);
                 $attribute->setName('');
                 $this->variable = $attribute;
                 $this->setCaret($attribute->getCaret());

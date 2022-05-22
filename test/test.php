@@ -13,7 +13,7 @@ $tetra = new Tetraquark();
 // $minified = $tetra->minify(__DIR__ . '/data/for.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
 // $minified = $tetra->minify(__DIR__ . '/data/function.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
 // $minified = $tetra->minify(__DIR__ . '/data/ifelse.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
-// $minified = $tetra->minify(__DIR__ . '/data/object.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
+$minified = $tetra->minify(__DIR__ . '/data/object.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
 // $minified = $tetra->minify(__DIR__ . '/data/shortIf.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
 // $minified = $tetra->minify(__DIR__ . '/data/spread.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
 // $minified = $tetra->minify(__DIR__ . '/data/switch.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
@@ -22,4 +22,4 @@ $tetra = new Tetraquark();
 
 // $minified = $tetra->minify(__DIR__ . '/data/single-function.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
 // $minified = $tetra->minify('/var/www/html/tab_jf/module/_hidden.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
-$minified = $tetra->minify('E:\xampp\htdocs\tab_jf\main.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
+// $minified = $tetra->minify('E:\xampp\htdocs\tab_jf\main.js'); echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;

@@ -11,13 +11,7 @@ class ChainLinkBlock extends Block implements Contract\Block
     public const MIDDLE_BRACKET = 'middle:bracket';
     public const END_METHOD = 'end:method';
     public const END_VARIABLE = 'end:variable';
-    public function __construct(
-        int $start,
-        protected string $subtype = '',
-        protected array  $data  = []
-    ) {
-        parent::__construct($start, $subtype, $data);
-    }
+
     public function objectify(int $start = 0)
     {
         $this->setName('');
@@ -26,6 +20,7 @@ class ChainLinkBlock extends Block implements Contract\Block
         if ($this->getSubtype() == self::FIRST) {
             $this->findInstructionStart($start, $endChars);
             $this->setCaret($start);
+            $this->blocks = array_merge($this->blocks, $this->createSubBlocks($start));
             return;
         }
 
@@ -73,7 +68,7 @@ class ChainLinkBlock extends Block implements Contract\Block
             $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
         } elseif ($this->getSubtype() == self::END_VARIABLE) {
             list($equal, $equalPos) = $this->getNextLetter($caret, self::$content);
-            $attribute = new AttributeBlock($equalPos);
+            $attribute = new AttributeBlock($equalPos, '', $this);
             $attribute->setName('');
             $this->setName($this->getInstruction()->subStr(0));
             $this->setBlocks([

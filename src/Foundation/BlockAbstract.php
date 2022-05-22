@@ -9,6 +9,7 @@ use \Tetraquark\Foundation\{
     MethodBlockAbstract as MethodBlock,
     VariableBlockAbstract as VariableBlock
 };
+use \Tetraquark\Contract\{Block as BlockInterface};
 use \Tetraquark\{Exception, Block, Log, Validate, Str, Content};
 
 abstract class BlockAbstract
@@ -18,6 +19,7 @@ abstract class BlockAbstract
     use BlockMapsTrait;     // Has $blocksMap, $classBlocksMap, $objectBlocksMap, $callerBlocksMap and $arrayBlocksMap variables
     use BlockAliasMapTrait; // Contains our alias creation map
     static protected Content $content;
+    static protected Scope   $globalScope;
     static protected array   $mappedAliases = [];
     protected int    $caret = 0;
     protected bool   $endFunction = false;
@@ -32,7 +34,7 @@ abstract class BlockAbstract
     protected int    $childIndex;
 
     /** @var BlockAbstract Parent of this block */
-    protected BlockAbstract $parent;
+    // protected BlockAbstract $parent;
 
     protected array  $aliasesMap = [];
 
@@ -50,6 +52,7 @@ abstract class BlockAbstract
     public function __construct(
         int $start = 0,
         string $subtype = '',
+        protected ?BlockInterface $parent = null,
     ) {
         $this->setSubtype($subtype);
         $this->objectify($start);
@@ -95,7 +98,7 @@ abstract class BlockAbstract
         return $nextStep;
     }
 
-    protected function blockFactory(string $hint, string $className, int $start, string &$possibleUndefined, array &$blocks): BlockAbstract
+    protected function blockFactory(string $hint, string $className, int $start, string &$possibleUndefined, array &$blocks): BlockInterface
     {
         $prefix = 'Tetraquark\Block\\';
         $class  = $prefix . $className;
@@ -109,8 +112,8 @@ abstract class BlockAbstract
             $hint = '';
         }
 
-        $lastBlock = $blocks[\sizeof($blocks) - 1] ?? null;
         if ($class == Block\ChainLinkBlock::class) {
+            $lastBlock = $blocks[\sizeof($blocks) - 1] ?? null;
             $first = false;
             // Check if we are not between some equasion with at least two ChainBlocks
             if ($lastBlock) {
@@ -127,37 +130,38 @@ abstract class BlockAbstract
                 }
             }
 
+            Log::log('New class: ' . $className . ", " . $possibleUndefined);
+            Log::log('First: ' . ($first?'true':'false') . ', class: ' . ($this->parent?$this->parent::class : 'null') . ", parent sub: " . $this->parent?->getSubtype());
             if (
                 $first
-                || !$lastBlock instanceof Block\ChainLinkBlock
+                || !$this->parent instanceof Block\ChainLinkBlock
                 || (
-                    $lastBlock instanceof Block\ChainLinkBlock
+                    $this->parent instanceof Block\ChainLinkBlock
                     && (
-                        $lastBlock->getSubtype() == Block\ChainLinkBlock::END_METHOD
-                        || $lastBlock->getSubtype() == Block\ChainLinkBlock::END_VARIABLE
-                        || $lastBlock->getSubtype() == '.'
+                        $this->parent->getSubtype() == Block\ChainLinkBlock::END_METHOD
+                        || $this->parent->getSubtype() == Block\ChainLinkBlock::END_VARIABLE
+                        || $this->parent->getSubtype() == '.'
                     )
                 )
             ) {
-                $block = new $class($start, Block\ChainLinkBlock::FIRST);
+                $block = new $class($start, Block\ChainLinkBlock::FIRST, $this);
 
                 $possibleUndefined = \mb_substr($possibleUndefined, 0, -($block->getInstruction()->getLength() + 1));
                 if (Validate::isValidUndefined($possibleUndefined)) {
-                    $undefinedBlock = new Block\UndefinedBlock($start - \mb_strlen($possibleUndefined), $possibleUndefined);
+                    $undefinedBlock = new Block\UndefinedBlock($start - \mb_strlen($possibleUndefined), $possibleUndefined, '', $this);
                     $undefinedBlock->setChildIndex(\sizeof($blocks));
-                    $undefinedBlock->setParent($this);
                     $blocks[] = $undefinedBlock;
                 }
 
                 $block->setChildIndex(\sizeof($blocks));
-                $block->setParent($this);
 
                 $blocks[] = $block;
                 $possibleUndefined = '';
+                return $block;
             }
-            return new $class($start + 1, $hint);
+            return new $class($start + 1, $hint, $this);
         }
-        return new $class($start, $hint);
+        return new $class($start, $hint, $this);
     }
 
     protected function findInstructionEnd(int $start, string $name, ?array $endChars = null, bool $skipString = true): void
@@ -257,15 +261,13 @@ abstract class BlockAbstract
                 $i = $this->skipString($letter, $i + 1, self::$content, $startsTemplate);
 
                 if (Validate::isValidUndefined($possibleUndefined)) {
-                    $undefined = new Block\UndefinedBlock($oldPos - \mb_strlen($possibleUndefined), $possibleUndefined);
+                    $undefined = new Block\UndefinedBlock($oldPos - \mb_strlen($possibleUndefined), $possibleUndefined, '', $this);
                     $undefined->setChildIndex(\sizeof($blocks));
-                    $undefined->setParent($this);
                     $blocks[] = $undefined;
                 }
                 if (!$this instanceof Block\ObjectBlock) {
-                    $string = new Block\StringBlock($oldPos, self::$content->iSubStr($oldPos, $i));
+                    $string = new Block\StringBlock($oldPos, self::$content->iSubStr($oldPos, $i), '', $this);
                     $string->setChildIndex(\sizeof($blocks));
-                    $string->setParent($this);
                     $blocks[] = $string;
                 }
 
@@ -302,15 +304,13 @@ abstract class BlockAbstract
                 }
 
                 if (Validate::isValidUndefined($possibleUndefined)) {
-                    $undefined = new Block\UndefinedBlock($oldPos - \mb_strlen($possibleUndefined), $possibleUndefined);
+                    $undefined = new Block\UndefinedBlock($oldPos - \mb_strlen($possibleUndefined), $possibleUndefined, '', $this);
                     $undefined->setChildIndex(\sizeof($blocks));
-                    $undefined->setParent($this);
                     $blocks[] = $undefined;
                 }
 
                 $possibleUndefined = '';
                 $block->setChildIndex(\sizeof($blocks));
-                $block->setParent($this);
                 $blocks[] = $block;
                 $mappedWord = '';
                 $map = null;
@@ -322,9 +322,8 @@ abstract class BlockAbstract
             if ($this->endChars[$letter] ?? false) {
                 $possibleUndefined = \mb_substr($possibleUndefined, 0, -1);
                 if (Validate::isValidUndefined($possibleUndefined)) {
-                    $undefined = new Block\UndefinedBlock($i - \mb_strlen($possibleUndefined), $possibleUndefined);
+                    $undefined = new Block\UndefinedBlock($i - \mb_strlen($possibleUndefined), $possibleUndefined, '', $this);
                     $undefined->setChildIndex(\sizeof($blocks));
-                    $undefined->setParent($this);
                     $blocks[] = $undefined;
                     $possibleUndefined = '';
                 }
@@ -337,7 +336,9 @@ abstract class BlockAbstract
         }
 
         if (Validate::isValidUndefined($possibleUndefined)) {
-            $blocks[] = new Block\UndefinedBlock($i - \mb_strlen($possibleUndefined), $possibleUndefined);
+            $block = new Block\UndefinedBlock($i - \mb_strlen($possibleUndefined), $possibleUndefined, '', $this);
+            $undefined->setChildIndex(\sizeof($blocks));
+            $blocks[] = $block;
         }
 
         $this->setCaret($i);

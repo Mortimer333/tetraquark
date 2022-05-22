@@ -72,7 +72,7 @@ class Tetraquark
         foreach ($defaultSettings as $key => $value) {
             if (
                 ($settings[$key] ?? false)
-                && \sizeof($value['options']) > 0                     // If empty any value works
+                && \sizeof($value['options']) > 0
                 && !\in_array($value['options'], $settings[$key])
             ) {
                 throw new Exception("Not allowed value in " . $key, 400);
@@ -96,53 +96,5 @@ class Tetraquark
         }
 
         return \file_get_contents($path);
-    }
-
-    private function isFunction(array $map, string $letter, string $contents, int $i): bool
-    {
-        $lastWord = $map[\sizeof($map) - 1];
-        $funcObjSwitch = [
-            'function' => function () {
-                $this->type = Block::FUNC;
-                return true;
-            },
-            '=>' => function () {
-                $this->type = Block::FUNC_ARROW;
-                return true;
-            },
-            'default' => function () {
-                return false;
-            }
-        ];
-        return ($funcObjSwitch[$lastWord] ?? $funcObjSwitch['default'])();
-    }
-
-    private function isSingle(string $letter): bool
-    {
-        $singles = [
-            "(" => true,
-            ")" => true,
-            "{" => true,
-            "}" => true,
-            "+" => true,
-            "-" => true,
-            "/" => true,
-            "*" => true,
-            "=" => true,
-            "!" => true,
-            "'" => true,
-            '"' => true,
-            '`' => true,
-            '[' => true,
-            ']' => true,
-            '%' => true,
-            '^' => true,
-            ":" => true,
-            ">" => true,
-            "<" => true,
-            "," => true,
-        ];
-
-        return $singles[$letter] ?? false;
     }
 }
