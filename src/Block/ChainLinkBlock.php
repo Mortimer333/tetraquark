@@ -11,6 +11,7 @@ class ChainLinkBlock extends Block implements Contract\Block
     public const MIDDLE_BRACKET = 'middle:bracket';
     public const END_METHOD = 'end:method';
     public const END_VARIABLE = 'end:variable';
+    protected Block $methodValues;
 
     public function objectify(int $start = 0)
     {
@@ -19,8 +20,7 @@ class ChainLinkBlock extends Block implements Contract\Block
 
         if ($this->getSubtype() == self::FIRST) {
             $this->findInstructionStart($start, $endChars);
-            $this->setCaret($start);
-            $this->blocks = array_merge($this->blocks, $this->createSubBlocks($start));
+            $this->blocks = array_merge($this->blocks, $this->createSubBlocks($start, true));
             return;
         }
 
@@ -30,20 +30,21 @@ class ChainLinkBlock extends Block implements Contract\Block
         list($letter, $linkStart) = $this->getNextLetter($start, self::$content);
         for ($i=$linkStart; $i < self::$content->getLength(); $i++) {
             $letter = self::$content->getLetter($i);
-            if (($endChars[$letter] ?? false || $startLetterSearch) && !Validate::isWhitespace($letter)) {
+            if (($endChars[$letter] ?? false || $startLetterSearch) && $letter != ' ') {
                 $end = $i;
                 if ($letter == '=' && self::$content->getLetter($i + 1) != '=') {
                     $this->setSubtype(self::END_VARIABLE);
                 } elseif ($letter == '(') {
                     $this->setSubtype(self::END_METHOD);
-                    $i += 2;
+                    $i += 1;
                 } elseif ($letter == '.') {
                     $this->setSubtype(self::MIDDLE);
                 } elseif ($letter == '[') {
                     $this->setSubtype(self::MIDDLE_BRACKET);
                 }
 
-                $caret = $i - 1;
+                $caret = $i;
+                $this->setCaret($caret);
                 break;
             }
 
@@ -54,27 +55,29 @@ class ChainLinkBlock extends Block implements Contract\Block
         if (\is_null($caret)) {
             $this->setCaret($i);
             $end = $i;
-        } else {
-            $this->setCaret($caret);
         }
 
         $this->setInstructionStart($start - 1)
             ->setInstruction(self::$content->iCutToContent($start, $end)->trim());
 
         if ($this->getSubtype() == self::END_METHOD) {
-            $this->endChars = [
-                ')' => true
-            ];
-            $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
+            $this->methodValues = new CallerBlock($this->getCaret() - 1, '', $this);$this->createSubBlocks();
+            $this->methodValues->setChildIndex(0);
+            $this->setCaret($this->methodValues->getCaret() + 1);
+            // $this->blocks = array_merge($this->blocks, $this->createSubBlocks(onlyOne: true));
         } elseif ($this->getSubtype() == self::END_VARIABLE) {
-            list($equal, $equalPos) = $this->getNextLetter($caret, self::$content);
-            $attribute = new AttributeBlock($equalPos, '', $this);
-            $attribute->setName('');
-            $this->setName($this->getInstruction()->subStr(0));
-            $this->setBlocks([
-                $attribute
-            ]);
-            $this->setCaret($attribute->getCaret());
+            // list($equal, $equalPos) = $this->getNextLetter($caret, self::$content);
+            // $attribute = new AttributeBlock($equalPos, '', $this);
+            // $attribute->setName('');
+            // $this->setName($this->getInstruction()->subStr(0));
+            // $this->setBlocks([
+            //     $attribute
+            // ]);
+            // $this->setCaret($attribute->getCaret());
+        }
+
+        $this->blocks = array_merge($this->blocks, $this->createSubBlocks(onlyOne: true));
+        if ($this->getSubtype() !== self::END_METHOD && $this->getSubtype() !== self::END_VARIABLE) {
         }
     }
 
@@ -84,46 +87,25 @@ class ChainLinkBlock extends Block implements Contract\Block
         $subtype = $this->getSubtype();
 
         if ($subtype == self::END_METHOD) {
-            $script .= "(";
+            // $script .= "(";
+
+            $script .= $this->methodValues->recreate();
+
+            // $script .= ")";
         }
 
-        if ($subtype == self::MIDDLE || $subtype == self::FIRST) {
-            $script .= '.';
-        }
+        $blocks = $this->getBlocks();
+        if (\sizeof($blocks)) {
+            $block = $blocks[0];
 
-        foreach ($this->getBlocks() as $block) {
+            if ($block::class === $this::class) {
+                $script .= '.';
+            }
+
             $script .= rtrim($block->recreate(), ';');
         }
 
-        $parent = $this->getParent();
-        $index = $this->getChildIndex();
-        $parentChildren = $parent->getBlocks();
-        $nextChild = $parentChildren[$index + 1] ?? null;
 
-        if ($subtype == self::END_METHOD) {
-            if (
-                !\is_null($nextChild)
-                && (
-                    (
-                        (
-                            $nextChild instanceof ChainLinkBlock
-                            || $nextChild instanceof BracketChainLinkBlock
-                        )
-                        && $nextChild->getSubtype() !== self::FIRST
-                    )
-                    || $this->checkIfFirstLetterInNextSiblingIsADot()
-                )
-            ) {
-                $script .= ")";
-            } else {
-                $script .= ");";
-            }
-        } elseif ($subtype !== self::MIDDLE && $subtype !== self::FIRST && $subtype !== self::MIDDLE_BRACKET) {
-            if (\is_null($nextChild) || !\is_null($nextChild) && !$nextChild instanceof SymbolBlock) {
-                $script .= ";";
-            }
-        }
-
-        return $script;
+        return $script . ';';
     }
 }

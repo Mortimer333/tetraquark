@@ -1,4 +1,4 @@
-/*let nem = {
+let nem = {
     objSoloTest,
     obj: 'boj',
 }
@@ -10,8 +10,6 @@ let tem = {
     ],
     `as${meh}` : 2
 }
-tem['as' . meh]
-tem[`as${meh}`].ga
 return {
     a: 'asd',
     meh : 2
@@ -68,7 +66,20 @@ const nested = {
 console.log(prevent[33].asd.cv)
 
 // I would like to keep 33 but alias the rest... But how do I know? I have to create scope then but this will be extremly difficult
-*/
 
 
-asd.fdg.cxsds()
+
+asd.fdg['asd' + asd].cxsds().asd
+dasd.fdg.cxsds()
+
+let a = onj.as.vc + 212;
+
+class ClassName {
+    while() {
+
+    }
+}
+
+
+tem['as' + meh]
+tem[`as${meh}`].ga

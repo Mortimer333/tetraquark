@@ -15,7 +15,7 @@ trait BlockMapsTrait
      * at the end of it.
      * @var array
      */
-    protected array $blocksMapWhiteSpacePrefix = [
+    protected array $blocksMapWhitePrefix = [
         'f' => [
             'o' => [
                 'r' => [
@@ -158,7 +158,7 @@ trait BlockMapsTrait
         ]
     ];
 
-    protected array $blocksMapNoWhiteSpacePrefix = [
+    protected array $blocksMapNoWhitePrefix = [
         '=' => [
             '>'       => 'ArrowFunctionBlock',
             'default' => 'AttributeBlock',
@@ -329,20 +329,20 @@ trait BlockMapsTrait
     ];
     protected array $returnBlocksMap = [
         "{" => "ObjectBlock",
-        "[" => "ArrayBlock"
+        // "[" => "ArrayBlock"
     ];
     protected array $chainLinkBlocksMap = [
         "{" => "ObjectBlock",
-        "[" => "ArrayBlock"
+        // "[" => "ArrayBlock"
     ];
 
     protected function getDefaultMap(): array
     {
-        $blocksMap = [
-            " " => $this->blocksMapWhiteSpacePrefix,
-            "\n" => $this->blocksMapWhiteSpacePrefix,
-            ...$this->blocksMapNoWhiteSpacePrefix
-        ];
+        $blocksMap = $this->blocksMapNoWhitePrefix;
+        $newConditionAppearers = [' ', "\n", ';', '}', '{'];
+        foreach ($newConditionAppearers as $value) {
+            $blocksMap[$value] = $this->blocksMapWhitePrefix;
+        }
 
         $additionalPaths = [
             Block\ArrayBlock           ::class => $this->arrayBlocksMap,
@@ -363,28 +363,22 @@ trait BlockMapsTrait
             }
         } elseif ($this instanceof Foundation\VariableBlockAbstract) {
             $blocksMap = $this->mergeBlockMaps($blocksMap, $this->variableBlocksMap);
-        } elseif ($this instanceof Block\ObjectBlock) {
+        } elseif ($this instanceof Block\ObjectBlock || $this instanceof Block\ClassBlock) {
             // Here we remove all directions to any Block which isn't special symbol.
             // Obj names are free game, they can be `for` or `let` and that will break all our journey search so we have to remove it.
             foreach ($blocksMap as $key => $value) {
-                if (Validate::isWhitespace($key)) {
-                    continue;
-                }
-
                 if (!Validate::isSpecial($key)) {
                     unset($blocksMap[$key]);
                 }
             }
 
-            foreach ($blocksMap[' '] as $key => $value) {
-                if (!Validate::isSpecial($key)) {
-                    unset($blocksMap[' '][$key]);
-                }
-            }
-
-            foreach ($blocksMap["\n"] as $key => $value) {
-                if (!Validate::isSpecial($key)) {
-                    unset($blocksMap["\n"][$key]);
+            foreach ($newConditionAppearers as $value) {
+                if (is_array($blocksMap[$value])) {
+                    foreach ($blocksMap[$value] as $key => $prop) {
+                        if (!Validate::isSpecial($key)) {
+                            unset($blocksMap[$value][$key]);
+                        }
+                    }
                 }
             }
         }
@@ -392,12 +386,26 @@ trait BlockMapsTrait
         return $blocksMap;
     }
 
-    private function mergeBlockMaps(array $map1, array $map2): array
+    protected function mergeBlockMaps(array $map1, array $map2): array
     {
         $map1[' ']  = array_merge($map1[' '], $map2[' '] ?? []);
         $map1["\n"] = array_merge($map1["\n"], $map2["\n"] ?? []);
         unset($map2[' ']);
         unset($map2["\n"]);
         return array_merge($map1, $map2);
+    }
+
+    protected function decideArrayBlockType(int $start) {
+        for ($i=$start - 1; $i >= 0; $i--) {
+            $letter = self::$content->getLetter($i);
+            if (Validate::isWhitespace($letter)) {
+                continue;
+            }
+            if (!Validate::isSpecial($letter)) {
+                return 'BracketChainLinkBlock';
+            }
+            return "ArrayBlock";
+        }
+        return "ArrayBlock";
     }
 }

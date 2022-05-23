@@ -1,6 +1,20 @@
 # TO DO
-## 0. Add all key words so when object has property "typeof" it won't get replaced with its alias
-## 1. Upgrade fixScript as it doesn't reamove all not needed space - do{ whileLooped--; console.log(whileLooped);}
+## 0. If
+```js
+let obj = {
+    'asd' :2,
+    33 : 'sad'
+};
+
+function fuc() {
+    return {
+        'asd' : 123
+    };
+}
+```
+
+## 1. Add all key words so when object has property "typeof" it won't get replaced with its alias
+## 2. Upgrade fixScript as it doesn't reamove all not needed space - do{ whileLooped--; console.log(whileLooped);}
 
 ## If script will be slow look into setting all values for functions in one iteration (instead of ~2,5)
 
@@ -10,7 +24,7 @@
 - not resolved methemtical equasions - 2 +2 (or more realisticly 60\*60\*24)
 - variables only containing strings and number - 'asd' + 'vxc' + 2 (but look out for those - 'asd' + (2+3))
 - if `IfBlock` and with `return` but the next one is else then remove else completely
-  - maybe if if ends with empty return it might be better to remove `return;` and extend if with `else{}`? this might be less symbols in the end (7 to 6 (or 4 if its single instruction)) 
+  - maybe if if ends with empty return it might be better to remove `return;` and extend if with `else{}`? this might be less symbols in the end (7 to 6 (or 4 if its single instruction))
 
 ## Handle
 - import, export

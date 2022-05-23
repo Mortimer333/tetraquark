@@ -53,8 +53,8 @@ class ScriptBlock extends Block implements Contract\Block
     {
         $content = str_replace("\r","\n", $content);
         $content = preg_replace('/[\n]+/',"\n", $content);
-        // Change space + new line (` \n`) to just new line
         $content = preg_replace('/[ \t]+/', ' ', $content);
+        // Change space + new line (` \n`) to just new line
         $content = preg_replace('/ \n+/',"\n", $content);
         // This fixes all problem with prototypes that are moved to new line with trailing dot (obj\n.attr)
         $content = preg_replace('/\n\./', '.', $content);

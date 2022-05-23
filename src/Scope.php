@@ -8,5 +8,9 @@ namespace Tetraquark;
 class Scope
 {
     array $scopes = [];
-    
+
+    public function __construct()
+    {
+        
+    }
 }

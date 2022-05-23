@@ -113,37 +113,23 @@ abstract class BlockAbstract
         }
 
         if ($class == Block\ChainLinkBlock::class) {
-            $lastBlock = $blocks[\sizeof($blocks) - 1] ?? null;
-            $first = false;
+            // $lastBlock = $blocks[\sizeof($blocks) - 1] ?? null;
+            // $first = false;
             // Check if we are not between some equasion with at least two ChainBlocks
-            if ($lastBlock) {
-                $startBlock = $lastBlock->getInstructionStart() + $lastBlock->getInstruction()->getLength();
-                for ($i=$startBlock; $i < self::$content->getLength(); $i++) {
-                    $letter = self::$content->getLetter($i);
-                    if ($letter == ' ') {
-                        continue;
-                    }
-                    if (Validate::isSpecial($letter) || $letter == "\n") {
-                        $first = true;
-                    }
-                    break;
-                }
-            }
-
-            Log::log('New class: ' . $className . ", " . $possibleUndefined);
-            Log::log('First: ' . ($first?'true':'false') . ', class: ' . ($this->parent?$this->parent::class : 'null') . ", parent sub: " . $this->parent?->getSubtype());
-            if (
-                $first
-                || !$this->parent instanceof Block\ChainLinkBlock
-                || (
-                    $this->parent instanceof Block\ChainLinkBlock
-                    && (
-                        $this->parent->getSubtype() == Block\ChainLinkBlock::END_METHOD
-                        || $this->parent->getSubtype() == Block\ChainLinkBlock::END_VARIABLE
-                        || $this->parent->getSubtype() == '.'
-                    )
-                )
-            ) {
+            // if ($lastBlock) {
+            //     $startBlock = $lastBlock->getInstructionStart() + $lastBlock->getInstruction()->getLength();
+            //     for ($i=$startBlock; $i < self::$content->getLength(); $i++) {
+            //         $letter = self::$content->getLetter($i);
+            //         if ($letter == ' ') {
+            //             continue;
+            //         }
+            //         if (Validate::isSpecial($letter) || $letter == "\n") {
+            //             $first = true;
+            //         }
+            //         break;
+            //     }
+            // }
+            if ($this::class !== Block\ChainLinkBlock::class && $this::class !== Block\BracketChainLinkBlock::class ) {
                 $block = new $class($start, Block\ChainLinkBlock::FIRST, $this);
 
                 $possibleUndefined = \mb_substr($possibleUndefined, 0, -($block->getInstruction()->getLength() + 1));
@@ -153,13 +139,10 @@ abstract class BlockAbstract
                     $blocks[] = $undefinedBlock;
                 }
 
-                $block->setChildIndex(\sizeof($blocks));
-
-                $blocks[] = $block;
                 $possibleUndefined = '';
                 return $block;
             }
-            return new $class($start + 1, $hint, $this);
+            return new $class($start + 1, $hint, $this, '.');
         }
         return new $class($start, $hint, $this);
     }
@@ -240,7 +223,7 @@ abstract class BlockAbstract
         return $block;
     }
 
-    protected function createSubBlocks(?int $start = null, $special = false): array
+    protected function createSubBlocks(?int $start = null, bool $onlyOne = false, $special = false): array
     {
         if (is_null($start)) {
             $start = $this->getCaret();
@@ -251,6 +234,7 @@ abstract class BlockAbstract
         $possibleUndefined = '';
         $undefinedEnds = ["\n" => true, ";" => true];
         $blocks = [];
+        Log::increaseIndent();
         for ($i=$start; $i < self::$content->getLength(); $i++) {
             $letter = self::$content->getLetter($i);
             if (
@@ -286,6 +270,18 @@ abstract class BlockAbstract
 
             $map = $this->journeyForBlockClassName($letter, $mappedWord, $possibleUndefined, $i, $map);
             if (gettype($map) == 'string') {
+                if ((
+                        $this::class === Block\ChainLinkBlock::class
+                        || $this::class === Block\BracketChainLinkBlock::class
+                    ) && $map !== 'ChainLinkBlock'
+                    && $map !== 'BracketChainLinkBlock'
+                    && $onlyOne
+                ) {
+                    $i -= \mb_strlen($possibleUndefined);
+                    $possibleUndefined = '';
+                    break;
+                }
+
                 $oldPos = $i - \mb_strlen($possibleUndefined);
                 $block = $this->constructBlock($mappedWord, $map, $i, $possibleUndefined, $blocks);
                 $mappedWordLen = \mb_strlen($mappedWord);
@@ -312,8 +308,13 @@ abstract class BlockAbstract
                 $possibleUndefined = '';
                 $block->setChildIndex(\sizeof($blocks));
                 $blocks[] = $block;
-                $mappedWord = '';
+                $mappedWord = ' ';
                 $map = null;
+                // BlockChain Blocks can only have one child if they don't close the chain
+                if ($onlyOne) {
+                    break;
+                }
+                $map = $this->getDefaultMap()[' '] ?? null;
                 continue;
             } elseif (\is_null($map)) {
                 $mappedWord = '';
@@ -330,17 +331,16 @@ abstract class BlockAbstract
                 break;
             }
         }
-
+        Log::decreaseIndent();
         if ($i == self::$content->getLength()) {
             $i--;
         }
 
         if (Validate::isValidUndefined($possibleUndefined)) {
-            $block = new Block\UndefinedBlock($i - \mb_strlen($possibleUndefined), $possibleUndefined, '', $this);
+            $undefined = new Block\UndefinedBlock($i - \mb_strlen($possibleUndefined), $possibleUndefined, '', $this);
             $undefined->setChildIndex(\sizeof($blocks));
-            $blocks[] = $block;
+            $blocks[] = $undefined;
         }
-
         $this->setCaret($i);
         return $blocks;
     }
@@ -591,20 +591,6 @@ abstract class BlockAbstract
             $properInstr .= $letter;
         }
         return trim($properInstr);
-    }
-
-    protected function decideArrayBlockType(int $start) {
-        for ($i=$start - 1; $i >= 0; $i--) {
-            $letter = self::$content->getLetter($i);
-            if (Validate::isWhitespace($letter)) {
-                continue;
-            }
-            if (!Validate::isSpecial($letter)) {
-                return 'BracketChainLinkBlock';
-            }
-            return "ArrayBlock";
-        }
-        return "ArrayBlock";
     }
 
     protected function canBeAliased(string $name, BlockAbstract $block): bool

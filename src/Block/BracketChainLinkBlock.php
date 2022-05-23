@@ -6,12 +6,10 @@ use \Tetraquark\Foundation\BlockAbstract as Block;
 
 class BracketChainLinkBlock extends Block implements Contract\Block
 {
-    protected array $endChars = [
-        ']' => true
-    ];
     /** @var AttributeBlock Holder for Attribute Block which will hold assigned values */
     protected AttributeBlock $variable;
     protected const VARIABLE = 'variable';
+    protected array $bracketBlocks = [];
 
     public function objectify(int $start = 0)
     {
@@ -27,7 +25,7 @@ class BracketChainLinkBlock extends Block implements Contract\Block
         $start += 1;
         for ($i=$start; $i < self::$content->getLength(); $i++) {
             $letter = self::$content->getLetter($i);
-            $end = $i;
+            $end = $i + 1;
             if (Validate::isWhitespace($letter)) {
                 continue;
             }
@@ -93,30 +91,38 @@ class BracketChainLinkBlock extends Block implements Contract\Block
         $this->setCaret($end);
 
         if ($getSubBlocks) {
-            $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
+            $oldEndChars = $this->endChars;
+            $this->endChars = [
+                ']' => true
+            ];
+            Log::log(self::$content->getLEtter($end));
+            $this->bracketBlocks = $this->createSubBlocks();
+            $this->endChars = $oldEndChars;
+            $this->setCaret($this->getCaret() + 1);
         }
+        $this->blocks = array_merge($this->blocks, $this->createSubBlocks(onlyOne: true));
 
-        for ($i=$this->getCaret() + 1; $i < self::$content->getLength(); $i++) {
-            $letter = self::$content->getLetter($i);
-            if (Validate::isWhitespace($letter)) {
-                continue;
-            }
-
-            if ($letter != '=' || $letter == '=' && self::$content->getLetter($i + 1) == '=') {
-                if (!$getSubBlocks) {
-                    $this->setCaret($start);
-                    $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
-                }
-                return;
-            } else {
-                $this->setSubtype(self::VARIABLE);
-                $attribute = new AttributeBlock($i, '', $this);
-                $attribute->setName('');
-                $this->variable = $attribute;
-                $this->setCaret($attribute->getCaret());
-                break;
-            }
-        }
+        // for ($i=$this->getCaret() + 1; $i < self::$content->getLength(); $i++) {
+        //     $letter = self::$content->getLetter($i);
+        //     if (Validate::isWhitespace($letter)) {
+        //         continue;
+        //     }
+        //
+        //     if ($letter != '=' || $letter == '=' && self::$content->getLetter($i + 1) == '=') {
+        //         if (!$getSubBlocks) {
+        //             $this->setCaret($start);
+        //             $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
+        //         }
+        //         return;
+        //     } else {
+        //         $this->setSubtype(self::VARIABLE);
+        //         $attribute = new AttributeBlock($i, '', $this);
+        //         $attribute->setName('');
+        //         $this->variable = $attribute;
+        //         $this->setCaret($attribute->getCaret());
+        //         break;
+        //     }
+        // }
 
         $name = trim(self::$content->iSubStr($start, $end));
         if ($string) {
@@ -137,34 +143,38 @@ class BracketChainLinkBlock extends Block implements Contract\Block
         if (\mb_strlen($name)) {
             $script .= "'" . $this->replaceVariablesWithAliases(new Content($name)) . "'";
         } else {
-            foreach ($this->getBlocks() as $block) {
+            foreach ($this->bracketBlocks as $block) {
                 $script .= rtrim($block->recreate(), ';');
             }
         }
 
         $script .= ']';
 
-        if ($this->getSubtype() === self::VARIABLE) {
-            $script .= rtrim($this->variable->recreate(), ';') . ';';
+        foreach ($this->getBlocks() as $block) {
+            $script .= '.' . rtrim($block->recreate(), ';');
         }
 
-        $parent = $this->getParent();
-        $index = $this->getChildIndex();
-        $nextChild = $parent->getBlocks()[$index + 1] ?? null;
-        if (
-            is_null($nextChild)
-            ||
-            (
-                !$nextChild instanceof ChainLinkBlock
-                && $nextChild->getSubtype() !== ChainLinkBlock::MIDDLE
-                && $nextChild->getSubtype() !== ChainLinkBlock::MIDDLE_BRACKET
-                && !$nextChild instanceof BracketChainLinkBlock
-                && !$this->checkIfFirstLetterInNextSiblingIsADot()
-            )
-        ) {
-            $script .= ';';
-        }
+        // if ($this->getSubtype() === self::VARIABLE) {
+        //     $script .= rtrim($this->variable->recreate(), ';') . ';';
+        // }
+        //
+        // $parent = $this->getParent();
+        // $index = $this->getChildIndex();
+        // $nextChild = $parent->getBlocks()[$index + 1] ?? null;
+        // if (
+        //     is_null($nextChild)
+        //     ||
+        //     (
+        //         !$nextChild instanceof ChainLinkBlock
+        //         && $nextChild->getSubtype() !== ChainLinkBlock::MIDDLE
+        //         && $nextChild->getSubtype() !== ChainLinkBlock::MIDDLE_BRACKET
+        //         && !$nextChild instanceof BracketChainLinkBlock
+        //         && !$this->checkIfFirstLetterInNextSiblingIsADot()
+        //     )
+        // ) {
+        //     $script .= ';';
+        // }
 
-        return $script;
+        return $script . ';';
     }
 }
