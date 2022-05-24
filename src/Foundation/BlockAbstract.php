@@ -321,6 +321,7 @@ abstract class BlockAbstract
             }
 
             if ($this->endChars[$letter] ?? false) {
+                Log::log('Possible: ' . $possibleUndefined);
                 $possibleUndefined = \mb_substr($possibleUndefined, 0, -1);
                 if (Validate::isValidUndefined($possibleUndefined)) {
                     $undefined = new Block\UndefinedBlock($i - \mb_strlen($possibleUndefined), $possibleUndefined, '', $this);
@@ -583,8 +584,8 @@ abstract class BlockAbstract
             ];
             if (
                 $letter == ';'
-                && Validate::isSpecial($nextLetter)
-                && !isset($blackListedSpecial[$nextLetter])
+                // && Validate::isSpecial($nextLetter)
+                && isset($blackListedSpecial[$nextLetter])
             ) {
                 continue;
             }

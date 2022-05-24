@@ -95,7 +95,6 @@ class BracketChainLinkBlock extends Block implements Contract\Block
             $this->endChars = [
                 ']' => true
             ];
-            Log::log(self::$content->getLEtter($end));
             $this->bracketBlocks = $this->createSubBlocks();
             $this->endChars = $oldEndChars;
             $this->setCaret($this->getCaret() + 1);

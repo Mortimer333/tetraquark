@@ -1,4 +1,5 @@
 # TO DO
+## `While` and `for` can be without brackets - single statment
 ## 0. If
 ```js
 let obj = {

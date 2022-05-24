@@ -17,10 +17,14 @@ class ChainLinkBlock extends Block implements Contract\Block
     {
         $this->setName('');
         $endChars = array_merge([';' => true], Validate::getSpecial());
-
+        $this->endChars = array_merge($this->endChars, [']' => true]);
         if ($this->getSubtype() == self::FIRST) {
             $this->findInstructionStart($start, $endChars);
             $this->blocks = array_merge($this->blocks, $this->createSubBlocks($start, true));
+            // If chain didn't and with new line then it must have ended on someone elses end symbol
+            if (!Validate::isWhitespace(self::$content->getLetter($this->getCaret()))) {
+                $this->setCaret($this->getCaret() - 1);
+            }
             return;
         }
 
@@ -61,7 +65,7 @@ class ChainLinkBlock extends Block implements Contract\Block
             ->setInstruction(self::$content->iCutToContent($start, $end)->trim());
 
         if ($this->getSubtype() == self::END_METHOD) {
-            $this->methodValues = new CallerBlock($this->getCaret() - 1, '', $this);$this->createSubBlocks();
+            $this->methodValues = new CallerBlock($this->getCaret() - 1, '', $this);
             $this->methodValues->setChildIndex(0);
             $this->setCaret($this->methodValues->getCaret() + 1);
             // $this->blocks = array_merge($this->blocks, $this->createSubBlocks(onlyOne: true));
@@ -77,8 +81,6 @@ class ChainLinkBlock extends Block implements Contract\Block
         }
 
         $this->blocks = array_merge($this->blocks, $this->createSubBlocks(onlyOne: true));
-        if ($this->getSubtype() !== self::END_METHOD && $this->getSubtype() !== self::END_VARIABLE) {
-        }
     }
 
     public function recreate(): string
