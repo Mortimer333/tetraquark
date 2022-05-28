@@ -124,7 +124,7 @@ class CallerBlock extends Block implements Contract\Block
         }
 
         foreach ($this->getBlocks() as $block) {
-            $script .= $block->recreate();
+            $script .= rtrim($block->recreate(), ';');
         }
 
         $script = rtrim($script, ';');

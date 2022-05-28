@@ -1,4 +1,4 @@
-/*if (obj.objSoloTest[0] == 'asd') {
+if (obj.objSoloTest[0] == 'asd') {
     console.log('found')
     console.log('found2')
 }
@@ -56,11 +56,11 @@ if (false) {
 
 } else if (true) {
 
-}*/
+}
 
 if (true
     ) {
 
     } else {
-     
+
     }

@@ -9,7 +9,10 @@ class BracketChainLinkBlock extends Block implements Contract\Block
     /** @var AttributeBlock Holder for Attribute Block which will hold assigned values */
     protected AttributeBlock $variable;
     protected const VARIABLE = 'variable';
+    protected const METHOD   = 'method';
     protected array $bracketBlocks = [];
+    protected Contract\Block $methodValues;
+    protected string $identifier = '';
 
     public function objectify(int $start = 0)
     {
@@ -99,45 +102,50 @@ class BracketChainLinkBlock extends Block implements Contract\Block
             $this->endChars = $oldEndChars;
             $this->setCaret($this->getCaret() + 1);
         }
-        $this->blocks = array_merge($this->blocks, $this->createSubBlocks(onlyOne: true));
+        
+        list($nextLetter, $pos) = $this->getNextLetter($this->getCaret() + 1, self::$content);
 
-        // for ($i=$this->getCaret() + 1; $i < self::$content->getLength(); $i++) {
-        //     $letter = self::$content->getLetter($i);
-        //     if (Validate::isWhitespace($letter)) {
-        //         continue;
-        //     }
-        //
-        //     if ($letter != '=' || $letter == '=' && self::$content->getLetter($i + 1) == '=') {
-        //         if (!$getSubBlocks) {
-        //             $this->setCaret($start);
-        //             $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
-        //         }
-        //         return;
-        //     } else {
-        //         $this->setSubtype(self::VARIABLE);
-        //         $attribute = new AttributeBlock($i, '', $this);
-        //         $attribute->setName('');
-        //         $this->variable = $attribute;
-        //         $this->setCaret($attribute->getCaret());
-        //         break;
-        //     }
-        // }
+        if ($nextLetter == '(') {
+            $this->setSubtype(self::METHOD);
+            $this->methodValues = new CallerBlock($pos, '', $this);
+            $this->methodValues->setChildIndex(0);
+            $this->setCaret($this->methodValues->getCaret() + 1);
+            $this->blocks = array_merge($this->blocks, $this->createSubBlocks(onlyOne: true));
+        } elseif ($nextLetter == '=' && self::$content->getLetter($pos + 1) != '=') {
+            $this->setSubtype(self::VARIABLE);
+            $this->methodValues = new AttributeBlock($pos, '', $this);
+            $this->methodValues->setChildIndex(0);
+            $this->methodValues->setName('');
+            $this->setCaret($this->methodValues->getCaret() + 1);
+        } else {
+            if (!$getSubBlocks && self::$content->getLetter($this->getCaret()) == ']') {
+                $this->setCaret($this->getCaret() + 1);
+            }
+            $this->blocks = array_merge($this->blocks, $this->createSubBlocks(onlyOne: true));
+        }
+
 
         $name = trim(self::$content->iSubStr($start, $end));
         if ($string) {
             $name = \mb_substr($name, 1, -1);
-            $this->setName($name);
+            if ($this->getSubtype() === self::VARIABLE) {
+                $this->setName($name);
+            }
+            $this->setIdentifier($name);
         } elseif ($template) {
             if (strpos($name, '${') === false) {
                 $name = \mb_substr($name, 1, -1);
-                $this->setName($name);
+                if ($this->getSubtype() === self::VARIABLE) {
+                    $this->setName($name);
+                }
+                $this->setIdentifier($name);
             }
         }
     }
 
     public function recreate(): string
     {
-        $name = $this->getName();
+        $name = $this->getIdentifier();
         $script = '[';
         if (\mb_strlen($name)) {
             $script .= "'" . $this->replaceVariablesWithAliases(new Content($name)) . "'";
@@ -149,31 +157,35 @@ class BracketChainLinkBlock extends Block implements Contract\Block
 
         $script .= ']';
 
+        if ($this->getSubtype() == self::METHOD || $this->getSubtype() == self::VARIABLE) {
+            $script .= rtrim($this->methodValues->recreate(), ';');
+        }
+
         foreach ($this->getBlocks() as $block) {
             $script .= '.' . rtrim($block->recreate(), ';');
         }
 
-        // if ($this->getSubtype() === self::VARIABLE) {
-        //     $script .= rtrim($this->variable->recreate(), ';') . ';';
-        // }
-        //
-        // $parent = $this->getParent();
-        // $index = $this->getChildIndex();
-        // $nextChild = $parent->getBlocks()[$index + 1] ?? null;
-        // if (
-        //     is_null($nextChild)
-        //     ||
-        //     (
-        //         !$nextChild instanceof ChainLinkBlock
-        //         && $nextChild->getSubtype() !== ChainLinkBlock::MIDDLE
-        //         && $nextChild->getSubtype() !== ChainLinkBlock::MIDDLE_BRACKET
-        //         && !$nextChild instanceof BracketChainLinkBlock
-        //         && !$this->checkIfFirstLetterInNextSiblingIsADot()
-        //     )
-        // ) {
-        //     $script .= ';';
-        // }
-
         return $script . ';';
+    }
+
+    public function getMethodValues(): ?Contract\Block
+    {
+        return $this->methodValues ?? null;
+    }
+
+    public function getBracketBlocks(): array
+    {
+        return $this->bracketBlocks;
+    }
+
+    protected function setIdentifier(string $id): self
+    {
+        $this->identifier = $id;
+        return $this;
+    }
+
+    protected function getIdentifier(): string
+    {
+        return $this->identifier;
     }
 }

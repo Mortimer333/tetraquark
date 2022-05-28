@@ -21,3 +21,4 @@ obj.g()
 obj.c.sddf.asas
 obj.c.sddf.asas.we_das['@varp2']()
 obj.c.sddf["asa"] = 123;
+obj.c.sddf["asa"].asd;

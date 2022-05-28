@@ -6,6 +6,8 @@ use \Tetraquark\{Block, Log, Validate, Foundation};
 
 trait BlockMapsTrait
 {
+    protected array $newConditionAppearers = [' ', "\n", ';', '}', '{'];
+
     /**
      * Map of possible blocks prefixed with whitespace.
      *
@@ -15,7 +17,7 @@ trait BlockMapsTrait
      * at the end of it.
      * @var array
      */
-    protected array $blocksMapWhitePrefix = [
+    protected array $blocksMapPrefix = [
         'f' => [
             'o' => [
                 'r' => [
@@ -88,7 +90,6 @@ trait BlockMapsTrait
                 ]
             ]
         ],
-
         'i' => [
             'f' => [
                 ' '  => "IfBlock",
@@ -158,7 +159,7 @@ trait BlockMapsTrait
         ]
     ];
 
-    protected array $blocksMapNoWhitePrefix = [
+    protected array $blocksMapNoPrefix = [
         '=' => [
             '>'       => 'ArrowFunctionBlock',
             'default' => 'AttributeBlock',
@@ -310,6 +311,7 @@ trait BlockMapsTrait
             ],
             "default" => 'ChainLinkBlock'
         ],
+        "{" => "ObjectBlock",
     ];
     protected array $arrayBlocksMap  = [
         '.' => [
@@ -338,10 +340,13 @@ trait BlockMapsTrait
 
     protected function getDefaultMap(): array
     {
-        $blocksMap = $this->blocksMapNoWhitePrefix;
-        $newConditionAppearers = [' ', "\n", ';', '}', '{'];
-        foreach ($newConditionAppearers as $value) {
-            $blocksMap[$value] = $this->blocksMapWhitePrefix;
+        $blocksMap = $this->blocksMapNoPrefix;
+        foreach ($this->newConditionAppearers as $value) {
+            $oldValue = $blocksMap[$value] ?? null;
+            $blocksMap[$value] = $this->blocksMapPrefix;
+            if (!\is_null($oldValue)) {
+                $blocksMap[$value]['default'] = $oldValue;
+            }
         }
 
         $additionalPaths = [
@@ -356,9 +361,9 @@ trait BlockMapsTrait
 
         $blocksMap = $this->mergeBlockMaps($blocksMap, $additionalPaths[$this::class] ?? []);
 
-        if ($this instanceof Block\MethodBlock) {
+        if ($this instanceof Block\MethodBlock || $this instanceof Block\CallerBlock) {
             $blocksMap = $this->mergeBlockMaps($blocksMap, $this->callerBlocksMap);
-            if ($this->getStatus() === $this::CREATING_ARGUMENTS) {
+            if ($this instanceof Block\MethodBlock && $this->getStatus() === $this::CREATING_ARGUMENTS) {
                 $blocksMap = $this->mergeBlockMaps($blocksMap, $this->callerArgsBlocksMap);
             }
         } elseif ($this instanceof Foundation\VariableBlockAbstract) {
@@ -368,30 +373,49 @@ trait BlockMapsTrait
             // Obj names are free game, they can be `for` or `let` and that will break all our journey search so we have to remove it.
             foreach ($blocksMap as $key => $value) {
                 if (!Validate::isSpecial($key)) {
-                    unset($blocksMap[$key]);
+                    if (isset($blocksMap[$key]['default'])) {
+                        unset($blocksMap[$key]['default']);
+                    } else {
+                        unset($blocksMap[$key]);
+                    }
                 }
             }
 
-            foreach ($newConditionAppearers as $value) {
+            foreach ($this->newConditionAppearers as $value) {
                 if (is_array($blocksMap[$value])) {
                     foreach ($blocksMap[$value] as $key => $prop) {
-                        if (!Validate::isSpecial($key)) {
+                        if (!Validate::isSpecial($key) && $key != 'default') {
                             unset($blocksMap[$value][$key]);
                         }
                     }
                 }
             }
         }
-
         return $blocksMap;
     }
 
     protected function mergeBlockMaps(array $map1, array $map2): array
     {
-        $map1[' ']  = array_merge($map1[' '], $map2[' '] ?? []);
-        $map1["\n"] = array_merge($map1["\n"], $map2["\n"] ?? []);
-        unset($map2[' ']);
-        unset($map2["\n"]);
+        /*
+        ar = [
+            '{' =>[
+                'f' => ...
+                ?'default' => ...
+            ],
+            ' ' =>[
+                'f' => ...
+                ?'default' => ...
+            ],
+        ]
+         */
+        foreach ($this->newConditionAppearers as $value) {
+            if (isset($map2[$value]) && is_string($map2[$value])) {
+                $map1[$value]['default'] = $map2[$value];
+            } else {
+                $map1[$value] = array_merge($map1[$value], $map2[$value] ?? []);
+            }
+            unset($map2[$value]);
+        }
         return array_merge($map1, $map2);
     }
 

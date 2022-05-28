@@ -11,7 +11,7 @@ class ChainLinkBlock extends Block implements Contract\Block
     public const MIDDLE_BRACKET = 'middle:bracket';
     public const END_METHOD = 'end:method';
     public const END_VARIABLE = 'end:variable';
-    protected Block $methodValues;
+    protected Contract\Block $methodValues;
 
     public function objectify(int $start = 0)
     {
@@ -22,7 +22,8 @@ class ChainLinkBlock extends Block implements Contract\Block
             $this->findInstructionStart($start, $endChars);
             $this->blocks = array_merge($this->blocks, $this->createSubBlocks($start, true));
             // If chain didn't and with new line then it must have ended on someone elses end symbol
-            if (!Validate::isWhitespace(self::$content->getLetter($this->getCaret()))) {
+            $endChar = self::$content->getLetter($this->getCaret());
+            if ($endChar === ']' && !($this->getLastLink() instanceof BracketChainLinkBlock)) {
                 $this->setCaret($this->getCaret() - 1);
             }
             return;
@@ -68,19 +69,17 @@ class ChainLinkBlock extends Block implements Contract\Block
             $this->methodValues = new CallerBlock($this->getCaret() - 1, '', $this);
             $this->methodValues->setChildIndex(0);
             $this->setCaret($this->methodValues->getCaret() + 1);
-            // $this->blocks = array_merge($this->blocks, $this->createSubBlocks(onlyOne: true));
+            $this->blocks = array_merge($this->blocks, $this->createSubBlocks(onlyOne: true));
         } elseif ($this->getSubtype() == self::END_VARIABLE) {
-            // list($equal, $equalPos) = $this->getNextLetter($caret, self::$content);
-            // $attribute = new AttributeBlock($equalPos, '', $this);
-            // $attribute->setName('');
-            // $this->setName($this->getInstruction()->subStr(0));
-            // $this->setBlocks([
-            //     $attribute
-            // ]);
-            // $this->setCaret($attribute->getCaret());
+            $this->methodValues = new AttributeBlock($this->getCaret(), '', $this);
+            $this->methodValues->setChildIndex(0);
+            $this->methodValues->setName('');
+            $this->setCaret($this->methodValues->getCaret() + 1);
+            $this->setName($this->getInstruction()->__toString());
+        } else {
+            $this->blocks = array_merge($this->blocks, $this->createSubBlocks(onlyOne: true));
         }
 
-        $this->blocks = array_merge($this->blocks, $this->createSubBlocks(onlyOne: true));
     }
 
     public function recreate(): string
@@ -88,12 +87,8 @@ class ChainLinkBlock extends Block implements Contract\Block
         $script = $this->replaceVariablesWithAliases($this->getInstruction());
         $subtype = $this->getSubtype();
 
-        if ($subtype == self::END_METHOD) {
-            // $script .= "(";
-
-            $script .= $this->methodValues->recreate();
-
-            // $script .= ")";
+        if ($subtype == self::END_METHOD || $subtype == self::END_VARIABLE) {
+            $script .= rtrim($this->methodValues->recreate(), ';');
         }
 
         $blocks = $this->getBlocks();
@@ -109,5 +104,22 @@ class ChainLinkBlock extends Block implements Contract\Block
 
 
         return $script . ';';
+    }
+
+    public function getMethodValues(): ?Contract\Block
+    {
+        return $this->methodValues ?? null;
+    }
+
+    private function getLastLink(?Contract\Block $block = null): Contract\Block
+    {
+        if (is_null($block)) {
+            $block = $this;
+        }
+        $link = $block->getBlocks()[\sizeof($block->getBlocks()) - 1] ?? null;
+        if (\is_null($link)) {
+            return $block;
+        }
+        return $this->getLastLink($link);
     }
 }

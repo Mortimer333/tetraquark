@@ -154,6 +154,21 @@ class Log
                 self::displayBlocks($block->getArgBlock());
                 self::decreaseIndent();
             }
+            if (method_exists($block, 'getBracketBlocks')) {
+                self::log("Bracket block: [" . \sizeof($block->getBracketBlocks()) . "] ");
+                self::increaseIndent();
+                self::displayBlocks($block->getBracketBlocks());
+                self::decreaseIndent();
+            }
+            if (method_exists($block, 'getMethodValues')) {
+                $method = $block->getMethodValues();
+                if (!\is_null($method)) {
+                    self::log("Chain Link Method:");
+                    self::increaseIndent();
+                    self::displayBlocks([$method]);
+                    self::decreaseIndent();
+                }
+            }
             self::log("Alias: `" . $block->getAlias($block->getName()) . "`");
             self::log("Blocks: [" . \sizeof($block->getBlocks()) . "] ");
             self::log("=======");

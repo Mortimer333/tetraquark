@@ -113,22 +113,6 @@ abstract class BlockAbstract
         }
 
         if ($class == Block\ChainLinkBlock::class) {
-            // $lastBlock = $blocks[\sizeof($blocks) - 1] ?? null;
-            // $first = false;
-            // Check if we are not between some equasion with at least two ChainBlocks
-            // if ($lastBlock) {
-            //     $startBlock = $lastBlock->getInstructionStart() + $lastBlock->getInstruction()->getLength();
-            //     for ($i=$startBlock; $i < self::$content->getLength(); $i++) {
-            //         $letter = self::$content->getLetter($i);
-            //         if ($letter == ' ') {
-            //             continue;
-            //         }
-            //         if (Validate::isSpecial($letter) || $letter == "\n") {
-            //             $first = true;
-            //         }
-            //         break;
-            //     }
-            // }
             if ($this::class !== Block\ChainLinkBlock::class && $this::class !== Block\BracketChainLinkBlock::class ) {
                 $block = new $class($start, Block\ChainLinkBlock::FIRST, $this);
 
@@ -229,7 +213,7 @@ abstract class BlockAbstract
             $start = $this->getCaret();
         }
 
-        $map = null;
+        $map = $this->getDefaultMap()[' '] ?? null;
         $mappedWord = '';
         $possibleUndefined = '';
         $undefinedEnds = ["\n" => true, ";" => true];
@@ -237,6 +221,9 @@ abstract class BlockAbstract
         Log::increaseIndent();
         for ($i=$start; $i < self::$content->getLength(); $i++) {
             $letter = self::$content->getLetter($i);
+            if ($this::class === Block\BracketChainLinkBlock::class) {
+                Log::log('Letter: ' . $letter);
+            }
             if (
                 ($startsTemplate = Validate::isTemplateLiteralLandmark($letter, ''))
                 || Validate::isStringLandmark($letter, '')
@@ -267,7 +254,6 @@ abstract class BlockAbstract
 
             $mappedWord .= $letter;
             $possibleUndefined .= $letter;
-
             $map = $this->journeyForBlockClassName($letter, $mappedWord, $possibleUndefined, $i, $map);
             if (gettype($map) == 'string') {
                 if ((
@@ -321,7 +307,6 @@ abstract class BlockAbstract
             }
 
             if ($this->endChars[$letter] ?? false) {
-                Log::log('Possible: ' . $possibleUndefined);
                 $possibleUndefined = \mb_substr($possibleUndefined, 0, -1);
                 if (Validate::isValidUndefined($possibleUndefined)) {
                     $undefined = new Block\UndefinedBlock($i - \mb_strlen($possibleUndefined), $possibleUndefined, '', $this);

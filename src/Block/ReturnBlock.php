@@ -9,7 +9,7 @@ class ReturnBlock extends VariableBlock implements Contract\Block
     protected array $endChars = [
         ';' => true,
     ];
-    
+
     public function objectify(int $start = 0)
     {
         $this->setName('');
@@ -27,7 +27,7 @@ class ReturnBlock extends VariableBlock implements Contract\Block
     {
         $script = 'return ';
         foreach ($this->getBlocks() as $block) {
-            $script .= $block->recreate();
+            $script .= rtrim($block->recreate(), ';');
         }
         return rtrim($script, ';') . ';';
     }

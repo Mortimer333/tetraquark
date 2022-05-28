@@ -83,3 +83,5 @@ class ClassName {
 
 tem['as' + meh]
 tem[`as${meh}`].ga
+
+fdg.asd.cxsds('a').asd;
