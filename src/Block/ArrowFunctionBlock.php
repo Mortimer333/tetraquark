@@ -156,8 +156,9 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
     {
         $searchForBracketsStart  = false;
         $searchForNextWhiteSpace = false;
-        $subStart = null;
+        $subStart = 0;
         $ignoreParenthesis = 0;
+        $this->setSubtype(self::NO_PARENTHESIS);
         for ($i=$start - 2; $i >= 0; $i--) {
             $letter = self::$content->getLetter($i);
             if (

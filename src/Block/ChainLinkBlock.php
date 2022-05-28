@@ -77,7 +77,16 @@ class ChainLinkBlock extends Block implements Contract\Block
             $this->setCaret($this->methodValues->getCaret() + 1);
             $this->setName($this->getInstruction()->__toString());
         } else {
-            $this->blocks = array_merge($this->blocks, $this->createSubBlocks(onlyOne: true));
+            list($nextLetter, $pos) = $this->getNextLetter($this->getCaret(), self::$content);
+            $possibleOperation = $nextLetter . self::$content->getLetter($pos + 1);
+            if ($possibleOperation === '--' || $possibleOperation == '++') {
+                $symbol = new SymbolBlock($pos + 1, $possibleOperation, $this);
+                $symbol->setChildIndex(0);
+                $this->setBlocks([$symbol]);
+                $this->setCaret($pos + 1);
+            } else {
+                $this->blocks = array_merge($this->blocks, $this->createSubBlocks(onlyOne: true));
+            }
         }
 
     }

@@ -28,7 +28,7 @@ abstract class BlockAbstract
     protected Content $instruction;
 
     protected int    $instructionStart;
-    protected string $name;
+    protected string $name = '';
 
     /** @var int Queue indicator */
     protected int    $childIndex;
@@ -113,7 +113,14 @@ abstract class BlockAbstract
         }
 
         if ($class == Block\ChainLinkBlock::class) {
-            if ($this::class !== Block\ChainLinkBlock::class && $this::class !== Block\BracketChainLinkBlock::class ) {
+            if (
+                $this::class !== Block\ChainLinkBlock::class
+                && $this::class !== Block\BracketChainLinkBlock::class
+                || (
+                    $this::class === Block\BracketChainLinkBlock::class
+                    && $this->getSubtype() === Block\BracketChainLinkBlock::BRACKET_BLOCK_CREATE
+                )
+            ) {
                 $block = new $class($start, Block\ChainLinkBlock::FIRST, $this);
 
                 $possibleUndefined = \mb_substr($possibleUndefined, 0, -($block->getInstruction()->getLength() + 1));
@@ -207,6 +214,17 @@ abstract class BlockAbstract
         return $block;
     }
 
+    protected function generateUndefined(int $start, string $possibleUndefined, int $childIndex): BlockInterface
+    {
+        if ($this::class === Block\ClassBlock::class) {
+            $undefined = new Block\EmptyAttributeBlock($start, $possibleUndefined, '', $this);
+        } else {
+            $undefined = new Block\UndefinedBlock($start, $possibleUndefined, '', $this);
+        }
+        $undefined->setChildIndex($childIndex);
+        return $undefined;
+    }
+
     protected function createSubBlocks(?int $start = null, bool $onlyOne = false, $special = false): array
     {
         if (is_null($start)) {
@@ -221,9 +239,6 @@ abstract class BlockAbstract
         Log::increaseIndent();
         for ($i=$start; $i < self::$content->getLength(); $i++) {
             $letter = self::$content->getLetter($i);
-            if ($this::class === Block\BracketChainLinkBlock::class) {
-                Log::log('Letter: ' . $letter);
-            }
             if (
                 ($startsTemplate = Validate::isTemplateLiteralLandmark($letter, ''))
                 || Validate::isStringLandmark($letter, '')
@@ -232,9 +247,7 @@ abstract class BlockAbstract
                 $i = $this->skipString($letter, $i + 1, self::$content, $startsTemplate);
 
                 if (Validate::isValidUndefined($possibleUndefined)) {
-                    $undefined = new Block\UndefinedBlock($oldPos - \mb_strlen($possibleUndefined), $possibleUndefined, '', $this);
-                    $undefined->setChildIndex(\sizeof($blocks));
-                    $blocks[] = $undefined;
+                    $blocks[] = $this->generateUndefined($oldPos - \mb_strlen($possibleUndefined), $possibleUndefined, \sizeof($blocks));
                 }
                 if (!$this instanceof Block\ObjectBlock) {
                     $string = new Block\StringBlock($oldPos, self::$content->iSubStr($oldPos, $i), '', $this);
@@ -286,9 +299,7 @@ abstract class BlockAbstract
                 }
 
                 if (Validate::isValidUndefined($possibleUndefined)) {
-                    $undefined = new Block\UndefinedBlock($oldPos - \mb_strlen($possibleUndefined), $possibleUndefined, '', $this);
-                    $undefined->setChildIndex(\sizeof($blocks));
-                    $blocks[] = $undefined;
+                    $blocks[] = $this->generateUndefined($oldPos - \mb_strlen($possibleUndefined), $possibleUndefined, \sizeof($blocks));
                 }
 
                 $possibleUndefined = '';
@@ -309,9 +320,7 @@ abstract class BlockAbstract
             if ($this->endChars[$letter] ?? false) {
                 $possibleUndefined = \mb_substr($possibleUndefined, 0, -1);
                 if (Validate::isValidUndefined($possibleUndefined)) {
-                    $undefined = new Block\UndefinedBlock($i - \mb_strlen($possibleUndefined), $possibleUndefined, '', $this);
-                    $undefined->setChildIndex(\sizeof($blocks));
-                    $blocks[] = $undefined;
+                    $blocks[] = $this->generateUndefined($i - \mb_strlen($possibleUndefined), $possibleUndefined, \sizeof($blocks));
                     $possibleUndefined = '';
                 }
                 break;

@@ -10,6 +10,7 @@ class BracketChainLinkBlock extends Block implements Contract\Block
     protected AttributeBlock $variable;
     protected const VARIABLE = 'variable';
     protected const METHOD   = 'method';
+    public const BRACKET_BLOCK_CREATE = 'create_bracket_blocks';
     protected array $bracketBlocks = [];
     protected Contract\Block $methodValues;
     protected string $identifier = '';
@@ -95,14 +96,17 @@ class BracketChainLinkBlock extends Block implements Contract\Block
 
         if ($getSubBlocks) {
             $oldEndChars = $this->endChars;
+            $oldSubtype  = $this->getSubtype();
             $this->endChars = [
                 ']' => true
             ];
+            $this->setSubtype(self::BRACKET_BLOCK_CREATE);
             $this->bracketBlocks = $this->createSubBlocks();
+            $this->setSubtype($oldSubtype);
             $this->endChars = $oldEndChars;
             $this->setCaret($this->getCaret() + 1);
         }
-        
+
         list($nextLetter, $pos) = $this->getNextLetter($this->getCaret() + 1, self::$content);
 
         if ($nextLetter == '(') {
@@ -121,7 +125,16 @@ class BracketChainLinkBlock extends Block implements Contract\Block
             if (!$getSubBlocks && self::$content->getLetter($this->getCaret()) == ']') {
                 $this->setCaret($this->getCaret() + 1);
             }
-            $this->blocks = array_merge($this->blocks, $this->createSubBlocks(onlyOne: true));
+
+            $possibleOperation = $nextLetter . self::$content->getLetter($pos + 1);
+            if ($possibleOperation === '--' || $possibleOperation == '++') {
+                $symbol = new SymbolBlock($pos + 1, $possibleOperation, $this);
+                $symbol->setChildIndex(0);
+                $this->setBlocks([$symbol]);
+                $this->setCaret($pos + 1);
+            } else {
+                $this->blocks = array_merge($this->blocks, $this->createSubBlocks(onlyOne: true));
+            }
         }
 
 
@@ -162,7 +175,11 @@ class BracketChainLinkBlock extends Block implements Contract\Block
         }
 
         foreach ($this->getBlocks() as $block) {
-            $script .= '.' . rtrim($block->recreate(), ';');
+            if ($block::class === SymbolBlock::class) {
+                $script .= rtrim($block->recreate(), ';');
+            } else {
+                $script .= '.' . rtrim($block->recreate(), ';');
+            }
         }
 
         return $script . ';';

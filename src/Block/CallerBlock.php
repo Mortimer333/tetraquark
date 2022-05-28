@@ -86,7 +86,7 @@ class CallerBlock extends Block implements Contract\Block
             // If we are searching for arrow and the first thing we find isn't equal sign it means this isn't arrow function
             if ($searchForArrow && $letter != '=') {
                 break;
-            } elseif ($searchForArrow && $letter == '=' && self::$content->getLetter($i + 1) ?? '' == ">") {
+            } elseif ($searchForArrow && $letter == '=' && (self::$content->getLetter($i + 1) ?? '') == ">") {
                 // If this is arrow function then make this empty and skip current letter
                 $this->setInstruction(new Content(''))
                     ->setInstructionStart($start)

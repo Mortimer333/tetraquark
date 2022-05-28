@@ -38,7 +38,15 @@ class OperatorBlock extends Block implements Contract\Block
     {
         $script = $this->getInstruction()->__toString();
         if ($this->addSemicolon) {
-            $script .= ';';
+            if ($script === '--' || $script == '++') {
+                $parent = $this->getParent();
+                $nextBlock = $parent->getBlocks()[$this->getChildIndex() + 1];
+                if ($nextBlock::class !== ChainLinkBlock::class && $nextBlock::class !== BracketChainLinkBlock::class) {
+                    $script .= ';';
+                }
+            } else {
+                $script .= ';';
+            }
         }
         return $script;
     }
