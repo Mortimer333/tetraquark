@@ -29,7 +29,7 @@ class ScriptBlock extends Block implements Contract\Block
         $this->map();
         Log::log("=======================");
         Log::log("Creating aliases...");
-        $this->generateAliases();
+        // $this->generateAliases(); -- work in progress, see TODO
         Log::log("=======================");
         $aliasesStr = "Aliases: ";
         foreach (self::$mappedAliases as $key => $value) {

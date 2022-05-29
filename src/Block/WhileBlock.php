@@ -25,6 +25,11 @@ class WhileBlock extends ConditionBlock implements Contract\Block
         $this->setCondition(
             $this->recreateCondBlocks($condBlocks)
         );
-        $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
+
+        if ($this->getSubtype() === self::SINGLE_CONDITION_SUBTYPE) {
+            $this->blocks = $this->createSubBlocksWithContent($this->getSingleCond());
+        } else {
+            $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
+        }
     }
 }

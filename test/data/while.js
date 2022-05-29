@@ -5,3 +5,10 @@ while (objSoloTest.length) {
     console.log(size, objSoloTest[0]);
     objSoloTest.shift();
 }
+
+while (objSoloTest.length) objSoloTest.shift();
+while (objSoloTest.length) objSoloTest.shift()
+while (objSoloTest.length)
+    objSoloTest.shift();
+while (objSoloTest.length)
+    objSoloTest.shift()

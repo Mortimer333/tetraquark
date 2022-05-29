@@ -1,4 +1,4 @@
-/*let obj = {
+let obj = {
     'sa' : 'v',
   g : () => {},
   c : {
@@ -38,7 +38,7 @@ if ( sel.type.toLowerCase() == 'range' ) {
 methodsSave.forEach(path => {
   this.set.preciseMethodsProxy(this, path);
 });
-this.render.content[ this.pos.line ].content = this.truck.exportLine( el.parentElement ).content;*/
+this.render.content[ this.pos.line ].content = this.truck.exportLine( el.parentElement ).content;
 this.pos.line--;
 --this.pos.line;
 

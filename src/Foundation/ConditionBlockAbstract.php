@@ -68,7 +68,15 @@ abstract class ConditionBlockAbstract extends BlockAbstract
                 && !\is_null($condEnd)
                 && (
                     $letter == '{'
-                    || ($this instanceof Block\IfBlock && ($letter == ';' || $letter == "\n") && $letterFound)
+                    || (
+                        (
+                            $this instanceof Block\IfBlock
+                            || $this instanceof Block\WhileBlock
+                            || $this instanceof Block\ForBlock
+                        )
+                        && ($letter == ';' || $letter == "\n")
+                        && $letterFound
+                    )
                 )
             ) {
                 $end = $i + 1;
@@ -79,7 +87,15 @@ abstract class ConditionBlockAbstract extends BlockAbstract
                 break;
             }
 
-            if (!\is_null($condStart) && !\is_null($condEnd) && !$this instanceof Block\IfBlock) {
+            if (
+                !\is_null($condStart)
+                && !\is_null($condEnd)
+                && !(
+                    $this instanceof Block\IfBlock
+                    || $this instanceof Block\WhileBlock
+                    || $this instanceof Block\ForBlock
+                )
+            ) {
                 throw new Exception("Unexcepted character when searching for condition block start at letter $i => " . $this::class, 401);
             }
         }

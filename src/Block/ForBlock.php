@@ -36,7 +36,11 @@ class ForBlock extends ConditionBlock implements Contract\Block
             . ';' . $this->recreateCondBlocks($counterApplyBlocks)
         );
 
-        $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
+        if ($this->getSubtype() === self::SINGLE_CONDITION_SUBTYPE) {
+            $this->blocks = $this->createSubBlocksWithContent($this->getSingleCond());
+        } else {
+            $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
+        }
     }
 
     protected function recreateCondBlocks(array $blocks): string
