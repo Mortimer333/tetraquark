@@ -5,67 +5,281 @@ Creating aliases...
 Aliases: 
 Recreating...
 =======================
-Block: Tetraquark\Block\WhileBlock
-Subtype: while
-Instruction: while (objSoloTest.length) {
-Instruction Start: 1
-Caret: 30
+Block: Tetraquark\Block\ExportBlock
+Subtype: export
+Instruction:  let name1, name2, nameN
+Instruction Start: 0
+Caret: 31
 Name: ``
-Cond block: [1] 
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: first
-  Instruction: objSoloTest
-  Instruction Start: 0
-  Caret: 17
-  Name: ``
-  Alias: ``
-  Blocks: [1] 
-  =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: .
-    Instruction: length
-    Instruction Start: 11
-    Caret: 17
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
 Alias: ``
-Blocks: [0] 
-=======
-Block: Tetraquark\Block\WhileBlock
-Subtype: while
-Instruction: while (objSoloTest.length) {
-Instruction Start: 32
-Caret: 151
-Name: ``
-Cond block: [1] 
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: first
-  Instruction: objSoloTest
-  Instruction Start: 0
-  Caret: 17
-  Name: ``
-  Alias: ``
-  Blocks: [1] 
-  =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: .
-    Instruction: length
-    Instruction Start: 11
-    Caret: 17
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-Alias: ``
-Blocks: [3] 
+Blocks: [1] 
 =======
   Block: Tetraquark\Block\VariableBlock
   Subtype: let
-  Instruction: let size = objSoloTest.length
-  Instruction Start: 62
-  Caret: 91
+  Instruction: let name1, name2, nameN
+  Instruction Start: 1
+  Caret: 24
+  Name: ``
+  Value: ``
+  Alias: ``
+  Blocks: [3] 
+  =======
+    Block: Tetraquark\Block\VariableItemBlock
+    Subtype: 
+    Instruction: 
+    Instruction Start: 6
+    Caret: 7
+    Name: `name1`
+    Value: ``
+    Alias: `name1`
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\VariableItemBlock
+    Subtype: 
+    Instruction: 
+    Instruction Start: 6
+    Caret: 7
+    Name: `name2`
+    Value: ``
+    Alias: `name2`
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\VariableItemBlock
+    Subtype: 
+    Instruction: 
+    Instruction Start: 6
+    Caret: 7
+    Name: `nameN`
+    Value: ``
+    Alias: `nameN`
+    Blocks: [0] 
+    =======
+Block: Tetraquark\Block\ExportBlock
+Subtype: export
+Instruction:  let name1 = '1', name2 = 'v', nameN
+Instruction Start: 32
+Caret: 75
+Name: ``
+Alias: ``
+Blocks: [1] 
+=======
+  Block: Tetraquark\Block\VariableBlock
+  Subtype: let
+  Instruction: let name1 = '1', name2 = 'v', nameN
+  Instruction Start: 1
+  Caret: 36
+  Name: ``
+  Value: ``
+  Alias: ``
+  Blocks: [3] 
+  =======
+    Block: Tetraquark\Block\VariableItemBlock
+    Subtype: 
+    Instruction:  name1 =
+    Instruction Start: 0
+    Caret: 12
+    Name: `name1`
+    Value: ``
+    Alias: `name1`
+    Blocks: [1] 
+    =======
+      Block: Tetraquark\Block\StringBlock
+      Subtype: 
+      Instruction: '1'
+      Instruction Start: 9
+      Caret: 12
+      Name: ``
+      Alias: ``
+      Blocks: [0] 
+      =======
+    Block: Tetraquark\Block\VariableItemBlock
+    Subtype: 
+    Instruction:  name2 =
+    Instruction Start: 0
+    Caret: 12
+    Name: `name2`
+    Value: ``
+    Alias: `name2`
+    Blocks: [1] 
+    =======
+      Block: Tetraquark\Block\StringBlock
+      Subtype: 
+      Instruction: 'v'
+      Instruction Start: 9
+      Caret: 12
+      Name: ``
+      Alias: ``
+      Blocks: [0] 
+      =======
+    Block: Tetraquark\Block\VariableItemBlock
+    Subtype: 
+    Instruction: 
+    Instruction Start: 6
+    Caret: 7
+    Name: `nameN`
+    Value: ``
+    Alias: `nameN`
+    Blocks: [0] 
+    =======
+Block: Tetraquark\Block\ExportBlock
+Subtype: export
+Instruction:  function functionName(){}
+Instruction Start: 76
+Caret: 109
+Name: ``
+Alias: ``
+Blocks: [1] 
+=======
+  Block: Tetraquark\Block\FunctionBlock
+  Subtype: function
+  Instruction: function functionName(){
+  Instruction Start: 0
+  Caret: 25
+  Name: `functionName`
+  Arguments: [0] `
+  Alias: `functionName`
+  Blocks: [0] 
+  =======
+Block: Tetraquark\Block\ExportBlock
+Subtype: export
+Instruction:  class ClassName {}
+Instruction Start: 109
+Caret: 135
+Name: ``
+Alias: ``
+Blocks: [1] 
+=======
+  Block: Tetraquark\Block\ClassBlock
+  Subtype: class
+  Instruction: class ClassName {
+  Instruction Start: 1
+  Caret: 18
+  Name: `ClassName`
+  Alias: `ClassName`
+  Blocks: [0] 
+  =======
+Block: Tetraquark\Block\ExportBlock
+Subtype: export
+Instruction:  { name1, name2, nameN }
+Instruction Start: 135
+Caret: 166
+Name: ``
+Alias: ``
+Blocks: [1] 
+=======
+  Block: Tetraquark\Block\ObjectBlock
+  Subtype: {
+  Instruction: 
+  Instruction Start: 1
+  Caret: 23
+  Name: ``
+  Alias: ``
+  Blocks: [3] 
+  =======
+    Block: Tetraquark\Block\ObjectSoloValueBlock
+    Subtype: ,
+    Instruction: name1
+    Instruction Start: 3
+    Caret: 8
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\ObjectSoloValueBlock
+    Subtype: ,
+    Instruction: name2
+    Instruction Start: 10
+    Caret: 15
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  nameN 
+    Instruction Start: 16
+    Caret: 23
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+Block: Tetraquark\Block\ExportBlock
+Subtype: export
+Instruction:  { variable1 as name1, variable2 as name2, nameN }
+Instruction Start: 167
+Caret: 224
+Name: ``
+Alias: ``
+Blocks: [1] 
+=======
+  Block: Tetraquark\Block\ObjectBlock
+  Subtype: {
+  Instruction: 
+  Instruction Start: 1
+  Caret: 49
+  Name: ``
+  Alias: ``
+  Blocks: [5] 
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  variable1 as 
+    Instruction Start: -13
+    Caret: 1
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\ObjectSoloValueBlock
+    Subtype: ,
+    Instruction: name1
+    Instruction Start: 16
+    Caret: 21
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  variable2 as 
+    Instruction Start: 7
+    Caret: 21
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\ObjectSoloValueBlock
+    Subtype: ,
+    Instruction: name2
+    Instruction Start: 36
+    Caret: 41
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  nameN 
+    Instruction Start: 42
+    Caret: 49
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+Block: Tetraquark\Block\ExportBlock
+Subtype: export
+Instruction:  const { name1, name2: bar } = o
+Instruction Start: 225
+Caret: 264
+Name: ``
+Alias: ``
+Blocks: [1] 
+=======
+  Block: Tetraquark\Block\VariableBlock
+  Subtype: const
+  Instruction: const { name1, name2: bar } = o
+  Instruction Start: 1
+  Caret: 32
   Name: ``
   Value: ``
   Alias: ``
@@ -73,347 +287,468 @@ Blocks: [3]
   =======
     Block: Tetraquark\Block\VariableItemBlock
     Subtype: 
-    Instruction:  size =
+    Instruction:  { name1, name2: bar } =
     Instruction Start: 0
     Caret: 26
-    Name: `size`
+    Name: `{ name1, name2: bar }`
     Value: ``
-    Alias: `size`
+    Alias: `{ name1, name2: bar }`
     Blocks: [1] 
     =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: first
-      Instruction: objSoloTest
-      Instruction Start: 8
+      Block: Tetraquark\Block\UndefinedBlock
+      Subtype: 
+      Instruction:  o
+      Instruction Start: 24
       Caret: 26
       Name: ``
       Alias: ``
-      Blocks: [1] 
+      Blocks: [0] 
       =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: length
-        Instruction Start: 19
-        Caret: 26
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: first
-  Instruction: console
-  Instruction Start: 94
-  Caret: 127
+Block: Tetraquark\Block\ExportBlock
+Subtype: export
+Instruction:  const [ name1, name2 ] = array
+Instruction Start: 265
+Caret: 303
+Name: ``
+Alias: ``
+Blocks: [1] 
+=======
+  Block: Tetraquark\Block\VariableBlock
+  Subtype: const
+  Instruction: const [ name1, name2 ] = array
+  Instruction Start: 1
+  Caret: 31
   Name: ``
+  Value: ``
   Alias: ``
   Blocks: [1] 
   =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:method
-    Instruction: log
-    Instruction Start: 101
-    Caret: 127
-    Name: ``
-    Chain Link Method:
-      Block: Tetraquark\Block\CallerBlock
-      Subtype: 
-      Instruction: 
-      Instruction Start: 105
-      Caret: 126
-      Name: ``
-      Alias: ``
-      Blocks: [2] 
-      =======
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction: size, objSoloTest
-        Instruction Start: -18
-        Caret: -1
-        Name: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-        Block: Tetraquark\Block\BracketChainLinkBlock
-        Subtype: [
-        Instruction: 
-        Instruction Start: 17
-        Caret: 20
-        Name: ``
-        Bracket block: [1] 
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction: 0
-          Instruction Start: 18
-          Caret: 19
-          Name: ``
-          Alias: ``
-          Blocks: [0] 
-          =======
-        Alias: ``
-        Blocks: [0] 
-        =======
-    Alias: ``
-    Blocks: [0] 
+    Block: Tetraquark\Block\VariableItemBlock
+    Subtype: 
+    Instruction:  [ name1, name2 ] =
+    Instruction Start: 0
+    Caret: 25
+    Name: `[ name1, name2 ]`
+    Value: ``
+    Alias: `[ name1, name2 ]`
+    Blocks: [1] 
     =======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: first
-  Instruction: objSoloTest
-  Instruction Start: 130
-  Caret: 149
-  Name: ``
-  Alias: ``
-  Blocks: [1] 
-  =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:method
-    Instruction: shift
-    Instruction Start: 141
-    Caret: 149
-    Name: ``
-    Chain Link Method:
-      Block: Tetraquark\Block\CallerBlock
+      Block: Tetraquark\Block\UndefinedBlock
       Subtype: 
-      Instruction: 
-      Instruction Start: 147
-      Caret: 148
+      Instruction:  array
+      Instruction Start: 19
+      Caret: 25
       Name: ``
       Alias: ``
       Blocks: [0] 
       =======
-    Alias: ``
-    Blocks: [0] 
-    =======
-Block: Tetraquark\Block\WhileBlock
-Subtype: single-condition
-Instruction: while (objSoloTest.length) objSoloTest.shift()
-Instruction Start: 153
-Caret: 199
+Block: Tetraquark\Block\ExportBlock
+Subtype: export
+Instruction:  default expression
+Instruction Start: 304
+Caret: 330
 Name: ``
-Cond block: [1] 
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: first
-  Instruction: objSoloTest
-  Instruction Start: 0
-  Caret: 17
+Alias: ``
+Blocks: [1] 
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  default expression
+  Instruction Start: -1
+  Caret: 18
   Name: ``
   Alias: ``
-  Blocks: [1] 
+  Blocks: [0] 
   =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: .
-    Instruction: length
-    Instruction Start: 11
-    Caret: 17
+Block: Tetraquark\Block\ExportBlock
+Subtype: export
+Instruction:  default function () { }
+Instruction Start: 331
+Caret: 362
+Name: ``
+Alias: ``
+Blocks: [2] 
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  default
+  Instruction Start: -9
+  Caret: -1
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\FunctionBlock
+  Subtype: anonymous:function
+  Instruction: function () {
+  Instruction Start: 8
+  Caret: 23
+  Name: ``
+  Arguments: [0] `
+  Alias: ``
+  Blocks: [0] 
+  =======
+Block: Tetraquark\Block\ExportBlock
+Subtype: export
+Instruction:  default function name1() {}
+Instruction Start: 362
+Caret: 397
+Name: ``
+Alias: ``
+Blocks: [2] 
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  default
+  Instruction Start: -9
+  Caret: -1
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\FunctionBlock
+  Subtype: function
+  Instruction: function name1() {
+  Instruction Start: 8
+  Caret: 27
+  Name: `name1`
+  Arguments: [0] `
+  Alias: `name1`
+  Blocks: [0] 
+  =======
+Block: Tetraquark\Block\ExportBlock
+Subtype: export
+Instruction:  { name1 as default, name2}
+Instruction Start: 397
+Caret: 431
+Name: ``
+Alias: ``
+Blocks: [1] 
+=======
+  Block: Tetraquark\Block\ObjectBlock
+  Subtype: {
+  Instruction: 
+  Instruction Start: 1
+  Caret: 26
+  Name: ``
+  Alias: ``
+  Blocks: [3] 
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  name1 as 
+    Instruction Start: -9
+    Caret: 1
     Name: ``
     Alias: ``
     Blocks: [0] 
     =======
-Alias: ``
-Blocks: [1] 
-=======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: first
-  Instruction: objSoloTest
-  Instruction Start: 1
-  Caret: 19
-  Name: ``
-  Alias: ``
-  Blocks: [1] 
-  =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:method
-    Instruction: shift
+    Block: Tetraquark\Block\ObjectSoloValueBlock
+    Subtype: ,
+    Instruction: default
     Instruction Start: 12
     Caret: 19
     Name: ``
-    Chain Link Method:
-      Block: Tetraquark\Block\CallerBlock
-      Subtype: 
-      Instruction: 
-      Instruction Start: 18
-      Caret: 19
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
     Alias: ``
     Blocks: [0] 
     =======
-Block: Tetraquark\Block\WhileBlock
-Subtype: single-condition
-Instruction: while (objSoloTest.length) objSoloTest.shift()
-Instruction Start: 201
-Caret: 247
-Name: ``
-Cond block: [1] 
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: first
-  Instruction: objSoloTest
-  Instruction Start: 0
-  Caret: 17
-  Name: ``
-  Alias: ``
-  Blocks: [1] 
-  =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: .
-    Instruction: length
-    Instruction Start: 11
-    Caret: 17
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  name2
+    Instruction Start: 20
+    Caret: 26
     Name: ``
     Alias: ``
     Blocks: [0] 
     =======
+Block: Tetraquark\Block\ExportBlock
+Subtype: export
+Instruction:  * from 'path'
+Instruction Start: 432
+Caret: 453
+Name: ``
 Alias: ``
-Blocks: [1] 
+Blocks: [3] 
 =======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: first
-  Instruction: objSoloTest
+  Block: Tetraquark\Block\SymbolBlock
+  Subtype: *
+  Instruction: *
   Instruction Start: 1
-  Caret: 19
+  Caret: 1
   Name: ``
   Alias: ``
-  Blocks: [1] 
+  Blocks: [0] 
   =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:method
-    Instruction: shift
-    Instruction Start: 12
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  from 
+  Instruction Start: 2
+  Caret: 8
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\StringBlock
+  Subtype: 
+  Instruction: 'path'
+  Instruction Start: 8
+  Caret: 14
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
+Block: Tetraquark\Block\ExportBlock
+Subtype: export
+Instruction:  * as name1 from 'path'
+Instruction Start: 454
+Caret: 484
+Name: ``
+Alias: ``
+Blocks: [3] 
+=======
+  Block: Tetraquark\Block\SymbolBlock
+  Subtype: *
+  Instruction: *
+  Instruction Start: 1
+  Caret: 1
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  as name1 from 
+  Instruction Start: 2
+  Caret: 17
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\StringBlock
+  Subtype: 
+  Instruction: 'path'
+  Instruction Start: 17
+  Caret: 23
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
+Block: Tetraquark\Block\ExportBlock
+Subtype: export
+Instruction:  { name1, name2, nameN } from 'path'
+Instruction Start: 485
+Caret: 528
+Name: ``
+Alias: ``
+Blocks: [3] 
+=======
+  Block: Tetraquark\Block\ObjectBlock
+  Subtype: {
+  Instruction: 
+  Instruction Start: 1
+  Caret: 23
+  Name: ``
+  Alias: ``
+  Blocks: [3] 
+  =======
+    Block: Tetraquark\Block\ObjectSoloValueBlock
+    Subtype: ,
+    Instruction: name1
+    Instruction Start: 3
+    Caret: 8
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\ObjectSoloValueBlock
+    Subtype: ,
+    Instruction: name2
+    Instruction Start: 10
+    Caret: 15
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  nameN 
+    Instruction Start: 16
+    Caret: 23
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  from 
+  Instruction Start: 24
+  Caret: 30
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\StringBlock
+  Subtype: 
+  Instruction: 'path'
+  Instruction Start: 30
+  Caret: 36
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
+Block: Tetraquark\Block\ExportBlock
+Subtype: export
+Instruction:  { import1 as name1, import2 as name2, nameN } from 'path'
+Instruction Start: 529
+Caret: 594
+Name: ``
+Alias: ``
+Blocks: [3] 
+=======
+  Block: Tetraquark\Block\ObjectBlock
+  Subtype: {
+  Instruction: 
+  Instruction Start: 1
+  Caret: 45
+  Name: ``
+  Alias: ``
+  Blocks: [5] 
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  import1 as 
+    Instruction Start: -11
+    Caret: 1
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\ObjectSoloValueBlock
+    Subtype: ,
+    Instruction: name1
+    Instruction Start: 14
     Caret: 19
     Name: ``
-    Chain Link Method:
-      Block: Tetraquark\Block\CallerBlock
-      Subtype: 
-      Instruction: 
-      Instruction Start: 18
-      Caret: 19
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
     Alias: ``
     Blocks: [0] 
     =======
-Block: Tetraquark\Block\WhileBlock
-Subtype: single-condition
-Instruction: while (objSoloTest.length)\n objSoloTest.shift()
-Instruction Start: 248
-Caret: 295
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  import2 as 
+    Instruction Start: 7
+    Caret: 19
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\ObjectSoloValueBlock
+    Subtype: ,
+    Instruction: name2
+    Instruction Start: 32
+    Caret: 37
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  nameN 
+    Instruction Start: 38
+    Caret: 45
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  from 
+  Instruction Start: 46
+  Caret: 52
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\StringBlock
+  Subtype: 
+  Instruction: 'path'
+  Instruction Start: 52
+  Caret: 58
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
+Block: Tetraquark\Block\ExportBlock
+Subtype: export
+Instruction:  { default, name2 } from 'path'
+Instruction Start: 595
+Caret: 633
 Name: ``
-Cond block: [1] 
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: first
-  Instruction: objSoloTest
-  Instruction Start: 0
-  Caret: 17
-  Name: ``
-  Alias: ``
-  Blocks: [1] 
-  =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: .
-    Instruction: length
-    Instruction Start: 11
-    Caret: 17
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
 Alias: ``
-Blocks: [1] 
+Blocks: [3] 
 =======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: first
-  Instruction: objSoloTest
-  Instruction Start: 2
-  Caret: 20
+  Block: Tetraquark\Block\ObjectBlock
+  Subtype: {
+  Instruction: 
+  Instruction Start: 1
+  Caret: 18
   Name: ``
   Alias: ``
-  Blocks: [1] 
+  Blocks: [2] 
   =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:method
-    Instruction: shift
-    Instruction Start: 13
-    Caret: 20
+    Block: Tetraquark\Block\ObjectSoloValueBlock
+    Subtype: ,
+    Instruction: default
+    Instruction Start: 3
+    Caret: 10
     Name: ``
-    Chain Link Method:
-      Block: Tetraquark\Block\CallerBlock
-      Subtype: 
-      Instruction: 
-      Instruction Start: 19
-      Caret: 20
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
     Alias: ``
     Blocks: [0] 
     =======
-Block: Tetraquark\Block\WhileBlock
-Subtype: single-condition
-Instruction: while (objSoloTest.length)\n objSoloTest.shift()
-Instruction Start: 297
-Caret: 344
-Name: ``
-Cond block: [1] 
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: first
-  Instruction: objSoloTest
-  Instruction Start: 0
-  Caret: 17
-  Name: ``
-  Alias: ``
-  Blocks: [1] 
-  =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: .
-    Instruction: length
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  name2 
     Instruction Start: 11
-    Caret: 17
+    Caret: 18
     Name: ``
     Alias: ``
     Blocks: [0] 
     =======
-Alias: ``
-Blocks: [1] 
-=======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: first
-  Instruction: objSoloTest
-  Instruction Start: 2
-  Caret: 20
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  from 
+  Instruction Start: 19
+  Caret: 25
   Name: ``
   Alias: ``
-  Blocks: [1] 
+  Blocks: [0] 
   =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: end:method
-    Instruction: shift
-    Instruction Start: 13
-    Caret: 20
-    Name: ``
-    Chain Link Method:
-      Block: Tetraquark\Block\CallerBlock
-      Subtype: 
-      Instruction: 
-      Instruction Start: 19
-      Caret: 20
-      Name: ``
-      Alias: ``
-      Blocks: [0] 
-      =======
-    Alias: ``
-    Blocks: [0] 
-    =======
-Duration: 0.005s
+  Block: Tetraquark\Block\StringBlock
+  Subtype: 
+  Instruction: 'path'
+  Instruction Start: 25
+  Caret: 31
+  Name: ``
+  Alias: ``
+  Blocks: [0] 
+  =======
+Duration: 0.011s
 
 
-while(objSoloTest.length){}while(objSoloTest.length){let size=objSoloTest.length;
-console.log(size, objSoloTest[0]);
-objSoloTest.shift()}while(objSoloTest.length)objSoloTest.shift();
-while(objSoloTest.length)objSoloTest.shift();
-while(objSoloTest.length)objSoloTest.shift();
-while(objSoloTest.length)objSoloTest.shift();
+export let name1,name2,nameN;
+export let name1='1',name2='v',nameN;
+export function functionName(){};
+export class ClassName{};
+export{name1,name2,nameN};
+export{variable1 asname1,variable2 asname2,nameN};
+export const{ name1, name2: bar}=o;
+export const[ name1, name2]=array;
+export default expression;
+export default function(){};
+export default function name1(){};
+export{name1 asdefault,name2};
+export*from 'path';
+export*as name1 from 'path';
+export{name1,name2,nameN}from 'path';
+export{import1 asname1,import2 asname2,nameN}from 'path';
+export{default,name2}from 'path';
 

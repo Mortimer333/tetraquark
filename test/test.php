@@ -10,6 +10,7 @@ $tetra = new Tetraquark();
 // $minified = $tetra->minify(__DIR__ . '/data/comment.js');
 // $minified = $tetra->minify(__DIR__ . '/data/caller.js');
 // $minified = $tetra->minify(__DIR__ . '/data/dowhile.js');
+$minified = $tetra->minify(__DIR__ . '/data/export.js');
 // $minified = $tetra->minify(__DIR__ . '/data/for.js');
 // $minified = $tetra->minify(__DIR__ . '/data/function.js');
 // $minified = $tetra->minify(__DIR__ . '/data/ifelse.js');
@@ -18,7 +19,7 @@ $tetra = new Tetraquark();
 // $minified = $tetra->minify(__DIR__ . '/data/spread.js');
 // $minified = $tetra->minify(__DIR__ . '/data/switch.js');
 // $minified = $tetra->minify(__DIR__ . '/data/variable.js');
-$minified = $tetra->minify(__DIR__ . '/data/while.js');
+// $minified = $tetra->minify(__DIR__ . '/data/while.js');
 
 // $minified = $tetra->minify(__DIR__ . '/data/single-function.js');
 // $minified = $tetra->minify('/var/www/html/tab_jf/module/_hidden.js');

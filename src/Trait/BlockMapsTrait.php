@@ -141,6 +141,19 @@ trait BlockMapsTrait
                         "\n" => "ElseBlock",
                     ]
                 ]
+            ],
+            "x" => [
+                "p" => [
+                    "o" => [
+                        "r" => [
+                            "t" => [
+                                "{" => "ExportBlock",
+                                ' '  => 'ExportBlock',
+                                "\n" => "ExportBlock",
+                            ]
+                        ]
+                    ]
+                ]
             ]
         ],
         "r" => [

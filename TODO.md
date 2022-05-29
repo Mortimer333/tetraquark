@@ -4,8 +4,8 @@
 
 This is supposed to be a minifier and obfuscator in one. But due to project with higher priority the obfuscator functionality won't be finished and this library will be only joining and minifing files. There is about 50% work done on obfuscator but this is still not usable.
 
+## Add to variables Deconstructed assignment - https://medium.com/swlh/javascript-best-practices-renaming-imports-and-proper-variable-declaration-aa405c191bee
 ## If CallerBlock try to get caller name
-## `While` and `for` can be without brackets - single statment
 ## 0. If
 ```js
 let obj = {
