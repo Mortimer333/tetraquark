@@ -138,7 +138,7 @@ abstract class BlockAbstract
         return new $class($start, $hint, $this);
     }
 
-    protected function findInstructionEnd(int $start, string $name, ?array $endChars = null, bool $skipString = true): void
+    protected function findInstructionEnd(int $start, string $name = '', ?array $endChars = null, bool $skipString = true): void
     {
         if (\is_null($endChars)) {
             $endChars = $this->endChars;
@@ -167,7 +167,7 @@ abstract class BlockAbstract
         }
 
         if (is_null($properEnd)) {
-            $properEnd = self::$content->getLength() - 1;
+            $properEnd = self::$content->getLength();
             $this->setCaret($properEnd);
         }
 
@@ -239,6 +239,7 @@ abstract class BlockAbstract
         Log::increaseIndent();
         for ($i=$start; $i < self::$content->getLength(); $i++) {
             $letter = self::$content->getLetter($i);
+            // Log::log("Letter: " . $letter);
             if (
                 ($startsTemplate = Validate::isTemplateLiteralLandmark($letter, ''))
                 || Validate::isStringLandmark($letter, '')

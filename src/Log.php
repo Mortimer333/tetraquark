@@ -134,6 +134,15 @@ class Log
             if (method_exists($block, 'getValue')) {
                 self::log("Value: `" . $block->getValue() . "`");
             }
+            if (method_exists($block, 'getOldName')) {
+                self::log("Old Name: `" . $block->getOldName() . "`");
+            }
+            if (method_exists($block, 'getNewName')) {
+                self::log("New Name: `" . $block->getNewName() . "`");
+            }
+            if (method_exists($block, 'getPath')) {
+                self::log("Path: `" . $block->getPath() . "`");
+            }
             if (method_exists($block, 'getArguments')) {
                 self::log("Arguments: [" . \sizeof($block->getArguments()) . "] `");
                 self::increaseIndent();

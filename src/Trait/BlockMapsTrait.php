@@ -344,11 +344,46 @@ trait BlockMapsTrait
     ];
     protected array $returnBlocksMap = [
         "{" => "ObjectBlock",
-        // "[" => "ArrayBlock"
     ];
     protected array $chainLinkBlocksMap = [
         "{" => "ObjectBlock",
-        // "[" => "ArrayBlock"
+    ];
+    protected array $exportBlocksMap = [
+        "{" => "ExportObjectBlock",
+        "&_" => [
+            "d" => [
+                "e" => [
+                    "f" => [
+                        "a" => [
+                            "u" => [
+                                "l" => [
+                                    "t" => [
+                                        ' '  => 'ExportDefaultBlock',
+                                        "\n" => "ExportDefaultBlock",
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            "f" => [
+                "r" => [
+                    "o" => [
+                        "m" => [
+                            ' '  => 'ExportFromBlock',
+                            "\n" => "ExportFromBlock",
+                            "'"  => "ExportFromBlock",
+                            '"'  => "ExportFromBlock",
+                            "`"  => "ExportFromBlock",
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ];
+    protected array $exportObjectBlocksMap = [
+        "," => "ExportObjectItemBlock",
     ];
 
     protected function getDefaultMap(): array
@@ -370,6 +405,7 @@ trait BlockMapsTrait
             Block\ObjectBlock          ::class => $this->objectBlocksMap,
             Block\ObjectValueBlock     ::class => $this->objectValueBlocksMap,
             Block\ReturnBlock          ::class => $this->returnBlocksMap,
+            Block\ExportBlock          ::class => $this->exportBlocksMap,
         ];
 
         $blocksMap = $this->mergeBlockMaps($blocksMap, $additionalPaths[$this::class] ?? []);
@@ -379,7 +415,7 @@ trait BlockMapsTrait
             if ($this instanceof Block\MethodBlock && $this->getStatus() === $this::CREATING_ARGUMENTS) {
                 $blocksMap = $this->mergeBlockMaps($blocksMap, $this->callerArgsBlocksMap);
             }
-        } elseif ($this instanceof Foundation\VariableBlockAbstract) {
+        } elseif ($this instanceof Foundation\VariableBlockAbstract && !$this instanceof Block\ExportBlock) {
             $blocksMap = $this->mergeBlockMaps($blocksMap, $this->variableBlocksMap);
         } elseif ($this instanceof Block\ObjectBlock || $this instanceof Block\ClassBlock) {
             // Here we remove all directions to any Block which isn't special symbol.
@@ -403,33 +439,59 @@ trait BlockMapsTrait
                     }
                 }
             }
+        } elseif ($this instanceof Block\ExportObjectBlock) {
+            $blocksMap = $this->exportObjectBlocksMap;
         }
+
+        // if ($this instanceof Block\ExportBlock) {
+        //     die(json_encode($blocksMap));
+        // }
+
         return $blocksMap;
     }
 
-    protected function mergeBlockMaps(array $map1, array $map2): array
+    protected function mergeBlockMaps(array $old, array $new): array
     {
         /*
         ar = [
             '{' =>[
                 'f' => ...
-                ?'default' => ...
+                'default' => ...
             ],
             ' ' =>[
                 'f' => ...
-                ?'default' => ...
+                'default' => ...
             ],
         ]
          */
-        foreach ($this->newConditionAppearers as $value) {
-            if (isset($map2[$value]) && is_string($map2[$value])) {
-                $map1[$value]['default'] = $map2[$value];
-            } else {
-                $map1[$value] = array_merge($map1[$value], $map2[$value] ?? []);
-            }
-            unset($map2[$value]);
+        $onlyConditionAppearers = [];
+        if (isset($new["&_"])) {
+            $onlyConditionAppearers = $new["&_"];
+            unset($new["&_"]);
         }
-        return array_merge($map1, $map2);
+
+        $old = $this->addStepsToBlockMap($old, $new);
+
+        foreach ($this->newConditionAppearers as $value) {
+            if (is_array($old[$value])) {
+                $old[$value] = $this->addStepsToBlockMap($old[$value], $new);
+                $old[$value] = $this->addStepsToBlockMap($old[$value], $onlyConditionAppearers);
+            }
+        }
+
+        return $old;
+    }
+
+    private function addStepsToBlockMap(array $blocksMap, array $steps): array
+    {
+        foreach ($steps as $landmark => $step) {
+            if (isset($blocksMap[$landmark]) && is_array($step)) {
+                $blocksMap[$landmark] = $this->addStepsToBlockMap($blocksMap, $step);
+            } else {
+                $blocksMap[$landmark] = $step;
+            }
+        }
+        return $blocksMap;
     }
 
     protected function decideArrayBlockType(int $start) {

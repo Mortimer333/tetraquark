@@ -29,7 +29,7 @@ class Validate
         'export' => true, 'import' => true, 'implements' => true, 'let' => true,
         'private' => true, 'public' => true, 'yield' => true, 'interface' => true,
         'package' => true, 'protected' => true, 'static' => true, 'null' => true,
-        'true' => true, 'false' => true
+        'true' => true, 'false' => true, 'from' => true
     ];
 
     public static function getSpecial(): array
@@ -83,7 +83,7 @@ class Validate
         return $strings[$letter] ?? false;
     }
 
-    public static function isStringLandmark(string $letter, string $previousLetter, bool $inString = false): bool
+    public static function isStringLandmark(string $letter, string $previousLetter = '', bool $inString = false): bool
     {
         return ($letter === '"' || $letter === "'")
             && (
