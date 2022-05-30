@@ -16,7 +16,6 @@ export default function name1() {}
 export { name1 as default, name2};
 
 export * from 'path';
-export * as name1 from 'path';
 export { name1, name2, nameN } from 'path';
 export {
     name1,
@@ -31,3 +30,4 @@ export {
 } from 'path';
 export { default, name2 } from
 'path';
+export * as name1 from 'path';

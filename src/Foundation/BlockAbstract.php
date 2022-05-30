@@ -306,13 +306,13 @@ abstract class BlockAbstract
                 $possibleUndefined = '';
                 $block->setChildIndex(\sizeof($blocks));
                 $blocks[] = $block;
-                $mappedWord = ' ';
-                $map = null;
+                $mappedWord = '';
+                $map = $this->getDefaultMap()[' '] ?? null;
+
                 // BlockChain Blocks can only have one child if they don't close the chain
                 if ($onlyOne) {
                     break;
                 }
-                $map = $this->getDefaultMap()[' '] ?? null;
                 continue;
             } elseif (\is_null($map)) {
                 $mappedWord = '';
@@ -661,6 +661,36 @@ abstract class BlockAbstract
         }
 
         return [Str::rev($word), 0];
+    }
+
+    protected function getNextWord(int $start, Content $content): array
+    {
+        $letterFound = false;
+        $whitespaceFound = false;
+        $word = '';
+        for ($i=$start; $i < $content->getLength(); $i++) {
+            $letter = $content->getLetter($i);
+            if (Validate::isWhitespace($letter)) {
+                if (!$whitespaceFound) {
+                    $whitespaceFound = true;
+                } elseif ($letterFound) {
+                    return [$word, $i - 1];
+                }
+                continue;
+            }
+
+            if ($letterFound) {
+                $word .= $letter;
+            }
+
+            if ($whitespaceFound && !$letterFound) {
+                $word .= $letter;
+                $letterFound = true;
+                continue;
+            }
+        }
+
+        return [$word, 0];
     }
 
     protected function checkIfFirstLetterInNextSiblingIsADot(): bool

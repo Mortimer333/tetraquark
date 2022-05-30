@@ -350,6 +350,9 @@ trait BlockMapsTrait
     ];
     protected array $exportBlocksMap = [
         "{" => "ExportObjectBlock",
+        "*" => [
+            "default" => "ExportAllBlock"
+        ],
         "&_" => [
             "d" => [
                 "e" => [
@@ -486,7 +489,7 @@ trait BlockMapsTrait
     {
         foreach ($steps as $landmark => $step) {
             if (isset($blocksMap[$landmark]) && is_array($step)) {
-                $blocksMap[$landmark] = $this->addStepsToBlockMap($blocksMap, $step);
+                $blocksMap[$landmark] = $this->addStepsToBlockMap($blocksMap[$landmark], $step);
             } else {
                 $blocksMap[$landmark] = $step;
             }

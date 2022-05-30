@@ -128,33 +128,16 @@ Instruction Start: 76
 Caret: 109
 Name: ``
 Alias: ``
-Blocks: [3] 
+Blocks: [1] 
 =======
-  Block: Tetraquark\Block\UndefinedBlock
-  Subtype: 
-  Instruction:  function functionName
-  Instruction Start: -23
-  Caret: -1
-  Name: ``
-  Alias: ``
-  Blocks: [0] 
-  =======
-  Block: Tetraquark\Block\CallerBlock
-  Subtype: (
-  Instruction: 
-  Instruction Start: 22
-  Caret: 23
-  Name: ``
-  Alias: ``
-  Blocks: [0] 
-  =======
-  Block: Tetraquark\Block\ExportObjectBlock
-  Subtype: {
-  Instruction: 
-  Instruction Start: 24
+  Block: Tetraquark\Block\FunctionBlock
+  Subtype: function
+  Instruction: function functionName(){
+  Instruction Start: 0
   Caret: 25
-  Name: ``
-  Alias: ``
+  Name: `functionName`
+  Arguments: [0] `
+  Alias: `functionName`
   Blocks: [0] 
   =======
 Block: Tetraquark\Block\ExportBlock
@@ -387,7 +370,7 @@ Instruction Start: 331
 Caret: 362
 Name: ``
 Alias: ``
-Blocks: [4] 
+Blocks: [2] 
 =======
   Block: Tetraquark\Block\ExportDefaultBlock
   Subtype: default
@@ -398,30 +381,13 @@ Blocks: [4]
   Alias: ``
   Blocks: [0] 
   =======
-  Block: Tetraquark\Block\UndefinedBlock
-  Subtype: 
-  Instruction: function 
-  Instruction Start: -1
-  Caret: 8
-  Name: ``
-  Alias: ``
-  Blocks: [0] 
-  =======
-  Block: Tetraquark\Block\CallerBlock
-  Subtype: (
-  Instruction: 
-  Instruction Start: 18
-  Caret: 19
-  Name: ``
-  Alias: ``
-  Blocks: [0] 
-  =======
-  Block: Tetraquark\Block\ExportObjectBlock
-  Subtype: {
-  Instruction: 
-  Instruction Start: 21
+  Block: Tetraquark\Block\FunctionBlock
+  Subtype: anonymous:function
+  Instruction: function () {
+  Instruction Start: 8
   Caret: 23
   Name: ``
+  Arguments: [0] `
   Alias: ``
   Blocks: [0] 
   =======
@@ -432,7 +398,7 @@ Instruction Start: 362
 Caret: 397
 Name: ``
 Alias: ``
-Blocks: [4] 
+Blocks: [2] 
 =======
   Block: Tetraquark\Block\ExportDefaultBlock
   Subtype: default
@@ -443,31 +409,14 @@ Blocks: [4]
   Alias: ``
   Blocks: [0] 
   =======
-  Block: Tetraquark\Block\UndefinedBlock
-  Subtype: 
-  Instruction: function name1
-  Instruction Start: -6
-  Caret: 8
-  Name: ``
-  Alias: ``
-  Blocks: [0] 
-  =======
-  Block: Tetraquark\Block\CallerBlock
-  Subtype: (
-  Instruction: 
-  Instruction Start: 23
-  Caret: 24
-  Name: ``
-  Alias: ``
-  Blocks: [0] 
-  =======
-  Block: Tetraquark\Block\ExportObjectBlock
-  Subtype: {
-  Instruction: 
-  Instruction Start: 26
+  Block: Tetraquark\Block\FunctionBlock
+  Subtype: function
+  Instruction: function name1() {
+  Instruction Start: 8
   Caret: 27
-  Name: ``
-  Alias: ``
+  Name: `name1`
+  Arguments: [0] `
+  Alias: `name1`
   Blocks: [0] 
   =======
 Block: Tetraquark\Block\ExportBlock
@@ -489,7 +438,7 @@ Blocks: [1]
   Blocks: [2] 
   =======
     Block: Tetraquark\Block\ExportObjectItemBlock
-    Subtype: aliased
+    Subtype: default aliased
     Instruction:  name1 as default
     Instruction Start: 2
     Caret: 20
@@ -519,12 +468,13 @@ Name: ``
 Alias: ``
 Blocks: [2] 
 =======
-  Block: Tetraquark\Block\SymbolBlock
+  Block: Tetraquark\Block\ExportAllBlock
   Subtype: *
   Instruction: *
-  Instruction Start: 1
+  Instruction Start: 0
   Caret: 1
   Name: ``
+  New Name: ``
   Alias: ``
   Blocks: [0] 
   =======
@@ -540,46 +490,9 @@ Blocks: [2]
   =======
 Block: Tetraquark\Block\ExportBlock
 Subtype: export
-Instruction:  * as name1 from 'path'
-Instruction Start: 454
-Caret: 484
-Name: ``
-Alias: ``
-Blocks: [3] 
-=======
-  Block: Tetraquark\Block\SymbolBlock
-  Subtype: *
-  Instruction: *
-  Instruction Start: 1
-  Caret: 1
-  Name: ``
-  Alias: ``
-  Blocks: [0] 
-  =======
-  Block: Tetraquark\Block\UndefinedBlock
-  Subtype: 
-  Instruction:  as name1
-  Instruction Start: -8
-  Caret: 1
-  Name: ``
-  Alias: ``
-  Blocks: [0] 
-  =======
-  Block: Tetraquark\Block\ExportFromBlock
-  Subtype: from
-  Instruction:  from 'path'
-  Instruction Start: 11
-  Caret: 23
-  Name: ``
-  Path: `path`
-  Alias: ``
-  Blocks: [0] 
-  =======
-Block: Tetraquark\Block\ExportBlock
-Subtype: export
 Instruction:  { name1, name2, nameN } from 'path'
-Instruction Start: 485
-Caret: 528
+Instruction Start: 454
+Caret: 497
 Name: ``
 Alias: ``
 Blocks: [2] 
@@ -639,8 +552,8 @@ Blocks: [2]
 Block: Tetraquark\Block\ExportBlock
 Subtype: export
 Instruction:  {\n name1,\n name2,\n nameN\n} from 'path'
-Instruction Start: 529
-Caret: 575
+Instruction Start: 498
+Caret: 544
 Name: ``
 Alias: ``
 Blocks: [2] 
@@ -700,8 +613,8 @@ Blocks: [2]
 Block: Tetraquark\Block\ExportBlock
 Subtype: export
 Instruction:  { import1 as name1, import2 as name2, nameN } from 'path'
-Instruction Start: 576
-Caret: 641
+Instruction Start: 545
+Caret: 610
 Name: ``
 Alias: ``
 Blocks: [2] 
@@ -761,8 +674,8 @@ Blocks: [2]
 Block: Tetraquark\Block\ExportBlock
 Subtype: export
 Instruction:  {\n import1 as name1,\n import2 as name2,\n nameN\n} from 'path'
-Instruction Start: 642
-Caret: 710
+Instruction Start: 611
+Caret: 679
 Name: ``
 Alias: ``
 Blocks: [2] 
@@ -822,8 +735,8 @@ Blocks: [2]
 Block: Tetraquark\Block\ExportBlock
 Subtype: export
 Instruction:  { default, name2 } from\n'path'
-Instruction Start: 711
-Caret: 749
+Instruction Start: 680
+Caret: 718
 Name: ``
 Alias: ``
 Blocks: [2] 
@@ -869,7 +782,36 @@ Blocks: [2]
   Alias: ``
   Blocks: [0] 
   =======
-Duration: 0.013s
+Block: Tetraquark\Block\ExportBlock
+Subtype: export
+Instruction:  * as name1 from 'path'
+Instruction Start: 719
+Caret: 749
+Name: ``
+Alias: ``
+Blocks: [2] 
+=======
+  Block: Tetraquark\Block\ExportAllBlock
+  Subtype: new name
+  Instruction: * as name1
+  Instruction Start: 0
+  Caret: 10
+  Name: ``
+  New Name: `name1`
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\ExportFromBlock
+  Subtype: from
+  Instruction:  from 'path'
+  Instruction Start: 11
+  Caret: 23
+  Name: ``
+  Path: `path`
+  Alias: ``
+  Blocks: [0] 
+  =======
+Duration: 0.011s
 
 
 export let name1,name2,nameN;
@@ -885,10 +827,10 @@ export default function(){};
 export default function name1(){};
 export{name1 as default,name};
 export* from 'path';
-export*as name1 from 'path';
 export{name1,name2,nameN} from 'path';
 export{name1,name2,nameN} from 'path';
 export{import1 as name1,import2 as name2,nameN} from 'path';
 export{import1 as name1,import2 as name2,nameN} from 'path';
 export{default,name2} from 'path';
+export*as name1 from 'path';
 

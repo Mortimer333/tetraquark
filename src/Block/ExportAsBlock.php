@@ -18,15 +18,6 @@ class ExportAsBlock extends Block implements Contract\Block
             ->setCaret($end)
         ;
         $this->blocks = $this->createSubBlocksWithContent($this->getInstruction()->__toString());
-
-        // if ($letter == '{') {
-        //     $this->setSubtype(self::MULTI_LINE);
-        //     $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
-        // } else {
-        //     $this->setSubtype(self::SINGLE_LINE);
-        //     $items = $this->seperateVariableItems($properStart, $end);
-        //     $this->addVariableItems($items);
-        // }
     }
 
     public function recreate(): string

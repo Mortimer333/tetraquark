@@ -7,6 +7,7 @@ use \Tetraquark\Foundation\BlockAbstract as Block;
 class ExportObjectItemBlock extends Block implements Contract\Block
 {
     public const ALIASED = 'aliased';
+    PUBLIC CONST DEFAULT_ALIASED = 'default aliased';
     protected array $endChars = [
         "," => true,
         "{" => true,
@@ -24,6 +25,10 @@ class ExportObjectItemBlock extends Block implements Contract\Block
             $this->setSubtype(self::ALIASED);
             $this->setOldName($parted[0]);
             $this->setNewName($parted[2]);
+
+            if ($parted[2] === 'default') {
+                $this->setSubtype(self::DEFAULT_ALIASED);
+            }
         }
         $this->setCaret($start + 1);
     }
