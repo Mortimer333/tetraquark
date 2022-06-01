@@ -18,6 +18,14 @@ class NewClassBlock extends MethodBlock implements Contract\Block
 
         for ($i=$start; $i < self::$content->getLength(); $i++) {
             $letter = self::$content->getLetter($i);
+            if (
+                ($startsTemplate = Validate::isTemplateLiteralLandmark($letter, ''))
+                || Validate::isStringLandmark($letter, '')
+            ) {
+                $i = $this->skipString($letter, $i + 1, self::$content, $startsTemplate);
+                $letter = self::$content->getLetter($i);
+            }
+
             if (Validate::isWhitespace($letter)) {
                 if ($nameStarted) {
                     $nameEnded = true;

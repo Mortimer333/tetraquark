@@ -225,6 +225,15 @@ abstract class BlockAbstract
         return $undefined;
     }
 
+    protected function canHaveAnotheChild(string $map): bool
+    {
+        return (
+            $this::class === Block\ChainLinkBlock::class
+            || $this::class === Block\BracketChainLinkBlock::class
+        ) && $map !== 'ChainLinkBlock'
+        && $map !== 'BracketChainLinkBlock';
+    }
+
     protected function createSubBlocks(?int $start = null, bool $onlyOne = false, $special = false): array
     {
         if (is_null($start)) {
@@ -270,13 +279,7 @@ abstract class BlockAbstract
             $possibleUndefined .= $letter;
             $map = $this->journeyForBlockClassName($letter, $mappedWord, $possibleUndefined, $i, $map);
             if (gettype($map) == 'string') {
-                if ((
-                        $this::class === Block\ChainLinkBlock::class
-                        || $this::class === Block\BracketChainLinkBlock::class
-                    ) && $map !== 'ChainLinkBlock'
-                    && $map !== 'BracketChainLinkBlock'
-                    && $onlyOne
-                ) {
+                if ($this->canHaveAnotheChild($map) && $onlyOne) {
                     $i -= \mb_strlen($possibleUndefined);
                     $possibleUndefined = '';
                     break;
@@ -321,7 +324,11 @@ abstract class BlockAbstract
             if ($this->endChars[$letter] ?? false) {
                 $possibleUndefined = \mb_substr($possibleUndefined, 0, -1);
                 if (Validate::isValidUndefined($possibleUndefined)) {
-                    $blocks[] = $this->generateUndefined($i - \mb_strlen($possibleUndefined), $possibleUndefined, \sizeof($blocks));
+                    if ($this->canHaveAnotheChild('UndefinedBlock') && $onlyOne) {
+                        $i -= \mb_strlen($possibleUndefined) + 1;
+                    } else {
+                        $blocks[] = $this->generateUndefined($i - \mb_strlen($possibleUndefined), $possibleUndefined, \sizeof($blocks));
+                    }
                     $possibleUndefined = '';
                 }
                 break;
@@ -333,9 +340,14 @@ abstract class BlockAbstract
         }
 
         if (Validate::isValidUndefined($possibleUndefined)) {
-            $undefined = new Block\UndefinedBlock($i - \mb_strlen($possibleUndefined), $possibleUndefined, '', $this);
-            $undefined->setChildIndex(\sizeof($blocks));
-            $blocks[] = $undefined;
+            if ($this->canHaveAnotheChild('UndefinedBlock') && $onlyOne) {
+                $i -= \mb_strlen($possibleUndefined);
+                $possibleUndefined = '';
+            } else {
+                $undefined = new Block\UndefinedBlock($i - \mb_strlen($possibleUndefined), $possibleUndefined, '', $this);
+                $undefined->setChildIndex(\sizeof($blocks));
+                $blocks[] = $undefined;
+            }
         }
         $this->setCaret($i);
         return $blocks;

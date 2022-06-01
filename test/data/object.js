@@ -85,3 +85,9 @@ tem['as' + meh]
 tem[`as${meh}`].ga
 
 fdg.asd.cxsds('a').asd;
+
+const event = {
+    pos       : this.get.clonedPos(),
+    event     : e,
+    selection : '',
+};

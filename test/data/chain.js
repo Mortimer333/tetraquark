@@ -39,6 +39,8 @@ methodsSave.forEach(path => {
   this.set.preciseMethodsProxy(this, path);
 });
 this.render.content[ this.pos.line ].content = this.truck.exportLine( el.parentElement ).content;
+
+variable++
 this.pos.line--;
 --this.pos.line;
 
@@ -48,3 +50,4 @@ dot.pos;
 
 pos['dot']--
 dot['pos']
+this.syntax.groups[0].end[sentence[0]]

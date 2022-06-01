@@ -1,4 +1,4 @@
-/*class ClassName {
+class ClassName {
     novalue
     testAttr = 1
     constructor() {
@@ -31,7 +31,7 @@ ClassName
 
 if(!õ||!ú) throw new Error('Couldn\'t find lines');
 throw new Error("Parent has wrong tag, can't find proper lines");
-*/
+
 class noValue {
     novalue
     test = 1;
@@ -39,3 +39,5 @@ class noValue {
     funcr2() {}
 
 }
+
+if ( editor.nodeType != 1                  ) throw new Error('Editor node has to be of proper node type. (1)'                    );

@@ -18,13 +18,13 @@ class OperatorBlock extends Block implements Contract\Block
         $this->setName('');
         $this->setCaret($start + 1);
         $this->setInstructionStart($start - 1);
-        for ($i=$start; $i >= 0; $i--) {
+        for ($i=$start - 2; $i >= 0; $i--) {
             $letter = self::$content->getLetter($i);
             if ($letter == ' ') {
                 continue;
             }
 
-            if ($letter == "\n" || $letter == ";") {
+            if (Validate::isSpecial($letter)) {
                 $this->addSemicolon = false;
                 break;
             }
@@ -37,16 +37,14 @@ class OperatorBlock extends Block implements Contract\Block
     public function recreate(): string
     {
         $script = $this->getInstruction()->__toString();
-        if ($this->addSemicolon) {
-            if ($script === '--' || $script == '++') {
-                $parent = $this->getParent();
-                $nextBlock = $parent->getBlocks()[$this->getChildIndex() + 1] ?? null;
-                if ($nextBlock && $nextBlock::class !== ChainLinkBlock::class && $nextBlock::class !== BracketChainLinkBlock::class) {
-                    $script .= ';';
-                }
-            } else {
+        if (!$this->addSemicolon) {
+            $parent = $this->getParent();
+            $nextBlock = $parent->getBlocks()[$this->getChildIndex() + 1] ?? null;
+            if ($nextBlock && $nextBlock::class !== ChainLinkBlock::class && $nextBlock::class !== BracketChainLinkBlock::class) {
                 $script .= ';';
             }
+        } else {
+            $script .= ';';
         }
         return $script;
     }

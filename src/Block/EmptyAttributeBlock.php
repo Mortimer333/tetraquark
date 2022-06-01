@@ -38,6 +38,6 @@ class EmptyAttributeBlock extends Block implements Contract\Block
             $script .= $block->recreate();
         }
 
-        return trim($script) . ';';
+        return trim(trim($script), ';') . ';';
     }
 }
