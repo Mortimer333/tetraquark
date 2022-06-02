@@ -57,7 +57,12 @@ abstract class VariableBlockAbstract extends BlockAbstract
                 }
 
                 list($previousWord) = $this->getPreviousWord($i, self::$content);
-                if (Validate::isTakenKeyWord($previousWord)) {
+                if (Validate::isExtendingKeyWord($previousWord)) {
+                    continue;
+                }
+
+                list($nextWord) = $this->getNextWord($i, self::$content);
+                if (Validate::isExtendingKeyWord($nextWord)) {
                     continue;
                 }
 

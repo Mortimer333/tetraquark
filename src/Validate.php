@@ -32,6 +32,11 @@ class Validate
         'true' => true, 'false' => true, 'from' => true
     ];
 
+    protected static array $extendingsConsts = [
+        'instanceof' => true, 'typeof' => true, 'in' => true, 'extends' => true,
+        'implements' => true, 'interface' => true, 'from' => true
+    ];
+
     public static function getSpecial(): array
     {
         return self::$special;
@@ -40,6 +45,11 @@ class Validate
     public static function isTakenKeyWord(string $word): bool
     {
         return self::$notAllowedConsts[$word] ?? false;
+    }
+
+    public static function isExtendingKeyWord(string $word): bool
+    {
+        return self::$extendingsConsts[$word] ?? false;
     }
 
     public static function isValidVariable(string $variable): bool

@@ -14,6 +14,7 @@ $tetra = new Tetraquark();
 // $minified = $tetra->minify(__DIR__ . '/data/for.js');
 // $minified = $tetra->minify(__DIR__ . '/data/function.js');
 // $minified = $tetra->minify(__DIR__ . '/data/ifelse.js');
+$minified = $tetra->minify(__DIR__ . '/data/import.js');
 // $minified = $tetra->minify(__DIR__ . '/data/object.js');
 // $minified = $tetra->minify(__DIR__ . '/data/shortIf.js');
 // $minified = $tetra->minify(__DIR__ . '/data/spread.js');
@@ -22,7 +23,7 @@ $tetra = new Tetraquark();
 // $minified = $tetra->minify(__DIR__ . '/data/while.js');
 
 // $minified = $tetra->minify(__DIR__ . '/data/single-function.js');
-$minified = $tetra->minify('/var/www/html/tab_jf/main.js');
+// $minified = $tetra->minify('/var/www/html/tab_jf/main.js');
 // $minified = $tetra->minify('E:\xampp\htdocs\tab_jf\main.js');
-echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
-// echo PHP_EOL . PHP_EOL . str_replace(';', ";\n", $minified ?? '') . PHP_EOL;
+// echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
+echo PHP_EOL . PHP_EOL . str_replace(';', ";\n", $minified ?? '') . PHP_EOL;

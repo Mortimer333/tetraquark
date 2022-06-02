@@ -18,40 +18,6 @@ trait BlockMapsTrait
      * @var array
      */
     protected array $blocksMapPrefix = [
-        'f' => [
-            'o' => [
-                'r' => [
-                    ' '  => 'ForBlock',
-                    "\n" => "ForBlock",
-                    '('  => "ForBlock",
-                ]
-            ],
-            'u' => [
-                'n' => [
-                    'c' => [
-                        't' => [
-                            'i' => [
-                                'o' => [
-                                    'n' => [
-                                        ' '  => 'FunctionBlock',
-                                        "\n" => "FunctionBlock",
-                                        "("  => "FunctionBlock",
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ]
-        ],
-        'l' => [
-            'e' => [
-                't' => [
-                    ' '  => 'VariableBlock',
-                    "\n" => "VariableBlock",
-                ]
-            ]
-        ],
         'c' => [
             'o' => [
                 'n' => [
@@ -69,57 +35,6 @@ trait BlockMapsTrait
                         's' => [
                             ' '  => 'ClassBlock',
                             "\n" => "ClassBlock",
-                        ]
-                    ]
-                ]
-            ]
-        ],
-        'v' => [
-            'a' => [
-                'r' => [
-                    ' '  => 'VariableBlock',
-                    "\n" => "VariableBlock",
-                ],
-            ]
-        ],
-        'n' => [
-            'e' => [
-                'w' => [
-                    ' '  => 'NewClassBlock',
-                    "\n" => "NewClassBlock",
-                ]
-            ]
-        ],
-        'i' => [
-            'f' => [
-                ' '  => "IfBlock",
-                "\n" => "IfBlock",
-                "("  => "IfBlock",
-            ]
-        ],
-        "w" => [
-            "h" => [
-                "i" => [
-                    "l" => [
-                        "e" => [
-                            ' '  => 'WhileBlock',
-                            "\n" => "WhileBlock",
-                            '('  => "WhileBlock",
-                        ]
-                    ]
-                ]
-            ]
-        ],
-        "s" => [
-            "w" => [
-                "i" => [
-                    "t" => [
-                        "c" => [
-                            "h" => [
-                                ' '  => 'SwitchBlock',
-                                "\n" => "SwitchBlock",
-                                '('  => "SwitchBlock",
-                            ]
                         ]
                     ]
                 ]
@@ -156,6 +71,67 @@ trait BlockMapsTrait
                 ]
             ]
         ],
+        'f' => [
+            'o' => [
+                'r' => [
+                    ' '  => 'ForBlock',
+                    "\n" => "ForBlock",
+                    '('  => "ForBlock",
+                ]
+            ],
+            'u' => [
+                'n' => [
+                    'c' => [
+                        't' => [
+                            'i' => [
+                                'o' => [
+                                    'n' => [
+                                        ' '  => 'FunctionBlock',
+                                        "\n" => "FunctionBlock",
+                                        "("  => "FunctionBlock",
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        'i' => [
+            'f' => [
+                ' '  => "IfBlock",
+                "\n" => "IfBlock",
+                "("  => "IfBlock",
+            ],
+            "m" => [
+                "p" => [
+                    "o" => [
+                        "r" => [
+                            "t" => [
+                                ' '  => "ImportBlock",
+                                "\n" => "ImportBlock",
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        'l' => [
+            'e' => [
+                't' => [
+                    ' '  => 'VariableBlock',
+                    "\n" => "VariableBlock",
+                ]
+            ]
+        ],
+        'n' => [
+            'e' => [
+                'w' => [
+                    ' '  => 'NewClassBlock',
+                    "\n" => "NewClassBlock",
+                ]
+            ]
+        ],
         "r" => [
             "e" => [
                 "t" => [
@@ -169,7 +145,43 @@ trait BlockMapsTrait
                     ]
                 ]
             ]
-        ]
+        ],
+        "s" => [
+            "w" => [
+                "i" => [
+                    "t" => [
+                        "c" => [
+                            "h" => [
+                                ' '  => 'SwitchBlock',
+                                "\n" => "SwitchBlock",
+                                '('  => "SwitchBlock",
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        "w" => [
+            "h" => [
+                "i" => [
+                    "l" => [
+                        "e" => [
+                            ' '  => 'WhileBlock',
+                            "\n" => "WhileBlock",
+                            '('  => "WhileBlock",
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        'v' => [
+            'a' => [
+                'r' => [
+                    ' '  => 'VariableBlock',
+                    "\n" => "VariableBlock",
+                ],
+            ]
+        ],
     ];
 
     protected array $blocksMapNoPrefix = [
@@ -338,6 +350,23 @@ trait BlockMapsTrait
     ];
     protected array $variableBlocksMap = [
         "{" => "ObjectBlock",
+        "&_" => [
+            'i' => [
+                "m" => [
+                    "p" => [
+                        "o" => [
+                            "r" => [
+                                "t" => [
+                                    ' '  => "ImportPromiseBlock",
+                                    "\n" => "ImportPromiseBlock",
+                                    "("  => "ImportPromiseBlock",
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ],
     ];
     protected array $callerArgsBlocksMap = [
         "{" => "ObjectBlock",
@@ -388,6 +417,49 @@ trait BlockMapsTrait
     protected array $exportObjectBlocksMap = [
         "," => "ExportObjectItemBlock",
     ];
+    protected array $importBlocksMap = [
+        "{" => "ImportObjectBlock",
+        "*" => [
+            "default" => "ImportAllBlock"
+        ],
+        "," => [
+            "default" => "ImportItemSeperatorBlock"
+        ],
+        "&_" => [
+            "d" => [
+                "e" => [
+                    "f" => [
+                        "a" => [
+                            "u" => [
+                                "l" => [
+                                    "t" => [
+                                        ' '  => 'ImportDefaultBlock',
+                                        "\n" => "ImportDefaultBlock",
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            "f" => [
+                "r" => [
+                    "o" => [
+                        "m" => [
+                            ' '  => 'ImportFromBlock',
+                            "\n" => "ImportFromBlock",
+                            "'"  => "ImportFromBlock",
+                            '"'  => "ImportFromBlock",
+                            "`"  => "ImportFromBlock",
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ];
+    protected array $importObjectBlocksMap = [
+        "," => "ImportObjectItemBlock",
+    ];
 
     protected function getDefaultMap(): array
     {
@@ -409,6 +481,7 @@ trait BlockMapsTrait
             Block\ObjectValueBlock     ::class => $this->objectValueBlocksMap,
             Block\ReturnBlock          ::class => $this->returnBlocksMap,
             Block\ExportBlock          ::class => $this->exportBlocksMap,
+            Block\ImportBlock          ::class => $this->importBlocksMap,
         ];
 
         $blocksMap = $this->mergeBlockMaps($blocksMap, $additionalPaths[$this::class] ?? []);
@@ -418,7 +491,7 @@ trait BlockMapsTrait
             if ($this instanceof Block\MethodBlock && $this->getStatus() === $this::CREATING_ARGUMENTS) {
                 $blocksMap = $this->mergeBlockMaps($blocksMap, $this->callerArgsBlocksMap);
             }
-        } elseif ($this instanceof Foundation\VariableBlockAbstract && !$this instanceof Block\ExportBlock) {
+        } elseif ($this instanceof Foundation\VariableBlockAbstract && !$this instanceof Block\ExportBlock && !$this instanceof Block\ImportBlock) {
             $blocksMap = $this->mergeBlockMaps($blocksMap, $this->variableBlocksMap);
         } elseif ($this instanceof Block\ObjectBlock || $this instanceof Block\ClassBlock) {
             // Here we remove all directions to any Block which isn't special symbol.
@@ -444,6 +517,8 @@ trait BlockMapsTrait
             }
         } elseif ($this instanceof Block\ExportObjectBlock) {
             $blocksMap = $this->exportObjectBlocksMap;
+        } elseif ($this instanceof Block\ImportObjectBlock) {
+            $blocksMap = $this->importObjectBlocksMap;
         }
 
         // if ($this instanceof Block\ExportBlock) {

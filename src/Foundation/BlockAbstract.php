@@ -218,6 +218,10 @@ abstract class BlockAbstract
     {
         if ($this::class === Block\ClassBlock::class) {
             $undefined = new Block\EmptyAttributeBlock($start, $possibleUndefined, '', $this);
+        } elseif ($this::class === Block\ImportBlock::class) {
+            $undefined = new Block\ImportAsBlock($start, $possibleUndefined, '', $this);
+        } elseif ($this::class === Block\ExportBlock::class) {
+            $undefined = new Block\ExportAsBlock($start, $possibleUndefined, '', $this);
         } else {
             $undefined = new Block\UndefinedBlock($start, $possibleUndefined, '', $this);
         }
@@ -344,9 +348,7 @@ abstract class BlockAbstract
                 $i -= \mb_strlen($possibleUndefined);
                 $possibleUndefined = '';
             } else {
-                $undefined = new Block\UndefinedBlock($i - \mb_strlen($possibleUndefined), $possibleUndefined, '', $this);
-                $undefined->setChildIndex(\sizeof($blocks));
-                $blocks[] = $undefined;
+                $blocks[] = $this->generateUndefined($i - \mb_strlen($possibleUndefined), $possibleUndefined, \sizeof($blocks));
             }
         }
         $this->setCaret($i);

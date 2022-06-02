@@ -4,7 +4,7 @@ namespace Tetraquark\Block;
 use \Tetraquark\{Log, Exception, Contract, Validate, Content};
 use \Tetraquark\Foundation\BlockAbstract as Block;
 
-class ExportAsBlock extends Block implements Contract\Block
+class ImportAsBlock extends Block implements Contract\Block
 {
     public function __construct(
         int $start,

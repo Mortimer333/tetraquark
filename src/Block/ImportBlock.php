@@ -4,12 +4,12 @@ namespace Tetraquark\Block;
 use \Tetraquark\{Log, Exception, Contract, Validate};
 use \Tetraquark\Foundation\VariableBlockAbstract as VariableBlock;
 
-class ExportBlock extends VariableBlock implements Contract\Block
+class ImportBlock extends VariableBlock implements Contract\Block
 {
     public function objectify(int $start = 0)
     {
         $this->setName('');
-        $properStart = $start - (\mb_strlen("export") + 1);
+        $properStart = $start - (\mb_strlen("import") + 1);
         $this->setInstructionStart($properStart);
 
         $end = $this->findVariableEnd($start);
@@ -21,7 +21,7 @@ class ExportBlock extends VariableBlock implements Contract\Block
 
     public function recreate(): string
     {
-        $script = 'export ';
+        $script = 'import ';
 
         foreach ($this->getBlocks() as $block) {
             $script .=  rtrim($block->recreate(), ';');
