@@ -29,4 +29,13 @@ class ClassBlock extends Block implements Contract\Block
         }
         return $script . '}';
     }
+
+    public function recreateForImport(): string
+    {
+        $script = $this->getAlias($this->getName()) . ' = class {';
+        foreach ($this->getBlocks() as $block) {
+            $script .= $block->recreate();
+        }
+        return $script . '}';
+    }
 }

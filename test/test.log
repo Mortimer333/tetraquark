@@ -1,4 +1,88 @@
 Mapping...
+  Mapping...
+  =======================
+  Creating aliases...
+  =======================
+  Aliases: 
+  Recreating...
+  =======================
+  Block: Tetraquark\Block\FunctionBlock
+  Subtype: function
+  Instruction: function defaultFunction() {
+  Instruction Start: 0
+  Caret: 68
+  Name: `defaultFunction`
+  Arguments: [0] `
+  Alias: `defaultFunction`
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: first
+    Instruction: console
+    Instruction Start: 31
+    Caret: 66
+    Name: ``
+    Alias: ``
+    Blocks: [1] 
+    =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: end:method
+      Instruction: log
+      Instruction Start: 38
+      Caret: 66
+      Name: ``
+      Chain Link Method:
+        Block: Tetraquark\Block\CallerBlock
+        Subtype: 
+        Instruction: 
+        Instruction Start: 42
+        Caret: 65
+        Name: ``
+        Alias: ``
+        Blocks: [1] 
+        =======
+          Block: Tetraquark\Block\StringBlock
+          Subtype: 
+          Instruction: 'default fundtion log'
+          Instruction Start: 0
+          Caret: 22
+          Name: ``
+          Alias: ``
+          Blocks: [0] 
+          =======
+      Alias: ``
+      Blocks: [0] 
+      =======
+  Block: Tetraquark\Block\ExportBlock
+  Subtype: export
+  Instruction:  default defaultFunction
+  Instruction Start: 69
+  Caret: 100
+  Name: ``
+  Alias: ``
+  Blocks: [2] 
+  =======
+    Block: Tetraquark\Block\ExportDefaultBlock
+    Subtype: default
+    Instruction: default
+    Instruction Start: 0
+    Caret: 8
+    Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\ExportAsBlock
+    Subtype: 
+    Instruction: defaultFunction
+    Instruction Start: 8
+    Caret: 23
+    Name: ``
+    Old Name: `defaultFunction`
+    Alias: ``
+    Blocks: [0] 
+    =======
+  Duration: 0.002s
+  Heeeeeeeee: function defaultExport(){console.log('default fundtion log');}
 =======================
 Creating aliases...
 =======================
@@ -7,9 +91,9 @@ Recreating...
 =======================
 Block: Tetraquark\Block\ImportBlock
 Subtype: import
-Instruction:  defaultExport from "module-name"
+Instruction:  defaultExport from "E:/xampp/htdocs/tetraquark/test/data/imports/default.js"
 Instruction Start: 0
-Caret: 40
+Caret: 84
 Name: ``
 Alias: ``
 Blocks: [2] 
@@ -19,470 +103,22 @@ Blocks: [2]
   Instruction:  defaultExport
   Instruction Start: -15
   Caret: -1
-  Name: ``
-  Alias: ``
+  Name: `defaultExport`
+  Alias: `defaultExport`
   Blocks: [0] 
   =======
   Block: Tetraquark\Block\ImportFromBlock
   Subtype: from
-  Instruction:  from "module-name"
+  Instruction:  from "E:/xampp/htdocs/tetraquark/test/data/imports/default.js"
   Instruction Start: 14
-  Caret: 33
+  Caret: 77
   Name: ``
-  Path: `module-name`
+  Path: `E:/xampp/htdocs/tetraquark/test/data/imports/default.js`
   Alias: ``
   Blocks: [0] 
   =======
-Block: Tetraquark\Block\ImportBlock
-Subtype: import
-Instruction:  * as name from "module-name"
-Instruction Start: 41
-Caret: 77
-Name: ``
-Alias: ``
-Blocks: [2] 
-=======
-  Block: Tetraquark\Block\ImportAllBlock
-  Subtype: new name
-  Instruction: * as name
-  Instruction Start: 0
-  Caret: 9
-  Name: ``
-  New Name: `name`
-  Alias: ``
-  Blocks: [0] 
-  =======
-  Block: Tetraquark\Block\ImportFromBlock
-  Subtype: from
-  Instruction:  from "module-name"
-  Instruction Start: 10
-  Caret: 29
-  Name: ``
-  Path: `module-name`
-  Alias: ``
-  Blocks: [0] 
-  =======
-Block: Tetraquark\Block\ImportBlock
-Subtype: import
-Instruction:  * as name\nfrom "module-name"
-Instruction Start: 78
-Caret: 114
-Name: ``
-Alias: ``
-Blocks: [2] 
-=======
-  Block: Tetraquark\Block\ImportAllBlock
-  Subtype: new name
-  Instruction: * as name
-  Instruction Start: 0
-  Caret: 9
-  Name: ``
-  New Name: `name`
-  Alias: ``
-  Blocks: [0] 
-  =======
-  Block: Tetraquark\Block\ImportFromBlock
-  Subtype: from
-  Instruction:  from "module-name"
-  Instruction Start: 10
-  Caret: 29
-  Name: ``
-  Path: `module-name`
-  Alias: ``
-  Blocks: [0] 
-  =======
-Block: Tetraquark\Block\ImportBlock
-Subtype: import
-Instruction:  { export1 } from "module-name"
-Instruction Start: 115
-Caret: 153
-Name: ``
-Alias: ``
-Blocks: [2] 
-=======
-  Block: Tetraquark\Block\ImportObjectBlock
-  Subtype: {
-  Instruction: 
-  Instruction Start: 1
-  Caret: 11
-  Name: ``
-  Alias: ``
-  Blocks: [1] 
-  =======
-    Block: Tetraquark\Block\ExportObjectItemBlock
-    Subtype: ,
-    Instruction:  export1
-    Instruction Start: 2
-    Caret: 11
-    Name: ``
-    Old Name: ``
-    New Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-  Block: Tetraquark\Block\ImportFromBlock
-  Subtype: from
-  Instruction:  from "module-name"
-  Instruction Start: 12
-  Caret: 31
-  Name: ``
-  Path: `module-name`
-  Alias: ``
-  Blocks: [0] 
-  =======
-Block: Tetraquark\Block\ImportBlock
-Subtype: import
-Instruction:  { export1 as alias1 } from "module-name"
-Instruction Start: 154
-Caret: 202
-Name: ``
-Alias: ``
-Blocks: [2] 
-=======
-  Block: Tetraquark\Block\ImportObjectBlock
-  Subtype: {
-  Instruction: 
-  Instruction Start: 1
-  Caret: 21
-  Name: ``
-  Alias: ``
-  Blocks: [1] 
-  =======
-    Block: Tetraquark\Block\ExportObjectItemBlock
-    Subtype: aliased
-    Instruction:  export1 as alias1
-    Instruction Start: 2
-    Caret: 21
-    Name: ``
-    Old Name: `export1`
-    New Name: `alias1`
-    Alias: ``
-    Blocks: [0] 
-    =======
-  Block: Tetraquark\Block\ImportFromBlock
-  Subtype: from
-  Instruction:  from "module-name"
-  Instruction Start: 22
-  Caret: 41
-  Name: ``
-  Path: `module-name`
-  Alias: ``
-  Blocks: [0] 
-  =======
-Block: Tetraquark\Block\ImportBlock
-Subtype: import
-Instruction:  { export1 , export2 } from "module-name"
-Instruction Start: 203
-Caret: 251
-Name: ``
-Alias: ``
-Blocks: [2] 
-=======
-  Block: Tetraquark\Block\ImportObjectBlock
-  Subtype: {
-  Instruction: 
-  Instruction Start: 1
-  Caret: 21
-  Name: ``
-  Alias: ``
-  Blocks: [2] 
-  =======
-    Block: Tetraquark\Block\ImportObjectItemBlock
-    Subtype: ,
-    Instruction:  export1 
-    Instruction Start: 2
-    Caret: 12
-    Name: ``
-    Old Name: ``
-    New Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ExportObjectItemBlock
-    Subtype: ,
-    Instruction:  export2
-    Instruction Start: 12
-    Caret: 21
-    Name: ``
-    Old Name: ``
-    New Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-  Block: Tetraquark\Block\ImportFromBlock
-  Subtype: from
-  Instruction:  from "module-name"
-  Instruction Start: 22
-  Caret: 41
-  Name: ``
-  Path: `module-name`
-  Alias: ``
-  Blocks: [0] 
-  =======
-Block: Tetraquark\Block\ImportBlock
-Subtype: import
-Instruction:  { export1 , export2 as alias2 } from "module-name"
-Instruction Start: 252
-Caret: 310
-Name: ``
-Alias: ``
-Blocks: [2] 
-=======
-  Block: Tetraquark\Block\ImportObjectBlock
-  Subtype: {
-  Instruction: 
-  Instruction Start: 1
-  Caret: 31
-  Name: ``
-  Alias: ``
-  Blocks: [2] 
-  =======
-    Block: Tetraquark\Block\ImportObjectItemBlock
-    Subtype: ,
-    Instruction:  export1 
-    Instruction Start: 2
-    Caret: 12
-    Name: ``
-    Old Name: ``
-    New Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ExportObjectItemBlock
-    Subtype: aliased
-    Instruction:  export2 as alias2
-    Instruction Start: 12
-    Caret: 31
-    Name: ``
-    Old Name: `export2`
-    New Name: `alias2`
-    Alias: ``
-    Blocks: [0] 
-    =======
-  Block: Tetraquark\Block\ImportFromBlock
-  Subtype: from
-  Instruction:  from "module-name"
-  Instruction Start: 32
-  Caret: 51
-  Name: ``
-  Path: `module-name`
-  Alias: ``
-  Blocks: [0] 
-  =======
-Block: Tetraquark\Block\ImportBlock
-Subtype: import
-Instruction:  {\n export1 ,\n export2 as alias2\n} from "module-name"
-Instruction Start: 311
-Caret: 371
-Name: ``
-Alias: ``
-Blocks: [2] 
-=======
-  Block: Tetraquark\Block\ImportObjectBlock
-  Subtype: {
-  Instruction: 
-  Instruction Start: 1
-  Caret: 33
-  Name: ``
-  Alias: ``
-  Blocks: [2] 
-  =======
-    Block: Tetraquark\Block\ImportObjectItemBlock
-    Subtype: ,
-    Instruction:   export1 
-    Instruction Start: 2
-    Caret: 13
-    Name: ``
-    Old Name: ``
-    New Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ExportObjectItemBlock
-    Subtype: aliased
-    Instruction:   export2 as alias2
-    Instruction Start: 13
-    Caret: 33
-    Name: ``
-    Old Name: `export2`
-    New Name: `alias2`
-    Alias: ``
-    Blocks: [0] 
-    =======
-  Block: Tetraquark\Block\ImportFromBlock
-  Subtype: from
-  Instruction:  from "module-name"
-  Instruction Start: 34
-  Caret: 53
-  Name: ``
-  Path: `module-name`
-  Alias: ``
-  Blocks: [0] 
-  =======
-Block: Tetraquark\Block\ImportBlock
-Subtype: import
-Instruction:  defaultExport, { export1 } from "module-name"
-Instruction Start: 372
-Caret: 425
-Name: ``
-Alias: ``
-Blocks: [4] 
-=======
-  Block: Tetraquark\Block\ImportAsBlock
-  Subtype: 
-  Instruction:  defaultExport
-  Instruction Start: -15
-  Caret: -1
-  Name: ``
-  Alias: ``
-  Blocks: [0] 
-  =======
-  Block: Tetraquark\Block\ImportItemSeperatorBlock
-  Subtype: ,
-  Instruction: 
-  Instruction Start: 14
-  Caret: 14
-  Name: ``
-  Alias: ``
-  Blocks: [0] 
-  =======
-  Block: Tetraquark\Block\ImportObjectBlock
-  Subtype: {
-  Instruction: 
-  Instruction Start: 16
-  Caret: 26
-  Name: ``
-  Alias: ``
-  Blocks: [1] 
-  =======
-    Block: Tetraquark\Block\ExportObjectItemBlock
-    Subtype: ,
-    Instruction:  export1
-    Instruction Start: 17
-    Caret: 26
-    Name: ``
-    Old Name: ``
-    New Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-  Block: Tetraquark\Block\ImportFromBlock
-  Subtype: from
-  Instruction:  from "module-name"
-  Instruction Start: 27
-  Caret: 46
-  Name: ``
-  Path: `module-name`
-  Alias: ``
-  Blocks: [0] 
-  =======
-Block: Tetraquark\Block\ImportBlock
-Subtype: import
-Instruction:  defaultExport, * as name from "module-name"
-Instruction Start: 426
-Caret: 477
-Name: ``
-Alias: ``
-Blocks: [4] 
-=======
-  Block: Tetraquark\Block\ImportAsBlock
-  Subtype: 
-  Instruction:  defaultExport
-  Instruction Start: -15
-  Caret: -1
-  Name: ``
-  Alias: ``
-  Blocks: [0] 
-  =======
-  Block: Tetraquark\Block\ImportItemSeperatorBlock
-  Subtype: ,
-  Instruction: 
-  Instruction Start: 14
-  Caret: 14
-  Name: ``
-  Alias: ``
-  Blocks: [0] 
-  =======
-  Block: Tetraquark\Block\ImportAllBlock
-  Subtype: new name
-  Instruction: * as name
-  Instruction Start: 15
-  Caret: 24
-  Name: ``
-  New Name: `name`
-  Alias: ``
-  Blocks: [0] 
-  =======
-  Block: Tetraquark\Block\ImportFromBlock
-  Subtype: from
-  Instruction:  from "module-name"
-  Instruction Start: 25
-  Caret: 44
-  Name: ``
-  Path: `module-name`
-  Alias: ``
-  Blocks: [0] 
-  =======
-Block: Tetraquark\Block\ImportBlock
-Subtype: import
-Instruction:  "module-name"
-Instruction Start: 478
-Caret: 499
-Name: ``
-Alias: ``
-Blocks: [1] 
-=======
-  Block: Tetraquark\Block\StringBlock
-  Subtype: 
-  Instruction: "module-name"
-  Instruction Start: 1
-  Caret: 14
-  Name: ``
-  Alias: ``
-  Blocks: [0] 
-  =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: var
-Instruction: var promise = import\n(\n "module-name"\n)
-Instruction Start: 501
-Caret: 540
-Name: ``
-Value: ``
-Alias: ``
-Blocks: [1] 
-=======
-  Block: Tetraquark\Block\VariableItemBlock
-  Subtype: 
-  Instruction:  promise =
-  Instruction Start: 0
-  Caret: 36
-  Name: `promise`
-  Value: ``
-  Alias: `promise`
-  Blocks: [1] 
-  =======
-    Block: Tetraquark\Block\ImportPromiseBlock
-    Subtype: import
-    Instruction: import\n(\n "module-name"\n)
-    Instruction Start: 11
-    Caret: 36
-    Name: ``
-    Alias: ``
-    Blocks: [0] 
-    =======
-Duration: 0.011s
+Duration: 0.002s
 
 
-import defaultExport from 'module-name';
-import*as name from 'module-name';
-import*as name from 'module-name';
-import{export1} from 'module-name';
-import{export1 as alias1} from 'module-name';
-import{export1,export2} from 'module-name';
-import{export1,export2 as alias2} from 'module-name';
-import{export1,export2 as alias2} from 'module-name';
-import defaultExport,{export1} from 'module-name';
-import defaultExport,*as name from 'module-name';
-import "module-name";
-var promise=import (  "module-name" );
+import defaultExport from 'E:/xampp/htdocs/tetraquark/test/data/imports/default.js';
 

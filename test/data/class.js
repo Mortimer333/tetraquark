@@ -41,3 +41,6 @@ class noValue {
 }
 
 if ( editor.nodeType != 1                  ) throw new Error('Editor node has to be of proper node type. (1)'                    );
+obj.testClass = class {
+  a = 'a';
+}

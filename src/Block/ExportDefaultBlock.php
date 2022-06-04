@@ -4,7 +4,7 @@ namespace Tetraquark\Block;
 use \Tetraquark\{Log, Exception, Contract, Validate, Content};
 use \Tetraquark\Foundation\BlockAbstract as Block;
 
-class ExportDefaultBlock extends Block implements Contract\Block
+class ExportDefaultBlock extends Block implements Contract\Block, Contract\ExportBlock
 {
     public function objectify(int $start = 0)
     {

@@ -12,13 +12,14 @@ class ImportAsBlock extends Block implements Contract\Block
         protected string $subtype = '',
         protected ?Contract\Block $parent = null,
     ) {
-        $this->setInstruction(new Content($instruction));
+        $this->setInstruction(new Content($instruction))
+            ->setName($this->getInstruction()->trim()->__toString())
+        ;
         parent::__construct($start, $subtype, $parent);
     }
 
     public function objectify(int $start = 0)
     {
-        $this->setName('');
         $instruction = $this->getInstruction();
         $this->setCaret($start + $instruction->getLength());
         $this->setInstructionStart($start);

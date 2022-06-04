@@ -51,4 +51,13 @@ class Str
         }
         return $res;
     }
+
+    public static function getFile(string $path)
+    {
+        if (!\is_file($path)) {
+            throw new Exception('Passed file `' . htmlentities($path) . '` not found, did you provide absolute path?', 404);
+        }
+
+        return \file_get_contents($path);
+    }
 }

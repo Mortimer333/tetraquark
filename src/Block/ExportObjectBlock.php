@@ -4,7 +4,7 @@ namespace Tetraquark\Block;
 use \Tetraquark\{Log, Exception, Contract, Validate, Content};
 use \Tetraquark\Foundation\BlockAbstract as Block;
 
-class ExportObjectBlock extends Block implements Contract\Block
+class ExportObjectBlock extends Block implements Contract\Block, Contract\ExportBlock
 {
     protected array $endChars = [
         "}" => true

@@ -4,7 +4,7 @@ namespace Tetraquark\Block;
 use \Tetraquark\{Log, Exception, Contract, Validate};
 use \Tetraquark\Foundation\VariableBlockAbstract as VariableBlock;
 
-class ExportBlock extends VariableBlock implements Contract\Block
+class ExportBlock extends VariableBlock implements Contract\Block, Contract\ExportBlock
 {
     public function objectify(int $start = 0)
     {

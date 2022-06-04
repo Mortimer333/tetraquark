@@ -10,7 +10,7 @@ use \Tetraquark\Foundation\{
     VariableBlockAbstract as VariableBlock
 };
 use \Tetraquark\Contract\{Block as BlockInterface};
-use \Tetraquark\{Exception, Block, Log, Validate, Str, Content};
+use \Tetraquark\{Exception, Block, Log, Validate, Str, Content, Folder};
 
 abstract class BlockAbstract
 {
@@ -20,6 +20,7 @@ abstract class BlockAbstract
     use BlockAliasMapTrait; // Contains our alias creation map
     static protected Content $content;
     static protected Scope   $globalScope;
+    static protected Folder  $folder;
     static protected array   $mappedAliases = [];
     protected int    $caret = 0;
     protected bool   $endFunction = false;
@@ -54,6 +55,9 @@ abstract class BlockAbstract
         string $subtype = '',
         protected ?BlockInterface $parent = null,
     ) {
+        if (!isset(self::$folder)) {
+            self::$folder = new Folder();
+        }
         $this->setSubtype($subtype);
         $this->objectify($start);
     }
@@ -252,7 +256,7 @@ abstract class BlockAbstract
         Log::increaseIndent();
         for ($i=$start; $i < self::$content->getLength(); $i++) {
             $letter = self::$content->getLetter($i);
-            // Log::log("Letter: " . $letter);
+            // Log::log("Letter: " . $letter . ', i: ' . $i . ', ' . self::$content->getLength() . ', ' . self::$content);
             if (
                 ($startsTemplate = Validate::isTemplateLiteralLandmark($letter, ''))
                 || Validate::isStringLandmark($letter, '')
@@ -616,7 +620,7 @@ abstract class BlockAbstract
     protected function createSubBlocksWithContent(string $content, $special = false): array
     {
         $caret = $this->getCaret();
-        self::$content->setContent($content);
+        self::$content->addContent($content);
         $blocks = $this->createSubBlocks(0, $special);
         self::$content->removeContent();
         $this->setCaret($caret);
@@ -824,6 +828,11 @@ abstract class BlockAbstract
         }
         $purgedContentArray = array_merge($purgedContentArray, $content->iCutToArray($lastStart, $i));
 
-        return (new Content(''))->setArrayContent($purgedContentArray, true);
+        return (new Content(''))->addArrayContent($purgedContentArray, true);
+    }
+
+    public function checkPath(string $path): void
+    {
+
     }
 }

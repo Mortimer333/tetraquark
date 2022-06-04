@@ -4,10 +4,11 @@ namespace Tetraquark\Block;
 use \Tetraquark\{Log, Exception, Contract, Validate, Content};
 use \Tetraquark\Foundation\BlockAbstract as Block;
 
-class ExportObjectItemBlock extends Block implements Contract\Block
+class ExportObjectItemBlock extends Block implements Contract\Block, Contract\ExportBlock
 {
     public const ALIASED = 'aliased';
     PUBLIC CONST DEFAULT_ALIASED = 'default aliased';
+    PUBLIC CONST DEFAULT_IMPORTED = 'default imported';
     protected array $endChars = [
         "," => true,
         "{" => true,
@@ -28,6 +29,11 @@ class ExportObjectItemBlock extends Block implements Contract\Block
 
             if ($parted[2] === 'default') {
                 $this->setSubtype(self::DEFAULT_ALIASED);
+            }
+        } else {
+            $this->setOldName($instr);
+            if ($instr === 'default') {
+                $this->setSubtype(self::DEFAULT_IMPORTED);
             }
         }
         $this->setCaret($start + 1);

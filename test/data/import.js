@@ -1,19 +1,21 @@
-import defaultExport from "module-name";
-import * as name from "module-name";
+import defaultExport from "E:/xampp/htdocs/tetraquark/test/data/imports/default.js";
+/*
+import * as name from "test";
 import * as name
-from "module-name";
-import { export1 } from "module-name";
-import { export1 as alias1 } from "module-name";
-import { export1 , export2 } from "module-name";
-import { export1 , export2 as alias2 } from "module-name";
+from "test";
+import { export1 } from "test";
+import { export1 as alias1 } from "test";
+import { export1 , export2 } from "test";
+import { export1 , export2 as alias2 } from "test";
 import {
     export1 ,
     export2 as alias2
-} from "module-name";
-import defaultExport, { export1 } from "module-name";
-import defaultExport, * as name from "module-name";
-import "module-name";
+} from "test";
+import defaultExport, { export1 } from "test";
+import defaultExport, * as name from "test";
+import "test";
 var promise = import
 (
-    "module-name"
+    "test"
 );
+*/

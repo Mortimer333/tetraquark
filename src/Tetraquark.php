@@ -84,17 +84,7 @@ class Tetraquark
 
     public function minify(string $path): string
     {
-        $file  = $this->getFile($path);
-        $script = new Block\ScriptBlock($file);
+        $script = new Block\ScriptBlock($path);
         return $script->getMinified();
-    }
-
-    protected function getFile(string $path)
-    {
-        if (!\is_file($path)) {
-            throw new Exception('Passed file not found, did you provide absolute path?', 404);
-        }
-
-        return \file_get_contents($path);
     }
 }

@@ -6,19 +6,35 @@ use \Tetraquark\Foundation\BlockAbstract as Block;
 
 class ScriptBlock extends Block implements Contract\Block
 {
+    public const DUMMY_PATH = 'test';
     protected array  $endChars = [];
     /** @var string Minified script */
     protected string $minified = '';
 
     public function __construct(
-        string $content,
+        string $path,
         int    $start = 0,
         string $subtype = '',
     ) {
-        // Adding space at the start for any Blocks that require space before their keys
-        self::$content = $this->generateContent(' ' . $content);
-        self::$content = $this->removeComments(self::$content);
+        if ($path == self::DUMMY_PATH) {
+            if (isset(self::$content)) {
+                self::$content->addContent('');
+            } else {
+                self::$content = new Content('');
+            }
+        } else {
+            $content = Str::getFile($path);
+            // Adding space at the start for any Blocks that require space before their keys
+            $content = $this->generateContent(' ' . $content);
+            $content = $this->removeComments($content);
+            if (isset(self::$content)) {
+                self::$content->addArrayContent($content->getContent());
+            } else {
+                self::$content = $content;
+            }
+        }
         parent::__construct($start, $subtype);
+        self::$folder->addFile($path, $this);
     }
 
     public function objectify(int $start = 0)
@@ -41,6 +57,7 @@ class ScriptBlock extends Block implements Contract\Block
         Log::log("=======================");
         Log::displayBlocks($this->blocks);
         Log::timerEnd();
+        self::$content->removeContent();
     }
 
     protected function generateContent(string $content): Content

@@ -13,7 +13,7 @@ trait BlockGetSetTrait
         return self::$content;
     }
 
-    public function setContent(Content $content): self
+    public function addContent(Content $content): self
     {
         self::$content = $content;
         return $this;

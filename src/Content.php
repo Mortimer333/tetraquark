@@ -78,7 +78,7 @@ class Content
      * @param  boolean $clear   If set to `true` will remove all old versions
      * @return self
      */
-    public function setContent(string $content, bool $clear = false, bool $replace = false): self
+    public function addContent(string $content, bool $clear = false, bool $replace = false): self
     {
         if (!$replace && $clear) {
             $this->clear();
@@ -87,7 +87,7 @@ class Content
         return $this;
     }
 
-    public function setArrayContent(array $content, bool $clear = false, bool $replace = false): self
+    public function addArrayContent(array $content, bool $clear = false, bool $replace = false): self
     {
         if (!$replace && $clear) {
             $this->clear();
@@ -108,7 +108,7 @@ class Content
      */
     public function getContent(): array
     {
-        return $this->contents[$this->contentPointer];
+        return $this->contents[$this->contentPointer]['content'];
     }
 
     /**
@@ -185,7 +185,7 @@ class Content
     public function cutToContent(int $start, int $length): Content
     {
         $cut = array_slice($this->contents[$this->contentPointer]['content'], $start, $length);
-        return (new Content(''))->setArrayContent($cut, true);
+        return (new Content(''))->addArrayContent($cut, true);
     }
 
     /**
@@ -197,7 +197,7 @@ class Content
     public function iCutToContent(int $start, int $end): Content
     {
         $cut = array_slice($this->contents[$this->contentPointer]['content'], $start, $end - $start);
-        return (new Content(''))->setArrayContent($cut, true);
+        return (new Content(''))->addArrayContent($cut, true);
     }
 
     /**

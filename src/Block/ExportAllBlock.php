@@ -4,7 +4,7 @@ namespace Tetraquark\Block;
 use \Tetraquark\{Log, Exception, Contract, Validate, Content};
 use \Tetraquark\Foundation\BlockAbstract as Block;
 
-class ExportAllBlock extends Block implements Contract\Block
+class ExportAllBlock extends Block implements Contract\Block, Contract\ExportBlock
 {
     protected string $newName = '';
     public const NEW_NAME = 'new name';

@@ -115,7 +115,7 @@ abstract class VariableBlockAbstract extends BlockAbstract
         foreach ($items as $item) {
             // $item = preg_replace('/[\n]/', ' ', $item);
             // $item = preg_replace('/[ \t]+/', ' ', $item) . ';';
-            self::$content->setContent($item . ';');
+            self::$content->addContent($item . ';');
             $this->blocks[] = new Block\VariableItemBlock();
             self::$content->removeContent();
         }
