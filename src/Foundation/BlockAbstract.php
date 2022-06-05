@@ -104,12 +104,7 @@ abstract class BlockAbstract
 
     protected function blockFactory(string $hint, string $className, int $start, string &$possibleUndefined, array &$blocks): BlockInterface
     {
-        $prefix = 'Tetraquark\Block\\';
-        $class  = $prefix . $className;
-
-        if (!\class_exists($class)) {
-            throw new Exception("Passed class doesn't exist: " . htmlspecialchars($className), 404);
-        }
+        $class = self::blockExistsOrThrow($className);
 
         // If this is variable creatiion without any type declaration then its attribute assignment and we shouldn't add anything before it
         if ($hint == '=') {
@@ -831,8 +826,55 @@ abstract class BlockAbstract
         return (new Content(''))->addArrayContent($purgedContentArray, true);
     }
 
-    public function checkPath(string $path): void
+    public function getScript(): Block\ScriptBlock
     {
+        if ($this instanceof Block\ScriptBlock) {
+            return $this;
+        }
 
+        $parent = $this->getParent();
+
+        if (!($parent instanceof BlockInterface)) {
+            throw new Exception('Script block not found', 404);
+        }
+
+        return $parent->getScript();
+    }
+
+    public function addBlock(BlockInterface $block): self
+    {
+        $this->blocks[] = $block;
+        return $this;
+    }
+
+    public static function createBlock(
+        string $className,
+        string $content,
+        int $start = 0,
+        string $subtype = '',
+        ?BlockInterface $parent = null
+    ): BlockInterface {
+        $class = self::blockExistsOrThrow($className);
+        if (isset(self::$content)) {
+            self::$content->addContent('');
+            $newBlock = new $class($start, $subtype, $parent);
+            self::$content->removeContent();
+        } else {
+            self::$content = new Content('');
+            $newBlock = new $class($start, $subtype, $parent);
+            unset(self::$content);
+        }
+        return $newBlock;
+    }
+
+    public static function blockExistsOrThrow(string $className): string
+    {
+        $prefix = 'Tetraquark\Block\\';
+        $class  = $prefix . $className;
+
+        if (!\class_exists($class)) {
+            throw new Exception("Passed class doesn't exist: " . htmlspecialchars($className), 404);
+        }
+        return $class;
     }
 }

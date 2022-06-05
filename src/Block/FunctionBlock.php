@@ -42,4 +42,20 @@ class FunctionBlock extends MethodBlock implements Contract\Block
 
         return $script . '}';
     }
+
+    public function recreateForImport(): string
+    {
+        $script = $this->getAlias($this->getName()) . ' = function(' . $this->getAliasedArguments() . '){';
+        $blocks = '';
+
+        foreach ($this->getBlocks() as $block) {
+            $blocks .= $block->recreate();
+        }
+
+        if (\mb_strlen($blocks) > 0) {
+            return $script . rtrim($blocks, ';') . ';}';
+        }
+
+        return $script . '}';
+    }
 }

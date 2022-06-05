@@ -4,6 +4,7 @@ namespace Tetraquark;
 
 use \Tetraquark\Contract\{Block as BlockInterface};
 use \Tetraquark\Block;
+use \Tetraquark\Foundation\{BlockAbstract};
 use \Tetraquark\Block\{ScriptBlock as Script, ExportBlock as Export};
 
 /**
@@ -69,26 +70,27 @@ class Folder
 
     public function findDefaultExport(string $path): BlockInterface
     {
-        $script = $this->getFile($path);
-        $blocks = $script->getBlocks();
-        $export = null;
-        for ($i=\sizeof($blocks) - 1; $i >= 0; $i--) {
-            $block = $blocks[$i];
-            if ($block instanceof Export) {
-                $export = $block;
-                break;
-            }
-        }
-
-        if (\is_null($export)) {
-            throw new Exception("Export Block not found in " . htmlentities($path), 404);
-        }
-
-        $exportDefault = $this->getDefaultBlockFromExport($export);
+        $exportDefault = $this->getDefaultBlockFromExport(
+            $this->findExportInScript($path)
+        );
         if (!($exportDefault instanceof Contract\ExportBlock)) {
             return $exportDefault;
         }
-        return $this->matchBlock($script, $exportDefault->getOldName());
+        return $this->matchBlock($this->getFile($path), $exportDefault->getOldName());
+    }
+
+    public function findExportInScript(string $path): BlockInterface
+    {
+        $script = $this->getFile($path);
+        $blocks = $script->getBlocks();
+        for ($i=\sizeof($blocks) - 1; $i >= 0; $i--) {
+            $block = $blocks[$i];
+            if ($block instanceof Export) {
+                return $block;
+            }
+        }
+
+        throw new Exception("Export Block not found in " . htmlentities($path), 404);
     }
 
     public function matchBlock(BlockInterface $block, string $name): BlockInterface
@@ -97,8 +99,18 @@ class Folder
             if ($block->getName() === $name) {
                 return $block;
             }
+
+            if ($block::class === Block\VariableBlock::class) {
+                foreach ($block->getBlocks() as $subBlock) {
+                    if ($subBlock->getName() === $name) {
+                        $newVariable = BlockAbstract::createBlock('VariableBlock', '', 0, 'substitute');
+                        $newVariable->addBlock($subBlock);
+                        return $newVariable;
+                    }
+                }
+            }
         }
-        throw new Exception("Block named " . htmlentities($name) . " not found in given block", 404);
+        throw new Exception("Block named " . htmlentities($name) . " not found in given script", 404);
     }
 
     private function getDefaultBlockFromExport(BlockInterface $export): BlockInterface

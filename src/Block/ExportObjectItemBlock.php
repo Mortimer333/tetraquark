@@ -18,8 +18,11 @@ class ExportObjectItemBlock extends Block implements Contract\Block, Contract\Ex
 
     public function objectify(int $start = 0)
     {
-        list($previousLetter) = $this->getPreviousLetter($start - 1, self::$content);
-        $this->findInstructionStart($start);
+        if (self::$content->getLetter($start) === ',') {
+            $this->findInstructionStart($start);
+        } else {
+            $this->findInstructionStart($start + 1);
+        }
         $instr = $this->getInstruction()->trim()->__toString();
         $parted = explode(' ', $instr);
         if ($parted[1] ?? '' == 'as') {

@@ -6,7 +6,9 @@ use \Tetraquark\Foundation\VariableBlockAbstract as VariableBlock;
 
 class ImportBlock extends VariableBlock implements Contract\Block
 {
-    protected array $importItems = [];
+    protected array $importItems = [
+        "items" => []
+    ];
 
     public function objectify(int $start = 0)
     {
@@ -47,18 +49,47 @@ class ImportBlock extends VariableBlock implements Contract\Block
 
 
         $path = $from->getPath();
+        if ($path === ScriptBlock::DUMMY_PATH) {
+            return;
+        }
 
         if (self::$folder->fileExists($path)) {
             $script = self::$folder->getFile($path);
         } else {
             $script = new ScriptBlock($path);
         }
-
+        ///  !!!!!!!! This is wrong
+        ///  Acutally globabl code is alway run (any function usage is always added)
+        ///  each time import is added we have to (()=>{[import stuff]}) like above.
+        ///  Then we can add those to furthere use.
+        ///
+        ///  Another important thing is to remember is to somehow make scope of the imported function inside the import. They don't actually use
+        ///  current script scope but only that from import. But all methods used in script are hidden from global (current script)
         $importedGlob = '';
-        foreach ($this->importItems['default'] ?? [] as $item) {
+        if (isset($this->importItems['default'])) {
+            $default = $this->importItems['default'];
             $defaultBlock = self::$folder->findDefaultExport($path);
-            $defaultBlock->setName($item->getName());
+            $defaultBlock->setName($default->getName());
             $importedGlob .= method_exists($defaultBlock, 'recreateForImport') ? $defaultBlock->recreateForImport() : $defaultBlock->recreate();
+        }
+
+        if (isset($this->importItems['namespace'])) {
+            $namespace = $this->importItems['namespace'];
+            $export = self::$folder->findExportInScript($path);
+            $exportedBlocks = $export->getExportedBlocks();
+            $importedGlob .= 'const ' . $namespace->getNewName() . '={};';
+            foreach ($exportedBlocks as $block) {
+                $importedGlob .= $namespace->getNewName() . '.' . (method_exists($block, 'recreateForImport') ? $block->recreateForImport() : $block->recreate());
+            }
+        }
+
+        foreach ($this->importItems['items'] as $item) {
+            $block = self::$folder->matchBlock($script, $item->getOldName());
+            $newName = $item->getNewName();
+            if (strlen($newName) > 0) {
+                $block->setName($newName);
+            }
+            $importedGlob .= $block->recreate();
         }
 
         Log::log('Heeeeeeeee: ' . $importedGlob);
@@ -82,7 +113,7 @@ class ImportBlock extends VariableBlock implements Contract\Block
                 ImportAsBlock        ::class => $this->addImportItem('default', $block),
                 ImportAllBlock       ::class => $this->addImportItem('namespace', $block),
                 ImportObjectBlock    ::class => $this->addImportItems($block->getBlocks()),
-                ExportObjectItemBlock::class => $this->addImportItem('item', $block),
+                ExportObjectItemBlock::class => $this->addImportItem('items', $block),
                 default                      => '' // do nothin'
             };
         }
@@ -90,9 +121,10 @@ class ImportBlock extends VariableBlock implements Contract\Block
 
     protected function addImportItem(string $type, Contract\Block $block): void
     {
-        if (!isset($this->importItems[$type])) {
-            $this->importItems[$type] = [];
+        if ($type === 'items') {
+            $this->importItems['items'][] = $block;
+            return;
         }
-        $this->importItems[$type][] = $block;
+        $this->importItems[$type] = $block;
     }
 }

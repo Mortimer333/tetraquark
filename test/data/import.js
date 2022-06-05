@@ -1,5 +1,6 @@
 import defaultExport from "E:/xampp/htdocs/tetraquark/test/data/imports/default.js";
-/*
+import * as test from "E:/xampp/htdocs/tetraquark/test/data/imports/normal.js";
+import {testGlobablClass} from "E:/xampp/htdocs/tetraquark/test/data/imports/normal.js";
 import * as name from "test";
 import * as name
 from "test";
@@ -18,4 +19,3 @@ var promise = import
 (
     "test"
 );
-*/

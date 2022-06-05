@@ -27,6 +27,45 @@ class ExportBlock extends VariableBlock implements Contract\Block, Contract\Expo
             $script .=  rtrim($block->recreate(), ';');
         }
 
-        return$script . ';';
+        return $script . ';';
+    }
+
+    public function getExportedBlocks(): array
+    {
+        $exported = [];
+        foreach ($this->getBlocks() as $block) {
+            match ($block::class) {
+                ExportAllBlock::class => throw new Exception("Exporting from other files in not currently implemented", 500),
+                ExportAsBlock::class => $exported[] = $this->getExportBlockReference($block),
+                ExportDefaultBlock::class => false,
+                ExportFromBlock::class => false,
+                ExportObjectBlock::class => $exported = array_merge($exported, $this->getObjectItemsReferences($block)),
+                default => $exported[] = $block // any none exportBlock is just regular variable, export it
+            };
+        }
+        return $exported;
+    }
+
+    public function getExportBlockReference(ExportAsBlock $block): Contract\Block
+    {
+        $name = $block->getOldName();
+        $script = $this->getScript();
+        return self::$folder->matchBlock($script, $name);
+    }
+
+    public function getObjectItemsReferences(ExportObjectBlock $object): array
+    {
+        $blocks = [];
+        $script = $this->getScript();
+        foreach ($object->getBlocks() as $block) {
+            $oldName = $block->getOldName();
+            $newName = $block->getNewName();
+            $reference = self::$folder->matchBlock($script, $oldName);
+            if (strlen($newName) > 0) {
+                $reference->setName($newName);
+            }
+            $blocks[] = $reference;
+        }
+        return $blocks;
     }
 }

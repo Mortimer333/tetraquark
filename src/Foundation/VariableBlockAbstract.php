@@ -20,6 +20,17 @@ abstract class VariableBlockAbstract extends BlockAbstract
         return $script . ';';
     }
 
+    public function recreateForImport(): string
+    {
+        $script = '';
+
+        if (\sizeof($this->getBlocks()) !== 1) {
+            throw new Exception('Variable recreate for import should only/at least have one child', 500);
+        }
+        
+        return rtrim(rtrim($this->getBlocks()[0]->recreate(), ';'), ',') . ';';
+    }
+
     protected function findVariableEnd(int $start): int
     {
         $end = null;
