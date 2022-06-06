@@ -426,22 +426,6 @@ trait BlockMapsTrait
             "default" => "ImportItemSeperatorBlock"
         ],
         "&_" => [
-            "d" => [
-                "e" => [
-                    "f" => [
-                        "a" => [
-                            "u" => [
-                                "l" => [
-                                    "t" => [
-                                        ' '  => 'ImportDefaultBlock',
-                                        "\n" => "ImportDefaultBlock",
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ],
             "f" => [
                 "r" => [
                     "o" => [

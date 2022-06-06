@@ -1,33 +1,83 @@
 Mapping...
+  New import =  defVar from "E:/xampp/htdocs/tetraquark/test/data/imports/two_imports.js"
   Mapping...
+    New import =  {testDefault} from 'E:/xampp/htdocs/tetraquark/test/data/imports/importsamefile1.js'
+    Mapping...
+      New import =  default from 'E:/xampp/htdocs/tetraquark/test/data/imports/normal.js'
+      Mapping...
+      =======================
+      Creating aliases...
+      =======================
+      Aliases:
+      Recreating...
+      =======================
+      Duration: 0.005s
+    =======================
+    Creating aliases...
+    =======================
+    Aliases:
+    Recreating...
+    =======================
+    Duration: 0.006s
+    New import =  {testDefault2} from 'E:/xampp/htdocs/tetraquark/test/data/imports/importsamefile2.js'
+    Mapping...
+      New import =  default2 from 'E:/xampp/htdocs/tetraquark/test/data/imports/normal.js'
+    =======================
+    Creating aliases...
+    =======================
+    Aliases:
+    Recreating...
+    =======================
+    Duration: 0.002s
   =======================
   Creating aliases...
   =======================
-  Aliases: 
+  Aliases:
   Recreating...
   =======================
   Duration: 0.004s
-  Heeeeeeeee: const test=(()=>{let a='sdsdf';const b={c:'d'};console.log('asdas');function testGlobal(){console.log('asdas2')}class testGlobablClass{constructor(){console.log('asd')}}testGlobal();return {b,testGlobablClass,testGlobal};})();
-  Heeeeeeeee: const {defVar}=(()=>{let a='sdsdf';const b={c:'d'};console.log('asdas');function testGlobal(){console.log('asdas2')}class testGlobablClass{constructor(){console.log('asd')}}testGlobal();return {b};})();
-  Heeeeeeeee: const {testGlobablClass}=(()=>{let a='sdsdf';const b={c:'d'};console.log('asdas');function testGlobal(){console.log('asdas2')}class testGlobablClass{constructor(){console.log('asd')}}testGlobal();return {testGlobablClass};})();
-  Heeeeeeeee: const {testGlobablClass}=test=(()=>{let a='sdsdf';const b={c:'d'};console.log('asdas');function testGlobal(){console.log('asdas2')}class testGlobablClass{constructor(){console.log('asd')}}testGlobal();return {testGlobablClass,b,testGlobal};})();
-  Heeeeeeeee: const {defVar,testGlobablClass}=(()=>{let a='sdsdf';const b={c:'d'};console.log('asdas');function testGlobal(){console.log('asdas2')}class testGlobablClass{constructor(){console.log('asd')}}testGlobal();return {b,testGlobablClass};})();
-  Heeeeeeeee: const {defVar}=test=(()=>{let a='sdsdf';const b={c:'d'};console.log('asdas');function testGlobal(){console.log('asdas2')}class testGlobablClass{constructor(){console.log('asd')}}testGlobal();return {b,testGlobablClass,testGlobal};})();
-  Heeeeeeeee: const {defVar,testGlobal}=test=(()=>{let a='sdsdf';const b={c:'d'};console.log('asdas');function testGlobal(){console.log('asdas2')}class testGlobablClass{constructor(){console.log('asd')}}testGlobal();return {b,testGlobal,testGlobablClass};})();
 =======================
 Creating aliases...
 =======================
-Aliases: 
+Aliases:
 Recreating...
 =======================
-Duration: 0.009s
+Duration: 0.006s
+let imports = {};
+imports[normal.js] = () =>{
+    let a='sdsdf';
+    const b={c:'d'};
+    console.log('asdas');
+    function testGlobal(){console.log('asdas2')}
+    class testGlobablClass{constructor(){console.log('asd')}}
+    testGlobal();
+    return{b} // all possible exports here
+};
 
+imports[importsamefile2.js] = () =>{
+    // importsamefile2.js -> normal.js
+    const{default2}=imports[normal.js]();
+    function testDefault2(){console.log(default2)}
+    return{testDefault2}
+}
 
-import*as test from '/var/www/html/tetraquark-js/test/data/imports/normal.js';
-import defVar from '/var/www/html/tetraquark-js/test/data/imports/normal.js';
-import{testGlobablClass} from '/var/www/html/tetraquark-js/test/data/imports/normal.js';
-import{testGlobablClass},*as test from '/var/www/html/tetraquark-js/test/data/imports/normal.js';
-import{testGlobablClass},defVar from '/var/www/html/tetraquark-js/test/data/imports/normal.js';
-import*as test,defVar from '/var/www/html/tetraquark-js/test/data/imports/normal.js';
-import{testGlobal},*as test,defVar from '/var/www/html/tetraquark-js/test/data/imports/normal.js';
+imports[importsamefile1.js] = ()=>{
+    // importsamefile1.js -> normal.js
+    const{default}=imports[normal.js]();
+    function testDefault(){console.log(default)}
+    return{testDefault}
+}
 
+imports[two_imports.js] = ()=>{
+    // two_imports.js -> importsamefile1.js
+    const{testDefault}=imports[importsamefile2.js]();
+    // two_imports.js -> importsamefile2.js
+    const{testDefault2}=imports[importsamefile2.js]();
+    console.log(testDefault);
+    console.log(testDefault2);
+    const a=testDefault();
+    return{a}
+}
+
+// import.js -> two_imports.js
+const{defVar}=imports[two_imports.js]();

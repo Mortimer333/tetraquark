@@ -9,6 +9,50 @@ class ImportBlock extends VariableBlockAbstract implements Contract\Block
     protected array $importItems = [
         "items" => []
     ];
+    protected string $imported;
+
+    /*
+        !!! How it should work at the end:
+        let imports = {};
+        imports[normal.js] = () =>{
+            let a='sdsdf';
+            const b={c:'d'};
+            console.log('asdas');
+            function testGlobal(){console.log('asdas2')}
+            class testGlobablClass{constructor(){console.log('asd')}}
+            testGlobal();
+            return{b} // all possible exports here
+        };
+
+        imports[importsamefile2.js] = () =>{
+            // importsamefile2.js -> normal.js
+            const{default2}=imports[normal.js]();
+            function testDefault2(){console.log(default2)}
+            return{testDefault2}
+        }
+
+        imports[importsamefile1.js] = ()=>{
+            // importsamefile1.js -> normal.js
+            const{default}=imports[normal.js]();
+            function testDefault(){console.log(default)}
+            return{testDefault}
+        }
+
+        imports[two_imports.js] = ()=>{
+            // two_imports.js -> importsamefile1.js
+            const{testDefault}=imports[importsamefile2.js]();
+            // two_imports.js -> importsamefile2.js
+            const{testDefault2}=imports[importsamefile2.js]();
+            console.log(testDefault);
+            console.log(testDefault2);
+            const a=testDefault();
+            return{a}
+        }
+
+        // import.js -> two_imports.js
+        const{defVar}=imports[two_imports.js]();
+        imports = undefined;
+     */
 
     public function objectify(int $start = 0)
     {
@@ -20,25 +64,9 @@ class ImportBlock extends VariableBlockAbstract implements Contract\Block
         $this->setInstruction(self::$content->iCutToContent($start, $end))
             ->setCaret($end)
         ;
+        Log::log('New import = ' . $this->getInstruction());
         $this->blocks = $this->createSubBlocksWithContent(str_replace("\n"," ", $this->getInstruction()->__toString()));
-        // If it's just importing global code (import 'module') get path from string
-        if ($this->blocks[0] instanceof StringBlock) {
-            $globalImport = $this->blocks[0];
-            $path = $globalImport->getInstruction()
-                ->trim(
-                    $globalImport->getInstruction()->__toString()[0] // Trim string landmarks
-                )->__toString();
-        } else {
-            // else find proper form block
-            $from = $this->blocks[\sizeof($this->blocks) - 1];
-            if (!($from instanceof ImportFromBlock)) {
-                throw new Exception("Couldn't find from block for import instruction.", 500);
-            }
-
-            $this->addImportItems($this->blocks);
-            $path = $from->getPath();
-        }
-
+        $path = $this->findPathInBlocks();
 
         if ($path === ScriptBlock::DUMMY_PATH) {
             return;
@@ -52,7 +80,6 @@ class ImportBlock extends VariableBlockAbstract implements Contract\Block
 
         $imported = '(()=>{';
         $imported .= $script->recreateSkip([
-            ImportBlock::class => true,
             ExportBlock::class => true
         ]);
 
@@ -62,61 +89,14 @@ class ImportBlock extends VariableBlockAbstract implements Contract\Block
             return;
         }
 
-        ///  !!!!!!!! This is wrong
-        ///  Acutally globabl code is alway run (any function usage is always added)
-        ///  each time import is added we have to (()=>{[import stuff]}) like above.
-        ///  Then we can add those for furthere use.
-        ///
-        ///  Another important thing is to remember is to somehow make scope of the imported function inside the import. They don't actually use
-        ///  current script scope but only that from import. But all methods used in script are hidden from global (current script)
-        $namespace = false;
-        $deconstructNames = [];
-        $importNames = [];
-        if (isset($this->importItems['default'])) {
-            $default = $this->importItems['default'];
-            $defaultBlock = self::$folder->findDefaultExport($path);
-            $deconstructNames[] = $default->getName();
-            if ($defaultBlock::class === VariableBlock::class) {
-                $importNames[] = $defaultBlock->getBlocks()[0]->getName();
-            } else {
-                $importNames[] = $defaultBlock->getName();
-            }
-            // $imported .= method_exists($defaultBlock, 'recreateForImport') ? $defaultBlock->recreateForImport() : $defaultBlock->recreate();
-        }
+        list($deconstructNames, $importNames) = $this->tryAddDefault([], [], $path);
+        list($deconstructNames, $importNames) = $this->tryAddItems($deconstructNames, $importNames, $script);
+        list($deconstructNames, $importNames, $namespace) = $this->tryAddNamespace($deconstructNames, $importNames, $path);
+        $this->imported = $this->recreateImported($imported, $deconstructNames, $importNames, $namespace);
+    }
 
-        foreach ($this->importItems['items'] as $item) {
-            $block = self::$folder->matchBlock($script, $item->getOldName());
-            $newName = $item->getNewName();
-            if (strlen($newName) > 0) {
-                $block->setName($newName);
-                $importNames[] = $newName;
-            } else {
-                $importNames[] = $block->getName();
-            }
-            $deconstructNames[] = $block->getName();
-            // $imported .= $block->recreate();
-        }
-
-        if (isset($this->importItems['namespace'])) {
-            $namespace = $this->importItems['namespace']->getNewName();
-            $export = self::$folder->findExportInScript($path);
-            $exportedBlocks = $export->getExportedBlocks();
-            // $imported .= 'const ' . $namespace->getNewName() . '={};';
-            foreach ($exportedBlocks as $block) {
-                if ($block::class === VariableBlock::class) {
-                    foreach ($block->getBlocks() as $subBlock) {
-                        if (!in_array($subBlock->getName(), $importNames)) {
-                            $importNames[] = $subBlock->getName();
-                        }
-                    }
-                } else {
-                    if (!in_array($block->getName(), $importNames)) {
-                        $importNames[] = $block->getName();
-                    }
-                }
-                // $imported .= $namespace->getNewName() . '.' . (method_exists($block, 'recreateForImport') ? $block->recreateForImport() : $block->recreate());
-            }
-        }
+    protected function recreateImported(string $imported, array $deconstructNames, array $importNames, bool|string $namespace): string
+    {
         if (sizeof($deconstructNames) > 0) {
             $importedPrefix = 'const {';
             foreach ($deconstructNames as $name) {
@@ -138,19 +118,95 @@ class ImportBlock extends VariableBlockAbstract implements Contract\Block
             $importedSufix .= $name. ',';
         }
 
-        $imported .= rtrim($importedSufix, ',') . '};})();';
-        Log::log('Heeeeeeeee: ' . $imported);
+        return $imported . rtrim($importedSufix, ',') . '};})();';
+    }
+
+    protected function tryAddNamespace(array $deconstructNames, array $importNames, string $path): array
+    {
+        $namespace = false;
+        if (isset($this->importItems['namespace'])) {
+            $namespace = $this->importItems['namespace']->getNewName();
+            $export = self::$folder->findExportInScript($path);
+            $exportedBlocks = $export->getExportedBlocks();
+            foreach ($exportedBlocks as $block) {
+                if ($block::class === VariableBlock::class) {
+                    foreach ($block->getBlocks() as $subBlock) {
+                        if (!in_array($subBlock->getName(), $importNames)) {
+                            $importNames[] = $subBlock->getName();
+                        }
+                    }
+                } else {
+                    if (!in_array($block->getName(), $importNames)) {
+                        $importNames[] = $block->getName();
+                    }
+                }
+            }
+        }
+        return [$deconstructNames, $importNames, $namespace];
+    }
+    protected function tryAddItems(array $deconstructNames, array $importNames, ScriptBlock $script): array
+    {
+        foreach ($this->importItems['items'] as $item) {
+            $block = self::$folder->matchBlock($script, $item->getOldName());
+            $newName = $item->getNewName();
+            if (strlen($newName) > 0) {
+                $block->setName($newName);
+                $importNames[] = $newName;
+            } else {
+                $importNames[] = $block->getName();
+            }
+            $deconstructNames[] = $block->getName();
+        }
+        return [$deconstructNames, $importNames];
+    }
+    protected function tryAddDefault(array $deconstructNames, array $importNames, string $path): array
+    {
+        if (isset($this->importItems['default'])) {
+            $default = $this->importItems['default'];
+            $defaultBlock = self::$folder->findDefaultExport($path);
+            $deconstructNames[] = $default->getName();
+            if ($defaultBlock::class === VariableBlock::class) {
+                $importNames[] = $defaultBlock->getBlocks()[0]->getName();
+            } else {
+                $importNames[] = $defaultBlock->getName();
+            }
+        }
+        return [$deconstructNames, $importNames];
+    }
+
+    protected function findPathInBlocks(): string
+    {
+        if ($this->blocks[0] instanceof StringBlock) {
+            $globalImport = $this->blocks[0];
+            return $globalImport->getInstruction()
+                ->trim(
+                    $globalImport->getInstruction()->__toString()[0] // Trim string landmarks
+                )->__toString();
+        } else {
+            // else find proper form block
+            $from = $this->blocks[\sizeof($this->blocks) - 1];
+            if (!($from instanceof ImportFromBlock)) {
+                throw new Exception("Couldn't find from block for import instruction.", 500);
+            }
+
+            $this->addImportItems($this->blocks);
+            return $from->getPath();
+        }
     }
 
     public function recreate(): string
     {
+        if (isset($this->imported)) {
+            return $this->imported;
+        }
+
         $script = 'import ';
 
         foreach ($this->getBlocks() as $block) {
             $script .=  rtrim($block->recreate(), ';');
         }
 
-        return$script . ';';
+        return $script . ';';
     }
 
     protected function addImportItems(array $blocks): void
