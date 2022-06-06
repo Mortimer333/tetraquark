@@ -12,4 +12,4 @@ class testGlobablClass {
     }
 }
 testGlobal();
-export { testGlobablClass, testGlobal, b};
+export { testGlobablClass, testGlobal, b as default};

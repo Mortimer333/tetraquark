@@ -17,8 +17,14 @@ class ImportAllBlock extends Block implements Contract\Block
             throw new Exception('Missing name when importing all contents of file', 404);
         }
         list($nextWord, $pos) = $this->getNextWord($pos + 1, self::$content);
-        $this->setNewName($nextWord)
-            ->setInstruction(new Content('* as ' . $nextWord))
+        $nextWord = explode(',', $nextWord);
+        $newName = $nextWord[0];
+        if (\sizeof($nextWord) > 1) {
+            $wholeWord = implode(',', $nextWord);
+            $pos -= (\mb_strlen($wholeWord) - \mb_strlen($newName));
+        }
+        $this->setNewName($newName)
+            ->setInstruction(new Content('* as ' . $newName))
             ->setCaret($pos)
             ->setSubtype(self::NEW_NAME)
         ;

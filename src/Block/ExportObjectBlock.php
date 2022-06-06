@@ -27,6 +27,14 @@ class ExportObjectBlock extends Block implements Contract\Block, Contract\Export
                 $this
             );
         }
+
+        foreach ($this->blocks as $i => $block) {
+            if ($block->getSubtype() === ExportObjectItemBlock::DEFAULT_ALIASED) {
+                unset($this->blocks[$i]);
+                array_unshift($this->blocks, $block);
+                break;
+            }
+        }
     }
 
     public function recreate(): string

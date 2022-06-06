@@ -55,7 +55,7 @@ class ScriptBlock extends Block implements Contract\Block
         Log::log("Recreating...");
         $this->setMinified($this->recreate());
         Log::log("=======================");
-        Log::displayBlocks($this->blocks);
+        // Log::displayBlocks($this->blocks);
         Log::timerEnd();
         self::$content->removeContent();
     }
@@ -99,6 +99,19 @@ class ScriptBlock extends Block implements Contract\Block
     {
         $script = '';
         foreach ($this->blocks as $block) {
+            $script .= $block->recreate();
+        }
+        return $this->fixScript(new Content($script));
+    }
+
+    public function recreateSkip(array $classNamesSwitch): string
+    {
+        $script = '';
+        foreach ($this->blocks as $block) {
+            if ($classNamesSwitch[$block::class] ?? false) {
+                continue;
+            }
+
             $script .= $block->recreate();
         }
         return $this->fixScript(new Content($script));
