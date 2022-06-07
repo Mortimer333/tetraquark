@@ -1,7 +1,7 @@
-import default from 'E:/xampp/htdocs/tetraquark/test/data/imports/normal.js';
+import defaultVar from 'E:/xampp/htdocs/tetraquark/test/data/imports/normal.js';
 
 function testDefault() {
-    console.log(default);
+    console.log(defaultVar);
 }
 
 export { testDefault };

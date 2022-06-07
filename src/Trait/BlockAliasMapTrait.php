@@ -5,7 +5,7 @@ namespace Tetraquark\Trait;
 trait BlockAliasMapTrait
 {
     /** @var array Map of possible aliases (df is to get default - the start of map), the last alias direction returns false */
-    protected array $aliasMap = [
+    protected static array $aliasMap = [
         'df' => 'a', 'a' => 'b', 'b' => 'c', 'c' => 'd', 'd' => 'e', 'e' => 'f', 'f' => 'g', 'g' => 'h', 'h' => 'i', 'i' => 'j', 'j' => 'k',
         'k' => 'l', 'l' => 'm', 'm' => 'n', 'n' => 'o', 'o' => 'p', 'p' => 'r', 'r' => 's', 's' => 't', 't' => 'u', 'u' => 'w', 'w' => 'z',
         'z' => 'y', 'y' => 'x', 'x' => 'q', 'q' => 'v', 'v' => 'µ', 'µ' => 'ß', 'ß' => 'à', 'à' => 'á', 'á' => 'â', 'â' => 'ã', 'ã' => 'ä',

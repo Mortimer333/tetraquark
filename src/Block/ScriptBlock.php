@@ -12,10 +12,14 @@ class ScriptBlock extends Block implements Contract\Block
     protected string $minified = '';
 
     public function __construct(
-        string $path,
+        protected string $path,
         int    $start = 0,
         string $subtype = '',
     ) {
+        if (!isset(self::$mainScript)) {
+            self::$mainScript = $this;
+        }
+
         if ($path == self::DUMMY_PATH) {
             if (isset(self::$content)) {
                 self::$content->addContent('');
@@ -35,6 +39,11 @@ class ScriptBlock extends Block implements Contract\Block
         }
         parent::__construct($start, $subtype);
         self::$folder->addFile($path, $this);
+    }
+
+    public function getPath(): string
+    {
+        return $this->path;
     }
 
     public function objectify(int $start = 0)
@@ -98,6 +107,9 @@ class ScriptBlock extends Block implements Contract\Block
     public function recreate(): string
     {
         $script = '';
+        if (self::$mainScript === $this) {
+            $script .= self::$import->recreate();
+        }
         foreach ($this->blocks as $block) {
             $script .= $block->recreate();
         }

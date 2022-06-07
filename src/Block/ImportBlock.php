@@ -72,30 +72,34 @@ class ImportBlock extends VariableBlockAbstract implements Contract\Block
             return;
         }
 
+        if (self::$import->scriptExists($path)) {
+            return;
+        }
+
         if (self::$folder->fileExists($path)) {
             $script = self::$folder->getFile($path);
         } else {
             $script = new ScriptBlock($path);
         }
 
-        $imported = '(()=>{';
-        $imported .= $script->recreateSkip([
-            ExportBlock::class => true
+        $imported = $script->recreateSkip([
+            ImportBlock::class => true,
+            ExportBlock::class => true,
         ]);
 
         // If only import global code then stop here
         if ($this->blocks[0] instanceof StringBlock) {
-            $imported .= '})();';
+            self::$import->setScript($path, $imported);
             return;
         }
 
         list($deconstructNames, $importNames) = $this->tryAddDefault([], [], $path);
         list($deconstructNames, $importNames) = $this->tryAddItems($deconstructNames, $importNames, $script);
         list($deconstructNames, $importNames, $namespace) = $this->tryAddNamespace($deconstructNames, $importNames, $path);
-        $this->imported = $this->recreateImported($imported, $deconstructNames, $importNames, $namespace);
+        $this->transformImport($imported, $path, $deconstructNames, $importNames, $namespace);
     }
 
-    protected function recreateImported(string $imported, array $deconstructNames, array $importNames, bool|string $namespace): string
+    protected function transformImport(string $imported, string $path, array $deconstructNames, array $importNames, bool|string $namespace): void
     {
         if (sizeof($deconstructNames) > 0) {
             $importedPrefix = 'const {';
@@ -112,13 +116,14 @@ class ImportBlock extends VariableBlockAbstract implements Contract\Block
             $importedPrefix .= $namespace . '=';
         }
 
-        $imported = $importedPrefix . $imported;
         $importedSufix = 'return {';
         foreach ($importNames as $name) {
             $importedSufix .= $name. ',';
         }
 
-        return $imported . rtrim($importedSufix, ',') . '};})();';
+        self::$import->setScript($path, $imported . rtrim($importedSufix, ',') . '}');
+        $script = $this->getScript();
+        self::$import->addRetrival($script->getPath(), $path, $importedPrefix);
     }
 
     protected function tryAddNamespace(array $deconstructNames, array $importNames, string $path): array
@@ -164,12 +169,12 @@ class ImportBlock extends VariableBlockAbstract implements Contract\Block
         if (isset($this->importItems['default'])) {
             $default = $this->importItems['default'];
             $defaultBlock = self::$folder->findDefaultExport($path);
-            $deconstructNames[] = $default->getName();
             if ($defaultBlock::class === VariableBlock::class) {
                 $importNames[] = $defaultBlock->getBlocks()[0]->getName();
             } else {
                 $importNames[] = $defaultBlock->getName();
             }
+            $deconstructNames[] = $importNames[sizeof($importNames) - 1] . ':' . $default->getName();
         }
         return [$deconstructNames, $importNames];
     }

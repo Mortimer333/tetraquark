@@ -3,81 +3,68 @@ Mapping...
   Mapping...
     New import =  {testDefault} from 'E:/xampp/htdocs/tetraquark/test/data/imports/importsamefile1.js'
     Mapping...
-      New import =  default from 'E:/xampp/htdocs/tetraquark/test/data/imports/normal.js'
+      New import =  defaultVar from 'E:/xampp/htdocs/tetraquark/test/data/imports/normal.js'
       Mapping...
       =======================
       Creating aliases...
       =======================
-      Aliases:
+      Aliases: 
       Recreating...
       =======================
       Duration: 0.005s
+      Add script: E:/xampp/htdocs/tetraquark/test/data/imports/normal.js
+      Add retrival: const {b:defaultVar}=
     =======================
     Creating aliases...
     =======================
-    Aliases:
+    Aliases: 
     Recreating...
     =======================
     Duration: 0.006s
+    Add script: E:/xampp/htdocs/tetraquark/test/data/imports/importsamefile1.js
+    Add retrival: const {testDefault}=
     New import =  {testDefault2} from 'E:/xampp/htdocs/tetraquark/test/data/imports/importsamefile2.js'
     Mapping...
       New import =  default2 from 'E:/xampp/htdocs/tetraquark/test/data/imports/normal.js'
     =======================
     Creating aliases...
     =======================
-    Aliases:
+    Aliases: 
     Recreating...
     =======================
-    Duration: 0.002s
+    Duration: 0.001s
+    Add script: E:/xampp/htdocs/tetraquark/test/data/imports/importsamefile2.js
+    Add retrival: const {testDefault2}=
   =======================
   Creating aliases...
   =======================
-  Aliases:
+  Aliases: 
   Recreating...
   =======================
-  Duration: 0.004s
+  Duration: 0.003s
+  Add script: E:/xampp/htdocs/tetraquark/test/data/imports/two_imports.js
+  Add retrival: const {a:defVar}=
 =======================
 Creating aliases...
 =======================
-Aliases:
+Aliases: 
 Recreating...
 =======================
-Duration: 0.006s
-let imports = {};
-imports[normal.js] = () =>{
-    let a='sdsdf';
-    const b={c:'d'};
-    console.log('asdas');
-    function testGlobal(){console.log('asdas2')}
-    class testGlobablClass{constructor(){console.log('asd')}}
-    testGlobal();
-    return{b} // all possible exports here
-};
+Duration: 0.004s
 
-imports[importsamefile2.js] = () =>{
-    // importsamefile2.js -> normal.js
-    const{default2}=imports[normal.js]();
-    function testDefault2(){console.log(default2)}
-    return{testDefault2}
-}
 
-imports[importsamefile1.js] = ()=>{
-    // importsamefile1.js -> normal.js
-    const{default}=imports[normal.js]();
-    function testDefault(){console.log(default)}
-    return{testDefault}
-}
+let Ī={};
+Ī.b=Ī=>{const{b:defaultVar}=Ī.a(Ī);
+function testDefault(){console.log(defaultVar)}return{testDefault}}Ī.d=Ī=>{const{testDefault}=Ī.b(Ī);
+const{testDefault2}=Ī.c(Ī);
+console.log(testDefault);
+console.log(testDefault2);
+const a=testDefault();
+return{a}}Ī.a=Ī=>{let a='sdsdf';
+const b={c:'d'};
+console.log('asdas');
+function testGlobal(){console.log('asdas2')}class testGlobablClass{constructor(){console.log('asd')}}testGlobal();
+return{b}}Ī.c=Ī=>{function testDefault2(){console.log(default2)}return{testDefault2}}const{a:defVar}=Ī.d(Ī);
+a=undefined;
+import defVar from 'E:/xampp/htdocs/tetraquark/test/data/imports/two_imports.js';
 
-imports[two_imports.js] = ()=>{
-    // two_imports.js -> importsamefile1.js
-    const{testDefault}=imports[importsamefile2.js]();
-    // two_imports.js -> importsamefile2.js
-    const{testDefault2}=imports[importsamefile2.js]();
-    console.log(testDefault);
-    console.log(testDefault2);
-    const a=testDefault();
-    return{a}
-}
-
-// import.js -> two_imports.js
-const{defVar}=imports[two_imports.js]();
