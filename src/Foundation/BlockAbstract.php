@@ -24,6 +24,9 @@ abstract class BlockAbstract
     static protected Folder  $folder;
     static protected Import  $import;
     static protected array   $mappedAliases = [];
+    static protected array   $settings = [
+        "single_file" => true
+    ];
     protected int    $caret = 0;
     protected bool   $endFunction = false;
 

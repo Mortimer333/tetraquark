@@ -18,7 +18,8 @@
 // import { testGlobablClass }, defVar from "E:/xampp/htdocs/tetraquark/test/data/imports/normal.js";
 // import * as test,defVar from "E:/xampp/htdocs/tetraquark/test/data/imports/normal.js";
 // import { testGlobal }, * as test,defVar from "E:/xampp/htdocs/tetraquark/test/data/imports/normal.js";
-import defVar from "E:/xampp/htdocs/tetraquark/test/data/imports/two_imports.js";
+// import defVar from "E:/xampp/htdocs/tetraquark/test/data/imports/two_imports.js";
+import variable from "E:/xampp/htdocs/tetraquark/test/data/imports/variable.js";
 
 // import {testGlobablClass} from "E:/xampp/htdocs/tetraquark/test/data/imports/normal.js";
 // import {testGlobablClass} from "/var/www/html/tetraquark-js/test/data/imports/normal.js";

@@ -17,7 +17,7 @@ class Folder
 
     public function __construct()
     {
-
+        // nothing
     }
 
     public function addFile(string $path, ?Script $script = null, bool $setAsCurrent = false): Script
@@ -136,5 +136,35 @@ class Folder
         }
 
         throw new Exception("Couldn't find default export block", 500);
+    }
+
+    public function makePathAbsolute(string $path, ?string $context = null): string
+    {
+        if (is_null($context)) {
+            $context = __DIR__;
+        }
+
+        // Path is absolute
+        if ($path[0] !== '.') {
+            return $path;
+        }
+
+        if (!is_dir($context)) {
+            throw new Exception('Passed context path is not a path to existing folder', 500);
+        }
+
+        $segments = explode('/', $path);
+        $properPath = $context;
+        foreach ($segments as $i => $segment) {
+            if ($segment === '.') {
+                return rtrim($properPath, '/' ) . '/' . implode('/', array_slice($segments, $i + 1));
+            }
+            if ($segment === '..') {
+                $properPath = dirname($properPath);
+                continue;
+            }
+            $properPath .= '/' . $segment;
+        }
+        return $properPath;
     }
 }

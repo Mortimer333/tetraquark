@@ -13,3 +13,7 @@ this.render.set.overflow(
 );
 
 const results = target.bind( main )( ...args );
+
+triggers.forEach( func => {
+  func.bind(scope)(...args);
+});

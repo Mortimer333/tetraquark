@@ -11,49 +11,6 @@ class ImportBlock extends VariableBlockAbstract implements Contract\Block
     ];
     protected string $imported;
 
-    /*
-        !!! How it should work at the end:
-        let imports = {};
-        imports[normal.js] = () =>{
-            let a='sdsdf';
-            const b={c:'d'};
-            console.log('asdas');
-            function testGlobal(){console.log('asdas2')}
-            class testGlobablClass{constructor(){console.log('asd')}}
-            testGlobal();
-            return{b} // all possible exports here
-        };
-
-        imports[importsamefile2.js] = () =>{
-            // importsamefile2.js -> normal.js
-            const{default2}=imports[normal.js]();
-            function testDefault2(){console.log(default2)}
-            return{testDefault2}
-        }
-
-        imports[importsamefile1.js] = ()=>{
-            // importsamefile1.js -> normal.js
-            const{default}=imports[normal.js]();
-            function testDefault(){console.log(default)}
-            return{testDefault}
-        }
-
-        imports[two_imports.js] = ()=>{
-            // two_imports.js -> importsamefile1.js
-            const{testDefault}=imports[importsamefile2.js]();
-            // two_imports.js -> importsamefile2.js
-            const{testDefault2}=imports[importsamefile2.js]();
-            console.log(testDefault);
-            console.log(testDefault2);
-            const a=testDefault();
-            return{a}
-        }
-
-        // import.js -> two_imports.js
-        const{defVar}=imports[two_imports.js]();
-        imports = undefined;
-     */
-
     public function objectify(int $start = 0)
     {
         $this->setName('');
@@ -64,14 +21,16 @@ class ImportBlock extends VariableBlockAbstract implements Contract\Block
         $this->setInstruction(self::$content->iCutToContent($start, $end))
             ->setCaret($end)
         ;
-        Log::log('New import = ' . $this->getInstruction());
+
         $this->blocks = $this->createSubBlocksWithContent(str_replace("\n"," ", $this->getInstruction()->__toString()));
         $path = $this->findPathInBlocks();
+        $pathToScript = $this->getScript()->getPath();
 
         if ($path === ScriptBlock::DUMMY_PATH) {
             return;
         }
 
+        $path = self::$folder->makePathAbsolute($path, dirname($pathToScript));
         if (self::$import->scriptExists($path)) {
             return;
         }
@@ -174,7 +133,12 @@ class ImportBlock extends VariableBlockAbstract implements Contract\Block
             } else {
                 $importNames[] = $defaultBlock->getName();
             }
-            $deconstructNames[] = $importNames[sizeof($importNames) - 1] . ':' . $default->getName();
+            $lastName = $importNames[sizeof($importNames) - 1];
+            if ($lastName !== $default->getName()) {
+                $deconstructNames[] = $importNames[sizeof($importNames) - 1] . ':' . $default->getName();
+            } else {
+                $deconstructNames[] = $lastName;
+            }
         }
         return [$deconstructNames, $importNames];
     }
@@ -201,8 +165,8 @@ class ImportBlock extends VariableBlockAbstract implements Contract\Block
 
     public function recreate(): string
     {
-        if (isset($this->imported)) {
-            return $this->imported;
+        if (isset($this->settings['single_file'])) {
+            return '';
         }
 
         $script = 'import ';

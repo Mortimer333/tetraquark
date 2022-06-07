@@ -4,6 +4,9 @@
 
 This is supposed to be a minifier and obfuscator in one. But due to project with higher priority the obfuscator functionality won't be finished and this library will be only joining and minifing files. There is about 50% work done on obfuscator but this is still not usable.
 
+# Fixes
+
+## Fix caller, chain, import
 ## Extend classes:
     - interface
     - extends
@@ -17,22 +20,10 @@ This is supposed to be a minifier and obfuscator in one. But due to project with
 ## Add the rest of taken keywords
 ## Add to variables Deconstructed assignment - https://medium.com/swlh/javascript-best-practices-renaming-imports-and-proper-variable-declaration-aa405c191bee
 ## If CallerBlock try to get caller name
-## 0. If
-```js
-let obj = {
-    'asd' :2,
-    33 : 'sad'
-};
+## Add all key words so when object has property "typeof" it won't get replaced with its alias
+## Upgrade fixScript as it doesn't reamove all not needed space example: do{ whileLooped--; console.log(whileLooped);}
 
-function fuc() {
-    return {
-        'asd' : 123
-    };
-}
-```
-
-## 1. Add all key words so when object has property "typeof" it won't get replaced with its alias
-## 2. Upgrade fixScript as it doesn't reamove all not needed space - do{ whileLooped--; console.log(whileLooped);}
+# Improvments
 
 ## If script will be slow look into setting all values for functions in one iteration (instead of ~2,5)
 
@@ -43,9 +34,10 @@ function fuc() {
 - variables only containing strings and number - 'asd' + 'vxc' + 2 (but look out for those - 'asd' + (2+3))
 - if `IfBlock` and with `return` but the next one is else then remove else completely
   - maybe if if ends with empty return it might be better to remove `return;` and extend if with `else{}`? this might be less symbols in the end (7 to 6 (or 4 if its single instruction))
+- remove not used variables (scope required)
 
 ## Handle
-- import, export
+- [DONE] import, export
 - [DONE] ?: conditions
 - [DONE] array (used like object)
 - [DONE] notes
@@ -68,6 +60,20 @@ obj['a  b'] = 'v';
 This: obj['a  b'] will become this obj['a b'] in process which might cause some problems with script.
 
 # Problems:
+
+## 0. If
+```js
+let obj = {
+    'asd' :2,
+    33 : 'sad'
+};
+
+function fuc() {
+    return {
+        'asd' : 123
+    };
+}
+```
 
 ## Accessing object with generated names
 

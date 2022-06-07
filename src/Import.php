@@ -93,7 +93,7 @@ class Import
             $imports .= 'Ī.' . $script['alias'] . '=' . 'Ī=>{' . $script['script'] . "}";
         }
 
-        $imports .= $addToTheEndImports . 'a=undefined;';
+        $imports .= $addToTheEndImports . 'Ī=undefined;';
 
         return $imports;
     }

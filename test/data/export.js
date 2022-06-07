@@ -31,3 +31,8 @@ export { default, name2 } from
 'path';
 export * as name1 from 'path';
 export default expression;
+let fonts; export default fonts = {
+  "serif": true,
+  "sans-serif": true,
+  "monospace": true,
+};
