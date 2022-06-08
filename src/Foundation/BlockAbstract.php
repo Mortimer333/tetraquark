@@ -767,7 +767,13 @@ abstract class BlockAbstract
     protected function getClosestNextChild(): bool | BlockInterface
     {
         $parent     = $this->getParent();
-        $childIndex = $this->getChildIndex();
+        try {
+            $childIndex = $this->getChildIndex();
+        } catch (\Error $e) {
+            // If we didn't set childIndex it means it still in progress of objectifing
+            return false;
+        }
+
         if (is_null($parent)) {
             return false;
         }

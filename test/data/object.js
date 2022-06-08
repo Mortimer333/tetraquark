@@ -1,3 +1,14 @@
+let a = {
+    "values": {
+        "auto": true,
+        "crisp-edges": true,
+        "pixelated": true,
+        "smooth": true,
+        "high-quality": true,
+        "": true
+    }
+}
+
 let nem = {
     objSoloTest,
     obj: 'boj',

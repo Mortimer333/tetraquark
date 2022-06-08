@@ -1,5 +1,10 @@
+Object.keys(required).forEach( attr => {
+    set[attr] = typeof set[attr] == 'undefined' ? required[attr] : set[attr];
+});
+ string = string.replaceAll(' ', '&nbsp;').replaceAll(this.spaceUChar, '&nbsp;');
+/*
 subset[path[path.length-1]] path.slice(1);
-/*let obj = {
+let obj = {
     'sa' : 'v',
   g : () => {},
   c : {

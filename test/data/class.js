@@ -1,4 +1,13 @@
 class ClassName {
+    elPos ( el ) {
+        for ( let i = 0; i < el.parentElement.children.length; i++ ) {
+          if ( el.parentElement.children[i] == el ) return i;
+        }
+        return false;
+    }
+
+}
+/*
     novalue
     testAttr = 1
     constructor() {
@@ -44,3 +53,4 @@ if ( editor.nodeType != 1                  ) throw new Error('Editor node has to
 obj.testClass = class {
   a = 'a';
 }
+*/
