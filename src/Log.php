@@ -131,6 +131,7 @@ class Log
             self::log("Instruction Start: " . $block->getInstructionStart());
             self::log("Caret: " . $block->getCaret());
             self::log("Name: `" . $block->getName() . "`");
+            self::log("Child Index: `" . $block->getChildIndex() . "`");
             if (method_exists($block, 'getValue')) {
                 self::log("Value: `" . $block->getValue() . "`");
             }

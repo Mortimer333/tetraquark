@@ -8,7 +8,7 @@ $tetra = new Tetraquark();
 // $minified = $tetra->minify(__DIR__ . '/data/chain.js');
 // $minified = $tetra->minify(__DIR__ . '/data/class.js');
 // $minified = $tetra->minify(__DIR__ . '/data/comment.js');
-// $minified = $tetra->minify(__DIR__ . '/data/caller.js');
+$minified = $tetra->minify(__DIR__ . '/data/caller.js');
 // $minified = $tetra->minify(__DIR__ . '/data/dowhile.js');
 // $minified = $tetra->minify(__DIR__ . '/data/export.js');
 // $minified = $tetra->minify(__DIR__ . '/data/for.js');
@@ -24,6 +24,6 @@ $tetra = new Tetraquark();
 
 // $minified = $tetra->minify(__DIR__ . '/data/single-function.js');
 // $minified = $tetra->minify('/var/www/html/tab_jf/main.js');
-$minified = $tetra->minify('E:\xampp\htdocs\tab_jf\main.js');
-echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
-// echo PHP_EOL . PHP_EOL . str_replace(';', ";\n", $minified ?? '') . PHP_EOL;
+// $minified = $tetra->minify('E:\xampp\htdocs\tab_jf\main.js');
+// echo PHP_EOL . PHP_EOL . $minified . PHP_EOL;
+echo PHP_EOL . PHP_EOL . str_replace(';', ";\n", $minified ?? '') . PHP_EOL;

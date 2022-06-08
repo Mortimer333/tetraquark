@@ -68,6 +68,14 @@ abstract class BlockAbstract
         }
         $this->setSubtype($subtype);
         $this->objectify($start);
+        // $this->updateChildren();
+    }
+
+    protected function updateChildren(): void
+    {
+        foreach ($this->getBlocks() as &$block) {
+            $block->setParent($this);
+        }
     }
 
     public function aliasExists(string $name): bool
@@ -730,16 +738,58 @@ abstract class BlockAbstract
         return [$word, 0];
     }
 
-    protected function checkIfFirstLetterInNextSiblingIsADot(): bool
+    protected function isNextSiblingContected(): bool
     {
-        $parent = $this->getParent();
-        $childIndex = $this->getChildIndex();
-        $nextSibling = $parent->getBlocks()[$childIndex + 1] ?? false;
-        if (!$nextSibling instanceof BlockAbstract || $nextSibling instanceof CommentBlock) {
+
+        $nextSibling = $this->getClosestNextChild();
+        if (!$nextSibling) {
             return false;
         }
-        $letter = $nextSibling->getInstruction()->trim()->getLetter(0) ?? '';
-        return $letter === '.';
+        return $nextSibling instanceof Block\CallerBlock
+            || $nextSibling instanceof Block\ChainLinkBlock
+            || $nextSibling instanceof Block\BracketChainLinkBlock
+            || $nextSibling instanceof Block\DoubleEqualBlock
+            || $nextSibling instanceof Block\TripleEqualBlock
+            || $nextSibling instanceof Block\OperatorBlock
+            || $nextSibling instanceof Block\SymbolBlock
+        ;
+    }
+
+    protected function getClosestNextChild(): bool | BlockInterface
+    {
+        $parent     = $this->getParent();
+        $childIndex = $this->getChildIndex();
+        if (is_null($parent)) {
+            return false;
+        }
+        if (
+            (
+                $parent::class === Block\ChainLinkBlock::class
+                && (
+                    $parent->getSubtype() == Block\ChainLinkBlock::END_METHOD
+                    || $parent->getSubtype() == Block\ChainLinkBlock::END_VARIABLE
+                )
+            ) || (
+                $parent::class === Block\BracketChainLinkBlock::class
+                && (
+                    $parent->getSubtype() == Block\BracketChainLinkBlock::METHOD
+                    || $parent->getSubtype() == Block\BracketChainLinkBlock::VARIABLE
+                )
+            )
+        ) {
+            $child = $parent->getMethodValues();
+        } else {
+            $child = $parent->getBlocks()[$childIndex];
+        }
+        if ($child instanceof Block\ScriptBlock) {
+            return false;
+        }
+
+        $nextSibling = $parent->getBlocks()[$childIndex + 1] ?? false;
+        if (!$nextSibling) {
+            return $parent->getClosestNextChild();
+        }
+        return $nextSibling;
     }
 
     protected function isAnyOpenBracket(string $letter): bool

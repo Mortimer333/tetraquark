@@ -21,7 +21,6 @@ class Import
 
     public function setScript(string $path, string $script): self
     {
-        Log::log('Add script: ' . $path);
         $this->scripts[$path] = [
             "script" => $script,
             "alias"  => BlockAbstract::generateAliasStatic($this->lastAlias),
@@ -39,7 +38,6 @@ class Import
 
     public function addRetrival(string $path, string $importsFrom, string $retrival): self
     {
-        Log::log('Add retrival: ' . $retrival);
         if (!isset($this->retrivals[$path])) {
             $this->retrivals[$path] = [];
         }

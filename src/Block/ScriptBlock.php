@@ -16,6 +16,7 @@ class ScriptBlock extends Block implements Contract\Block
         int    $start = 0,
         string $subtype = '',
     ) {
+        $this->setChildIndex(0);
         if (!isset(self::$mainScript)) {
             self::$mainScript = $this;
         }
@@ -64,7 +65,7 @@ class ScriptBlock extends Block implements Contract\Block
         Log::log("Recreating...");
         $this->setMinified($this->recreate());
         Log::log("=======================");
-        // Log::displayBlocks($this->blocks);
+        Log::displayBlocks($this->blocks);
         Log::timerEnd();
         self::$content->removeContent();
     }

@@ -111,8 +111,10 @@ class ChainLinkBlock extends Block implements Contract\Block
             $script .= rtrim($block->recreate(), ';');
         }
 
-
-        return $script . ';';
+        if (!$this->isNextSiblingContected()) {
+            return $script . ';';
+        }
+        return $script;
     }
 
     public function getMethodValues(): ?Contract\Block

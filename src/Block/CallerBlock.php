@@ -127,13 +127,12 @@ class CallerBlock extends Block implements Contract\Block
             $script .= rtrim($block->recreate(), ';');
         }
 
-        $script = rtrim($script, ';');
         if ($this->getSubtype() !== self::ARROW_FUNCTION) {
             $script .= ')';
         }
-
-        if (!$this->checkIfFirstLetterInNextSiblingIsADot()) {
-            return $script . ';';
+        if (!$this->isNextSiblingContected()) {
+            $script .= ';';
+            return $script;
         }
         return $script;
     }

@@ -27,7 +27,7 @@ abstract class VariableBlockAbstract extends BlockAbstract
         if (\sizeof($this->getBlocks()) !== 1) {
             throw new Exception('Variable recreate for import should only/at least have one child', 500);
         }
-        
+
         return rtrim(rtrim($this->getBlocks()[0]->recreate(), ';'), ',') . ';';
     }
 
@@ -127,7 +127,9 @@ abstract class VariableBlockAbstract extends BlockAbstract
             // $item = preg_replace('/[\n]/', ' ', $item);
             // $item = preg_replace('/[ \t]+/', ' ', $item) . ';';
             self::$content->addContent($item . ';');
-            $this->blocks[] = new Block\VariableItemBlock();
+            $variable = new Block\VariableItemBlock(parent: $this);
+            $variable->setChildIndex(\sizeof($this->blocks));
+            $this->blocks[] = $variable;
             self::$content->removeContent();
         }
     }
