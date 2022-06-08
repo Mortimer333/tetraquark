@@ -124,6 +124,9 @@ abstract class ConditionBlockAbstract extends BlockAbstract
 
     protected function setCondBlocks(array $blocks): void
     {
+        foreach ($blocks as &$block) {
+            $block->setPlacement('getCondBlocks');
+        }
         $this->condBlocks = $blocks;
     }
 

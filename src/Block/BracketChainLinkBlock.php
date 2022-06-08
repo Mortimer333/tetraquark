@@ -102,6 +102,9 @@ class BracketChainLinkBlock extends Block implements Contract\Block
             ];
             $this->setSubtype(self::BRACKET_BLOCK_CREATE);
             $this->bracketBlocks = $this->createSubBlocks();
+            foreach ($this->bracketBlocks as &$block) {
+                $block->setPlacement('getBracketBlocks');
+            }
             $this->setSubtype($oldSubtype);
             $this->endChars = $oldEndChars;
             $this->setCaret($this->getCaret() + 1);

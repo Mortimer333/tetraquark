@@ -115,4 +115,15 @@ trait BlockGetSetTrait
     {
         return $this->parent;
     }
+
+    public function setPlacement(string $placement): self
+    {
+        $this->placementMethod = $placement;
+        return $this;
+    }
+
+    public function getPlacement(): string
+    {
+        return $this->placementMethod;
+    }
 }

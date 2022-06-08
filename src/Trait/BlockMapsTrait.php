@@ -377,6 +377,10 @@ trait BlockMapsTrait
     protected array $chainLinkBlocksMap = [
         "{" => "ObjectBlock",
     ];
+    protected array $childrenChainLinkBlocksMap = [
+        '.' => 'ChainLinkBlock',
+        '[' => 'BracketChainLinkBlock'
+    ];
     protected array $exportBlocksMap = [
         "{" => "ExportObjectBlock",
         "*" => [
@@ -459,7 +463,6 @@ trait BlockMapsTrait
         $additionalPaths = [
             Block\ArrayBlock           ::class => $this->arrayBlocksMap,
             Block\BracketChainLinkBlock::class => $this->chainLinkBlocksMap,
-            Block\ChainLinkBlock       ::class => $this->chainLinkBlocksMap,
             Block\ClassBlock           ::class => $this->classBlocksMap,
             Block\ObjectBlock          ::class => $this->objectBlocksMap,
             Block\ObjectValueBlock     ::class => $this->objectValueBlocksMap,
@@ -470,7 +473,14 @@ trait BlockMapsTrait
 
         $blocksMap = $this->mergeBlockMaps($blocksMap, $additionalPaths[$this::class] ?? []);
 
-        if ($this instanceof Block\MethodBlock || $this instanceof Block\CallerBlock) {
+        if (
+            (
+                $this instanceof Block\BracketChainLinkBlock
+                && $this->getSubtype() != Block\BracketChainLinkBlock::BRACKET_BLOCK_CREATE
+            ) || $this instanceof Block\ChainLinkBlock
+        ) {
+            $blocksMap = $this->childrenChainLinkBlocksMap;
+        } elseif ($this instanceof Block\MethodBlock || $this instanceof Block\CallerBlock) {
             $blocksMap = $this->mergeBlockMaps($blocksMap, $this->callerBlocksMap);
             if ($this instanceof Block\MethodBlock && $this->getStatus() === $this::CREATING_ARGUMENTS) {
                 $blocksMap = $this->mergeBlockMaps($blocksMap, $this->callerArgsBlocksMap);

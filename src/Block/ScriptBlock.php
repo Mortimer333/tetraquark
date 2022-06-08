@@ -114,6 +114,7 @@ class ScriptBlock extends Block implements Contract\Block
         foreach ($this->blocks as $block) {
             $script .= $block->recreate();
         }
+        
         return $this->fixScript(new Content($script));
     }
 

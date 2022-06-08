@@ -27,6 +27,7 @@ abstract class BlockAbstract
     static protected array   $settings = [
         "single_file" => true
     ];
+
     protected int    $caret = 0;
     protected bool   $endFunction = false;
 
@@ -54,6 +55,9 @@ abstract class BlockAbstract
 
     /** @var int Amount of opened brackets */
     protected int $bracketsCount = 0;
+
+    /** @var string Holds name of method which will return array of items this Block is saved in */
+    protected string $placementMethod = "getBlocks";
 
     public function __construct(
         int $start = 0,
@@ -267,7 +271,7 @@ abstract class BlockAbstract
         Log::increaseIndent();
         for ($i=$start; $i < self::$content->getLength(); $i++) {
             $letter = self::$content->getLetter($i);
-            // Log::log("Letter: " . $letter . ', i: ' . $i . ', ' . self::$content->getLength() . ', ' . self::$content);
+            // Log::log($this::class . " | Letter: " . $letter . ', i: ' . $i . ', ' . self::$content->getLength() . ', ["' . implode('", "', array_keys($this->endChars)) . '"]' );
             if (
                 ($startsTemplate = Validate::isTemplateLiteralLandmark($letter, ''))
                 || Validate::isStringLandmark($letter, '')
@@ -322,6 +326,11 @@ abstract class BlockAbstract
                 }
 
                 if (Validate::isValidUndefined($possibleUndefined)) {
+                    if ($onlyOne) {
+                        $i = $oldPos;
+                        $possibleUndefined = '';
+                        break;
+                    }
                     $blocks[] = $this->generateUndefined($oldPos - \mb_strlen($possibleUndefined), $possibleUndefined, \sizeof($blocks));
                 }
 
@@ -746,7 +755,7 @@ abstract class BlockAbstract
             return false;
         }
         return $nextSibling instanceof Block\CallerBlock
-            || $nextSibling instanceof Block\ChainLinkBlock
+            || ($nextSibling instanceof Block\ChainLinkBlock && $nextSibling->getSubtype() !== Block\ChainLinkBlock::FIRST)
             || $nextSibling instanceof Block\BracketChainLinkBlock
             || $nextSibling instanceof Block\DoubleEqualBlock
             || $nextSibling instanceof Block\TripleEqualBlock
@@ -762,24 +771,23 @@ abstract class BlockAbstract
         if (is_null($parent)) {
             return false;
         }
-        if (
-            (
-                $parent::class === Block\ChainLinkBlock::class
-                && (
-                    $parent->getSubtype() == Block\ChainLinkBlock::END_METHOD
-                    || $parent->getSubtype() == Block\ChainLinkBlock::END_VARIABLE
-                )
-            ) || (
-                $parent::class === Block\BracketChainLinkBlock::class
-                && (
-                    $parent->getSubtype() == Block\BracketChainLinkBlock::METHOD
-                    || $parent->getSubtype() == Block\BracketChainLinkBlock::VARIABLE
-                )
+        if ((
+            $parent::class === Block\ChainLinkBlock::class
+            && (
+                $parent->getSubtype() == Block\ChainLinkBlock::END_METHOD
+                || $parent->getSubtype() == Block\ChainLinkBlock::END_VARIABLE
             )
-        ) {
+        ) || (
+            $parent::class === Block\BracketChainLinkBlock::class
+            && (
+                $parent->getSubtype() == Block\BracketChainLinkBlock::METHOD
+                || $parent->getSubtype() == Block\BracketChainLinkBlock::VARIABLE
+            )
+        )) {
             $child = $parent->getMethodValues();
         } else {
-            $child = $parent->getBlocks()[$childIndex];
+            $placementMethod = $this->getPlacement();
+            $child = $parent->$placementMethod()[$childIndex];
         }
         if ($child instanceof Block\ScriptBlock) {
             return false;

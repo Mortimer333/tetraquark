@@ -1,23 +1,1418 @@
 Mapping...
+  Mapping...
+  =======================
+  Creating aliases...
+  =======================
+  Aliases: 
+  Recreating...
+  =======================
+  Block: Tetraquark\Block\FunctionBlock
+  Subtype: function
+  Instruction: function defaultFunction() {
+  Instruction Start: 0
+  Caret: 68
+  Name: `defaultFunction`
+  Child Index: `0`
+  Arguments: [0] `
+  Alias: `defaultFunction`
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: first
+    Instruction: console
+    Instruction Start: 31
+    Caret: 66
+    Name: ``
+    Child Index: `0`
+    Alias: ``
+    Blocks: [1] 
+    =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: end:method
+      Instruction: log
+      Instruction Start: 38
+      Caret: 66
+      Name: ``
+      Child Index: `0`
+      Chain Link Method:
+        Block: Tetraquark\Block\CallerBlock
+        Subtype: 
+        Instruction: 
+        Instruction Start: 42
+        Caret: 65
+        Name: ``
+        Child Index: `0`
+        Alias: ``
+        Blocks: [1] 
+        =======
+          Block: Tetraquark\Block\StringBlock
+          Subtype: 
+          Instruction: 'default fundtion log'
+          Instruction Start: 0
+          Caret: 22
+          Name: ``
+          Child Index: `0`
+          Alias: ``
+          Blocks: [0] 
+          =======
+      Alias: ``
+      Blocks: [0] 
+      =======
+  Block: Tetraquark\Block\ExportBlock
+  Subtype: export
+  Instruction:  default defaultFunction
+  Instruction Start: 69
+  Caret: 100
+  Name: ``
+  Child Index: `1`
+  Alias: ``
+  Blocks: [2] 
+  =======
+    Block: Tetraquark\Block\ExportDefaultBlock
+    Subtype: default
+    Instruction: default
+    Instruction Start: 0
+    Caret: 8
+    Name: ``
+    Child Index: `0`
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\ExportAsBlock
+    Subtype: 
+    Instruction: defaultFunction
+    Instruction Start: 8
+    Caret: 23
+    Name: ``
+    Child Index: `1`
+    Old Name: `defaultFunction`
+    Alias: ``
+    Blocks: [0] 
+    =======
+  Duration: 0.003s
+  Mapping...
+  =======================
+  Creating aliases...
+  =======================
+  Aliases: 
+  Recreating...
+  =======================
+  Block: Tetraquark\Block\VariableBlock
+  Subtype: let
+  Instruction: let a = 'sdsdf'
+  Instruction Start: 1
+  Caret: 16
+  Name: ``
+  Child Index: `0`
+  Value: ``
+  Alias: ``
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\VariableItemBlock
+    Subtype: 
+    Instruction:  a =
+    Instruction Start: 0
+    Caret: 12
+    Name: `a`
+    Child Index: `0`
+    Value: ``
+    Alias: `a`
+    Blocks: [1] 
+    =======
+      Block: Tetraquark\Block\StringBlock
+      Subtype: 
+      Instruction: 'sdsdf'
+      Instruction Start: 5
+      Caret: 12
+      Name: ``
+      Child Index: `0`
+      Alias: ``
+      Blocks: [0] 
+      =======
+  Block: Tetraquark\Block\VariableBlock
+  Subtype: const
+  Instruction: const b = {\n c : 'd'\n}
+  Instruction Start: 18
+  Caret: 40
+  Name: ``
+  Child Index: `1`
+  Value: ``
+  Alias: ``
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\VariableItemBlock
+    Subtype: 
+    Instruction:  b =
+    Instruction Start: 0
+    Caret: 17
+    Name: `b`
+    Child Index: `0`
+    Value: ``
+    Alias: `b`
+    Blocks: [1] 
+    =======
+      Block: Tetraquark\Block\ObjectBlock
+      Subtype: {
+      Instruction: 
+      Instruction Start: 5
+      Caret: 16
+      Name: ``
+      Child Index: `0`
+      Alias: ``
+      Blocks: [1] 
+      =======
+        Block: Tetraquark\Block\ObjectValueBlock
+        Subtype: :
+        Instruction: \n c 
+        Instruction Start: 6
+        Caret: 15
+        Name: `c`
+        Child Index: `0`
+        Alias: `c`
+        Blocks: [1] 
+        =======
+          Block: Tetraquark\Block\StringBlock
+          Subtype: 
+          Instruction: 'd'
+          Instruction Start: 12
+          Caret: 15
+          Name: ``
+          Child Index: `0`
+          Alias: ``
+          Blocks: [0] 
+          =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 41
+  Caret: 61
+  Name: ``
+  Child Index: `2`
+  Alias: ``
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: end:method
+    Instruction: log
+    Instruction Start: 48
+    Caret: 61
+    Name: ``
+    Child Index: `0`
+    Chain Link Method:
+      Block: Tetraquark\Block\CallerBlock
+      Subtype: 
+      Instruction: 
+      Instruction Start: 52
+      Caret: 60
+      Name: ``
+      Child Index: `0`
+      Alias: ``
+      Blocks: [1] 
+      =======
+        Block: Tetraquark\Block\StringBlock
+        Subtype: 
+        Instruction: 'asdas'
+        Instruction Start: 0
+        Caret: 7
+        Name: ``
+        Child Index: `0`
+        Alias: ``
+        Blocks: [0] 
+        =======
+    Alias: ``
+    Blocks: [0] 
+    =======
+  Block: Tetraquark\Block\FunctionBlock
+  Subtype: function
+  Instruction: function testGlobal() {
+  Instruction Start: 62
+  Caret: 111
+  Name: `testGlobal`
+  Child Index: `3`
+  Arguments: [0] `
+  Alias: `testGlobal`
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: first
+    Instruction: console
+    Instruction Start: 88
+    Caret: 109
+    Name: ``
+    Child Index: `0`
+    Alias: ``
+    Blocks: [1] 
+    =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: end:method
+      Instruction: log
+      Instruction Start: 95
+      Caret: 109
+      Name: ``
+      Child Index: `0`
+      Chain Link Method:
+        Block: Tetraquark\Block\CallerBlock
+        Subtype: 
+        Instruction: 
+        Instruction Start: 99
+        Caret: 108
+        Name: ``
+        Child Index: `0`
+        Alias: ``
+        Blocks: [1] 
+        =======
+          Block: Tetraquark\Block\StringBlock
+          Subtype: 
+          Instruction: 'asdas2'
+          Instruction Start: 0
+          Caret: 8
+          Name: ``
+          Child Index: `0`
+          Alias: ``
+          Blocks: [0] 
+          =======
+      Alias: ``
+      Blocks: [0] 
+      =======
+  Block: Tetraquark\Block\ClassBlock
+  Subtype: class
+  Instruction: class testGlobablClass {
+  Instruction Start: 113
+  Caret: 179
+  Name: `testGlobablClass`
+  Child Index: `4`
+  Alias: `testGlobablClass`
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\ClassMethodBlock
+    Subtype: method
+    Instruction: constructor() {
+    Instruction Start: 139
+    Caret: 177
+    Name: `constructor`
+    Child Index: `0`
+    Arguments: [0] `
+    Alias: `constructor`
+    Blocks: [1] 
+    =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: first
+      Instruction: console
+      Instruction Start: 156
+      Caret: 174
+      Name: ``
+      Child Index: `0`
+      Alias: ``
+      Blocks: [1] 
+      =======
+        Block: Tetraquark\Block\ChainLinkBlock
+        Subtype: end:method
+        Instruction: log
+        Instruction Start: 163
+        Caret: 174
+        Name: ``
+        Child Index: `0`
+        Chain Link Method:
+          Block: Tetraquark\Block\CallerBlock
+          Subtype: 
+          Instruction: 
+          Instruction Start: 167
+          Caret: 173
+          Name: ``
+          Child Index: `0`
+          Alias: ``
+          Blocks: [1] 
+          =======
+            Block: Tetraquark\Block\StringBlock
+            Subtype: 
+            Instruction: 'asd'
+            Instruction Start: 0
+            Caret: 5
+            Name: ``
+            Child Index: `0`
+            Alias: ``
+            Blocks: [0] 
+            =======
+        Alias: ``
+        Blocks: [0] 
+        =======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: \ntestGlobal
+  Instruction Start: 168
+  Caret: 179
+  Name: ``
+  Child Index: `5`
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\CallerBlock
+  Subtype: (
+  Instruction: 
+  Instruction Start: 191
+  Caret: 192
+  Name: ``
+  Child Index: `6`
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\ExportBlock
+  Subtype: export
+  Instruction:  { testGlobablClass, testGlobal, b as default}
+  Instruction Start: 194
+  Caret: 247
+  Name: ``
+  Child Index: `7`
+  Alias: ``
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\ExportObjectBlock
+    Subtype: {
+    Instruction: 
+    Instruction Start: 1
+    Caret: 45
+    Name: ``
+    Child Index: `0`
+    Alias: ``
+    Blocks: [3] 
+    =======
+      Block: Tetraquark\Block\ExportObjectItemBlock
+      Subtype: default aliased
+      Instruction:  b as default
+      Instruction Start: 32
+      Caret: 45
+      Name: ``
+      Child Index: `3`
+      Old Name: `b`
+      New Name: `default`
+      Alias: ``
+      Blocks: [0] 
+      =======
+      Block: Tetraquark\Block\ExportObjectItemBlock
+      Subtype: ,
+      Instruction:  testGlobablClass
+      Instruction Start: 2
+      Caret: 20
+      Name: ``
+      Child Index: `0`
+      Old Name: `testGlobablClass`
+      New Name: ``
+      Alias: ``
+      Blocks: [0] 
+      =======
+      Block: Tetraquark\Block\ExportObjectItemBlock
+      Subtype: ,
+      Instruction:  testGlobal
+      Instruction Start: 20
+      Caret: 32
+      Name: ``
+      Child Index: `1`
+      Old Name: `testGlobal`
+      New Name: ``
+      Alias: ``
+      Blocks: [0] 
+      =======
+  Duration: 0.004s
+  Mapping...
+    Mapping...
+    =======================
+    Creating aliases...
+    =======================
+    Aliases: 
+    Recreating...
+    =======================
+    Block: Tetraquark\Block\ImportBlock
+    Subtype: import
+    Instruction:  defaultVar from 'E:/xampp/htdocs/tetraquark/test/data/imports/normal.js'
+    Instruction Start: 0
+    Caret: 80
+    Name: ``
+    Child Index: `0`
+    Alias: ``
+    Blocks: [2] 
+    =======
+      Block: Tetraquark\Block\ImportAsBlock
+      Subtype: 
+      Instruction:  defaultVar
+      Instruction Start: -12
+      Caret: -1
+      Name: `defaultVar`
+      Child Index: `0`
+      Alias: `defaultVar`
+      Blocks: [0] 
+      =======
+      Block: Tetraquark\Block\ImportFromBlock
+      Subtype: from
+      Instruction:  from 'E:/xampp/htdocs/tetraquark/test/data/imports/normal.js'
+      Instruction Start: 11
+      Caret: 73
+      Name: ``
+      Child Index: `1`
+      Path: `E:/xampp/htdocs/tetraquark/test/data/imports/normal.js`
+      Alias: ``
+      Blocks: [0] 
+      =======
+    Block: Tetraquark\Block\FunctionBlock
+    Subtype: function
+    Instruction: function testDefault() {
+    Instruction Start: 81
+    Caret: 133
+    Name: `testDefault`
+    Child Index: `1`
+    Arguments: [0] `
+    Alias: `testDefault`
+    Blocks: [1] 
+    =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: first
+      Instruction: console
+      Instruction Start: 108
+      Caret: 131
+      Name: ``
+      Child Index: `0`
+      Alias: ``
+      Blocks: [1] 
+      =======
+        Block: Tetraquark\Block\ChainLinkBlock
+        Subtype: end:method
+        Instruction: log
+        Instruction Start: 115
+        Caret: 131
+        Name: ``
+        Child Index: `0`
+        Chain Link Method:
+          Block: Tetraquark\Block\CallerBlock
+          Subtype: 
+          Instruction: 
+          Instruction Start: 119
+          Caret: 130
+          Name: ``
+          Child Index: `0`
+          Alias: ``
+          Blocks: [1] 
+          =======
+            Block: Tetraquark\Block\UndefinedBlock
+            Subtype: 
+            Instruction: defaultVar
+            Instruction Start: 0
+            Caret: 10
+            Name: ``
+            Child Index: `0`
+            Alias: ``
+            Blocks: [0] 
+            =======
+        Alias: ``
+        Blocks: [0] 
+        =======
+    Block: Tetraquark\Block\ExportBlock
+    Subtype: export
+    Instruction:  { testDefault }
+    Instruction Start: 134
+    Caret: 157
+    Name: ``
+    Child Index: `2`
+    Alias: ``
+    Blocks: [1] 
+    =======
+      Block: Tetraquark\Block\ExportObjectBlock
+      Subtype: {
+      Instruction: 
+      Instruction Start: 1
+      Caret: 15
+      Name: ``
+      Child Index: `0`
+      Alias: ``
+      Blocks: [1] 
+      =======
+        Block: Tetraquark\Block\ExportObjectItemBlock
+        Subtype: ,
+        Instruction:  testDefault 
+        Instruction Start: 2
+        Caret: 15
+        Name: ``
+        Child Index: `1`
+        Old Name: `testDefault`
+        New Name: ``
+        Alias: ``
+        Blocks: [0] 
+        =======
+    Duration: 0.001s
+    Mapping...
+    =======================
+    Creating aliases...
+    =======================
+    Aliases: 
+    Recreating...
+    =======================
+    Block: Tetraquark\Block\ImportBlock
+    Subtype: import
+    Instruction:  default2 from 'E:/xampp/htdocs/tetraquark/test/data/imports/normal.js'
+    Instruction Start: 0
+    Caret: 78
+    Name: ``
+    Child Index: `0`
+    Alias: ``
+    Blocks: [2] 
+    =======
+      Block: Tetraquark\Block\ImportAsBlock
+      Subtype: 
+      Instruction:  default2
+      Instruction Start: -10
+      Caret: -1
+      Name: `default2`
+      Child Index: `0`
+      Alias: `default2`
+      Blocks: [0] 
+      =======
+      Block: Tetraquark\Block\ImportFromBlock
+      Subtype: from
+      Instruction:  from 'E:/xampp/htdocs/tetraquark/test/data/imports/normal.js'
+      Instruction Start: 9
+      Caret: 71
+      Name: ``
+      Child Index: `1`
+      Path: `E:/xampp/htdocs/tetraquark/test/data/imports/normal.js`
+      Alias: ``
+      Blocks: [0] 
+      =======
+    Block: Tetraquark\Block\FunctionBlock
+    Subtype: function
+    Instruction: function testDefault2() {
+    Instruction Start: 79
+    Caret: 130
+    Name: `testDefault2`
+    Child Index: `1`
+    Arguments: [0] `
+    Alias: `testDefault2`
+    Blocks: [1] 
+    =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: first
+      Instruction: console
+      Instruction Start: 107
+      Caret: 128
+      Name: ``
+      Child Index: `0`
+      Alias: ``
+      Blocks: [1] 
+      =======
+        Block: Tetraquark\Block\ChainLinkBlock
+        Subtype: end:method
+        Instruction: log
+        Instruction Start: 114
+        Caret: 128
+        Name: ``
+        Child Index: `0`
+        Chain Link Method:
+          Block: Tetraquark\Block\CallerBlock
+          Subtype: 
+          Instruction: 
+          Instruction Start: 118
+          Caret: 127
+          Name: ``
+          Child Index: `0`
+          Alias: ``
+          Blocks: [1] 
+          =======
+            Block: Tetraquark\Block\UndefinedBlock
+            Subtype: 
+            Instruction: default2
+            Instruction Start: 0
+            Caret: 8
+            Name: ``
+            Child Index: `0`
+            Alias: ``
+            Blocks: [0] 
+            =======
+        Alias: ``
+        Blocks: [0] 
+        =======
+    Block: Tetraquark\Block\ExportBlock
+    Subtype: export
+    Instruction:  { testDefault2 }
+    Instruction Start: 131
+    Caret: 155
+    Name: ``
+    Child Index: `2`
+    Alias: ``
+    Blocks: [1] 
+    =======
+      Block: Tetraquark\Block\ExportObjectBlock
+      Subtype: {
+      Instruction: 
+      Instruction Start: 1
+      Caret: 16
+      Name: ``
+      Child Index: `0`
+      Alias: ``
+      Blocks: [1] 
+      =======
+        Block: Tetraquark\Block\ExportObjectItemBlock
+        Subtype: ,
+        Instruction:  testDefault2 
+        Instruction Start: 2
+        Caret: 16
+        Name: ``
+        Child Index: `1`
+        Old Name: `testDefault2`
+        New Name: ``
+        Alias: ``
+        Blocks: [0] 
+        =======
+    Duration: 0.001s
+  =======================
+  Creating aliases...
+  =======================
+  Aliases: 
+  Recreating...
+  =======================
+  Block: Tetraquark\Block\ImportBlock
+  Subtype: import
+  Instruction:  {testDefault} from 'E:/xampp/htdocs/tetraquark/test/data/imports/importsamefile1.js'
+  Instruction Start: 0
+  Caret: 92
+  Name: ``
+  Child Index: `0`
+  Alias: ``
+  Blocks: [2] 
+  =======
+    Block: Tetraquark\Block\ImportObjectBlock
+    Subtype: {
+    Instruction: 
+    Instruction Start: 1
+    Caret: 13
+    Name: ``
+    Child Index: `0`
+    Alias: ``
+    Blocks: [1] 
+    =======
+      Block: Tetraquark\Block\ImportObjectItemBlock
+      Subtype: ,
+      Instruction: testDefaul
+      Instruction Start: 2
+      Caret: 13
+      Name: ``
+      Child Index: `1`
+      Old Name: ``
+      New Name: ``
+      Alias: ``
+      Blocks: [0] 
+      =======
+    Block: Tetraquark\Block\ImportFromBlock
+    Subtype: from
+    Instruction:  from 'E:/xampp/htdocs/tetraquark/test/data/imports/importsamefile1.js'
+    Instruction Start: 14
+    Caret: 85
+    Name: ``
+    Child Index: `1`
+    Path: `E:/xampp/htdocs/tetraquark/test/data/imports/importsamefile1.js`
+    Alias: ``
+    Blocks: [0] 
+    =======
+  Block: Tetraquark\Block\ImportBlock
+  Subtype: import
+  Instruction:  {testDefault2} from 'E:/xampp/htdocs/tetraquark/test/data/imports/importsamefile2.js'
+  Instruction Start: 93
+  Caret: 186
+  Name: ``
+  Child Index: `1`
+  Alias: ``
+  Blocks: [2] 
+  =======
+    Block: Tetraquark\Block\ImportObjectBlock
+    Subtype: {
+    Instruction: 
+    Instruction Start: 1
+    Caret: 14
+    Name: ``
+    Child Index: `0`
+    Alias: ``
+    Blocks: [1] 
+    =======
+      Block: Tetraquark\Block\ImportObjectItemBlock
+      Subtype: ,
+      Instruction: testDefault
+      Instruction Start: 2
+      Caret: 14
+      Name: ``
+      Child Index: `1`
+      Old Name: ``
+      New Name: ``
+      Alias: ``
+      Blocks: [0] 
+      =======
+    Block: Tetraquark\Block\ImportFromBlock
+    Subtype: from
+    Instruction:  from 'E:/xampp/htdocs/tetraquark/test/data/imports/importsamefile2.js'
+    Instruction Start: 15
+    Caret: 86
+    Name: ``
+    Child Index: `1`
+    Path: `E:/xampp/htdocs/tetraquark/test/data/imports/importsamefile2.js`
+    Alias: ``
+    Blocks: [0] 
+    =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 188
+  Caret: 212
+  Name: ``
+  Child Index: `2`
+  Alias: ``
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: end:method
+    Instruction: log
+    Instruction Start: 195
+    Caret: 212
+    Name: ``
+    Child Index: `0`
+    Chain Link Method:
+      Block: Tetraquark\Block\CallerBlock
+      Subtype: 
+      Instruction: 
+      Instruction Start: 199
+      Caret: 211
+      Name: ``
+      Child Index: `0`
+      Alias: ``
+      Blocks: [1] 
+      =======
+        Block: Tetraquark\Block\UndefinedBlock
+        Subtype: 
+        Instruction: testDefault
+        Instruction Start: 0
+        Caret: 11
+        Name: ``
+        Child Index: `0`
+        Alias: ``
+        Blocks: [0] 
+        =======
+    Alias: ``
+    Blocks: [0] 
+    =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: first
+  Instruction: console
+  Instruction Start: 214
+  Caret: 239
+  Name: ``
+  Child Index: `3`
+  Alias: ``
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: end:method
+    Instruction: log
+    Instruction Start: 221
+    Caret: 239
+    Name: ``
+    Child Index: `0`
+    Chain Link Method:
+      Block: Tetraquark\Block\CallerBlock
+      Subtype: 
+      Instruction: 
+      Instruction Start: 225
+      Caret: 238
+      Name: ``
+      Child Index: `0`
+      Alias: ``
+      Blocks: [1] 
+      =======
+        Block: Tetraquark\Block\UndefinedBlock
+        Subtype: 
+        Instruction: testDefault2
+        Instruction Start: 0
+        Caret: 12
+        Name: ``
+        Child Index: `0`
+        Alias: ``
+        Blocks: [0] 
+        =======
+    Alias: ``
+    Blocks: [0] 
+    =======
+  Block: Tetraquark\Block\VariableBlock
+  Subtype: const
+  Instruction: const a = testDefault()
+  Instruction Start: 241
+  Caret: 264
+  Name: ``
+  Child Index: `4`
+  Value: ``
+  Alias: ``
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\VariableItemBlock
+    Subtype: 
+    Instruction:  a =
+    Instruction Start: 0
+    Caret: 18
+    Name: `a`
+    Child Index: `0`
+    Value: ``
+    Alias: `a`
+    Blocks: [2] 
+    =======
+      Block: Tetraquark\Block\UndefinedBlock
+      Subtype: 
+      Instruction:  testDefault
+      Instruction Start: -9
+      Caret: 3
+      Name: ``
+      Child Index: `0`
+      Alias: ``
+      Blocks: [0] 
+      =======
+      Block: Tetraquark\Block\CallerBlock
+      Subtype: (
+      Instruction: 
+      Instruction Start: 16
+      Caret: 17
+      Name: ``
+      Child Index: `1`
+      Alias: ``
+      Blocks: [0] 
+      =======
+  Block: Tetraquark\Block\ExportBlock
+  Subtype: export
+  Instruction:  default a
+  Instruction Start: 265
+  Caret: 282
+  Name: ``
+  Child Index: `5`
+  Alias: ``
+  Blocks: [2] 
+  =======
+    Block: Tetraquark\Block\ExportDefaultBlock
+    Subtype: default
+    Instruction: default
+    Instruction Start: 0
+    Caret: 8
+    Name: ``
+    Child Index: `0`
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\ExportAsBlock
+    Subtype: 
+    Instruction: a
+    Instruction Start: 8
+    Caret: 9
+    Name: ``
+    Child Index: `1`
+    Old Name: `a`
+    Alias: ``
+    Blocks: [0] 
+    =======
+  Duration: 0.002s
+  Mapping...
+  =======================
+  Creating aliases...
+  =======================
+  Aliases: 
+  Recreating...
+  =======================
+  Block: Tetraquark\Block\VariableBlock
+  Subtype: let
+  Instruction: let fonts
+  Instruction Start: 1
+  Caret: 10
+  Name: ``
+  Child Index: `0`
+  Value: ``
+  Alias: ``
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\VariableItemBlock
+    Subtype: 
+    Instruction: 
+    Instruction Start: 6
+    Caret: 7
+    Name: `fonts`
+    Child Index: `0`
+    Value: ``
+    Alias: `fonts`
+    Blocks: [0] 
+    =======
+  Block: Tetraquark\Block\ExportBlock
+  Subtype: export
+  Instruction:  default fonts = {\n "serif": true,\n "sans-serif": true,\n "monospace": true,\n}
+  Instruction Start: 11
+  Caret: 95
+  Name: ``
+  Child Index: `1`
+  Alias: ``
+  Blocks: [2] 
+  =======
+    Block: Tetraquark\Block\ExportDefaultBlock
+    Subtype: default
+    Instruction: default
+    Instruction Start: 0
+    Caret: 8
+    Name: ``
+    Child Index: `0`
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\AttributeBlock
+    Subtype: 
+    Instruction: fonts = {  "serif": true,  "sans-serif": true,  "monospace": true, }
+    Instruction Start: 9
+    Caret: 77
+    Name: `fonts`
+    Child Index: `1`
+    Alias: `fonts`
+    Blocks: [1] 
+    =======
+      Block: Tetraquark\Block\ObjectBlock
+      Subtype: {
+      Instruction: 
+      Instruction Start: 1
+      Caret: 60
+      Name: ``
+      Child Index: `0`
+      Alias: ``
+      Blocks: [3] 
+      =======
+        Block: Tetraquark\Block\ObjectValueBlock
+        Subtype: :
+        Instruction:   "serif"
+        Instruction Start: 2
+        Caret: 17
+        Name: `serif`
+        Child Index: `0`
+        Alias: `serif`
+        Blocks: [1] 
+        =======
+          Block: Tetraquark\Block\UndefinedBlock
+          Subtype: 
+          Instruction:  true
+          Instruction Start: 12
+          Caret: 17
+          Name: ``
+          Child Index: `0`
+          Alias: ``
+          Blocks: [0] 
+          =======
+        Block: Tetraquark\Block\ObjectValueBlock
+        Subtype: :
+        Instruction:   "sans-serif"
+        Instruction Start: 18
+        Caret: 38
+        Name: `"sans-serif"`
+        Child Index: `1`
+        Alias: `"sans-serif"`
+        Blocks: [1] 
+        =======
+          Block: Tetraquark\Block\UndefinedBlock
+          Subtype: 
+          Instruction:  true
+          Instruction Start: 33
+          Caret: 38
+          Name: ``
+          Child Index: `0`
+          Alias: ``
+          Blocks: [0] 
+          =======
+        Block: Tetraquark\Block\ObjectValueBlock
+        Subtype: :
+        Instruction:   "monospace"
+        Instruction Start: 39
+        Caret: 58
+        Name: `monospace`
+        Child Index: `2`
+        Alias: `monospace`
+        Blocks: [1] 
+        =======
+          Block: Tetraquark\Block\UndefinedBlock
+          Subtype: 
+          Instruction:  true
+          Instruction Start: 53
+          Caret: 58
+          Name: ``
+          Child Index: `0`
+          Alias: ``
+          Blocks: [0] 
+          =======
+  Duration: 0.001s
+  Mapping...
+  =======================
+  Creating aliases...
+  =======================
+  Aliases: 
+  Recreating...
+  =======================
+  Block: Tetraquark\Block\VariableBlock
+  Subtype: let
+  Instruction: let functionVar
+  Instruction Start: 1
+  Caret: 16
+  Name: ``
+  Child Index: `0`
+  Value: ``
+  Alias: ``
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\VariableItemBlock
+    Subtype: 
+    Instruction: 
+    Instruction Start: 12
+    Caret: 13
+    Name: `functionVar`
+    Child Index: `0`
+    Value: ``
+    Alias: `functionVar`
+    Blocks: [0] 
+    =======
+  Block: Tetraquark\Block\ExportBlock
+  Subtype: export
+  Instruction:  default functionVar = function (a,b,c) {\n a = 'a';\n return a;\n}
+  Instruction Start: 17
+  Caret: 88
+  Name: ``
+  Child Index: `1`
+  Alias: ``
+  Blocks: [2] 
+  =======
+    Block: Tetraquark\Block\ExportDefaultBlock
+    Subtype: default
+    Instruction: default
+    Instruction Start: 0
+    Caret: 8
+    Name: ``
+    Child Index: `0`
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\AttributeBlock
+    Subtype: 
+    Instruction: functionVar = function (a,b,c) {  a = 'a';  return a; }
+    Instruction Start: 9
+    Caret: 64
+    Name: `functionVar`
+    Child Index: `1`
+    Alias: `functionVar`
+    Blocks: [1] 
+    =======
+      Block: Tetraquark\Block\FunctionBlock
+      Subtype: anonymous:function
+      Instruction: function (a,b,c) {
+      Instruction Start: 0
+      Caret: 41
+      Name: ``
+      Child Index: `0`
+      Arguments: [3] `
+        Block: Tetraquark\Block\UndefinedBlock
+        Subtype: 
+        Instruction: a
+        Instruction Start: -1
+        Caret: 0
+        Name: `a`
+        Child Index: `0`
+        Alias: `a`
+        Blocks: [0] 
+        =======
+        Block: Tetraquark\Block\UndefinedBlock
+        Subtype: 
+        Instruction: b
+        Instruction Start: -1
+        Caret: 0
+        Name: `b`
+        Child Index: `0`
+        Alias: `b`
+        Blocks: [0] 
+        =======
+        Block: Tetraquark\Block\UndefinedBlock
+        Subtype: 
+        Instruction: c
+        Instruction Start: -1
+        Caret: 0
+        Name: `c`
+        Child Index: `0`
+        Alias: `c`
+        Blocks: [0] 
+        =======
+      Alias: ``
+      Blocks: [2] 
+      =======
+        Block: Tetraquark\Block\AttributeBlock
+        Subtype: 
+        Instruction: a = 'a'
+        Instruction Start: 21
+        Caret: 28
+        Name: `a`
+        Child Index: `0`
+        Alias: `a`
+        Blocks: [1] 
+        =======
+          Block: Tetraquark\Block\StringBlock
+          Subtype: 
+          Instruction: 'a'
+          Instruction Start: 1
+          Caret: 4
+          Name: ``
+          Child Index: `0`
+          Alias: ``
+          Blocks: [0] 
+          =======
+        Block: Tetraquark\Block\ReturnBlock
+        Subtype: return
+        Instruction:  a;
+        Instruction Start: 31
+        Caret: 39
+        Name: ``
+        Child Index: `1`
+        Alias: ``
+        Blocks: [1] 
+        =======
+          Block: Tetraquark\Block\UndefinedBlock
+          Subtype: 
+          Instruction:  a
+          Instruction Start: -1
+          Caret: 1
+          Name: ``
+          Child Index: `0`
+          Alias: ``
+          Blocks: [0] 
+          =======
+  Duration: 0.001s
+  Mapping...
+  =======================
+  Creating aliases...
+  =======================
+  Aliases: 
+  Recreating...
+  =======================
+  Block: Tetraquark\Block\VariableBlock
+  Subtype: let
+  Instruction: let classVar
+  Instruction Start: 1
+  Caret: 13
+  Name: ``
+  Child Index: `0`
+  Value: ``
+  Alias: ``
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\VariableItemBlock
+    Subtype: 
+    Instruction: 
+    Instruction Start: 9
+    Caret: 10
+    Name: `classVar`
+    Child Index: `0`
+    Value: ``
+    Alias: `classVar`
+    Blocks: [0] 
+    =======
+  Block: Tetraquark\Block\ExportBlock
+  Subtype: export
+  Instruction:  default classVar = class {\n a = 'a';\n}
+  Instruction Start: 14
+  Caret: 60
+  Name: ``
+  Child Index: `1`
+  Alias: ``
+  Blocks: [2] 
+  =======
+    Block: Tetraquark\Block\ExportDefaultBlock
+    Subtype: default
+    Instruction: default
+    Instruction Start: 0
+    Caret: 8
+    Name: ``
+    Child Index: `0`
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\AttributeBlock
+    Subtype: 
+    Instruction: classVar = class {  a = 'a'; }
+    Instruction Start: 9
+    Caret: 39
+    Name: `classVar`
+    Child Index: `1`
+    Alias: `classVar`
+    Blocks: [1] 
+    =======
+      Block: Tetraquark\Block\ClassBlock
+      Subtype: class
+      Instruction: class {
+      Instruction Start: 1
+      Caret: 19
+      Name: ``
+      Child Index: `0`
+      Alias: ``
+      Blocks: [1] 
+      =======
+        Block: Tetraquark\Block\AttributeBlock
+        Subtype: 
+        Instruction: a = 'a'
+        Instruction Start: 10
+        Caret: 17
+        Name: `a`
+        Child Index: `0`
+        Alias: `a`
+        Blocks: [1] 
+        =======
+          Block: Tetraquark\Block\StringBlock
+          Subtype: 
+          Instruction: 'a'
+          Instruction Start: 1
+          Caret: 4
+          Name: ``
+          Child Index: `0`
+          Alias: ``
+          Blocks: [0] 
+          =======
+  Duration: 0.001s
 =======================
 Creating aliases...
 =======================
 Aliases: 
 Recreating...
 =======================
-Block: Tetraquark\Block\ReturnBlock
-Subtype: return
-Instruction:  this.caret.isActive\n && (\n this.pos.line >= this.render.hidden\n && this.pos.line <= this.render.hidden + this.render.linesLimit\n );
-Instruction Start: 1
-Caret: 138
+Block: Tetraquark\Block\ImportBlock
+Subtype: import
+Instruction:  defaultExport from "E:/xampp/htdocs/tetraquark/test/data/imports/default.js"
+Instruction Start: 14
+Caret: 98
 Name: ``
 Child Index: `0`
 Alias: ``
-Blocks: [3] 
+Blocks: [2] 
 =======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: first
-  Instruction: this
+  Block: Tetraquark\Block\ImportAsBlock
+  Subtype: 
+  Instruction:  defaultExport
+  Instruction Start: -15
+  Caret: -1
+  Name: `defaultExport`
+  Child Index: `0`
+  Alias: `defaultExport`
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\ImportFromBlock
+  Subtype: from
+  Instruction:  from "E:/xampp/htdocs/tetraquark/test/data/imports/default.js"
+  Instruction Start: 14
+  Caret: 77
+  Name: ``
+  Child Index: `1`
+  Path: `E:/xampp/htdocs/tetraquark/test/data/imports/default.js`
+  Alias: ``
+  Blocks: [0] 
+  =======
+Block: Tetraquark\Block\ImportBlock
+Subtype: import
+Instruction:  defaultExport from "E:/xampp/htdocs/tetraquark/test/data/imports/default.js"
+Instruction Start: 99
+Caret: 183
+Name: ``
+Child Index: `1`
+Alias: ``
+Blocks: [2] 
+=======
+  Block: Tetraquark\Block\ImportAsBlock
+  Subtype: 
+  Instruction:  defaultExport
+  Instruction Start: -15
+  Caret: -1
+  Name: `defaultExport`
+  Child Index: `0`
+  Alias: `defaultExport`
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\ImportFromBlock
+  Subtype: from
+  Instruction:  from "E:/xampp/htdocs/tetraquark/test/data/imports/default.js"
+  Instruction Start: 14
+  Caret: 77
+  Name: ``
+  Child Index: `1`
+  Path: `E:/xampp/htdocs/tetraquark/test/data/imports/default.js`
+  Alias: ``
+  Blocks: [0] 
+  =======
+Block: Tetraquark\Block\ImportBlock
+Subtype: import
+Instruction:  * as test from "E:/xampp/htdocs/tetraquark/test/data/imports/normal.js"
+Instruction Start: 184
+Caret: 263
+Name: ``
+Child Index: `2`
+Alias: ``
+Blocks: [2] 
+=======
+  Block: Tetraquark\Block\ImportAllBlock
+  Subtype: new name
+  Instruction: * as test
+  Instruction Start: 0
+  Caret: 9
+  Name: ``
+  Child Index: `0`
+  New Name: `test`
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\ImportFromBlock
+  Subtype: from
+  Instruction:  from "E:/xampp/htdocs/tetraquark/test/data/imports/normal.js"
+  Instruction Start: 10
+  Caret: 72
+  Name: ``
+  Child Index: `1`
+  Path: `E:/xampp/htdocs/tetraquark/test/data/imports/normal.js`
+  Alias: ``
+  Blocks: [0] 
+  =======
+Block: Tetraquark\Block\ImportBlock
+Subtype: import
+Instruction:  defVar from "E:/xampp/htdocs/tetraquark/test/data/imports/normal.js"
+Instruction Start: 264
+Caret: 340
+Name: ``
+Child Index: `3`
+Alias: ``
+Blocks: [2] 
+=======
+  Block: Tetraquark\Block\ImportAsBlock
+  Subtype: 
+  Instruction:  defVar
+  Instruction Start: -8
+  Caret: -1
+  Name: `defVar`
+  Child Index: `0`
+  Alias: `defVar`
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\ImportFromBlock
+  Subtype: from
+  Instruction:  from "E:/xampp/htdocs/tetraquark/test/data/imports/normal.js"
+  Instruction Start: 7
+  Caret: 69
+  Name: ``
+  Child Index: `1`
+  Path: `E:/xampp/htdocs/tetraquark/test/data/imports/normal.js`
+  Alias: ``
+  Blocks: [0] 
+  =======
+Block: Tetraquark\Block\ImportBlock
+Subtype: import
+Instruction:  { testGlobablClass } from "E:/xampp/htdocs/tetraquark/test/data/imports/normal.js"
+Instruction Start: 341
+Caret: 431
+Name: ``
+Child Index: `4`
+Alias: ``
+Blocks: [2] 
+=======
+  Block: Tetraquark\Block\ImportObjectBlock
+  Subtype: {
+  Instruction: 
   Instruction Start: 1
   Caret: 20
   Name: ``
@@ -25,864 +1420,438 @@ Blocks: [3]
   Alias: ``
   Blocks: [1] 
   =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: middle
-    Instruction: caret
-    Instruction Start: 5
+    Block: Tetraquark\Block\ImportObjectItemBlock
+    Subtype: ,
+    Instruction:  testGlobablClass
+    Instruction Start: 2
     Caret: 20
     Name: ``
-    Child Index: `0`
+    Child Index: `1`
+    Old Name: ``
+    New Name: ``
     Alias: ``
-    Blocks: [1] 
+    Blocks: [0] 
     =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: isActive
-      Instruction Start: 11
-      Caret: 20
-      Name: ``
-      Child Index: `0`
-      Alias: ``
-      Blocks: [0] 
-      =======
-  Block: Tetraquark\Block\SymbolBlock
-  Subtype: &&
-  Instruction: &&
-  Instruction Start: 22
-  Caret: 23
+  Block: Tetraquark\Block\ImportFromBlock
+  Subtype: from
+  Instruction:  from "E:/xampp/htdocs/tetraquark/test/data/imports/normal.js"
+  Instruction Start: 21
+  Caret: 83
   Name: ``
   Child Index: `1`
+  Path: `E:/xampp/htdocs/tetraquark/test/data/imports/normal.js`
   Alias: ``
   Blocks: [0] 
   =======
-  Block: Tetraquark\Block\CallerBlock
-  Subtype: (
-  Instruction: 
-  Instruction Start: 25
-  Caret: 130
-  Name: ``
-  Child Index: `2`
-  Alias: ``
-  Blocks: [9] 
-  =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: this
-    Instruction Start: 2
-    Caret: 15
-    Name: ``
-    Child Index: `0`
-    Alias: ``
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: pos
-      Instruction Start: 6
-      Caret: 15
-      Name: ``
-      Child Index: `0`
-      Alias: ``
-      Blocks: [1] 
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: line
-        Instruction Start: 10
-        Caret: 15
-        Name: ``
-        Child Index: `0`
-        Alias: ``
-        Blocks: [0] 
-        =======
-    Block: Tetraquark\Block\SymbolBlock
-    Subtype: >=
-    Instruction: >=
-    Instruction Start: 16
-    Caret: 17
-    Name: ``
-    Child Index: `1`
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: this
-    Instruction Start: 19
-    Caret: 37
-    Name: ``
-    Child Index: `2`
-    Alias: ``
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: render
-      Instruction Start: 23
-      Caret: 37
-      Name: ``
-      Child Index: `0`
-      Alias: ``
-      Blocks: [1] 
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: hidden
-        Instruction Start: 30
-        Caret: 37
-        Name: ``
-        Child Index: `0`
-        Alias: ``
-        Blocks: [0] 
-        =======
-    Block: Tetraquark\Block\SymbolBlock
-    Subtype: &&
-    Instruction: &&
-    Instruction Start: 39
-    Caret: 40
-    Name: ``
-    Child Index: `3`
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: this
-    Instruction Start: 42
-    Caret: 55
-    Name: ``
-    Child Index: `4`
-    Alias: ``
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: pos
-      Instruction Start: 46
-      Caret: 55
-      Name: ``
-      Child Index: `0`
-      Alias: ``
-      Blocks: [1] 
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: line
-        Instruction Start: 50
-        Caret: 55
-        Name: ``
-        Child Index: `0`
-        Alias: ``
-        Blocks: [0] 
-        =======
-    Block: Tetraquark\Block\SymbolBlock
-    Subtype: <=
-    Instruction: <=
-    Instruction Start: 56
-    Caret: 57
-    Name: ``
-    Child Index: `5`
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: this
-    Instruction Start: 59
-    Caret: 77
-    Name: ``
-    Child Index: `6`
-    Alias: ``
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: render
-      Instruction Start: 63
-      Caret: 77
-      Name: ``
-      Child Index: `0`
-      Alias: ``
-      Blocks: [1] 
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: hidden
-        Instruction Start: 70
-        Caret: 77
-        Name: ``
-        Child Index: `0`
-        Alias: ``
-        Blocks: [0] 
-        =======
-    Block: Tetraquark\Block\SymbolBlock
-    Subtype: +
-    Instruction: +
-    Instruction Start: 78
-    Caret: 78
-    Name: ``
-    Child Index: `7`
-    Alias: ``
-    Blocks: [0] 
-    =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: this
-    Instruction Start: 80
-    Caret: 104
-    Name: ``
-    Child Index: `8`
-    Alias: ``
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: middle
-      Instruction: render
-      Instruction Start: 84
-      Caret: 104
-      Name: ``
-      Child Index: `0`
-      Alias: ``
-      Blocks: [1] 
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: .
-        Instruction: linesLimit
-        Instruction Start: 91
-        Caret: 102
-        Name: ``
-        Child Index: `0`
-        Alias: ``
-        Blocks: [0] 
-        =======
-Block: Tetraquark\Block\ChainLinkBlock
-Subtype: first
-Instruction: this
-Instruction Start: 140
-Caret: 283
+Block: Tetraquark\Block\ImportBlock
+Subtype: import
+Instruction:  { testGlobablClass }, * as test from "E:/xampp/htdocs/tetraquark/test/data/imports/normal.js"
+Instruction Start: 432
+Caret: 533
 Name: ``
-Child Index: `1`
+Child Index: `5`
 Alias: ``
-Blocks: [1] 
+Blocks: [4] 
 =======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: middle
-  Instruction: render
-  Instruction Start: 144
-  Caret: 283
+  Block: Tetraquark\Block\ImportObjectBlock
+  Subtype: {
+  Instruction: 
+  Instruction Start: 1
+  Caret: 20
   Name: ``
   Child Index: `0`
   Alias: ``
   Blocks: [1] 
   =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: middle
-    Instruction: set
-    Instruction Start: 151
-    Caret: 283
-    Name: ``
-    Child Index: `0`
-    Alias: ``
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: overflow
-      Instruction Start: 155
-      Caret: 283
-      Name: ``
-      Child Index: `0`
-      Chain Link Method:
-        Block: Tetraquark\Block\CallerBlock
-        Subtype: 
-        Instruction: 
-        Instruction Start: 164
-        Caret: 282
-        Name: ``
-        Child Index: `0`
-        Alias: ``
-        Blocks: [4] 
-        =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction: \n null,\n 
-          Instruction Start: -10
-          Caret: -1
-          Name: ``
-          Child Index: `0`
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\CallerBlock
-          Subtype: (
-          Instruction: 
-          Instruction Start: 9
-          Caret: 94
-          Name: ``
-          Child Index: `1`
-          Alias: ``
-          Blocks: [3] 
-          =======
-            Block: Tetraquark\Block\CallerBlock
-            Subtype: (
-            Instruction: 
-            Instruction Start: 2
-            Caret: 39
-            Name: ``
-            Child Index: `0`
-            Alias: ``
-            Blocks: [5] 
-            =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: first
-              Instruction: this
-              Instruction Start: 0
-              Caret: 13
-              Name: ``
-              Child Index: `0`
-              Alias: ``
-              Blocks: [1] 
-              =======
-                Block: Tetraquark\Block\ChainLinkBlock
-                Subtype: middle
-                Instruction: pos
-                Instruction Start: 4
-                Caret: 13
-                Name: ``
-                Child Index: `0`
-                Alias: ``
-                Blocks: [1] 
-                =======
-                  Block: Tetraquark\Block\ChainLinkBlock
-                  Subtype: .
-                  Instruction: line
-                  Instruction Start: 8
-                  Caret: 13
-                  Name: ``
-                  Child Index: `0`
-                  Alias: ``
-                  Blocks: [0] 
-                  =======
-              Block: Tetraquark\Block\SymbolBlock
-              Subtype: +
-              Instruction: +
-              Instruction Start: 14
-              Caret: 14
-              Name: ``
-              Child Index: `1`
-              Alias: ``
-              Blocks: [0] 
-              =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: first
-              Instruction: clipboard
-              Instruction Start: 16
-              Caret: 32
-              Name: ``
-              Child Index: `2`
-              Alias: ``
-              Blocks: [1] 
-              =======
-                Block: Tetraquark\Block\ChainLinkBlock
-                Subtype: .
-                Instruction: length
-                Instruction Start: 25
-                Caret: 32
-                Name: ``
-                Child Index: `0`
-                Alias: ``
-                Blocks: [0] 
-                =======
-              Block: Tetraquark\Block\SymbolBlock
-              Subtype: -
-              Instruction: -
-              Instruction Start: 33
-              Caret: 33
-              Name: ``
-              Child Index: `3`
-              Alias: ``
-              Blocks: [0] 
-              =======
-              Block: Tetraquark\Block\UndefinedBlock
-              Subtype: 
-              Instruction:  1
-              Instruction Start: 34
-              Caret: 36
-              Name: ``
-              Child Index: `4`
-              Alias: ``
-              Blocks: [0] 
-              =======
-            Block: Tetraquark\Block\SymbolBlock
-            Subtype: -
-            Instruction: -
-            Instruction Start: 42
-            Caret: 42
-            Name: ``
-            Child Index: `1`
-            Alias: ``
-            Blocks: [0] 
-            =======
-            Block: Tetraquark\Block\CallerBlock
-            Subtype: (
-            Instruction: 
-            Instruction Start: 44
-            Caret: 81
-            Name: ``
-            Child Index: `2`
-            Alias: ``
-            Blocks: [1] 
-            =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: first
-              Instruction: Math
-              Instruction Start: 0
-              Caret: 36
-              Name: ``
-              Child Index: `0`
-              Alias: ``
-              Blocks: [1] 
-              =======
-                Block: Tetraquark\Block\ChainLinkBlock
-                Subtype: end:method
-                Instruction: floor
-                Instruction Start: 4
-                Caret: 36
-                Name: ``
-                Child Index: `0`
-                Chain Link Method:
-                  Block: Tetraquark\Block\CallerBlock
-                  Subtype: 
-                  Instruction: 
-                  Instruction Start: 10
-                  Caret: 35
-                  Name: ``
-                  Child Index: `0`
-                  Alias: ``
-                  Blocks: [3] 
-                  =======
-                    Block: Tetraquark\Block\ChainLinkBlock
-                    Subtype: first
-                    Instruction: this
-                    Instruction Start: 0
-                    Caret: 21
-                    Name: ``
-                    Child Index: `0`
-                    Alias: ``
-                    Blocks: [1] 
-                    =======
-                      Block: Tetraquark\Block\ChainLinkBlock
-                      Subtype: middle
-                      Instruction: render
-                      Instruction Start: 4
-                      Caret: 21
-                      Name: ``
-                      Child Index: `0`
-                      Alias: ``
-                      Blocks: [1] 
-                      =======
-                        Block: Tetraquark\Block\ChainLinkBlock
-                        Subtype: .
-                        Instruction: linesLimit
-                        Instruction Start: 11
-                        Caret: 21
-                        Name: ``
-                        Child Index: `0`
-                        Alias: ``
-                        Blocks: [0] 
-                        =======
-                    Block: Tetraquark\Block\SymbolBlock
-                    Subtype: /
-                    Instruction: /
-                    Instruction Start: 22
-                    Caret: 22
-                    Name: ``
-                    Child Index: `1`
-                    Alias: ``
-                    Blocks: [0] 
-                    =======
-                    Block: Tetraquark\Block\UndefinedBlock
-                    Subtype: 
-                    Instruction: 2
-                    Instruction Start: 23
-                    Caret: 24
-                    Name: ``
-                    Child Index: `2`
-                    Alias: ``
-                    Blocks: [0] 
-                    =======
-                Alias: ``
-                Blocks: [0] 
-                =======
-          Block: Tetraquark\Block\SymbolBlock
-          Subtype: *
-          Instruction: *
-          Instruction Start: 96
-          Caret: 96
-          Name: ``
-          Child Index: `2`
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: first
-          Instruction: this
-          Instruction Start: 98
-          Caret: 117
-          Name: ``
-          Child Index: `3`
-          Alias: ``
-          Blocks: [1] 
-          =======
-            Block: Tetraquark\Block\ChainLinkBlock
-            Subtype: middle
-            Instruction: settings
-            Instruction Start: 102
-            Caret: 117
-            Name: ``
-            Child Index: `0`
-            Alias: ``
-            Blocks: [1] 
-            =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: .
-              Instruction: line
-              Instruction Start: 111
-              Caret: 116
-              Name: ``
-              Child Index: `0`
-              Alias: ``
-              Blocks: [0] 
-              =======
-      Alias: ``
-      Blocks: [0] 
-      =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: const
-Instruction: const results = target.bind( main )( ...args )
-Instruction Start: 285
-Caret: 331
-Name: ``
-Child Index: `2`
-Value: ``
-Alias: ``
-Blocks: [1] 
-=======
-  Block: Tetraquark\Block\VariableItemBlock
-  Subtype: 
-  Instruction:  results =
-  Instruction Start: 0
-  Caret: 41
-  Name: `results`
-  Child Index: `0`
-  Value: ``
-  Alias: `results`
-  Blocks: [2] 
-  =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: target
-    Instruction Start: 11
-    Caret: 29
-    Name: ``
-    Child Index: `0`
-    Alias: ``
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: bind
-      Instruction Start: 17
-      Caret: 29
-      Name: ``
-      Child Index: `0`
-      Chain Link Method:
-        Block: Tetraquark\Block\CallerBlock
-        Subtype: 
-        Instruction: 
-        Instruction Start: 22
-        Caret: 29
-        Name: ``
-        Child Index: `0`
-        Alias: ``
-        Blocks: [1] 
-        =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction:  main 
-          Instruction Start: 0
-          Caret: 6
-          Name: ``
-          Child Index: `0`
-          Alias: ``
-          Blocks: [0] 
-          =======
-      Alias: ``
-      Blocks: [0] 
-      =======
-    Block: Tetraquark\Block\CallerBlock
-    Subtype: (
-    Instruction: 
-    Instruction Start: 30
-    Caret: 40
+    Block: Tetraquark\Block\ImportObjectItemBlock
+    Subtype: ,
+    Instruction:  testGlobablClass
+    Instruction Start: 2
+    Caret: 20
     Name: ``
     Child Index: `1`
+    Old Name: ``
+    New Name: ``
     Alias: ``
-    Blocks: [2] 
+    Blocks: [0] 
     =======
-      Block: Tetraquark\Block\SpreadBlock
-      Subtype: ...
-      Instruction: ...
-      Instruction Start: 1
-      Caret: 3
-      Name: ``
-      Child Index: `0`
-      Alias: ``
-      Blocks: [0] 
-      =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction: args 
-      Instruction Start: 4
-      Caret: 9
-      Name: ``
-      Child Index: `1`
-      Alias: ``
-      Blocks: [0] 
-      =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: const
-Instruction: const results = target.bind( main )['as'](asd)
-Instruction Start: 333
-Caret: 379
-Name: ``
-Child Index: `3`
-Value: ``
-Alias: ``
-Blocks: [1] 
-=======
-  Block: Tetraquark\Block\VariableItemBlock
-  Subtype: 
-  Instruction:  results =
-  Instruction Start: 0
-  Caret: 41
-  Name: `results`
-  Child Index: `0`
-  Value: ``
-  Alias: `results`
-  Blocks: [3] 
-  =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: first
-    Instruction: target
-    Instruction Start: 11
-    Caret: 29
-    Name: ``
-    Child Index: `0`
-    Alias: ``
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: end:method
-      Instruction: bind
-      Instruction Start: 17
-      Caret: 29
-      Name: ``
-      Child Index: `0`
-      Chain Link Method:
-        Block: Tetraquark\Block\CallerBlock
-        Subtype: 
-        Instruction: 
-        Instruction Start: 22
-        Caret: 29
-        Name: ``
-        Child Index: `0`
-        Alias: ``
-        Blocks: [1] 
-        =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction:  main 
-          Instruction Start: 0
-          Caret: 6
-          Name: ``
-          Child Index: `0`
-          Alias: ``
-          Blocks: [0] 
-          =======
-      Alias: ``
-      Blocks: [0] 
-      =======
-    Block: Tetraquark\Block\ArrayBlock
-    Subtype: [
-    Instruction: 
-    Instruction Start: 30
-    Caret: 35
-    Name: ``
-    Child Index: `1`
-    Alias: ``
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\StringBlock
-      Subtype: 
-      Instruction: 'as'
-      Instruction Start: 31
-      Caret: 35
-      Name: ``
-      Child Index: `0`
-      Alias: ``
-      Blocks: [0] 
-      =======
-    Block: Tetraquark\Block\CallerBlock
-    Subtype: (
-    Instruction: 
-    Instruction Start: 36
-    Caret: 40
-    Name: ``
-    Child Index: `2`
-    Alias: ``
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype: 
-      Instruction: asd
-      Instruction Start: 0
-      Caret: 3
-      Name: ``
-      Child Index: `0`
-      Alias: ``
-      Blocks: [0] 
-      =======
-Block: Tetraquark\Block\ChainLinkBlock
-Subtype: first
-Instruction: triggers
-Instruction Start: 381
-Caret: 439
-Name: ``
-Child Index: `4`
-Alias: ``
-Blocks: [1] 
-=======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: end:method
-  Instruction: forEach
-  Instruction Start: 389
-  Caret: 439
+  Block: Tetraquark\Block\ImportItemSeperatorBlock
+  Subtype: ,
+  Instruction: 
+  Instruction Start: 21
+  Caret: 21
   Name: ``
-  Child Index: `0`
-  Chain Link Method:
-    Block: Tetraquark\Block\CallerBlock
-    Subtype: 
-    Instruction: 
-    Instruction Start: 397
-    Caret: 438
-    Name: ``
-    Child Index: `0`
-    Alias: ``
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\ArrowFunctionBlock
-      Subtype: no-parenthesis:brackets
-      Instruction: func => {
-      Instruction Start: 1
-      Caret: 39
-      Name: ``
-      Child Index: `0`
-      Value: ``
-      Arguments: [1] `
-        Block: Tetraquark\Block\UndefinedBlock
-        Subtype: 
-        Instruction: func
-        Instruction Start: -1
-        Caret: 3
-        Name: `func`
-        Child Index: `0`
-        Alias: `func`
-        Blocks: [0] 
-        =======
-      Alias: ``
-      Blocks: [2] 
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: first
-        Instruction: func
-        Instruction Start: 12
-        Caret: 27
-        Name: ``
-        Child Index: `0`
-        Alias: ``
-        Blocks: [1] 
-        =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: end:method
-          Instruction: bind
-          Instruction Start: 16
-          Caret: 27
-          Name: ``
-          Child Index: `0`
-          Chain Link Method:
-            Block: Tetraquark\Block\CallerBlock
-            Subtype: 
-            Instruction: 
-            Instruction Start: 21
-            Caret: 27
-            Name: ``
-            Child Index: `0`
-            Alias: ``
-            Blocks: [1] 
-            =======
-              Block: Tetraquark\Block\UndefinedBlock
-              Subtype: 
-              Instruction: scope
-              Instruction Start: 0
-              Caret: 5
-              Name: ``
-              Child Index: `0`
-              Alias: ``
-              Blocks: [0] 
-              =======
-          Alias: ``
-          Blocks: [0] 
-          =======
-        Block: Tetraquark\Block\CallerBlock
-        Subtype: (
-        Instruction: 
-        Instruction Start: 28
-        Caret: 36
-        Name: ``
-        Child Index: `1`
-        Alias: ``
-        Blocks: [2] 
-        =======
-          Block: Tetraquark\Block\SpreadBlock
-          Subtype: ...
-          Instruction: ...
-          Instruction Start: 0
-          Caret: 2
-          Name: ``
-          Child Index: `0`
-          Alias: ``
-          Blocks: [0] 
-          =======
-          Block: Tetraquark\Block\UndefinedBlock
-          Subtype: 
-          Instruction: args
-          Instruction Start: 3
-          Caret: 7
-          Name: ``
-          Child Index: `1`
-          Alias: ``
-          Blocks: [0] 
-          =======
+  Child Index: `1`
   Alias: ``
   Blocks: [0] 
   =======
-Duration: 0.012s
+  Block: Tetraquark\Block\ImportAllBlock
+  Subtype: new name
+  Instruction: * as test
+  Instruction Start: 22
+  Caret: 31
+  Name: ``
+  Child Index: `2`
+  New Name: `test`
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\ImportFromBlock
+  Subtype: from
+  Instruction:  from "E:/xampp/htdocs/tetraquark/test/data/imports/normal.js"
+  Instruction Start: 32
+  Caret: 94
+  Name: ``
+  Child Index: `3`
+  Path: `E:/xampp/htdocs/tetraquark/test/data/imports/normal.js`
+  Alias: ``
+  Blocks: [0] 
+  =======
+Block: Tetraquark\Block\ImportBlock
+Subtype: import
+Instruction:  { testGlobablClass }, defVar from "E:/xampp/htdocs/tetraquark/test/data/imports/normal.js"
+Instruction Start: 534
+Caret: 632
+Name: ``
+Child Index: `6`
+Alias: ``
+Blocks: [4] 
+=======
+  Block: Tetraquark\Block\ImportObjectBlock
+  Subtype: {
+  Instruction: 
+  Instruction Start: 1
+  Caret: 20
+  Name: ``
+  Child Index: `0`
+  Alias: ``
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\ImportObjectItemBlock
+    Subtype: ,
+    Instruction:  testGlobablClass
+    Instruction Start: 2
+    Caret: 20
+    Name: ``
+    Child Index: `1`
+    Old Name: ``
+    New Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+  Block: Tetraquark\Block\ImportItemSeperatorBlock
+  Subtype: ,
+  Instruction: 
+  Instruction Start: 21
+  Caret: 21
+  Name: ``
+  Child Index: `1`
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\ImportAsBlock
+  Subtype: 
+  Instruction:  defVar
+  Instruction Start: 14
+  Caret: 21
+  Name: `defVar`
+  Child Index: `2`
+  Alias: `defVar`
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\ImportFromBlock
+  Subtype: from
+  Instruction:  from "E:/xampp/htdocs/tetraquark/test/data/imports/normal.js"
+  Instruction Start: 29
+  Caret: 91
+  Name: ``
+  Child Index: `3`
+  Path: `E:/xampp/htdocs/tetraquark/test/data/imports/normal.js`
+  Alias: ``
+  Blocks: [0] 
+  =======
+Block: Tetraquark\Block\ImportBlock
+Subtype: import
+Instruction:  * as test,defVar from "E:/xampp/htdocs/tetraquark/test/data/imports/normal.js"
+Instruction Start: 633
+Caret: 719
+Name: ``
+Child Index: `7`
+Alias: ``
+Blocks: [4] 
+=======
+  Block: Tetraquark\Block\ImportAllBlock
+  Subtype: new name
+  Instruction: * as test
+  Instruction Start: 0
+  Caret: 9
+  Name: ``
+  Child Index: `0`
+  New Name: `test`
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\ImportItemSeperatorBlock
+  Subtype: ,
+  Instruction: 
+  Instruction Start: 10
+  Caret: 10
+  Name: ``
+  Child Index: `1`
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\ImportAsBlock
+  Subtype: 
+  Instruction: defVar
+  Instruction Start: 4
+  Caret: 10
+  Name: `defVar`
+  Child Index: `2`
+  Alias: `defVar`
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\ImportFromBlock
+  Subtype: from
+  Instruction:  from "E:/xampp/htdocs/tetraquark/test/data/imports/normal.js"
+  Instruction Start: 17
+  Caret: 79
+  Name: ``
+  Child Index: `3`
+  Path: `E:/xampp/htdocs/tetraquark/test/data/imports/normal.js`
+  Alias: ``
+  Blocks: [0] 
+  =======
+Block: Tetraquark\Block\ImportBlock
+Subtype: import
+Instruction:  { testGlobal }, * as test,defVar from "E:/xampp/htdocs/tetraquark/test/data/imports/normal.js"
+Instruction Start: 720
+Caret: 822
+Name: ``
+Child Index: `8`
+Alias: ``
+Blocks: [6] 
+=======
+  Block: Tetraquark\Block\ImportObjectBlock
+  Subtype: {
+  Instruction: 
+  Instruction Start: 1
+  Caret: 14
+  Name: ``
+  Child Index: `0`
+  Alias: ``
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\ImportObjectItemBlock
+    Subtype: ,
+    Instruction:  testGlobal
+    Instruction Start: 2
+    Caret: 14
+    Name: ``
+    Child Index: `1`
+    Old Name: ``
+    New Name: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+  Block: Tetraquark\Block\ImportItemSeperatorBlock
+  Subtype: ,
+  Instruction: 
+  Instruction Start: 15
+  Caret: 15
+  Name: ``
+  Child Index: `1`
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\ImportAllBlock
+  Subtype: new name
+  Instruction: * as test
+  Instruction Start: 16
+  Caret: 25
+  Name: ``
+  Child Index: `2`
+  New Name: `test`
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\ImportItemSeperatorBlock
+  Subtype: ,
+  Instruction: 
+  Instruction Start: 26
+  Caret: 26
+  Name: ``
+  Child Index: `3`
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\ImportAsBlock
+  Subtype: 
+  Instruction: defVar
+  Instruction Start: 20
+  Caret: 26
+  Name: `defVar`
+  Child Index: `4`
+  Alias: `defVar`
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\ImportFromBlock
+  Subtype: from
+  Instruction:  from "E:/xampp/htdocs/tetraquark/test/data/imports/normal.js"
+  Instruction Start: 33
+  Caret: 95
+  Name: ``
+  Child Index: `5`
+  Path: `E:/xampp/htdocs/tetraquark/test/data/imports/normal.js`
+  Alias: ``
+  Blocks: [0] 
+  =======
+Block: Tetraquark\Block\ImportBlock
+Subtype: import
+Instruction:  defVar from "E:/xampp/htdocs/tetraquark/test/data/imports/two_imports.js"
+Instruction Start: 823
+Caret: 904
+Name: ``
+Child Index: `9`
+Alias: ``
+Blocks: [2] 
+=======
+  Block: Tetraquark\Block\ImportAsBlock
+  Subtype: 
+  Instruction:  defVar
+  Instruction Start: -8
+  Caret: -1
+  Name: `defVar`
+  Child Index: `0`
+  Alias: `defVar`
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\ImportFromBlock
+  Subtype: from
+  Instruction:  from "E:/xampp/htdocs/tetraquark/test/data/imports/two_imports.js"
+  Instruction Start: 7
+  Caret: 74
+  Name: ``
+  Child Index: `1`
+  Path: `E:/xampp/htdocs/tetraquark/test/data/imports/two_imports.js`
+  Alias: ``
+  Blocks: [0] 
+  =======
+Block: Tetraquark\Block\ImportBlock
+Subtype: import
+Instruction:  variable from "E:/xampp/htdocs/tetraquark/test/data/imports/variable.js"
+Instruction Start: 905
+Caret: 985
+Name: ``
+Child Index: `10`
+Alias: ``
+Blocks: [2] 
+=======
+  Block: Tetraquark\Block\ImportAsBlock
+  Subtype: 
+  Instruction:  variable
+  Instruction Start: -10
+  Caret: -1
+  Name: `variable`
+  Child Index: `0`
+  Alias: `variable`
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\ImportFromBlock
+  Subtype: from
+  Instruction:  from "E:/xampp/htdocs/tetraquark/test/data/imports/variable.js"
+  Instruction Start: 9
+  Caret: 73
+  Name: ``
+  Child Index: `1`
+  Path: `E:/xampp/htdocs/tetraquark/test/data/imports/variable.js`
+  Alias: ``
+  Blocks: [0] 
+  =======
+Block: Tetraquark\Block\ImportBlock
+Subtype: import
+Instruction:  variable from "E:/xampp/htdocs/tetraquark/test/data/imports/function.js"
+Instruction Start: 986
+Caret: 1066
+Name: ``
+Child Index: `11`
+Alias: ``
+Blocks: [2] 
+=======
+  Block: Tetraquark\Block\ImportAsBlock
+  Subtype: 
+  Instruction:  variable
+  Instruction Start: -10
+  Caret: -1
+  Name: `variable`
+  Child Index: `0`
+  Alias: `variable`
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\ImportFromBlock
+  Subtype: from
+  Instruction:  from "E:/xampp/htdocs/tetraquark/test/data/imports/function.js"
+  Instruction Start: 9
+  Caret: 73
+  Name: ``
+  Child Index: `1`
+  Path: `E:/xampp/htdocs/tetraquark/test/data/imports/function.js`
+  Alias: ``
+  Blocks: [0] 
+  =======
+Block: Tetraquark\Block\ImportBlock
+Subtype: import
+Instruction:  variable from "E:/xampp/htdocs/tetraquark/test/data/imports/class.js"
+Instruction Start: 1067
+Caret: 1144
+Name: ``
+Child Index: `12`
+Alias: ``
+Blocks: [2] 
+=======
+  Block: Tetraquark\Block\ImportAsBlock
+  Subtype: 
+  Instruction:  variable
+  Instruction Start: -10
+  Caret: -1
+  Name: `variable`
+  Child Index: `0`
+  Alias: `variable`
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\ImportFromBlock
+  Subtype: from
+  Instruction:  from "E:/xampp/htdocs/tetraquark/test/data/imports/class.js"
+  Instruction Start: 9
+  Caret: 70
+  Name: ``
+  Child Index: `1`
+  Path: `E:/xampp/htdocs/tetraquark/test/data/imports/class.js`
+  Alias: ``
+  Blocks: [0] 
+  =======
+Duration: 0.004s
 
 
-return this.caret.isActive&&(this.pos.line>=this.render.hidden&&this.pos.line<=this.render.hidden+this.render.linesLimit);
-this.render.set.overflow(null,((this.pos.line+clipboard.length-1)-(Math.floor(this.render.linesLimit/2)))*this.settings.line);
-const results=target.bind(main)(...args);
-const results=target.bind(main)['as'](asd);
-triggers.forEach(func=>{func.bind(scope)(...args)});
+let Ī={};
+Ī.e=Ī=>{const Ī.c(Ī);
+const Ī.d(Ī);
+console.log(testDefault);
+console.log(testDefault2);
+const a=testDefault();
+return{a}}Ī.a=Ī=>{function defaultFunction(){console.log('default fundtion log')}return{defaultFunction}}Ī.b=Ī=>{let a='sdsdf';
+const b={c:'d'};
+console.log('asdas');
+function testGlobal(){console.log('asdas2')}class testGlobablClass{constructor(){console.log('asd')}}testGlobal();
+return{b,testGlobablClass,testGlobal}}Ī.c=Ī=>{function testDefault(){console.log(defaultVar)}return{}}Ī.d=Ī=>{function testDefault2(){console.log(default2)}return{}}Ī.f=Ī=>{let fonts;
+return{fonts:{serif:true,"sans-serif":true,monospace:true}}}Ī.g=Ī=>{let functionVar;
+return{functionVar:function(a,b,c){a='a';
+return a}}}Ī.h=Ī=>{let classVar;
+return{classVar:class{a='a'}}}const{defaultFunction:defaultExport}=Ī.a(Ī);
+const test=Ī.b(Ī);
+const{a:defVar}=Ī.e(Ī);
+const{fonts:variable}=Ī.f(Ī);
+const{functionVar:variable}=Ī.g(Ī);
+const{classVar:variable}=Ī.h(Ī);
+Ī=undefined;
 

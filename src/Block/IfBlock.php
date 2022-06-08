@@ -22,6 +22,9 @@ class IfBlock extends ConditionBlock implements Contract\Block
         $this->setCondType('if');
         $this->setConditionAndInstruction($start);
         $this->argsBlocks = $this->createSubBlocksWithContent($this->getCondition());
+        foreach ($this->argsBlocks as $block) {
+            $block->setPlacement('getArgBlocks');
+        }
         if ($this->getSubtype() === self::SINGLE_CONDITION_SUBTYPE) {
             $this->blocks = $this->createSubBlocksWithContent($this->getSingleCond());
         } else {
@@ -29,7 +32,7 @@ class IfBlock extends ConditionBlock implements Contract\Block
         }
     }
 
-    public function getArgBlock(): array
+    public function getArgBlocks(): array
     {
         return $this->argsBlocks;
     }

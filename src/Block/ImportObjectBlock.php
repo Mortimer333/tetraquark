@@ -21,11 +21,13 @@ class ImportObjectBlock extends Block implements Contract\Block
         // Check if last block is not solo
         $lastBlock = $this->blocks[\sizeof($this->blocks) - 1] ?? false;
         if ($lastBlock && $lastBlock instanceof UndefinedBlock) {
-            $this->blocks[\sizeof($this->blocks) - 1] = new ExportObjectItemBlock(
+            $block = new ImportObjectItemBlock(
                 $lastBlock->getInstructionStart() + $lastBlock->getInstruction()->getLength() - 1,
                 ',',
                 $this
             );
+            $block->setChildIndex(\sizeof($this->blocks));
+            $this->blocks[\sizeof($this->blocks) - 1] = $block;
         }
     }
 

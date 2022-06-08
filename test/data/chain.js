@@ -1,4 +1,5 @@
-let obj = {
+subset[path[path.length-1]] path.slice(1);
+/*let obj = {
     'sa' : 'v',
   g : () => {},
   c : {
@@ -51,5 +52,4 @@ dot.pos;
 pos['dot']--
 dot['pos']
 this.syntax.groups[0].end[sentence[0]]
-
-this.syntax.findTriggers(subset[path[path.length - 1]], path.slice(1));
+*/

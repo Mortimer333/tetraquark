@@ -2,7 +2,7 @@
 
 namespace Tetraquark\Block;
 use \Tetraquark\{Log, Exception, Contract, Validate, Str};
-use \Tetraquark\Foundation\VariableBlockAbstract;
+use \Tetraquark\Foundation\{VariableBlockAbstract, MethodBlockAbstract};
 
 class ImportBlock extends VariableBlockAbstract implements Contract\Block
 {
@@ -76,8 +76,12 @@ class ImportBlock extends VariableBlockAbstract implements Contract\Block
         }
 
         $importedSufix = 'return {';
-        foreach ($importNames as $name) {
-            $importedSufix .= $name. ',';
+        foreach ($importNames as $import) {
+            $importedSufix .= $import["name"];
+            if (isset($import["value"])) {
+                $importedSufix .= ":" . $import["value"];
+            }
+            $importedSufix .= ',';
         }
 
         self::$import->setScript($path, $imported . rtrim($importedSufix, ',') . '}');
@@ -96,12 +100,12 @@ class ImportBlock extends VariableBlockAbstract implements Contract\Block
                 if ($block::class === VariableBlock::class) {
                     foreach ($block->getBlocks() as $subBlock) {
                         if (!in_array($subBlock->getName(), $importNames)) {
-                            $importNames[] = $subBlock->getName();
+                            $importNames[] = ["name" => $subBlock->getName()];
                         }
                     }
                 } else {
                     if (!in_array($block->getName(), $importNames)) {
-                        $importNames[] = $block->getName();
+                        $importNames[] = ["name" => $block->getName()];
                     }
                 }
             }
@@ -115,9 +119,9 @@ class ImportBlock extends VariableBlockAbstract implements Contract\Block
             $newName = $item->getNewName();
             if (strlen($newName) > 0) {
                 $block->setName($newName);
-                $importNames[] = $newName;
+                $importNames[] = ["name" => $newName];
             } else {
-                $importNames[] = $block->getName();
+                $importNames[] = ["name" => $block->getName()];
             }
             $deconstructNames[] = $block->getName();
         }
@@ -128,14 +132,30 @@ class ImportBlock extends VariableBlockAbstract implements Contract\Block
         if (isset($this->importItems['default'])) {
             $default = $this->importItems['default'];
             $defaultBlock = self::$folder->findDefaultExport($path);
-            if ($defaultBlock::class === VariableBlock::class) {
-                $importNames[] = $defaultBlock->getBlocks()[0]->getName();
+            if ($defaultBlock instanceof VariableBlockAbstract) {
+                if ($defaultBlock::class === VariableBlock::class) {
+                    $name = $defaultBlock->getBlocks()[0]->getName();
+                } else {
+                    $name = $defaultBlock->getName();
+                }
+
+                $import = ["name" => $name,];
+                if ($defaultBlock::class === AttributeBlock::class) {
+                    $import["value"] = $defaultBlock->recreateForImport();
+                }
+
+                $importNames[] = $import;
+            } elseif ($defaultBlock instanceof MethodBlockAbstract && $defaultBlock->getSubType() === FunctionBlock::ANONYMOUS) {
+                $importNames[] = [
+                    "name" => $defaultBlock->getName(),
+                    "value" =>  $defaultBlock->recreateForImport()
+                ];
             } else {
-                $importNames[] = $defaultBlock->getName();
+                $importNames[] = ["name" => $defaultBlock->getName()];
             }
-            $lastName = $importNames[sizeof($importNames) - 1];
+            $lastName = $importNames[sizeof($importNames) - 1]["name"];
             if ($lastName !== $default->getName()) {
-                $deconstructNames[] = $importNames[sizeof($importNames) - 1] . ':' . $default->getName();
+                $deconstructNames[] = $importNames[sizeof($importNames) - 1]["name"] . ':' . $default->getName();
             } else {
                 $deconstructNames[] = $lastName;
             }
@@ -165,7 +185,7 @@ class ImportBlock extends VariableBlockAbstract implements Contract\Block
 
     public function recreate(): string
     {
-        if (isset($this->settings['single_file'])) {
+        if (self::$settings['single_file'] ?? false === true) {
             return '';
         }
 

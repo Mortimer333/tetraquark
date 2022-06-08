@@ -6,6 +6,7 @@ use \Tetraquark\Foundation\MethodBlockAbstract as MethodBlock;
 
 class FunctionBlock extends MethodBlock implements Contract\Block
 {
+    public const ANONYMOUS = 'anonymous:function';
     protected array $endChars = [
         '}' => true
     ];
@@ -21,7 +22,7 @@ class FunctionBlock extends MethodBlock implements Contract\Block
         $this->findAndSetName('function ', ['(' => true]);
         $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
         if (\mb_strlen($this->getName()) == 0) {
-            $this->setSubtype('anonymous:function');
+            $this->setSubtype(self::ANONYMOUS);
         }
         $this->findAndSetArguments();
         $this->setInstructionStart($start - \mb_strlen('function '));
