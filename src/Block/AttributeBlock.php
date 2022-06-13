@@ -26,7 +26,7 @@ class AttributeBlock extends VariableBlock implements Contract\Block
         for ($i=$start; $i >= 0; $i--) {
             $letter = self::$content->getLetter($i);
             if ($letterFound && Validate::isWhitespace($letter) || $letterFound && $letter == '.') {
-                $name = self::$content->iSubStr($i + 1, $start);
+                $name = self::$content->iSubStr($i + 1, $start - 1);
                 $start = $i + 1;
                 break;
             }
@@ -44,7 +44,7 @@ class AttributeBlock extends VariableBlock implements Contract\Block
         $end = $this->findVariableEnd($equalPos);
         $value = self::$content->subStr($equalPos + 1, $end - ($equalPos + 1));
         $this->blocks = array_merge($this->blocks, $this->createSubBlocksWithContent($value));
-        $this->setInstruction(self::$content->iCutToContent($start, $end))
+        $this->setInstruction(self::$content->iCutToContent($start, $end - 1))
             ->setInstructionStart($start)
             ->setName($name)
             ->setCaret($end)

@@ -1,119 +1,159 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\{Log, Exception, Contract, Validate};
+use \Tetraquark\{Log, Exception, Contract, Validate, Content};
 use \Tetraquark\Foundation\BlockAbstract as Block;
 
 class ChainLinkBlock extends Block implements Contract\Block
 {
-    public const FIRST = 'first';
-    public const MIDDLE = 'middle';
-    public const MIDDLE_BRACKET = 'middle:bracket';
-    public const END_METHOD = 'end:method';
-    public const END_VARIABLE = 'end:variable';
+    public const FIRST = 'chain:first';
+    public const BRACKET = 'chain:bracket';
+    public const MIDDLE_BRACKET = 'chain:middle:bracket';
+    public const END_METHOD = 'chain:end:method';
+    public const END_VARIABLE = 'chain:end:variable';
+    public const BRACKET_BLOCK_CREATE = 'chain:bracket:create';
     protected Contract\Block $methodValues;
+    protected string $firstLink;
+    protected array $bracketBlocks = [];
+    protected bool $isBracket = false;
 
     public function objectify(int $start = 0)
     {
+        /*
+            when encounter dot:
+            - check if first by checking if parent is ChainLinkBlock
+                - if first then find instruction start with findInstructionStart
+                - add found link to the special variable `first`
+                - procced normally with the rest of the method
+            - check the current letter
+                - if it's dot then find where it ends with findInstructionEnd (it will end on all normal (';', "\n") and special symbols)
+                - if it's bracket '[' then find its end `]` and create subblocks from whats between then proceed
+            - find next closest letter
+                - if it's dot or bracket, create new ChinLinkBlock child
+                - if it's = create new AttributeBlock child
+                - if it's ( create new CallerBlock and then repeat this check
+            - end it
+            first.middle.middle['middle 2'].var = first.method()
+         */
         $this->setName('');
+        $parent = $this->getParent();
         $endChars = array_merge([';' => true], Validate::getSpecial());
-        $this->endChars = array_merge($this->endChars, [']' => true]);
-        if ($this->getSubtype() == self::FIRST) {
+        $realStart = null;
+
+        $mapTrigger = self::$content->getLetter($start);
+        if (!($parent instanceof ChainLinkBlock) || $parent->getMode() === self::BRACKET_BLOCK_CREATE) {
             $this->findInstructionStart($start, $endChars);
-            $this->blocks = array_merge($this->blocks, $this->createSubBlocks($start, true));
-            // If chain didn't and with new line then it must have ended on someone elses end symbol
-            $endChar = self::$content->getLetter($this->getCaret());
-            if ($endChar === ']' && !($this->getLastLink() instanceof BracketChainLinkBlock)) {
-                $this->setCaret($this->getCaret() - 1);
-            }
-            return;
+            $realStart = $this->getInstructionStart();
+            $this->firstLink = $this->getInstruction()->__toString();
+            $this->setSubtype(self::FIRST);
         }
 
-        $end = null;
-        $startLetterSearch = false;
-        $caret = null;
-        list($letter, $linkStart) = $this->getNextLetter($start, self::$content);
-        for ($i=$linkStart; $i < self::$content->getLength(); $i++) {
-            $letter = self::$content->getLetter($i);
-            if (($endChars[$letter] ?? false || $startLetterSearch) && $letter != ' ') {
-                $end = $i;
-                if ($letter == '=' && self::$content->getLetter($i + 1) != '=') {
-                    $this->setSubtype(self::END_VARIABLE);
-                } elseif ($letter == '(') {
-                    $this->setSubtype(self::END_METHOD);
-                    $i += 1;
-                } elseif ($letter == '.') {
-                    $this->setSubtype(self::MIDDLE);
-                } elseif ($letter == '[') {
-                    $this->setSubtype(self::MIDDLE_BRACKET);
-                }
-
-                $caret = $i;
-                $this->setCaret($caret);
-                break;
+        if ($mapTrigger === '.') {
+            $this->findInstructionEnd($start + 1, '', $endChars);
+        } elseif ($mapTrigger === '[') {
+            if ($this->getSubtype() === self::FIRST) {
+                $oldStart = $this->getInstructionStart();
             }
-
-            if (Validate::isWhitespace($letter)) {
-                $startLetterSearch = true;
+            $this->findInstructionEnd($start + 1, '', [']' => true]);
+            if (isset($oldStart)) {
+                $this->setInstructionStart($oldStart);
             }
-        }
-        if (\is_null($caret)) {
-            $this->setCaret($i);
-            $end = $i;
+            $bracketContent = $this->getInstruction()->__toString();
+            $this->setInstruction(new Content(''));
+            $this->setMode(self::BRACKET_BLOCK_CREATE);
+            $this->bracketBlocks = $this->createSubBlocksWithContent($bracketContent);
+            foreach ($this->bracketBlocks as &$block) {
+                $block->setPlacement('getBracketBlocks');
+            }
+            $this->setMode(self::DEFAULT_MODE);
+            $this->isBracket = true;
+            $this->setCaret($this->getCaret() + 1);
         }
 
-        $this->setInstructionStart($start - 1)
-            ->setInstruction(self::$content->iCutToContent($start, $end)->trim());
-
-        if ($this->getSubtype() == self::END_METHOD) {
-            $this->methodValues = new CallerBlock($this->getCaret() - 1, '', $this);
-            $this->methodValues->setChildIndex(0);
-            $this->setCaret($this->methodValues->getCaret() + 1);
-            $this->blocks = array_merge($this->blocks, $this->createSubBlocks(onlyOne: true));
-        } elseif ($this->getSubtype() == self::END_VARIABLE) {
-            $this->methodValues = new AttributeBlock($this->getCaret(), '', $this);
-            $this->methodValues->setChildIndex(0);
-            $this->methodValues->setName('');
-            $this->setCaret($this->methodValues->getCaret() + 1);
-            $this->setName($this->getInstruction()->__toString());
-        } else {
-            list($nextLetter, $pos) = $this->getNextLetter($this->getCaret(), self::$content);
-            $possibleOperation = $nextLetter . self::$content->getLetter($pos + 1);
-            if ($possibleOperation === '--' || $possibleOperation == '++') {
-                $symbol = new SymbolBlock($pos + 1, $possibleOperation, $this);
-                $symbol->setChildIndex(0);
-                $this->setBlocks([$symbol]);
-                $this->setCaret($pos + 1);
+        if ($this->getSubtype() === self::FIRST) {
+            $this->setInstructionStart($realStart);
+            if ($this->isBracket) {
+                $this->setInstruction(new Content($this->firstLink));
             } else {
-                $this->blocks = array_merge($this->blocks, $this->createSubBlocks(onlyOne: true));
+                $this->setInstruction(new Content($this->firstLink . '.' . $this->getInstruction()));
             }
         }
 
+        $this->resolvePossibleTrigger();
+    }
+
+    public function getBracketBlocks(): array
+    {
+        return $this->bracketBlocks;
+    }
+
+    protected function resolvePossibleTrigger(): void
+    {
+        list($trigger, $pos) = $this->getNextLetter($this->getCaret(), self::$content);
+        $switch = [
+            '.' => function (int $pos) {
+                $chain = new ChainLinkBlock($pos, '.', $this);
+                $chain->setChildIndex(\sizeof($this->getBlocks()));
+                $this->addBlock($chain);
+                $this->setCaret($chain->getCaret());
+            },
+            '[' => function (int $pos) {
+                $chain = new ChainLinkBlock($pos, '[', $this);
+                $chain->setChildIndex(\sizeof($this->getBlocks()));
+                $this->addBlock($chain);
+                $this->setCaret($chain->getCaret());
+            },
+            '(' => function (int $pos) {
+                $caller = new CallerBlock($pos, '(', $this);
+                $caller->setChildIndex(\sizeof($this->getBlocks()));
+                $this->addBlock($caller);
+                list($letter, $pos) = $this->getNextLetter($caller->getCaret() + 1, self::$content);
+                $this->setCaret($pos);
+                $this->resolvePossibleTrigger();
+            },
+            '=' => function (int $pos) {
+                $attribute = new AttributeBlock($pos, '=', $this);
+                $attribute->setName('');
+                $attribute->setChildIndex(\sizeof($this->getBlocks()));
+                $this->addBlock($attribute);
+                $this->setCaret($attribute->getCaret());
+            },
+            'default' => function (int $pos) {}
+        ];
+        ($switch[$trigger] ?? $switch['default'])($pos);
     }
 
     public function recreate(): string
     {
-        $script = $this->replaceVariablesWithAliases($this->getInstruction());
         $subtype = $this->getSubtype();
+        $script  = '';
 
-        if ($subtype == self::END_METHOD || $subtype == self::END_VARIABLE) {
-            $script .= rtrim($this->methodValues->recreate(), ';');
+
+        if ($subtype !== self::FIRST && !$this->isBracket) {
+            $script .= '.';
         }
+        Log::log('==========');
 
-        $blocks = $this->getBlocks();
-        if (\sizeof($blocks)) {
-            $block = $blocks[0];
-
-            if ($block::class === $this::class) {
-                $script .= '.';
+        $script .= $this->getInstruction();
+        Log::log($script);
+        if ($this->isBracket) {
+            $script .= "[";
+            foreach ($this->getBracketBlocks() as $block) {
+                $script .= rtrim($block->recreate(), ';');
             }
+            $script .= "]";
+        }
+        Log::log($script);
 
+        foreach ($this->getBlocks() as $block) {
             $script .= rtrim($block->recreate(), ';');
         }
 
-        if (!$this->isNextSiblingContected()) {
+        Log::log($script);
+        if (!($this->getParent() instanceof ChainLinkBlock)) {
             return $script . ';';
         }
+
         return $script;
     }
 

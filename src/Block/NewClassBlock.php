@@ -32,18 +32,18 @@ class NewClassBlock extends MethodBlock implements Contract\Block
                 }
                 continue;
             } elseif (!$searchForClosing && $letter == '(') {
-                $this->setClassName(self::$content->iSubStr($start, $i));
+                $this->setClassName(self::$content->iSubStr($start, $i - 1));
                 $searchForClosing = true;
                 continue;
             } elseif ($letter == ';') {
                 $end = $i;
-                $this->setClassName(self::$content->iSubStr($start, $end));
+                $this->setClassName(self::$content->iSubStr($start, $end - 1));
                 break;
             } elseif (!$searchForClosing) {
                 // If its non whitespace char and we don't search for ')'
                 if ($nameEnded) {
                     $end = $i - 1;
-                    $this->setClassName(self::$content->iSubStr($start, $end));
+                    $this->setClassName(self::$content->iSubStr($start, $end - 1));
                     break;
                 }
                 $nameStarted = true;
@@ -55,12 +55,12 @@ class NewClassBlock extends MethodBlock implements Contract\Block
 
         if (\is_null($end)) {
             $end = $i;
-            $this->setClassName(self::$content->iSubStr($start, $end));
+            $this->setClassName(self::$content->iSubStr($start, $end - 1));
         }
 
         $this->setCaret($end);
 
-        $this->setInstruction(self::$content->iCutToContent($start, $end))
+        $this->setInstruction(self::$content->iCutToContent($start, $end - 1))
             ->setInstructionStart($start - \mb_strlen('new '))
         ;
         $this->findAndSetArguments();

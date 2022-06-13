@@ -16,7 +16,7 @@ class ReturnBlock extends VariableBlock implements Contract\Block
         $this->setInstructionStart($start - 6);
         $end = $this->findVariableEnd($start);
         $this->setCaret($end);
-        $instr = self::$content->iSubStr($start, $end);
+        $instr = self::$content->iSubStr($start, $end - 1);
         // $instr = preg_replace('/[\n]/', ' ', $instr);
         // $instr = preg_replace('/[ \t]+/', ' ', $instr) . ';';
         $this->setInstruction(new Content($instr . ';'));

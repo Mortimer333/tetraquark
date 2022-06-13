@@ -18,7 +18,7 @@ class ImportBlock extends VariableBlockAbstract implements Contract\Block
         $this->setInstructionStart($properStart);
 
         $end = $this->findVariableEnd($start);
-        $this->setInstruction(self::$content->iCutToContent($start, $end))
+        $this->setInstruction(self::$content->iCutToContent($start, $end - 1))
             ->setCaret($end)
         ;
 

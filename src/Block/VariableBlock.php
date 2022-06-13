@@ -43,7 +43,7 @@ class VariableBlock extends VariableBlockAbstract implements Contract\Block
         $this->addVariableItems($items);
 
         $this->setName('');
-        $this->setInstruction(self::$content->iCutToContent($this->getInstructionStart(), $end));
+        $this->setInstruction(self::$content->iCutToContent($this->getInstructionStart(), $end - 1));
         $this->setCaret($end);
     }
 

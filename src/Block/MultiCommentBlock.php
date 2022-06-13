@@ -29,7 +29,7 @@ class MultiCommentBlock extends CommentBlock implements Contract\Block
             $end = self::$content->getLength() - 1 - $start;
         }
 
-        $this->setInstruction(self::$content->iCutToContent($start - 1, $end))
+        $this->setInstruction(self::$content->iCutToContent($start - 1, $end - 1))
             ->setInstructionStart($start - 1)
             ->setCaret($end)
         ;

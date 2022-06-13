@@ -18,7 +18,6 @@ class VariableItemBlock extends VariableBlockAbstract implements Contract\Block
 
     public function objectify(int $start = 0)
     {
-        $newLineFound = false;
         for ($i=$start + 1; $i < self::$content->getLength(); $i++) {
             $letter = self::$content->getLetter($i);
 
@@ -30,21 +29,27 @@ class VariableItemBlock extends VariableBlockAbstract implements Contract\Block
                 break;
             }
 
-            if ($letter == ';') { //|| $newLineFound) {
+            if ($letter == ';') {
                 $this->setInstruction(new Content(''));
                 $this->setInstructionStart($i);
-                $this->setName(self::$content->iSubStr($start, $i));
+                $this->setName(self::$content->iSubStr($start, $i - 1));
                 $this->setCaret($i + 1);
                 return;
             }
         }
-
-        $this->findInstructionEnd($start, $this->subtype, $this->instructionEnds);
+        Log::log('content: ' . self::$content);
+        $this->findInstructionEnd($start, $this->getSubtype(), $this->instructionEnds);
+        $this->setInstruction(new Content($this->getInstruction() . '='));
+        Log::log('instr ' . $this->getInstruction());
+        if (self::$content->getLetter($this->getCaret()) == '=') {
+            $this->setCaret($this->getCaret() + 1);
+        }
         $this->blocks = array_merge($this->blocks, $this->createSubBlocks(null));
         if (\sizeof($this->blocks) == 0) {
             $instrEnd = $this->getInstructionStart() + \mb_strlen($this->getInstruction());
-            $this->setValue(trim(self::$content->iSubStr($instrEnd, $this->getCaret())));
+            $this->setValue(trim(self::$content->iSubStr($instrEnd, $this->getCaret() - 1)));
         }
+        Log::log('subtype: ' . $this->getSubtype());
         $this->findAndSetName($this->getSubtype() . ' ', $this->instructionEnds);
     }
 

@@ -13,7 +13,7 @@ class ExportBlock extends VariableBlock implements Contract\Block, Contract\Expo
         $this->setInstructionStart($properStart);
 
         $end = $this->findVariableEnd($start);
-        $this->setInstruction(self::$content->iCutToContent($start, $end))
+        $this->setInstruction(self::$content->iCutToContent($start, $end - 1))
             ->setCaret($end)
         ;
         $this->blocks = $this->createSubBlocksWithContent(str_replace("\n"," ", $this->getInstruction()->__toString()));

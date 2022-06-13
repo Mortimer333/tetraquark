@@ -51,7 +51,11 @@ class ObjectValueBlock extends Block implements Contract\Block
         }
 
         if (Validate::isStringChar($name->getLetter(0) ?? '')) {
-            return trim($name->__toString(), $name->getLetter(0));
+            $name = trim($name->__toString(), $name->getLetter(0));
+            if (strlen($name) == 0 || Validate::isWhitespace($name)) {
+                return "'$name'";
+            }
+            return $name;
         }
         return $name->__toString();
     }

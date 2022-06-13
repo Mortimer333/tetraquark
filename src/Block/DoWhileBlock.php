@@ -76,7 +76,7 @@ class DoWhileBlock extends ConditionBlock implements Contract\Block
         }
 
         $this->setCaret($condEnd);
-        $this->setCondition(self::$content->iSubStr($condStart, $condEnd));
+        $this->setCondition(self::$content->iSubStr($condStart, $condEnd - 1));
         $condBlocks = $this->createSubBlocksWithContent($this->getCondition());
         foreach ($condBlocks as &$block) {
             $block->setPlacement('getBracketBlocks');

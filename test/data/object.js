@@ -25,6 +25,7 @@ return {
     a: 'asd',
     meh : 2
 };
+/*
 let set = group.sets[word[0]] || group.sets[word] || group.sets['default'] || { attrs : { class : 'mistake' } };
 let oldOne = { 'subset' : { 'sets' : { [group.start] : group } } };
 
@@ -102,3 +103,4 @@ const event = {
     event     : e,
     selection : '',
 };
+*/

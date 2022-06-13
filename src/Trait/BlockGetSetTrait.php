@@ -126,4 +126,15 @@ trait BlockGetSetTrait
     {
         return $this->placementMethod;
     }
+
+    public function getMode(): string
+    {
+        return $this->mode;
+    }
+
+    public function setMode(string $mode): self
+    {
+        $this->mode = $mode;
+        return $this;
+    }
 }

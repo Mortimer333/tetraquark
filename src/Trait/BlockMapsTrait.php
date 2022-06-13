@@ -379,7 +379,7 @@ trait BlockMapsTrait
     ];
     protected array $childrenChainLinkBlocksMap = [
         '.' => 'ChainLinkBlock',
-        '[' => 'BracketChainLinkBlock'
+        '[' => 'ChainLinkBlock'
     ];
     protected array $exportBlocksMap = [
         "{" => "ExportObjectBlock",
@@ -462,7 +462,6 @@ trait BlockMapsTrait
 
         $additionalPaths = [
             Block\ArrayBlock           ::class => $this->arrayBlocksMap,
-            Block\BracketChainLinkBlock::class => $this->chainLinkBlocksMap,
             Block\ClassBlock           ::class => $this->classBlocksMap,
             Block\ObjectBlock          ::class => $this->objectBlocksMap,
             Block\ObjectValueBlock     ::class => $this->objectValueBlocksMap,
@@ -474,10 +473,8 @@ trait BlockMapsTrait
         $blocksMap = $this->mergeBlockMaps($blocksMap, $additionalPaths[$this::class] ?? []);
 
         if (
-            (
-                $this instanceof Block\BracketChainLinkBlock
-                && $this->getSubtype() != Block\BracketChainLinkBlock::BRACKET_BLOCK_CREATE
-            ) || $this instanceof Block\ChainLinkBlock
+            $this instanceof Block\ChainLinkBlock
+            && $this->getSubtype() != Block\ChainLinkBlock::BRACKET_BLOCK_CREATE
         ) {
             $blocksMap = $this->childrenChainLinkBlocksMap;
         } elseif ($this instanceof Block\MethodBlock || $this instanceof Block\CallerBlock) {
@@ -573,7 +570,7 @@ trait BlockMapsTrait
                 continue;
             }
             if (!Validate::isSpecial($letter)) {
-                return 'BracketChainLinkBlock';
+                return 'ChainLinkBlock';
             }
             return "ArrayBlock";
         }

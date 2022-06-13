@@ -7,7 +7,7 @@ class Log
     static protected int     $indent        = 0;
     static protected int     $verbose       = 0;
     static protected int     $maxVerbose    = 0;
-    static protected int     $classLimit    = 30;
+    static protected int     $classLimit    = 50;
     static protected int     $functionLimit = 20;
     static protected ?string $timeStart     = null;
     static protected bool    $addClass      = false;
@@ -56,7 +56,7 @@ class Log
             $class = '';
             $function = '';
             if (self::$addClass) {
-                $debug = debug_backtrace()[1 + $traceLvl];
+                $debug = debug_backtrace()[1 + $traceLvl] ?? debug_backtrace()[1];
                 $class = self::fitString($debug['class'], self::$classLimit);
             }
             if (self::$addFunction) {

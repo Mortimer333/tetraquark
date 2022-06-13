@@ -161,7 +161,7 @@ class Content
      */
     public function iSubStr(int $start, int $end): string
     {
-        $cut = array_slice($this->contents[$this->contentPointer]['content'], $start, $end - $start);
+        $cut = array_slice($this->contents[$this->contentPointer]['content'], $start, $end + 1 - $start);
         return implode('', $cut);
     }
 
@@ -196,7 +196,7 @@ class Content
      */
     public function iCutToContent(int $start, int $end): Content
     {
-        $cut = array_slice($this->contents[$this->contentPointer]['content'], $start, $end - $start);
+        $cut = array_slice($this->contents[$this->contentPointer]['content'], $start, $end + 1 - $start);
         return (new Content(''))->addArrayContent($cut, true);
     }
 
@@ -219,7 +219,7 @@ class Content
      */
     public function iCutToArray(int $start, int $end): array
     {
-        return array_slice($this->contents[$this->contentPointer]['content'], $start, $end - $start);
+        return array_slice($this->contents[$this->contentPointer]['content'], $start, $end + 1 - $start);
     }
 
     public function trim($regex = "\s"): Content

@@ -104,11 +104,11 @@ abstract class ConditionBlockAbstract extends BlockAbstract
             throw new Exception("Condition (" . $this->getCondType() . " at letter $start) was not mapped properly, stopping script", 500);
         }
         $this->setCaret($end);
-        $this->setInstruction(self::$content->iCutToContent($actualStart, $end));
+        $this->setInstruction(self::$content->iCutToContent($actualStart, $end - 1));
         $this->setInstructionStart($actualStart);
-        $this->setCondition(self::$content->iSubStr($condStart, $condEnd));
+        $this->setCondition(self::$content->iSubStr($condStart, $condEnd - 1));
         if ($this->getSubtype() === self::SINGLE_CONDITION_SUBTYPE) {
-            $this->setSingleCond(self::$content->iSubStr($condEnd + 1, $end));
+            $this->setSingleCond(self::$content->iSubStr($condEnd + 1, $end - 1));
         }
     }
 

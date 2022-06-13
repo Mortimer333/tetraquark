@@ -141,7 +141,7 @@ class BracketChainLinkBlock extends Block implements Contract\Block
         }
 
 
-        $name = trim(self::$content->iSubStr($start, $end));
+        $name = trim(self::$content->iSubStr($start, $end - 1));
         if ($string) {
             $name = \mb_substr($name, 1, -1);
             if ($this->getSubtype() === self::VARIABLE) {

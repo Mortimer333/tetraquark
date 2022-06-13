@@ -22,9 +22,9 @@ class ExportFromBlock extends Block implements Contract\Block, Contract\ExportBl
         }
 
         $end = $this->skipString($startLetter, $pathStart + 1, self::$content, $startLetter === '`');
-        $this->setInstruction(self::$content->iCutToContent($this->getInstructionStart(), $end))
+        $this->setInstruction(self::$content->iCutToContent($this->getInstructionStart(), $end - 1))
             ->setCaret($end)
-            ->setPath(self::$content->iSubStr($pathStart + 1, $end - 1))
+            ->setPath(self::$content->iSubStr($pathStart + 1, $end - 2))
         ;
     }
 

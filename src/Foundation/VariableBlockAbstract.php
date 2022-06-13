@@ -107,13 +107,13 @@ abstract class VariableBlockAbstract extends BlockAbstract
             }
 
             if ($letter === ',') {
-                $items[] = self::$content->iSubStr($itemStart, $i);
+                $items[] = self::$content->iSubStr($itemStart, $i - 1);
                 $itemStart = $i + 1;
                 continue;
             }
         }
 
-        $lastItem = self::$content->iSubStr($itemStart, $end);
+        $lastItem = self::$content->iSubStr($itemStart, $end - 1);
         if (\mb_strlen($lastItem) > 0) {
             $items[] = $lastItem;
         }
