@@ -23,8 +23,9 @@ This is supposed to be a minifier and obfuscator in one. But due to project with
 ## If CallerBlock try to get caller name
 ## Add all key words so when object has property "typeof" it won't get replaced with its alias
 ## Upgrade fixScript as it doesn't reamove all not needed space example: do{ whileLooped--; console.log(whileLooped);}
+## Fix performance -  we take so much time on few script (like 15s)
 
-# Improvments
+# Improvments - probably name searching when creating exports takes a lot of time
 
 ## If script will be slow look into setting all values for functions in one iteration (instead of ~2,5)
 

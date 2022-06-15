@@ -9,7 +9,7 @@ class Log
     static protected int     $maxVerbose    = 0;
     static protected int     $classLimit    = 50;
     static protected int     $functionLimit = 20;
-    static protected ?string $timeStart     = null;
+    static protected array   $timeStart     = [];
     static protected bool    $addClass      = false;
     static protected bool    $addFunction   = false;
     static protected string  $oldFunction   = '';
@@ -20,18 +20,19 @@ class Log
 
     static public function timerStart(): void
     {
-        self::$timeStart = microtime();
+        self::$timeStart[] = microtime();
     }
 
     static public function timerEnd(): void
     {
         $timeEnd = self::getMilliseconds(microtime());
 
-        if (\is_null(self::$timeStart)) {
-            throw new Exception('Time start is null', 400);
+        if (empty(self::$timeStart)) {
+            throw new Exception('Time start is empty', 400);
         }
 
-        $timeStart = self::getMilliseconds(self::$timeStart);
+        $timeStart = self::getMilliseconds(self::$timeStart[\sizeof(self::$timeStart) - 1]);
+        array_pop(self::$timeStart);
         $time = $timeEnd - $timeStart;
         self::log('Duration: ' . ($time/1000) . 's', null, 1);
     }
