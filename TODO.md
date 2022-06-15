@@ -6,7 +6,7 @@ This is supposed to be a minifier and obfuscator in one. But due to project with
 
 # Fixes
 
-# Test object, variable, if, import, chain
+# Test ifelse, import, chain
 
 ## Extend classes:
     - interface

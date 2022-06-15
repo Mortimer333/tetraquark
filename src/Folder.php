@@ -163,6 +163,12 @@ class Folder
                 $properPath = dirname($properPath);
                 continue;
             }
+
+            if (strpos($segment, '?') !== false) {
+                $subSegments = explode('?', $segment);
+                return $properPath . '/' . $subSegments[0];
+            }
+
             $properPath .= '/' . $segment;
         }
         return $properPath;

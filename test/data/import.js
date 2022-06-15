@@ -11,6 +11,7 @@
 // import variable from "/var/www/html/tetraquark-js/test/data/imports/variable.js";
 // import variable from "/var/www/html/tetraquark-js/test/data/imports/function.js";
 // import variable from "/var/www/html/tetraquark-js/test/data/imports/class.js";
+import variable from "/var/www/html/tetraquark-js/test/data/imports/class_export.js";
 
 // WINDOWS
 // import defaultExport from "E:/xampp/htdocs/tetraquark/test/data/imports/default.js";
@@ -26,7 +27,7 @@
 // import variable from "E:/xampp/htdocs/tetraquark/test/data/imports/variable.js";
 // import variable from "E:/xampp/htdocs/tetraquark/test/data/imports/function.js";
 // import variable from "E:/xampp/htdocs/tetraquark/test/data/imports/class.js";
-import variable from "E:/xampp/htdocs/tetraquark/test/data/imports/class_export.js";
+// import variable from "E:/xampp/htdocs/tetraquark/test/data/imports/class_export.js";
 
 // import {testGlobablClass} from "E:/xampp/htdocs/tetraquark/test/data/imports/normal.js";
 // import {testGlobablClass} from "/var/www/html/tetraquark-js/test/data/imports/normal.js";

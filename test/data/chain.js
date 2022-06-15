@@ -1,3 +1,6 @@
+const res = this.syntax.startNewSubset(letter, letterSet, word, words, sentence.substring(letter.length), debug, subset);
+
+/*
 Object.keys(required).forEach( attr => {
     set[attr] = typeof set[attr] == 'undefined' ? required[attr] : set[attr];
 });
@@ -58,3 +61,4 @@ dot.pos -= 1;
 pos['dot']--
 dot['pos']
 this.syntax.groups[0].end[sentence[0]]
+*/
