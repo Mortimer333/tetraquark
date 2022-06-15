@@ -391,7 +391,7 @@ abstract class BlockAbstract
             $this->setName('');
             return;
         }
-        throw new Exception('Blocks name not found', 404);
+        $this->setName($instr->subStr($start));
     }
 
     protected function generateAliases(string $lastAlias = ''): string
@@ -626,7 +626,6 @@ abstract class BlockAbstract
             ];
             if (
                 $letter == ';'
-                // && Validate::isSpecial($nextLetter)
                 && isset($blackListedSpecial[$nextLetter])
             ) {
                 continue;
@@ -759,7 +758,7 @@ abstract class BlockAbstract
 
     protected function getClosestNextChild(): bool | BlockInterface
     {
-        $parent     = $this->getParent();
+        $parent = $this->getParent();
         try {
             $childIndex = $this->getChildIndex();
         } catch (\Error $e) {
@@ -786,7 +785,7 @@ abstract class BlockAbstract
             $child = $parent->getMethodValues();
         } else {
             $placementMethod = $this->getPlacement();
-            $child = $parent->$placementMethod()[$childIndex];
+            $child = $parent->$placementMethod()[$childIndex] ?? throw new Exception('Child not found', 404);
         }
         if ($child instanceof Block\ScriptBlock) {
             return false;

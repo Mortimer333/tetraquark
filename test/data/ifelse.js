@@ -1,5 +1,5 @@
 if ( line.nodeName == "P") linePos++;
-/*
+
 if (obj.objSoloTest[0] == 'asd') {
     console.log('found')
     console.log('found2')
@@ -66,4 +66,3 @@ if (true
     } else {
 
     }
-*/

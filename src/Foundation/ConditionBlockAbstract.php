@@ -100,7 +100,11 @@ abstract class ConditionBlockAbstract extends BlockAbstract
             }
         }
 
-        if (\is_null($condStart) || \is_null($condEnd) || \is_null($end)) {
+        if (is_null($end)) {
+            $this->setSubtype(self::SINGLE_CONDITION_SUBTYPE);
+            $end = self::$content->getLength();
+        }
+        if (\is_null($condStart) || \is_null($condEnd)) {
             throw new Exception("Condition (" . $this->getCondType() . " at letter $start) was not mapped properly, stopping script", 500);
         }
         $this->setCaret($end);
@@ -124,8 +128,9 @@ abstract class ConditionBlockAbstract extends BlockAbstract
 
     protected function setCondBlocks(array $blocks): void
     {
-        foreach ($blocks as &$block) {
+        foreach ($blocks as $i => &$block) {
             $block->setPlacement('getCondBlocks');
+            $block->setChildIndex($i);
         }
         $this->condBlocks = $blocks;
     }

@@ -17,7 +17,7 @@ class ClassBlock extends Block implements Contract\Block
     public function objectify(int $start = 0)
     {
         $this->findInstructionEnd($start, 'class', $this->instructionEnds);
-        $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
+        $this->blocks = array_merge($this->blocks, $this->createSubBlocks($this->getCaret() + 1));
         $this->findAndSetName('class ', $this->instructionEnds);
     }
 

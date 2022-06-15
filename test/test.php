@@ -19,8 +19,8 @@ $tetra = new Tetraquark();
 // $minified = $tetra->minify(__DIR__ . '/data/shortIf.js');
 // $minified = $tetra->minify(__DIR__ . '/data/spread.js');
 // $minified = $tetra->minify(__DIR__ . '/data/switch.js');
-$minified = $tetra->minify(__DIR__ . '/data/variable.js');
-// $minified = $tetra->minify(__DIR__ . '/data/while.js');
+// $minified = $tetra->minify(__DIR__ . '/data/variable.js');
+$minified = $tetra->minify(__DIR__ . '/data/while.js');
 
 // $minified = $tetra->minify(__DIR__ . '/data/single-function.js');
 // $minified = $tetra->minify('/var/www/html/tab_jf/main.js');

@@ -2,7 +2,7 @@ Object.keys(required).forEach( attr => {
     set[attr] = typeof set[attr] == 'undefined' ? required[attr] : set[attr];
 });
  string = string.replaceAll(' ', '&nbsp;').replaceAll(this.spaceUChar, '&nbsp;');
-/*
+
 subset[path[path.length-1]] path.slice(1);
 let obj = {
     'sa' : 'v',
@@ -17,6 +17,7 @@ let obj = {
 		}
 	}
 }
+
 obj.
 ba = 'c';
 obj
@@ -28,7 +29,6 @@ obj.c.sddf.asas
 obj.c.sddf.asas.we_das['@varp2']()
 obj.c.sddf["asa"] = 123;
 obj.c.sddf["asa"].asd;
-
 methodsSave.forEach(path => {
   this.set.preciseMethodsProxy(this, path);
 });
@@ -52,9 +52,9 @@ this.pos.line--;
 
 pos.dot--
 dot.pos;
+dot.pos -= 1;
 
 
 pos['dot']--
 dot['pos']
 this.syntax.groups[0].end[sentence[0]]
-*/

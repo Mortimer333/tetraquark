@@ -37,10 +37,8 @@ class VariableItemBlock extends VariableBlockAbstract implements Contract\Block
                 return;
             }
         }
-        Log::log('content: ' . self::$content);
         $this->findInstructionEnd($start, $this->getSubtype(), $this->instructionEnds);
         $this->setInstruction(new Content($this->getInstruction() . '='));
-        Log::log('instr ' . $this->getInstruction());
         if (self::$content->getLetter($this->getCaret()) == '=') {
             $this->setCaret($this->getCaret() + 1);
         }
@@ -49,7 +47,6 @@ class VariableItemBlock extends VariableBlockAbstract implements Contract\Block
             $instrEnd = $this->getInstructionStart() + \mb_strlen($this->getInstruction());
             $this->setValue(trim(self::$content->iSubStr($instrEnd, $this->getCaret() - 1)));
         }
-        Log::log('subtype: ' . $this->getSubtype());
         $this->findAndSetName($this->getSubtype() . ' ', $this->instructionEnds);
     }
 

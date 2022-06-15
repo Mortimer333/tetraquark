@@ -130,9 +130,8 @@ class CallerBlock extends Block implements Contract\Block
         if ($this->getSubtype() !== self::ARROW_FUNCTION) {
             $script .= ')';
         }
-        if (!$this->isNextSiblingContected()) {
-            $script .= ';';
-            return $script;
+        if ($this->getSubtype() === self::ARROW_FUNCTION || !$this->isNextSiblingContected()) {
+            return $script . ';';
         }
         return $script;
     }

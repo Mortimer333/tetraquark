@@ -34,7 +34,7 @@ class Validate
 
     protected static array $extendingsConsts = [
         'instanceof' => true, 'typeof' => true, 'in' => true, 'extends' => true,
-        'implements' => true, 'interface' => true, 'from' => true
+        'implements' => true, 'interface' => true, 'from' => true, 'new' => true
     ];
 
     public static function getSpecial(): array

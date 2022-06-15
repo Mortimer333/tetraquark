@@ -1,5 +1,4 @@
-['a',var1]
-[function () { return 'a'; }, 'a']
+
 let c = [
    'c',
    () => {
@@ -7,6 +6,8 @@ let c = [
    },
    caller('a'),
 ];
+['a',var1]
+[function () { return 'a'; }, 'a']
 [
    [
        [

@@ -16,9 +16,11 @@ class ChainLinkBlock extends Block implements Contract\Block
     protected string $firstLink;
     protected array $bracketBlocks = [];
     protected bool $isBracket = false;
+    private array $triggerSwitch;
 
     public function objectify(int $start = 0)
     {
+        $this->setTriggerSwitch();
         /*
             when encounter dot:
             - check if first by checking if parent is ChainLinkBlock
@@ -49,7 +51,12 @@ class ChainLinkBlock extends Block implements Contract\Block
         }
 
         if ($mapTrigger === '.') {
-            $this->findInstructionEnd($start + 1, '', $endChars);
+            list($letter, $pos) = $this->getNextLetter($start + 1, self::$content);
+            $this->findInstructionEnd($pos, '', $endChars);
+            $endLetter = self::$content->getLetter($this->getCaret());
+            if (!isset($this->triggerSwitch[$endLetter]) && !Validate::isWhitespace($endLetter ?? '')) {
+                $this->setCaret($this->getCaret() - 1);
+            }
         } elseif ($mapTrigger === '[') {
             if ($this->getSubtype() === self::FIRST) {
                 $oldStart = $this->getInstructionStart();
@@ -82,6 +89,69 @@ class ChainLinkBlock extends Block implements Contract\Block
         $this->resolvePossibleTrigger();
     }
 
+    private function setTriggerSwitch(): void
+    {
+        $this->triggerSwitch = [
+            '.' => function (int $pos) {
+                $this->addChainToBlocks($pos, '.');
+            },
+            '[' => function (int $pos) {
+                $this->addChainToBlocks($pos, '[');
+            },
+            '(' => function (int $pos) {
+                $caller = new CallerBlock($pos, '(', $this);
+                $caller->setChildIndex(\sizeof($this->getBlocks()));
+                $this->addBlock($caller);
+                $blockSize = sizeof($this->getBlocks());
+                $this->setCaret($caller->getCaret() + 1);
+                $this->resolvePossibleTrigger();
+            },
+            '=' => function (int $pos) {
+                $this->addAttributeToBlocks($pos);
+            },
+            '-' => function (int $pos) {
+                $this->addOperatorToBlocks($pos, '-');
+            },
+            '+' => function (int $pos) {
+                $this->addOperatorToBlocks($pos, '+');
+            },
+            'default' => false
+        ];
+    }
+
+    private function addOperatorToBlocks(int $pos, string $type): void
+    {
+        $nextLetter = self::$content->getLetter($pos + 1);
+        if ($nextLetter == "=") {
+            return;
+        } elseif ($nextLetter != $type) {
+            $this->setCaret($this->getCaret() - 1);
+            return;
+        }
+
+        $operator = new OperatorBlock($pos, $type . $type, $this);
+        $operator->setChildIndex(\sizeof($this->getBlocks()));
+        $this->addBlock($operator);
+        $this->setCaret($operator->getCaret());
+    }
+
+    private function addAttributeToBlocks(int $pos): void
+    {
+        $attribute = new AttributeBlock($pos, '=', $this);
+        $attribute->setChildIndex(\sizeof($this->getBlocks()));
+        $attribute->setName('');
+        $this->addBlock($attribute);
+        $this->setCaret($attribute->getCaret());
+    }
+
+    private function addChainToBlocks(int $pos, string $type): void
+    {
+        $chain = new ChainLinkBlock($pos, $type, $this);
+        $chain->setChildIndex(\sizeof($this->getBlocks()));
+        $this->addBlock($chain);
+        $this->setCaret($chain->getCaret());
+    }
+
     public function getBracketBlocks(): array
     {
         return $this->bracketBlocks;
@@ -90,37 +160,29 @@ class ChainLinkBlock extends Block implements Contract\Block
     protected function resolvePossibleTrigger(): void
     {
         list($trigger, $pos) = $this->getNextLetter($this->getCaret(), self::$content);
-        $switch = [
-            '.' => function (int $pos) {
-                $chain = new ChainLinkBlock($pos, '.', $this);
-                $chain->setChildIndex(\sizeof($this->getBlocks()));
-                $this->addBlock($chain);
-                $this->setCaret($chain->getCaret());
-            },
-            '[' => function (int $pos) {
-                $chain = new ChainLinkBlock($pos, '[', $this);
-                $chain->setChildIndex(\sizeof($this->getBlocks()));
-                $this->addBlock($chain);
-                $this->setCaret($chain->getCaret());
-            },
-            '(' => function (int $pos) {
-                $caller = new CallerBlock($pos, '(', $this);
-                $caller->setChildIndex(\sizeof($this->getBlocks()));
-                $this->addBlock($caller);
-                list($letter, $pos) = $this->getNextLetter($caller->getCaret() + 1, self::$content);
-                $this->setCaret($pos);
-                $this->resolvePossibleTrigger();
-            },
-            '=' => function (int $pos) {
-                $attribute = new AttributeBlock($pos, '=', $this);
-                $attribute->setName('');
-                $attribute->setChildIndex(\sizeof($this->getBlocks()));
-                $this->addBlock($attribute);
-                $this->setCaret($attribute->getCaret());
-            },
-            'default' => function (int $pos) {}
+        $res = ($this->triggerSwitch[$trigger] ?? $this->triggerSwitch['default']);
+        $nextLetter   = self::$content->getLetter($pos + 1);
+        $thridLetter  = self::$content->getLetter($pos + 2);
+        $fourthLetter = self::$content->getLetter($pos + 3);
+
+        $skipOperators = [
+            "==" => true,
+            "<=" => true,
+            ">=" => true,
+            "!=" => true,
         ];
-        ($switch[$trigger] ?? $switch['default'])($pos);
+
+        if (isset($skipOperators[$trigger . $nextLetter])) {
+            // do nothing
+        } elseif ($nextLetter == "=") {
+            $this->addAttributeToBlocks($pos + 1);
+        } elseif (Validate::isSymbol($nextLetter ?? '') && $thridLetter == "=") {
+            $this->addAttributeToBlocks($pos + 2);
+        } elseif (Validate::isSymbol($nextLetter ?? '') && Validate::isSymbol($thridLetter ?? '') && $fourthLetter == "=") {
+            $this->addAttributeToBlocks($pos + 3);
+        } elseif ($res) {
+            $res($pos);
+        }
     }
 
     public function recreate(): string
@@ -132,10 +194,8 @@ class ChainLinkBlock extends Block implements Contract\Block
         if ($subtype !== self::FIRST && !$this->isBracket) {
             $script .= '.';
         }
-        Log::log('==========');
 
         $script .= $this->getInstruction();
-        Log::log($script);
         if ($this->isBracket) {
             $script .= "[";
             foreach ($this->getBracketBlocks() as $block) {
@@ -143,13 +203,11 @@ class ChainLinkBlock extends Block implements Contract\Block
             }
             $script .= "]";
         }
-        Log::log($script);
 
         foreach ($this->getBlocks() as $block) {
             $script .= rtrim($block->recreate(), ';');
         }
 
-        Log::log($script);
         if (!($this->getParent() instanceof ChainLinkBlock)) {
             return $script . ';';
         }

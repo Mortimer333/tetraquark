@@ -1,432 +1,342 @@
 Mapping...
-  content:  attrs = letterSet.attrs ?? { style : 'color:#FFF;' };
-  instr  attrs =
-  subtype:
-  content:  middleLines = this.get.clone(clipboard.slice( 1, clipboard.length - 1 ));
-  instr  middleLines =
-  subtype:
 =======================
 Creating aliases...
 =======================
 Aliases:
 Recreating...
-==========
-vars.lan
-vars.lan
-==========
-.bacn
-.bacn
-==========
-
-==========
-asd
-asd['add']
-asd['add']
-['asd'+ asd['add']]
-==========
-atr.asd
-atr.asd
-==========
-.as
-.as
-.as
-atr.asd('asd')(2,56 ).as
-['asd'+ asd['add']]=atr.asd('asd')(2,56 ).as
-.bacn['asd'+ asd['add']]=atr.asd('asd')(2,56 ).as
-vars.lan.bacn['asd'+ asd['add']]=atr.asd('asd')(2,56 ).as
-==========
-letterSet.attrs
-letterSet.attrs
-letterSet.attrs
-==========
-this.get
-this.get
-==========
-.clone
-.clone
-==========
-clipboard.slice
-clipboard.slice
-==========
-clipboard.length
-clipboard.length
-clipboard.length
-clipboard.slice(1, clipboard.length-1 )
-.clone(clipboard.slice(1, clipboard.length-1 ))
-this.get.clone(clipboard.slice(1, clipboard.length-1 ))
 =======================
-Block: Tetraquark\Block\ChainLinkBlock
-Subtype: chain:first
-Instruction: vars.lan
+Block: Tetraquark\Block\WhileBlock
+Subtype: while
+Instruction: while (objSoloTest.length) {
 Instruction Start: 1
-Caret: 60
+Caret: 30
 Name: ``
 Child Index: `0`
-Bracket block: [0]
+Cond block: [1]
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: chain:first
+  Instruction: objSoloTest.length
+  Instruction Start: 0
+  Caret: 17
+  Name: ``
+  Child Index: `0`
+  Bracket block: [0]
+  Alias: ``
+  Blocks: [0]
+  =======
+Alias: ``
+Blocks: [0]
+=======
+Block: Tetraquark\Block\WhileBlock
+Subtype: while
+Instruction: while (objSoloTest.length) {
+Instruction Start: 32
+Caret: 151
+Name: ``
+Child Index: `1`
+Cond block: [1]
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: chain:first
+  Instruction: objSoloTest.length
+  Instruction Start: 0
+  Caret: 17
+  Name: ``
+  Child Index: `0`
+  Bracket block: [0]
+  Alias: ``
+  Blocks: [0]
+  =======
+Alias: ``
+Blocks: [3]
+=======
+  Block: Tetraquark\Block\VariableBlock
+  Subtype: let
+  Instruction: let size = objSoloTest.length
+  Instruction Start: 62
+  Caret: 91
+  Name: ``
+  Child Index: `0`
+  Value: ``
+  Alias: ``
+  Blocks: [1]
+  =======
+    Block: Tetraquark\Block\VariableItemBlock
+    Subtype:
+    Instruction:  size =
+    Instruction Start: 0
+    Caret: 26
+    Name: `size`
+    Child Index: `0`
+    Value: ``
+    Alias: `size`
+    Blocks: [1]
+    =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: chain:first
+      Instruction: objSoloTest.length
+      Instruction Start: 8
+      Caret: 25
+      Name: ``
+      Child Index: `0`
+      Bracket block: [0]
+      Alias: ``
+      Blocks: [0]
+      =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: chain:first
+  Instruction: console.log
+  Instruction Start: 94
+  Caret: 127
+  Name: ``
+  Child Index: `1`
+  Bracket block: [0]
+  Alias: ``
+  Blocks: [1]
+  =======
+    Block: Tetraquark\Block\CallerBlock
+    Subtype: (
+    Instruction:
+    Instruction Start: 105
+    Caret: 126
+    Name: ``
+    Child Index: `0`
+    Alias: ``
+    Blocks: [2]
+    =======
+      Block: Tetraquark\Block\UndefinedBlock
+      Subtype:
+      Instruction: size,
+      Instruction Start: -7
+      Caret: -1
+      Name: ``
+      Child Index: `0`
+      Alias: ``
+      Blocks: [0]
+      =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: chain:first
+      Instruction: objSoloTest
+      Instruction Start: 6
+      Caret: 20
+      Name: ``
+      Child Index: `1`
+      Bracket block: [1]
+        Block: Tetraquark\Block\UndefinedBlock
+        Subtype:
+        Instruction: 0
+        Instruction Start: -1
+        Caret: 0
+        Name: ``
+        Child Index: `0`
+        Alias: ``
+        Blocks: [0]
+        =======
+      Alias: ``
+      Blocks: [0]
+      =======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: chain:first
+  Instruction: objSoloTest.shift
+  Instruction Start: 130
+  Caret: 149
+  Name: ``
+  Child Index: `2`
+  Bracket block: [0]
+  Alias: ``
+  Blocks: [1]
+  =======
+    Block: Tetraquark\Block\CallerBlock
+    Subtype: (
+    Instruction:
+    Instruction Start: 147
+    Caret: 148
+    Name: ``
+    Child Index: `0`
+    Alias: ``
+    Blocks: [0]
+    =======
+Block: Tetraquark\Block\WhileBlock
+Subtype: single-condition
+Instruction: while (objSoloTest.length) objSoloTest.shift()
+Instruction Start: 153
+Caret: 199
+Name: ``
+Child Index: `2`
+Cond block: [1]
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: chain:first
+  Instruction: objSoloTest.length
+  Instruction Start: 0
+  Caret: 17
+  Name: ``
+  Child Index: `0`
+  Bracket block: [0]
+  Alias: ``
+  Blocks: [0]
+  =======
 Alias: ``
 Blocks: [1]
 =======
   Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: .
-  Instruction: bacn
-  Instruction Start: 10
-  Caret: 60
+  Subtype: chain:first
+  Instruction: objSoloTest.shift
+  Instruction Start: 1
+  Caret: 20
   Name: ``
   Child Index: `0`
   Bracket block: [0]
   Alias: ``
   Blocks: [1]
   =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: [
+    Block: Tetraquark\Block\CallerBlock
+    Subtype: (
     Instruction:
-    Instruction Start: 15
-    Caret: 60
+    Instruction Start: 18
+    Caret: 19
     Name: ``
     Child Index: `0`
-    Bracket block: [3]
-      Block: Tetraquark\Block\StringBlock
-      Subtype:
-      Instruction: 'asd'
-      Instruction Start: 0
-      Caret: 5
-      Name: ``
-      Child Index: `0`
-      Alias: ``
-      Blocks: [0]
-      =======
-      Block: Tetraquark\Block\UndefinedBlock
-      Subtype:
-      Instruction:  +
-      Instruction Start: 1
-      Caret: 4
-      Name: ``
-      Child Index: `1`
-      Alias: ``
-      Blocks: [0]
-      =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: chain:first
-      Instruction: asd
-      Instruction Start: 8
-      Caret: 18
-      Name: ``
-      Child Index: `2`
-      Bracket block: [1]
-        Block: Tetraquark\Block\StringBlock
-        Subtype:
-        Instruction: 'add'
-        Instruction Start: 0
-        Caret: 5
-        Name: ``
-        Child Index: `0`
-        Alias: ``
-        Blocks: [0]
-        =======
-      Alias: ``
-      Blocks: [0]
-      =======
-    Alias: ``
-    Blocks: [1]
-    =======
-      Block: Tetraquark\Block\AttributeBlock
-      Subtype: =
-      Instruction: asd['add']] = atr.asd('asd')(2,56).as
-      Instruction Start: 23
-      Caret: 60
-      Name: ``
-      Child Index: `0`
-      Alias: ``
-      Blocks: [1]
-      =======
-        Block: Tetraquark\Block\ChainLinkBlock
-        Subtype: chain:first
-        Instruction: atr.asd
-        Instruction Start: 1
-        Caret: 24
-        Name: ``
-        Child Index: `0`
-        Bracket block: [0]
-        Alias: ``
-        Blocks: [3]
-        =======
-          Block: Tetraquark\Block\CallerBlock
-          Subtype: (
-          Instruction:
-          Instruction Start: 8
-          Caret: 14
-          Name: ``
-          Child Index: `0`
-          Alias: ``
-          Blocks: [1]
-          =======
-            Block: Tetraquark\Block\StringBlock
-            Subtype:
-            Instruction: 'asd'
-            Instruction Start: 0
-            Caret: 5
-            Name: ``
-            Child Index: `0`
-            Alias: ``
-            Blocks: [0]
-            =======
-          Block: Tetraquark\Block\CallerBlock
-          Subtype: (
-          Instruction:
-          Instruction Start: 15
-          Caret: 20
-          Name: ``
-          Child Index: `1`
-          Alias: ``
-          Blocks: [1]
-          =======
-            Block: Tetraquark\Block\UndefinedBlock
-            Subtype:
-            Instruction: 2,56
-            Instruction Start: 0
-            Caret: 4
-            Name: ``
-            Child Index: `0`
-            Alias: ``
-            Blocks: [0]
-            =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: .
-          Instruction: as
-          Instruction Start: 22
-          Caret: 24
-          Name: ``
-          Child Index: `2`
-          Bracket block: [0]
-          Alias: ``
-          Blocks: [0]
-          =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: let
-Instruction: let attrs = letterSet.attrs ?? { style : 'color:#FFF;' }
-Instruction Start: 61
-Caret: 117
-Name: ``
-Child Index: `1`
-Value: ``
-Alias: ``
-Blocks: [1]
-=======
-  Block: Tetraquark\Block\VariableItemBlock
-  Subtype:
-  Instruction:  attrs =
-  Instruction Start: 0
-  Caret: 53
-  Name: `attrs`
-  Child Index: `0`
-  Value: ``
-  Alias: `attrs`
-  Blocks: [3]
-  =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: chain:first
-    Instruction: letterSet.attrs
-    Instruction Start: 9
-    Caret: 24
-    Name: ``
-    Child Index: `0`
-    Bracket block: [0]
     Alias: ``
     Blocks: [0]
     =======
-    Block: Tetraquark\Block\SymbolBlock
-    Subtype: ??
-    Instruction: ??
-    Instruction Start: 25
-    Caret: 26
-    Name: ``
-    Child Index: `1`
-    Alias: ``
-    Blocks: [0]
-    =======
-    Block: Tetraquark\Block\ObjectBlock
-    Subtype: {
-    Instruction:
-    Instruction Start: 28
-    Caret: 52
-    Name: ``
-    Child Index: `2`
-    Alias: ``
-    Blocks: [1]
-    =======
-      Block: Tetraquark\Block\ObjectValueBlock
-      Subtype: :
-      Instruction:  style
-      Instruction Start: 29
-      Caret: 51
-      Name: `style`
-      Child Index: `0`
-      Alias: `style`
-      Blocks: [1]
-      =======
-        Block: Tetraquark\Block\StringBlock
-        Subtype:
-        Instruction: 'color:#FFF;'
-        Instruction Start: 38
-        Caret: 51
-        Name: ``
-        Child Index: `0`
-        Alias: ``
-        Blocks: [0]
-        =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: let
-Instruction: let middleLines = this.get.clone(clipboard.slice( 1, clipboard.length - 1 ))
-Instruction Start: 119
-Caret: 195
-Name: ``
-Child Index: `2`
-Value: ``
-Alias: ``
-Blocks: [1]
-=======
-  Block: Tetraquark\Block\VariableItemBlock
-  Subtype:
-  Instruction:  middleLines =
-  Instruction Start: 0
-  Caret: 73
-  Name: `middleLines`
-  Child Index: `0`
-  Value: ``
-  Alias: `middleLines`
-  Blocks: [1]
-  =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: chain:first
-    Instruction: this.get
-    Instruction Start: 15
-    Caret: 73
-    Name: ``
-    Child Index: `0`
-    Bracket block: [0]
-    Alias: ``
-    Blocks: [1]
-    =======
-      Block: Tetraquark\Block\ChainLinkBlock
-      Subtype: .
-      Instruction: clone
-      Instruction Start: 24
-      Caret: 73
-      Name: ``
-      Child Index: `0`
-      Bracket block: [0]
-      Alias: ``
-      Blocks: [1]
-      =======
-        Block: Tetraquark\Block\CallerBlock
-        Subtype: (
-        Instruction:
-        Instruction Start: 29
-        Caret: 72
-        Name: ``
-        Child Index: `0`
-        Alias: ``
-        Blocks: [1]
-        =======
-          Block: Tetraquark\Block\ChainLinkBlock
-          Subtype: chain:first
-          Instruction: clipboard.slice
-          Instruction Start: 0
-          Caret: 42
-          Name: ``
-          Child Index: `0`
-          Bracket block: [0]
-          Alias: ``
-          Blocks: [1]
-          =======
-            Block: Tetraquark\Block\CallerBlock
-            Subtype: (
-            Instruction:
-            Instruction Start: 15
-            Caret: 41
-            Name: ``
-            Child Index: `0`
-            Alias: ``
-            Blocks: [4]
-            =======
-              Block: Tetraquark\Block\UndefinedBlock
-              Subtype:
-              Instruction:  1,
-              Instruction Start: -5
-              Caret: -1
-              Name: ``
-              Child Index: `0`
-              Alias: ``
-              Blocks: [0]
-              =======
-              Block: Tetraquark\Block\ChainLinkBlock
-              Subtype: chain:first
-              Instruction: clipboard.length
-              Instruction Start: 4
-              Caret: 20
-              Name: ``
-              Child Index: `1`
-              Bracket block: [0]
-              Alias: ``
-              Blocks: [0]
-              =======
-              Block: Tetraquark\Block\SymbolBlock
-              Subtype: -
-              Instruction: -
-              Instruction Start: 21
-              Caret: 21
-              Name: ``
-              Child Index: `2`
-              Alias: ``
-              Blocks: [0]
-              =======
-              Block: Tetraquark\Block\UndefinedBlock
-              Subtype:
-              Instruction:  1
-              Instruction Start: 22
-              Caret: 25
-              Name: ``
-              Child Index: `3`
-              Alias: ``
-              Blocks: [0]
-              =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: let
-Instruction: let lastLetter, lastChildIndex
-Instruction Start: 197
-Caret: 227
+Block: Tetraquark\Block\WhileBlock
+Subtype: single-condition
+Instruction: while (objSoloTest.length) objSoloTest.shift()
+Instruction Start: 201
+Caret: 247
 Name: ``
 Child Index: `3`
-Value: ``
-Alias: ``
-Blocks: [2]
-=======
-  Block: Tetraquark\Block\VariableItemBlock
-  Subtype:
-  Instruction:
-  Instruction Start: 11
-  Caret: 12
-  Name: `lastLetter`
+Cond block: [1]
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: chain:first
+  Instruction: objSoloTest.length
+  Instruction Start: 0
+  Caret: 17
+  Name: ``
   Child Index: `0`
-  Value: ``
-  Alias: `lastLetter`
+  Bracket block: [0]
+  Alias: ``
   Blocks: [0]
   =======
-  Block: Tetraquark\Block\VariableItemBlock
-  Subtype:
-  Instruction:
-  Instruction Start: 15
-  Caret: 16
-  Name: `lastChildIndex`
-  Child Index: `1`
-  Value: ``
-  Alias: `lastChildIndex`
+Alias: ``
+Blocks: [1]
+=======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: chain:first
+  Instruction: objSoloTest.shift
+  Instruction Start: 1
+  Caret: 20
+  Name: ``
+  Child Index: `0`
+  Bracket block: [0]
+  Alias: ``
+  Blocks: [1]
+  =======
+    Block: Tetraquark\Block\CallerBlock
+    Subtype: (
+    Instruction:
+    Instruction Start: 18
+    Caret: 19
+    Name: ``
+    Child Index: `0`
+    Alias: ``
+    Blocks: [0]
+    =======
+Block: Tetraquark\Block\WhileBlock
+Subtype: single-condition
+Instruction: while (objSoloTest.length)\n objSoloTest.shift()
+Instruction Start: 248
+Caret: 295
+Name: ``
+Child Index: `4`
+Cond block: [1]
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: chain:first
+  Instruction: objSoloTest.length
+  Instruction Start: 0
+  Caret: 17
+  Name: ``
+  Child Index: `0`
+  Bracket block: [0]
+  Alias: ``
   Blocks: [0]
   =======
-Duration: 0.005s
+Alias: ``
+Blocks: [1]
+=======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: chain:first
+  Instruction: objSoloTest.shift
+  Instruction Start: 2
+  Caret: 21
+  Name: ``
+  Child Index: `0`
+  Bracket block: [0]
+  Alias: ``
+  Blocks: [1]
+  =======
+    Block: Tetraquark\Block\CallerBlock
+    Subtype: (
+    Instruction:
+    Instruction Start: 19
+    Caret: 20
+    Name: ``
+    Child Index: `0`
+    Alias: ``
+    Blocks: [0]
+    =======
+Block: Tetraquark\Block\WhileBlock
+Subtype: single-condition
+Instruction: while (objSoloTest.length)\n objSoloTest.shift()
+Instruction Start: 297
+Caret: 344
+Name: ``
+Child Index: `5`
+Cond block: [1]
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: chain:first
+  Instruction: objSoloTest.length
+  Instruction Start: 0
+  Caret: 17
+  Name: ``
+  Child Index: `0`
+  Bracket block: [0]
+  Alias: ``
+  Blocks: [0]
+  =======
+Alias: ``
+Blocks: [1]
+=======
+  Block: Tetraquark\Block\ChainLinkBlock
+  Subtype: chain:first
+  Instruction: objSoloTest.shift
+  Instruction Start: 2
+  Caret: 21
+  Name: ``
+  Child Index: `0`
+  Bracket block: [0]
+  Alias: ``
+  Blocks: [1]
+  =======
+    Block: Tetraquark\Block\CallerBlock
+    Subtype: (
+    Instruction:
+    Instruction Start: 19
+    Caret: 20
+    Name: ``
+    Child Index: `0`
+    Alias: ``
+    Blocks: [0]
+    =======
+Duration: 0.007s
 
 
-vars.lan.bacn['asd'+ asd['add']]=atr.asd('asd')(2,56).as;
-let attrs=letterSet.attrs??{style:'color:#FFF;'};
-let middleLines=this.get.clone(clipboard.slice(1, clipboard.length-1));
-let lastLetter,lastChildIndex;
+while(objSoloTest.length){}
+while(objSoloTest.length){
+    let size=objSoloTest.length;
+    console.log(size, objSoloTest[0]);
+    objSoloTest.shift()
+}
+while(objSoloTest.length)objSoloTest.shift();
+while(objSoloTest.length)objSoloTest.shift();
+while(objSoloTest.length)objSoloTest.shift();
+while(objSoloTest.length)objSoloTest.shift();
