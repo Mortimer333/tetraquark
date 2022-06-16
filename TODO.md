@@ -10,7 +10,6 @@ This is supposed to be a minifier and obfuscator in one. But due to project with
     - interface
     - extends
     - implements
-    - private - # at the start of name
 
 ## methods/function `get` and `set` keyword
 ## methods/function `async` keyword
