@@ -1,19 +1,38 @@
 Mapping...
+          gen und:  0
+        gen und:  i 
+        gen und:  i
+          gen und: i
+        gen und:  el
+          gen und:  i
+      gen und:  false
+    gen und:  el 
+    gen und:  1
+    gen und: \n #novalue\n 
+    gen und: õ
+  gen und: ú
+    gen und:  throw
+  gen und: \nthrow
+    gen und:  1
+    gen und: \n novalue\n 
+    gen und: \n secondNoValue\n 
+  gen und:  1
+    gen und:  throw
 =======================
 Creating aliases...
 =======================
-Aliases:
+Aliases: 
 Recreating...
 =======================
 Block: Tetraquark\Block\ClassBlock
 Subtype: class
-Instruction: class static
+Instruction: class static 
 Instruction Start: 1
-Caret: 337
+Caret: 408
 Name: `static`
 Child Index: `0`
 Alias: `static`
-Blocks: [5]
+Blocks: [6] 
 =======
   Block: Tetraquark\Block\AttributeBlock
   Subtype: attribute:static
@@ -22,18 +41,19 @@ Blocks: [5]
   Caret: 52
   Name: `staticProperty`
   Child Index: `0`
+  Is Private: `false`
   Alias: `staticProperty`
-  Blocks: [1]
+  Blocks: [1] 
   =======
     Block: Tetraquark\Block\StringBlock
-    Subtype:
+    Subtype: 
     Instruction: 'someValue'
     Instruction Start: 1
     Caret: 12
     Name: ``
     Child Index: `0`
     Alias: ``
-    Blocks: [0]
+    Blocks: [0] 
     =======
   Block: Tetraquark\Block\ClassMethodBlock
   Subtype: class:method:static
@@ -42,9 +62,10 @@ Blocks: [5]
   Caret: 122
   Name: `staticMethod`
   Child Index: `1`
+  Is Private: `false`
   Arguments: [0] `
   Alias: `staticMethod`
-  Blocks: [1]
+  Blocks: [1] 
   =======
     Block: Tetraquark\Block\ReturnBlock
     Subtype: return
@@ -54,155 +75,1005 @@ Blocks: [5]
     Name: ``
     Child Index: `0`
     Alias: ``
-    Blocks: [1]
+    Blocks: [1] 
     =======
       Block: Tetraquark\Block\StringBlock
-      Subtype:
+      Subtype: 
       Instruction: 'static method has been called.'
       Instruction Start: 1
       Caret: 33
       Name: ``
       Child Index: `0`
       Alias: ``
-      Blocks: [0]
+      Blocks: [0] 
+      =======
+  Block: Tetraquark\Block\ClassMethodBlock
+  Subtype: class:method:static
+  Instruction: static #staticMethod() {
+  Instruction Start: 118
+  Caret: 193
+  Name: `#staticMethod`
+  Child Index: `2`
+  Is Private: `true`
+  Arguments: [0] `
+  Alias: `#staticMethod`
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\ReturnBlock
+    Subtype: return
+    Instruction:  'static method has been called.';
+    Instruction Start: 151
+    Caret: 190
+    Name: ``
+    Child Index: `0`
+    Alias: ``
+    Blocks: [1] 
+    =======
+      Block: Tetraquark\Block\StringBlock
+      Subtype: 
+      Instruction: 'static method has been called.'
+      Instruction Start: 1
+      Caret: 33
+      Name: ``
+      Child Index: `0`
+      Alias: ``
+      Blocks: [0] 
       =======
   Block: Tetraquark\Block\StaticInitializationBlock
   Subtype: static
   Instruction: static {
-  Instruction Start: 124
-  Caret: 193
+  Instruction Start: 195
+  Caret: 264
   Name: ``
-  Child Index: `2`
+  Child Index: `3`
   Alias: ``
-  Blocks: [1]
+  Blocks: [1] 
   =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: chain:first
     Instruction: console.log
-    Instruction Start: 135
-    Caret: 189
+    Instruction Start: 206
+    Caret: 260
     Name: ``
     Child Index: `0`
-    Bracket block: [0]
+    Bracket block: [0] 
     Alias: ``
-    Blocks: [1]
+    Blocks: [1] 
     =======
       Block: Tetraquark\Block\CallerBlock
       Subtype: (
-      Instruction:
-      Instruction Start: 146
-      Caret: 189
+      Instruction: 
+      Instruction Start: 217
+      Caret: 260
       Name: ``
       Child Index: `0`
       Alias: ``
-      Blocks: [1]
+      Blocks: [1] 
       =======
         Block: Tetraquark\Block\StringBlock
-        Subtype:
+        Subtype: 
         Instruction: 'Class static initialization block called'
         Instruction Start: 0
         Caret: 42
         Name: ``
         Child Index: `0`
         Alias: ``
-        Blocks: [0]
+        Blocks: [0] 
         =======
   Block: Tetraquark\Block\StaticInitializationBlock
   Subtype: static{
   Instruction: static {
-  Instruction Start: 195
-  Caret: 263
+  Instruction Start: 266
+  Caret: 334
   Name: ``
-  Child Index: `3`
+  Child Index: `4`
   Alias: ``
-  Blocks: [1]
+  Blocks: [1] 
   =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: chain:first
     Instruction: console.log
-    Instruction Start: 205
-    Caret: 259
+    Instruction Start: 276
+    Caret: 330
     Name: ``
     Child Index: `0`
-    Bracket block: [0]
+    Bracket block: [0] 
     Alias: ``
-    Blocks: [1]
+    Blocks: [1] 
     =======
       Block: Tetraquark\Block\CallerBlock
       Subtype: (
-      Instruction:
-      Instruction Start: 216
-      Caret: 259
+      Instruction: 
+      Instruction Start: 287
+      Caret: 330
       Name: ``
       Child Index: `0`
       Alias: ``
-      Blocks: [1]
+      Blocks: [1] 
       =======
         Block: Tetraquark\Block\StringBlock
-        Subtype:
+        Subtype: 
         Instruction: 'Class static initialization block called'
         Instruction Start: 0
         Caret: 42
         Name: ``
         Child Index: `0`
         Alias: ``
-        Blocks: [0]
+        Blocks: [0] 
         =======
   Block: Tetraquark\Block\StaticInitializationBlock
   Subtype: static
   Instruction: static {
-  Instruction Start: 265
-  Caret: 335
+  Instruction Start: 336
+  Caret: 406
   Name: ``
-  Child Index: `4`
+  Child Index: `5`
   Alias: ``
-  Blocks: [1]
+  Blocks: [1] 
   =======
     Block: Tetraquark\Block\ChainLinkBlock
     Subtype: chain:first
     Instruction: console.log
-    Instruction Start: 277
-    Caret: 331
+    Instruction Start: 348
+    Caret: 402
     Name: ``
     Child Index: `0`
-    Bracket block: [0]
+    Bracket block: [0] 
     Alias: ``
-    Blocks: [1]
+    Blocks: [1] 
     =======
       Block: Tetraquark\Block\CallerBlock
       Subtype: (
-      Instruction:
-      Instruction Start: 288
-      Caret: 331
+      Instruction: 
+      Instruction Start: 359
+      Caret: 402
       Name: ``
       Child Index: `0`
       Alias: ``
-      Blocks: [1]
+      Blocks: [1] 
       =======
         Block: Tetraquark\Block\StringBlock
-        Subtype:
+        Subtype: 
         Instruction: 'Class static initialization block called'
         Instruction Start: 0
         Caret: 42
         Name: ``
         Child Index: `0`
         Alias: ``
-        Blocks: [0]
+        Blocks: [0] 
         =======
-Duration: 0.005s
+Block: Tetraquark\Block\ClassBlock
+Subtype: class
+Instruction: class ClassName 
+Instruction Start: 410
+Caret: 740
+Name: `ClassName`
+Child Index: `1`
+Alias: `ClassName`
+Blocks: [8] 
+=======
+  Block: Tetraquark\Block\ClassMethodBlock
+  Subtype: method
+  Instruction: #elPos ( el ) {
+  Instruction Start: 429
+  Caret: 581
+  Name: `#elPos`
+  Child Index: `0`
+  Is Private: `true`
+  Arguments: [1] `
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  el 
+    Instruction Start: -1
+    Caret: 3
+    Name: `el`
+    Child Index: `0`
+    Alias: `el`
+    Blocks: [0] 
+    =======
+  Alias: `#elPos`
+  Blocks: [2] 
+  =======
+    Block: Tetraquark\Block\ForBlock
+    Subtype: for
+    Instruction: for ( let i = 0; i < el.parentElement.children.length; i++ ) {
+    Instruction Start: 446
+    Caret: 563
+    Name: ``
+    Child Index: `0`
+    Cond block: [6] 
+      Block: Tetraquark\Block\VariableBlock
+      Subtype: let
+      Instruction: let i = 0
+      Instruction Start: 0
+      Caret: 9
+      Name: ``
+      Child Index: `0`
+      Value: ``
+      Alias: ``
+      Blocks: [1] 
+      =======
+        Block: Tetraquark\Block\VariableItemBlock
+        Subtype: 
+        Instruction:  i =
+        Instruction Start: 0
+        Caret: 6
+        Name: `i`
+        Child Index: `0`
+        Value: ``
+        Alias: `i`
+        Blocks: [1] 
+        =======
+          Block: Tetraquark\Block\UndefinedBlock
+          Subtype: 
+          Instruction:  0
+          Instruction Start: 4
+          Caret: 6
+          Name: ``
+          Child Index: `0`
+          Alias: ``
+          Blocks: [0] 
+          =======
+      Block: Tetraquark\Block\UndefinedBlock
+      Subtype: 
+      Instruction:  i 
+      Instruction Start: -4
+      Caret: -1
+      Name: ``
+      Child Index: `1`
+      Alias: ``
+      Blocks: [0] 
+      =======
+      Block: Tetraquark\Block\SymbolBlock
+      Subtype: <
+      Instruction: <
+      Instruction Start: 3
+      Caret: 3
+      Name: ``
+      Child Index: `2`
+      Alias: ``
+      Blocks: [0] 
+      =======
+      Block: Tetraquark\Block\ChainLinkBlock
+      Subtype: chain:first
+      Instruction: el.parentElement
+      Instruction Start: 5
+      Caret: 36
+      Name: ``
+      Child Index: `3`
+      Bracket block: [0] 
+      Alias: ``
+      Blocks: [1] 
+      =======
+        Block: Tetraquark\Block\ChainLinkBlock
+        Subtype: .
+        Instruction: children
+        Instruction Start: 22
+        Caret: 36
+        Name: ``
+        Child Index: `0`
+        Bracket block: [0] 
+        Alias: ``
+        Blocks: [1] 
+        =======
+          Block: Tetraquark\Block\ChainLinkBlock
+          Subtype: .
+          Instruction: length
+          Instruction Start: 31
+          Caret: 36
+          Name: ``
+          Child Index: `0`
+          Bracket block: [0] 
+          Alias: ``
+          Blocks: [0] 
+          =======
+      Block: Tetraquark\Block\UndefinedBlock
+      Subtype: 
+      Instruction:  i
+      Instruction Start: -3
+      Caret: -1
+      Name: ``
+      Child Index: `4`
+      Alias: ``
+      Blocks: [0] 
+      =======
+      Block: Tetraquark\Block\OperatorBlock
+      Subtype: ++
+      Instruction: ++
+      Instruction Start: 2
+      Caret: 4
+      Name: ``
+      Child Index: `5`
+      Alias: ``
+      Blocks: [0] 
+      =======
+    Alias: ``
+    Blocks: [1] 
+    =======
+      Block: Tetraquark\Block\IfBlock
+      Subtype: single-condition
+      Instruction: if ( el.parentElement.children[i] == el ) return i
+      Instruction Start: 510
+      Caret: 560
+      Name: ``
+      Child Index: `0`
+      Cond block: [0] 
+      Alias: ``
+      Blocks: [1] 
+      =======
+        Block: Tetraquark\Block\ReturnBlock
+        Subtype: return
+        Instruction:  i;
+        Instruction Start: 1
+        Caret: 9
+        Name: ``
+        Child Index: `0`
+        Alias: ``
+        Blocks: [1] 
+        =======
+          Block: Tetraquark\Block\UndefinedBlock
+          Subtype: 
+          Instruction:  i
+          Instruction Start: -1
+          Caret: 1
+          Name: ``
+          Child Index: `0`
+          Alias: ``
+          Blocks: [0] 
+          =======
+    Block: Tetraquark\Block\ReturnBlock
+    Subtype: return
+    Instruction:  false;
+    Instruction Start: 566
+    Caret: 578
+    Name: ``
+    Child Index: `1`
+    Alias: ``
+    Blocks: [1] 
+    =======
+      Block: Tetraquark\Block\UndefinedBlock
+      Subtype: 
+      Instruction:  false
+      Instruction Start: -1
+      Caret: 5
+      Name: ``
+      Child Index: `0`
+      Alias: ``
+      Blocks: [0] 
+      =======
+  Block: Tetraquark\Block\EmptyAttributeBlock
+  Subtype: 
+  Instruction: \n #novalue\n 
+  Instruction Start: 569
+  Caret: 581
+  Name: ``
+  Child Index: `1`
+  Is Private: `true`
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\AttributeBlock
+  Subtype: 
+  Instruction: #testAttr = 1
+  Instruction Start: 594
+  Caret: 607
+  Name: `#testAttr`
+  Child Index: `2`
+  Is Private: `true`
+  Alias: `#testAttr`
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  1
+    Instruction Start: -1
+    Caret: 1
+    Name: ``
+    Child Index: `0`
+    Alias: ``
+    Blocks: [0] 
+    =======
+  Block: Tetraquark\Block\ClassMethodBlock
+  Subtype: method
+  Instruction: constructor() {
+  Instruction Start: 609
+  Caret: 647
+  Name: `constructor`
+  Child Index: `3`
+  Is Private: `false`
+  Arguments: [0] `
+  Alias: `constructor`
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: chain:first
+    Instruction: console.log
+    Instruction Start: 626
+    Caret: 643
+    Name: ``
+    Child Index: `0`
+    Bracket block: [0] 
+    Alias: ``
+    Blocks: [1] 
+    =======
+      Block: Tetraquark\Block\CallerBlock
+      Subtype: (
+      Instruction: 
+      Instruction Start: 637
+      Caret: 643
+      Name: ``
+      Child Index: `0`
+      Alias: ``
+      Blocks: [1] 
+      =======
+        Block: Tetraquark\Block\StringBlock
+        Subtype: 
+        Instruction: 'new'
+        Instruction Start: 0
+        Caret: 5
+        Name: ``
+        Child Index: `0`
+        Alias: ``
+        Blocks: [0] 
+        =======
+  Block: Tetraquark\Block\ClassMethodBlock
+  Subtype: method
+  Instruction: func1 () {
+  Instruction Start: 650
+  Caret: 662
+  Name: `func1`
+  Child Index: `4`
+  Is Private: `false`
+  Arguments: [0] `
+  Alias: `func1`
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\ClassMethodBlock
+  Subtype: method
+  Instruction: funcr2() {
+  Instruction Start: 665
+  Caret: 675
+  Name: `funcr2`
+  Child Index: `5`
+  Is Private: `false`
+  Arguments: [0] `
+  Alias: `funcr2`
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\ClassMethodBlock
+  Subtype: method
+  Instruction: meth2\n ()\n {
+  Instruction Start: 678
+  Caret: 715
+  Name: `meth2`
+  Child Index: `6`
+  Is Private: `false`
+  Arguments: [0] `
+  Alias: `meth2`
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: chain:first
+    Instruction: console.log
+    Instruction Start: 692
+    Caret: 711
+    Name: ``
+    Child Index: `0`
+    Bracket block: [0] 
+    Alias: ``
+    Blocks: [1] 
+    =======
+      Block: Tetraquark\Block\CallerBlock
+      Subtype: (
+      Instruction: 
+      Instruction Start: 703
+      Caret: 711
+      Name: ``
+      Child Index: `0`
+      Alias: ``
+      Blocks: [1] 
+      =======
+        Block: Tetraquark\Block\StringBlock
+        Subtype: 
+        Instruction: 'asdas'
+        Instruction Start: 0
+        Caret: 7
+        Name: ``
+        Child Index: `0`
+        Alias: ``
+        Blocks: [0] 
+        =======
+  Block: Tetraquark\Block\AttributeBlock
+  Subtype: 
+  Instruction: attrb = 'asd' + 'asd'
+  Instruction Start: 718
+  Caret: 739
+  Name: `attrb`
+  Child Index: `7`
+  Is Private: `false`
+  Alias: `attrb`
+  Blocks: [3] 
+  =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: 'asd'
+    Instruction Start: 1
+    Caret: 6
+    Name: ``
+    Child Index: `0`
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\SymbolBlock
+    Subtype: +
+    Instruction: +
+    Instruction Start: 7
+    Caret: 7
+    Name: ``
+    Child Index: `1`
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: 'asd'
+    Instruction Start: 9
+    Caret: 14
+    Name: ``
+    Child Index: `2`
+    Alias: ``
+    Blocks: [0] 
+    =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: const
+Instruction: const classTest = new ClassName()
+Instruction Start: 742
+Caret: 775
+Name: ``
+Child Index: `2`
+Value: ``
+Alias: ``
+Blocks: [1] 
+=======
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype: 
+  Instruction:  classTest =
+  Instruction Start: 0
+  Caret: 28
+  Name: `classTest`
+  Child Index: `0`
+  Value: ``
+  Alias: `classTest`
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\NewClassBlock
+    Subtype: new
+    Instruction:  ClassName()
+    Instruction Start: 12
+    Caret: 28
+    Name: ``
+    Child Index: `0`
+    Arguments: [0] `
+    Alias: ``
+    Blocks: [0] 
+    =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: const
+Instruction: const classTest2 = new ClassName()
+Instruction Start: 777
+Caret: 811
+Name: ``
+Child Index: `3`
+Value: ``
+Alias: ``
+Blocks: [1] 
+=======
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype: 
+  Instruction:  classTest2 =
+  Instruction Start: 0
+  Caret: 29
+  Name: `classTest2`
+  Child Index: `0`
+  Value: ``
+  Alias: `classTest2`
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\NewClassBlock
+    Subtype: new
+    Instruction:  ClassName()
+    Instruction Start: 13
+    Caret: 29
+    Name: ``
+    Child Index: `0`
+    Arguments: [0] `
+    Alias: ``
+    Blocks: [0] 
+    =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: const
+Instruction: const classTes3 = new ClassName\n()
+Instruction Start: 812
+Caret: 846
+Name: ``
+Child Index: `4`
+Value: ``
+Alias: ``
+Blocks: [1] 
+=======
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype: 
+  Instruction:  classTes3 =
+  Instruction Start: 0
+  Caret: 29
+  Name: `classTes3`
+  Child Index: `0`
+  Value: ``
+  Alias: `classTes3`
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\NewClassBlock
+    Subtype: new
+    Instruction:  ClassName\n()
+    Instruction Start: 12
+    Caret: 29
+    Name: ``
+    Child Index: `0`
+    Arguments: [0] `
+    Alias: ``
+    Blocks: [0] 
+    =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: const
+Instruction: const classTest4 = new ClassName
+Instruction Start: 847
+Caret: 879
+Name: ``
+Child Index: `5`
+Value: ``
+Alias: ``
+Blocks: [1] 
+=======
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype: 
+  Instruction:  classTest4 =
+  Instruction Start: 0
+  Caret: 27
+  Name: `classTest4`
+  Child Index: `0`
+  Value: ``
+  Alias: `classTest4`
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\NewClassBlock
+    Subtype: new
+    Instruction:  ClassName
+    Instruction Start: 13
+    Caret: 27
+    Name: ``
+    Child Index: `0`
+    Arguments: [0] `
+    Alias: ``
+    Blocks: [0] 
+    =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: const
+Instruction: const classTest6 = new ClassName
+Instruction Start: 881
+Caret: 913
+Name: ``
+Child Index: `6`
+Value: ``
+Alias: ``
+Blocks: [1] 
+=======
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype: 
+  Instruction:  classTest6 =
+  Instruction Start: 0
+  Caret: 27
+  Name: `classTest6`
+  Child Index: `0`
+  Value: ``
+  Alias: `classTest6`
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\NewClassBlock
+    Subtype: new
+    Instruction:  ClassName
+    Instruction Start: 13
+    Caret: 27
+    Name: ``
+    Child Index: `0`
+    Arguments: [0] `
+    Alias: ``
+    Blocks: [0] 
+    =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: const
+Instruction: const classTest5 = new\nClassName
+Instruction Start: 914
+Caret: 946
+Name: ``
+Child Index: `7`
+Value: ``
+Alias: ``
+Blocks: [1] 
+=======
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype: 
+  Instruction:  classTest5 =
+  Instruction Start: 0
+  Caret: 27
+  Name: `classTest5`
+  Child Index: `0`
+  Value: ``
+  Alias: `classTest5`
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\NewClassBlock
+    Subtype: new
+    Instruction: \nClassName
+    Instruction Start: 13
+    Caret: 27
+    Name: ``
+    Child Index: `0`
+    Arguments: [0] `
+    Alias: ``
+    Blocks: [0] 
+    =======
+Block: Tetraquark\Block\IfBlock
+Subtype: single-condition
+Instruction: if(!õ||!ú) throw new Error('Couldn\'t find lines')
+Instruction Start: 947
+Caret: 997
+Name: ``
+Child Index: `8`
+Cond block: [0] 
+Alias: ``
+Blocks: [2] 
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  throw
+  Instruction Start: -7
+  Caret: -1
+  Name: ``
+  Child Index: `0`
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\NewClassBlock
+  Subtype: new
+  Instruction:  Error('Couldn\'t find lines')
+  Instruction Start: 6
+  Caret: 40
+  Name: ``
+  Child Index: `1`
+  Arguments: [1] `
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: 'Couldn\'t find lines'
+    Instruction Start: 0
+    Caret: 22
+    Name: ``
+    Child Index: `0`
+    Alias: ``
+    Blocks: [0] 
+    =======
+  Alias: ``
+  Blocks: [0] 
+  =======
+Block: Tetraquark\Block\UndefinedBlock
+Subtype: 
+Instruction: \nthrow
+Instruction Start: 991
+Caret: 997
+Name: ``
+Child Index: `9`
+Alias: ``
+Blocks: [0] 
+=======
+Block: Tetraquark\Block\NewClassBlock
+Subtype: new
+Instruction:  Error("Parent has wrong tag, can't find proper lines")
+Instruction Start: 1004
+Caret: 1063
+Name: ``
+Child Index: `10`
+Arguments: [1] `
+  Block: Tetraquark\Block\StringBlock
+  Subtype: 
+  Instruction: "Parent has wrong tag, can't find proper lines"
+  Instruction Start: 0
+  Caret: 47
+  Name: ``
+  Child Index: `0`
+  Alias: ``
+  Blocks: [0] 
+  =======
+Alias: ``
+Blocks: [0] 
+=======
+Block: Tetraquark\Block\ClassBlock
+Subtype: class
+Instruction: class noValue 
+Instruction Start: 1065
+Caret: 1129
+Name: `noValue`
+Child Index: `11`
+Alias: `noValue`
+Blocks: [4] 
+=======
+  Block: Tetraquark\Block\EmptyAttributeBlock
+  Subtype: 
+  Instruction: \n novalue\n 
+  Instruction Start: 1068
+  Caret: 1079
+  Name: `novalue`
+  Child Index: `0`
+  Is Private: `false`
+  Alias: `novalue`
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\AttributeBlock
+  Subtype: 
+  Instruction: test = 1
+  Instruction Start: 1091
+  Caret: 1099
+  Name: `test`
+  Child Index: `1`
+  Is Private: `false`
+  Alias: `test`
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  1
+    Instruction Start: -1
+    Caret: 1
+    Name: ``
+    Child Index: `0`
+    Alias: ``
+    Blocks: [0] 
+    =======
+  Block: Tetraquark\Block\EmptyAttributeBlock
+  Subtype: 
+  Instruction: \n secondNoValue\n 
+  Instruction Start: 1082
+  Caret: 1099
+  Name: `secondNoValue`
+  Child Index: `2`
+  Is Private: `false`
+  Alias: `secondNoValue`
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\ClassMethodBlock
+  Subtype: method
+  Instruction: funcr2() {
+  Instruction Start: 1117
+  Caret: 1127
+  Name: `funcr2`
+  Child Index: `3`
+  Is Private: `false`
+  Arguments: [0] `
+  Alias: `funcr2`
+  Blocks: [0] 
+  =======
+Block: Tetraquark\Block\IfBlock
+Subtype: single-condition
+Instruction: if ( editor.nodeType != 1 ) throw new Error('Editor node has to be of proper node type. (1)' )
+Instruction Start: 1131
+Caret: 1225
+Name: ``
+Child Index: `12`
+Cond block: [0] 
+Alias: ``
+Blocks: [2] 
+=======
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction:  throw
+  Instruction Start: -7
+  Caret: -1
+  Name: ``
+  Child Index: `0`
+  Alias: ``
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\NewClassBlock
+  Subtype: new
+  Instruction:  Error('Editor node has to be of proper node type. (1)' )
+  Instruction Start: 6
+  Caret: 67
+  Name: ``
+  Child Index: `1`
+  Arguments: [1] `
+    Block: Tetraquark\Block\StringBlock
+    Subtype: 
+    Instruction: 'Editor node has to be of proper node type. (1)'
+    Instruction Start: 0
+    Caret: 48
+    Name: ``
+    Child Index: `0`
+    Alias: ``
+    Blocks: [0] 
+    =======
+  Alias: ``
+  Blocks: [0] 
+  =======
+Block: Tetraquark\Block\ChainLinkBlock
+Subtype: chain:first
+Instruction: obj.testClass
+Instruction Start: 1227
+Caret: 1262
+Name: ``
+Child Index: `13`
+Bracket block: [0] 
+Alias: ``
+Blocks: [1] 
+=======
+  Block: Tetraquark\Block\AttributeBlock
+  Subtype: =
+  Instruction: testClass = class {\n a = 'a';\n}
+  Instruction Start: 1231
+  Caret: 1262
+  Name: ``
+  Child Index: `0`
+  Is Private: `false`
+  Alias: ``
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\ClassBlock
+    Subtype: class
+    Instruction: class 
+    Instruction Start: 1
+    Caret: 19
+    Name: ``
+    Child Index: `0`
+    Alias: ``
+    Blocks: [1] 
+    =======
+      Block: Tetraquark\Block\AttributeBlock
+      Subtype: 
+      Instruction: a = 'a'
+      Instruction Start: 10
+      Caret: 17
+      Name: `a`
+      Child Index: `0`
+      Is Private: `false`
+      Alias: `a`
+      Blocks: [1] 
+      =======
+        Block: Tetraquark\Block\StringBlock
+        Subtype: 
+        Instruction: 'a'
+        Instruction Start: 1
+        Caret: 4
+        Name: ``
+        Child Index: `0`
+        Alias: ``
+        Blocks: [0] 
+        =======
+Duration: 0.018s
 
 
-class static{
-    static staticProperty='someValue';
-    static staticMethod(){
-        return 'static method has been called.'
-    }
-    static{
-        console.log('Class static initialization block called')
-    }
-    static{
-        console.log('Class static initialization block called')
-    }
-    static{console.log('Class static initialization block called')
-    }
-}
+class static{static staticProperty='someValue';
+static staticMethod(){return 'static method has been called.'}static #staticMethod(){return 'static method has been called.'}static{console.log('Class static initialization block called')}static{console.log('Class static initialization block called')}static{console.log('Class static initialization block called')}}class ClassName{#elPos(el){for(let i=0;
+i<el.parentElement.children.length;
+i++){if(el.parentElement.children[i]==el)return i}return false}#novalue;
+#testAttr=1;
+constructor(){console.log('new')}func1(){}funcr2(){}meth2(){console.log('asdas')}attrb='asd'+'asd'}const classTest=new ClassName;
+const classTest2=new ClassName;
+const classTes3=new ClassName;
+const classTest4=new ClassName;
+const classTest6=new ClassName;
+const classTest5=new ClassName;
+if(!õ||!ú)throw new Error('Couldn\'t find lines');
+throw new Error("Parent has wrong tag, can't find proper lines");
+class noValue{novalue;
+test=1;
+secondNoValue;
+funcr2(){}}if(editor.nodeType!=1)throw new Error('Editor node has to be of proper node type. (1)');
+obj.testClass=class{a='a'};
+

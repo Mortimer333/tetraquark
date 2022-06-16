@@ -7,6 +7,7 @@ use \Tetraquark\Contract\{Block as BlockInterface};
 
 class EmptyAttributeBlock extends Block implements Contract\Block
 {
+    protected bool $private = false;
     public function __construct(
         int $start,
         string $instruction,
@@ -19,9 +20,12 @@ class EmptyAttributeBlock extends Block implements Contract\Block
 
     public function objectify(int $start = 0)
     {
-        $possibleName = rtrim($this->getInstruction()->trim()->__toString(), ';');
+        $possibleName = trim(rtrim($this->getInstruction()->trim()->__toString(), ';'));
         if (Validate::isValidVariable($possibleName)) {
             $this->setName($possibleName);
+        }
+        if ($this->getParent() instanceof ClassBlock && $possibleName[0] === '#') {
+            $this->setPrivate(true);
         }
         $instruction = $this->getInstruction();
         $this->setCaret($start + $instruction->getLength());
@@ -39,5 +43,16 @@ class EmptyAttributeBlock extends Block implements Contract\Block
         }
 
         return trim(trim($script), ';') . ';';
+    }
+
+    protected function setPrivate(bool $isPrivate): self
+    {
+        $this->private = $isPrivate;
+        return $this;
+    }
+
+    public function isPrivate(): bool
+    {
+        return $this->private;
     }
 }

@@ -133,6 +133,9 @@ class Log
             self::log("Caret: " . $block->getCaret());
             self::log("Name: `" . $block->getName() . "`");
             self::log("Child Index: `" . $block->getChildIndex() . "`");
+            if (method_exists($block, 'isPrivate')) {
+                self::log("Is Private: `" . ($block->isPrivate() ? 'true' : 'false') . "`");
+            }
             if (method_exists($block, 'getValue')) {
                 self::log("Value: `" . $block->getValue() . "`");
             }

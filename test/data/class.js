@@ -3,6 +3,9 @@ class static {
   static staticMethod() {
     return 'static method has been called.';
   }
+  static #staticMethod() {
+    return 'static method has been called.';
+  }
   static {
     console.log('Class static initialization block called');
   }
@@ -17,17 +20,17 @@ class static {
   }
 }
 
-/*
+
 class ClassName {
-    elPos ( el ) {
+    #elPos ( el ) {
         for ( let i = 0; i < el.parentElement.children.length; i++ ) {
           if ( el.parentElement.children[i] == el ) return i;
         }
         return false;
     }
 
-    novalue
-    testAttr = 1
+    #novalue
+    #testAttr = 1
     constructor() {
         console.log('new');
     }
@@ -71,4 +74,3 @@ if ( editor.nodeType != 1                  ) throw new Error('Editor node has to
 obj.testClass = class {
   a = 'a';
 }
-*/

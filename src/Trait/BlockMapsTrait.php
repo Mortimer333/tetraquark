@@ -488,7 +488,6 @@ trait BlockMapsTrait
 
         $additionalPaths = [
             Block\ArrayBlock           ::class => $this->arrayBlocksMap,
-            Block\ClassBlock           ::class => $this->classBlocksMap,
             Block\ObjectBlock          ::class => $this->objectBlocksMap,
             Block\ObjectValueBlock     ::class => $this->objectValueBlocksMap,
             Block\ReturnBlock          ::class => $this->returnBlocksMap,
@@ -496,6 +495,7 @@ trait BlockMapsTrait
             Block\ImportBlock          ::class => $this->importBlocksMap,
         ];
 
+        $blocksMap = $this->mergeBlockMaps($blocksMap, $additionalPaths[$this::class] ?? []);
         if (
             $this instanceof Block\ChainLinkBlock
             && $this->getSubtype() != Block\ChainLinkBlock::BRACKET_BLOCK_CREATE
@@ -530,13 +530,14 @@ trait BlockMapsTrait
                     }
                 }
             }
+
+            $blocksMap = $this->mergeBlockMaps($blocksMap, $this->classBlocksMap);
         } elseif ($this instanceof Block\ExportObjectBlock) {
             $blocksMap = $this->exportObjectBlocksMap;
         } elseif ($this instanceof Block\ImportObjectBlock) {
             $blocksMap = $this->importObjectBlocksMap;
         }
 
-        $blocksMap = $this->mergeBlockMaps($blocksMap, $additionalPaths[$this::class] ?? []);
 
         // if ($this instanceof Block\ExportBlock) {
         //     die(json_encode($blocksMap));

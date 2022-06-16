@@ -7,6 +7,7 @@ use \Tetraquark\Foundation\MethodBlockAbstract as MethodBlock;
 class ClassMethodBlock extends MethodBlock implements Contract\Block
 {
     public const STATIC_METH = 'class:method:static';
+    protected bool $private = false;
     protected array $endChars = [
         '}' => true
     ];
@@ -37,6 +38,9 @@ class ClassMethodBlock extends MethodBlock implements Contract\Block
 
 
         if ($this->getParent() instanceof ClassBlock) {
+            if ($this->getName()[0] === '#') {
+                $this->setPrivate(true);
+            }
             list($word, $pos) = $this->getPreviousWord($this->getInstructionStart() - 1, self::$content);
             if (\mb_substr($word, -6) === 'static') {
                 $this->setInstructionStart($pos - 6)
@@ -62,5 +66,16 @@ class ClassMethodBlock extends MethodBlock implements Contract\Block
             return $script . rtrim($blocks, ';') . ';}';
         }
         return $script . '}';
+    }
+
+    protected function setPrivate(bool $isPrivate): self
+    {
+        $this->private = $isPrivate;
+        return $this;
+    }
+
+    public function isPrivate(): bool
+    {
+        return $this->private;
     }
 }
