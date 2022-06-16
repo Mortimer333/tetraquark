@@ -33,6 +33,19 @@ abstract class ConditionBlockAbstract extends BlockAbstract
                 continue;
             }
 
+            if (
+                ($startsTemplate = Validate::isTemplateLiteralLandmark($letter, ''))
+                || Validate::isStringLandmark($letter, '')
+            ) {
+                $i = $this->skipString($letter, $i + 1, self::$content, $startsTemplate);
+
+                if (\is_null(self::$content->getLetter($i))) {
+                    break;
+                }
+
+                $letter = self::$content->getLetter($i);
+            }
+
             if ($parenthesisOpen > 0 && $letter == ')') {
                 $parenthesisOpen--;
                 continue;
@@ -59,7 +72,7 @@ abstract class ConditionBlockAbstract extends BlockAbstract
                 continue;
             }
 
-            if (!\is_null($condEnd) && $letter != "\n") {
+            if (!\is_null($condEnd) && $letter != "\n" && $letter != "{") {
                 $letterFound = true;
             }
 
@@ -67,8 +80,10 @@ abstract class ConditionBlockAbstract extends BlockAbstract
                 !\is_null($condStart)
                 && !\is_null($condEnd)
                 && (
-                    $letter == '{'
-                    || (
+                    (
+                        $letter == '{'
+                        && !$letterFound
+                    ) || (
                         (
                             $this instanceof Block\IfBlock
                             || $this instanceof Block\WhileBlock

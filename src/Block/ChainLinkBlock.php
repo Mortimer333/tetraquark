@@ -54,9 +54,7 @@ class ChainLinkBlock extends Block implements Contract\Block
             list($letter, $pos) = $this->getNextLetter($start + 1, self::$content);
             $this->findInstructionEnd($pos, '', $endChars);
             $endLetter = self::$content->getLetter($this->getCaret());
-            if (!isset($this->triggerSwitch[$endLetter]) && !Validate::isWhitespace($endLetter ?? '')) {
-                $this->setCaret($this->getCaret() - 1);
-            }
+            $this->setCaret($this->getCaret() - 1);
         } elseif ($mapTrigger === '[') {
             if ($this->getSubtype() === self::FIRST) {
                 $oldStart = $this->getInstructionStart();
@@ -74,7 +72,6 @@ class ChainLinkBlock extends Block implements Contract\Block
             }
             $this->setMode(self::DEFAULT_MODE);
             $this->isBracket = true;
-            $this->setCaret($this->getCaret() + 1);
         }
 
         if ($this->getSubtype() === self::FIRST) {
@@ -103,7 +100,7 @@ class ChainLinkBlock extends Block implements Contract\Block
                 $caller->setChildIndex(\sizeof($this->getBlocks()));
                 $this->addBlock($caller);
                 $blockSize = sizeof($this->getBlocks());
-                $this->setCaret($caller->getCaret() + 1);
+                $this->setCaret($caller->getCaret());
                 $this->resolvePossibleTrigger();
             },
             '=' => function (int $pos) {
@@ -125,7 +122,6 @@ class ChainLinkBlock extends Block implements Contract\Block
         if ($nextLetter == "=") {
             return;
         } elseif ($nextLetter != $type) {
-            $this->setCaret($this->getCaret() - 1);
             return;
         }
 
@@ -157,9 +153,13 @@ class ChainLinkBlock extends Block implements Contract\Block
         return $this->bracketBlocks;
     }
 
-    protected function resolvePossibleTrigger(): void
+    protected function resolvePossibleTrigger(?int $start = null): void
     {
-        list($trigger, $pos) = $this->getNextLetter($this->getCaret(), self::$content);
+        if (\is_null($start)) {
+            $start = $this->getCaret() + 1;
+        }
+
+        list($trigger, $pos) = $this->getNextLetter($start, self::$content);
         $res = ($this->triggerSwitch[$trigger] ?? $this->triggerSwitch['default']);
         $nextLetter   = self::$content->getLetter($pos + 1);
         $thridLetter  = self::$content->getLetter($pos + 2);

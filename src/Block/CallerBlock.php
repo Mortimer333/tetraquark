@@ -92,6 +92,7 @@ class CallerBlock extends Block implements Contract\Block
                     ->setInstructionStart($start)
                 ;
                 $arrow = new ArrowFunctionBlock($i + 1, '', $this);
+                $arrow->setChildIndex(\sizeof($this->getBlocks()));
                 $this->setBlocks([
                     $arrow
                 ]);

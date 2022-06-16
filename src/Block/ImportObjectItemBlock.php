@@ -17,8 +17,11 @@ class ImportObjectItemBlock extends Block implements Contract\Block
 
     public function objectify(int $start = 0)
     {
-        list($previousLetter) = $this->getPreviousLetter($start - 1, self::$content);
-        $this->findInstructionStart($start);
+        if (self::$content->getLetter($start) === ',') {
+            $this->findInstructionStart($start);
+        } else {
+            $this->findInstructionStart($start + 1);
+        }
         $instr = $this->getInstruction()->trim()->__toString();
         $parted = explode(' ', $instr);
         if ($parted[1] ?? '' == 'as') {
@@ -29,6 +32,8 @@ class ImportObjectItemBlock extends Block implements Contract\Block
             if ($parted[2] === 'default') {
                 $this->setSubtype(self::DEFAULT_ALIASED);
             }
+        } else {
+            $this->setOldName($instr);
         }
         $this->setCaret($start + 1);
     }
@@ -40,7 +45,7 @@ class ImportObjectItemBlock extends Block implements Contract\Block
 
     protected function setNewName(string $newName): self
     {
-        $this->newName = $newName;
+        $this->newName = trim($newName);
         return $this;
     }
 
@@ -51,7 +56,7 @@ class ImportObjectItemBlock extends Block implements Contract\Block
 
     protected function setOldName(string $oldName): self
     {
-        $this->oldName = $oldName;
+        $this->oldName = trim($oldName);
         return $this;
     }
 

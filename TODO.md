@@ -6,8 +6,7 @@ This is supposed to be a minifier and obfuscator in one. But due to project with
 
 # Fixes
 
-# Test ifelse, import, chain
-
+## Add try catch finally
 ## Extend classes:
     - interface
     - extends
@@ -17,7 +16,6 @@ This is supposed to be a minifier and obfuscator in one. But due to project with
     - private
     - static
 
-## Add try catch finally
 ## Add the rest of taken keywords
 ## Add to variables Deconstructed assignment - https://medium.com/swlh/javascript-best-practices-renaming-imports-and-proper-variable-declaration-aa405c191bee
 ## If CallerBlock try to get caller name

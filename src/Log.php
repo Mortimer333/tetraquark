@@ -180,6 +180,18 @@ class Log
                     self::decreaseIndent();
                 }
             }
+            if (method_exists($block, 'getCatch')) {
+                self::log("Catch block: [" . \sizeof($block->getCatch()) . "] ");
+                self::increaseIndent();
+                self::displayBlocks($block->getCatch());
+                self::decreaseIndent();
+            }
+            if (method_exists($block, 'getFinally')) {
+                self::log("Finally block: [" . \sizeof($block->getFinally()) . "] ");
+                self::increaseIndent();
+                self::displayBlocks($block->getFinally());
+                self::decreaseIndent();
+            }
             self::log("Alias: `" . $block->getAlias($block->getName()) . "`");
             self::log("Blocks: [" . \sizeof($block->getBlocks()) . "] ");
             self::log("=======");

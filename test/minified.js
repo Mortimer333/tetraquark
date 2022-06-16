@@ -1,8 +1,8 @@
 let Ī = {};
-Ī.v = Ī => {
+Ī.y = Ī => {
     const {
         fonts
-    } = Ī.q(Ī);
+    } = Ī.z(Ī);
     let dictionary;
     return {
         dictionary: {
@@ -4428,12 +4428,11 @@ let Ī = {};
         }
     }
 }
-Ī.µ = Ī => {
+Ī.x = Ī => {
     const {
         dictionary: css
-    } = Ī.v(Ī);
+    } = Ī.y(Ī);
     class TabJF_Syntax {
-        rulesetOpen = false;
         groups = [];
         ends = [];
         groupPath = [];
@@ -4448,6 +4447,19 @@ let Ī = {};
             this.syntax.ends = [null];
             this.syntax.highlightLines(lines, start)
         }
+        fireTrigger(subset, scope, path, args) {
+            if (!subset) return;
+            const triggers = this.syntax.findTriggers(subset, path);
+            if (!triggers) return;
+            triggers.forEach(func => {
+                func.bind(scope)(...args)
+            })
+        }
+        findTriggers(subset, path) {
+            if (path.length == 1) return subset[path[0]];
+            if (!subset[path[path.length - 1]]) return false;
+            return this.syntax.findTriggers(subset[path[path.length - 1]], path.slice(1))
+        }
         highlightLines(lines, start) {
             for (let i = 0; i < lines.length; i++) {
                 this.render.content[i + start].ends = this.get.clone(this.syntax.ends);
@@ -4455,28 +4467,14 @@ let Ī = {};
                 const line = lines[i];
                 const sentence = this.get.sentence(line);
                 let group = this.syntax.groups[0];
-                if (group?.triggers) {
-                    const triggers = group.triggers;
-                    if (triggers?.line?.start) {
-                        triggers?.line.start.forEach(func => {
-                            func.bind(this.settings.syntax)(i + start, line, sentence, group.subset.sets)
-                        })
-                    }
-                }
+                this.syntax.fireTrigger(group?.triggers, this.settings.syntax, ['line', 'start'], [i + start, line, sentence, group.subset.sets, this.syntax]);
                 const res = this.syntax.validateResults(this.syntax.paint(sentence));
                 if (res.words.length == 0) {
                     res.words.push(this.syntax.create.span({}, ''))
                 }
                 this.render.content[i + start].content = res.words;
                 group = this.syntax.groups[0];
-                if (group?.triggers) {
-                    const triggers = group.triggers;
-                    if (triggers?.line?.end) {
-                        triggers?.line.end.forEach(func => {
-                            func.bind(this.settings.syntax)(i + start, line, group.subset.sets)
-                        })
-                    }
-                }
+                this.syntax.fireTrigger(group?.triggers, this.settings.syntax, ['line', 'end'], [i + start, line, group.subset.sets, this.syntax])
             }
         }
         update() {
@@ -4485,7 +4483,7 @@ let Ī = {};
             const aStart = this.render.hidden;
             const end = this.render.linesLimit;
             const lines = this.render.content.slice(start, aStart + end);
-            this.syntax.groups = this.syntax.createGroups(this.get.clone(this.render.content[start].groupPath) this.settings.syntax);
+            this.syntax.groups = this.syntax.createGroups(this.get.clone(this.render.content[start].groupPath), this.settings.syntax);
             this.syntax.groups.push(this.settings.syntax);
             this.syntax.ends = this.render.content[start].ends;
             this.syntax.groupPath = this.render.content[start].groupPath;
@@ -4508,15 +4506,30 @@ let Ī = {};
             directions.shift();
             return this.syntax.createGroups(directions, schemat, groups)
         }
-        validateResults(res, rec = false) {
+        validateResults(res) {
             if (res.sentence.length > 0) {
                 return {
-                    words: res.words.concat(this.syntax.validateResults(this.syntax.paint(res.sentence) true).words) sentence: ''
+                    words: res.words.concat(this.syntax.validateResults(this.syntax.paint(res.sentence), true).words),
+                    sentence: ''
                 }
             }
             return res
         }
-        paint(sentence, words = [], debug = '') {
+        findEndLandmark(sentence, end) {
+            let endFound = false;
+            if (typeof end == 'object') {
+                Object.keys(end).forEach(function(endLandmark) {
+                    if (sentence.substr(-endLandmark.length) == endLandmark) {
+                        endFound = endLandmark;
+                        return
+                    }
+                })
+            } else if (sentence.substr(-end.length) == end) {
+                endFound = end
+            }
+            return endFound
+        }
+        paint(sentence, words = []) {
             let group = this.syntax.groups[0];
             let subset = group.subset;
             subset.sets = Object.assign({}, this.settings.syntax.global ?? {}, subset.sets);
@@ -4525,19 +4538,10 @@ let Ī = {};
                 let letter = sentence[i];
                 let endFound = false;
                 if (end !== null) {
-                    if (typeof end == 'object') {
-                        Object.keys(end).forEach(function(endLandmark) {
-                            if (sentence.substr(0, i + 1).substr(-endLandmark.length) == endLandmark) {
-                                endFound = endLandmark;
-                                return
-                            }
-                        })
-                    } else if (sentence.substr(0, i + 1).substr(-end.length) == end) {
-                        endFound = end
-                    }
+                    endFound = this.syntax.findEndLandmark(sentence.substr(0, i + 1), end)
                 }
                 if (endFound) {
-                    const results = this.syntax.endSubsetChecks(i, letter, endFound, words, sentence, subset, group, debug);
+                    const results = this.syntax.endSubsetChecks(i, letter, endFound, words, sentence, subset, group);
                     words = results.words;
                     sentence = results.sentence;
                     i = results.i;
@@ -4546,9 +4550,9 @@ let Ī = {};
                     end = this.syntax.ends[0];
                     continue
                 }
-                if (subset?.sets && ((subset?.sets[letter] && !subset?.sets[letter].whole) || (subset?.sets[sentence.substr(0, i + 1)] && !subset?.sets[sentence.substr(0, i + 1)].whole))) {
+                if (subset?.sets && ((subset?.sets[letter] && !subset?.sets[letter]?.whole) || (subset?.sets[sentence.substr(0, i + 1)] && !subset?.sets[sentence.substr(0, i + 1)]?.whole))) {
                     const realLetter = subset?.sets[sentence.substr(0, i + 1)] ? sentence.substr(0, i + 1) : letter;
-                    const results = this.syntax.splitWord(subset, i, realLetter, words, sentence, '\t' + debug);
+                    const results = this.syntax.splitWord(subset, i, realLetter, words, sentence);
                     words = results.words;
                     sentence = results.sentence;
                     i = results.i;
@@ -4563,11 +4567,9 @@ let Ī = {};
                             }
                         }
                     };
-                    const resultsFirstWord = this.syntax.splitWord(subset, i, letter, words, sentence.slice(0, i)
-                        '\t' + debug);
+                    const resultsFirstWord = this.syntax.splitWord(subset, i, letter, words, sentence.slice(0, i));
                     words = resultsFirstWord.words;
-                    const results = this.syntax.splitWord(oldOne.subset, 0, letter, words, sentence.slice(i)
-                        '\t' + debug);
+                    const results = this.syntax.splitWord(oldOne.subset, 0, letter, words, sentence.slice(i));
                     words = results.words;
                     sentence = results.sentence;
                     i = results.i + 1;
@@ -4575,7 +4577,7 @@ let Ī = {};
                 }
             }
             if (sentence.length > 0) {
-                let attr = this.syntax.getAttrsFromSet(this.syntax.getSet(subset, sentence) sentence, words, '', sentence, subset);
+                let attr = this.syntax.getAttrsFromSet(this.syntax.getSet(subset, sentence), sentence, words, '', sentence, subset);
                 words.push(this.syntax.create.span(attr, sentence));
                 sentence = ''
             }
@@ -4584,22 +4586,15 @@ let Ī = {};
                 sentence
             }
         }
-        endSubsetChecks(i, letter, end, words, sentence, subset, group, debug) {
+        endSubsetChecks(i, letter, end, words, sentence, subset, group) {
             let word = sentence.substring(0, (i + 1) - end.length);
             if (word.length != 0) {
                 let wordSet = this.syntax.getSet(subset, word);
-                words.push(this.syntax.create.span(this.syntax.getAttrsFromSet(wordSet, word, words, letter, sentence, subset) word))
+                words.push(this.syntax.create.span(this.syntax.getAttrsFromSet(wordSet, word, words, letter, sentence, subset), word))
             }
             sentence = sentence.substring((i + 1) - end.length);
             this.syntax.endSubset();
-            if (group?.triggers) {
-                const triggers = group.triggers;
-                if (triggers?.end) {
-                    triggers?.end.forEach(func => {
-                        func.bind(group)(i, word, words, letter, sentence, group, this.syntax)
-                    })
-                }
-            }
+            this.syntax.fireTrigger(group?.triggers, group, ['end'], [i, word, words, letter, sentence, group, this.syntax]);
             let index = -1;
             if (sentence[0] == group.start || (sentence[0] == this.syntax.groups[0].end || (typeof this.syntax.groups[0].end == 'object' && this.syntax.groups[0].end[sentence[0]]))) {
                 index = 0
@@ -4615,17 +4610,17 @@ let Ī = {};
             this.syntax.ends.shift();
             this.syntax.groupPath.pop()
         }
-        splitWord(subset, i, letter, words, sentence, debug) {
+        splitWord(subset, i, letter, words, sentence) {
             const letterSet = subset?.sets[letter];
             let word = sentence.substr(0, i - (letter.length - 1));
             if (word.length != 0) {
                 let wordSet = this.syntax.getSet(subset, word);
                 let attrs = wordSet.attrs;
-                if (wordSet?.ignore) {
+                if (wordSet?.ignore) wordSet = {
                     attrs: {
                         style: 'color:#FFF;'
                     }
-                }
+                };
                 if (wordSet?.run) {
                     const results = wordSet.run.bind(wordSet);
                     attrs = results(word, words, letter, sentence, subset.sets, subset, this.syntax)
@@ -4646,9 +4641,9 @@ let Ī = {};
             }
             sentence = sentence.substring(word.length);
             i = word.length > 0 ? -1 : i;
-            if (subset.sets[letter].subset) {
+            if (subset.sets[letter]?.subset) {
                 words.push(this.syntax.create.span(letterSet.attrs, sentence.substr(0, letter.length)));
-                const res = this.syntax.startNewSubset(letter, letterSet, word, words, sentence.substring(letter.length) debug, subset);
+                const res = this.syntax.startNewSubset(letter, letterSet, word, words, sentence.substring(letter.length), subset);
                 words = res.words;
                 sentence = res.sentence;
                 i = res.i
@@ -4658,26 +4653,20 @@ let Ī = {};
                 sentence
             }
         }
-        startNewSubset(letter, letterSet, word, words, sentence, debug, subset) {
+        startNewSubset(letter, letterSet, word, words, sentence, subset) {
             this.syntax.groupPath.push(letter);
             const group = subset.sets[letter];
-            if (group?.triggers) {
-                const triggers = group.triggers;
-                if (triggers?.start) {
-                    triggers?.start.forEach(func => {
-                        func.bind(group)(letter, letterSet, word, words, sentence, subset)
-                    })
-                }
-            }
-            if (!letterSet?.single && !subset.sets[letter].subset) {
+            console.log(letter, letterSet, word, words, sentence, subset);
+            this.syntax.fireTrigger(group?.triggers, group, ['start'], [letter, letterSet, word, words, sentence, subset, this.syntax]);
+            if (!letterSet?.single && !subset.sets[letter]?.subset) {
                 words.push(this.syntax.create.span(subset.sets[letter].attrs, letter))
             }
-            if (!subset.sets[letter].start) {
+            if (!subset.sets[letter]?.start) {
                 subset.sets[letter].start = letter
             }
             this.syntax.groups.unshift(subset.sets[letter]);
             this.syntax.ends.unshift(subset.sets[letter].end);
-            const res = this.syntax.paint(sentence, words, debug + '\t');
+            const res = this.syntax.paint(sentence, words);
             return {
                 words: res.words,
                 sentence: res.sentence,
@@ -4701,45 +4690,42 @@ let Ī = {};
         }
         getAttrsFromSet(set, word, words, letter, sentence, group) {
             let attrs = set.attrs;
-            if (set?.ignore) {
+            if (set?.ignore) set = {
                 attrs: {
                     style: 'color:#FFF;'
                 }
-            }
+            };
             if (set?.run) {
                 const results = set.run.bind(set);
                 attrs = results(word, words, letter, sentence, group.sets, group, this.syntax)
             }
             return attrs
         }
-        chainSearch(chunks) {
-            const chunk = chunks[0];
-            if (this.settings.syntax[chunk]) {
-                if (chunks.length == 1) {
-                    return this.settings.syntax[chunk]
-                } else {
-                    this.syntax.chainSearch(chunks.slice(1))
-                }
-            } else {
-                return false
-            }
-        }
     }
-    return {}
+    return {
+        TabJF_Syntax
+    }
 }
 Ī.a = Ī => {
     class TabJF_Action {
+        copyGround = null;
+        createCopyGround() {
+            this.action.copyGround = document.createElement('div');
+            this.render.overflow.insertBefore(this.action.copyGround, this.editor)
+        }
         copy() {
-            const clipboard = this.get.selectedNodes();
+            const clipboard = this.get.selectedLines();
             const event = this.event.dispatch('tabJFCopy', {
-                pos: this.get.clonedPos() event: null,
+                pos: this.get.clonedPos(),
+                event: null,
                 clipboard: this.get.clone(clipboard)
             });
             if (event.defaultPrevented) return;
             this.clipboard = this.get.clone(clipboard);
-            this.truck.import(this.clipboard, false, 0, false, false, this.font.lab, false);
-            let firstText = this.font.lab.children[0].children[0].childNodes[0];
-            let lastText = this.font.lab.children[this.font.lab.children.length - 1];
+            const ground = this.action.copyGround;
+            this.truck.import(this.clipboard, false, 0, false, false, ground, false);
+            let firstText = ground.children[0].children[0].childNodes[0];
+            let lastText = ground.children[ground.children.length - 1];
             lastText = lastText.children[lastText.children.length - 1];
             lastText = lastText.childNodes[lastText.childNodes.length - 1];
             const range = new Range;
@@ -4750,13 +4736,14 @@ let Ī = {};
             setTimeout(function() {
                 document.execCommand('copy');
                 this.copiedHere = true;
-                this.font.lab.innerHTML = '';
+                ground.innerHTML = '';
                 this.checkSelect()
-            }.bind(this) 0)
+            }.bind(this), 0)
         }
         paste() {
             const event = this.event.dispatch('tabJFPaste', {
-                pos: this.get.clonedPos() event: null,
+                pos: this.get.clonedPos(),
+                event: null,
                 clipboard: this.get.clone(this.clipboard)
             });
             if (event.defaultPrevented) return;
@@ -4797,23 +4784,26 @@ let Ī = {};
             this.update.page()
         }
         cut() {
+            const event = this.event.dispatch('tabJFCut', {
+                pos: this.get.clonedPos(),
+                event: null,
+                clipboard: this.get.clone(this.clipboard)
+            });
+            if (event.defaultPrevented) return;
             this.action.copy();
             this.remove.selected();
             this.render.update.minHeight();
-            this.render.update.scrollWidth();
-            const event = this.event.dispatch('tabJFCut', {
-                pos: this.get.clonedPos() event: null,
-                clipboard: this.get.clone(this.clipboard)
-            });
-            if (event.defaultPrevented) return
+            this.render.update.scrollWidth()
         }
         undo() {
             const versionBefore = this.get.clone(this._save.versions[this._save.version] ?? {});
             const versionNumberBefore = this._save.version;
             const event = this.event.dispatch('tabJFUndo', {
-                pos: this.get.clonedPos() event: null,
+                pos: this.get.clonedPos(),
+                event: null,
                 versionNumber: this._save.version - 1,
-                version: this.get.clone(this._save.versions[this._save.version - 1] ?? {}) versionNumberBefore,
+                version: this.get.clone(this._save.versions[this._save.version - 1] ?? {}),
+                versionNumberBefore,
                 versionBefore
             });
             if (event.defaultPrevented) return;
@@ -4826,9 +4816,11 @@ let Ī = {};
             const versionBefore = this.get.clone(this._save.versions[this._save.version] ?? {});
             const versionNumberBefore = this._save.version;
             const event = this.event.dispatch('tabJFRedo', {
-                pos: this.get.clonedPos() event: null,
+                pos: this.get.clonedPos(),
+                event: null,
                 versionNumber: this._save.version + 1,
-                version: this.get.clone(this._save.versions[this._save.version + 1] ?? {}) versionNumberBefore
+                version: this.get.clone(this._save.versions[this._save.version + 1] ?? {}),
+                versionNumberBefore
             });
             if (event.defaultPrevented) return;
             this._save.recall();
@@ -4838,7 +4830,8 @@ let Ī = {};
         }
         selectAll() {
             const event = this.event.dispatch('tabJFSelectAll', {
-                pos: this.get.clonedPos() event: null
+                pos: this.get.clonedPos(),
+                event: null
             });
             if (event.defaultPrevented) return;
             this.update.selection.start(0, 0, 0);
@@ -4850,17 +4843,11 @@ let Ī = {};
             this.checkSelect()
         }
     }
-    return {}
+    return {
+        TabJF_Action
+    }
 }
 Ī.b = Ī => {
-    class TabJF_Caret_Pos {
-        toY(pos) {
-            return (Math.floor((pos - this.settings.top) / this.settings.line) * this.settings.line) + this.settings.top
-        }
-    }
-    return {}
-}
-Ī.c = Ī => {
     class TabJF_Caret {
         el = null;
         isActive = false;
@@ -4879,10 +4866,10 @@ let Ī = {};
         scrollToY() {
             const top = this.render.overflow.scrollTop;
             const caretPos = this.caret.getPos();
-            if (this.render.overflow.offsetHeight + top - 10 - this.settings.top < caretPos.top) {
-                this.render.move.overflow(0, caretPos.top - (this.render.overflow.offsetHeight + top - 10 - this.settings.top), )
-            } else if (caretPos.top < top + 10 + this.settings.top) {
-                this.render.move.overflow(-(top + 10 + this.settings.top - caretPos.top), 0)
+            if (this.render.overflow.offsetHeight + top - 10 < caretPos.top) {
+                this.render.move.overflow(0, caretPos.top - (this.render.overflow.offsetHeight + top - 10), )
+            } else if (caretPos.top < top + 10) {
+                this.render.move.overflow(-(top + 10 - caretPos.top), 0)
             }
         }
         set(x, y) {
@@ -4891,14 +4878,15 @@ let Ī = {};
         }
         setByChar(letter, line, el = null) {
             if (el) this.pos.el = el;
-            let posX = this.font.calculateWidth(this.pos.el.innerText.slice(0, letter) this.pos.el);
+            let posX = this.font.calculateWidth(this.pos.el.innerText.slice(0, letter), this.pos.el);
             this.pos.letter = letter;
             this.pos.line = line;
-            this.caret.set(posX + this.settings.left + this.pos.el.offsetLeft, (line * this.settings.line) + this.settings.top)
+            this.caret.set(posX + this.settings.left + this.pos.el.offsetLeft, (line * this.settings.line))
         }
         getPos() {
             return {
-                top: this.caret.el.style.top.replace('px', '') left: this.caret.el.style.left.replace('px', '')
+                top: this.caret.el.style.top.replace('px', ''),
+                left: this.caret.el.style.left.replace('px', '')
             }
         }
         create(parent) {
@@ -4919,7 +4907,7 @@ let Ī = {};
             this.pos.letter = letter;
             this.pos.line = line;
             this.pos.childIndex = childIndex;
-            if (!this.caret.isVisible()) return;
+            if (!this.caret.isVisible()) return false;
             line = this.get.lineByPos(this.pos.line);
             if (this.pos.line <= this.render.hidden + this.render.linesLimit && this.pos.line >= this.render.hidden && line) {
                 this.pos.el = line.childNodes[childIndex];
@@ -4954,42 +4942,44 @@ let Ī = {};
             }
         }
     }
-    return {}
+    return {
+        TabJF_Caret
+    }
 }
-Ī.d = Ī => {
+Ī.c = Ī => {
     class TabJF_Clear {
-        editor(onlyLines = true) {
-            Object.values(this.editor.childNodes).forEach(p => {
-                if (p.nodeName == "P" && onlyLines) p.remove();
-                else if (p != this.caret.el && p != this.font.lab && !onlyLines) p.remove()
-            })
+        editor() {
+            this.editor.innerHTML = '';
+            if (this.caret.el) this.editor.appendChild(this.caret.el)
         }
     }
-    return {}
+    return {
+        TabJF_Clear
+    }
 }
-Ī.e = Ī => {
+Ī.d = Ī => {
     class TabJF_End {
         select() {
             this.get.selection().empty();
             const sel = this.selection;
-            sel.anchor = null;
-            sel.offset = -1;
-            sel.line = -1;
+            sel.update = false;
             sel.reverse = false;
             sel.active = false;
             sel.expanded = false;
-            this.pressed.shift = false;
-            this.update.selection.start();
             sel.end = {
                 line: -1,
                 letter: -1,
                 node: -1
-            }
+            };
+            this.pressed.shift = false;
+            this.update.selection.start()
         }
     }
-    return {}
+    return {
+        TabJF_End
+    }
 }
-Ī.f = Ī => {
+Ī.e = Ī => {
     class TabJF_Event {
         dispatch(name, details = {}) {
             details = Object.assign({
@@ -4999,7 +4989,7 @@ let Ī = {};
             this.editor.dispatchEvent(event);
             return event
         }
-        create(name, details) {
+        create(name, detail = {}) {
             return new CustomEvent(name, {
                 detail: details,
                 bubbles: true,
@@ -5008,35 +4998,11 @@ let Ī = {};
             })
         }
     }
-    return {}
-}
-Ī.g = Ī => {
-    class TabJF_Expand {
-        select(stop = false) {
-            this.selection.expanded = true;
-            const range = new Range;
-            if (this.selection.reverse) {
-                range.setStart(this.pos.el.childNodes[0] this.pos.letter);
-                range.setEnd(this.selection.anchor.childNodes[0] this.selection.offset)
-            } else {
-                range.setStart(this.selection.anchor.childNodes[0] this.selection.offset);
-                range.setEnd(this.pos.el.childNodes[0] this.pos.letter)
-            }
-            this.get.selection().removeAllRanges();
-            this.get.selection().addRange(range);
-            if (stop) return;
-            if (this.get.selection().isCollapsed && !this.selection.reverse) {
-                this.selection.reverse = true;
-                this.expand.select(true)
-            } else if (this.get.selection().isCollapsed && this.selection.reverse) {
-                this.selection.reverse = false;
-                this.expand.select(true)
-            }
-        }
+    return {
+        TabJF_Event
     }
-    return {}
 }
-Ī.h = Ī => {
+Ī.f = Ī => {
     class TabJF_Font {
         lab = null;
         createLab() {
@@ -5057,7 +5023,7 @@ let Ī = {};
             return context.measureText(text).width
         }
         getLetterByWidth(text, el, left) {
-            if (text.length == 1) {
+            if (text.length <= 1) {
                 const singleSize = this.font.calculateWidth(text, el);
                 if (singleSize / 2 > left) {
                     return 0
@@ -5067,67 +5033,16 @@ let Ī = {};
             const half = text.slice(0, Math.floor(text.length / 2));
             const textWidth = this.font.calculateWidth(half, el);
             if (left > textWidth) {
-                return half.length + this.font.getLetterByWidth(text.slice(Math.floor(text.length / 2)) el, left - textWidth)
+                return half.length + this.font.getLetterByWidth(text.slice(Math.floor(text.length / 2)), el, left - textWidth)
             }
             return this.font.getLetterByWidth(half, el, left)
         }
     }
-    return {}
-}
-Ī.i = Ī => {
-    class TabJF_Get_Css {
-        words(sentence) {
-            let word = '';
-            let words = [];
-            const seprators = {
-                ':': true,
-                ';': true,
-                '(': true,
-                ')': true
-            };
-            const joiners = {
-                "'": true,
-                '"': true
-            };
-            let spaces = false;
-            let open = false;
-            if (this.is.space(sentence[0])) spaces = true;
-            for (let i = 0; i < sentence.length; i++) {
-                const letter = sentence[i];
-                const isSpace = this.is.space(letter);
-                if (letter === open) {
-                    word += letter;
-                    words.push(word);
-                    word = '';
-                    open = false;
-                    continue
-                } else if (open) {
-                    word += letter;
-                    continue
-                }
-                if (seprators[letter]) {
-                    if (word.length > 0) words.push(word);
-                    words.push(letter);
-                    word = ''
-                } else if (!open && joiners[letter]) {
-                    if (word.length > 0) words.push(word);
-                    word = open = letter
-                } else if (isSpace && spaces == false || !isSpace && spaces == true) {
-                    if (word.length > 0) words.push(word);
-                    word = letter
-                } else {
-                    word += letter
-                }
-                if (isSpace) spaces = true;
-                else spaces = false
-            }
-            words.push(word);
-            return words
-        }
+    return {
+        TabJF_Font
     }
-    return {}
 }
-Ī.j = Ī => {
+Ī.g = Ī => {
     class TabJF_Get {
         clone(obj) {
             return JSON.parse(JSON.stringify(obj))
@@ -5143,7 +5058,7 @@ let Ī = {};
         visibleLines() {
             return this.render.content.slice(this.render.hidden, this.render.hidden + this.render.linesLimit)
         }
-        selectedLines(sLine = null, eLine = null) {
+        selectedNodes(sLine = null, eLine = null) {
             if (!sLine || !eLine) {
                 const sel = this.get.selection(),
                     revCheck = this.selection.reverse && !this.selection.expanded;
@@ -5151,15 +5066,15 @@ let Ī = {};
                 eLine = this.get.line(revCheck ? sel.anchorNode : sel.focusNode)
             }
             if (!sLine || !eLine) throw new Error('Couldn\'t find lines');
-            return [sLine.cloneNode(true)...this.get.selectedLinesRecursive(sLine.nextSibling, eLine)]
+            return [sLine.cloneNode(true), ...this.get.selectedNodesRecursive(sLine.nextSibling, eLine)]
         }
-        selectedLinesRecursive(node, end) {
+        selectedNodesRecursive(node, end) {
             if (node === null) throw new Error('The node doesn\'t exist in this parent');
             if (node == end) return [node.cloneNode(true)];
-            if (node.nodeName !== "P") return this.get.selectedLinesRecursive(node.nextSibling, end);
-            return [node.cloneNode(true)...this.get.selectedLinesRecursive(node.nextSibling, end)]
+            if (node.nodeName !== "P") return this.get.selectedNodesRecursive(node.nextSibling, end);
+            return [node.cloneNode(true), ...this.get.selectedNodesRecursive(node.nextSibling, end)]
         }
-        selectedNodes() {
+        selectedLines() {
             const sel = this.get.selection();
             if (sel.type != 'Range') return;
             let start = this.get.clone(this.selection.start);
@@ -5234,6 +5149,7 @@ let Ī = {};
             }
         }
         line(el) {
+            if (!el.parentElement) return false;
             if (el.parentElement == this.editor) return el;
             return this.get.line(el.parentElement)
         }
@@ -5293,25 +5209,26 @@ let Ī = {};
             }
             return attrsObj
         }
-        splitNode() {
+        splitNode(pos = this.pos.letter) {
             let text = this.pos.el.innerText;
             return {
-                pre: this.set.attributes(this.pos.el.attributes, text.substr(0, this.pos.letter)) suf: this.set.attributes(this.pos.el.attributes, text.substr(this.pos.letter))
+                pre: this.set.attributes(this.pos.el.attributes, text.substr(0, pos)),
+                suf: this.set.attributes(this.pos.el.attributes, text.substr(pos))
             }
         }
-        splitRow() {
-            let local = this.get.splitNode();
-            let nodes = this.get.nextSiblignAndRemove(this.pos.el.nextSibling);
+        splitRow(el = this.pos.el, pos = this.pos.letter) {
+            let local = this.get.splitNode(pos);
+            let nodes = this.get.nextSiblingAndRemove(el.nextSibling);
             local.suf = [local.suf, ...nodes];
             return local
         }
-        nextSiblignAndRemove(el) {
+        nextSiblingAndRemove(el) {
             if (el === null) return [];
             let nodes = [];
             let span = this.set.attributes(el.attributes, el.innerText);
             nodes.push(span);
             if (el.nextSibling) {
-                let nextSpan = this.get.nextSiblignAndRemove(el.nextSibling);
+                let nextSpan = this.get.nextSiblingAndRemove(el.nextSibling);
                 nodes = nodes.concat(nextSpan)
             }
             el.remove();
@@ -5353,30 +5270,36 @@ let Ī = {};
             return text.indexOf(' ', start)
         }
     }
-    return {}
+    return {
+        TabJF_Get
+    }
 }
-Ī.k = Ī => {
+Ī.h = Ī => {
     class TabJF_Is_Line {
         visible(line) {
             return !(line < this.render.hidden || line > this.render.hidden + this.render.linesLimit)
         }
     }
-    return {}
+    return {
+        TabJF_Is_Line
+    }
 }
-Ī.l = Ī => {
+Ī.i = Ī => {
     class TabJF_Is {
         space(word) {
             return word == " " || word == "\u00A0" || word == '&nbsp;'
         }
     }
-    return {}
+    return {
+        TabJF_Is
+    }
 }
-Ī.m = Ī => {
+Ī.j = Ī => {
     class TabJF_Keys {
-        enter(e) {
+        enter(e = null) {
             this.newLine(e)
         }
-        backspace(e) {
+        backspace(e = null) {
             if (!this.selection.active) {
                 if (this.pressed.ctrl) this.remove.word(-1);
                 else this.remove.one(-1)
@@ -5386,26 +5309,29 @@ let Ī = {};
                 else this.remove.selected()
             }
         }
-        tab(e) {
+        tab(e = null) {
             e.preventDefault();
             let tab = '';
-            for (let i = 0; i < 2; i++) {
+            for (let i = 0; i < this.tabWidth; i++) {
                 tab += '&nbsp;'
             }
             this.insert(tab)
         }
-        escape(e) {
-            this.caret.hide();
+        escape(e = null) {
             this.end.select()
         }
-        space(e) {
+        space(e = null) {
             this.insert('&nbsp;')
         }
-        delete(e) {
+        delete(e = null) {
             if (!this.selection.active) {
                 if (this.pressed.ctrl) this.remove.word(1);
                 else this.remove.one(1)
-            } else this.remove.selected()
+            } else {
+                const sel = this.get.selection();
+                if (sel.type != "Range") this.remove.one(1);
+                else this.remove.selected()
+            }
         }
         moveCtrl(dir, el = this.pos.el, c_pos = this.pos.letter) {
             let newPos, text = el.innerText;
@@ -5453,7 +5379,7 @@ let Ī = {};
             this.set.pos(el, c_pos, this.pos.line, this.get.childIndex(el));
             this.lastX = this.get.realPos().x
         }
-        move(dirX, dirY, recuresionCheck = false) {
+        move(dirX, dirY, recursionCheck = false) {
             if (this.get.selection().type == 'Range') {
                 this.caret.refocus(this.selection.end.letter, this.selection.end.line, this.selection.end.node)
             }
@@ -5465,7 +5391,7 @@ let Ī = {};
             if (this.pressed.ctrl && dirX != 0) this.keys.moveCtrl(dirX);
             else if (dirX != 0) this.keys.moveX(dirY, dirX);
             if (dirY != 0) this.keys.moveY(dirY, dirX);
-            if (this.pos.el.innerText.length == 0 && (this.pos.el.previousSibling && dirX < 0 || this.pos.el.nextSibling && dirX > 0) && !recuresionCheck) {
+            if (this.pos.el.innerText.length == 0 && (this.pos.el.previousSibling && dirX < 0 || this.pos.el.nextSibling && dirX > 0) && !recursionCheck) {
                 let temp = this.pos.el;
                 this.keys.move(dirX, 0, true);
                 temp.remove()
@@ -5545,9 +5471,11 @@ let Ī = {};
             this.caret.refocus()
         }
     }
-    return {}
+    return {
+        TabJF_Keys
+    }
 }
-Ī.n = Ī => {
+Ī.k = Ī => {
     class TabJF_Remove {
         selected() {
             let start = this.get.clone(this.selection.start);
@@ -5631,7 +5559,7 @@ let Ī = {};
             if (dir < 0) {
                 for (let i = this.pos.childIndex; i >= 0; i--) {
                     const textSpan = this.replace.spaceChars(line.content[i].content);
-                    let index = this.get.spaceIndex(textSpan.split("").reverse() textSpan.length - pos.letter);
+                    let index = this.get.spaceIndex(textSpan.split("").reverse(), textSpan.length - pos.letter);
                     if (index != -1) {
                         pos.letter = textSpan.length - index;
                         pos.text = textSpan;
@@ -5727,9 +5655,11 @@ let Ī = {};
             }
         }
     }
-    return {}
+    return {
+        TabJF_Remove
+    }
 }
-Ī.o = Ī => {
+Ī.l = Ī => {
     class TabJF_Render_Add {
         line(line, pos) {
             this.render.content.splice(pos, 0, this.truck.exportLine(line));
@@ -5737,9 +5667,11 @@ let Ī = {};
             this.render.update.minHeight()
         }
     }
-    return {}
+    return {
+        TabJF_Render_Add
+    }
 }
-Ī.p = Ī => {
+Ī.m = Ī => {
     class TabJF_Render_Fill {
         event(e = null) {
             try {
@@ -5758,9 +5690,11 @@ let Ī = {};
             }
         }
     }
-    return {}
+    return {
+        TabJF_Render_Fill
+    }
 }
-Ī.r = Ī => {
+Ī.n = Ī => {
     class TabJF_Render_Move {
         page(obj = {}) {
             const required = {
@@ -5788,9 +5722,11 @@ let Ī = {};
             this.render.overflow.scrollTo(left + x, top + y)
         }
     }
-    return {}
+    return {
+        TabJF_Render_Move
+    }
 }
-Ī.s = Ī => {
+Ī.o = Ī => {
     class TabJF_Render_Remove {
         line(pos) {
             this.render.content.splice(pos, 1);
@@ -5798,23 +5734,23 @@ let Ī = {};
             this.render.update.minHeight()
         }
     }
-    return {}
+    return {
+        TabJF_Render_Remove
+    }
 }
-Ī.t = Ī => {
+Ī.p = Ī => {
     class TabJF_Render_Set {
         overflow(x = null, y = null) {
-            if (x === null) {
-                x = this.render.overflow.scrollLeft
-            }
-            if (y === null) {
-                y = this.render.overflow.scrollTop
-            }
+            if (x === null) x = this.render.overflow.scrollLeft;
+            if (y === null) y = this.render.overflow.scrollTop;
             this.render.overflow.scrollTo(x, y)
         }
     }
-    return {}
+    return {
+        TabJF_Render_Set
+    }
 }
-Ī.u = Ī => {
+Ī.r = Ī => {
     class TabJF_Render_Update {
         minHeight(lines = this.render.content.length) {
             lines = lines < this.render.linesLimit ? this.render.linesLimit : lines;
@@ -5852,9 +5788,11 @@ let Ī = {};
             this.editor.style.setProperty("--scroll-width", width + this.settings.left)
         }
     }
-    return {}
+    return {
+        TabJF_Render_Update
+    }
 }
-Ī.w = Ī => {
+Ī.s = Ī => {
     class TabJF_Render {
         hidden = 0;
         content = null;
@@ -5874,7 +5812,6 @@ let Ī = {};
             const overflow = document.createElement("div");
             overflow.addEventListener('scroll', this.render.fill.event, true);
             overflow.className = "tabjf_editor-con";
-            overflow.style.setProperty("--max-height", this.settings.height);
             this.render.update.minHeight();
             this.render.update.scrollWidth();
             this.editor.parentElement.insertBefore(overflow, this.editor);
@@ -5882,12 +5819,14 @@ let Ī = {};
             this.render.overflow = overflow
         }
     }
-    return {}
+    return {
+        TabJF_Render
+    }
 }
-Ī.z = Ī => {
+Ī.t = Ī => {
     class TabJF_Replace {
         spaces(string) {
-            if (string.length !== 0) {
+            if (string.length != 0) {
                 string = string.replaceAll(' ', '&nbsp;').replaceAll(this.spaceUChar, '&nbsp;')
             }
             return string
@@ -5896,33 +5835,24 @@ let Ī = {};
             return string.replaceAll('&nbsp;', ' ')
         }
     }
-    return {}
+    return {
+        TabJF_Replace
+    }
 }
-Ī.y = Ī => {
+Ī.u = Ī => {
     class TabJF_Set {
         docEvents() {
             if (this.docEventsSet) return;
-            document.addEventListener('paste', this.catchClipboard.bind(this) true);
-            document.addEventListener('keydown', this.key.bind(this) true);
-            document.addEventListener('keyup', this.key.bind(this) true);
+            document.addEventListener('paste', this.catchClipboard.bind(this));
+            document.addEventListener('keydown', this.key.bind(this));
+            document.addEventListener('keyup', this.key.bind(this));
+            window.addEventListener('resize', this.update.resizeDebounce.bind(this));
             this.docEventsSet = true
         }
         preciseMethodsProxy(scope, path) {
             if (path.length == 1) scope[path[0]] = new Proxy(scope[path[0]], this._proxySaveHandle);
             else {
-                this.set.preciseMethodsProxy(scope[path[0]] path.slice(1))
-            }
-        }
-        methodsProxy(object, keys) {
-            for (var i = 0; i < keys.length; i++) {
-                let propertyName = keys[i];
-                const type = typeofobject[propertyName];
-                if (type == 'function') {
-                    if (object[propertyName] == this.set.methodsProxy) continue;
-                    object[propertyName] = new Proxy(object[propertyName], this._proxyHandle)
-                } else if (type == 'object' && object[propertyName] !== null && propertyName[0] != '_') {
-                    this.set.methodsProxy(object[propertyName] Object.keys(object[propertyName]))
-                }
+                this.set.preciseMethodsProxy(scope[path[0]], path.slice(1))
             }
         }
         side(node, dirX, newLine = this.pos.line, childIndex = this.pos.childIndex) {
@@ -5960,9 +5890,11 @@ let Ī = {};
             return newSpan
         }
     }
-    return {}
+    return {
+        TabJF_Set
+    }
 }
-Ī.x = Ī => {
+Ī.w = Ī => {
     class TabJF_Syntax_Create {
         span(attrs, text) {
             return {
@@ -5970,67 +5902,12 @@ let Ī = {};
                 content: this.replace.spaces(text)
             }
         }
-        space(spaces) {
-            return {
-                attrs: {
-                    class: 'spaces'
-                },
-                content: this.replace.spaces(spaces)
-            }
-        }
-        mistake(text) {
-            return {
-                attrs: {
-                    class: 'mistake',
-                    style: 'color:#FFF;'
-                },
-                content: text
-            }
-        }
-        proper(text) {
-            return {
-                attrs: {
-                    class: 'proper'
-                },
-                content: text
-            }
-        }
-        class(text) {
-            return {
-                attrs: {
-                    class: 'class'
-                },
-                content: text
-            }
-        }
-        id(text) {
-            return {
-                attrs: {
-                    class: 'id'
-                },
-                content: text
-            }
-        }
-        method(text) {
-            return {
-                attrs: {
-                    class: 'method'
-                },
-                content: text
-            }
-        }
-        tag(text) {
-            return {
-                attrs: {
-                    class: 'tag'
-                },
-                content: text
-            }
-        }
     }
-    return {}
+    return {
+        TabJF_Syntax_Create
+    }
 }
-Ī.q = Ī => {
+Ī.z = Ī => {
     let fonts;
     return {
         fonts: {
@@ -6287,7 +6164,7 @@ let Ī = {};
         }
     }
 }
-Ī.ê = Ī => {
+Ī.q = Ī => {
     class TabJF_Truck {
         export (html = null) {
             const exportAr = [];
@@ -6305,7 +6182,8 @@ let Ī = {};
             const lineContent = [];
             Object.values(p.children).forEach(span => {
                 lineContent.push({
-                    attrs: this.get.attributes(span) content: this.replace.spaces(span.innerText)
+                    attrs: this.get.attributes(span),
+                    content: this.replace.spaces(span.innerText)
                 })
             });
             if (lineContent.length == 0) {
@@ -6356,9 +6234,11 @@ let Ī = {};
             if (replaceContent) this.render.content = importAr
         }
     }
-    return {}
+    return {
+        TabJF_Truck
+    }
 }
-Ī.õ = Ī => {
+Ī.v = Ī => {
     class TabJF_Update_Selection {
         start(letter = this.pos.letter, line = this.pos.line, index = this.pos.childIndex) {
             const start = this.selection.start;
@@ -6373,10 +6253,13 @@ let Ī = {};
             end.node = index
         }
     }
-    return {}
+    return {
+        TabJF_Update_Selection
+    }
 }
-Ī.ú = Ī => {
+Ī.µ = Ī => {
     class TabJF_Update {
+        resizeDebounce = null;
         page() {
             if (this.settings.syntax) this.syntax.update();
             this.render.move.page({
@@ -6388,7 +6271,7 @@ let Ī = {};
                 this.caret.refocus()
             }
         }
-        select(e) {
+        select() {
             this.selection.update = true;
             const selection = this.get.selection();
             if (selection.type !== 'Range') return;
@@ -6396,7 +6279,8 @@ let Ī = {};
             if (selection.focusNode == this.editor) return;
             this.selection.end = {
                 line: this.get.linePos(this.get.line(selection.focusNode)) + this.render.hidden,
-                node: this.get.childIndex(selection.focusNode.parentElement) letter: selection.focusOffset
+                node: this.get.childIndex(selection.focusNode.parentElement),
+                letter: selection.focusOffset
             }
         }
         specialKeys(e) {
@@ -6418,10 +6302,20 @@ let Ī = {};
         currentSpanContent(text) {
             this.render.content[this.pos.line].content[this.pos.childIndex].content = this.replace.spaces(text)
         }
+        resize(e = null) {
+            this.settings.height = this.render.overflow.offsetHeight;
+            this.render.linesLimit = Math.ceil(this.settings.height / this.settings.line) + 2;
+            this.render.update.minHeight();
+            this.render.update.scrollWidth();
+            this.clear.editor(false);
+            this.render.fill.event()
+        }
     }
-    return {}
+    return {
+        TabJF_Update
+    }
 }
-Ī.A = Ī => {
+Ī.ê = Ī => {
     class TabJF_Hidden {
         debounce(func, timeout = 300) {
             let timer;
@@ -6436,9 +6330,11 @@ let Ī = {};
             }
         }
     }
-    return {}
+    return {
+        TabJF_Hidden
+    }
 }
-Ī.B = Ī => {
+Ī.õ = Ī => {
     class TabJF_Save_Content {
         remove(remove) {
             this.render.content.splice(remove.sLine, remove.len)
@@ -6450,15 +6346,18 @@ let Ī = {};
             })
         }
     }
-    return {}
+    return {
+        TabJF_Save_Content
+    }
 }
-Ī.C = Ī => {
+Ī.ú = Ī => {
     class TabJF_Save_Set {
         focus() {
             return {
                 letter: this.pos.letter,
                 line: this.pos.line,
-                childIndex: this.get.childIndex(this.pos.el) topLine: this.render.hidden,
+                childIndex: this.get.childIndex(this.pos.el),
+                topLine: this.render.hidden,
                 lastX: this.get.realPos().x
             }
         }
@@ -6483,7 +6382,7 @@ let Ī = {};
             if (!tmp.add[linePos]) tmp.add[linePos] = this.get.clone(this.render.content[linePos]);
             if (modifiers != 0 && !tmp.add[linePos + modifiers]) {
                 let nexLine = this.get.lineInDirection(line, modifiers);
-                if (nexLine) tmp.add[linePos + modifiers] = this.render.content[linePos + modifiers]
+                if (nexLine) tmp.add[linePos + modifiers] = this.get.clone(this.render.content[linePos + modifiers])
             }
             this._save.tmp.push(tmp)
         }
@@ -6502,7 +6401,7 @@ let Ī = {};
                 };
                 tmp.focusAfter = this._save.set.focus();
                 for (let i = tmp.remove.sLine; i < tmp.remove.sLine + tmp.remove.len; i++) {
-                    tmp.after[i] = this.render.content[i]
+                    tmp.after[i] = this.get.clone(this.render.content[i])
                 }
                 save.tmp = [tmp];
                 return
@@ -6532,14 +6431,16 @@ let Ī = {};
                 tmp.remove.len++
             }
             for (let i = tmp.remove.sLine; i < tmp.remove.sLine + tmp.remove.len; i++) {
-                tmp.after[i] = this.render.content[i]
+                tmp.after[i] = this.get.clone(this.render.content[i])
             }
             tmp.focusAfter = save.set.focus()
         }
     }
-    return {}
+    return {
+        TabJF_Save_Set
+    }
 }
-Ī.D = Ī => {
+Ī.A = Ī => {
     class TabJF_Save {
         debounce = undefined;
         version = 0;
@@ -6571,6 +6472,7 @@ let Ī = {};
         inProgress = false;
         set = {};
         content = {};
+        maxVersionCount = 100;
         moveToPending() {
             this._save.pending = this._save.pending.concat(this._save.tmp);
             this._save.resetTmp()
@@ -6585,7 +6487,10 @@ let Ī = {};
             save.squash();
             save.pending[0].focus.topLine = this.render.hidden;
             save.versions.unshift(save.pending.reverse());
-            save.pending = []
+            save.pending = [];
+            if (save.versions.length > save.maxVersionCount) {
+                save.versions.splice(save.maxVersionCount)
+            }
         }
         squash() {
             const pending = this._save.pending;
@@ -6633,39 +6538,6 @@ let Ī = {};
             this.render.overflow.scrollTo(this.render.overflow.scrollLeft, this.render.hidden * this.settings.line);
             save.version++
         }
-        slowVersion(version, i = 0) {
-            setTimeout(function() {
-                let step = version[i];
-                console.info("Step", i + 1, step.fun_name, "Remove", step.remove);
-                const save = this._save;
-                save.content.remove(step.remove);
-                const focus = step.focus;
-                this.render.move.page({
-                    offset: focus.topLine
-                });
-                setTimeout(function() {
-                    let step = version[i];
-                    console.info("Step", i + 1, step.fun_name, "Add", step.add);
-                    const focus = step.focus;
-                    const save = this._save;
-                    save.content.add(step.add);
-                    this.render.move.page({
-                        offset: focus.topLine
-                    });
-                    if (version.length > i + 1) {
-                        this._save.slowVersion(version, i + 1)
-                    }
-                }.bind(this) 2000)
-            }.bind(this) 2000)
-        }
-        refocus(focus) {
-            let line = this.get.lineByPos(focus?.line);
-            if (line) {
-                this.set.pos(line.childNodes[focus.childIndex] focus.letter, focus.line, focus.childIndex)
-            } else {
-                console.error("Line not found! Please refocus caret.")
-            }
-        }
         recall() {
             const save = this._save;
             if (save.version <= 0) return;
@@ -6690,55 +6562,111 @@ let Ī = {};
             this.caret.refocus(focus.letter, focus.line, focus.childIndex)
         }
     }
-    return {}
-}
-Ī.E = Ī => {
-    let styles;
     return {
-        styles: [`.tabjf_editor-con {  max-height : calc( var(--max-height, 200) * 1px);  overflow : auto;  background : #FFF;  color : #000;  }`, `.tabjf_editor-con .tabjf_editor {  position : relative;  min-height : calc( (var(--min-height, 0) - var(--paddingTop, 0)) * 1px);  padding-top : calc( var(--paddingTop, 0) * 1px ) ;  padding-left : var(--padding-left);  padding-right : 10px;  padding-top : calc( var(--paddingTop, 0) * 1px );  width : calc(var(--scroll-width, 100%) * 1px + 5px );  min-width : calc(100% - var(--padding-left) - 10px);  }`, `.tabjf_editor-con .tabjf_editor p {  position : relative;  min-height : 20px ;  max-height : 20px ;  height : 20px ;  cursor : text ;  display : flex ;  margin : 0 ;  padding : 0 ;  }`, `.tabjf_editor-con .tabjf_editor p::after {  display : block;  content : '█' ;  opacity : 0 ;  }`, `.tabjf_editor-con .tabjf_editor p span {  display : block ;  white-space : nowrap;  flex-shrink : 0 ;  }`, `.tabjf_editor-con .tabjf_editor p span:last-child {  margin-right: 10px;  }`, `@keyframes tabjf_blink {  0% { opacity: 1; }  50% { opacity: 0; }  100% { opacity: 1; }  }`, `.tabjf_editor-con .tabjf_editor .caret {  width : 1px ;  height : 20px;  position : absolute;  animation : tabjf_blink 1s linear infinite;  background-color : #000;  }`]
+        TabJF_Save
     }
 }
-const Ī.a(Ī);
-const Ī.b(Ī);
-const Ī.c(Ī);
-const Ī.d(Ī);
-const Ī.e(Ī);
-const Ī.f(Ī);
-const Ī.g(Ī);
-const Ī.h(Ī);
-const Ī.i(Ī);
-const Ī.j(Ī);
-const Ī.k(Ī);
-const Ī.l(Ī);
-const Ī.m(Ī);
-const Ī.n(Ī);
-const Ī.o(Ī);
-const Ī.p(Ī);
-const Ī.r(Ī);
-const Ī.s(Ī);
-const Ī.t(Ī);
-const Ī.u(Ī);
-const Ī.w(Ī);
-const Ī.z(Ī);
-const Ī.y(Ī);
-const Ī.x(Ī);
-const Ī.µ(Ī);
-const Ī.ê(Ī);
-const Ī.õ(Ī);
-const Ī.ú(Ī);
-const Ī.A(Ī);
-const Ī.B(Ī);
-const Ī.C(Ī);
-const Ī.D(Ī);
+Ī.B = Ī => {
+    let styles;
+    return {
+        styles: [`.tabjf_editor-con {  overflow : auto;  background : #FFF;  color : #000;  }`, `.tabjf_editor-con .tabjf_editor {  position : relative;  min-height : calc( (var(--min-height, 0) - var(--paddingTop, 0)) * 1px);  padding-top : calc( var(--paddingTop, 0) * 1px ) ;  padding-right : 10px;  padding-top : calc( var(--paddingTop, 0) * 1px );  width : calc(var(--scroll-width, 100%) * 1px + 5px );  }`, `.tabjf_editor-con .tabjf_editor p {  position : relative;  line-height: 20px ;  min-height : 20px ;  max-height : 20px ;  height : 20px ;  cursor : text ;  display : flex ;  margin : 0 ;  padding : 0 ;  }`, `.tabjf_editor-con .tabjf_editor p::after {  display : block;  content : '█' ;  opacity : 0 ;  }`, `.tabjf_editor-con .tabjf_editor p span {  display : block ;  white-space : nowrap;  flex-shrink : 0 ;  }`, `.tabjf_editor-con .tabjf_editor p span:last-child {  margin-right: 10px;  }`, `@keyframes tabjf_blink {  0% { opacity: 1; }  50% { opacity: 0; }  100% { opacity: 1; }  }`, `.tabjf_editor-con .tabjf_editor .caret {  width : 1px ;  height : 20px;  position : absolute;  animation : tabjf_blink 1s linear infinite;  background-color : #000;  }`]
+    }
+}
+const {
+    TabJF_Action
+} = Ī.a(Ī);
+const {
+    TabJF_Caret
+} = Ī.b(Ī);
+const {
+    TabJF_Clear
+} = Ī.c(Ī);
+const {
+    TabJF_End
+} = Ī.d(Ī);
+const {
+    TabJF_Event
+} = Ī.e(Ī);
+const {
+    TabJF_Font
+} = Ī.f(Ī);
+const {
+    TabJF_Get
+} = Ī.g(Ī);
+const {
+    TabJF_Is_Line
+} = Ī.h(Ī);
+const {
+    TabJF_Is
+} = Ī.i(Ī);
+const {
+    TabJF_Keys
+} = Ī.j(Ī);
+const {
+    TabJF_Remove
+} = Ī.k(Ī);
+const {
+    TabJF_Render_Add
+} = Ī.l(Ī);
+const {
+    TabJF_Render_Fill
+} = Ī.m(Ī);
+const {
+    TabJF_Render_Move
+} = Ī.n(Ī);
+const {
+    TabJF_Render_Remove
+} = Ī.o(Ī);
+const {
+    TabJF_Render_Set
+} = Ī.p(Ī);
+const {
+    TabJF_Render_Update
+} = Ī.r(Ī);
+const {
+    TabJF_Render
+} = Ī.s(Ī);
+const {
+    TabJF_Replace
+} = Ī.t(Ī);
+const {
+    TabJF_Set
+} = Ī.u(Ī);
+const {
+    TabJF_Syntax_Create
+} = Ī.w(Ī);
+const {
+    TabJF_Syntax
+} = Ī.x(Ī);
+const {
+    TabJF_Truck
+} = Ī.q(Ī);
+const {
+    TabJF_Update_Selection
+} = Ī.v(Ī);
+const {
+    TabJF_Update
+} = Ī.µ(Ī);
+const {
+    TabJF_Hidden
+} = Ī.ê(Ī);
+const {
+    TabJF_Save_Content
+} = Ī.õ(Ī);
+const {
+    TabJF_Save_Set
+} = Ī.ú(Ī);
+const {
+    TabJF_Save
+} = Ī.A(Ī);
 const {
     styles
-} = Ī.E(Ī);
+} = Ī.B(Ī);
 Ī = undefined;
 class TabJF {
     editor;
     lastX = 0;
     clipboard = [];
-    docEventsSet = false;
     copiedHere = false;
     activated = false;
     spaceUChar = '\u00A0';
@@ -6755,9 +6683,6 @@ class TabJF {
     };
     selection = {
         update: false,
-        anchor: null,
-        offset: -1,
-        line: -1,
         reverse: false,
         active: false,
         expanded: false,
@@ -6772,18 +6697,16 @@ class TabJF {
             node: -1
         }
     };
+    tabWidth = 2;
     constructor(editor, set = {}) {
         if (typeof editor?.nodeType == 'undefined') throw new Error('You can\'t create Editor JF without passing node to set as editor.');
-        if (editor.nodeType != 1) throw new Error('Editor node has to be of proper node type. (1)');
+        if (editor.nodeType != 1) throw new Error('Editor node has to be of proper node type. [1]');
         this.editor = editor;
         this.editor.setAttribute('tabindex', '-1');
         this.editor.classList.add('tabjf_editor');
-        window.tab = this;
         const required = {
             left: 0,
-            top: 0,
             line: 20,
-            height: 400,
             syntax: false,
             contentText: false,
             contentObj: false
@@ -6792,8 +6715,10 @@ class TabJF {
             set[attr] = typeof set[attr] == 'undefined' ? required[attr] : set[attr]
         });
         this.settings = set;
+        this.settings.height = this.editor.offsetHeight;
         this.inject();
         this._save.debounce = this._hidden.debounce(this._save.publish, 500);
+        this.update.resizeDebounce = this._hidden.debounce(this.update.resize, 500);
         const methodsSave = [
             ['remove', 'selected'],
             ['remove', 'one'],
@@ -6811,6 +6736,7 @@ class TabJF {
         this.caret.hide();
         this.font.createLab();
         this.render.init(this.settings.contentObj, this.settings.contentText);
+        this.action.createCopyGround();
         if (this.settings.syntax) this.syntax.init();
         this.truck.import(this.render.content, this.render.linesLimit);
         this.addRules();
@@ -6836,11 +6762,7 @@ class TabJF {
             var: 'action'
         }, {
             instance: TabJF_Caret,
-            var: 'caret',
-            modules: [{
-                instance: TabJF_Caret_Pos,
-                var: 'pos'
-            }]
+            var: 'caret'
         }, {
             instance: TabJF_Clear,
             var: 'clear'
@@ -6851,18 +6773,11 @@ class TabJF {
             instance: TabJF_Event,
             var: 'event'
         }, {
-            instance: TabJF_Expand,
-            var: 'expand'
-        }, {
             instance: TabJF_Font,
             var: 'font'
         }, {
             instance: TabJF_Get,
-            var: 'get',
-            modules: [{
-                instance: TabJF_Get_Css,
-                var: 'css'
-            }]
+            var: 'get'
         }, {
             instance: TabJF_Is,
             var: 'is',
@@ -6953,13 +6868,15 @@ class TabJF {
         }
     }
     addRules() {
+        if (TabJF.prototype.cssAdded) return;
         var styleEl = document.createElement('style');
         styleEl.setAttribute('name', "TabJF Styles");
         document.head.insertBefore(styleEl, document.head.children[0]);
         const css = styleEl.sheet;
         styles.forEach(rule => {
             css.insertRule(rule, css.cssRules.length)
-        })
+        });
+        TabJF.prototype.cssAdded = true
     }
     _proxySaveHandle = {
         main: this,
@@ -6992,28 +6909,27 @@ class TabJF {
         }
     };
     assignEvents() {
-        console.log("assignEvent");
         this.editor.addEventListener("mousedown", this.active.bind ? this.active.bind(this) : this.active);
         this.editor.addEventListener("mouseup", this.stopSelect.bind ? this.stopSelect.bind(this) : this.stopSelect);
         this.editor.addEventListener("focusout", this.deactive.bind ? this.deactive.bind(this) : this.deactive);
-        this.editor.addEventListener("dblclick", this.saveSelection.bind ? this.saveSelection.bind(this) : this.saveSelection)
+        this.editor.addEventListener("dblclick", this.saveSelectionDblClick.bind ? this.saveSelectionDblClick.bind(this) : this.saveSelectionDblClick)
     }
-    saveSelection(e) {
+    saveSelectionDblClick(e) {
         this.update.select();
         this.update.selection.start(0, this.selection.end.line, this.selection.end.node);
         this.checkSelect()
     }
     stopSelect(e) {
+        this.editor.removeEventListener('mousemove', this.updateMethod, true);
         if (this.get.selection().type == 'Range') {
             const event = this.event.dispatch('tabJFSelectStop', {
-                pos: this.get.clonedPos() event: e,
+                pos: this.get.clonedPos(),
+                event: e,
                 selection: this.get.clone(this.selection)
             });
             if (event.defaultPrevented) return
         }
         this.selection.update = false;
-        const updateMethod = this.update.select.bind ? this.update.select.bind(this) : this.update.select;
-        this.editor.removeEventListener('mousemove', this.updateMethod, true);
         this.checkSelect()
     }
     checkSelect() {
@@ -7075,21 +6991,15 @@ class TabJF {
     }
     active(e) {
         const event = this.event.dispatch('tabJFActivate', {
-            pos: this.get.clonedPos() event: e
+            pos: this.get.clonedPos(),
+            event: e
         });
         if (event.defaultPrevented) return;
         if (e.target == this.editor || e.x < 0 || e.y < 0) return;
         let el = e.target;
         if (el.nodeName === "P") el = el.children[el.children.length - 1];
-        const overflow = this.render?.overflow?.scrollLeft ?? 0;
-        let left = e.x - this.settings.left + overflow;
-        if (el.offsetWidth + el.offsetLeft < left) {
-            left = el.offsetWidth + el.offsetLeft + overflow
-        }
-        let y = this.caret.pos.toY(el.parentElement.offsetTop + this.settings.top);
-        const x = e.layerX;
-        let line = Math.ceil((y - this.settings.top) / this.settings.line);
-        const letter = this.font.getLetterByWidth(el.innerText, el, x - el.offsetLeft);
+        const line = el.parentElement.offsetTop / this.settings.line;
+        const letter = this.font.getLetterByWidth(el.innerText, el, e.clientX - el.offsetLeft - this.settings.left);
         this.caret.show();
         const index = this.get.childIndex(el);
         this.caret.refocus(letter, line, index, );
@@ -7121,7 +7031,8 @@ class TabJF {
     }
     deactive(e) {
         const event = this.event.dispatch('tabJFDeactivate', {
-            pos: this.get.clonedPos() event: e
+            pos: this.get.clonedPos(),
+            event: e
         });
         if (event.defaultPrevented) return;
         this.caret.hide();
@@ -7133,19 +7044,19 @@ class TabJF {
         const type = e.type;
         if (type == 'keydown') {
             const event = this.event.dispatch('tabJFKeyDown', {
-                pos: this.get.clonedPos() event: e
+                pos: this.get.clonedPos(),
+                event: e
             });
             if (event.defaultPrevented) return
         } else if (type == 'keyup') {
             const event = this.event.dispatch('tabJFKeyUp', {
-                pos: this.get.clonedPos() event: e
+                pos: this.get.clonedPos(),
+                event: e
             });
             if (event.defaultPrevented) return
         }
         this.update.specialKeys(e);
-        if (type == 'keyup') {
-            return
-        }
+        if (type == 'keyup') return;
         const prevent = {
             33: true,
             34: true,
@@ -7192,7 +7103,6 @@ class TabJF {
             },
             17: (e, type) => {},
             18: (e, type) => {},
-            18: (e, type) => {},
             20: (e, type) => {},
             27: (e, type) => {
                 this.keys.escape(e)
@@ -7218,8 +7128,10 @@ class TabJF {
             },
             37: (e, type) => {
                 const event = this.event.dispatch('tabJFMove', {
-                    pos: this.get.clonedPos() event: e,
-                    selection: this.get.clone(this.selection) x: -1,
+                    pos: this.get.clonedPos(),
+                    event: e,
+                    selection: this.get.clone(this.selection),
+                    x: -1,
                     y: 0
                 });
                 if (event.defaultPrevented) return;
@@ -7227,8 +7139,10 @@ class TabJF {
             },
             38: (e, type) => {
                 const event = this.event.dispatch('tabJFMove', {
-                    pos: this.get.clonedPos() event: e,
-                    selection: this.get.clone(this.selection) x: 0,
+                    pos: this.get.clonedPos(),
+                    event: e,
+                    selection: this.get.clone(this.selection),
+                    x: 0,
                     y: -1
                 });
                 if (event.defaultPrevented) return;
@@ -7236,8 +7150,10 @@ class TabJF {
             },
             39: (e, type) => {
                 const event = this.event.dispatch('tabJFMove', {
-                    pos: this.get.clonedPos() event: e,
-                    selection: this.get.clone(this.selection) x: 1,
+                    pos: this.get.clonedPos(),
+                    event: e,
+                    selection: this.get.clone(this.selection),
+                    x: 1,
                     y: 0
                 });
                 if (event.defaultPrevented) return;
@@ -7245,8 +7161,10 @@ class TabJF {
             },
             40: (e, type) => {
                 const event = this.event.dispatch('tabJFMove', {
-                    pos: this.get.clonedPos() event: e,
-                    selection: this.get.clone(this.selection) x: 0,
+                    pos: this.get.clonedPos(),
+                    event: e,
+                    selection: this.get.clone(this.selection),
+                    x: 0,
                     y: 1
                 });
                 if (event.defaultPrevented) return;
@@ -7346,7 +7264,13 @@ class TabJF {
         } else {
             (keys[e.keyCode] || keys['default'])(e, type)
         }
-        if (!this.caret.isVisible()) {
+        const preventScroll = {
+            16: true,
+            17: true,
+            18: true,
+            20: true
+        };
+        if (!preventScroll[e.keyCode] && !this.caret.isVisible()) {
             this.render.set.overflow(null, (this.pos.line - (this.render.linesLimit / 2)) * this.settings.line)
         }
         const skipUpdate = {
@@ -7354,13 +7278,15 @@ class TabJF {
                 if (!this.pressed.ctrl) return false;
                 return true
             },
+            67: () => true,
             default: () => false
         };
         if (!(skipUpdate[e.keyCode] || skipUpdate['default'])()) {
             this.update.page();
             this.render.update.scrollWidthWithCurrentLine();
-            this.caret.scrollToX();
-            this.caret.scrollToY()
+            if (!preventScroll[e.keyCode]) {
+                this.caret.scrollToX()
+            }
         }
     }
     toSide(dirX, dirY) {
@@ -7426,7 +7352,9 @@ class TabJF {
             this.render.move.page()
         }
         this.caret.refocus(0, this.pos.line + 1, 0);
-        this.lastX = 0
+        this.lastX = 0;
+        this.render.update.minHeight();
+        this.render.update.scrollWidth()
     }
     mergeLine(dir) {
         let line = this.get.line(this.pos.el);
@@ -7441,11 +7369,14 @@ class TabJF {
             this.render.content[this.pos.line].content = this.render.content[this.pos.line].content.concat(this.render.content[this.pos.line + 1].content);
             this.render.content.splice(this.pos.line + 1, 1)
         }
+        this.render.update.minHeight();
+        this.render.update.scrollWidth()
     }
     insert(key) {
         let text = this.replace.spaceChars(this.render.content[this.pos.line].content[this.pos.childIndex].content);
         text = {
-            pre: text.substr(0, this.pos.letter) suf: text.substr(this.pos.letter)
+            pre: text.substr(0, this.pos.letter),
+            suf: text.substr(this.pos.letter)
         };
         text = this.replace.spaces(text.pre) + key + this.replace.spaces(text.suf);
         this.render.content[this.pos.line].content[this.pos.childIndex].content = text;

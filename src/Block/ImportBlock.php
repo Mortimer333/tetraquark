@@ -31,6 +31,7 @@ class ImportBlock extends VariableBlockAbstract implements Contract\Block
         }
 
         $path = self::$folder->makePathAbsolute($path, dirname($pathToScript));
+        // @TODO find out if this might break stuff when requested something multiple times from the same script
         if (self::$import->scriptExists($path)) {
             return;
         }
@@ -83,7 +84,6 @@ class ImportBlock extends VariableBlockAbstract implements Contract\Block
             }
             $importedSufix .= ',';
         }
-
         self::$import->setScript($path, $imported . rtrim($importedSufix, ',') . '}');
         $script = $this->getScript();
         self::$import->addRetrival($script->getPath(), $path, $importedPrefix);
@@ -205,8 +205,8 @@ class ImportBlock extends VariableBlockAbstract implements Contract\Block
                 ImportAsBlock        ::class => $this->addImportItem('default', $block),
                 ImportAllBlock       ::class => $this->addImportItem('namespace', $block),
                 ImportObjectBlock    ::class => $this->addImportItems($block->getBlocks()),
-                ExportObjectItemBlock::class => $this->addImportItem('items', $block),
-                default                      => '' // do nothin'
+                ImportObjectItemBlock::class => $this->addImportItem('items', $block),
+                default                      => null // do nothin'
             };
         }
     }

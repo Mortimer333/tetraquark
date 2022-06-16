@@ -161,6 +161,15 @@ trait BlockMapsTrait
                 ]
             ]
         ],
+        "t" => [
+            "r" => [
+                "y" => [
+                    ' '  => 'TryBlock',
+                    "\n" => "TryBlock",
+                    '{'  => "TryBlock",
+                ]
+            ]
+        ],
         "w" => [
             "h" => [
                 "i" => [

@@ -1,5 +1,5 @@
 if ( wordSet?.ignore ) wordSet = { attrs : { style : 'color:#FFF;' } };
-/*
+
 if ( line.nodeName == "P") linePos++;
 
 if (obj.objSoloTest[0] == 'asd') {
@@ -68,4 +68,3 @@ if (true
     } else {
 
     }
-*/
