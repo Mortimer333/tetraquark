@@ -4,7 +4,7 @@ namespace Tetraquark\Block;
 use \Tetraquark\{Log, Exception, Contract, Validate, Content};
 use \Tetraquark\Foundation\BlockAbstract;
 
-class FinallyBlock extends BlockAbstract implements Contract\Block
+class StaticInitializationBlock extends BlockAbstract implements Contract\Block
 {
     protected array $endChars = [
         '}' => true
@@ -12,12 +12,12 @@ class FinallyBlock extends BlockAbstract implements Contract\Block
 
     public function objectify(int $start = 0)
     {
-        $this->setInstruction(new Content('finally {'))
-            ->setInstructionStart($start - 8) // len of finally{
+        $this->setInstruction(new Content('static {'))
+            ->setInstructionStart($start - 7) // len of static{
         ;
         list($letter, $pos) = $this->getNextLetter($start, self::$content);
         if ($letter != '{') {
-            throw new Exception('Couldn\'t find start of the finally', 404);
+            throw new Exception('Couldn\'t find start of the static initialization block', 404);
         }
         $this->setCaret($pos);
         $this->blocks = array_merge($this->blocks, $this->createSubBlocks($pos + 1));
@@ -25,7 +25,7 @@ class FinallyBlock extends BlockAbstract implements Contract\Block
 
     public function recreate(): string
     {
-        $script = 'finally{';
+        $script = 'static{';
         $blocks = '';
 
         foreach ($this->getBlocks() as $block) {

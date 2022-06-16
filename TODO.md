@@ -6,7 +6,6 @@ This is supposed to be a minifier and obfuscator in one. But due to project with
 
 # Fixes
 
-## Add try catch finally
 ## Extend classes:
     - interface
     - extends
@@ -14,7 +13,6 @@ This is supposed to be a minifier and obfuscator in one. But due to project with
     - protected
     - public
     - private
-    - static
 
 ## Add the rest of taken keywords
 ## Add to variables Deconstructed assignment - https://medium.com/swlh/javascript-best-practices-renaming-imports-and-proper-variable-declaration-aa405c191bee
@@ -22,6 +20,7 @@ This is supposed to be a minifier and obfuscator in one. But due to project with
 ## Add all key words so when object has property "typeof" it won't get replaced with its alias
 ## Upgrade fixScript as it doesn't reamove all not needed space example: do{ whileLooped--; console.log(whileLooped);}
 ## Fix performance -  we take so much time on few script (like 15s)
+## Put imports not in seperate attributes (Ī.y = Ī => {) but inside the object (let Ī={y:Ī=>{}};). This way we will save 2n letter per n imports (so with 10 imports 20 letters)
 
 # Improvments - probably name searching when creating exports takes a lot of time
 

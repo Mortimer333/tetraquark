@@ -1,11 +1,12 @@
 <?php declare(strict_types=1);
 
 namespace Tetraquark\Block;
-use \Tetraquark\{Log, Exception, Contract, Validate};
+use \Tetraquark\{Log, Exception, Contract, Validate, Content};
 use \Tetraquark\Foundation\MethodBlockAbstract as MethodBlock;
 
 class ClassMethodBlock extends MethodBlock implements Contract\Block
 {
+    public const STATIC_METH = 'class:method:static';
     protected array $endChars = [
         '}' => true
     ];
@@ -33,11 +34,26 @@ class ClassMethodBlock extends MethodBlock implements Contract\Block
         $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
         $this->setSubtype('method');
         $this->findAndSetArguments();
+
+
+        if ($this->getParent() instanceof ClassBlock) {
+            list($word, $pos) = $this->getPreviousWord($this->getInstructionStart() - 1, self::$content);
+            if (\mb_substr($word, -6) === 'static') {
+                $this->setInstructionStart($pos - 6)
+                    ->setInstruction(new Content('static ' . $this->getInstruction()))
+                    ->setSubtype(self::STATIC_METH)
+                ;
+            }
+        }
     }
 
     public function recreate(): string
     {
-        $script = $this->getAlias($this->getName()) . '(' . $this->getAliasedArguments() . '){';
+        $script = '';
+        if ($this->getSubtype() === self::STATIC_METH) {
+            $script .= 'static ';
+        }
+        $script .= $this->getName() . '(' . $this->getAliasedArguments() . '){';
         $blocks = '';
         foreach ($this->getBlocks() as $block) {
             $blocks .= $block->recreate();

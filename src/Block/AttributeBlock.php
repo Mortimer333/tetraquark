@@ -6,6 +6,7 @@ use \Tetraquark\Foundation\VariableBlockAbstract as VariableBlock;
 
 class AttributeBlock extends VariableBlock implements Contract\Block
 {
+    public const STATIC_ATTR = 'attribute:static';
     protected array $endChars = [
         ';' => true,
     ];
@@ -41,6 +42,14 @@ class AttributeBlock extends VariableBlock implements Contract\Block
             }
         }
 
+        if ($this->getParent() instanceof ClassBlock) {
+            list($word, $pos) = $this->getPreviousWord($start - 1, self::$content);
+            if (\mb_substr($word, -6) === 'static') {
+                $start = $pos;
+                $this->setSubtype(self::STATIC_ATTR);
+            }
+        }
+
         $end = $this->findVariableEnd($equalPos);
         $value = self::$content->subStr($equalPos + 1, $end - ($equalPos + 1));
         $this->blocks = array_merge($this->blocks, $this->createSubBlocksWithContent($value));
@@ -48,7 +57,7 @@ class AttributeBlock extends VariableBlock implements Contract\Block
             ->setInstructionStart($start)
             ->setName($name)
             ->setCaret($end)
-            ;
+        ;
     }
 
     /**
@@ -102,7 +111,11 @@ class AttributeBlock extends VariableBlock implements Contract\Block
 
     public function recreate(): string
     {
-        $script = $this->getAlias($this->getName());
+        $script = '';
+        if ($this->getSubtype() === self::STATIC_ATTR) {
+            $script .= 'static ';
+        }
+        $script .= $this->getAlias($this->getName());
 
         if (\sizeof($this->getBlocks()) > 0 || \mb_strlen($this->getValue()) > 0) {
             $script .= $this->augment . '=';

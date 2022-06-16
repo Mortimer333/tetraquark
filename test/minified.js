@@ -5683,9 +5683,7 @@ let Ī = {};
                     clear: false,
                     refocus: false
                 })
-            };
-            catch (e); {};
-            finally {
+            } catch (e) {} finally {
                 this.update.page()
             }
         }

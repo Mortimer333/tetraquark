@@ -317,6 +317,23 @@ trait BlockMapsTrait
 
     protected array $classBlocksMap  = [
         '(' => "ClassMethodBlock",
+        "&_" => [
+            "s" => [
+                "t" => [
+                    "a" => [
+                        "t" => [
+                            "i" => [
+                                "c" => [
+                                    ' '  => 'isStaticInitializationBlock',
+                                    "\n" => "isStaticInitializationBlock",
+                                    '{'  => "StaticInitializationBlock",
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
     ];
     protected array $objectBlocksMap = [
         ':' => "ObjectValueBlock",
@@ -479,8 +496,6 @@ trait BlockMapsTrait
             Block\ImportBlock          ::class => $this->importBlocksMap,
         ];
 
-        $blocksMap = $this->mergeBlockMaps($blocksMap, $additionalPaths[$this::class] ?? []);
-
         if (
             $this instanceof Block\ChainLinkBlock
             && $this->getSubtype() != Block\ChainLinkBlock::BRACKET_BLOCK_CREATE
@@ -520,6 +535,8 @@ trait BlockMapsTrait
         } elseif ($this instanceof Block\ImportObjectBlock) {
             $blocksMap = $this->importObjectBlocksMap;
         }
+
+        $blocksMap = $this->mergeBlockMaps($blocksMap, $additionalPaths[$this::class] ?? []);
 
         // if ($this instanceof Block\ExportBlock) {
         //     die(json_encode($blocksMap));
@@ -572,7 +589,8 @@ trait BlockMapsTrait
         return $blocksMap;
     }
 
-    protected function decideArrayBlockType(int $start) {
+    protected function decideArrayBlockType(int $start): string
+    {
         for ($i=$start - 1; $i >= 0; $i--) {
             $letter = self::$content->getLetter($i);
             if (Validate::isWhitespace($letter)) {
@@ -584,5 +602,14 @@ trait BlockMapsTrait
             return "ArrayBlock";
         }
         return "ArrayBlock";
+    }
+
+    protected function isStaticInitializationBlock(int $start): ?string
+    {
+        list($letter) = $this->getNextLetter($start, self::$content);
+        if ($letter === '{') {
+            return 'StaticInitializationBlock';
+        }
+        return null;
     }
 }

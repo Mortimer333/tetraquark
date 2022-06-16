@@ -45,7 +45,7 @@ class TryBlock extends BlockAbstract implements Contract\Block
 
     public function recreate(): string
     {
-        $script = 'try {';
+        $script = 'try{';
         $blocks = '';
 
         foreach ($this->getBlocks() as $block) {

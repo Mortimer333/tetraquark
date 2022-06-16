@@ -1,4 +1,23 @@
+class static {
+  static staticProperty = 'someValue';
+  static staticMethod() {
+    return 'static method has been called.';
+  }
+  static {
+    console.log('Class static initialization block called');
+  }
 
+  static{
+    console.log('Class static initialization block called');
+  }
+
+  static
+  {
+    console.log('Class static initialization block called');
+  }
+}
+
+/*
 class ClassName {
     elPos ( el ) {
         for ( let i = 0; i < el.parentElement.children.length; i++ ) {
@@ -52,3 +71,4 @@ if ( editor.nodeType != 1                  ) throw new Error('Editor node has to
 obj.testClass = class {
   a = 'a';
 }
+*/

@@ -2,139 +2,207 @@ Mapping...
 =======================
 Creating aliases...
 =======================
-Aliases: 
+Aliases:
 Recreating...
 =======================
-Block: Tetraquark\Block\TryBlock
-Subtype: try
-Instruction: try {
-Instruction Start: 0
-Caret: 160
-Name: ``
+Block: Tetraquark\Block\ClassBlock
+Subtype: class
+Instruction: class static
+Instruction Start: 1
+Caret: 337
+Name: `static`
 Child Index: `0`
-Catch block: [1] 
-  Block: Tetraquark\Block\CatchBlock
-  Subtype: catch
-  Instruction: catch(e) {
-  Instruction Start: 60
-  Caret: 160
-  Name: ``
-  Child Index: `0`
-  Cond block: [0] 
-  Finally block: [1] 
-    Block: Tetraquark\Block\FinallyBlock
-    Subtype: finally
-    Instruction: finally {
-    Instruction Start: 110
-    Caret: 160
-    Name: ``
-    Child Index: `0`
-    Alias: ``
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\TryBlock
-      Subtype: try
-      Instruction: try {
-      Instruction Start: 121
-      Caret: 158
-      Name: ``
-      Child Index: `0`
-      Catch block: [1] 
-        Block: Tetraquark\Block\CatchBlock
-        Subtype: catch
-        Instruction: catch (e) {
-        Instruction Start: 132
-        Caret: 158
-        Name: ``
-        Child Index: `0`
-        Cond block: [0] 
-        Finally block: [1] 
-          Block: Tetraquark\Block\FinallyBlock
-          Subtype: finally
-          Instruction: finally {
-          Instruction Start: 146
-          Caret: 158
-          Name: ``
-          Child Index: `0`
-          Alias: ``
-          Blocks: [0] 
-          =======
-        Alias: ``
-        Blocks: [0] 
-        =======
-      Alias: ``
-      Blocks: [0] 
-      =======
-  Alias: ``
-  Blocks: [1] 
-  =======
-    Block: Tetraquark\Block\ClassBlock
-    Subtype: class
-    Instruction: class asdas 
-    Instruction Start: 72
-    Caret: 107
-    Name: `asdas`
-    Child Index: `0`
-    Alias: `asdas`
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\ClassMethodBlock
-      Subtype: method
-      Instruction: constructor() {
-      Instruction Start: 87
-      Caret: 104
-      Name: `constructor`
-      Child Index: `0`
-      Arguments: [0] `
-      Alias: `constructor`
-      Blocks: [0] 
-      =======
-Alias: ``
-Blocks: [2] 
+Alias: `static`
+Blocks: [5]
 =======
-  Block: Tetraquark\Block\ChainLinkBlock
-  Subtype: chain:first
-  Instruction: console.log
-  Instruction Start: 8
-  Caret: 25
-  Name: ``
+  Block: Tetraquark\Block\AttributeBlock
+  Subtype: attribute:static
+  Instruction:  static staticProperty = 'someValue'
+  Instruction Start: 16
+  Caret: 52
+  Name: `staticProperty`
   Child Index: `0`
-  Bracket block: [0] 
-  Alias: ``
-  Blocks: [1] 
+  Alias: `staticProperty`
+  Blocks: [1]
   =======
-    Block: Tetraquark\Block\CallerBlock
-    Subtype: (
-    Instruction: 
-    Instruction Start: 19
-    Caret: 25
+    Block: Tetraquark\Block\StringBlock
+    Subtype:
+    Instruction: 'someValue'
+    Instruction Start: 1
+    Caret: 12
     Name: ``
     Child Index: `0`
     Alias: ``
-    Blocks: [1] 
+    Blocks: [0]
     =======
-      Block: Tetraquark\Block\StringBlock
-      Subtype: 
-      Instruction: 'asd'
-      Instruction Start: 0
-      Caret: 5
-      Name: ``
-      Child Index: `0`
-      Alias: ``
-      Blocks: [0] 
-      =======
-  Block: Tetraquark\Block\FunctionBlock
-  Subtype: function
-  Instruction: function functionName() {
-  Instruction Start: 28
-  Caret: 56
-  Name: `functionName`
+  Block: Tetraquark\Block\ClassMethodBlock
+  Subtype: class:method:static
+  Instruction: static staticMethod() {
+  Instruction Start: 48
+  Caret: 122
+  Name: `staticMethod`
   Child Index: `1`
   Arguments: [0] `
-  Alias: `functionName`
-  Blocks: [0] 
+  Alias: `staticMethod`
+  Blocks: [1]
   =======
-Duration: 0.004s
+    Block: Tetraquark\Block\ReturnBlock
+    Subtype: return
+    Instruction:  'static method has been called.';
+    Instruction Start: 80
+    Caret: 119
+    Name: ``
+    Child Index: `0`
+    Alias: ``
+    Blocks: [1]
+    =======
+      Block: Tetraquark\Block\StringBlock
+      Subtype:
+      Instruction: 'static method has been called.'
+      Instruction Start: 1
+      Caret: 33
+      Name: ``
+      Child Index: `0`
+      Alias: ``
+      Blocks: [0]
+      =======
+  Block: Tetraquark\Block\StaticInitializationBlock
+  Subtype: static
+  Instruction: static {
+  Instruction Start: 124
+  Caret: 193
+  Name: ``
+  Child Index: `2`
+  Alias: ``
+  Blocks: [1]
+  =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: chain:first
+    Instruction: console.log
+    Instruction Start: 135
+    Caret: 189
+    Name: ``
+    Child Index: `0`
+    Bracket block: [0]
+    Alias: ``
+    Blocks: [1]
+    =======
+      Block: Tetraquark\Block\CallerBlock
+      Subtype: (
+      Instruction:
+      Instruction Start: 146
+      Caret: 189
+      Name: ``
+      Child Index: `0`
+      Alias: ``
+      Blocks: [1]
+      =======
+        Block: Tetraquark\Block\StringBlock
+        Subtype:
+        Instruction: 'Class static initialization block called'
+        Instruction Start: 0
+        Caret: 42
+        Name: ``
+        Child Index: `0`
+        Alias: ``
+        Blocks: [0]
+        =======
+  Block: Tetraquark\Block\StaticInitializationBlock
+  Subtype: static{
+  Instruction: static {
+  Instruction Start: 195
+  Caret: 263
+  Name: ``
+  Child Index: `3`
+  Alias: ``
+  Blocks: [1]
+  =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: chain:first
+    Instruction: console.log
+    Instruction Start: 205
+    Caret: 259
+    Name: ``
+    Child Index: `0`
+    Bracket block: [0]
+    Alias: ``
+    Blocks: [1]
+    =======
+      Block: Tetraquark\Block\CallerBlock
+      Subtype: (
+      Instruction:
+      Instruction Start: 216
+      Caret: 259
+      Name: ``
+      Child Index: `0`
+      Alias: ``
+      Blocks: [1]
+      =======
+        Block: Tetraquark\Block\StringBlock
+        Subtype:
+        Instruction: 'Class static initialization block called'
+        Instruction Start: 0
+        Caret: 42
+        Name: ``
+        Child Index: `0`
+        Alias: ``
+        Blocks: [0]
+        =======
+  Block: Tetraquark\Block\StaticInitializationBlock
+  Subtype: static
+  Instruction: static {
+  Instruction Start: 265
+  Caret: 335
+  Name: ``
+  Child Index: `4`
+  Alias: ``
+  Blocks: [1]
+  =======
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: chain:first
+    Instruction: console.log
+    Instruction Start: 277
+    Caret: 331
+    Name: ``
+    Child Index: `0`
+    Bracket block: [0]
+    Alias: ``
+    Blocks: [1]
+    =======
+      Block: Tetraquark\Block\CallerBlock
+      Subtype: (
+      Instruction:
+      Instruction Start: 288
+      Caret: 331
+      Name: ``
+      Child Index: `0`
+      Alias: ``
+      Blocks: [1]
+      =======
+        Block: Tetraquark\Block\StringBlock
+        Subtype:
+        Instruction: 'Class static initialization block called'
+        Instruction Start: 0
+        Caret: 42
+        Name: ``
+        Child Index: `0`
+        Alias: ``
+        Blocks: [0]
+        =======
+Duration: 0.005s
 
 
-try{console.log('asd');function functionName(){}}catch(e){class asdas{constructor(){}}}finally{try{}catch(e){}finally{}}
+class static{
+    static staticProperty='someValue';
+    static staticMethod(){
+        return 'static method has been called.'
+    }
+    static{
+        console.log('Class static initialization block called')
+    }
+    static{
+        console.log('Class static initialization block called')
+    }
+    static{console.log('Class static initialization block called')
+    }
+}
