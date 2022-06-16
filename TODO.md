@@ -6,11 +6,6 @@ This is supposed to be a minifier and obfuscator in one. But due to project with
 
 # Fixes
 
-## Extend classes:
-    - interface
-    - extends
-    - implements
-
 ## methods/function `get` and `set` keyword
 ## methods/function `async` keyword
 ## method/functions generators = `*method()` - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator

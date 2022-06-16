@@ -148,6 +148,9 @@ class Log
             if (method_exists($block, 'getPath')) {
                 self::log("Path: `" . $block->getPath() . "`");
             }
+            if (method_exists($block, 'getExtendClass')) {
+                self::log("Extended: `" . $block->getExtendClass() . "`");
+            }
             if (method_exists($block, 'getArguments')) {
                 self::log("Arguments: [" . \sizeof($block->getArguments()) . "] `");
                 self::increaseIndent();

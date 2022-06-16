@@ -1,3 +1,12 @@
+class beXtended extends toExtend {
+    item
+}
+
+let obj = {
+    nameClass : class {},
+    nameExtendedClass : class extends obj.nameClass {}
+}
+/*
 class static {
   static staticProperty = 'someValue';
   static staticMethod() {
@@ -74,3 +83,4 @@ if ( editor.nodeType != 1                  ) throw new Error('Editor node has to
 obj.testClass = class {
   a = 'a';
 }
+*/
