@@ -1,3 +1,42 @@
+async function functionName() {
+
+}
+
+get function functionName() {
+
+}
+
+set function functionName() {
+
+}
+
+async () => {
+
+}
+
+get () => {
+
+}
+
+set () => {
+
+}
+
+class ClassName{
+    async constructor() {
+
+    }
+
+    get constructor() {
+
+    }
+
+    set constructor() {
+
+    }
+}
+
+/*
 function functionName() {
 
 }
@@ -26,3 +65,4 @@ functionName2    ()
     functionName
     ()
 }
+*/

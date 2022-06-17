@@ -1,109 +1,172 @@
 Mapping...
-    gen und: \n item\n
+  async,0
+  is async
+  get,34
+  set,66
+  async,98
+  is async
+  get,114
+  set,128
+    async,160
+    is async
+    get,186
+    set,210
 =======================
 Creating aliases...
 =======================
 Aliases: 
 Recreating...
 =======================
-Block: Tetraquark\Block\ClassBlock
-Subtype: class
-Instruction: class beXtended extends toExtend 
-Instruction Start: 1
-Caret: 42
-Name: `beXtended`
+Block: Tetraquark\Block\FunctionBlock
+Subtype: function
+Instruction: function functionName() {
+Instruction Start: 0
+Caret: 33
+Name: `functionName`
 Child Index: `0`
-Extended: `toExtend`
-Alias: `beXtended`
-Blocks: [1] 
+Arguments: [0] `
+Alias: `functionName`
+Blocks: [0] 
 =======
-  Block: Tetraquark\Block\EmptyAttributeBlock
-  Subtype: 
-  Instruction: \n item\n
-  Instruction Start: 35
-  Caret: 42
-  Name: `item`
-  Child Index: `0`
-  Is Private: `false`
-  Alias: `item`
-  Blocks: [0] 
-  =======
-Block: Tetraquark\Block\VariableBlock
-Subtype: let
-Instruction: let obj = {\n nameClass : class {},\n nameExtendedClass : class extends obj.nameClass {}\n}
-Instruction Start: 44
-Caret: 132
-Name: ``
+Block: Tetraquark\Block\FunctionBlock
+Subtype: function
+Instruction: function functionName() {
+Instruction Start: 34
+Caret: 65
+Name: `functionName`
 Child Index: `1`
-Value: ``
+Arguments: [0] `
+Alias: `functionName`
+Blocks: [0] 
+=======
+Block: Tetraquark\Block\FunctionBlock
+Subtype: function
+Instruction: function functionName() {
+Instruction Start: 66
+Caret: 97
+Name: `functionName`
+Child Index: `2`
+Arguments: [0] `
+Alias: `functionName`
+Blocks: [0] 
+=======
+Block: Tetraquark\Block\CallerBlock
+Subtype: arrow-function
+Instruction: 
+Instruction Start: 98
+Caret: 113
+Name: ``
+Child Index: `3`
 Alias: ``
 Blocks: [1] 
 =======
-  Block: Tetraquark\Block\VariableItemBlock
-  Subtype: 
-  Instruction:  obj =
-  Instruction Start: 0
-  Caret: 85
-  Name: `obj`
+  Block: Tetraquark\Block\ArrowFunctionBlock
+  Subtype: parenthesis:brackets
+  Instruction: () => {
+  Instruction Start: 98
+  Caret: 113
+  Name: ``
   Child Index: `0`
   Value: ``
-  Alias: `obj`
-  Blocks: [1] 
+  Arguments: [0] `
+  Alias: ``
+  Blocks: [0] 
   =======
-    Block: Tetraquark\Block\ObjectBlock
-    Subtype: {
-    Instruction: 
-    Instruction Start: 7
-    Caret: 84
-    Name: ``
-    Child Index: `0`
-    Alias: ``
-    Blocks: [2] 
-    =======
-      Block: Tetraquark\Block\ObjectValueBlock
-      Subtype: :
-      Instruction: \n nameClass 
-      Instruction Start: 8
-      Caret: 30
-      Name: `nameClass`
-      Child Index: `0`
-      Alias: `nameClass`
-      Blocks: [1] 
-      =======
-        Block: Tetraquark\Block\ClassBlock
-        Subtype: class
-        Instruction: class 
-        Instruction Start: 22
-        Caret: 29
-        Name: ``
-        Child Index: `0`
-        Extended: ``
-        Alias: ``
-        Blocks: [0] 
-        =======
-      Block: Tetraquark\Block\ObjectValueBlock
-      Subtype: :
-      Instruction: \n nameExtendedClass 
-      Instruction Start: 31
-      Caret: 83
-      Name: `nameExtendedClass`
-      Child Index: `1`
-      Alias: `nameExtendedClass`
-      Blocks: [1] 
-      =======
-        Block: Tetraquark\Block\ClassBlock
-        Subtype: class
-        Instruction: class extends obj.nameClass 
-        Instruction Start: 53
-        Caret: 82
-        Name: ``
-        Child Index: `0`
-        Extended: `obj.nameClass`
-        Alias: ``
-        Blocks: [0] 
-        =======
+Block: Tetraquark\Block\CallerBlock
+Subtype: arrow-function
+Instruction: 
+Instruction Start: 114
+Caret: 127
+Name: ``
+Child Index: `4`
+Alias: ``
+Blocks: [1] 
+=======
+  Block: Tetraquark\Block\ArrowFunctionBlock
+  Subtype: parenthesis:brackets
+  Instruction: () => {
+  Instruction Start: 114
+  Caret: 127
+  Name: ``
+  Child Index: `0`
+  Value: ``
+  Arguments: [0] `
+  Alias: ``
+  Blocks: [0] 
+  =======
+Block: Tetraquark\Block\CallerBlock
+Subtype: arrow-function
+Instruction: 
+Instruction Start: 128
+Caret: 141
+Name: ``
+Child Index: `5`
+Alias: ``
+Blocks: [1] 
+=======
+  Block: Tetraquark\Block\ArrowFunctionBlock
+  Subtype: parenthesis:brackets
+  Instruction: () => {
+  Instruction Start: 128
+  Caret: 141
+  Name: ``
+  Child Index: `0`
+  Value: ``
+  Arguments: [0] `
+  Alias: ``
+  Blocks: [0] 
+  =======
+Block: Tetraquark\Block\ClassBlock
+Subtype: class
+Instruction: class ClassName
+Instruction Start: 143
+Caret: 234
+Name: `ClassName`
+Child Index: `6`
+Extended: ``
+Alias: `ClassName`
+Blocks: [3] 
+=======
+  Block: Tetraquark\Block\ClassMethodBlock
+  Subtype: method
+  Instruction: constructor() {
+  Instruction Start: 160
+  Caret: 184
+  Name: `constructor`
+  Child Index: `0`
+  Is Private: `false`
+  Arguments: [0] `
+  Alias: `constructor`
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\ClassMethodBlock
+  Subtype: method
+  Instruction: constructor() {
+  Instruction Start: 186
+  Caret: 208
+  Name: `constructor`
+  Child Index: `1`
+  Is Private: `false`
+  Arguments: [0] `
+  Alias: `constructor`
+  Blocks: [0] 
+  =======
+  Block: Tetraquark\Block\ClassMethodBlock
+  Subtype: method
+  Instruction: constructor() {
+  Instruction Start: 210
+  Caret: 232
+  Name: `constructor`
+  Child Index: `2`
+  Is Private: `false`
+  Arguments: [0] `
+  Alias: `constructor`
+  Blocks: [0] 
+  =======
 Duration: 0.004s
 
 
-class beXtended extends toExtend{item}let obj={nameClass:class{},nameExtendedClass:class extends obj.nameClass{}};
-
+async function functionName(){}get function functionName(){}set function functionName(){}async()=>{};
+get()=>{};
+set()=>{};
+class ClassName{async constructor(){}get constructor(){}set constructor(){}}

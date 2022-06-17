@@ -17,20 +17,19 @@ class FunctionBlock extends MethodBlock implements Contract\Block
 
     public function objectify(int $start = 0)
     {
-        $this->findMethodEnd($start);
-        $this->setInstruction(new Content('function' . $this->getInstruction()));
+        $this->findMethodEnd($start - 8);
         $this->findAndSetName('function ', ['(' => true]);
         $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
         if (\mb_strlen($this->getName()) == 0) {
             $this->setSubtype(self::ANONYMOUS);
         }
         $this->findAndSetArguments();
-        $this->setInstructionStart($start - \mb_strlen('function '));
+        $this->checkForPrefixes();
     }
 
     public function recreate(): string
     {
-        $script = 'function ' . $this->getAlias($this->getName()) . '(' . $this->getAliasedArguments() . '){';
+        $script = $this->recreatePrefix() . 'function ' . $this->getAlias($this->getName()) . '(' . $this->getAliasedArguments() . '){';
         $blocks = '';
 
         foreach ($this->getBlocks() as $block) {
@@ -46,7 +45,7 @@ class FunctionBlock extends MethodBlock implements Contract\Block
 
     public function recreateForImport(): string
     {
-        $script = $this->getAlias($this->getName()) . ' = function(' . $this->getAliasedArguments() . '){';
+        $script = $this->getAlias($this->getName()) . ' = ' . $this->recreatePrefix() . 'function(' . $this->getAliasedArguments() . '){';
         $blocks = '';
 
         foreach ($this->getBlocks() as $block) {

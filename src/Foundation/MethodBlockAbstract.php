@@ -9,7 +9,11 @@ abstract class MethodBlockAbstract extends BlockAbstract
     /** @var array Contains arguments in form of Blocks[] so its [Blocks[], Blocks[]] */
     protected array $arguments = [];
     protected string $status = '';
-    protected const CREATING_ARGUMENTS = 'creating arguments';
+    protected string $prefix = '';
+    public const CREATING_ARGUMENTS = 'method:create:argument';
+    public const ASYNC_PREFIX = 'prefix:async';
+    public const GET_PREFIX = 'prefix:get';
+    public const SET_PREFIX = 'prefix:set';
 
     public function getArguments(): array
     {
@@ -173,5 +177,56 @@ abstract class MethodBlockAbstract extends BlockAbstract
         $properStart = $start;
         $this->setInstructionStart($properStart)
             ->setInstruction(self::$content->iCutToContent($properStart, $properEnd - 1));
+    }
+
+    public function getPrefix(): string
+    {
+        return $this->prefix;
+    }
+
+    protected function setPrefix(string $prefix): self
+    {
+        $this->prefix = $prefix;
+        return $this;
+    }
+
+    public function recreatePrefix(): string
+    {
+        return match ($this->prefix) {
+            self::ASYNC_PREFIX => 'async ',
+            self::SET_PREFIX   => 'set ',
+            self::GET_PREFIX   => 'get ',
+            default            => '',
+        };
+    }
+
+    protected function checkForPrefixes(): void
+    {
+        list($word, $pos) = $this->getPreviousWord($this->getInstructionStart() - 1, self::$content);
+        $possibleAsync = substr($word, -5);
+        $realPos = $pos + \mb_strlen($word) - 5;
+        Log::log($possibleAsync . ',' . $pos);
+
+        if ($possibleAsync === 'async') {
+            Log::log('is async');
+            $this->setPrefix(self::ASYNC_PREFIX)
+                ->setInstructionStart($realPos);
+            return;
+        }
+
+        $possibleGetOrSet = substr($word, -3);
+        $realPos = $pos + \mb_strlen($word) - 3;
+
+        if ($possibleGetOrSet === 'get') {
+            $this->setPrefix(self::GET_PREFIX)
+                ->setInstructionStart($realPos);
+            return;
+        }
+
+        if ($possibleGetOrSet === 'set') {
+            $this->setPrefix(self::SET_PREFIX)
+                ->setInstructionStart($realPos);
+            return;
+        }
     }
 }

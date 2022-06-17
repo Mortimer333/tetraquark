@@ -88,16 +88,16 @@ class CallerBlock extends Block implements Contract\Block
                 break;
             } elseif ($searchForArrow && $letter == '=' && (self::$content->getLetter($i + 1) ?? '') == ">") {
                 // If this is arrow function then make this empty and skip current letter
-                $this->setInstruction(new Content(''))
-                    ->setInstructionStart($start)
-                ;
                 $arrow = new ArrowFunctionBlock($i + 1, '', $this);
                 $arrow->setChildIndex(\sizeof($this->getBlocks()));
                 $this->setBlocks([
                     $arrow
                 ]);
-                $this->setSubtype(self::ARROW_FUNCTION);
-                $this->setCaret($arrow->getCaret());
+                $this->setSubtype(self::ARROW_FUNCTION)
+                    ->setCaret($arrow->getCaret())
+                    ->setInstruction(new Content(''))
+                    ->setInstructionStart($arrow->getInstructionStart())
+                ;
                 return;
             }
         }

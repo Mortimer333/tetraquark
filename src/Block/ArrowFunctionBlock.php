@@ -41,6 +41,9 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
         $this->setInstruction(new Content($instruction))
             ->setInstructionStart($subStart)
         ;
+
+        $this->checkForPrefixes();
+
         if ($this->isMultiLine()) {
             $this->endFunction = true;
             $this->endChars = [
@@ -228,10 +231,11 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
             }
         }
 
+        $script = $this->recreatePrefix();
         if (\sizeof($args) == 1 && !$hasSpread) {
-            $script = $this->getAliasedArguments() . '=>';
+            $script .= $this->getAliasedArguments() . '=>';
         } else {
-            $script = '(' . $this->getAliasedArguments() . ')=>';
+            $script .= '(' . $this->getAliasedArguments() . ')=>';
         }
         if (!$this->isMultiLine()) {
             $script .= new Content($this->getValue()) . ';';

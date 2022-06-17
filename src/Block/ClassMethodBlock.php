@@ -32,6 +32,7 @@ class ClassMethodBlock extends MethodBlock implements Contract\Block
         }
         $this->findMethodEnd($start);
         $this->findAndSetName('', ['(' => true]);
+        $this->checkForPrefixes();
         $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
         $this->setSubtype('method');
         $this->findAndSetArguments();
@@ -53,7 +54,7 @@ class ClassMethodBlock extends MethodBlock implements Contract\Block
 
     public function recreate(): string
     {
-        $script = '';
+        $script = $this->recreatePrefix();
         if ($this->getSubtype() === self::STATIC_METH) {
             $script .= 'static ';
         }

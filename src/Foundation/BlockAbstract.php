@@ -228,7 +228,6 @@ abstract class BlockAbstract
 
     protected function generateUndefined(int $start, string $possibleUndefined, int $childIndex): BlockInterface
     {
-        Log::log('gen und: ' . $possibleUndefined);
         if ($this::class === Block\ClassBlock::class) {
             $undefined = new Block\EmptyAttributeBlock($start, $possibleUndefined, '', $this);
         } elseif ($this::class === Block\ImportBlock::class) {

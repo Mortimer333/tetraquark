@@ -6,8 +6,6 @@ This is supposed to be a minifier and obfuscator in one. But due to project with
 
 # Fixes
 
-## methods/function `get` and `set` keyword
-## methods/function `async` keyword
 ## method/functions generators = `*method()` - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator
 ## Add the rest of taken keywords
 ## Add to variables Deconstructed assignment - https://medium.com/swlh/javascript-best-practices-renaming-imports-and-proper-variable-declaration-aa405c191bee
