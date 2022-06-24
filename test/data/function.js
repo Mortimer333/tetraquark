@@ -2,6 +2,10 @@ async function functionName() {
 
 }
 
+function* functionName() {
+
+}
+
 get function functionName() {
 
 }
@@ -32,6 +36,10 @@ class ClassName{
     }
 
     set constructor() {
+
+    }
+
+    *constructor() {
 
     }
 }

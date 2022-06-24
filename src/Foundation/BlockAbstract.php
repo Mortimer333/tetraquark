@@ -127,29 +127,6 @@ abstract class BlockAbstract
             $hint = '';
         }
 
-        // if ($class == Block\ChainLinkBlock::class) {
-        //     if (
-        //         $this::class !== Block\ChainLinkBlock::class
-        //         && $this::class !== Block\BracketChainLinkBlock::class
-        //         || (
-        //             $this::class === Block\BracketChainLinkBlock::class
-        //             && $this->getSubtype() === Block\BracketChainLinkBlock::BRACKET_BLOCK_CREATE
-        //         )
-        //     ) {
-        //         $block = new $class($start, Block\ChainLinkBlock::FIRST, $this);
-        //
-        //         $possibleUndefined = \mb_substr($possibleUndefined, 0, -($block->getInstruction()->getLength() + 1));
-        //         if (Validate::isValidUndefined($possibleUndefined)) {
-        //             $undefinedBlock = new Block\UndefinedBlock($start - \mb_strlen($possibleUndefined), $possibleUndefined, '', $this);
-        //             $undefinedBlock->setChildIndex(\sizeof($blocks));
-        //             $blocks[] = $undefinedBlock;
-        //         }
-        //
-        //         $possibleUndefined = '';
-        //         return $block;
-        //     }
-        //     return new $class($start + 1, $hint, $this, '.');
-        // }
         return new $class($start, $hint, $this);
     }
 
@@ -234,6 +211,8 @@ abstract class BlockAbstract
             $undefined = new Block\ImportAsBlock($start, $possibleUndefined, '', $this);
         } elseif ($this::class === Block\ExportBlock::class) {
             $undefined = new Block\ExportAsBlock($start, $possibleUndefined, '', $this);
+        } elseif (Validate::isTakenKeyWord(trim($possibleUndefined))) {
+            $undefined = new Block\TakenBlock($start, $possibleUndefined, '', $this);
         } else {
             $undefined = new Block\UndefinedBlock($start, $possibleUndefined, '', $this);
         }
@@ -250,7 +229,7 @@ abstract class BlockAbstract
         && $map !== 'BracketChainLinkBlock';
     }
 
-    protected function createSubBlocks(?int $start = null, bool $onlyOne = false, $special = false): array
+    protected function createSubBlocks(?int $start = null, bool $onlyOne = false, ?callable $endMethod = null, $special = false): array
     {
         if (is_null($start)) {
             $start = $this->getCaret();
@@ -264,7 +243,7 @@ abstract class BlockAbstract
         Log::increaseIndent();
         for ($i=$start; $i < self::$content->getLength(); $i++) {
             $letter = self::$content->getLetter($i);
-            // Log::log($this::class . " | Letter: " . $letter . ', i: ' . $i . ', ' . self::$content->getLength() . ', ["' . implode('", "', array_keys($this->endChars)) . '"]' );
+            Log::log($this::class . " | Letter: " . $letter . ', i: ' . $i . ', ' . self::$content->getLength() . ', ["' . implode('", "', array_keys($this->endChars)) . '"]' );
             if (
                 ($startsTemplate = Validate::isTemplateLiteralLandmark($letter, ''))
                 || Validate::isStringLandmark($letter, '')
@@ -342,7 +321,9 @@ abstract class BlockAbstract
                 $mappedWord = '';
             }
 
-            if ($this->endChars[$letter] ?? false) {
+            if (
+                $this->endChars[$letter] ?? false
+                || is_callable($endMethod) && $endMethod($i, $letter, $possibleUndefined)) {
                 $possibleUndefined = \mb_substr($possibleUndefined, 0, -1);
                 if (Validate::isValidUndefined($possibleUndefined)) {
                     if ($this->canHaveAnotherChild('UndefinedBlock') && $onlyOne) {
@@ -375,7 +356,7 @@ abstract class BlockAbstract
     protected function findAndSetName(string $prefix, array $ends): void
     {
         $instr = $this->getInstruction();
-        $start = \mb_strlen($prefix) - 1;
+        $start = \mb_strlen($prefix);
         if ($start < 0) {
             $start = 0;
         }

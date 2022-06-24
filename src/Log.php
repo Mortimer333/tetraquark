@@ -151,6 +151,18 @@ class Log
             if (method_exists($block, 'getExtendClass')) {
                 self::log("Extended: `" . $block->getExtendClass() . "`");
             }
+            if (method_exists($block, 'isGenerator')) {
+                self::log("Generator: `" . ($block->isGenerator() ? 'true' : 'false') . "`");
+            }
+            if (method_exists($block, 'getCaseValue')) {
+                self::log("Case value: `" . $block->getCaseValue() . "`");
+            }
+            if (method_exists($block, 'getBreakLabel')) {
+                self::log("Break label: `" . $block->getBreakLabel() . "`");
+            }
+            if (method_exists($block, 'getContinueLabel')) {
+                self::log("Continue label: `" . $block->getContinueLabel() . "`");
+            }
             if (method_exists($block, 'getArguments')) {
                 self::log("Arguments: [" . \sizeof($block->getArguments()) . "] `");
                 self::increaseIndent();

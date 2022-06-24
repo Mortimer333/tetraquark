@@ -26,15 +26,13 @@ class Validate
         'with' => true, 'default' => true, 'if' => true, 'throw' => true,
         'delete' => true, 'in' => true, 'try' => true, 'class' => true,
         'enum' => true, 'extends' => true, 'super' => true, 'const' => true,
-        'export' => true, 'import' => true, 'implements' => true, 'let' => true,
-        'private' => true, 'public' => true, 'yield' => true, 'interface' => true,
-        'package' => true, 'protected' => true, 'static' => true, 'null' => true,
-        'true' => true, 'false' => true, 'from' => true
+        'export' => true, 'import' => true, 'let' => true, 'yield' => true, 
+        'static' => true, 'null' => true, 'true' => true, 'false' => true, 'from' => true
     ];
 
     protected static array $extendingsConsts = [
         'instanceof' => true, 'typeof' => true, 'in' => true, 'extends' => true,
-        'implements' => true, 'interface' => true, 'from' => true, 'new' => true
+        'from' => true, 'new' => true
     ];
 
     public static function getSpecial(): array

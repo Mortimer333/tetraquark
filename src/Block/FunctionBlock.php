@@ -15,8 +15,14 @@ class FunctionBlock extends MethodBlock implements Contract\Block
         '{' => true,
     ];
 
+    protected bool $generator = false;
+
     public function objectify(int $start = 0)
     {
+        $endLandmark = self::$content->getLetter($start);
+        if ($endLandmark == '*') {
+            $this->setGenerator(true);
+        }
         $this->findMethodEnd($start - 8);
         $this->findAndSetName('function ', ['(' => true]);
         $this->blocks = array_merge($this->blocks, $this->createSubBlocks());
@@ -27,9 +33,24 @@ class FunctionBlock extends MethodBlock implements Contract\Block
         $this->checkForPrefixes();
     }
 
+    protected function setGenerator(bool $isGenerator): self
+    {
+        $this->generator = $isGenerator;
+        return $this;
+    }
+
+    public function isGenerator(): bool
+    {
+        return $this->generator;
+    }
+
     public function recreate(): string
     {
-        $script = $this->recreatePrefix() . 'function ' . $this->getAlias($this->getName()) . '(' . $this->getAliasedArguments() . '){';
+        $script = $this->recreatePrefix() . 'function';
+        if ($this->generator) {
+            $script .= '*';
+        }
+        $script .= ' ' . $this->getAlias($this->getName()) . '(' . $this->getAliasedArguments() . '){';
         $blocks = '';
 
         foreach ($this->getBlocks() as $block) {
@@ -45,7 +66,11 @@ class FunctionBlock extends MethodBlock implements Contract\Block
 
     public function recreateForImport(): string
     {
-        $script = $this->getAlias($this->getName()) . ' = ' . $this->recreatePrefix() . 'function(' . $this->getAliasedArguments() . '){';
+        $script = $this->getAlias($this->getName()) . ' = ' . $this->recreatePrefix() . 'function';
+        if ($this->generator) {
+            $script .= '*';
+        }
+        $script .= '(' . $this->getAliasedArguments() . '){';
         $blocks = '';
 
         foreach ($this->getBlocks() as $block) {

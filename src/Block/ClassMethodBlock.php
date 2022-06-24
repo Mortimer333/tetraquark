@@ -8,6 +8,7 @@ class ClassMethodBlock extends MethodBlock implements Contract\Block
 {
     public const STATIC_METH = 'class:method:static';
     protected bool $private = false;
+    protected bool $generator = false;
     protected array $endChars = [
         '}' => true
     ];
@@ -41,7 +42,10 @@ class ClassMethodBlock extends MethodBlock implements Contract\Block
         if ($this->getParent() instanceof ClassBlock) {
             if ($this->getName()[0] === '#') {
                 $this->setPrivate(true);
+            } elseif ($this->getName()[0] === '*') {
+                $this->setGenerator(true);
             }
+
             list($word, $pos) = $this->getPreviousWord($this->getInstructionStart() - 1, self::$content);
             if (\mb_substr($word, -6) === 'static') {
                 $this->setInstructionStart($pos - 6)
@@ -67,6 +71,17 @@ class ClassMethodBlock extends MethodBlock implements Contract\Block
             return $script . rtrim($blocks, ';') . ';}';
         }
         return $script . '}';
+    }
+
+    protected function setGenerator(bool $isGenerator): self
+    {
+        $this->generator = $isGenerator;
+        return $this;
+    }
+
+    public function isGenerator(): bool
+    {
+        return $this->generator;
     }
 
     protected function setPrivate(bool $isPrivate): self

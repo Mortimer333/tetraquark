@@ -21,6 +21,19 @@ trait BlockMapsTrait
         'c' => [
             'o' => [
                 'n' => [
+                    "t" => [
+                        "i" => [
+                            "n" => [
+                                "u" => [
+                                    "e" => [
+                                        ' '  => 'ContinueBlock',
+                                        "\n" => "ContinueBlock",
+                                        ";" => "ContinueBlock",
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ],
                     's' => [
                         't' => [
                             ' '  => 'VariableBlock',
@@ -35,6 +48,19 @@ trait BlockMapsTrait
                         's' => [
                             ' '  => 'ClassBlock',
                             "\n" => "ClassBlock",
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        "b" => [
+            "r" => [
+                "e" => [
+                    "a" => [
+                        "k" => [
+                            ' '  => 'BreakBlock',
+                            "\n" => "BreakBlock",
+                            ";" => "BreakBlock",
                         ]
                     ]
                 ]
@@ -89,6 +115,7 @@ trait BlockMapsTrait
                                         ' '  => 'FunctionBlock',
                                         "\n" => "FunctionBlock",
                                         "("  => "FunctionBlock",
+                                        "*"  => "FunctionBlock", // Generator
                                     ]
                                 ]
                             ]
@@ -317,6 +344,8 @@ trait BlockMapsTrait
 
     protected array $classBlocksMap  = [
         '(' => "ClassMethodBlock",
+        '#' => false,
+        '*' => false,
         "&_" => [
             "s" => [
                 "t" => [
@@ -474,6 +503,36 @@ trait BlockMapsTrait
     protected array $importObjectBlocksMap = [
         "," => "ImportObjectItemBlock",
     ];
+    protected array $switchObjectBlocksMap = [
+        "c" => [
+            'a' => [
+                's' => [
+                    'e' => [
+                        " " => 'SwitchCaseBlock',
+                        "\n" => 'SwitchCaseBlock',
+                        ":" => 'SwitchCaseBlock',
+                    ],
+                ]
+            ]
+        ],
+        "d" => [
+            "e" => [
+                "f" => [
+                    "a" => [
+                        "u" => [
+                            "l" => [
+                                "t" => [
+                                    " " => 'SwitchCaseBlock',
+                                    "\n" => 'SwitchCaseBlock',
+                                    ":" => 'SwitchCaseBlock',
+                                ],
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ];
 
     protected function getDefaultMap(): array
     {
@@ -496,7 +555,9 @@ trait BlockMapsTrait
         ];
 
         $blocksMap = $this->mergeBlockMaps($blocksMap, $additionalPaths[$this::class] ?? []);
-        if (
+        if ($this instanceof Block\SwitchBlock) {
+            $blocksMap = $this->switchObjectBlocksMap;
+        } elseif (
             $this instanceof Block\ChainLinkBlock
             && $this->getSubtype() != Block\ChainLinkBlock::BRACKET_BLOCK_CREATE
         ) {

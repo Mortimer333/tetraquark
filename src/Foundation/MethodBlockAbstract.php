@@ -205,10 +205,8 @@ abstract class MethodBlockAbstract extends BlockAbstract
         list($word, $pos) = $this->getPreviousWord($this->getInstructionStart() - 1, self::$content);
         $possibleAsync = substr($word, -5);
         $realPos = $pos + \mb_strlen($word) - 5;
-        Log::log($possibleAsync . ',' . $pos);
 
         if ($possibleAsync === 'async') {
-            Log::log('is async');
             $this->setPrefix(self::ASYNC_PREFIX)
                 ->setInstructionStart($realPos);
             return;

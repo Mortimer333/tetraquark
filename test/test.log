@@ -1,172 +1,281 @@
 Mapping...
-  async,0
-  is async
-  get,34
-  set,66
-  async,98
-  is async
-  get,114
-  set,128
-    async,160
-    is async
-    get,186
-    set,210
+  Tetraquark\Block\ScriptBlock | Letter:  , i: 0, 159, [""]
+  Tetraquark\Block\ScriptBlock | Letter: l, i: 1, 159, [""]
+  Tetraquark\Block\ScriptBlock | Letter: e, i: 2, 159, [""]
+  Tetraquark\Block\ScriptBlock | Letter: t, i: 3, 159, [""]
+  Tetraquark\Block\ScriptBlock | Letter:  , i: 4, 159, [""]
+    Tetraquark\Block\VariableItemBlock | Letter:  , i: 9, 12, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: 2, i: 10, 12, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: ;, i: 11, 12, [";"]
+  Tetraquark\Block\ScriptBlock | Letter: \n, i: 16, 159, [""]
+  Tetraquark\Block\ScriptBlock | Letter: s, i: 17, 159, [""]
+  Tetraquark\Block\ScriptBlock | Letter: w, i: 18, 159, [""]
+  Tetraquark\Block\ScriptBlock | Letter: i, i: 19, 159, [""]
+  Tetraquark\Block\ScriptBlock | Letter: t, i: 20, 159, [""]
+  Tetraquark\Block\ScriptBlock | Letter: c, i: 21, 159, [""]
+  Tetraquark\Block\ScriptBlock | Letter: h, i: 22, 159, [""]
+  Tetraquark\Block\ScriptBlock | Letter:  , i: 23, 159, [""]
+    Tetraquark\Block\SwitchBlock | Letter: l, i: 0, 6, ["}"]
+    Tetraquark\Block\SwitchBlock | Letter: e, i: 1, 6, ["}"]
+    Tetraquark\Block\SwitchBlock | Letter: n, i: 2, 6, ["}"]
+    Tetraquark\Block\SwitchBlock | Letter: g, i: 3, 6, ["}"]
+    Tetraquark\Block\SwitchBlock | Letter: t, i: 4, 6, ["}"]
+    Tetraquark\Block\SwitchBlock | Letter: h, i: 5, 6, ["}"]
+    Tetraquark\Block\SwitchBlock | Letter: \n, i: 34, 159, ["}"]
+    Tetraquark\Block\SwitchBlock | Letter:  , i: 35, 159, ["}"]
+    Tetraquark\Block\SwitchBlock | Letter: c, i: 36, 159, ["}"]
+    Tetraquark\Block\SwitchBlock | Letter: a, i: 37, 159, ["}"]
+    Tetraquark\Block\SwitchBlock | Letter: s, i: 38, 159, ["}"]
+    Tetraquark\Block\SwitchBlock | Letter: e, i: 39, 159, ["}"]
+    Tetraquark\Block\SwitchBlock | Letter:  , i: 40, 159, ["}"]
+      Tetraquark\Block\SwitchCaseBlock | Letter: c, i: 43, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: o, i: 44, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: n, i: 45, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: s, i: 46, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: o, i: 47, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: l, i: 48, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: e, i: 49, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: ., i: 50, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: l, i: 51, 159, [""]
+        Tetraquark\Block\CallerBlock | Letter: ', i: 0, 13, [";"]
+      Tetraquark\Block\SwitchCaseBlock | Letter: \n, i: 68, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter:  , i: 69, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: c, i: 70, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: o, i: 71, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: n, i: 72, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: t, i: 73, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: i, i: 74, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: n, i: 75, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: u, i: 76, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: e, i: 77, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: ;, i: 78, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: \n, i: 79, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter:  , i: 80, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: b, i: 81, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: r, i: 82, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: e, i: 83, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: a, i: 84, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: k, i: 85, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter:  , i: 86, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: \n, i: 93, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter:  , i: 94, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: d, i: 95, 159, [""]
+    Tetraquark\Block\SwitchBlock | Letter: d, i: 95, 159, ["}"]
+    Tetraquark\Block\SwitchBlock | Letter: e, i: 96, 159, ["}"]
+    Tetraquark\Block\SwitchBlock | Letter: f, i: 97, 159, ["}"]
+    Tetraquark\Block\SwitchBlock | Letter: a, i: 98, 159, ["}"]
+    Tetraquark\Block\SwitchBlock | Letter: u, i: 99, 159, ["}"]
+    Tetraquark\Block\SwitchBlock | Letter: l, i: 100, 159, ["}"]
+    Tetraquark\Block\SwitchBlock | Letter: t, i: 101, 159, ["}"]
+    Tetraquark\Block\SwitchBlock | Letter: :, i: 102, 159, ["}"]
+      Tetraquark\Block\SwitchCaseBlock | Letter: \n, i: 103, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter:  , i: 104, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: c, i: 105, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: o, i: 106, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: n, i: 107, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: s, i: 108, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: o, i: 109, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: l, i: 110, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: e, i: 111, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: ., i: 112, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: l, i: 113, 159, [""]
+        Tetraquark\Block\CallerBlock | Letter: ', i: 0, 25, [";"]
+      Tetraquark\Block\SwitchCaseBlock | Letter: \n, i: 142, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter:  , i: 143, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: c, i: 144, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: o, i: 145, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: n, i: 146, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: t, i: 147, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: i, i: 148, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: n, i: 149, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: u, i: 150, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: e, i: 151, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter:  , i: 152, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: \n, i: 157, 159, [""]
+      Tetraquark\Block\SwitchCaseBlock | Letter: }, i: 158, 159, [""]
+    Tetraquark\Block\SwitchBlock | Letter: }, i: 158, 159, ["}"]
 =======================
 Creating aliases...
 =======================
 Aliases: 
 Recreating...
 =======================
-Block: Tetraquark\Block\FunctionBlock
-Subtype: function
-Instruction: function functionName() {
-Instruction Start: 0
-Caret: 33
-Name: `functionName`
+Block: Tetraquark\Block\VariableBlock
+Subtype: let
+Instruction: let length = 2
+Instruction Start: 1
+Caret: 15
+Name: ``
 Child Index: `0`
-Arguments: [0] `
-Alias: `functionName`
-Blocks: [0] 
+Value: ``
+Alias: ``
+Blocks: [1] 
 =======
-Block: Tetraquark\Block\FunctionBlock
-Subtype: function
-Instruction: function functionName() {
-Instruction Start: 34
-Caret: 65
-Name: `functionName`
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype: 
+  Instruction:  length =
+  Instruction Start: 0
+  Caret: 11
+  Name: `length`
+  Child Index: `0`
+  Value: ``
+  Alias: `length`
+  Blocks: [1] 
+  =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  2
+    Instruction Start: 9
+    Caret: 11
+    Name: ``
+    Child Index: `0`
+    Alias: ``
+    Blocks: [0] 
+    =======
+Block: Tetraquark\Block\SwitchBlock
+Subtype: switch
+Instruction: switch (length) {
+Instruction Start: 17
+Caret: 158
+Name: ``
 Child Index: `1`
-Arguments: [0] `
-Alias: `functionName`
-Blocks: [0] 
-=======
-Block: Tetraquark\Block\FunctionBlock
-Subtype: function
-Instruction: function functionName() {
-Instruction Start: 66
-Caret: 97
-Name: `functionName`
-Child Index: `2`
-Arguments: [0] `
-Alias: `functionName`
-Blocks: [0] 
-=======
-Block: Tetraquark\Block\CallerBlock
-Subtype: arrow-function
-Instruction: 
-Instruction Start: 98
-Caret: 113
-Name: ``
-Child Index: `3`
-Alias: ``
-Blocks: [1] 
-=======
-  Block: Tetraquark\Block\ArrowFunctionBlock
-  Subtype: parenthesis:brackets
-  Instruction: () => {
-  Instruction Start: 98
-  Caret: 113
+Cond block: [1] 
+  Block: Tetraquark\Block\UndefinedBlock
+  Subtype: 
+  Instruction: length
+  Instruction Start: -1
+  Caret: 5
   Name: ``
   Child Index: `0`
-  Value: ``
-  Arguments: [0] `
   Alias: ``
   Blocks: [0] 
   =======
-Block: Tetraquark\Block\CallerBlock
-Subtype: arrow-function
-Instruction: 
-Instruction Start: 114
-Caret: 127
-Name: ``
-Child Index: `4`
 Alias: ``
-Blocks: [1] 
+Blocks: [2] 
 =======
-  Block: Tetraquark\Block\ArrowFunctionBlock
-  Subtype: parenthesis:brackets
-  Instruction: () => {
-  Instruction Start: 114
-  Caret: 127
+  Block: Tetraquark\Block\SwitchCaseBlock
+  Subtype: case
+  Instruction: case 1
+  Instruction Start: 36
+  Caret: 94
   Name: ``
   Child Index: `0`
-  Value: ``
-  Arguments: [0] `
+  Case value: `1`
   Alias: ``
-  Blocks: [0] 
+  Blocks: [3] 
   =======
-Block: Tetraquark\Block\CallerBlock
-Subtype: arrow-function
-Instruction: 
-Instruction Start: 128
-Caret: 141
-Name: ``
-Child Index: `5`
-Alias: ``
-Blocks: [1] 
-=======
-  Block: Tetraquark\Block\ArrowFunctionBlock
-  Subtype: parenthesis:brackets
-  Instruction: () => {
-  Instruction Start: 128
-  Caret: 141
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: chain:first
+    Instruction: console.log
+    Instruction Start: 43
+    Caret: 67
+    Name: ``
+    Child Index: `0`
+    Bracket block: [0] 
+    Alias: ``
+    Blocks: [1] 
+    =======
+      Block: Tetraquark\Block\CallerBlock
+      Subtype: (
+      Instruction: 
+      Instruction Start: 54
+      Caret: 67
+      Name: ``
+      Child Index: `0`
+      Alias: ``
+      Blocks: [1] 
+      =======
+        Block: Tetraquark\Block\StringBlock
+        Subtype: 
+        Instruction: 'Obj is one'
+        Instruction Start: 0
+        Caret: 12
+        Name: ``
+        Child Index: `0`
+        Alias: ``
+        Blocks: [0] 
+        =======
+    Block: Tetraquark\Block\ContinueBlock
+    Subtype: continue;
+    Instruction: continue;
+    Instruction Start: 69
+    Caret: 78
+    Name: ``
+    Child Index: `1`
+    Continue label: ``
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\BreakBlock
+    Subtype: break
+    Instruction: break label;
+    Instruction Start: 80
+    Caret: 92
+    Name: ``
+    Child Index: `2`
+    Break label: `label`
+    Alias: ``
+    Blocks: [0] 
+    =======
+  Block: Tetraquark\Block\SwitchCaseBlock
+  Subtype: switch-case:default
+  Instruction:  default
+  Instruction Start: 94
+  Caret: 157
   Name: ``
-  Child Index: `0`
-  Value: ``
-  Arguments: [0] `
-  Alias: ``
-  Blocks: [0] 
-  =======
-Block: Tetraquark\Block\ClassBlock
-Subtype: class
-Instruction: class ClassName
-Instruction Start: 143
-Caret: 234
-Name: `ClassName`
-Child Index: `6`
-Extended: ``
-Alias: `ClassName`
-Blocks: [3] 
-=======
-  Block: Tetraquark\Block\ClassMethodBlock
-  Subtype: method
-  Instruction: constructor() {
-  Instruction Start: 160
-  Caret: 184
-  Name: `constructor`
-  Child Index: `0`
-  Is Private: `false`
-  Arguments: [0] `
-  Alias: `constructor`
-  Blocks: [0] 
-  =======
-  Block: Tetraquark\Block\ClassMethodBlock
-  Subtype: method
-  Instruction: constructor() {
-  Instruction Start: 186
-  Caret: 208
-  Name: `constructor`
   Child Index: `1`
-  Is Private: `false`
-  Arguments: [0] `
-  Alias: `constructor`
-  Blocks: [0] 
+  Case value: ``
+  Alias: ``
+  Blocks: [2] 
   =======
-  Block: Tetraquark\Block\ClassMethodBlock
-  Subtype: method
-  Instruction: constructor() {
-  Instruction Start: 210
-  Caret: 232
-  Name: `constructor`
-  Child Index: `2`
-  Is Private: `false`
-  Arguments: [0] `
-  Alias: `constructor`
-  Blocks: [0] 
-  =======
-Duration: 0.004s
+    Block: Tetraquark\Block\ChainLinkBlock
+    Subtype: chain:first
+    Instruction: console.log
+    Instruction Start: 105
+    Caret: 141
+    Name: ``
+    Child Index: `0`
+    Bracket block: [0] 
+    Alias: ``
+    Blocks: [1] 
+    =======
+      Block: Tetraquark\Block\CallerBlock
+      Subtype: (
+      Instruction: 
+      Instruction Start: 116
+      Caret: 141
+      Name: ``
+      Child Index: `0`
+      Alias: ``
+      Blocks: [1] 
+      =======
+        Block: Tetraquark\Block\StringBlock
+        Subtype: 
+        Instruction: 'Obj is bigger then one'
+        Instruction Start: 0
+        Caret: 24
+        Name: ``
+        Child Index: `0`
+        Alias: ``
+        Blocks: [0] 
+        =======
+    Block: Tetraquark\Block\ContinueBlock
+    Subtype: continue
+    Instruction: continue leb;
+    Instruction Start: 143
+    Caret: 156
+    Name: ``
+    Child Index: `1`
+    Continue label: `leb`
+    Alias: ``
+    Blocks: [0] 
+    =======
+Duration: 0.005s
 
 
-async function functionName(){}get function functionName(){}set function functionName(){}async()=>{};
-get()=>{};
-set()=>{};
-class ClassName{async constructor(){}get constructor(){}set constructor(){}}
+let length=2;
+switch(length){case 1:console.log('Obj is one');
+continue;
+break label;
+default:console.log('Obj is bigger then one');
+continue leb}

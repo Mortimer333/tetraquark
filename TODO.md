@@ -6,7 +6,6 @@ This is supposed to be a minifier and obfuscator in one. But due to project with
 
 # Fixes
 
-## method/functions generators = `*method()` - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator
 ## Add the rest of taken keywords
 ## Add to variables Deconstructed assignment - https://medium.com/swlh/javascript-best-practices-renaming-imports-and-proper-variable-declaration-aa405c191bee
 ## If CallerBlock try to get caller name
@@ -16,6 +15,25 @@ This is supposed to be a minifier and obfuscator in one. But due to project with
 ## Put imports not in seperate attributes (Ī.y = Ī => {) but inside the object (let Ī={y:Ī=>{}};). This way we will save 2n letter per n imports (so with 10 imports 20 letters)
 
 # Improvments - probably name searching when creating exports takes a lot of time
+
+# replace ifs with short if:
+
+"bind" != n && this[n].map(e => e.textContent = e.text);
+is equivalent of
+if ("bind" != n) {
+  this[n].map(e => e.textContent = e.text);
+}
+
+## function in function replacment
+
+const t = t => n => n.textContent = n.textContent.split("{" + t + "}").join(e[t]);
+is equivalent of
+
+const t = function (t) {
+  return function (n) {
+    n.textContent = n.textContent.split("{" + t + "}").join(e[t]);
+  }
+}
 
 ## If script will be slow look into setting all values for functions in one iteration (instead of ~2,5)
 
