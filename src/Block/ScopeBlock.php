@@ -27,6 +27,6 @@ class ScopeBlock extends Block implements Contract\Block
             $script .= trim($block->recreate());
         }
 
-        return $script . '};';
+        return $script . '}';
     }
 }

@@ -34,7 +34,7 @@ abstract class MethodBlockAbstract extends BlockAbstract
         $args = '';
         foreach ($this->getArguments() as $arg) {
             foreach ($arg as $block) {
-                $args .= rtrim($block->recreate(), ';');
+                $args .= $block->recreate();
             }
             $args = trim($args) . ',';
         }

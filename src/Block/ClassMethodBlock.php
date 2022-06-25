@@ -68,7 +68,7 @@ class ClassMethodBlock extends MethodBlock implements Contract\Block
             $blocks .= $block->recreate();
         }
         if (\mb_strlen($blocks) > 0) {
-            return $script . rtrim($blocks, ';') . ';}';
+            return $script . $blocks . '}';
         }
         return $script . '}';
     }

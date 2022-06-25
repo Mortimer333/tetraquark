@@ -11,13 +11,13 @@ abstract class VariableBlockAbstract extends BlockAbstract
 
         foreach ($this->getBlocks() as $i => $block) {
             if ($i == 0) {
-                $script .= rtrim(rtrim($block->recreate(), ';'), ',');
+                $script .= rtrim($block->recreate(), ',');
             } else {
-                $script .= ',' . rtrim(rtrim($block->recreate(), ';'), ',');
+                $script .= ',' . rtrim($block->recreate(), ',');
             }
         }
 
-        return $script . ';';
+        return $script;
     }
 
     public function recreateForImport(): string
@@ -28,7 +28,7 @@ abstract class VariableBlockAbstract extends BlockAbstract
             throw new Exception('Variable recreate for import should only/at least have one child', 500);
         }
 
-        return rtrim(rtrim($this->getBlocks()[0]->recreate(), ';'), ',') . ';';
+        return rtrim($this->getBlocks()[0]->recreate(), ',');
     }
 
     protected function findVariableEnd(int $start): int

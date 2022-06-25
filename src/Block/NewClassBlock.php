@@ -71,17 +71,17 @@ class NewClassBlock extends MethodBlock implements Contract\Block
         $script = 'new ' . $this->getAlias($this->getClassName());
         $args = $this->getArguments();
         if (\sizeof($args) == 0) {
-            return $script . ';';
+            return $script;
         }
         $script .= '(';
         foreach ($args as $arg) {
             foreach ($arg as $block) {
-                $script .= rtrim($block->recreate(), ';');
+                $script .= $block->recreate();
             }
             $script .= ',';
         }
         $script = rtrim($script, ',');
-        return $script . ');';
+        return $script . ')';
     }
 
     protected function setClassName(string $name): void

@@ -58,7 +58,7 @@ class FunctionBlock extends MethodBlock implements Contract\Block
         }
 
         if (\mb_strlen($blocks) > 0) {
-            return $script . rtrim($blocks, ';') . ';}';
+            return $script . $blocks . '}';
         }
 
         return $script . '}';
@@ -78,7 +78,7 @@ class FunctionBlock extends MethodBlock implements Contract\Block
         }
 
         if (\mb_strlen($blocks) > 0) {
-            return $script . rtrim($blocks, ';') . ';}';
+            return $script . $blocks . '}';
         }
 
         return $script . '}';

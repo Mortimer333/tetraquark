@@ -129,15 +129,6 @@ class AttributeBlock extends VariableBlock implements Contract\Block
             $script .= rtrim($block->recreate(), ';');
         }
 
-        $scriptLastLetter = $script[\mb_strlen($script) - 1];
-        $addSemiColon = [
-            ';' => false,
-            ',' => false
-        ];
-
-        if ($addSemiColon[$scriptLastLetter] ?? true) {
-            $script .= ';';
-        }
         return $script;
     }
 

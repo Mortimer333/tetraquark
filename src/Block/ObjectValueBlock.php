@@ -65,7 +65,7 @@ class ObjectValueBlock extends Block implements Contract\Block
         $script = $this->replaceVariablesWithAliases(new Content($this->getName())) . ":";
 
         foreach ($this->getBlocks() as $block) {
-            $script .= rtrim($block->recreate(), ';');
+            $script .= $block->recreate();
         }
 
         return trim($script) . ",";

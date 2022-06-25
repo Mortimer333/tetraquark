@@ -53,7 +53,7 @@ class TryBlock extends BlockAbstract implements Contract\Block
         }
 
         if (\mb_strlen($blocks) > 0) {
-            $script .= rtrim($blocks, ';') . ';}';
+            $script .= $blocks . '}';
         } else {
             $script .= '}';
         }

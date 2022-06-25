@@ -49,6 +49,6 @@ class ExportObjectBlock extends Block implements Contract\Block, Contract\Export
 
         $script = rtrim($script, ',');
 
-        return $script . '};';
+        return $script . '}';
     }
 }

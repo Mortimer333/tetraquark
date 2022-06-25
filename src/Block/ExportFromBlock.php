@@ -41,6 +41,6 @@ class ExportFromBlock extends Block implements Contract\Block, Contract\ExportBl
 
     public function recreate(): string
     {
-        return " from '" . $this->getPath() . "';";
+        return " from '" . $this->getPath() . "'";
     }
 }

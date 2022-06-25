@@ -27,7 +27,7 @@ class ExportBlock extends VariableBlock implements Contract\Block, Contract\Expo
             $script .=  rtrim($block->recreate(), ';');
         }
 
-        return $script . ';';
+        return $script;
     }
 
     public function getExportedBlocks(): array

@@ -22,9 +22,9 @@ class ArrayBlock extends Block implements Contract\Block
     {
         $script = '[';
         foreach ($this->getBlocks() as $block) {
-            $script .= trim(trim($block->recreate()),';');
+            $script .= trim($block->recreate());
         }
         $script = rtrim($script, ',');
-        return $script . '];';
+        return $script . ']';
     }
 }

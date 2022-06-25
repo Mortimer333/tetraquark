@@ -238,7 +238,7 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
             $script .= '(' . $this->getAliasedArguments() . ')=>';
         }
         if (!$this->isMultiLine()) {
-            $script .= new Content($this->getValue()) . ';';
+            $script .= new Content($this->getValue());
         } else {
             $script .= '{';
             $blocks = '';
@@ -246,9 +246,9 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
                 $blocks .= $block->recreate();
             }
             if (\mb_strlen($blocks) > 0) {
-                $script .= rtrim($blocks, ';') . ';';
+                $script .= $blocks;
             }
-            $script .= '};';
+            $script .= '}';
         }
         return $script;
     }

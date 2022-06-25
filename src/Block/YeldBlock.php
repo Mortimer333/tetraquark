@@ -27,8 +27,8 @@ class YeldBlock extends VariableBlock implements Contract\Block
     {
         $script = 'yeld ';
         foreach ($this->getBlocks() as $block) {
-            $script .= rtrim($block->recreate(), ';');
+            $script .= $block->recreate();
         }
-        return rtrim($script, ';') . ';';
+        return $script;
     }
 }

@@ -462,7 +462,7 @@ trait BlockMapsTrait
             "default" => "SymbolBlock",
         ],
         ":" => "SymbolBlock",
-        ";" => "SemicolonBlock",
+        // ";" => "SemicolonBlock",
     ];
 
     protected array $classBlocksMap  = [

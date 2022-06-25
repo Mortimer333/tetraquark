@@ -41,6 +41,6 @@ class ImportFromBlock extends Block implements Contract\Block
 
     public function recreate(): string
     {
-        return " from '" . $this->getPath() . "';";
+        return " from '" . $this->getPath() . "'";
     }
 }

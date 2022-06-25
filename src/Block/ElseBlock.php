@@ -67,7 +67,7 @@ class ElseBlock extends Block implements Contract\Block
             if ($this->getSubType() != self::SINGLE_LINE) {
                 return $script . '}';
             }
-            return rtrim($script, ';') . ';';
+            return $script;
         }
     }
 }

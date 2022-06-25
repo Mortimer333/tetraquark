@@ -192,10 +192,10 @@ class ImportBlock extends VariableBlockAbstract implements Contract\Block
         $script = 'import ';
 
         foreach ($this->getBlocks() as $block) {
-            $script .=  rtrim($block->recreate(), ';');
+            $script .=  $block->recreate();
         }
 
-        return $script . ';';
+        return $script;
     }
 
     protected function addImportItems(array $blocks): void

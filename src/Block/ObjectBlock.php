@@ -35,11 +35,11 @@ class ObjectBlock extends Block implements Contract\Block
         $script = '{';
 
         foreach ($this->getBlocks() as $block) {
-            $script .= rtrim(trim($block->recreate()), ';');
+            $script .= trim($block->recreate());
         }
 
         $script = rtrim($script, ',');
 
-        return $script . '};';
+        return $script . '}';
     }
 }

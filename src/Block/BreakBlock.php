@@ -22,7 +22,7 @@ class BreakBlock extends Block implements Contract\Block
         list($word, $pos) = $this->getNextWord($start, self::$content);
         $this->setBreakLabel($word)
             ->setCaret($pos)
-            ->setInstruction(new Content('break ' . $this->getBreakLabel() . ';'));
+            ->setInstruction(new Content('break ' . $this->getBreakLabel()));
     }
 
     public function recreate(): string

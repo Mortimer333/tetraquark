@@ -22,7 +22,7 @@ class ContinueBlock extends Block implements Contract\Block
         list($word, $pos) = $this->getNextWord($start, self::$content);
         $this->setContinueLabel($word)
             ->setCaret($pos)
-            ->setInstruction(new Content('continue ' . $this->getContinueLabel() . ';'));
+            ->setInstruction(new Content('continue ' . $this->getContinueLabel()));
     }
 
     public function recreate(): string

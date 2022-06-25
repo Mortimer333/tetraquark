@@ -27,8 +27,8 @@ class ReturnBlock extends VariableBlock implements Contract\Block
     {
         $script = 'return ';
         foreach ($this->getBlocks() as $block) {
-            $script .= rtrim($block->recreate(), ';');
+            $script .= $block->recreate();
         }
-        return rtrim($script, ';') . ';';
+        return $script;
     }
 }

@@ -199,17 +199,17 @@ class ChainLinkBlock extends Block implements Contract\Block
         if ($this->isBracket) {
             $script .= "[";
             foreach ($this->getBracketBlocks() as $block) {
-                $script .= rtrim($block->recreate(), ';');
+                $script .= $block->recreate();
             }
             $script .= "]";
         }
 
         foreach ($this->getBlocks() as $block) {
-            $script .= rtrim($block->recreate(), ';');
+            $script .= $block->recreate();
         }
 
         if (!($this->getParent() instanceof ChainLinkBlock)) {
-            return $script . ';';
+            return $script;
         }
 
         return $script;

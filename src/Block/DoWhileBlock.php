@@ -95,7 +95,7 @@ class DoWhileBlock extends ConditionBlock implements Contract\Block
             $script .= $block->recreate();
         }
 
-        $script .= '}while(' . $this->getArgs() . ');';
+        $script .= '}while(' . $this->getArgs() . ')';
 
         return $script;
     }

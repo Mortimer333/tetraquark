@@ -47,7 +47,7 @@ class ForBlock extends ConditionBlock implements Contract\Block
     {
         $str = '';
         foreach ($blocks as $block) {
-            $str .= rtrim($block->recreate(), ';');
+            $str .= $block->recreate();
         }
         return $str;
     }

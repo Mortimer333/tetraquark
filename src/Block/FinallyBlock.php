@@ -33,7 +33,7 @@ class FinallyBlock extends BlockAbstract implements Contract\Block
         }
 
         if (\mb_strlen($blocks) > 0) {
-            return $script . rtrim($blocks, ';') . ';}';
+            return $script . $blocks . '}';
         }
 
         return $script . '}';

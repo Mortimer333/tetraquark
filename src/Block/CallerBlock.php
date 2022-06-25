@@ -125,14 +125,14 @@ class CallerBlock extends Block implements Contract\Block
         }
 
         foreach ($this->getBlocks() as $block) {
-            $script .= rtrim($block->recreate(), ';');
+            $script .= $block->recreate();
         }
 
         if ($this->getSubtype() !== self::ARROW_FUNCTION) {
             $script .= ')';
         }
         if ($this->getSubtype() === self::ARROW_FUNCTION || !$this->isNextSiblingContected()) {
-            return $script . ';';
+            return $script;
         }
         return $script;
     }

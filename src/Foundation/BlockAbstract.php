@@ -222,9 +222,7 @@ abstract class BlockAbstract
     {
         return (
             $this::class === Block\ChainLinkBlock::class
-            || $this::class === Block\BracketChainLinkBlock::class
-        ) && $map !== 'ChainLinkBlock'
-        && $map !== 'BracketChainLinkBlock';
+        ) && $map !== 'ChainLinkBlock';
     }
 
     protected function createSubBlocks(?int $start = null, bool $onlyOne = false, ?callable $endMethod = null, $special = false): array
@@ -752,7 +750,6 @@ abstract class BlockAbstract
         }
         return $nextSibling instanceof Block\CallerBlock
             || ($nextSibling instanceof Block\ChainLinkBlock && $nextSibling->getSubtype() !== Block\ChainLinkBlock::FIRST)
-            || $nextSibling instanceof Block\BracketChainLinkBlock
             || $nextSibling instanceof Block\DoubleEqualBlock
             || $nextSibling instanceof Block\TripleEqualBlock
             || $nextSibling instanceof Block\OperatorBlock
@@ -778,12 +775,6 @@ abstract class BlockAbstract
             && (
                 $parent->getSubtype() == Block\ChainLinkBlock::END_METHOD
                 || $parent->getSubtype() == Block\ChainLinkBlock::END_VARIABLE
-            )
-        ) || (
-            $parent::class === Block\BracketChainLinkBlock::class
-            && (
-                $parent->getSubtype() == Block\BracketChainLinkBlock::METHOD
-                || $parent->getSubtype() == Block\BracketChainLinkBlock::VARIABLE
             )
         )) {
             $child = $parent->getMethodValues();

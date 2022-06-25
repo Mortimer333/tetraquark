@@ -70,7 +70,7 @@ class VariableItemBlock extends VariableBlockAbstract implements Contract\Block
         }
 
         foreach ($this->getBlocks() as $block) {
-            $script .= rtrim($block->recreate(), ';');
+            $script .= $block->recreate());
         }
 
         $value = $this->getValue();

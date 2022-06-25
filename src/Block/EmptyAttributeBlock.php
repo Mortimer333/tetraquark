@@ -42,7 +42,7 @@ class EmptyAttributeBlock extends Block implements Contract\Block
             $script .= $block->recreate();
         }
 
-        return trim(trim($script), ';') . ';';
+        return trim($script);
     }
 
     protected function setPrivate(bool $isPrivate): self
