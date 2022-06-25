@@ -7,9 +7,55 @@ This is supposed to be a minifier and obfuscator in one. But due to project with
 # Fixes
 
 ## Add the rest of taken keywords
+- 'instanceof' => true,
+- 'typeof' => true,
+- 'undefined' => true,
+- 'void' => true,
+- 'debugger' => true,
+- 'yield' => true, // only generators
+- 'false' => true,
+- 'true' => true,
+- 'null' => true,
+- 'NaN' => true,
+- 'Infinity' => true
+
+- 'super' => null, // I don't think we need block for this one
+- 'in' => null, // I don't think we need block for this one
+- 'enum' => null, // ? actually not existing, can be skipped
+
+- 'break' => true,
+- 'do' => true,
+- 'case' => true,
+- 'else' => true,
+- 'new' => true,
+- 'var' => true,
+- 'catch' => true,
+- 'finally' => true,
+- 'return' => true,
+- 'continue' => true,
+- 'for' => true,
+- 'switch' => true,
+- 'while' => true,
+- 'function' => true,
+- 'this' => true,
+- 'with' => true,
+- 'default' => true,
+- 'if' => true,
+- 'throw' => true,
+- 'delete' => true,
+- 'try' => true,
+- 'class' => true,
+- 'extends' => true,
+- 'const' => true,
+- 'export' => true,
+- 'import' => true,
+- 'let' => true,
+- 'static' => true,
+- 'from' => true
+
+## Define where semicolon should be placed. This can be decided on when joining subblocks via the table. We can define which variable has which schemat (for example typeof will have variable after its definition)
 ## Add to variables Deconstructed assignment - https://medium.com/swlh/javascript-best-practices-renaming-imports-and-proper-variable-declaration-aa405c191bee
 ## If CallerBlock try to get caller name
-## Add all key words so when object has property "typeof" it won't get replaced with its alias
 ## Upgrade fixScript as it doesn't reamove all not needed space example: do{ whileLooped--; console.log(whileLooped);}
 ## Fix performance -  we take so much time on few script (like 15s)
 ## Put imports not in seperate attributes (Ī.y = Ī => {) but inside the object (let Ī={y:Ī=>{}};). This way we will save 2n letter per n imports (so with 10 imports 20 letters)

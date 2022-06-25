@@ -1,281 +1,449 @@
 Mapping...
-  Tetraquark\Block\ScriptBlock | Letter:  , i: 0, 159, [""]
-  Tetraquark\Block\ScriptBlock | Letter: l, i: 1, 159, [""]
-  Tetraquark\Block\ScriptBlock | Letter: e, i: 2, 159, [""]
-  Tetraquark\Block\ScriptBlock | Letter: t, i: 3, 159, [""]
-  Tetraquark\Block\ScriptBlock | Letter:  , i: 4, 159, [""]
-    Tetraquark\Block\VariableItemBlock | Letter:  , i: 9, 12, [";"]
-    Tetraquark\Block\VariableItemBlock | Letter: 2, i: 10, 12, [";"]
-    Tetraquark\Block\VariableItemBlock | Letter: ;, i: 11, 12, [";"]
-  Tetraquark\Block\ScriptBlock | Letter: \n, i: 16, 159, [""]
-  Tetraquark\Block\ScriptBlock | Letter: s, i: 17, 159, [""]
-  Tetraquark\Block\ScriptBlock | Letter: w, i: 18, 159, [""]
-  Tetraquark\Block\ScriptBlock | Letter: i, i: 19, 159, [""]
-  Tetraquark\Block\ScriptBlock | Letter: t, i: 20, 159, [""]
-  Tetraquark\Block\ScriptBlock | Letter: c, i: 21, 159, [""]
-  Tetraquark\Block\ScriptBlock | Letter: h, i: 22, 159, [""]
-  Tetraquark\Block\ScriptBlock | Letter:  , i: 23, 159, [""]
-    Tetraquark\Block\SwitchBlock | Letter: l, i: 0, 6, ["}"]
-    Tetraquark\Block\SwitchBlock | Letter: e, i: 1, 6, ["}"]
-    Tetraquark\Block\SwitchBlock | Letter: n, i: 2, 6, ["}"]
-    Tetraquark\Block\SwitchBlock | Letter: g, i: 3, 6, ["}"]
-    Tetraquark\Block\SwitchBlock | Letter: t, i: 4, 6, ["}"]
-    Tetraquark\Block\SwitchBlock | Letter: h, i: 5, 6, ["}"]
-    Tetraquark\Block\SwitchBlock | Letter: \n, i: 34, 159, ["}"]
-    Tetraquark\Block\SwitchBlock | Letter:  , i: 35, 159, ["}"]
-    Tetraquark\Block\SwitchBlock | Letter: c, i: 36, 159, ["}"]
-    Tetraquark\Block\SwitchBlock | Letter: a, i: 37, 159, ["}"]
-    Tetraquark\Block\SwitchBlock | Letter: s, i: 38, 159, ["}"]
-    Tetraquark\Block\SwitchBlock | Letter: e, i: 39, 159, ["}"]
-    Tetraquark\Block\SwitchBlock | Letter:  , i: 40, 159, ["}"]
-      Tetraquark\Block\SwitchCaseBlock | Letter: c, i: 43, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: o, i: 44, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: n, i: 45, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: s, i: 46, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: o, i: 47, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: l, i: 48, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: e, i: 49, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: ., i: 50, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: l, i: 51, 159, [""]
-        Tetraquark\Block\CallerBlock | Letter: ', i: 0, 13, [";"]
-      Tetraquark\Block\SwitchCaseBlock | Letter: \n, i: 68, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter:  , i: 69, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: c, i: 70, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: o, i: 71, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: n, i: 72, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: t, i: 73, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: i, i: 74, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: n, i: 75, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: u, i: 76, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: e, i: 77, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: ;, i: 78, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: \n, i: 79, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter:  , i: 80, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: b, i: 81, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: r, i: 82, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: e, i: 83, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: a, i: 84, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: k, i: 85, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter:  , i: 86, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: \n, i: 93, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter:  , i: 94, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: d, i: 95, 159, [""]
-    Tetraquark\Block\SwitchBlock | Letter: d, i: 95, 159, ["}"]
-    Tetraquark\Block\SwitchBlock | Letter: e, i: 96, 159, ["}"]
-    Tetraquark\Block\SwitchBlock | Letter: f, i: 97, 159, ["}"]
-    Tetraquark\Block\SwitchBlock | Letter: a, i: 98, 159, ["}"]
-    Tetraquark\Block\SwitchBlock | Letter: u, i: 99, 159, ["}"]
-    Tetraquark\Block\SwitchBlock | Letter: l, i: 100, 159, ["}"]
-    Tetraquark\Block\SwitchBlock | Letter: t, i: 101, 159, ["}"]
-    Tetraquark\Block\SwitchBlock | Letter: :, i: 102, 159, ["}"]
-      Tetraquark\Block\SwitchCaseBlock | Letter: \n, i: 103, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter:  , i: 104, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: c, i: 105, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: o, i: 106, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: n, i: 107, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: s, i: 108, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: o, i: 109, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: l, i: 110, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: e, i: 111, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: ., i: 112, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: l, i: 113, 159, [""]
-        Tetraquark\Block\CallerBlock | Letter: ', i: 0, 25, [";"]
-      Tetraquark\Block\SwitchCaseBlock | Letter: \n, i: 142, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter:  , i: 143, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: c, i: 144, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: o, i: 145, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: n, i: 146, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: t, i: 147, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: i, i: 148, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: n, i: 149, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: u, i: 150, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: e, i: 151, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter:  , i: 152, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: \n, i: 157, 159, [""]
-      Tetraquark\Block\SwitchCaseBlock | Letter: }, i: 158, 159, [""]
-    Tetraquark\Block\SwitchBlock | Letter: }, i: 158, 159, ["}"]
+  Tetraquark\Block\ScriptBlock | Letter: \n, i: 0, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: d, i: 1, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: e, i: 2, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: b, i: 3, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: u, i: 4, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: g, i: 5, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: g, i: 6, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: e, i: 7, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: r, i: 8, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: ;, i: 9, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: \n, i: 10, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: d, i: 11, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: e, i: 12, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: b, i: 13, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: u, i: 14, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: g, i: 15, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: g, i: 16, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: e, i: 17, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: r, i: 18, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: \n, i: 19, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: f, i: 20, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: a, i: 21, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: l, i: 22, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: s, i: 23, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: e, i: 24, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: \n, i: 26, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: t, i: 27, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: r, i: 28, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: u, i: 29, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: e, i: 30, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: \n, i: 31, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: c, i: 32, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: o, i: 33, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: n, i: 34, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: s, i: 35, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: t, i: 36, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter:  , i: 37, 148, [""]
+    Tetraquark\Block\VariableItemBlock | Letter:  , i: 8, 11, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: 0, i: 9, 11, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: ;, i: 10, 11, [";"]
+  Tetraquark\Block\ScriptBlock | Letter: \n, i: 48, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: l, i: 49, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: e, i: 50, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: t, i: 51, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter:  , i: 52, 148, [""]
+    Tetraquark\Block\VariableItemBlock | Letter:  , i: 4, 15, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: t, i: 5, 15, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: r, i: 6, 15, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: u, i: 7, 15, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: e, i: 8, 15, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: 1, i: 9, 15, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter:  , i: 10, 15, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: +, i: 11, 15, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter:  , i: 12, 15, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter:  , i: 12, 15, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: 2, i: 13, 15, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: ;, i: 14, 15, [";"]
+  Tetraquark\Block\ScriptBlock | Letter: \n, i: 67, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: l, i: 68, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: e, i: 69, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: t, i: 70, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter:  , i: 71, 148, [""]
+    Tetraquark\Block\VariableItemBlock | Letter:  , i: 4, 10, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: n, i: 5, 10, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: u, i: 6, 10, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: l, i: 7, 10, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: l, i: 8, 10, [";"]
+  Tetraquark\Block\ScriptBlock | Letter: \n, i: 81, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: l, i: 82, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: e, i: 83, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: t, i: 84, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter:  , i: 85, 148, [""]
+    Tetraquark\Block\VariableItemBlock | Letter:  , i: 4, 22, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: N, i: 5, 22, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: a, i: 6, 22, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: N, i: 7, 22, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter:  , i: 8, 22, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: -, i: 9, 22, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter:  , i: 10, 22, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter:  , i: 10, 22, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: n, i: 11, 22, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: a, i: 12, 22, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: n, i: 13, 22, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter:  , i: 14, 22, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: +, i: 15, 22, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter:  , i: 16, 22, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter:  , i: 16, 22, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: N, i: 17, 22, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: a, i: 18, 22, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: N, i: 19, 22, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: 2, i: 20, 22, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: ;, i: 21, 22, [";"]
+  Tetraquark\Block\ScriptBlock | Letter: \n, i: 107, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: l, i: 108, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: e, i: 109, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter: t, i: 110, 148, [""]
+  Tetraquark\Block\ScriptBlock | Letter:  , i: 111, 148, [""]
+    Tetraquark\Block\VariableItemBlock | Letter:  , i: 4, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: I, i: 5, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: n, i: 6, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: f, i: 7, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: i, i: 8, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: n, i: 9, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: i, i: 10, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: t, i: 11, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: y, i: 12, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter:  , i: 13, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: -, i: 14, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter:  , i: 15, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter:  , i: 15, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: i, i: 16, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: n, i: 17, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: f, i: 18, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: i, i: 19, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: n, i: 20, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: i, i: 21, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: t, i: 22, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: y, i: 23, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter:  , i: 24, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: +, i: 25, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter:  , i: 26, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter:  , i: 26, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: I, i: 27, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: n, i: 28, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: f, i: 29, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: i, i: 30, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: n, i: 31, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: i, i: 32, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: t, i: 33, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: y, i: 34, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: 2, i: 35, 37, [";"]
+    Tetraquark\Block\VariableItemBlock | Letter: ;, i: 36, 37, [";"]
 =======================
 Creating aliases...
 =======================
 Aliases: 
 Recreating...
 =======================
-Block: Tetraquark\Block\VariableBlock
-Subtype: let
-Instruction: let length = 2
-Instruction Start: 1
-Caret: 15
+Block: Tetraquark\Block\DebuggerBlock
+Subtype: debugger;
+Instruction: debbuger
+Instruction Start: 0
+Caret: 9
 Name: ``
 Child Index: `0`
+Alias: ``
+Blocks: [0] 
+=======
+Block: Tetraquark\Block\DebuggerBlock
+Subtype: debugger
+Instruction: debbuger
+Instruction Start: 10
+Caret: 19
+Name: ``
+Child Index: `1`
+Alias: ``
+Blocks: [0] 
+=======
+Block: Tetraquark\Block\FalseBlock
+Subtype: false
+Instruction: false
+Instruction Start: 19
+Caret: 24
+Name: ``
+Child Index: `2`
+Alias: ``
+Blocks: [0] 
+=======
+Block: Tetraquark\Block\TrueBlock
+Subtype: true
+Instruction: true
+Instruction Start: 26
+Caret: 30
+Name: ``
+Child Index: `3`
+Alias: ``
+Blocks: [0] 
+=======
+Block: Tetraquark\Block\VariableBlock
+Subtype: const
+Instruction: const true1 = 0
+Instruction Start: 32
+Caret: 47
+Name: ``
+Child Index: `4`
 Value: ``
 Alias: ``
 Blocks: [1] 
 =======
   Block: Tetraquark\Block\VariableItemBlock
   Subtype: 
-  Instruction:  length =
+  Instruction:  true1 =
   Instruction Start: 0
-  Caret: 11
-  Name: `length`
+  Caret: 10
+  Name: `true1`
   Child Index: `0`
   Value: ``
-  Alias: `length`
+  Alias: `true1`
   Blocks: [1] 
   =======
     Block: Tetraquark\Block\UndefinedBlock
     Subtype: 
-    Instruction:  2
-    Instruction Start: 9
-    Caret: 11
+    Instruction:  0
+    Instruction Start: 8
+    Caret: 10
     Name: ``
     Child Index: `0`
     Alias: ``
     Blocks: [0] 
     =======
-Block: Tetraquark\Block\SwitchBlock
-Subtype: switch
-Instruction: switch (length) {
-Instruction Start: 17
-Caret: 158
+Block: Tetraquark\Block\VariableBlock
+Subtype: let
+Instruction: let a = true1 + 2
+Instruction Start: 49
+Caret: 66
 Name: ``
-Child Index: `1`
-Cond block: [1] 
-  Block: Tetraquark\Block\UndefinedBlock
-  Subtype: 
-  Instruction: length
-  Instruction Start: -1
-  Caret: 5
-  Name: ``
-  Child Index: `0`
-  Alias: ``
-  Blocks: [0] 
-  =======
+Child Index: `5`
+Value: ``
 Alias: ``
-Blocks: [2] 
+Blocks: [1] 
 =======
-  Block: Tetraquark\Block\SwitchCaseBlock
-  Subtype: case
-  Instruction: case 1
-  Instruction Start: 36
-  Caret: 94
-  Name: ``
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype: 
+  Instruction:  a =
+  Instruction Start: 0
+  Caret: 14
+  Name: `a`
   Child Index: `0`
-  Case value: `1`
-  Alias: ``
+  Value: ``
+  Alias: `a`
   Blocks: [3] 
   =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: chain:first
-    Instruction: console.log
-    Instruction Start: 43
-    Caret: 67
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  true1 
+    Instruction Start: -4
+    Caret: 3
     Name: ``
     Child Index: `0`
-    Bracket block: [0] 
-    Alias: ``
-    Blocks: [1] 
-    =======
-      Block: Tetraquark\Block\CallerBlock
-      Subtype: (
-      Instruction: 
-      Instruction Start: 54
-      Caret: 67
-      Name: ``
-      Child Index: `0`
-      Alias: ``
-      Blocks: [1] 
-      =======
-        Block: Tetraquark\Block\StringBlock
-        Subtype: 
-        Instruction: 'Obj is one'
-        Instruction Start: 0
-        Caret: 12
-        Name: ``
-        Child Index: `0`
-        Alias: ``
-        Blocks: [0] 
-        =======
-    Block: Tetraquark\Block\ContinueBlock
-    Subtype: continue;
-    Instruction: continue;
-    Instruction Start: 69
-    Caret: 78
-    Name: ``
-    Child Index: `1`
-    Continue label: ``
     Alias: ``
     Blocks: [0] 
     =======
-    Block: Tetraquark\Block\BreakBlock
-    Subtype: break
-    Instruction: break label;
-    Instruction Start: 80
-    Caret: 92
+    Block: Tetraquark\Block\SymbolBlock
+    Subtype: +
+    Instruction: +
+    Instruction Start: 11
+    Caret: 11
+    Name: ``
+    Child Index: `1`
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  2
+    Instruction Start: 12
+    Caret: 14
     Name: ``
     Child Index: `2`
-    Break label: `label`
     Alias: ``
     Blocks: [0] 
     =======
-  Block: Tetraquark\Block\SwitchCaseBlock
-  Subtype: switch-case:default
-  Instruction:  default
-  Instruction Start: 94
-  Caret: 157
-  Name: ``
-  Child Index: `1`
-  Case value: ``
-  Alias: ``
-  Blocks: [2] 
+Block: Tetraquark\Block\VariableBlock
+Subtype: let
+Instruction: let a = null
+Instruction Start: 68
+Caret: 80
+Name: ``
+Child Index: `6`
+Value: ``
+Alias: ``
+Blocks: [1] 
+=======
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype: 
+  Instruction:  a =
+  Instruction Start: 0
+  Caret: 9
+  Name: `a`
+  Child Index: `0`
+  Value: ``
+  Alias: `a`
+  Blocks: [1] 
   =======
-    Block: Tetraquark\Block\ChainLinkBlock
-    Subtype: chain:first
-    Instruction: console.log
-    Instruction Start: 105
-    Caret: 141
+    Block: Tetraquark\Block\NullBlock
+    Subtype: null
+    Instruction: null
+    Instruction Start: 4
+    Caret: 8
     Name: ``
     Child Index: `0`
-    Bracket block: [0] 
     Alias: ``
-    Blocks: [1] 
+    Blocks: [0] 
     =======
-      Block: Tetraquark\Block\CallerBlock
-      Subtype: (
-      Instruction: 
-      Instruction Start: 116
-      Caret: 141
-      Name: ``
-      Child Index: `0`
-      Alias: ``
-      Blocks: [1] 
-      =======
-        Block: Tetraquark\Block\StringBlock
-        Subtype: 
-        Instruction: 'Obj is bigger then one'
-        Instruction Start: 0
-        Caret: 24
-        Name: ``
-        Child Index: `0`
-        Alias: ``
-        Blocks: [0] 
-        =======
-    Block: Tetraquark\Block\ContinueBlock
-    Subtype: continue
-    Instruction: continue leb;
-    Instruction Start: 143
-    Caret: 156
+Block: Tetraquark\Block\VariableBlock
+Subtype: let
+Instruction: let a = NaN - nan + NaN2
+Instruction Start: 82
+Caret: 106
+Name: ``
+Child Index: `7`
+Value: ``
+Alias: ``
+Blocks: [1] 
+=======
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype: 
+  Instruction:  a =
+  Instruction Start: 0
+  Caret: 21
+  Name: `a`
+  Child Index: `0`
+  Value: ``
+  Alias: `a`
+  Blocks: [5] 
+  =======
+    Block: Tetraquark\Block\NanBlock
+    Subtype: NaN
+    Instruction: NaN
+    Instruction Start: 4
+    Caret: 7
+    Name: ``
+    Child Index: `0`
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\SymbolBlock
+    Subtype: -
+    Instruction: -
+    Instruction Start: 9
+    Caret: 9
     Name: ``
     Child Index: `1`
-    Continue label: `leb`
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  nan 
+    Instruction Start: 4
+    Caret: 9
+    Name: ``
+    Child Index: `2`
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\SymbolBlock
+    Subtype: +
+    Instruction: +
+    Instruction Start: 15
+    Caret: 15
+    Name: ``
+    Child Index: `3`
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  NaN2
+    Instruction Start: 16
+    Caret: 21
+    Name: ``
+    Child Index: `4`
+    Alias: ``
+    Blocks: [0] 
+    =======
+Block: Tetraquark\Block\VariableBlock
+Subtype: let
+Instruction: let a = Infinity - infinity + Infinity2
+Instruction Start: 108
+Caret: 147
+Name: ``
+Child Index: `8`
+Value: ``
+Alias: ``
+Blocks: [1] 
+=======
+  Block: Tetraquark\Block\VariableItemBlock
+  Subtype: 
+  Instruction:  a =
+  Instruction Start: 0
+  Caret: 36
+  Name: `a`
+  Child Index: `0`
+  Value: ``
+  Alias: `a`
+  Blocks: [5] 
+  =======
+    Block: Tetraquark\Block\InfinityBlock
+    Subtype: Infinity
+    Instruction: Infinity
+    Instruction Start: 4
+    Caret: 12
+    Name: ``
+    Child Index: `0`
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\SymbolBlock
+    Subtype: -
+    Instruction: -
+    Instruction Start: 14
+    Caret: 14
+    Name: ``
+    Child Index: `1`
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  infinity 
+    Instruction Start: 4
+    Caret: 14
+    Name: ``
+    Child Index: `2`
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\SymbolBlock
+    Subtype: +
+    Instruction: +
+    Instruction Start: 25
+    Caret: 25
+    Name: ``
+    Child Index: `3`
+    Alias: ``
+    Blocks: [0] 
+    =======
+    Block: Tetraquark\Block\UndefinedBlock
+    Subtype: 
+    Instruction:  Infinity2
+    Instruction Start: 26
+    Caret: 36
+    Name: ``
+    Child Index: `4`
     Alias: ``
     Blocks: [0] 
     =======
 Duration: 0.005s
 
 
-let length=2;
-switch(length){case 1:console.log('Obj is one');
-continue;
-break label;
-default:console.log('Obj is bigger then one');
-continue leb}
+debugger;
+debugger!0!1const true1=0;
+let a=true1+2;
+let a=null;
+let a=NaN-nan+NaN2;
+let a=Infinity-infinity+Infinity2;
+

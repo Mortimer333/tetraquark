@@ -211,8 +211,6 @@ abstract class BlockAbstract
             $undefined = new Block\ImportAsBlock($start, $possibleUndefined, '', $this);
         } elseif ($this::class === Block\ExportBlock::class) {
             $undefined = new Block\ExportAsBlock($start, $possibleUndefined, '', $this);
-        } elseif (Validate::isTakenKeyWord(trim($possibleUndefined))) {
-            $undefined = new Block\TakenBlock($start, $possibleUndefined, '', $this);
         } else {
             $undefined = new Block\UndefinedBlock($start, $possibleUndefined, '', $this);
         }
@@ -254,7 +252,7 @@ abstract class BlockAbstract
                 if (Validate::isValidUndefined($possibleUndefined)) {
                     $blocks[] = $this->generateUndefined($oldPos - \mb_strlen($possibleUndefined), $possibleUndefined, \sizeof($blocks));
                 }
-                if (!$this instanceof Block\ObjectBlock) {
+                if (!($this instanceof Block\ObjectBlock)) {
                     $string = new Block\StringBlock($oldPos, self::$content->iSubStr($oldPos, $i - 1), '', $this);
                     $string->setChildIndex(\sizeof($blocks));
                     $blocks[] = $string;
@@ -272,8 +270,44 @@ abstract class BlockAbstract
 
             $mappedWord .= $letter;
             $possibleUndefined .= $letter;
+            if (
+                ($this->endChars[$letter] ?? false)
+                || is_callable($endMethod) && $endMethod($i, $letter, $possibleUndefined)
+            ) {
+                $possibleUndefined = \mb_substr($possibleUndefined, 0, -1);
+                if (Validate::isValidUndefined($possibleUndefined)) {
+                    if ($this->canHaveAnotherChild('UndefinedBlock') && $onlyOne) {
+                        $i -= \mb_strlen($possibleUndefined) + 1;
+                    } else {
+                        $blocks[] = $this->generateUndefined($i - \mb_strlen($possibleUndefined), $possibleUndefined, \sizeof($blocks));
+                    }
+                    $possibleUndefined = '';
+                }
+                break;
+            }
+
             $map = $this->journeyForBlockClassName($letter, $mappedWord, $possibleUndefined, $i, $map);
-            if (gettype($map) == 'string') {
+            if (
+                gettype($map) == 'string'
+                || (
+                    $i + 1 === self::$content->getLength()
+                    && (
+                        ($map['default'] ?? false)
+                        || ($map[' '] ?? false)
+                        || ($map["\n"] ?? false)
+                    )
+                )
+            ) {
+                if ($i + 1 === self::$content->getLength()) {
+                    if (isset($map['default'])) {
+                        $map = $map['default'];
+                    } elseif (isset($map[' '])) {
+                        $map = $map[' '];
+                    } elseif (isset($map["\n"])) {
+                        $map = $map["\n"];
+                    }
+                }
+
                 if ($this->canHaveAnotherChild($map) && $onlyOne) {
                     $i -= \mb_strlen($possibleUndefined);
                     $possibleUndefined = '';
@@ -319,21 +353,6 @@ abstract class BlockAbstract
                 continue;
             } elseif (\is_null($map)) {
                 $mappedWord = '';
-            }
-
-            if (
-                $this->endChars[$letter] ?? false
-                || is_callable($endMethod) && $endMethod($i, $letter, $possibleUndefined)) {
-                $possibleUndefined = \mb_substr($possibleUndefined, 0, -1);
-                if (Validate::isValidUndefined($possibleUndefined)) {
-                    if ($this->canHaveAnotherChild('UndefinedBlock') && $onlyOne) {
-                        $i -= \mb_strlen($possibleUndefined) + 1;
-                    } else {
-                        $blocks[] = $this->generateUndefined($i - \mb_strlen($possibleUndefined), $possibleUndefined, \sizeof($blocks));
-                    }
-                    $possibleUndefined = '';
-                }
-                break;
             }
         }
         Log::decreaseIndent();
@@ -603,7 +622,6 @@ abstract class BlockAbstract
                 "]" => true,
                 ")" => true,
                 "!" => true,
-                ' ' => true,
             ];
             if (
                 $letter == ';'
@@ -665,12 +683,15 @@ abstract class BlockAbstract
         $letterFound = false;
         $whitespaceFound = false;
         $word = '';
+
         for ($i=$start; $i >= 0; $i--) {
             $letter = $content->getLetter($i);
-            if (Validate::isWhitespace($letter)) {
-                if (!$whitespaceFound) {
+            if (Validate::isWhitespace($letter) || Validate::isSpecial($letter)) {
+                if (Validate::isWhitespace($letter) && !$whitespaceFound && !$letterFound) {
                     $whitespaceFound = true;
-                } elseif ($letterFound) {
+                } elseif (Validate::isSpecial($letter) && !$letterFound) {
+                    $letterFound = true;
+                } elseif ($letterFound && !Validate::isWhitespace($word)) {
                     return [Str::rev($word), $i];
                 }
                 continue;
@@ -697,10 +718,12 @@ abstract class BlockAbstract
         $word = '';
         for ($i=$start; $i < $content->getLength(); $i++) {
             $letter = $content->getLetter($i);
-            if (Validate::isWhitespace($letter)) {
-                if (!$whitespaceFound) {
+            if (Validate::isWhitespace($letter) || Validate::isSpecial($letter)) {
+                if (Validate::isWhitespace($letter) && !$whitespaceFound && !$letterFound) {
                     $whitespaceFound = true;
-                } elseif ($letterFound) {
+                } elseif (Validate::isSpecial($letter) && !$letterFound) {
+                    $letterFound = true;
+                } elseif ($letterFound && \strlen($word) > 0) {
                     return [$word, $i - 1];
                 }
                 continue;
@@ -717,7 +740,7 @@ abstract class BlockAbstract
             }
         }
 
-        return [$word, 0];
+        return [$word, $content->getLength()];
     }
 
     protected function isNextSiblingContected(): bool

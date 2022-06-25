@@ -26,8 +26,9 @@ class Validate
         'with' => true, 'default' => true, 'if' => true, 'throw' => true,
         'delete' => true, 'in' => true, 'try' => true, 'class' => true,
         'enum' => true, 'extends' => true, 'super' => true, 'const' => true,
-        'export' => true, 'import' => true, 'let' => true, 'yield' => true, 
-        'static' => true, 'null' => true, 'true' => true, 'false' => true, 'from' => true
+        'export' => true, 'import' => true, 'let' => true, 'yield' => true,
+        'static' => true, 'null' => true, 'true' => true, 'false' => true,
+        'from' => true, 'undefined' => true, 'NaN' => true, 'Infinity' => true,
     ];
 
     protected static array $extendingsConsts = [

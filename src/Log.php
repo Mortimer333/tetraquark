@@ -177,6 +177,12 @@ class Log
                 self::displayBlocks($block->getCondBlocks());
                 self::decreaseIndent();
             }
+            if (method_exists($block, 'getArgBlocks')) {
+                self::log("Arg block: [" . \sizeof($block->getArgBlocks()) . "] ");
+                self::increaseIndent();
+                self::displayBlocks($block->getArgBlocks());
+                self::decreaseIndent();
+            }
             if (method_exists($block, 'getArgBlock')) {
                 self::log("Arg block: [" . \sizeof($block->getArgBlock()) . "] ");
                 self::increaseIndent();

@@ -67,6 +67,23 @@ trait BlockMapsTrait
             ]
         ],
         "d" => [
+            "e" => [
+                "b" => [
+                    "u" => [
+                        "g" => [
+                            "g" => [
+                                "e" => [
+                                    "r" => [
+                                        ' '  => 'DebuggerBlock',
+                                        "\n" => "DebuggerBlock",
+                                        ";" => "DebuggerBlock",
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ],
             "o" => [
                 ' '  => 'DoWhileBlock',
                 "\n" => "DoWhileBlock",
@@ -98,6 +115,13 @@ trait BlockMapsTrait
             ]
         ],
         'f' => [
+            "a" => [
+                "l" => [
+                    "s" => [
+                        "e" => "falseCheck"
+                    ]
+                ]
+            ],
             'o' => [
                 'r' => [
                     ' '  => 'ForBlock',
@@ -141,6 +165,42 @@ trait BlockMapsTrait
                         ]
                     ]
                 ]
+            ],
+            "n" => [
+                "s" => [
+                    "t" => [
+                        "a" => [
+                            "n" => [
+                                "c" => [
+                                    "e" => [
+                                        "o" => [
+                                            "f" => [
+                                                ' '  => 'InstanceofBlock',
+                                                "\n" => "InstanceofBlock",
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ],
+
+        "I" => [
+            "n" => [
+                "f" => [
+                    "i" => [
+                        "n" => [
+                            "i" => [
+                                "t" => [
+                                    "y" => "infinityCheck"
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
             ]
         ],
         'l' => [
@@ -157,6 +217,16 @@ trait BlockMapsTrait
                     ' '  => 'NewClassBlock',
                     "\n" => "NewClassBlock",
                 ]
+            ],
+            "u" => [
+                "l" => [
+                    "l" => 'nullCheck'
+                ]
+            ]
+        ],
+        "N" => [
+            "a" => [
+                "N" => 'nanCheck'
             ]
         ],
         "r" => [
@@ -167,6 +237,7 @@ trait BlockMapsTrait
                             "n" => [
                                 ' '  => 'ReturnBlock',
                                 "\n" => "ReturnBlock",
+                                ";" => "YeldBlock",
                             ]
                         ]
                     ]
@@ -190,10 +261,42 @@ trait BlockMapsTrait
         ],
         "t" => [
             "r" => [
+                "u" => [
+                    "e" => "trueCheck"
+                ],
                 "y" => [
                     ' '  => 'TryBlock',
                     "\n" => "TryBlock",
                     '{'  => "TryBlock",
+                ]
+            ],
+            "y" => [
+                "p" => [
+                    "e" => [
+                        "o" => [
+                            "f" => [
+                                ' '  => 'TypeofBlock',
+                                "\n" => "TypeofBlock",
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        "u" => [
+            "n" => [
+                "d" => [
+                    "e" => [
+                        "f" => [
+                            "i" => [
+                                "n" => [
+                                    "e" => [
+                                        "d" => "undefinedValueCheck"
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
                 ]
             ]
         ],
@@ -216,8 +319,27 @@ trait BlockMapsTrait
                     ' '  => 'VariableBlock',
                     "\n" => "VariableBlock",
                 ],
+            ],
+            "o" => [
+                "i" => [
+                    "d" => [
+                        ' '  => 'VoidBlock',
+                        "\n" => "VoidBlock",
+                    ]
+                ]
             ]
         ],
+        "y" => [
+            "e" => [
+                "l" => [
+                    "d" => [
+                        ' '  => 'YeldBlock',
+                        "\n" => "YeldBlock",
+                        ";" => "YeldBlock",
+                    ]
+                ]
+            ]
+        ]
     ];
 
     protected array $blocksMapNoPrefix = [
@@ -233,7 +355,7 @@ trait BlockMapsTrait
             '.' => [
                 '.' => false
             ],
-            'default' => 'ChainLinkBlock'
+            'default' => 'dotCheck'
         ],
         '(' => 'CallerBlock',
         '[' => 'decideArrayBlockType',
@@ -340,6 +462,7 @@ trait BlockMapsTrait
             "default" => "SymbolBlock",
         ],
         ":" => "SymbolBlock",
+        ";" => "SemicolonBlock",
     ];
 
     protected array $classBlocksMap  = [
@@ -371,7 +494,7 @@ trait BlockMapsTrait
             "." => [
                 "." => "SpreadBlock"
             ],
-            "default" => 'ChainLinkBlock'
+            "default" => 'dotCheck'
         ],
         "{" => "ObjectBlock",
     ];
@@ -380,7 +503,7 @@ trait BlockMapsTrait
             "." => [
                 "." => "SpreadBlock"
             ],
-            "default" => 'ChainLinkBlock'
+            "default" => 'dotCheck'
         ],
         "{" => "ObjectBlock",
     ];
@@ -389,7 +512,7 @@ trait BlockMapsTrait
             "." => [
                 "." => "SpreadBlock"
             ],
-            "default" => 'ChainLinkBlock'
+            "default" => 'dotCheck'
         ],
         "{" => "ObjectBlock",
     ];
@@ -398,7 +521,7 @@ trait BlockMapsTrait
             "." => [
                 "." => "SpreadBlock"
             ],
-            "default" => 'ChainLinkBlock'
+            "default" => 'dotCheck'
         ],
         ',' => "ArrayItemSeperatorBlock",
         "{" => "ObjectBlock",
@@ -433,7 +556,7 @@ trait BlockMapsTrait
         "{" => "ObjectBlock",
     ];
     protected array $childrenChainLinkBlocksMap = [
-        '.' => 'ChainLinkBlock',
+        '.' => 'dotCheck',
         '[' => 'ChainLinkBlock'
     ];
     protected array $exportBlocksMap = [
@@ -673,5 +796,71 @@ trait BlockMapsTrait
             return 'StaticInitializationBlock';
         }
         return null;
+    }
+
+    protected function dotCheck(int $start): ?string
+    {
+        list($word, $pos) = $this->getPreviousWord($start, self::$content);
+        if (is_numeric($word)) {
+            return null;
+        }
+        return 'ChainLinkBlock';
+    }
+
+    private function checkIfNameIsPartOfVariable(int $start): bool
+    {
+        $nextLetter = self::$content->getLetter($start + 1);
+        if (preg_match('/[A-Za-z0-9]/', $nextLetter)) {
+            return true;
+        }
+        return false;
+    }
+
+    protected function undefinedValueCheck(int $start): ?string
+    {
+        if ($this->checkIfNameIsPartOfVariable($start)) {
+            return null;
+        }
+        return 'UndefinedValueBlock';
+    }
+
+    protected function falseCheck(int $start): ?string
+    {
+        if ($this->checkIfNameIsPartOfVariable($start)) {
+            return null;
+        }
+        return 'FalseBlock';
+    }
+
+    protected function trueCheck(int $start): ?string
+    {
+        if ($this->checkIfNameIsPartOfVariable($start)) {
+            return null;
+        }
+        return 'TrueBlock';
+    }
+
+    protected function nullCheck(int $start): ?string
+    {
+        if ($this->checkIfNameIsPartOfVariable($start)) {
+            return null;
+        }
+        return 'NullBlock';
+    }
+
+    protected function nanCheck(int $start): ?string
+    {
+        if ($this->checkIfNameIsPartOfVariable($start)) {
+            return null;
+        }
+        return 'NanBlock';
+    }
+
+    protected function infinityCheck(int $start): ?string
+    {
+        if ($this->checkIfNameIsPartOfVariable($start)) {
+            return null;
+        }
+        return 'InfinityBlock';
     }
 }
