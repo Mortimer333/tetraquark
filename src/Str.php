@@ -5,7 +5,7 @@ namespace Tetraquark;
 /**
  * MultiByte string Polyfill
  */
-class Str
+abstract class Str
 {
     public static function rev(string $text): string
     {
@@ -59,5 +59,29 @@ class Str
         }
 
         return \file_get_contents($path);
+    }
+
+
+
+    public static function skip(string $strLandmark, int $start, Content $content, bool $isTemplate = false, bool $reverse = false): int
+    {
+        $modifier = (((int)!$reverse) * 2) - 1;
+        for ($i=$start; (!$reverse && $i < $content->getLength()) || ($reverse && $i >= 0); $i += $modifier) {
+            $letter = $content->getLetter($i);
+            if (
+                $isTemplate
+                && Validate::isTemplateLiteralLandmark($letter, $content->getLetter($i - 1) ?? '', true)
+                && $letter === $strLandmark
+            ) {
+                return $i + $modifier;
+            } elseif (
+                !$isTemplate
+                && Validate::isStringLandmark($letter, $content->getLetter($i - 1) ?? '', true)
+                && $letter === $strLandmark
+            ) {
+                return $i + $modifier;
+            }
+        }
+        return $i;
     }
 }

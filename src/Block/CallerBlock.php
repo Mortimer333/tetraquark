@@ -34,7 +34,7 @@ class CallerBlock extends Block implements Contract\Block
                 ($startsTemplate = Validate::isTemplateLiteralLandmark($letter, ''))
                 || Validate::isStringLandmark($letter, '')
             ) {
-                $i = $this->skipString($letter, $i + 1, self::$content, $startsTemplate);
+                $i = Str::skip($letter, $i + 1, self::$content, $startsTemplate);
                 $letter = self::$content->getLetter($i);
             }
 

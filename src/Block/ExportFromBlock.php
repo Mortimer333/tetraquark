@@ -21,7 +21,7 @@ class ExportFromBlock extends Block implements Contract\Block, Contract\ExportBl
             throw new Exception("From Block doesn't have properly set path", 400);
         }
 
-        $end = $this->skipString($startLetter, $pathStart + 1, self::$content, $startLetter === '`');
+        $end = Str::skip($startLetter, $pathStart + 1, self::$content, $startLetter === '`');
         $this->setInstruction(self::$content->iCutToContent($this->getInstructionStart(), $end - 1))
             ->setCaret($end)
             ->setPath(self::$content->iSubStr($pathStart + 1, $end - 2))

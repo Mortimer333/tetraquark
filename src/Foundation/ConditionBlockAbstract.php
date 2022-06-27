@@ -37,7 +37,7 @@ abstract class ConditionBlockAbstract extends BlockAbstract
                 ($startsTemplate = Validate::isTemplateLiteralLandmark($letter, ''))
                 || Validate::isStringLandmark($letter, '')
             ) {
-                $i = $this->skipString($letter, $i + 1, self::$content, $startsTemplate);
+                $i = Str::skip($letter, $i + 1, self::$content, $startsTemplate);
 
                 if (\is_null(self::$content->getLetter($i))) {
                     break;

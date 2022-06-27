@@ -168,7 +168,7 @@ class ArrowFunctionBlock extends MethodBlock implements Contract\Block
                 ($startsTemplate = Validate::isTemplateLiteralLandmark($letter, ''))
                 || Validate::isStringLandmark($letter, '')
             ) {
-                $i = $this->skipString($letter, $i - 1, self::$content, $startsTemplate, true);
+                $i = Str::skip($letter, $i - 1, self::$content, $startsTemplate, true);
                 if (\is_null(self::$content->getLetter($i))) {
                     break;
                 }

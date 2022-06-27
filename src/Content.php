@@ -243,4 +243,16 @@ class Content
         }
         return $this->iCutToContent($start, $end);
     }
+
+    public function resize(): int
+    {
+        return $this->contents[$this->contentPointer]['size'] = \sizeof($this->contents[$this->contentPointer]['content']);
+    }
+
+    public function remove(int $start, ?int $length = 1): self
+    {
+        array_splice($this->contents[$this->contentPointer]['content'], $start, $length);
+        $this->resize();
+        return $this;
+    }
 }

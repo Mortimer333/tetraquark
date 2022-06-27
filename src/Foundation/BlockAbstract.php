@@ -178,7 +178,7 @@ abstract class BlockAbstract
                 ($startsTemplate = Validate::isTemplateLiteralLandmark($letter, ''))
                 || Validate::isStringLandmark($letter, '')
             ) {
-                $i = $this->skipString($letter, $i - 1, self::$content, $startsTemplate, true);
+                $i = Str::skip($letter, $i - 1, self::$content, $startsTemplate, true);
                 $letter = self::$content->getLetter($i);
             }
 
@@ -245,7 +245,7 @@ abstract class BlockAbstract
                 || Validate::isStringLandmark($letter, '')
             ) {
                 $oldPos = $i;
-                $i = $this->skipString($letter, $i + 1, self::$content, $startsTemplate);
+                $i = Str::skip($letter, $i + 1, self::$content, $startsTemplate);
 
                 if (Validate::isValidUndefined($possibleUndefined)) {
                     $blocks[] = $this->generateUndefined($oldPos - \mb_strlen($possibleUndefined), $possibleUndefined, \sizeof($blocks));
@@ -524,7 +524,7 @@ abstract class BlockAbstract
                 $templateLiteralInProgress = !$templateLiteralInProgress;
             } elseif (Validate::isStringLandmark($letter, $content->getLetter($i - 1) ?? '')) {
                 $oldPos = $i;
-                $i = $this->skipString($letter, $i + 1, $content, false);
+                $i = Str::skip($letter, $i + 1, $content, false);
                 $minifiedValue .= $letter . $word . $content->subStr($oldPos + 1, $i - $oldPos - 1);
                 if (\is_null($content->getLetter($i))) {
                     break;
@@ -560,28 +560,6 @@ abstract class BlockAbstract
             && ($value->getLetter($i - 2) ?? '') . ($value->getLetter($i - 1) ?? '') . $letter != '\${';
     }
 
-    public function skipString(string $strLandmark, int $start, Content $content, bool $isTemplate = false, bool $reverse = false): int
-    {
-        $modifier = (((int)!$reverse) * 2) - 1;
-        for ($i=$start; (!$reverse && $i < $content->getLength()) || ($reverse && $i >= 0); $i += $modifier) {
-            $letter = $content->getLetter($i);
-            if (
-                $isTemplate
-                && Validate::isTemplateLiteralLandmark($letter, $content->getLetter($i - 1) ?? '', true)
-                && $letter === $strLandmark
-            ) {
-                return $i + $modifier;
-            } elseif (
-                !$isTemplate
-                && Validate::isStringLandmark($letter, $content->getLetter($i - 1) ?? '', true)
-                && $letter === $strLandmark
-            ) {
-                return $i + $modifier;
-            }
-        }
-        return $i;
-    }
-
     protected function fixScript(Content $instruction): string
     {
         $properInstr = '';
@@ -592,7 +570,7 @@ abstract class BlockAbstract
                 || Validate::isStringLandmark($letter, '')
             ) {
                 $oldPos = $i;
-                $i = $this->skipString($letter, $i + 1, $instruction, $startsTemplate);
+                $i = Str::skip($letter, $i + 1, $instruction, $startsTemplate);
                 $properInstr .= $instruction->iSubStr($oldPos, $i - 1);
                 if (\is_null($instruction->getLetter($i))) {
                     break;
@@ -821,7 +799,7 @@ abstract class BlockAbstract
             || Validate::isStringLandmark($letter, '')
         ) {
             $oldPos = $i;
-            $i = $this->skipString($letter, $i + 1, $content, $startsTemplate);
+            $i = Str::skip($letter, $i + 1, $content, $startsTemplate);
             if (\is_null($content->getLetter($i))) {
                 return [$content->getLetter($i - 1), $i - 1];
             }

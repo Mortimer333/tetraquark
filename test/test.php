@@ -1,7 +1,10 @@
 <?php
+namespace Tetraquark;
 require 'vendor/autoload.php';
-use Tetraquark\Tetraquark as Tetraquark;
+$schemat = require_once 'src/schemats/javascript.php';
 $tetra = new Tetraquark();
+$reader = new Reader($schemat);
+$reader->read(__DIR__ . '/data/array.js', true);
 // $minified = $tetra->minify(__DIR__ . '/data/array.js');
 // $minified = $tetra->minify(__DIR__ . '/data/arrowFunction.js');
 // $minified = $tetra->minify(__DIR__ . '/data/attribute.js');
@@ -19,7 +22,7 @@ $tetra = new Tetraquark();
 // $minified = $tetra->minify(__DIR__ . '/data/shortIf.js');
 // $minified = $tetra->minify(__DIR__ . '/data/spread.js');
 // $minified = $tetra->minify(__DIR__ . '/data/switch.js');
-$minified = $tetra->minify(__DIR__ . '/data/taken.js');
+// $minified = $tetra->minify(__DIR__ . '/data/taken.js');
 // $minified = $tetra->minify(__DIR__ . '/data/trycatchfinally.js');
 // $minified = $tetra->minify(__DIR__ . '/data/variable.js');
 // $minified = $tetra->minify(__DIR__ . '/data/while.js');
