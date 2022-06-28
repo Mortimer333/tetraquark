@@ -4,7 +4,7 @@ require 'vendor/autoload.php';
 $schemat = require_once 'src/schemats/javascript.php';
 $tetra = new Tetraquark();
 $reader = new Reader($schemat);
-$reader->read(__DIR__ . '/data/array.js', true);
+$reader->read(__DIR__ . '/data/comment.js', true);
 // $minified = $tetra->minify(__DIR__ . '/data/array.js');
 // $minified = $tetra->minify(__DIR__ . '/data/arrowFunction.js');
 // $minified = $tetra->minify(__DIR__ . '/data/attribute.js');

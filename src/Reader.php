@@ -30,8 +30,8 @@ class Reader
     {
         $comment = [
             "schema" => $this->schemat['comments'] ?? [],
-            "start" => null,
-            "map" => null
+            "start"  => null,
+            "map"    => null
         ];
 
         $additional = $this->schemat['remove']['additional'] ?? null;
@@ -39,10 +39,6 @@ class Reader
         for ($i=0; $i < $content->getLength(); $i++) {
             $letter     = $content->getLetter($i);
             $nextLetter = $content->getLetter($i + 1);
-
-            if (is_null($nextLetter)) {
-                break;
-            }
 
             $comment["map"] = is_null($comment["map"]) ? ($comment['schema'][$letter] ?? null) : $comment["map"][$letter] ?? null;
 
@@ -53,8 +49,12 @@ class Reader
                     $content->remove($comment["start"], null);
                     return;
                 }
-                $content->iremove($comment["start"], $end);
-                $i = $end;
+
+                $content->remove($comment["start"], $end + 1 - $comment["start"]); /** @log Start */
+                // moving back by two is make sure that we didn't miss anything for additional checks
+                $i = $comment["start"] > 0 ? $comment["start"] - 2 : -1;
+                $comment["start"] = null;
+                $comment["map"] = null;
                 continue;
             }
 
@@ -72,7 +72,7 @@ class Reader
                 $i = Str::skip($letter, $i + 1, $content, $startsTemplate);
                 $letter     = $content->getLetter($i);
                 $nextLetter = $content->getLetter($i + 1);
-                if (is_null($letter) || is_null($nextLetter)) {
+                if (is_null($letter)) {
                     break;
                 }
             }
@@ -84,10 +84,15 @@ class Reader
     public function findClosestMatch(string $needle, Content $content, int $start = 0): bool | int
     {
         $needleSize = \mb_strlen($needle);
-        for ($i=0; $i < $content->getLength(); $i++) {
+        $needleFirst = $needle[0] ?? throw new Exception("Needle can't be empty", 400);
+        for ($i=$start; $i < $content->getLength(); $i++) {
+            if ($needleFirst != $content->getLetter($i)) {
+                continue;
+            }
+
             $match = $content->subStr($i, $needleSize);
             if ($needle == $match) {
-                return $i + $needleSize;
+                return $i + ($needleSize - 1);
             }
         }
         return false;
