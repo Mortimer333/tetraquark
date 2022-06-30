@@ -9,14 +9,9 @@ return [
         ],
     ],
     "remove" => [
-        "additional" => function(int &$i, Content &$content, string &$letter, ?string &$nextLetter, array $schemat) {
-            if (Validate::isWhitespace($letter) && is_null($nextLetter)) {
-                $content->remove($i);
-                $i--;
-                return;
-            }
-
-            if (Validate::isWhitespace($letter) && $i == 0) {
+        "additional" => function(int &$i, Content &$content, string &$letter, ?string &$nextLetter, array $schemat): void
+        {
+            if (Validate::isWhitespace($letter) && (is_null($nextLetter) || $i == 0)) {
                 $content->remove($i);
                 $i--;
                 return;
@@ -33,5 +28,15 @@ return [
                 $i--;
             }
         }
-    ]
+    ],
+    "instructions" => [
+        "if/s|e\(/match:(:)>condition\)/s|e\{" => "IfBlock"
+    ],
+    "matchers" => [
+        "match" => function (int &$i, Content $instr, string &$letter, array $schemat)
+        {
+            return "condition";
+        }
+    ],
+    "namespace" => "\Tetraquark\Block\\"
 ];

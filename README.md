@@ -17,3 +17,7 @@ PHP Library for minifying javascript
   - Designate some methods and attributes for minifying or designate some methods and attributes which can't be minified (one or anothe; can't use both)
   - Choose to not include (copy the content) of its imports
   - Choose to not include one or more of imports or choose to include one or more of imports (try to allow for choosing specific functions, like copy all other stuff into this file but leave this method call like it was (so copy method `render.content()` into `ab()` but leave `render.clear()` without changes))
+
+PHPunit
+
+php ./vendor/bin/phpunit test

@@ -1,7 +1,7 @@
 <?php
 namespace Tetraquark;
 require 'vendor/autoload.php';
-$schemat = require_once 'src/schemats/javascript.php';
+$schemat = require_once 'schemats/javascript.php';
 $tetra = new Tetraquark();
 $reader = new Reader($schemat);
 $reader->read(__DIR__ . '/data/comment.js', true);

@@ -44,3 +44,13 @@ Here we can see blocks definitions, inside them are data definitions: `/name/` o
   (true){`
 
 etc.
+
+As a tool what components it need?
+- translate coded syntax to all possible matches
+- iterate over code and find match (possibly we can use generator for this)
+- component to do with found match
+- ability to skip/move the current matching
+- ability to change script in progress
+- ability to decide what to do with component
+- access to other found components (parent and children)
+- usefull method (like next word, next letter, skip string, skip necessary, find end, find start)

@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
 use Tetraquark\{Reader, Content};
-$schemat = require_once 'src/schemats/javascript.php';
+$schemat = require_once 'schemats/javascript.php';
 
 final class ReaderTest extends TestCase
 {
@@ -30,7 +30,7 @@ final class ReaderTest extends TestCase
             let a = /* multile between variable */ 'ad';
             console.log('test'); // single after a method
         ";
-        $this->cases["js"]["full--trimmed"] = "let a = 'ad';\nconsole.log('test');"
+        $this->cases["js"]["full--trimmed"] = "let a = 'ad';\nconsole.log('test');";
     }
 
     public function testJsReaderIsReader(): void
@@ -116,10 +116,40 @@ final class ReaderTest extends TestCase
         );
     }
 
-    public function testRemoveAdditionalAndCommentsInJavascript(): void
+    public function testRemoveCommentSuccess()
+    {
+        $content = new Content("char [#] chaar char char/#/ char");
+        $pos = $this->jsReader->removeComment('/#/', $content, 5, 7);
+        $this->assertEquals(
+            3,
+            $pos
+        );
+
+        $this->assertEquals(
+            "char  char",
+            $content->__toString()
+        );
+    }
+
+    public function testRemoveCommentNoEnd()
+    {
+        $content = new Content("char [#] chaar char char/# char");
+        $pos = $this->jsReader->removeComment('/#/', $content, 5, 7);
+        $this->assertEquals(
+            3,
+            $pos
+        );
+
+        $this->assertEquals(
+            "char ",
+            $content->__toString()
+        );
+    }
+
+    public function testRemoveCommentsAndAdditionalsInJavascript(): void
     {
         $content = new Content($this->cases["js"]["full"]);
-        $this->jsReader->removeAdditionalAndComments($content);
+        $content = $this->jsReader->removeCommentsAndAdditional($content);
         $this->assertEquals(
             $this->cases["js"]["full--trimmed"],
             $content->__toString()

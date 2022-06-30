@@ -61,12 +61,17 @@ abstract class Str
         return \file_get_contents($path);
     }
 
-
-
-    public static function skip(string $strLandmark, int $start, Content $content, bool $isTemplate = false, bool $reverse = false): int
+    public static function skip(string $strLandmark, int $start, Content $content, bool $reverse = false): int
     {
+        if (
+            !($isTemplate = Validate::isTemplateLiteralLandmark($strLandmark, ''))
+            && !Validate::isStringLandmark($strLandmark, '')
+        ) {
+            return $start;
+        }
+
         $modifier = (((int)!$reverse) * 2) - 1;
-        for ($i=$start; (!$reverse && $i < $content->getLength()) || ($reverse && $i >= 0); $i += $modifier) {
+        for ($i=$start + 1; (!$reverse && $i < $content->getLength()) || ($reverse && $i >= 0); $i += $modifier) {
             $letter = $content->getLetter($i);
             if (
                 $isTemplate

@@ -7,3 +7,12 @@
  * asdnansd
  */
 let a /* asd*/ = 2;
+
+function* test() {
+    console.log('asd')
+    let b = 'c'
+}
+
+if (asda) {
+
+}
