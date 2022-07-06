@@ -30,7 +30,9 @@ return [
         }
     ],
     "instructions" => [
-        "if/s|e\(/match:(:)>condition\)/s|e\{" => "IfBlock"
+        "if/s|e\(/match:(:)>condition\)/s|e\{" => "IfBlock",
+        "class/match: :(>class\\" => "ClassBlock",
+        "continue/s\\" => "ContinueBlock",
     ],
     "matchers" => [
         "match" => function (int &$i, Content $instr, string &$letter, array $schemat)

@@ -4,6 +4,6 @@ console.log('asd')
 let b = 'c'
 }
 if (asda) {
-}[[{"item":"if","type":"landmark"},{"item":[{"name":"s","type":"default"},{"name":"e","type":"default"}],"type":"method"},{"item":"(","type":"landmark"},{"item":[{"name":"match:(:)","type":"default"},{"name":"condition","type":"save_output"}],"type":"method"},{"item":")","type":"landmark"},{"item":[{"name":"s","type":"default"},{"name":"e","type":"default"}],"type":"method"},{"item":"{","type":"landmark"}]]
+}{"i":{"f":{"*s":{"(":{"*match:(:)>condition":{")":{"*s":{"{":"IfBlock"},"*e":{"{":"IfBlock"}}}}},"*e":{"(":{"*match:(:)>condition":{")":{"*s":{"{":"IfBlock"},"*e":{"{":"IfBlock"}}}}}}},"c":{"l":{"a":{"s":{"s":{"*match: :(>class":"ClassBlock"}}}},"o":{"n":{"t":{"i":{"n":{"u":{"e":{"*s":"ContinueBlock"}}}}}}}}}
 
 

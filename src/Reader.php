@@ -22,7 +22,7 @@ class Reader
         }
 
         $content = $this->removeCommentsAndAdditional(new Content(trim($script)));
-        $maps = $this->generateBlocksMap();
+        $maps    = $this->generateBlocksMap();
         echo $content->__toString();
         echo json_encode($maps);
     }
@@ -113,9 +113,57 @@ class Reader
 
         $maps = [];
         foreach ($instructions as $instr => $blockName) {
-            $maps[] = $this->translateInstructionToMap($instr);
+            $maps[] =  $this->sliceIntoSteps($this->translateInstructionToMap($instr), $blockName);
         }
-        return $maps;
+        $map = $this->mergeMaps($maps);
+
+        return $map;
+    }
+
+    public function mergeMaps(array $maps): array
+    {
+        $merged = [];
+        foreach ($maps as $map) {
+            $firstKey = array_key_first($map);
+            if (isset($merged[$firstKey])) {
+                $merged[$firstKey] = $this->mergeMaps([$merged[$firstKey], $map[$firstKey]]);
+            } else {
+                $merged[$firstKey] = $map[$firstKey];
+            }
+        }
+        return $merged;
+    }
+
+    public function createWell(string|array $rope, mixed $end = [], int $counter = 0): mixed
+    {
+        // Did we hit bottom?
+        if (!isset($rope[$counter])) {
+            return $end;
+        }
+        return [$rope[$counter] => $this->createWell($rope, $end, $counter + 1)];
+    }
+
+    public function sliceIntoSteps(array $map, string $blockName, int $stepCounter = 0): array|string
+    {
+        $types = [
+            "landmark" => function (array $step) use ($map, $blockName, $stepCounter) {
+                $res = $this->createWell($step['item'], $this->sliceIntoSteps($map, $blockName, $stepCounter + 1));
+                return $res;
+            },
+            "method" => function (array $step) use ($map, $blockName, $stepCounter) {
+                $steps = [];
+                $nextStep = $this->sliceIntoSteps($map, $blockName, $stepCounter + 1);
+                foreach ($step['item'] as $item) {
+                    $steps['*' . $item['name']] = $nextStep;
+                }
+                return $steps;
+            },
+            "default" => function () use ($blockName) {
+                return $blockName;
+            }
+        ];
+
+        return ($types[$map[$stepCounter]['type'] ?? null] ?? $types['default'])($map[$stepCounter] ?? null);
     }
 
     public function translateInstructionToMap(string $instr): array
@@ -162,7 +210,7 @@ class Reader
                 continue;
             }
 
-            if ($inMethod && ($letter === '|' || $letter === ">")) {
+            if ($inMethod && ($letter === '|')) {
                 $methods[] = $this->createMethodMapItem($letter, $lastMethodLandmark, $currentItem);
                 $currentItem = '';
                 continue;
