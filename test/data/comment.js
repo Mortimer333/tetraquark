@@ -5,13 +5,13 @@
  * Comment 4
  * nasnasd
  * asdnansd
- */
-let a /* asd*/ = 2;
+let a /* asd = 2;
 
 function* test() {
     console.log('asd')
     let b = 'c'
 }
+*/
 
 if (asda) {
 

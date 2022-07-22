@@ -1,5 +1,5 @@
 <?php
-use \Tetraquark\{Content, Validate};
+use \Tetraquark\{Content, Validate, Str, Log};
 
 return [
     "comments" => [
@@ -8,10 +8,14 @@ return [
             "*" => "*/"
         ],
     ],
+    "prepare" => function(string $script)
+    {
+        return ' ' . trim($script);
+    },
     "remove" => [
         "additional" => function(int &$i, Content &$content, string &$letter, ?string &$nextLetter, array $schemat): void
         {
-            if (Validate::isWhitespace($letter) && (is_null($nextLetter) || $i == 0)) {
+            if (Validate::isWhitespace($letter) && is_null($nextLetter)) {
                 $content->remove($i);
                 $i--;
                 return;
@@ -30,14 +34,49 @@ return [
         }
     ],
     "instructions" => [
-        "if/s|e\(/match:(:)>condition\)/s|e\{" => "IfBlock",
-        "class/match: :(>class\\" => "ClassBlock",
-        "continue/s\\" => "ContinueBlock",
+        "/s\if/s|e\(/find:')':'(':'condition'\)/s|e\{" => [
+            "class" => "IfBlock"
+        ],
+        "/s\class/s|'('\\" => [
+            "class" => "ClassBlock"
+        ],
+        "/s\continue/s|';'\\" => [
+            "class" => "ContinueBlock"
+        ],
     ],
-    "matchers" => [
-        "match" => function (int &$i, Content $instr, string &$letter, array $schemat)
+    "methods" => [
+        "find" => function (Content $content, string &$letter, int &$index, array $data, string $needle, ?string $hayStarter = null, ?string $name = null)
         {
-            return "condition";
+            Log::increaseIndent();
+            Log::log('new find');
+            $nestedHays = 0;
+            for ($i=$index; $i < $content->getLength(); $i++) {
+                $i = Str::skip($content->getLetter($i), $i, $content);
+                $letter = $content->getLetter($i);
+                Log::log('Letter: ' . $letter);
+                if (!is_null($hayStarter) && $letter === $hayStarter) {
+                    $nestedHays++;
+                }
+
+                if ($letter === $needle) {
+                    if ($nestedHays > 0) {
+                        $nestedHays--;
+                        continue;
+                    }
+                    if (!is_null($name)) {
+                        $data[$name] = $content->iSubStr($index, $i);
+                    }
+                    $index = $i - 1;
+                    Log::decreaseIndent();
+                    return true;
+                }
+            }
+            Log::decreaseIndent();
+            return false;
+        },
+        "s" => function (Content $content, string &$letter, int &$i)
+        {
+            return Validate::isWhitespace($letter);
         }
     ],
     "namespace" => "\Tetraquark\Block\\"

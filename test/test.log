@@ -1,9 +1,148 @@
-let a = 2;
-function* test() {
-console.log('asd')
-let b = 'c'
-}
+{
+    "s": {
+        "name": "s",
+        "params": []
+    },
+    "find:')':'(':'condition'": {
+        "name": "find",
+        "params": [
+            ")",
+            "(",
+            "condition"
+        ]
+    }
+}Letter: \n, _m
+new landmark
+Letter: i, i, c
+new landmark
+Letter: f, f
+new landmark
+Letter:  , (, _m
+new landmark
+Letter: (, (
+new landmark
+Letter: a, _m
+  new find
+  Letter: a
+  Letter: s
+  Letter: d
+  Letter: a
+  Letter: )
+new landmark
+Letter: ), )
+new landmark
+Letter:  , {, _m
+new landmark
+Letter: {, {
+new landmark
+Letter: \n, _m
+new landmark
+Letter: }, i, c
+reset!
+
 if (asda) {
-}{"i":{"f":{"*s":{"(":{"*match:(:)>condition":{")":{"*s":{"{":"IfBlock"},"*e":{"{":"IfBlock"}}}}},"*e":{"(":{"*match:(:)>condition":{")":{"*s":{"{":"IfBlock"},"*e":{"{":"IfBlock"}}}}}}},"c":{"l":{"a":{"s":{"s":{"*match: :(>class":"ClassBlock"}}}},"o":{"n":{"t":{"i":{"n":{"u":{"e":{"*s":"ContinueBlock"}}}}}}}}}
+}{
+    "_m": {
+        "s": {
+            "i": {
+                "f": {
+                    "(": {
+                        "_m": {
+                            "find:')':'(':'condition'": {
+                                ")": {
+                                    "{": {
+                                        "class": "IfBlock",
+                                        "_end": true
+                                    },
+                                    "_m": {
+                                        "s": {
+                                            "{": {
+                                                "class": "IfBlock",
+                                                "_end": true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "_m": {
+                        "s": {
+                            "(": {
+                                "_m": {
+                                    "find:')':'(':'condition'": {
+                                        ")": {
+                                            "{": {
+                                                "class": "IfBlock",
+                                                "_end": true
+                                            },
+                                            "_m": {
+                                                "s": {
+                                                    "{": {
+                                                        "class": "IfBlock",
+                                                        "_end": true
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "c": {
+                "l": {
+                    "a": {
+                        "s": {
+                            "s": {
+                                "(": {
+                                    "class": "ClassBlock",
+                                    "_end": true
+                                },
+                                "_m": {
+                                    "s": {
+                                        "class": "ClassBlock",
+                                        "_end": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "o": {
+                    "n": {
+                        "t": {
+                            "i": {
+                                "n": {
+                                    "u": {
+                                        "e": {
+                                            ";": {
+                                                "class": "ContinueBlock",
+                                                "_end": true
+                                            },
+                                            "_m": {
+                                                "s": {
+                                                    "class": "ContinueBlock",
+                                                    "_end": true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}[
+    {
+        "class": "IfBlock",
+        "_end": true
+    }
+]
 
 

@@ -224,4 +224,9 @@ class Log
             self::decreaseIndent();
         }
     }
+
+    public static function boolToStr(bool $bool): string
+    {
+        return $bool ? 'true' : 'false';
+    }
 }

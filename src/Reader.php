@@ -7,6 +7,9 @@ namespace Tetraquark;
  */
 class Reader
 {
+    protected array $methods = [];
+    protected array $script = [];
+
     public function __construct(protected array $schema)
     {
     }
@@ -21,10 +24,74 @@ class Reader
             $script = file_get_contents($script);
         }
 
-        $content = $this->removeCommentsAndAdditional(new Content(trim($script)));
-        $maps    = $this->generateBlocksMap();
+        $script  = $this->customPrepate($script);
+        $content = $this->removeCommentsAndAdditional(new Content($script));
+        $map     = $this->generateBlocksMap();
+        echo json_encode($this->methods, JSON_PRETTY_PRINT);
+        $objectified = $this->objectify($content, $map);
         echo $content->__toString();
-        echo json_encode($maps);
+        echo json_encode($map, JSON_PRETTY_PRINT);
+        echo json_encode($this->script, JSON_PRETTY_PRINT);
+    }
+
+    public function objectify(Content $content, array $map): array
+    {
+        $landmark = $map;
+        $data     = [];
+        for ($i=0; $i < $content->getLength(); $i++) {
+            $letter = $content->getLetter($i);
+            Log::log('Letter: ' . $letter . ', ' . implode(', ', array_keys($landmark)));
+            if (isset($landmark[$letter])) {
+                Log::log('new landmark');
+                $landmark = $landmark[$letter];
+                if (isset($landmark['_end'])) {
+                    $this->saveLandmark($landmark);
+                    $landmark = $map;
+                    $data     = [];
+                }
+                continue;
+            }
+
+            if (isset($landmark['_m'])) {
+                foreach ($landmark['_m'] as $methodName => $step) {
+                    $method = $this->methods[$methodName]
+                        ?? throw new Exception("Method " . htmlentities($methodName) . " not found", 404);
+                    $callable = $this->schema['methods'][$method['name']]
+                        ?? throw new Exception("Method " . htmlentities($methodName) . " not defined", 400);
+                    is_callable($callable)
+                        or throw new Exception("Method " . htmlentities($methodName) . " is not callable", 400);
+                    $res = $callable($content, $letter, $i, $data, ...$method['params']);
+                    if ($res) {
+                        $landmark = $step;
+                        Log::log('new landmark');
+                        if (isset($landmark['_end'])) {
+                            $this->saveLandmark($landmark);
+                            $landmark = $map;
+                            $data     = [];
+                        }
+                        continue 2;
+                    }
+                }
+            }
+            Log::log('reset!');
+            $landmark = $map;
+            $data     = [];
+        }
+        return [];
+    }
+
+    public function saveLandmark(array $landmark): void
+    {
+        $this->script[] = $landmark;
+    }
+
+    public function customPrepate(string $script)
+    {
+        $prepare = $this->schema['prepare'] ?? null;
+        if (!isset($prepare) || !is_callable($prepare)) {
+            return $script;
+        }
+        return $prepare($script);
     }
 
     public function removeCommentsAndAdditional(Content $content): Content
@@ -120,13 +187,12 @@ class Reader
         return $map;
     }
 
-    public function mergeMaps(array $maps): array
+    public function mergeMaps(array $maps, array $merged = []): array
     {
-        $merged = [];
         foreach ($maps as $map) {
             $firstKey = array_key_first($map);
             if (isset($merged[$firstKey])) {
-                $merged[$firstKey] = $this->mergeMaps([$merged[$firstKey], $map[$firstKey]]);
+                $merged[$firstKey] = $this->mergeMaps([$map[$firstKey]], $merged[$firstKey]);
             } else {
                 $merged[$firstKey] = $map[$firstKey];
             }
@@ -143,27 +209,88 @@ class Reader
         return [$rope[$counter] => $this->createWell($rope, $end, $counter + 1)];
     }
 
-    public function sliceIntoSteps(array $map, string $blockName, int $stepCounter = 0): array|string
+    public function sliceIntoSteps(array $map, array $block, int $stepCounter = 0): array|string
     {
         $types = [
-            "landmark" => function (array $step) use ($map, $blockName, $stepCounter) {
-                $res = $this->createWell($step['item'], $this->sliceIntoSteps($map, $blockName, $stepCounter + 1));
+            "landmark" => function (array $step) use ($map, $block, $stepCounter) {
+                $res = $this->createWell($step['item'], $this->sliceIntoSteps($map, $block, $stepCounter + 1));
                 return $res;
             },
-            "method" => function (array $step) use ($map, $blockName, $stepCounter) {
+            "method" => function (array $step) use ($map, $block, $stepCounter) {
                 $steps = [];
-                $nextStep = $this->sliceIntoSteps($map, $blockName, $stepCounter + 1);
+                $nextStep = $this->sliceIntoSteps($map, $block, $stepCounter + 1);
+                $methods = [];
                 foreach ($step['item'] as $item) {
-                    $steps['*' . $item['name']] = $nextStep;
+                    if ($item['name'] === 'e') {
+                        $steps = array_merge($nextStep, $steps);
+                        continue;
+                    }
+                    if (Validate::isStringLandmark($item['name'][0], '')) {
+                        if (\mb_strlen($item['name']) !== 3) {
+                            throw new Exception("OR literal method can be only made from 1 letter at time", 400);
+                        }
+                        $steps[trim($item['name'], $item['name'][0])] = $nextStep;
+                    } else {
+                        $methods[$item['name']] = $nextStep;
+                        $this->methods[$item['name']] = $this->methodFromString($item['name']);
+                    }
                 }
+                $steps['_m'] = $methods;
                 return $steps;
             },
-            "default" => function () use ($blockName) {
-                return $blockName;
+            "default" => function () use ($block) {
+                $block["_end"] = true;
+                return $block;
             }
         ];
 
         return ($types[$map[$stepCounter]['type'] ?? null] ?? $types['default'])($map[$stepCounter] ?? null);
+    }
+
+    public function methodFromString(string $method): array
+    {
+        $content = new Content($method);
+        $parameters = [];
+        $name = '';
+        $lastCutIndex = -1;
+        for ($i=0; $i < $content->getLength(); $i++) {
+            $i = Str::skip($content->getLetter($i), $i, $content);
+            $letter = $content->getLetter($i);
+            if ($letter === ":") {
+                if (\strlen($name) == 0) {
+                    $name = $content->iSubStr($lastCutIndex + 1, $i - 1);
+                    if (Validate::isStringLandmark($name[0], '')) {
+                        $name = trim($name, $name[0]);
+                    }
+                    $lastCutIndex = $i;
+                    continue;
+                }
+
+                $param = $content->iSubStr($lastCutIndex + 1, $i - 1);
+                if (Validate::isStringLandmark($param[0], '')) {
+                    $param = trim($param, $param[0]);
+                }
+                $parameters[] = $param;
+                $lastCutIndex = $i;
+            }
+        }
+
+        $lastPart = $content->iSubStr($lastCutIndex + 1, $i - 1);
+        if (strlen($lastPart) > 0) {
+            if (Validate::isStringLandmark($lastPart[0], '')) {
+                $lastPart = trim($lastPart, $lastPart[0]);
+            }
+            if (\strlen($name) == 0) {
+                $name = $lastPart;
+            } else {
+                $parameters[] = $lastPart;
+            }
+        }
+
+        return [
+            "name" => $name,
+            "params" => $parameters,
+        ];
     }
 
     public function translateInstructionToMap(string $instr): array
@@ -183,6 +310,11 @@ class Reader
         $inMethod = false;
 
         for ($i=0; $i < $instr->getLength(); $i++) {
+            $newI = Str::skip($instr->getLetter($i), $i, $instr);
+            if ($i != $newI) {
+                $currentItem .= $instr->iSubStr($i, $newI - 1);
+                $i = $newI;
+            }
             $letter = $instr->getLetter($i);
 
             // skip this letter and just add next one
