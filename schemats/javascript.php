@@ -35,25 +35,30 @@ return [
     ],
     "instructions" => [
         "/s\if/s|e\(/find:')':'(':'condition'\)/s|e\{" => [
-            "class" => "IfBlock"
+            "class" => "IfBlock",
+            "_block" => [
+                "end" => "}",
+                "nested" => "{"
+            ]
         ],
-        "/s\class/s|'('\\" => [
-            "class" => "ClassBlock"
+        "/s\class/s|e\/find:'{':null:'class_name'\\" => [
+            "class" => "ClassBlock",
+            "_block" => [
+                "end" => "}",
+                "nested" => "{"
+            ]
         ],
         "/s\continue/s|';'\\" => [
             "class" => "ContinueBlock"
         ],
     ],
     "methods" => [
-        "find" => function (Content $content, string &$letter, int &$index, array $data, string $needle, ?string $hayStarter = null, ?string $name = null)
+        "find" => function (Content $content, string &$letter, int &$index, array &$data, string $needle, ?string $hayStarter = null, ?string $name = null)
         {
-            Log::increaseIndent();
-            Log::log('new find');
             $nestedHays = 0;
             for ($i=$index; $i < $content->getLength(); $i++) {
                 $i = Str::skip($content->getLetter($i), $i, $content);
                 $letter = $content->getLetter($i);
-                Log::log('Letter: ' . $letter);
                 if (!is_null($hayStarter) && $letter === $hayStarter) {
                     $nestedHays++;
                 }
@@ -64,14 +69,12 @@ return [
                         continue;
                     }
                     if (!is_null($name)) {
-                        $data[$name] = $content->iSubStr($index, $i);
+                        $data[$name] = trim($content->iSubStr($index, $i - 1));
                     }
                     $index = $i - 1;
-                    Log::decreaseIndent();
                     return true;
                 }
             }
-            Log::decreaseIndent();
             return false;
         },
         "s" => function (Content $content, string &$letter, int &$i)

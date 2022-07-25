@@ -10,37 +10,25 @@
             "(",
             "condition"
         ]
+    },
+    "find:'{':null:'class_name'": {
+        "name": "find",
+        "params": [
+            "{",
+            "null",
+            "class_name"
+        ]
     }
-}Letter: \n, _m
-new landmark
-Letter: i, i, c
-new landmark
-Letter: f, f
-new landmark
-Letter:  , (, _m
-new landmark
-Letter: (, (
-new landmark
-Letter: a, _m
-  new find
-  Letter: a
-  Letter: s
-  Letter: d
-  Letter: a
-  Letter: )
-new landmark
-Letter: ), )
-new landmark
-Letter:  , {, _m
-new landmark
-Letter: {, {
-new landmark
-Letter: \n, _m
-new landmark
-Letter: }, i, c
-reset!
+}[]
+start: 12(
+), end: 13(})
+[]
+start: 31({), end: 44(})
 
 if (asda) {
+}
+class ClassName {
+if(true){}
 }{
     "_m": {
         "s": {
@@ -52,13 +40,37 @@ if (asda) {
                                 ")": {
                                     "{": {
                                         "class": "IfBlock",
-                                        "_end": true
+                                        "_block": {
+                                            "map": {
+                                                "}": {
+                                                    "_finish": true,
+                                                    "_stop": true
+                                                },
+                                                "{": {
+                                                    "_skip": true,
+                                                    "_stop": true
+                                                }
+                                            }
+                                        },
+                                        "_stop": true
                                     },
                                     "_m": {
                                         "s": {
                                             "{": {
                                                 "class": "IfBlock",
-                                                "_end": true
+                                                "_block": {
+                                                    "map": {
+                                                        "}": {
+                                                            "_finish": true,
+                                                            "_stop": true
+                                                        },
+                                                        "{": {
+                                                            "_skip": true,
+                                                            "_stop": true
+                                                        }
+                                                    }
+                                                },
+                                                "_stop": true
                                             }
                                         }
                                     }
@@ -74,13 +86,37 @@ if (asda) {
                                         ")": {
                                             "{": {
                                                 "class": "IfBlock",
-                                                "_end": true
+                                                "_block": {
+                                                    "map": {
+                                                        "}": {
+                                                            "_finish": true,
+                                                            "_stop": true
+                                                        },
+                                                        "{": {
+                                                            "_skip": true,
+                                                            "_stop": true
+                                                        }
+                                                    }
+                                                },
+                                                "_stop": true
                                             },
                                             "_m": {
                                                 "s": {
                                                     "{": {
                                                         "class": "IfBlock",
-                                                        "_end": true
+                                                        "_block": {
+                                                            "map": {
+                                                                "}": {
+                                                                    "_finish": true,
+                                                                    "_stop": true
+                                                                },
+                                                                "{": {
+                                                                    "_skip": true,
+                                                                    "_stop": true
+                                                                }
+                                                            }
+                                                        },
+                                                        "_stop": true
                                                     }
                                                 }
                                             }
@@ -97,14 +133,26 @@ if (asda) {
                     "a": {
                         "s": {
                             "s": {
-                                "(": {
-                                    "class": "ClassBlock",
-                                    "_end": true
-                                },
                                 "_m": {
                                     "s": {
-                                        "class": "ClassBlock",
-                                        "_end": true
+                                        "_m": {
+                                            "find:'{':null:'class_name'": {
+                                                "class": "ClassBlock",
+                                                "_block": {
+                                                    "map": {
+                                                        "}": {
+                                                            "_finish": true,
+                                                            "_stop": true
+                                                        },
+                                                        "{": {
+                                                            "_skip": true,
+                                                            "_stop": true
+                                                        }
+                                                    }
+                                                },
+                                                "_stop": true
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -120,12 +168,12 @@ if (asda) {
                                         "e": {
                                             ";": {
                                                 "class": "ContinueBlock",
-                                                "_end": true
+                                                "_stop": true
                                             },
                                             "_m": {
                                                 "s": {
                                                     "class": "ContinueBlock",
-                                                    "_end": true
+                                                    "_stop": true
                                                 }
                                             }
                                         }
@@ -140,8 +188,50 @@ if (asda) {
     }
 }[
     {
-        "class": "IfBlock",
-        "_end": true
+        "start": 0,
+        "end": 13,
+        "landmark": {
+            "class": "IfBlock",
+            "_block": {
+                "map": {
+                    "}": {
+                        "_finish": true,
+                        "_stop": true
+                    },
+                    "{": {
+                        "_skip": true,
+                        "_stop": true
+                    }
+                }
+            },
+            "_stop": true
+        },
+        "data": {
+            "condition": "asda"
+        }
+    },
+    {
+        "start": 14,
+        "end": 44,
+        "landmark": {
+            "class": "ClassBlock",
+            "_block": {
+                "map": {
+                    "}": {
+                        "_finish": true,
+                        "_stop": true
+                    },
+                    "{": {
+                        "_skip": true,
+                        "_stop": true
+                    }
+                }
+            },
+            "_stop": true
+        },
+        "data": {
+            "class_name": "ClassName"
+        }
     }
 ]
 

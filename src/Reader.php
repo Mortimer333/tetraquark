@@ -28,61 +28,148 @@ class Reader
         $content = $this->removeCommentsAndAdditional(new Content($script));
         $map     = $this->generateBlocksMap();
         echo json_encode($this->methods, JSON_PRETTY_PRINT);
-        $objectified = $this->objectify($content, $map);
+        list($this->script, $end) = $this->objectify($content, $map);
         echo $content->__toString();
         echo json_encode($map, JSON_PRETTY_PRINT);
         echo json_encode($this->script, JSON_PRETTY_PRINT);
     }
 
-    public function objectify(Content $content, array $map): array
+    public function objectify(Content $content, array $map, int $start = 0): array
     {
         $landmark = $map;
         $data     = [];
-        for ($i=0; $i < $content->getLength(); $i++) {
-            $letter = $content->getLetter($i);
-            Log::log('Letter: ' . $letter . ', ' . implode(', ', array_keys($landmark)));
-            if (isset($landmark[$letter])) {
-                Log::log('new landmark');
-                $landmark = $landmark[$letter];
-                if (isset($landmark['_end'])) {
-                    $this->saveLandmark($landmark);
-                    $landmark = $map;
-                    $data     = [];
-                }
-                continue;
-            }
+        $lmStart  = null;
+        $script   = [];
+        $settings = [
+            "skip" => 0
+        ];
 
-            if (isset($landmark['_m'])) {
-                foreach ($landmark['_m'] as $methodName => $step) {
-                    $method = $this->methods[$methodName]
-                        ?? throw new Exception("Method " . htmlentities($methodName) . " not found", 404);
-                    $callable = $this->schema['methods'][$method['name']]
-                        ?? throw new Exception("Method " . htmlentities($methodName) . " not defined", 400);
-                    is_callable($callable)
-                        or throw new Exception("Method " . htmlentities($methodName) . " is not callable", 400);
-                    $res = $callable($content, $letter, $i, $data, ...$method['params']);
-                    if ($res) {
-                        $landmark = $step;
-                        Log::log('new landmark');
-                        if (isset($landmark['_end'])) {
-                            $this->saveLandmark($landmark);
-                            $landmark = $map;
-                            $data     = [];
-                        }
-                        continue 2;
+        try {
+            for ($i=$start; $i < $content->getLength(); $i++) {
+                try {
+                    $i      = Str::skip($content->getLetter($i), $i, $content);
+                    $letter = $content->getLetter($i);
+
+                    if (isset($landmark[$letter])) {
+                        $this->resolveStringLandmark($letter, $landmark, $lmStart, $script, $i, $content, $data, $settings, $map);
+                        continue;
+                    }
+
+                    if (isset($landmark['_m']) && $this->resolveMethodLandmark($letter, $landmark, $lmStart, $script, $i, $content, $data, $settings, $map)) {
+                        continue;
+                    }
+
+                    $this->clearObjectify($landmark, $map, $data, $lmStart);
+                } catch (\Exception $e) {
+                    if ($e->getMessage() !== 'skip') {
+                        throw $e;
                     }
                 }
             }
-            Log::log('reset!');
-            $landmark = $map;
-            $data     = [];
+        } catch (\Exception $e) {
+            if ($e->getMessage() !== 'finish') {
+                throw $e;
+            }
         }
-        return [];
+
+
+        return [$script, $i];
     }
 
-    public function saveLandmark(array $landmark): void
+    private function clearObjectify(array &$landmark, array $map, array &$data, ?int &$lmStart)
     {
-        $this->script[] = $landmark;
+        $landmark = $map;
+        $data     = [];
+        $lmStart  = null;
+    }
+
+    public function resolveStringLandmark(
+        string $letter, array &$landmark, ?int &$lmStart, array &$script,
+        int &$i, Content &$content, array &$data, array &$settings, array $map
+    ): void {
+        $landmark = $landmark[$letter];
+        if (is_null($lmStart)) {
+            $lmStart = $i;
+        }
+        if (isset($landmark['_stop'])) {
+            $this->resolveSettings($settings, $landmark);
+            $script[] = $this->saveLandmark($landmark, $lmStart, $i, $content, $data);
+            $this->clearObjectify($landmark, $map, $data, $lmStart);
+        }
+    }
+
+    public function resolveMethodLandmark(
+        string &$letter, array &$landmark, ?int &$lmStart, array &$script,
+        int &$i, Content &$content, array &$data, array &$settings, array $map
+    ): bool {
+        foreach ($landmark['_m'] as $methodName => $step) {
+            $method = $this->methods[$methodName]
+                ?? throw new Exception("Method " . htmlentities($methodName) . " not found", 404);
+
+            $callable = $this->schema['methods'][$method['name']]
+                ?? throw new Exception("Method " . htmlentities($methodName) . " not defined", 400);
+
+            is_callable($callable)
+                or throw new Exception("Method " . htmlentities($methodName) . " is not callable", 400);
+
+            $res = $callable($content, $letter, $i, $data, ...$method['params']);
+
+            if (!$res) {
+                continue;
+            }
+
+            $landmark = $step;
+            if (is_null($lmStart)) {
+                $lmStart = $i;
+            }
+            if (isset($landmark['_stop'])) {
+                $this->resolveSettings($settings, $landmark);
+                $script[] = $this->saveLandmark($landmark, $lmStart, $i, $content, $data);
+                $this->clearObjectify($landmark, $map, $data, $lmStart);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public function resolveSettings(array &$settings, array $landmark): void
+    {
+        if (isset($landmark['_finish'])) {
+            throw new \Exception('finish');
+        }
+
+        if ($settings['skip'] > 0) {
+            $settings['skip']--;
+            throw new Exception('skip');
+        }
+
+        if (isset($landmark['_skip'])) {
+            $settings['skip']++;
+            throw new Exception('skip');
+        }
+    }
+
+    public function saveLandmark(array $landmark, int $start, int &$i, Content $content, array $data): array
+    {
+        $item = [
+            "start" => $start,
+            "end" => $i,
+            "landmark" => $landmark,
+            "data" => $data,
+        ];
+        if (isset($landmark["_block"])) {
+            $i = $this->findBlocksEnd($landmark["_block"], $content, $i + 1);
+            $item['end'] = $i;
+        }
+        return $item;
+    }
+
+    public function findBlocksEnd(array $blockSet, Content $content, int $start): int
+    {
+        list($instructions, $i) = $this->objectify($content, $blockSet['map'], $start);
+        echo json_encode($instructions, JSON_PRETTY_PRINT);
+        echo PHP_EOL . "start: " . $start . "(" . $content->getLetter($start) . "), end: " . $i . "(" . $content->getLetter($i) . ")" . PHP_EOL;
+        return $i;
     }
 
     public function customPrepate(string $script)
@@ -109,11 +196,8 @@ class Reader
         $additional = $this->schema['remove']['additional'] ?? null;
 
         for ($i=0; $i < $content->getLength(); $i++) {
-            $letter     = $content->getLetter($i);
-            $nextLetter = $content->getLetter($i + 1);
-
             // skipping strings
-            $i          = Str::skip($letter, $i, $content);
+            $i          = Str::skip($content->getLetter($i), $i, $content);
             $letter     = $content->getLetter($i);
             $nextLetter = $content->getLetter($i + 1);
             if (is_null($letter)) {
@@ -179,8 +263,8 @@ class Reader
         $instructions = $this->schema['instructions'] ?? throw new Exception('Instructions not found', 404);
 
         $maps = [];
-        foreach ($instructions as $instr => $blockName) {
-            $maps[] =  $this->sliceIntoSteps($this->translateInstructionToMap($instr), $blockName);
+        foreach ($instructions as $instr => $block) {
+            $maps[] =  $this->sliceIntoSteps($this->translateInstructionToMap($instr), $block);
         }
         $map = $this->mergeMaps($maps);
 
@@ -239,7 +323,26 @@ class Reader
                 return $steps;
             },
             "default" => function () use ($block) {
-                $block["_end"] = true;
+                $block["_stop"] = true;
+                if (isset($block["_block"])) {
+                    $block["_block"]['end'] =  $this->sliceIntoSteps(
+                        $this->translateInstructionToMap($block["_block"]['end']),
+                        [
+                            "_finish" => true
+                        ]
+                    );
+                    if (isset($block["_block"]['nested'])) {
+                        $block["_block"]['nested'] =  $this->sliceIntoSteps(
+                            $this->translateInstructionToMap($block["_block"]['nested']),
+                            [
+                                "_skip" => true
+                            ]
+                        );
+                    }
+                    $block["_block"]["map"] = [...$block["_block"]['end'], ...($block["_block"]['nested'] ?? [])];
+                    unset($block["_block"]['end']);
+                    unset($block["_block"]['nested']);
+                }
                 return $block;
             }
         ];

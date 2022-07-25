@@ -16,3 +16,8 @@ function* test() {
 if (asda) {
 
 }
+
+
+class ClassName {
+if(true){}
+}
