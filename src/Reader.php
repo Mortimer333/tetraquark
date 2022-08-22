@@ -9,6 +9,13 @@ class Reader
 {
     protected array $methods = [];
     protected array $script = [];
+    protected array $map;
+    protected array $current = [
+        "caret" => null
+    ];
+
+    public const SKIP = 'skip';
+    public const FINISH = 'finish';
 
     public function __construct(protected array $schema)
     {
@@ -26,11 +33,8 @@ class Reader
 
         $script  = $this->customPrepate($script);
         $content = $this->removeCommentsAndAdditional(new Content($script));
-        $map     = $this->generateBlocksMap();
-        echo json_encode($this->methods, JSON_PRETTY_PRINT);
-        list($this->script, $end) = $this->objectify($content, $map);
-        echo $content->__toString();
-        echo json_encode($map, JSON_PRETTY_PRINT);
+        $this->map     = $this->generateBlocksMap();
+        list($this->script, $end) = $this->objectify($content, $this->map);
         echo json_encode($this->script, JSON_PRETTY_PRINT);
     }
 
@@ -61,13 +65,13 @@ class Reader
 
                     $this->clearObjectify($landmark, $map, $data, $lmStart);
                 } catch (\Exception $e) {
-                    if ($e->getMessage() !== 'skip') {
+                    if ($e->getMessage() !== self::SKIP) {
                         throw $e;
                     }
                 }
             }
         } catch (\Exception $e) {
-            if ($e->getMessage() !== 'finish') {
+            if ($e->getMessage() !== self::FINISH) {
                 throw $e;
             }
         }
@@ -134,42 +138,69 @@ class Reader
 
     public function resolveSettings(array &$settings, array $landmark): void
     {
-        if (isset($landmark['_finish'])) {
-            throw new \Exception('finish');
+
+        if (isset($landmark['_skip'])) {
+            $settings['skip']++;
+            throw new Exception(self::SKIP);
         }
 
         if ($settings['skip'] > 0) {
             $settings['skip']--;
-            throw new Exception('skip');
+            throw new Exception(self::SKIP);
         }
 
-        if (isset($landmark['_skip'])) {
-            $settings['skip']++;
-            throw new Exception('skip');
+        if (isset($landmark['_finish'])) {
+            throw new \Exception(self::FINISH);
         }
     }
 
     public function saveLandmark(array $landmark, int $start, int &$i, Content $content, array $data): array
     {
+        $clearLandmark = $this->clearLandmark($landmark);
         $item = [
             "start" => $start,
             "end" => $i,
-            "landmark" => $landmark,
+            "landmark" => $clearLandmark,
             "data" => $data,
         ];
         if (isset($landmark["_block"])) {
-            $i = $this->findBlocksEnd($landmark["_block"], $content, $i + 1);
+            list($i, $blocks) = $this->findBlocksEnd($landmark["_block"], $content, $i + 1);
             $item['end'] = $i;
+            $item['blocks'] = $blocks;
         }
         return $item;
     }
 
-    public function findBlocksEnd(array $blockSet, Content $content, int $start): int
+    public function clearLandmark(array $landmark): array
+    {
+        foreach ($landmark as $key => $value) {
+            if (is_string($key) && $key[0] == '_') {
+                Log::log($key);
+                unset($landmark[$key]);
+            }
+        }
+        return $landmark;
+    }
+
+    public function findBlocksEnd(array $blockSet, Content $content, int $start): array
     {
         list($instructions, $i) = $this->objectify($content, $blockSet['map'], $start);
-        echo json_encode($instructions, JSON_PRETTY_PRINT);
-        echo PHP_EOL . "start: " . $start . "(" . $content->getLetter($start) . "), end: " . $i . "(" . $content->getLetter($i) . ")" . PHP_EOL;
-        return $i;
+        if (is_null($this->current['caret'])) {
+            $this->current['caret'] = 0;
+        }
+        $this->current['caret'] += $start;
+        $caretIncr = $this->current['caret'];
+        $newContent = $content->iCutToContent($start, $i);
+        if (!Validate::isWhitespace($newContent->getLetter(0))) {
+            $newContent->prependArrayContent([" "]);
+        }
+        list($blocks) = $this->objectify($newContent, $this->map);
+        foreach ($blocks as &$block) {
+            $block['start'] += $caretIncr;
+            $block['end'] += $caretIncr;
+        }
+        $this->current['caret'] = null;
+        return [$i, $blocks];
     }
 
     public function customPrepate(string $script)

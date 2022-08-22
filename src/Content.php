@@ -52,8 +52,7 @@ class Content
         }
 
         $this->contents[$this->contentPointer] = [];
-        $this->contents[$this->contentPointer]['content'] = Str::iterate(
-            $content, 0, [[]],
+        $this->contents[$this->contentPointer]['content'] = Str::iterate($content, 0, [[]],
             function (string $letter, int $i, array &$content)
             {
                 $content[] = $letter;
@@ -73,8 +72,8 @@ class Content
     }
 
     /**
-     * Adds new content
-     * @param  string  $content Script
+     * Adds new text at the end of the content
+     * @param  string  $content Text
      * @param  boolean $clear   If set to `true` will remove all old versions
      * @return self
      */
@@ -95,6 +94,37 @@ class Content
             $this->contentPointer++;
         }
 
+        $this->contents[$this->contentPointer] = [
+            'content' => $content,
+            'size'    => \sizeof($content),
+        ];
+        return $this;
+    }
+
+    /**
+     * Prepends text to the current version of content
+     * @param  array $content Text in form of array
+     * @return self
+     */
+    public function prependArrayContent(array $content): self
+    {
+        $content = array_merge($content, $this->contents[$this->contentPointer]['content']);
+        Log::log('=============');
+        $this->contents[$this->contentPointer] = [
+            'content' => $content,
+            'size'    => \sizeof($content),
+        ];
+        return $this;
+    }
+
+    /**
+     * Apends text to the current version of content
+     * @param  array $content Text in form of array
+     * @return self
+     */
+    public function apendArrayContent(array $content): self
+    {
+        $content = array_merge($this->contents[$this->contentPointer]['content'], $content);
         $this->contents[$this->contentPointer] = [
             'content' => $content,
             'size'    => \sizeof($content),

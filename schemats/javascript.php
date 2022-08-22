@@ -41,7 +41,7 @@ return [
                 "nested" => "{"
             ]
         ],
-        "/s\class/s|e\/find:'{':null:'class_name'\\" => [
+        "/s\class/s|e\/find:'{':null:'class_name'\\{" => [
             "class" => "ClassBlock",
             "_block" => [
                 "end" => "}",

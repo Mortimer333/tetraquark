@@ -13,11 +13,14 @@ function* test() {
 }
 */
 
-if (asda) {
-
-}
+if (asda) {asdasd}
 
 
 class ClassName {
-if(true){}
+if (true){
+    class ClassName {
+        if() {continue
+        }
+    }
+}
 }

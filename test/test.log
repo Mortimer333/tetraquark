@@ -1,237 +1,83 @@
-{
-    "s": {
-        "name": "s",
-        "params": []
-    },
-    "find:')':'(':'condition'": {
-        "name": "find",
-        "params": [
-            ")",
-            "(",
-            "condition"
-        ]
-    },
-    "find:'{':null:'class_name'": {
-        "name": "find",
-        "params": [
-            "{",
-            "null",
-            "class_name"
-        ]
-    }
-}[]
-start: 12(
-), end: 13(})
-[]
-start: 31({), end: 44(})
-
-if (asda) {
-}
-class ClassName {
-if(true){}
-}{
-    "_m": {
-        "s": {
-            "i": {
-                "f": {
-                    "(": {
-                        "_m": {
-                            "find:')':'(':'condition'": {
-                                ")": {
-                                    "{": {
-                                        "class": "IfBlock",
-                                        "_block": {
-                                            "map": {
-                                                "}": {
-                                                    "_finish": true,
-                                                    "_stop": true
-                                                },
-                                                "{": {
-                                                    "_skip": true,
-                                                    "_stop": true
-                                                }
-                                            }
-                                        },
-                                        "_stop": true
-                                    },
-                                    "_m": {
-                                        "s": {
-                                            "{": {
-                                                "class": "IfBlock",
-                                                "_block": {
-                                                    "map": {
-                                                        "}": {
-                                                            "_finish": true,
-                                                            "_stop": true
-                                                        },
-                                                        "{": {
-                                                            "_skip": true,
-                                                            "_stop": true
-                                                        }
-                                                    }
-                                                },
-                                                "_stop": true
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "_m": {
-                        "s": {
-                            "(": {
-                                "_m": {
-                                    "find:')':'(':'condition'": {
-                                        ")": {
-                                            "{": {
-                                                "class": "IfBlock",
-                                                "_block": {
-                                                    "map": {
-                                                        "}": {
-                                                            "_finish": true,
-                                                            "_stop": true
-                                                        },
-                                                        "{": {
-                                                            "_skip": true,
-                                                            "_stop": true
-                                                        }
-                                                    }
-                                                },
-                                                "_stop": true
-                                            },
-                                            "_m": {
-                                                "s": {
-                                                    "{": {
-                                                        "class": "IfBlock",
-                                                        "_block": {
-                                                            "map": {
-                                                                "}": {
-                                                                    "_finish": true,
-                                                                    "_stop": true
-                                                                },
-                                                                "{": {
-                                                                    "_skip": true,
-                                                                    "_stop": true
-                                                                }
-                                                            }
-                                                        },
-                                                        "_stop": true
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "c": {
-                "l": {
-                    "a": {
-                        "s": {
-                            "s": {
-                                "_m": {
-                                    "s": {
-                                        "_m": {
-                                            "find:'{':null:'class_name'": {
-                                                "class": "ClassBlock",
-                                                "_block": {
-                                                    "map": {
-                                                        "}": {
-                                                            "_finish": true,
-                                                            "_stop": true
-                                                        },
-                                                        "{": {
-                                                            "_skip": true,
-                                                            "_stop": true
-                                                        }
-                                                    }
-                                                },
-                                                "_stop": true
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "o": {
-                    "n": {
-                        "t": {
-                            "i": {
-                                "n": {
-                                    "u": {
-                                        "e": {
-                                            ";": {
-                                                "class": "ContinueBlock",
-                                                "_stop": true
-                                            },
-                                            "_m": {
-                                                "s": {
-                                                    "class": "ContinueBlock",
-                                                    "_stop": true
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}[
+_block
+_stop
+=============
+_block
+_stop
+_block
+_stop
+_block
+_stop
+_block
+_stop
+=============
+_stop
+[
     {
         "start": 0,
-        "end": 13,
+        "end": 18,
         "landmark": {
-            "class": "IfBlock",
-            "_block": {
-                "map": {
-                    "}": {
-                        "_finish": true,
-                        "_stop": true
-                    },
-                    "{": {
-                        "_skip": true,
-                        "_stop": true
-                    }
-                }
-            },
-            "_stop": true
+            "class": "IfBlock"
         },
         "data": {
             "condition": "asda"
-        }
+        },
+        "blocks": []
     },
     {
-        "start": 14,
-        "end": 44,
+        "start": 19,
+        "end": 88,
         "landmark": {
-            "class": "ClassBlock",
-            "_block": {
-                "map": {
-                    "}": {
-                        "_finish": true,
-                        "_stop": true
-                    },
-                    "{": {
-                        "_skip": true,
-                        "_stop": true
-                    }
-                }
-            },
-            "_stop": true
+            "class": "ClassBlock"
         },
         "data": {
             "class_name": "ClassName"
-        }
+        },
+        "blocks": [
+            {
+                "start": 37,
+                "end": 86,
+                "landmark": {
+                    "class": "IfBlock"
+                },
+                "data": {
+                    "condition": "true"
+                },
+                "blocks": [
+                    {
+                        "start": 48,
+                        "end": 84,
+                        "landmark": {
+                            "class": "ClassBlock"
+                        },
+                        "data": {
+                            "class_name": "ClassName"
+                        },
+                        "blocks": [
+                            {
+                                "start": 66,
+                                "end": 82,
+                                "landmark": {
+                                    "class": "IfBlock"
+                                },
+                                "data": {
+                                    "condition": ""
+                                },
+                                "blocks": [
+                                    {
+                                        "start": 73,
+                                        "end": 82,
+                                        "landmark": {
+                                            "class": "ContinueBlock"
+                                        },
+                                        "data": []
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
     }
 ]
 
