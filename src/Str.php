@@ -89,4 +89,134 @@ abstract class Str
         }
         return $i;
     }
+
+    /**
+     * Change variable name from scnake case and camel case to pascal case
+     * @param  string $name Variable name
+     * @return string
+     */
+    public static function pascalize(string $name): string
+    {
+        $nameAr = explode('_', $name);
+        $camelized = '';
+        foreach ($nameAr as $chunk) {
+            $camelized .= ucfirst($chunk);
+        }
+        return $camelized;
+    }
+
+    /**
+     * Gets the next closest non-whitespace letter
+     * @param  int     $start
+     * @param  Content $content
+     * @return array            First item is found letter, next is letters position
+     */
+    public static function getNextLetter(int $start, Content $content): array
+    {
+        for ($i=$start; $i < $content->getLength(); $i++) {
+            $letter = $content->getLetter($i);
+            if (!Validate::isWhitespace($letter)) {
+                return [$letter, $i];
+            }
+        }
+
+        return ['', $i - 1];
+    }
+
+    /**
+     * Gets the previous closest non-whitespace letter
+     * @param  int     $start
+     * @param  Content $content
+     * @return array            First item is found letter, next is letters position
+     */
+    public static function getPreviousLetter(int $start, Content $content): array
+    {
+        for ($i=$start; $i >= 0; $i--) {
+            $letter = $content->getLetter($i);
+            if (!Validate::isWhitespace($letter)) {
+                return [$letter, $i];
+            }
+        }
+
+        return ['', 0];
+    }
+
+    /**
+     * Gets the previous closest word.
+     * Provides words start position and it recognizes special characters as word separators.
+     * @param  int     $start
+     * @param  Content $content
+     * @return array            First item is found word, next is words start position
+     */
+    public static function getPreviousWord(int $start, Content $content): array
+    {
+        $letterFound = false;
+        $whitespaceFound = false;
+        $word = '';
+
+        for ($i=$start; $i >= 0; $i--) {
+            $letter = $content->getLetter($i);
+            if (Validate::isWhitespace($letter) || Validate::isSpecial($letter)) {
+                if (Validate::isWhitespace($letter) && !$whitespaceFound && !$letterFound) {
+                    $whitespaceFound = true;
+                } elseif (Validate::isSpecial($letter) && !$letterFound) {
+                    $letterFound = true;
+                } elseif ($letterFound && !Validate::isWhitespace($word)) {
+                    return [Str::rev($word), $i];
+                }
+                continue;
+            }
+
+            if ($letterFound) {
+                $word .= $letter;
+            }
+
+            if ($whitespaceFound && !$letterFound) {
+                $word .= $letter;
+                $letterFound = true;
+                continue;
+            }
+        }
+
+        return [Str::rev($word), 0];
+    }
+
+    /**
+     * Gets the next closest word.
+     * Provides words end position and it recognizes special characters as word separators.
+     * @param  int     $start
+     * @param  Content $content
+     * @return array            First item is found word, next is words end position
+     */
+    public static function getNextWord(int $start, Content $content): array
+    {
+        $letterFound = false;
+        $whitespaceFound = false;
+        $word = '';
+        for ($i=$start; $i < $content->getLength(); $i++) {
+            $letter = $content->getLetter($i);
+            if (Validate::isWhitespace($letter) || Validate::isSpecial($letter)) {
+                if (Validate::isWhitespace($letter) && !$whitespaceFound && !$letterFound) {
+                    $whitespaceFound = true;
+                } elseif (Validate::isSpecial($letter) && !$letterFound) {
+                    $letterFound = true;
+                } elseif ($letterFound && \strlen($word) > 0) {
+                    return [$word, $i - 1];
+                }
+                continue;
+            }
+
+            if ($letterFound) {
+                $word .= $letter;
+            }
+
+            if ($whitespaceFound && !$letterFound) {
+                $word .= $letter;
+                $letterFound = true;
+                continue;
+            }
+        }
+
+        return [$word, $content->getLength()];
+    }
 }

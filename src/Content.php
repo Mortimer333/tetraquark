@@ -109,7 +109,6 @@ class Content
     public function prependArrayContent(array $content): self
     {
         $content = array_merge($content, $this->contents[$this->contentPointer]['content']);
-        Log::log('=============');
         $this->contents[$this->contentPointer] = [
             'content' => $content,
             'size'    => \sizeof($content),

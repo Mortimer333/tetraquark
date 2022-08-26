@@ -1,83 +1,73 @@
-_block
-_stop
-=============
-_block
-_stop
-_block
-_stop
-_block
-_stop
-_block
-_stop
-=============
-_stop
+ //comment
+///**/** comment
+//** comment2
+/*/* comment 3 */
+/**
+ * Comment 4
+ * nasnasd
+ * asdnansd
+let a /* asd = 2;
+
+function* test() {
+    console.log('asd')
+    let b = 'c'
+}
+*/
+SAVE LANDMARK: {"class":"SingleCommentBlock"}
+SAVE LANDMARK: {"class":"SingleCommentBlock"}
+SAVE LANDMARK: {"class":"SingleCommentBlock"}
+SAVE LANDMARK: {"class":"MultiCommentBlock"}
+SAVE LANDMARK: {"class":"MultiCommentBlock"}
 [
     {
-        "start": 0,
-        "end": 18,
+        "start": 1,
+        "end": 10,
         "landmark": {
-            "class": "IfBlock"
+            "class": "SingleCommentBlock"
         },
         "data": {
-            "condition": "asda"
-        },
-        "blocks": []
+            "comment": "comment"
+        }
     },
     {
-        "start": 19,
-        "end": 88,
+        "start": 12,
+        "end": 28,
         "landmark": {
-            "class": "ClassBlock"
+            "class": "SingleCommentBlock"
         },
         "data": {
-            "class_name": "ClassName"
+            "comment": "\/**\/** comment"
+        }
+    },
+    {
+        "start": 30,
+        "end": 43,
+        "landmark": {
+            "class": "SingleCommentBlock"
         },
-        "blocks": [
-            {
-                "start": 37,
-                "end": 86,
-                "landmark": {
-                    "class": "IfBlock"
-                },
-                "data": {
-                    "condition": "true"
-                },
-                "blocks": [
-                    {
-                        "start": 48,
-                        "end": 84,
-                        "landmark": {
-                            "class": "ClassBlock"
-                        },
-                        "data": {
-                            "class_name": "ClassName"
-                        },
-                        "blocks": [
-                            {
-                                "start": 66,
-                                "end": 82,
-                                "landmark": {
-                                    "class": "IfBlock"
-                                },
-                                "data": {
-                                    "condition": ""
-                                },
-                                "blocks": [
-                                    {
-                                        "start": 73,
-                                        "end": 82,
-                                        "landmark": {
-                                            "class": "ContinueBlock"
-                                        },
-                                        "data": []
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
+        "data": {
+            "comment": "** comment2"
+        }
+    },
+    {
+        "start": 45,
+        "end": 60,
+        "landmark": {
+            "class": "MultiCommentBlock"
+        },
+        "data": {
+            "comment": "\/* comment 3"
+        }
+    },
+    {
+        "start": 64,
+        "end": 193,
+        "landmark": {
+            "class": "MultiCommentBlock"
+        },
+        "data": {
+            "comment": "*\r\n * Comment 4\r\n * nasnasd\r\n * asdnansd\r\nlet a \/* asd = 2;\r\n\r\nfunction* test() {\r\n    console.log('asd')\r\n    let b = 'c'\r\n}"
+        }
     }
 ]
 

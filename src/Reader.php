@@ -2,6 +2,8 @@
 
 namespace Tetraquark;
 
+use Tetraquark\Model\CustomMethodEssentialsModel;
+
 /**
  *  Class for reading script and seperating it into managable blocks
  */
@@ -13,12 +15,14 @@ class Reader
     protected array $current = [
         "caret" => null
     ];
+    protected CustomMethodEssentialsModel $essentials;
 
     public const SKIP = 'skip';
     public const FINISH = 'finish';
 
     public function __construct(protected array $schema)
     {
+        $this->essentials = new CustomMethodEssentialsModel();
     }
 
     public function read(string $script, bool $isPath = false)
@@ -31,9 +35,11 @@ class Reader
             $script = file_get_contents($script);
         }
 
-        $script  = $this->customPrepate($script);
         $content = $this->removeCommentsAndAdditional(new Content($script));
+        $content = $this->customPrepare($content);
+        echo $content . PHP_EOL;
         $this->map     = $this->generateBlocksMap();
+        // die(json_encode($this->map, JSON_PRETTY_PRINT));
         list($this->script, $end) = $this->objectify($content, $this->map);
         echo json_encode($this->script, JSON_PRETTY_PRINT);
     }
@@ -63,14 +69,18 @@ class Reader
                         continue;
                     }
 
+                    // If nothing was found but we have descended some steps into the map, try with the same letter from the start
+                    if (!is_null($lmStart)) {
+                        $i--;
+                    }
                     $this->clearObjectify($landmark, $map, $data, $lmStart);
-                } catch (\Exception $e) {
+                } catch (Exception $e) {
                     if ($e->getMessage() !== self::SKIP) {
                         throw $e;
                     }
                 }
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             if ($e->getMessage() !== self::FINISH) {
                 throw $e;
             }
@@ -116,7 +126,23 @@ class Reader
             is_callable($callable)
                 or throw new Exception("Method " . htmlentities($methodName) . " is not callable", 400);
 
-            $res = $callable($content, $letter, $i, $data, ...$method['params']);
+            // Set essentials
+            $essentials = [
+                "content" => $content,
+                "letter"  => $letter,
+                "i"       => $i,
+                "data"    => $data
+            ];
+            $this->essentials->set($essentials);
+
+            // Call method
+            $res = $callable($this->essentials, ...$method['params']);
+
+            // Update changed essentials
+            foreach ($this->essentials as $key => $value) {
+                $method = 'get' . Str::pascalize($key);
+                $$key = $this->essentials->$method();
+            }
 
             if (!$res) {
                 continue;
@@ -150,7 +176,7 @@ class Reader
         }
 
         if (isset($landmark['_finish'])) {
-            throw new \Exception(self::FINISH);
+            throw new Exception(self::FINISH);
         }
     }
 
@@ -175,7 +201,6 @@ class Reader
     {
         foreach ($landmark as $key => $value) {
             if (is_string($key) && $key[0] == '_') {
-                Log::log($key);
                 unset($landmark[$key]);
             }
         }
@@ -203,23 +228,28 @@ class Reader
         return [$i, $blocks];
     }
 
-    public function customPrepate(string $script)
+    public function customPrepare(Content $content): Content
     {
         $prepare = $this->schema['prepare'] ?? null;
         if (!isset($prepare) || !is_callable($prepare)) {
-            return $script;
+            return $content;
         }
-        return $prepare($script);
+        return $prepare($content);
     }
 
     public function removeCommentsAndAdditional(Content $content): Content
     {
-        if (!isset($this->schema['comments']) || sizeof($this->schema['comments']) == 0) {
+        if (
+            (
+                sizeof($this->schema['comments']) == 0
+                || ($this->schema['remove']['comments'] ?? false) == false
+            ) && !isset($this->schema['remove']['additional'])
+        ) {
             return $content;
         }
 
         $comment = [
-            "schema" => $this->schema['comments'] ?? [],
+            "schema" => ($this->schema['remove']['comments'] ?? false) ? ($this->schema['comments']) : [],
             "start"  => null,
             "map"    => null
         ];
@@ -227,7 +257,7 @@ class Reader
         $additional = $this->schema['remove']['additional'] ?? null;
 
         for ($i=0; $i < $content->getLength(); $i++) {
-            // skipping strings
+            // Skipping strings
             $i          = Str::skip($content->getLetter($i), $i, $content);
             $letter     = $content->getLetter($i);
             $nextLetter = $content->getLetter($i + 1);
@@ -442,7 +472,6 @@ class Reader
         $methods = [];
         $lastMethodLandmark = '|';
         $inMethod = false;
-
         for ($i=0; $i < $instr->getLength(); $i++) {
             $newI = Str::skip($instr->getLetter($i), $i, $instr);
             if ($i != $newI) {
@@ -450,7 +479,6 @@ class Reader
                 $i = $newI;
             }
             $letter = $instr->getLetter($i);
-
             // skip this letter and just add next one
             if ($letter === "\\") {
                 if ($inMethod) {

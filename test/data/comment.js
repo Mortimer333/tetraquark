@@ -1,3 +1,4 @@
+//comment
 ///**/** comment
 //** comment2
 /*/* comment 3 */
@@ -12,15 +13,3 @@ function* test() {
     let b = 'c'
 }
 */
-
-if (asda) {asdasd}
-
-
-class ClassName {
-if (true){
-    class ClassName {
-        if() {continue
-        }
-    }
-}
-}
