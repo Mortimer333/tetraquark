@@ -13,3 +13,26 @@ function* test() {
     let b = 'c'
 }
 */
+
+
+if (asda) {asdasd}
+
+let a = 'asd'
+let b = 2 +
+3;
+
+let c = 2
++ 3
+
+let d = 2
++
+3
+
+class ClassName {
+if (true){
+    class ClassName {
+        if() {continue
+        }
+    }
+}
+}

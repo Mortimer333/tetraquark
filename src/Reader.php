@@ -38,7 +38,8 @@ class Reader
         $content = $this->removeCommentsAndAdditional(new Content($script));
         $content = $this->customPrepare($content);
         echo $content . PHP_EOL;
-        $this->map     = $this->generateBlocksMap();
+        Log::log($content . '');
+        $this->map = $this->generateBlocksMap();
         // die(json_encode($this->map, JSON_PRETTY_PRINT));
         list($this->script, $end) = $this->objectify($content, $this->map);
         echo json_encode($this->script, JSON_PRETTY_PRINT);
@@ -73,6 +74,7 @@ class Reader
                     if (!is_null($lmStart)) {
                         $i--;
                     }
+
                     $this->clearObjectify($landmark, $map, $data, $lmStart);
                 } catch (Exception $e) {
                     if ($e->getMessage() !== self::SKIP) {
@@ -131,8 +133,10 @@ class Reader
                 "content" => $content,
                 "letter"  => $letter,
                 "i"       => $i,
-                "data"    => $data
+                "data"    => $data,
+                "methods" => $this->schema['methods'],
             ];
+            $skipReplace = ["methods" => true];
             $this->essentials->set($essentials);
 
             // Call method
@@ -140,6 +144,9 @@ class Reader
 
             // Update changed essentials
             foreach ($this->essentials as $key => $value) {
+                if ($skipReplace[$key] ?? false) {
+                    continue;
+                }
                 $method = 'get' . Str::pascalize($key);
                 $$key = $this->essentials->$method();
             }
@@ -194,6 +201,12 @@ class Reader
             $item['end'] = $i;
             $item['blocks'] = $blocks;
         }
+        // Variable normally share their end/start:
+        // `let a = 'a'\nlet b = 'd'` (variable a is sharing its end (`\n`) with variable b)
+        // `let a = 'a';let b = 'd'` (variable a is sharing its end (`;`) with variable b)
+        // so we will try to include the last letter once more
+        $i--;
+
         return $item;
     }
 
@@ -336,10 +349,12 @@ class Reader
     {
         foreach ($maps as $map) {
             $firstKey = array_key_first($map);
-            if (isset($merged[$firstKey])) {
-                $merged[$firstKey] = $this->mergeMaps([$map[$firstKey]], $merged[$firstKey]);
-            } else {
-                $merged[$firstKey] = $map[$firstKey];
+            foreach ($map as $key => $value) {
+                if (isset($merged[$key])) {
+                    $merged[$key] = $this->mergeMaps([$map[$key]], $merged[$key]);
+                } else {
+                    $merged[$key] = $map[$key];
+                }
             }
         }
         return $merged;
@@ -431,7 +446,9 @@ class Reader
                 }
 
                 $param = $content->iSubStr($lastCutIndex + 1, $i - 1);
-                if (Validate::isStringLandmark($param[0], '')) {
+                if (empty($param)) {
+                    $param = null;
+                } elseif (Validate::isStringLandmark($param[0], '')) {
                     $param = trim($param, $param[0]);
                 }
                 $parameters[] = $param;
@@ -486,7 +503,12 @@ class Reader
                         $methods[] = $this->createMethodMapItem($letter, $lastMethodLandmark, $currentItem);
                     }
                     $lastMethodLandmark = '|';
-                    $map[] = $this->createMapItem($methods, "method");
+
+                    $item = $this->createMapItem($methods, "method");
+                    if (!is_null($item)) {
+                        $map[] = $item;
+                    }
+
                     $methods = [];
                     $currentItem = '';
                     $inMethod = false;
@@ -498,13 +520,16 @@ class Reader
             }
 
             if ($letter === "/") {
-                $map[] = $this->createMapItem($currentItem, "landmark");
+                $item = $this->createMapItem($currentItem, "landmark");
+                if (!is_null($item)) {
+                    $map[] = $item;
+                }
                 $currentItem = '';
                 $inMethod = true;
                 continue;
             }
 
-            if ($inMethod && ($letter === '|')) {
+            if ($inMethod && $letter === '|') {
                 $methods[] = $this->createMethodMapItem($letter, $lastMethodLandmark, $currentItem);
                 $currentItem = '';
                 continue;
@@ -514,14 +539,20 @@ class Reader
         }
 
         if (strlen($currentItem) > 0) {
-            $map[] = $this->createMapItem($currentItem, "landmark");
+            $item = $this->createMapItem($currentItem, "landmark");
+            if (!is_null($item)) {
+                $map[] = $item;
+            }
         }
 
         return $map;
     }
 
-    private function createMapItem(string|array $item, string $type): array
+    private function createMapItem(string|array $item, string $type): ?array
     {
+        if (empty($item)) {
+            return null;
+        }
         return ["item" => $item, "type" => $type];
     }
 

@@ -12,12 +12,31 @@ function* test() {
     console.log('asd')
     let b = 'c'
 }
-*/
-SAVE LANDMARK: {"class":"SingleCommentBlock"}
-SAVE LANDMARK: {"class":"SingleCommentBlock"}
-SAVE LANDMARK: {"class":"SingleCommentBlock"}
-SAVE LANDMARK: {"class":"MultiCommentBlock"}
-SAVE LANDMARK: {"class":"MultiCommentBlock"}
+*/
+
+
+if (asda) {asdasd}
+
+let a = 'asd'
+let b = 2 +
+3;
+
+let c = 2
++ 3
+
+let d = 2
++
+3
+
+class ClassName {
+if (true){
+    class ClassName {
+        if() {continue
+        }
+    }
+}
+}
+ //comment\r\n///**/** comment\r\n//** comment2\r\n/*/* comment 3 */\r\n/**\r\n * Comment 4\r\n * nasnasd\r\n * asdnansd\r\nlet a /* asd = 2;\r\n\r\nfunction* test() {\r\n    console.log('asd')\r\n    let b = 'c'\r\n}\r\n*/\r\n\r\n\r\nif (asda) {asdasd}\r\n\r\nlet a = 'asd'\r\nlet b = 2 +\r\n3;\r\n\r\nlet c = 2\r\n+ 3\r\n\r\nlet d = 2\r\n+\r\n3\r\n\r\nclass ClassName {\r\nif (true){\r\n    class ClassName {\r\n        if() {continue\r\n        }\r\n    }\r\n}\r\n}\r
 [
     {
         "start": 1,
@@ -68,6 +87,113 @@ SAVE LANDMARK: {"class":"MultiCommentBlock"}
         "data": {
             "comment": "*\r\n * Comment 4\r\n * nasnasd\r\n * asdnansd\r\nlet a \/* asd = 2;\r\n\r\nfunction* test() {\r\n    console.log('asd')\r\n    let b = 'c'\r\n}"
         }
+    },
+    {
+        "start": 200,
+        "end": 218,
+        "landmark": {
+            "class": "IfBlock"
+        },
+        "data": {
+            "condition": "asda"
+        },
+        "blocks": []
+    },
+    {
+        "start": 222,
+        "end": 237,
+        "landmark": {
+            "class": "LetVariableBlock"
+        },
+        "data": {
+            "var": "a = 'asd'\n"
+        }
+    },
+    {
+        "start": 237,
+        "end": 252,
+        "landmark": {
+            "class": "LetVariableBlock"
+        },
+        "data": {
+            "var": "b = 2 +\n3;"
+        }
+    },
+    {
+        "start": 256,
+        "end": 272,
+        "landmark": {
+            "class": "LetVariableBlock"
+        },
+        "data": {
+            "var": "c = 2\n+ 3\n"
+        }
+    },
+    {
+        "start": 274,
+        "end": 291,
+        "landmark": {
+            "class": "LetVariableBlock"
+        },
+        "data": {
+            "var": "d = 2\n+\n3\n"
+        }
+    },
+    {
+        "start": 293,
+        "end": 393,
+        "landmark": {
+            "class": "ClassBlock"
+        },
+        "data": {
+            "class_name": "ClassName"
+        },
+        "blocks": [
+            {
+                "start": 312,
+                "end": 390,
+                "landmark": {
+                    "class": "IfBlock"
+                },
+                "data": {
+                    "condition": "true"
+                },
+                "blocks": [
+                    {
+                        "start": 328,
+                        "end": 387,
+                        "landmark": {
+                            "class": "ClassBlock"
+                        },
+                        "data": {
+                            "class_name": "ClassName"
+                        },
+                        "blocks": [
+                            {
+                                "start": 355,
+                                "end": 380,
+                                "landmark": {
+                                    "class": "IfBlock"
+                                },
+                                "data": {
+                                    "condition": ""
+                                },
+                                "blocks": [
+                                    {
+                                        "start": 362,
+                                        "end": 371,
+                                        "landmark": {
+                                            "class": "ContinueBlock"
+                                        },
+                                        "data": []
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
     }
 ]
 

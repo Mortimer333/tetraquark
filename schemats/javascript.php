@@ -36,15 +36,15 @@ return [
     ],
     "instructions" => [
         /* SINGLE LINE COMMENT */
-        "\/\//find:\n:null:'comment'\\" => [
+        "\/\//find:\n::'comment'\\" => [
             "class" => "SingleCommentBlock"
         ],
         /* MULTI LINE COMMENT */
-        "\/*/find:'*/':null:'comment'\\" => [
+        "\/*/find:'*/'::'comment'\\" => [
             "class" => "MultiCommentBlock"
         ],
         /* IF */
-        "/s\if/s|e\(/find:')':'(':'condition'\)/s|e\{" => [
+        "/s|';'\if/s|e\(/find:')':'(':'condition'\)/s|e\{" => [
             "class" => "IfBlock",
             "_block" => [
                 "end" => "}",
@@ -52,65 +52,176 @@ return [
             ]
         ],
         /* SHORT IF */
-        "/s\if/s|e\(/find:')':'(':'condition'\)/s|e\/short\\" => [
+        "/s|';'\if/s|e\(/find:')':'(':'condition'\)/s|e\/short\\" => [
             "class" => "ShortIfBlock",
             "_block" => [
                 "end" => "}",
                 "nested" => "{"
             ]
         ],
-        "/s\class/s|e\/find:'{':null:'class_name'\\{" => [
+        /* CLASS DEFINITION */
+        "/s|';'\class/s|e\/find:'{'::'class_name'\\{" => [
             "class" => "ClassBlock",
             "_block" => [
                 "end" => "}",
                 "nested" => "{"
             ]
         ],
-        "/s\continue/n|';'\\" => [
+        /* CONTINUE */
+        "/s|';'\continue/n|';'\\" => [
             "class" => "ContinueBlock"
+        ],
+        /* LET */
+        "/s|';'\let/s\/varend\\" => [
+            "class" => "LetVariableBlock"
         ],
     ],
     "methods" => [
+        "varend" => function (CustomMethodEssentialsModel $essentials, $iter = 0)
+        {
+            if ($iter >= 50) {
+                die('Stop');
+            }
+
+            $var     = $essentials->getData()['var'] ?? '';
+
+            $essentials->getMethods()['find']($essentials, ["\n", ";"], null, 'var');
+
+            $newVar  = $essentials->getData()['var'];
+            $essentials->setData(["var" => $var . $newVar . $essentials->getLetter()]);
+
+            $essentials->setI($essentials->getI() + 1);
+
+            $i       = $essentials->getI();
+            $content = $essentials->getContent();
+
+
+            if ($essentials->getLetter() === ';') {
+                return true;
+            }
+
+            list($prevLetter, $prevPos) = Str::getPreviousLetter($essentials->getI(), $essentials->getContent());
+            if (
+                Validate::isOperator($prevLetter)
+                && !Validate::isStringLandmark($prevLetter, '')
+                && !Validate::isComment($prevPos, $content)
+            ) {
+                return $essentials->getMethods()['varendNext']($essentials, $iter);
+            }
+
+            list($nextLetter, $nextPos) = Str::getNextLetter($i, $content);
+
+            if (strlen($nextLetter) == 0) {
+                // End of file
+                return true;
+            }
+
+            if (
+                Validate::isOperator($nextLetter)
+                && !Validate::isStringLandmark($nextLetter, '')
+                && !Validate::isComment($nextPos, $content)
+            ) {
+                return $essentials->getMethods()['varendNext']($essentials, $iter);
+            }
+
+            list($previousWord) = Str::getPreviousWord($i, $content);
+            if (Validate::isExtendingKeyWord($previousWord)) {
+                return $essentials->getMethods()['varendNext']($essentials, $iter);
+            }
+
+            list($nextWord) = Str::getNextWord($i, $content);
+            if (Validate::isExtendingKeyWord($nextWord)) {
+                return $essentials->getMethods()['varendNext']($essentials, $iter);
+            }
+
+            return true;
+        },
+        "varendNext" => function (CustomMethodEssentialsModel $essentials, $iter)
+        {
+            $essentials->setI($essentials->getI() + 1);
+            return $essentials->getMethods()['varend']($essentials, $iter + 1);
+        },
         "short" => function (CustomMethodEssentialsModel $essentials)
         {
             return false;
         },
-        "find" => function (CustomMethodEssentialsModel $essentials, string $needle, ?string $hayStarter = null, ?string $name = null): bool
+        "find" => function (CustomMethodEssentialsModel $essentials, string|array $needle, null|array|string $hayStarter = null, ?string $name = null): bool
         {
             $content = $essentials->getContent();
             $letter  = $essentials->getLetter();
             $index   = $essentials->getI();
             $data    = $essentials->getData();
-            $needleLen = strlen($needle);
-            $searchAr = [];
+
+            if (is_string($needle)) {
+                $needle = [$needle];
+            }
+
+            if (empty($needle)) {
+                throw new Exception("Needle can't be empty", 400);
+            }
+
+            $tmpNeedle = [];
+            foreach ($needle as $value) {
+                $heyStarterAr = [];
+                if (is_array($hayStarter)) {
+                    $heyStarterItem = $hayStarter[$value] ?? null;
+                    if (is_string($heyStarterItem)) {
+                        $heyStarterAr[$heyStarterItem] = true;
+                    } elseif (is_array($heyStarterItem)) {
+                        foreach ($heyStarterItem as $starterNeedle) {
+                            $heyStarterAr[$starterNeedle] = true;
+                        }
+                    }
+                } elseif (is_string($hayStarter)) {
+                    $heyStarterAr[$hayStarter] = true;
+                }
+
+                $tmpNeedle[$value] = [
+                    "needle" => $value,
+                    "len" => mb_strlen($value),
+                    "haystack" => [],
+                    "hayStarter" => $heyStarterAr,
+                    "skip" => 0,
+                ];
+            }
+            $needle = $tmpNeedle;
 
             $nestedHays = 0;
             $res = false;
             for ($i=$index; $i < $content->getLength(); $i++) {
                 $i = Str::skip($content->getLetter($i), $i, $content);
                 $letter = $content->getLetter($i);
+                foreach ($needle as $key => &$straw) {
+                    $straw['haystack'][] = $letter;
 
-                $searchAr[] = $letter;
-                if (sizeof($searchAr) > $needleLen) {
-                    array_shift($searchAr);
-                }
+                    if (sizeof($straw['haystack']) > $straw['len']) {
+                        array_shift($straw['haystack']);
+                    }
 
-                if (!is_null($hayStarter) && $letter === $hayStarter) {
-                    $nestedHays++;
-                }
+                    $posNeedle = implode('', $straw['haystack']);
 
-                if (implode('', $searchAr) === $needle) {
-                    if ($nestedHays > 0) {
-                        $nestedHays--;
+                    if ($posNeedle === $key) {
+                        if ($straw['skip'] > 0) {
+                            $straw['skip']--;
+                            continue 2;
+                        }
+                        if (!is_null($name)) {
+                            $data[$name] = trim($content->iSubStr($index, $i - $straw['len']));
+                        }
+                        $index = $i - 1;
+                        $res = true;
+                        break 2;
+                    }
+
+                    if ($straw["hayStarter"][$posNeedle] ?? false) {
+                        $straw['skip']++;
                         continue;
                     }
-                    if (!is_null($name)) {
-                        $data[$name] = trim($content->iSubStr($index, $i - $needleLen));
-                    }
-                    $index = $i - 1;
-                    $res = true;
-                    break;
                 }
+            }
+
+            if (!$res) {
+                $index = $i - 1;
             }
 
             $essentials->setLetter($letter);

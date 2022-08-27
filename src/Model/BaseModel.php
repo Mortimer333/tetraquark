@@ -10,7 +10,7 @@ use Tetraquark\Contract\BaseModelInterface;
  */
 class BaseModel implements BaseModelInterface
 {
-    protected $methods = [];
+    protected $_methods = [];
 
     function __construct(array $args = [])
     {
@@ -19,7 +19,8 @@ class BaseModel implements BaseModelInterface
 
     public function __call(string $name, array $arguments)
     {
-        return $this->methods[$name](...$arguments) ?? throw new Exception("Method " . $name . " doesn't exist", 500);
+        $method = $this->_methods[$name] ?? throw new Exception("Method " . $name . " doesn't exist", 500);
+        return $method(...$arguments);
     }
 
     /**
@@ -29,18 +30,22 @@ class BaseModel implements BaseModelInterface
      */
     public function set(array $args): self
     {
+        $taken = ["_methods" => true];
         foreach ($args as $key => $value) {
             if (!is_string($key)) {
                 throw new Exception('Array passed into BaseModel::set method should contains only associative items.', 400);
             }
 
+            if ($taken[$key] ?? false) {
+                throw new Exception('The name of variable you are trying to use (' . $key . ') is taken.', 400);
+            }
             $pascalized = Str::pascalize($key);
             $camelcased = lcfirst($pascalized);
             $this->$camelcased = $value;
 
             $getter = 'get' . $pascalized;
-            if (!isset($this->methods[$getter])) {
-                $this->methods[$getter] = function() use ($camelcased)
+            if (!isset($this->_methods[$getter])) {
+                $this->_methods[$getter] = function() use ($camelcased)
                 {
                     return $this->$camelcased;
                 };
@@ -48,8 +53,8 @@ class BaseModel implements BaseModelInterface
             }
 
             $setter = 'set' . $pascalized;
-            if (!isset($this->methods[$setter])) {
-                $this->methods[$setter] = function ($value) use ($camelcased)
+            if (!isset($this->_methods[$setter])) {
+                $this->_methods[$setter] = function ($value) use ($camelcased)
                 {
                     $this->$camelcased = $value;
                     return $this;
@@ -65,7 +70,7 @@ class BaseModel implements BaseModelInterface
      */
     public function availableGetterAndSetters(): array
     {
-        return array_keys($this->methods);
+        return array_keys($this->_methods);
     }
 
     /**
@@ -75,7 +80,7 @@ class BaseModel implements BaseModelInterface
     public function toArray(): array
     {
         $array = [];
-        foreach ($this->methods as $methodName => $method) {
+        foreach ($this->_methods as $methodName => $method) {
             if ($methodName[0] . $methodName[1] . $methodName[2] === 'get') {
                 $array[lcfirst(substr($methodName, 3))] = $method();
             }
