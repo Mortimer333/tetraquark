@@ -48,12 +48,13 @@ class Log
         self::log(date('H:i:s:') . round($usec * 1000), 0 , 1);
     }
 
-    static public function log(string|int|float $output, ?int $verbose = null, int $traceLvl = 0): void
+    static public function log(string|int|float $output, ?int $verbose = null, int $traceLvl = 0, bool $replaceNewLine = true): void
     {
         $verbose = $verbose ?? self::$verbose;
+        $indentStr = "  ";
 
         if ($verbose <= self::$maxVerbose) {
-            $message = str_repeat("  ", self::$indent) . $output;
+            $message = str_repeat($indentStr, self::$indent) . $output;
             $class = '';
             $function = '';
             if (self::$addClass) {
@@ -72,7 +73,11 @@ class Log
             if (\mb_strlen($class) > 0 && \mb_strlen($function) == 0) {
                 $class .= ' * ';
             }
-            echo $class . $function . str_replace("\r", '\r', str_replace("\n", '\n', $message))   . PHP_EOL;
+            if ($replaceNewLine) {
+                echo $class . $function . str_replace("\r", '\r', str_replace("\n", '\n', $message)) . PHP_EOL;
+            } else {
+                echo $class . $function . str_replace("\n", "\n" . str_repeat($indentStr, self::$indent), $message) . PHP_EOL;
+            }
         }
     }
 

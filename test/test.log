@@ -1,200 +1,229 @@
- //comment
-///**/** comment
-//** comment2
-/*/* comment 3 */
-/**
- * Comment 4
- * nasnasd
- * asdnansd
-let a /* asd = 2;
-
-function* test() {
-    console.log('asd')
-    let b = 'c'
-}
-*/
-
-
-if (asda) {asdasd}
-
-let a = 'asd'
-let b = 2 +
-3;
-
-let c = 2
-+ 3
-
-let d = 2
-+
-3
-
-class ClassName {
-if (true){
-    class ClassName {
-        if() {continue
-        }
-    }
-}
-}
- //comment\r\n///**/** comment\r\n//** comment2\r\n/*/* comment 3 */\r\n/**\r\n * Comment 4\r\n * nasnasd\r\n * asdnansd\r\nlet a /* asd = 2;\r\n\r\nfunction* test() {\r\n    console.log('asd')\r\n    let b = 'c'\r\n}\r\n*/\r\n\r\n\r\nif (asda) {asdasd}\r\n\r\nlet a = 'asd'\r\nlet b = 2 +\r\n3;\r\n\r\nlet c = 2\r\n+ 3\r\n\r\nlet d = 2\r\n+\r\n3\r\n\r\nclass ClassName {\r\nif (true){\r\n    class ClassName {\r\n        if() {continue\r\n        }\r\n    }\r\n}\r\n}\r
+Duration: 0.002s
 [
-    {
-        "start": 1,
-        "end": 10,
-        "landmark": {
-            "class": "SingleCommentBlock"
-        },
-        "data": {
-            "comment": "comment"
-        }
+  [
+    start => 1,
+    end => 9,
+    landmark => {
+        "class": "SingleCommentBlock"
     },
-    {
-        "start": 12,
-        "end": 28,
-        "landmark": {
-            "class": "SingleCommentBlock"
-        },
-        "data": {
-            "comment": "\/**\/** comment"
-        }
+    data => {
+        "comment": "comment"
     },
-    {
-        "start": 30,
-        "end": 43,
-        "landmark": {
-            "class": "SingleCommentBlock"
-        },
-        "data": {
-            "comment": "** comment2"
-        }
+    index => 0,
+    parent => null,
+    children => 
+      [
+      ],
+  ],
+  [
+    start => 11,
+    end => 26,
+    landmark => {
+        "class": "SingleCommentBlock"
     },
-    {
-        "start": 45,
-        "end": 60,
-        "landmark": {
-            "class": "MultiCommentBlock"
-        },
-        "data": {
-            "comment": "\/* comment 3"
-        }
+    data => {
+        "comment": "\/**\/** comment"
     },
-    {
-        "start": 64,
-        "end": 193,
-        "landmark": {
-            "class": "MultiCommentBlock"
-        },
-        "data": {
-            "comment": "*\r\n * Comment 4\r\n * nasnasd\r\n * asdnansd\r\nlet a \/* asd = 2;\r\n\r\nfunction* test() {\r\n    console.log('asd')\r\n    let b = 'c'\r\n}"
-        }
+    index => 1,
+    parent => null,
+    children => 
+      [
+      ],
+  ],
+  [
+    start => 28,
+    end => 40,
+    landmark => {
+        "class": "SingleCommentBlock"
     },
-    {
-        "start": 200,
-        "end": 218,
-        "landmark": {
-            "class": "IfBlock"
-        },
-        "data": {
-            "condition": "asda"
-        },
-        "blocks": []
+    data => {
+        "comment": "** comment2"
     },
-    {
-        "start": 222,
-        "end": 237,
-        "landmark": {
-            "class": "LetVariableBlock"
-        },
-        "data": {
-            "var": "a = 'asd'\n"
-        }
+    index => 2,
+    parent => null,
+    children => 
+      [
+      ],
+  ],
+  [
+    start => 42,
+    end => 57,
+    landmark => {
+        "class": "MultiCommentBlock"
     },
-    {
-        "start": 237,
-        "end": 252,
-        "landmark": {
-            "class": "LetVariableBlock"
-        },
-        "data": {
-            "var": "b = 2 +\n3;"
-        }
+    data => {
+        "comment": "\/* comment 3"
     },
-    {
-        "start": 256,
-        "end": 272,
-        "landmark": {
-            "class": "LetVariableBlock"
-        },
-        "data": {
-            "var": "c = 2\n+ 3\n"
-        }
+    index => 3,
+    parent => null,
+    children => 
+      [
+      ],
+  ],
+  [
+    start => 60,
+    end => 179,
+    landmark => {
+        "class": "MultiCommentBlock"
     },
-    {
-        "start": 274,
-        "end": 291,
-        "landmark": {
-            "class": "LetVariableBlock"
-        },
-        "data": {
-            "var": "d = 2\n+\n3\n"
-        }
+    data => {
+        "comment": "*\n * Comment 4\n * nasnasd\n * asdnansd\nlet a \/* asd = 2;\n\nfunction* test() {\n    console.log('asd')\n    let b = 'c'\n}"
     },
-    {
-        "start": 293,
-        "end": 393,
-        "landmark": {
-            "class": "ClassBlock"
-        },
-        "data": {
-            "class_name": "ClassName"
-        },
-        "blocks": [
-            {
-                "start": 312,
-                "end": 390,
-                "landmark": {
-                    "class": "IfBlock"
+    index => 4,
+    parent => null,
+    children => 
+      [
+      ],
+  ],
+  [
+    start => 183,
+    end => 201,
+    landmark => {
+        "class": "IfBlock"
+    },
+    data => {
+        "condition": "asda"
+    },
+    index => 5,
+    parent => null,
+    children => 
+      [
+      ],
+  ],
+  [
+    start => 203,
+    end => 217,
+    landmark => {
+        "class": "LetVariableBlock"
+    },
+    data => {
+        "var": "a = 'asd'\n"
+    },
+    index => 6,
+    parent => null,
+    children => 
+      [
+      ],
+  ],
+  [
+    start => 217,
+    end => 231,
+    landmark => {
+        "class": "LetVariableBlock"
+    },
+    data => {
+        "var": "b = 2 +\n3;"
+    },
+    index => 7,
+    parent => null,
+    children => 
+      [
+      ],
+  ],
+  [
+    start => 233,
+    end => 247,
+    landmark => {
+        "class": "LetVariableBlock"
+    },
+    data => {
+        "var": "c = 2\n+ 3\n"
+    },
+    index => 8,
+    parent => null,
+    children => 
+      [
+      ],
+  ],
+  [
+    start => 248,
+    end => 262,
+    landmark => {
+        "class": "LetVariableBlock"
+    },
+    data => {
+        "var": "d = 2\n+\n3\n"
+    },
+    index => 9,
+    parent => null,
+    children => 
+      [
+      ],
+  ],
+  [
+    start => 263,
+    end => 364,
+    landmark => {
+        "class": "ClassBlock"
+    },
+    data => {
+        "class_name": "ClassName"
+    },
+    index => 10,
+    parent => null,
+    children => 
+      [
+        [
+          start => 288,
+          end => 362,
+          landmark => {
+              "class": "IfBlock"
+          },
+          data => {
+              "condition": "true"
+          },
+          index => 0,
+          parent => parent[10]
+          children => 
+            [
+              [
+                start => 303,
+                end => 360,
+                landmark => {
+                    "class": "ClassBlock"
                 },
-                "data": {
-                    "condition": "true"
+                data => {
+                    "class_name": "ClassName2"
                 },
-                "blocks": [
-                    {
-                        "start": 328,
-                        "end": 387,
-                        "landmark": {
-                            "class": "ClassBlock"
-                        },
-                        "data": {
-                            "class_name": "ClassName"
-                        },
-                        "blocks": [
-                            {
-                                "start": 355,
-                                "end": 380,
-                                "landmark": {
-                                    "class": "IfBlock"
-                                },
-                                "data": {
-                                    "condition": ""
-                                },
-                                "blocks": [
-                                    {
-                                        "start": 362,
-                                        "end": 371,
-                                        "landmark": {
-                                            "class": "ContinueBlock"
-                                        },
-                                        "data": []
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    }
-]
+                index => 0,
+                parent => parent[0]
+                children => 
+                  [
+                    [
+                      start => 330,
+                      end => 354,
+                      landmark => {
+                          "class": "IfBlock"
+                      },
+                      data => {
+                          "condition": ""
+                      },
+                      index => 0,
+                      parent => parent[0]
+                      children => 
+                        [
+                          [
+                            start => 337,
+                            end => 346,
+                            landmark => {
+                                "class": "ContinueBlock"
+                            },
+                            data => [],
+                            index => 0,
+                            parent => parent[0]
+                            children => 
+                              [
+                              ],
+                          ],
+                        ],
+                    ],
+                  ],
+              ],
+            ],
+        ],
+      ],
+  ],
+],
+
 
 

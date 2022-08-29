@@ -44,7 +44,7 @@ return [
             "class" => "MultiCommentBlock"
         ],
         /* IF */
-        "/s|';'\if/s|e\(/find:')':'(':'condition'\)/s|e\{" => [
+        "/s|end\if/s|e\(/find:')':'(':'condition'\)/s|e\{" => [
             "class" => "IfBlock",
             "_block" => [
                 "end" => "}",
@@ -52,7 +52,7 @@ return [
             ]
         ],
         /* SHORT IF */
-        "/s|';'\if/s|e\(/find:')':'(':'condition'\)/s|e\/short\\" => [
+        "/s|end\if/s|e\(/find:')':'(':'condition'\)/s|e\/short\\" => [
             "class" => "ShortIfBlock",
             "_block" => [
                 "end" => "}",
@@ -60,7 +60,7 @@ return [
             ]
         ],
         /* CLASS DEFINITION */
-        "/s|';'\class/s|e\/find:'{'::'class_name'\\{" => [
+        "/s|end\class/s|e\/find:'{'::'class_name'\\{" => [
             "class" => "ClassBlock",
             "_block" => [
                 "end" => "}",
@@ -68,15 +68,34 @@ return [
             ]
         ],
         /* CONTINUE */
-        "/s|';'\continue/n|';'\\" => [
+        "/s|end\continue/n|';'\\" => [
             "class" => "ContinueBlock"
         ],
         /* LET */
-        "/s|';'\let/s\/varend\\" => [
+        "/s|end\let/s\/varend\\" => [
+            "class" => "LetVariableBlock"
+        ],
+        /* CONST */
+        "/s|end\const/s\/varend\\" => [
+            "class" => "LetVariableBlock"
+        ],
+        /* VAR */
+        "/s|end\var/s\/varend\\" => [
             "class" => "LetVariableBlock"
         ],
     ],
     "methods" => [
+        "end" => function (CustomMethodEssentialsModel $essentials, $iter = 0): bool
+        {
+            $ends = [
+                ";" => true,
+            ];
+            $method = [
+                "}" => true,
+            ];
+
+            return $ends[$essentials->getLetter()] ?? false;
+        },
         "varend" => function (CustomMethodEssentialsModel $essentials, $iter = 0)
         {
             if ($iter >= 50) {

@@ -29,8 +29,9 @@ let d = 2
 3
 
 class ClassName {
+    {}
 if (true){
-    class ClassName {
+    class ClassName2 {
         if() {continue
         }
     }

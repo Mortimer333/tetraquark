@@ -5,6 +5,6 @@ namespace Tetraquark\Model;
 /**
  * Model holding all essential data for custom methods in language definition
  */
-class CustomMethodEssentialsModel extends BasePolymorphicModel
+class LandmarkResolverModel extends BasePolymorphicModel
 {
 }
