@@ -1,186 +1,263 @@
-Duration: 0.002s
+Duration: 0.005s
 [
   [
     start => 1,
-    end => 9,
+    end => 11,
     landmark => {
-        "class": "SingleCommentBlock"
+        "class": "SingleCommentBlock",
+        "_stop": true
     },
     data => {
         "comment": "comment"
     },
     index => 0,
-    parent => null,
+    parent => script
     children => 
       [
       ],
   ],
   [
-    start => 11,
-    end => 26,
+    start => 12,
+    end => 29,
     landmark => {
-        "class": "SingleCommentBlock"
+        "class": "SingleCommentBlock",
+        "_stop": true
     },
     data => {
         "comment": "\/**\/** comment"
     },
     index => 1,
-    parent => null,
+    parent => script
     children => 
       [
       ],
   ],
   [
-    start => 28,
-    end => 40,
+    start => 30,
+    end => 44,
     landmark => {
-        "class": "SingleCommentBlock"
+        "class": "SingleCommentBlock",
+        "_stop": true
     },
     data => {
         "comment": "** comment2"
     },
     index => 2,
-    parent => null,
+    parent => script
     children => 
       [
       ],
   ],
   [
-    start => 42,
-    end => 57,
+    start => 45,
+    end => 61,
     landmark => {
-        "class": "MultiCommentBlock"
+        "class": "MultiCommentBlock",
+        "_stop": true
     },
     data => {
         "comment": "\/* comment 3"
     },
     index => 3,
-    parent => null,
+    parent => script
     children => 
       [
       ],
   ],
   [
-    start => 60,
-    end => 179,
+    start => 64,
+    end => 194,
     landmark => {
-        "class": "MultiCommentBlock"
+        "class": "MultiCommentBlock",
+        "_stop": true
     },
     data => {
-        "comment": "*\n * Comment 4\n * nasnasd\n * asdnansd\nlet a \/* asd = 2;\n\nfunction* test() {\n    console.log('asd')\n    let b = 'c'\n}"
+        "comment": "*\r\n * Comment 4\r\n * nasnasd\r\n * asdnansd\r\nlet a \/* asd = 2;\r\n\r\nfunction* test() {\r\n    console.log('asd')\r\n    let b = 'c'\r\n}"
     },
     index => 4,
-    parent => null,
+    parent => script
     children => 
       [
       ],
   ],
   [
-    start => 183,
-    end => 201,
+    start => 194,
+    end => 207,
     landmark => {
-        "class": "IfBlock"
+        "class": "LetVariableBlock",
+        "_stop": true
+    },
+    data => {
+        "var": "bv = asd;"
+    },
+    index => 5,
+    parent => script
+    children => 
+      [
+      ],
+  ],
+  [
+    start => 213,
+    end => 231,
+    landmark => {
+        "class": "IfBlock",
+        "_block": {
+            "map": {
+                "}": {
+                    "_finish": true,
+                    "_stop": true
+                },
+                "{": {
+                    "_skip": true,
+                    "_stop": true
+                }
+            }
+        },
+        "_stop": true
     },
     data => {
         "condition": "asda"
     },
-    index => 5,
-    parent => null,
+    index => 6,
+    parent => script
     children => 
       [
       ],
   ],
   [
-    start => 203,
-    end => 217,
+    start => 231,
+    end => 246,
     landmark => {
-        "class": "LetVariableBlock"
+        "class": "LetVariableBlock",
+        "_stop": true
+    },
+    data => {
+        "var": "g = 'df'\n"
+    },
+    index => 7,
+    parent => script
+    children => 
+      [
+      ],
+  ],
+  [
+    start => 247,
+    end => 263,
+    landmark => {
+        "class": "LetVariableBlock",
+        "_stop": true
     },
     data => {
         "var": "a = 'asd'\n"
     },
-    index => 6,
-    parent => null,
+    index => 8,
+    parent => script
     children => 
       [
       ],
   ],
   [
-    start => 217,
-    end => 231,
+    start => 281,
+    end => 298,
     landmark => {
-        "class": "LetVariableBlock"
-    },
-    data => {
-        "var": "b = 2 +\n3;"
-    },
-    index => 7,
-    parent => null,
-    children => 
-      [
-      ],
-  ],
-  [
-    start => 233,
-    end => 247,
-    landmark => {
-        "class": "LetVariableBlock"
+        "class": "LetVariableBlock",
+        "_stop": true
     },
     data => {
         "var": "c = 2\n+ 3\n"
     },
-    index => 8,
-    parent => null,
+    index => 9,
+    parent => script
     children => 
       [
       ],
   ],
   [
-    start => 248,
-    end => 262,
+    start => 299,
+    end => 317,
     landmark => {
-        "class": "LetVariableBlock"
+        "class": "LetVariableBlock",
+        "_stop": true
     },
     data => {
         "var": "d = 2\n+\n3\n"
     },
-    index => 9,
-    parent => null,
+    index => 10,
+    parent => script
     children => 
       [
       ],
   ],
   [
-    start => 263,
-    end => 364,
+    start => 318,
+    end => 427,
     landmark => {
-        "class": "ClassBlock"
+        "class": "ClassBlock",
+        "_block": {
+            "map": {
+                "}": {
+                    "_finish": true,
+                    "_stop": true
+                },
+                "{": {
+                    "_skip": true,
+                    "_stop": true
+                }
+            }
+        },
+        "_stop": true
     },
     data => {
         "class_name": "ClassName"
     },
-    index => 10,
-    parent => null,
+    index => 11,
+    parent => script
     children => 
       [
         [
-          start => 288,
-          end => 362,
+          start => 345,
+          end => 424,
           landmark => {
-              "class": "IfBlock"
+              "class": "IfBlock",
+              "_block": {
+                  "map": {
+                      "}": {
+                          "_finish": true,
+                          "_stop": true
+                      },
+                      "{": {
+                          "_skip": true,
+                          "_stop": true
+                      }
+                  }
+              },
+              "_stop": true
           },
           data => {
               "condition": "true"
           },
           index => 0,
-          parent => parent[10]
+          parent => parent[11]
           children => 
             [
               [
-                start => 303,
-                end => 360,
+                start => 361,
+                end => 421,
                 landmark => {
-                    "class": "ClassBlock"
+                    "class": "ClassBlock",
+                    "_block": {
+                        "map": {
+                            "}": {
+                                "_finish": true,
+                                "_stop": true
+                            },
+                            "{": {
+                                "_skip": true,
+                                "_stop": true
+                            }
+                        }
+                    },
+                    "_stop": true
                 },
                 data => {
                     "class_name": "ClassName2"
@@ -190,10 +267,23 @@ Duration: 0.002s
                 children => 
                   [
                     [
-                      start => 330,
-                      end => 354,
+                      start => 389,
+                      end => 414,
                       landmark => {
-                          "class": "IfBlock"
+                          "class": "IfBlock",
+                          "_block": {
+                              "map": {
+                                  "}": {
+                                      "_finish": true,
+                                      "_stop": true
+                                  },
+                                  "{": {
+                                      "_skip": true,
+                                      "_stop": true
+                                  }
+                              }
+                          },
+                          "_stop": true
                       },
                       data => {
                           "condition": ""
@@ -203,10 +293,11 @@ Duration: 0.002s
                       children => 
                         [
                           [
-                            start => 337,
-                            end => 346,
+                            start => 396,
+                            end => 405,
                             landmark => {
-                                "class": "ContinueBlock"
+                                "class": "ContinueBlock",
+                                "_stop": true
                             },
                             data => [],
                             index => 0,

@@ -10,4 +10,13 @@ use Tetraquark\Contract\BaseModelInterface;
  */
 class BaseModel implements BaseModelInterface
 {
+    public function toArray(): array
+    {
+        $vars = get_class_vars(get_class($this));
+        $array = [];
+        foreach ($vars as $key => $value) {
+            $array[$key] = $this->$key;
+        }
+        return $array;
+    }
 }

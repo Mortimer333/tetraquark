@@ -1,5 +1,6 @@
 <?php
-use \Tetraquark\{Content, Validate, Str, Log, Model\CustomMethodEssentialsModel};
+use \Tetraquark\{Content, Validate, Str, Log};
+use \Tetraquark\Model\CustomMethodEssentialsModel;
 
 return [
     "comments" => [
@@ -44,7 +45,7 @@ return [
             "class" => "MultiCommentBlock"
         ],
         /* IF */
-        "/s|end\if/s|e\(/find:')':'(':'condition'\)/s|e\{" => [
+        "/s|end\if/s|e\(/find:')':'(':'condition'\/s|e\{" => [
             "class" => "IfBlock",
             "_block" => [
                 "end" => "}",
@@ -52,15 +53,15 @@ return [
             ]
         ],
         /* SHORT IF */
-        "/s|end\if/s|e\(/find:')':'(':'condition'\)/s|e\/short\\" => [
-            "class" => "ShortIfBlock",
-            "_block" => [
-                "end" => "}",
-                "nested" => "{"
-            ]
-        ],
+        // "/s|end\if/s|e\(/find:')':'(':'condition'\)/s|e\/short\\" => [
+        //     "class" => "ShortIfBlock",
+        //     "_block" => [
+        //         "end" => "}",
+        //         "nested" => "{"
+        //     ]
+        // ],
         /* CLASS DEFINITION */
-        "/s|end\class/s|e\/find:'{'::'class_name'\\{" => [
+        "/s|end\class/s|e\/find:'{'::'class_name'\\" => [
             "class" => "ClassBlock",
             "_block" => [
                 "end" => "}",
@@ -89,10 +90,15 @@ return [
         {
             $ends = [
                 ";" => true,
+                "/" => true,
             ];
-            $method = [
-                "}" => true,
-            ];
+
+            /** @var ?BlockModel */
+            $previous = $essentials->getPrevious();
+            // If previous was block
+            if (!is_null($previous) && ($previous->getLandmark()['_block'] ?? false)) {
+                $ends['}'] = true;
+            }
 
             return $ends[$essentials->getLetter()] ?? false;
         },
@@ -103,15 +109,12 @@ return [
             }
 
             $var     = $essentials->getData()['var'] ?? '';
-
             $essentials->getMethods()['find']($essentials, ["\n", ";"], null, 'var');
 
             $newVar  = $essentials->getData()['var'];
             $essentials->setData(["var" => $var . $newVar . $essentials->getLetter()]);
 
-            $essentials->setI($essentials->getI() + 1);
-
-            $i       = $essentials->getI();
+            $i       = $essentials->getI() + 1;
             $content = $essentials->getContent();
 
 
@@ -152,6 +155,8 @@ return [
             if (Validate::isExtendingKeyWord($nextWord)) {
                 return $essentials->getMethods()['varendNext']($essentials, $iter);
             }
+
+            $essentials->setI($essentials->getI() + 1);
 
             return true;
         },
@@ -227,7 +232,7 @@ return [
                         if (!is_null($name)) {
                             $data[$name] = trim($content->iSubStr($index, $i - $straw['len']));
                         }
-                        $index = $i - 1;
+                        $index = $i;
                         $res = true;
                         break 2;
                     }

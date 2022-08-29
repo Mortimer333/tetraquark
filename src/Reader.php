@@ -2,7 +2,13 @@
 
 namespace Tetraquark;
 
-use Tetraquark\Model\{CustomMethodEssentialsModel, LandmarkResolverModel, BlockModel};
+use Tetraquark\Model\{
+    CustomMethodEssentialsModel,
+    LandmarkResolverModel,
+    Block\BlockModel,
+    Block\ScriptBlockModel
+};
+use Tetraquark\Contract\BlockModelInterface;
 
 /**
  *  Class for reading script and seperating it into managable blocks
@@ -16,6 +22,7 @@ class Reader
         "caret" => null
     ];
     protected CustomMethodEssentialsModel $essentials;
+    protected int $iterations = 0;
 
     public const SKIP = 'skip';
     public const FINISH = 'finish';
@@ -42,7 +49,8 @@ class Reader
         Log::timerStart();
         $this->map = $this->generateBlocksMap();
         // die(json_encode($this->map, JSON_PRETTY_PRINT));
-        list($this->script, $end) = $this->objectify($content, $this->map);
+        $script = new ScriptBlockModel();
+        list($this->script, $end) = $this->objectify($content, $this->map, parent: $script);
         Log::timerEnd();
         // echo json_encode($this->script, JSON_PRETTY_PRINT);
         $this->displayScriptBlocks($this->script);
@@ -62,7 +70,11 @@ class Reader
                     $this->displayScriptBlocks($value);
                     Log::decreaseIndent();
                 } elseif ($key === 'parent' && !is_null($value)) {
-                    Log::log($key . ' => parent[' . $value?->getIndex() . ']');
+                    if ($value instanceof ScriptBlockModel) {
+                        Log::log($key . ' => script');
+                    } else {
+                        Log::log($key . ' => parent[' . $value?->getIndex() . ']');
+                    }
                 } else {
                     Log::log($key . ' => ' . json_encode($value, JSON_PRETTY_PRINT) . ',', replaceNewLine: false);
                 }
@@ -74,12 +86,12 @@ class Reader
         Log::log('],');
     }
 
-    public function objectify(Content $content, array $map, int $start = 0, ?BlockModel $parent = null): array
+    public function objectify(Content $content, array $map, int $start = 0, ?BlockModelInterface $parent = null): array
     {
         $settings = new \stdClass();
         $settings->skip = 0;
 
-        $landmarkResolver = new LandmarkResolverModel([
+        $resolver = new LandmarkResolverModel([
             "letter"     => null,
             "landmark"   => $map,
             "lmStart"    => null,
@@ -95,26 +107,7 @@ class Reader
         try {
             for ($i=$start; $i < $content->getLength(); $i++) {
                 try {
-                    $landmarkResolver->setI(Str::skip($content->getLetter($i), $i, $content));
-                    $landmarkResolver->setLetter($content->getLetter($i));
-
-                    if (isset($landmarkResolver->getLandmark()[$landmarkResolver->getLetter()])) {
-                        $this->resolveStringLandmark($landmarkResolver);
-                        $i = $landmarkResolver->getI();
-                        continue;
-                    }
-
-                    if (isset($landmarkResolver->getLandmark()['_m']) && $this->resolveMethodLandmark($landmarkResolver)) {
-                        $i = $landmarkResolver->getI();
-                        continue;
-                    }
-
-                    // If nothing was found but we have descended some steps into the map, try with the same letter from the start
-                    if (!is_null($landmarkResolver->getLmStart())) {
-                        $i--;
-                    }
-
-                    $this->clearObjectify($landmarkResolver);
+                    $this->resolve($resolver, $i);
                 } catch (Exception $e) {
                     if ($e->getMessage() !== self::SKIP) {
                         throw $e;
@@ -127,35 +120,79 @@ class Reader
             }
         }
 
-
-        return [$landmarkResolver->getScript(), $landmarkResolver->getI()];
+        return [$resolver->getScript(), $resolver->getI()];
     }
 
-    private function clearObjectify(LandmarkResolverModel $landmarkResolver)
+    private function resolve(LandmarkResolverModel $resolver, int &$i)
     {
-        $landmarkResolver->setLandmark($landmarkResolver->getMap());
-        $landmarkResolver->setData([]);
-        $landmarkResolver->setLmStart(null);
+        // @TODO remove this, and think of better fail save
+        $this->iterations++;
+        if ($this->iterations > 2000) {
+            throw new Error('Inifnite loop');
+        }
+
+        $content = $resolver->getContent();
+        if (is_null($content->getLetter($i))) {
+            throw new Exception(self::FINISH);
+        }
+
+        $resolver->setI(Str::skip($content->getLetter($i), $i, $content));
+        $resolver->setLetter($content->getLetter($i));
+
+        if (isset($resolver->getLandmark()[$resolver->getLetter()])) {
+            $res = $this->resolveStringLandmark($resolver);
+            if ($res) {
+                $i = $resolver->getI();
+                return true;
+            }
+        }
+
+        if (isset($resolver->getLandmark()['_m']) && $this->resolveMethodLandmark($resolver)) {
+            $i = $resolver->getI();
+            return true;
+        }
+
+        // If nothing was found but we have descended some steps into the map, try with the same letter from the start
+        if (!is_null($resolver->getLmStart())) {
+            $i--;
+            $resolver->setLetter($content->getLetter($i));
+        }
+
+        $this->clearObjectify($resolver);
+        return false;
     }
 
-    public function resolveStringLandmark(LandmarkResolverModel $landmarkResolver): void {
-        $landmarkResolver->setLandmark(
-            $landmarkResolver->getLandmark()[$landmarkResolver->getLetter()]
+    private function clearObjectify(LandmarkResolverModel $resolver)
+    {
+        $resolver->setLandmark($resolver->getMap());
+        $resolver->setData([]);
+        $resolver->setLmStart(null);
+    }
+
+    public function resolveStringLandmark(LandmarkResolverModel $resolver): bool
+    {
+        $resolver->setLandmark(
+            $resolver->getLandmark()[$resolver->getLetter()]
         );
 
-        if (is_null($landmarkResolver->getLmStart())) {
-            $landmarkResolver->setLmStart($landmarkResolver->getI());
+        if (is_null($resolver->getLmStart())) {
+            $resolver->setLmStart($resolver->getI());
         }
 
-        if (isset($landmarkResolver->getLandmark()['_stop'])) {
-            $this->resolveSettings($landmarkResolver);
-            $landmarkResolver->setScript([...$landmarkResolver->getScript(), $this->saveLandmark($landmarkResolver)]);
-            $this->clearObjectify($landmarkResolver);
+        if (isset($resolver->getLandmark()['_stop'])) {
+            $this->resolveSettings($resolver);
+            $resolver->setScript([...$resolver->getScript(), $this->saveLandmark($resolver)]);
+            $this->clearObjectify($resolver);
+            return true;
         }
+
+        $resolver->i++;
+        return $this->resolve($resolver, $resolver->i);
     }
 
-    public function resolveMethodLandmark(LandmarkResolverModel $landmarkResolver): bool {
-        foreach ($landmarkResolver->getLandmark()['_m'] as $methodName => $step) {
+    public function resolveMethodLandmark(LandmarkResolverModel $resolver): bool
+    {
+        foreach ($resolver->getLandmark()['_m'] as $methodName => $step) {
             $method = $this->methods[$methodName]
                 ?? throw new Exception("Method " . htmlentities($methodName) . " not found", 404);
 
@@ -167,13 +204,14 @@ class Reader
 
             // Set essentials
             $essentials = [
-                "content" => $landmarkResolver->getContent(),
-                "letter"  => $landmarkResolver->getLetter(),
-                "i"       => $landmarkResolver->getI(),
-                "data"    => $landmarkResolver->getData(),
-                "methods" => $this->schema['methods'],
+                "content"  => $resolver->getContent(),
+                "letter"   => $resolver->getLetter(),
+                "i"        => $resolver->getI(),
+                "data"     => $resolver->getData(),
+                "previous" => $resolver->getParent()?->getLastChild(),
+                "methods"  => $this->schema['methods'],
             ];
-            $skipReplace = ["methods" => true];
+            $skipReplace = ["methods" => true, 'previous' => true];
             $this->essentials->set($essentials);
 
             // Call method
@@ -186,60 +224,66 @@ class Reader
                 }
                 $getter = 'get' . Str::pascalize($key);
                 $setter = 'set' . Str::pascalize($key);
-                $landmarkResolver->$setter($this->essentials->$getter());
+                $resolver->$setter($this->essentials->$getter());
             }
 
             if (!$res) {
                 continue;
             }
+            $resolver->setLandmark($step);
 
-            $landmarkResolver->setLandmark($step);
-            if (is_null($landmarkResolver->getLmStart())) {
-                $landmarkResolver->setLmStart($landmarkResolver->getI());
+            if (is_null($resolver->getLmStart())) {
+                $resolver->setLmStart($resolver->getI());
             }
-            if (isset($landmarkResolver->getLandmark()['_stop'])) {
-                $this->resolveSettings($landmarkResolver);
-                $landmarkResolver->setScript([...$landmarkResolver->getScript(), $this->saveLandmark($landmarkResolver)]);
-                $this->clearObjectify($landmarkResolver);
+
+            if (isset($resolver->getLandmark()['_stop'])) {
+                $this->resolveSettings($resolver);
+                $resolver->setScript([...$resolver->getScript(), $this->saveLandmark($resolver)]);
+                $this->clearObjectify($resolver);
+                return true;
             }
-            return true;
+            $resolver->i++;
+            $res = $this->resolve($resolver, $resolver->i);
+            if ($res) {
+                return true;
+            }
         }
         return false;
     }
 
-    public function resolveSettings(LandmarkResolverModel $landmarkResolver): void
+    public function resolveSettings(LandmarkResolverModel $resolver): void
     {
-        if (isset($landmarkResolver->getLandmark()['_skip'])) {
-            $landmarkResolver->getSettings()->skip++;
+        if (isset($resolver->getLandmark()['_skip'])) {
+            $resolver->getSettings()->skip++;
             throw new Exception(self::SKIP);
         }
 
-        if ($landmarkResolver->getSettings()->skip > 0) {
-            $landmarkResolver->getSettings()->skip--;
+        if ($resolver->getSettings()->skip > 0) {
+            $resolver->getSettings()->skip--;
             throw new Exception(self::SKIP);
         }
 
-        if (isset($landmarkResolver->getLandmark()['_finish'])) {
+        if (isset($resolver->getLandmark()['_finish'])) {
             throw new Exception(self::FINISH);
         }
     }
 
-    public function saveLandmark(LandmarkResolverModel $landmarkResolver): BlockModel
+    public function saveLandmark(LandmarkResolverModel $resolver): BlockModelInterface
     {
         $item = new BlockModel(
-            start: $landmarkResolver->getLmStart(),
-            end: $landmarkResolver->getI(),
-            landmark: $this->clearLandmark($landmarkResolver->getLandmark()),
-            data: $landmarkResolver->getData(),
-            index: \sizeof($landmarkResolver->getScript()),
-            parent: $landmarkResolver->getParent()
+            start: $resolver->getLmStart(),
+            end: $resolver->getI(),
+            landmark: $resolver->getLandmark(),
+            data: $resolver->getData(),
+            index: \sizeof($resolver->getScript()),
+            parent: $resolver->getParent()
         );
 
-        $block = $landmarkResolver->getLandmark()["_block"] ?? false;
+        $block = $resolver->getLandmark()["_block"] ?? false;
 
         if ($block) {
-            list($i, $blocks) = $this->findBlocksEnd($block, $landmarkResolver->getContent(), $landmarkResolver->getI() + 1, $item);
-            $landmarkResolver->setI($i);
+            list($i, $blocks) = $this->findBlocksEnd($block, $resolver->getContent(), $resolver->getI() + 1, $item);
+            $resolver->setI($i);
             $item->setEnd($i);
             $item->setChildren($blocks);
         }
@@ -247,22 +291,12 @@ class Reader
         // `let a = 'a'\nlet b = 'd'` (variable a is sharing its end (`\n`) with variable b)
         // `let a = 'a';let b = 'd'` (variable a is sharing its end (`;`) with variable b)
         // so we will try to include the last letter once more
-        $landmarkResolver->i--;
-
+        $resolver->i--;
+        $resolver->getParent()->addChild($item);
         return $item;
     }
 
-    public function clearLandmark(array $landmark): array
-    {
-        foreach ($landmark as $key => $value) {
-            if (is_string($key) && $key[0] == '_') {
-                unset($landmark[$key]);
-            }
-        }
-        return $landmark;
-    }
-
-    public function findBlocksEnd(array $blockSet, Content $content, int $start, BlockModel $parent): array
+    public function findBlocksEnd(array $blockSet, Content $content, int $start, BlockModelInterface $parent): array
     {
         list($instructions, $i) = $this->objectify($content, $blockSet['map'], $start, $parent);
         if (is_null($this->current['caret'])) {

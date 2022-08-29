@@ -1,11 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace Tetraquark\Model;
+namespace Tetraquark\Model\Block;
+
+use Tetraquark\Model\BaseBlockModel;
+
+use Tetraquark\Contract\BlockModelInterface;
 
 /**
  * Data model of the single block
  */
-class BlockModel extends BaseModel
+class BlockModel extends BaseBlockModel
 {
     public function __construct(
         protected int $start,
@@ -13,7 +17,7 @@ class BlockModel extends BaseModel
         protected array $landmark,
         protected array $data,
         protected int $index,
-        protected ?BlockModel $parent = null,
+        protected ?BlockModelInterface $parent = null,
         protected array $children = [],
     ) {
     }

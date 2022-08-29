@@ -63,7 +63,7 @@ class Log
             }
             if (self::$addFunction) {
                 if (!isset($debug)) {
-                    $debug = debug_backtrace()[1 + $traceLvl];
+                    $debug = debug_backtrace()[1 + $traceLvl] ?? ['function' => 'not found'];
                 }
                 if (\mb_strlen($class) > 0) {
                     $function .= ' | ';
@@ -101,6 +101,9 @@ class Log
 
     static public function setIndent(int $indent): void
     {
+        if ($indent < 0) {
+            $indent = 0;
+        }
         self::$indent = $indent;
     }
 
@@ -112,6 +115,9 @@ class Log
     static public function decreaseIndent(): void
     {
         self::$indent--;
+        if (self::$indent < 0) {
+            self::$indent = 0;
+        }
     }
 
     static public function setVerboseLevel(int $level): void

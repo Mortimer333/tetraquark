@@ -12,10 +12,10 @@ function* test() {
     console.log('asd')
     let b = 'c'
 }
-*/
+*/let bv = asd;
 
 
-if (asda) {asdasd}
+if (asda) {asdasd}let g = 'df'
 
 let a = 'asd'
 let b = 2 +
