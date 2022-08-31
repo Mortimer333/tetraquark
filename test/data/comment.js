@@ -14,9 +14,10 @@ function* test() {
 }
 */let bv = asd;
 
+if (true) console.log
 
 if (asda) {asdasd}let g = 'df'
-
+missed
 let a = 'asd'
 let b = 2 +
 3;
@@ -37,3 +38,4 @@ if (true){
     }
 }
 }
+asd

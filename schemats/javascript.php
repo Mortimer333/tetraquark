@@ -53,13 +53,9 @@ return [
             ]
         ],
         /* SHORT IF */
-        // "/s|end\if/s|e\(/find:')':'(':'condition'\)/s|e\/short\\" => [
-        //     "class" => "ShortIfBlock",
-        //     "_block" => [
-        //         "end" => "}",
-        //         "nested" => "{"
-        //     ]
-        // ],
+        "/s|end\if/s|e\(/find:')':'(':'condition'\/s|e\/'!{'\/varend\\" => [
+            "class" => "ShortIfBlock"
+        ],
         /* CLASS DEFINITION */
         "/s|end\class/s|e\/find:'{'::'class_name'\\" => [
             "class" => "ClassBlock",
@@ -112,7 +108,8 @@ return [
             $essentials->getMethods()['find']($essentials, ["\n", ";"], null, 'var');
 
             $newVar  = $essentials->getData()['var'];
-            $essentials->setData(["var" => $var . $newVar . $essentials->getLetter()]);
+            // @PERFORMANCE
+            $essentials->setData([...$essentials->getData(), "var" => $var . $newVar . $essentials->getLetter()]);
 
             $i       = $essentials->getI() + 1;
             $content = $essentials->getContent();
@@ -156,7 +153,7 @@ return [
                 return $essentials->getMethods()['varendNext']($essentials, $iter);
             }
 
-            $essentials->setI($essentials->getI() + 1);
+            $essentials->setI($essentials->getI());
 
             return true;
         },
@@ -164,10 +161,6 @@ return [
         {
             $essentials->setI($essentials->getI() + 1);
             return $essentials->getMethods()['varend']($essentials, $iter + 1);
-        },
-        "short" => function (CustomMethodEssentialsModel $essentials)
-        {
-            return false;
         },
         "find" => function (CustomMethodEssentialsModel $essentials, string|array $needle, null|array|string $hayStarter = null, ?string $name = null): bool
         {
@@ -245,6 +238,9 @@ return [
             }
 
             if (!$res) {
+                if (!is_null($name)) {
+                    $data[$name] = trim($content->iSubStr($index, $i - $straw['len'] - 1));
+                }
                 $index = $i - 1;
             }
 

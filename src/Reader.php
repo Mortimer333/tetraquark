@@ -9,6 +9,7 @@ use Tetraquark\Model\{
     Block\ScriptBlockModel
 };
 use Tetraquark\Contract\BlockModelInterface;
+use Tetraquark\Factory\ClosureFactory;
 
 /**
  *  Class for reading script and seperating it into managable blocks
@@ -41,11 +42,14 @@ class Reader
 
             $script = file_get_contents($script);
         }
+        // @TODO think this one through
+        $script = str_replace("\r\n", "\n", $script);
 
         $content = $this->removeCommentsAndAdditional(new Content($script));
         $content = $this->customPrepare($content);
+
         // echo $content . PHP_EOL;
-        // Log::log($content . '');
+        Log::log($content . '');
         Log::timerStart();
         $this->map = $this->generateBlocksMap();
         // die(json_encode($this->map, JSON_PRETTY_PRINT));
@@ -118,9 +122,36 @@ class Reader
             if ($e->getMessage() !== self::FINISH) {
                 throw $e;
             }
+
+            $last = $resolver->getParent()->getLastChild();
+            if ($last && $last?->getEnd() != $i - 1) {
+                $this->addMissedEnd($resolver, $last->getEnd() + 1, $i - 1);
+            }
         }
 
         return [$resolver->getScript(), $resolver->getI()];
+    }
+
+    public function addMissedEnd(LandmarkResolverModel $resolver, int $start, int $end): void
+    {
+        $last = $resolver->getParent()->getLastChild();
+        $data = $this->getMissedData($resolver, $start, $end);
+        if (Validate::isWhitespace($data['missed'])) {
+            return;
+        }
+        $resolver->setLmStart($start);
+        $resolver->setI($end);
+        $resolver->setLandmark($this->getMissedLandmark());
+        $resolver->setData($data);
+        $this->saveBlock($resolver);
+    }
+
+    public function getMissedData(LandmarkResolverModel $resolver, int $start, int $end): array
+    {
+        $missed = $resolver->getContent()->iSubStr($start, $end);
+        return [
+            "missed" => $missed
+        ];
     }
 
     private function resolve(LandmarkResolverModel $resolver, int &$i)
@@ -159,6 +190,7 @@ class Reader
         }
 
         $this->clearObjectify($resolver);
+
         return false;
     }
 
@@ -181,7 +213,7 @@ class Reader
 
         if (isset($resolver->getLandmark()['_stop'])) {
             $this->resolveSettings($resolver);
-            $resolver->setScript([...$resolver->getScript(), $this->saveLandmark($resolver)]);
+            $this->saveBlock($resolver);
             $this->clearObjectify($resolver);
             return true;
         }
@@ -211,12 +243,20 @@ class Reader
                 "previous" => $resolver->getParent()?->getLastChild(),
                 "methods"  => $this->schema['methods'],
             ];
-            $skipReplace = ["methods" => true, 'previous' => true];
+            $skipReplace = [
+                "methods" => true,
+                "previous" => true,
+            ];
             $this->essentials->set($essentials);
 
             // Call method
             $res = $callable($this->essentials, ...$method['params']);
 
+
+
+            if (!$res) {
+                continue;
+            }
             // Update changed essentials
             foreach ($this->essentials as $key => $value) {
                 if ($skipReplace[$key] ?? false) {
@@ -227,9 +267,6 @@ class Reader
                 $resolver->$setter($this->essentials->$getter());
             }
 
-            if (!$res) {
-                continue;
-            }
             $resolver->setLandmark($step);
 
             if (is_null($resolver->getLmStart())) {
@@ -238,7 +275,8 @@ class Reader
 
             if (isset($resolver->getLandmark()['_stop'])) {
                 $this->resolveSettings($resolver);
-                $resolver->setScript([...$resolver->getScript(), $this->saveLandmark($resolver)]);
+                // @PERFORMANCE
+                $this->saveBlock($resolver);
                 $this->clearObjectify($resolver);
                 return true;
             }
@@ -268,7 +306,7 @@ class Reader
         }
     }
 
-    public function saveLandmark(LandmarkResolverModel $resolver): BlockModelInterface
+    public function saveBlock(LandmarkResolverModel $resolver): void
     {
         $item = new BlockModel(
             start: $resolver->getLmStart(),
@@ -293,7 +331,50 @@ class Reader
         // so we will try to include the last letter once more
         $resolver->i--;
         $resolver->getParent()->addChild($item);
-        return $item;
+
+        // @PERFORMANCE
+        $resolver->setScript([...$resolver->getScript(), $item]);
+
+        $this->addNotMapped($resolver);
+    }
+
+    public function getMissedLandmark(): array
+    {
+        return [
+            "_missed" => true,
+        ];
+    }
+
+    public function addNotMapped(LandmarkResolverModel $resolver): void
+    {
+        $script = $resolver->getScript();
+        $scriptLen = \sizeof($script);
+        if ($scriptLen <= 1) {
+            return;
+        }
+        $lastChild = $script[$scriptLen - 1];
+        $secondLastChild = $script[$scriptLen - 2];
+
+        if ($lastChild->getStart() - 1 > $secondLastChild->getEnd()) {
+            $data = $this->getMissedData($resolver, $secondLastChild->getEnd() + 1, $lastChild->getStart() - 1);
+            if (Validate::isWhitespace($data['missed'])) {
+                return;
+            }
+
+            $item = new BlockModel(
+                start: $secondLastChild->getEnd() + 1,
+                end: $lastChild->getStart() - 1,
+                landmark: $this->getMissedLandmark(),
+                data: $data,
+                index: $lastChild->getIndex(),
+                parent: $resolver->getParent(),
+            );
+
+            array_splice($script, $lastChild->getIndex(), 0, [$item]);
+            $lastChild->setIndex($lastChild->getIndex() + 1);
+
+            $resolver->setScript($script);
+        }
     }
 
     public function findBlocksEnd(array $blockSet, Content $content, int $start, BlockModelInterface $parent): array
@@ -457,15 +538,24 @@ class Reader
                 $nextStep = $this->sliceIntoSteps($map, $block, $stepCounter + 1);
                 $methods = [];
                 foreach ($step['item'] as $item) {
+                    // Sepcial method - empty
                     if ($item['name'] === 'e') {
                         $steps = array_merge($nextStep, $steps);
                         continue;
                     }
                     if (Validate::isStringLandmark($item['name'][0], '')) {
-                        if (\mb_strlen($item['name']) !== 3) {
-                            throw new Exception("OR literal method can be only made from 1 letter at time", 400);
+                        $strLen = \mb_strlen($item['name']);
+                        if ($strLen !== 3 &&$strLen !== 4) {
+                            throw new Exception("OR literal method can be only made from 1 letter at time (optionaly with negation `!`)", 400);
                         }
-                        $steps[trim($item['name'], $item['name'][0])] = $nextStep;
+                        $name = trim($item['name'], $item['name'][0]);
+                        if ($strLen === 4 && $name[0] === '!') {
+                            $methods                [$name] = $nextStep;
+                            $this->methods          [$name] = $this->methodFromString($name);
+                            $this->schema['methods'][$name] = ClosureFactory::generateReversalClosure($name[1]);
+                        } else {
+                            $steps[$name] = $nextStep;
+                        }
                     } else {
                         $methods[$item['name']] = $nextStep;
                         $this->methods[$item['name']] = $this->methodFromString($item['name']);
