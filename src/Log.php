@@ -48,8 +48,11 @@ class Log
         self::log(date('H:i:s:') . round($usec * 1000), 0 , 1);
     }
 
-    static public function log(string|int|float $output, ?int $verbose = null, int $traceLvl = 0, bool $replaceNewLine = true): void
+    static public function log(array|string|int|float $output, ?int $verbose = null, int $traceLvl = 0, bool $replaceNewLine = true): void
     {
+        if (is_array($output)) {
+            $output = json_encode($output, JSON_PRETTY_PRINT);
+        }
         $verbose = $verbose ?? self::$verbose;
         $indentStr = "  ";
 

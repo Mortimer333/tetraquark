@@ -43,7 +43,7 @@ class Reader
             $script = file_get_contents($script);
         }
         // @TODO think this one through
-        $script = str_replace("\r\n", "\n", $script);
+        // $script = str_replace("\r\n", "\n", $script);
 
         $content = $this->removeCommentsAndAdditional(new Content($script));
         $content = $this->customPrepare($content);
@@ -122,11 +122,11 @@ class Reader
             if ($e->getMessage() !== self::FINISH) {
                 throw $e;
             }
+        }
 
-            $last = $resolver->getParent()->getLastChild();
-            if ($last && $last?->getEnd() != $i - 1) {
-                $this->addMissedEnd($resolver, $last->getEnd() + 1, $i - 1);
-            }
+        $last = $resolver->getParent()->getLastChild();
+        if ($last && $last?->getEnd() + 1 != $i - 1) {
+            $this->addMissedEnd($resolver, $last->getEnd() + 1, $i - 1);
         }
 
         return [$resolver->getScript(), $resolver->getI()];
@@ -136,7 +136,7 @@ class Reader
     {
         $last = $resolver->getParent()->getLastChild();
         $data = $this->getMissedData($resolver, $start, $end);
-        if (Validate::isWhitespace($data['missed'])) {
+        if ($data['missed'] == '' || Validate::isWhitespace($data['missed'])) {
             return;
         }
         $resolver->setLmStart($start);
@@ -167,7 +167,8 @@ class Reader
             throw new Exception(self::FINISH);
         }
 
-        $resolver->setI(Str::skip($content->getLetter($i), $i, $content));
+        // Don't skip string - $resolver->setI(Str::skip($content->getLetter($i), $i, $content));
+        $resolver->setI($i);
         $resolver->setLetter($content->getLetter($i));
 
         if (isset($resolver->getLandmark()[$resolver->getLetter()])) {
@@ -252,11 +253,10 @@ class Reader
             // Call method
             $res = $callable($this->essentials, ...$method['params']);
 
-
-
             if (!$res) {
                 continue;
             }
+
             // Update changed essentials
             foreach ($this->essentials as $key => $value) {
                 if ($skipReplace[$key] ?? false) {
@@ -335,7 +335,7 @@ class Reader
         // @PERFORMANCE
         $resolver->setScript([...$resolver->getScript(), $item]);
 
-        $this->addNotMapped($resolver);
+        $this->addMissed($resolver);
     }
 
     public function getMissedLandmark(): array
@@ -345,7 +345,7 @@ class Reader
         ];
     }
 
-    public function addNotMapped(LandmarkResolverModel $resolver): void
+    public function addMissed(LandmarkResolverModel $resolver): void
     {
         $script = $resolver->getScript();
         $scriptLen = \sizeof($script);
@@ -354,8 +354,7 @@ class Reader
         }
         $lastChild = $script[$scriptLen - 1];
         $secondLastChild = $script[$scriptLen - 2];
-
-        if ($lastChild->getStart() - 1 > $secondLastChild->getEnd()) {
+        if ($lastChild->getStart() - 1 > $secondLastChild->getEnd() + 1) {
             $data = $this->getMissedData($resolver, $secondLastChild->getEnd() + 1, $lastChild->getStart() - 1);
             if (Validate::isWhitespace($data['missed'])) {
                 return;
@@ -379,20 +378,29 @@ class Reader
 
     public function findBlocksEnd(array $blockSet, Content $content, int $start, BlockModelInterface $parent): array
     {
-        list($instructions, $i) = $this->objectify($content, $blockSet['map'], $start, $parent);
+        // We firstly search for the end of the block then map contents to ensure that small error in the block won't break the whole chain
+        // and we will be able to use this data i.e. to point more then one error at time
+
+        // Find the end of block
+        list($tmp, $i) = $this->objectify($content, $blockSet['map'], $start, $parent);
         if (is_null($this->current['caret'])) {
             $this->current['caret'] = 0;
         }
         $this->current['caret'] += $start;
-        $caretIncr = $this->current['caret'];
-        $newContent = $content->iCutToContent($start, $i);
-        if (!Validate::isWhitespace($newContent->getLetter(0))) {
-            $newContent->prependArrayContent([" "]);
-        }
-        list($blocks) = $this->objectify($newContent, $this->map, parent: $parent);
-        foreach ($blocks as &$block) {
-            $block->setStart($block->getStart() + $caretIncr);
-            $block->setEnd($block->getEnd() + $caretIncr);
+        $caretIncr  = $this->current['caret'];
+        $newContent = $content->iCutToContent($start, $i - 1);
+        $blocks     = [];
+        if ($newContent->getLength() !== 0) {
+            if (!Validate::isWhitespace($newContent->getLetter(0))) {
+                $newContent->prependArrayContent([" "]);
+            }
+            // Generate blocks
+            list($blocks) = $this->objectify($newContent, $this->map, parent: $parent);
+
+            foreach ($blocks as &$block) {
+                $block->setStart($block->getStart() + $caretIncr);
+                $block->setEnd($block->getEnd() + $caretIncr);
+            }
         }
         $this->current['caret'] = null;
         return [$i, $blocks];
@@ -588,7 +596,6 @@ class Reader
                 return $block;
             }
         ];
-
         return ($types[$map[$stepCounter]['type'] ?? null] ?? $types['default'])($map[$stepCounter] ?? null);
     }
 
@@ -656,10 +663,12 @@ class Reader
         $lastMethodLandmark = '|';
         $inMethod = false;
         for ($i=0; $i < $instr->getLength(); $i++) {
-            $newI = Str::skip($instr->getLetter($i), $i, $instr);
-            if ($i != $newI) {
-                $currentItem .= $instr->iSubStr($i, $newI - 1);
-                $i = $newI;
+            if ($inMethod) {
+                $newI = Str::skip($instr->getLetter($i), $i, $instr);
+                if ($i != $newI) {
+                    $currentItem .= $instr->iSubStr($i, $newI - 1);
+                    $i = $newI;
+                }
             }
             $letter = $instr->getLetter($i);
             // skip this letter and just add next one

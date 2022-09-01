@@ -1,9 +1,30 @@
- //comment\n///**/** comment\n//** comment2\n/*/* comment 3 */\n/**\n * Comment 4\n * nasnasd\n * asdnansd\nlet a /* asd = 2;\n\nfunction* test() {\n    console.log('asd')\n    let b = 'c'\n}\n*/let bv = asd;\n\nif (true) console.log\n\nif (asda) {asdasd}let g = 'df'\nmissed\nlet a = 'asd'\nlet b = 2 +\n3;\n\nlet c = 2\n+ 3\n\nlet d = 2\n+\n3\n\nclass ClassName {\n    {}\nif (true){\n    class ClassName2 {\n        if() {continue\n        }\n    }\n}\n}\nasd\n
-Duration: 0.008s
+ //comment\r\n///**/** comment\r\n//** comment2\r\n/*/* comment 3 */\r\n/**\r\n * Comment 4\r\n * nasnasd\r\n * asdnansd\r\nlet a /* asd = 2;\r\n\r\nfunction* test() {\r\n    console.log('asd')\r\n    let b = 'c'\r\n}\r\n*/let bv = asd;\r\n["sad", [], bsd]\r\nif (true) console.log\r\n\r\nif (asda) {asdasd}let g = 'df'\r\nmissed\r\nlet a = 'asd'\r\nlet b = 2 +\r\n3;\r\n\r\nlet c = 2\r\n+ 3\r\n\r\nlet d = 2\r\n+\r\n3\r\n\r\nclass ClassName {\r\n    {}\r\nif (true){\r\n    class ClassName2 {\r\n        if() {continue\r\n        }\r\n    }\r\n}\r\n}\r\nasd\r
+11 > 12
+29 > 30
+44 > 45
+63 > 62
+missed: \r\n
+193 > 195
+7 > 7
+9 > 10
+209 > 208
+missed: \r\n
+226 > 226
+251 > 251
+269 > 271
+291 > 285
+missed: missed\r
+306 > 308
+325 > 323
+missed: \r\n\r
+343 > 343
+362 > 362
+472 > 473
+Duration: 0.006s
 [
   [
     start => 1,
-    end => 10,
+    end => 11,
     landmark => {
         "class": "SingleCommentBlock",
         "_stop": true
@@ -18,8 +39,8 @@ Duration: 0.008s
       ],
   ],
   [
-    start => 11,
-    end => 27,
+    start => 12,
+    end => 29,
     landmark => {
         "class": "SingleCommentBlock",
         "_stop": true
@@ -34,8 +55,8 @@ Duration: 0.008s
       ],
   ],
   [
-    start => 28,
-    end => 41,
+    start => 30,
+    end => 44,
     landmark => {
         "class": "SingleCommentBlock",
         "_stop": true
@@ -50,8 +71,8 @@ Duration: 0.008s
       ],
   ],
   [
-    start => 42,
-    end => 58,
+    start => 45,
+    end => 61,
     landmark => {
         "class": "MultiCommentBlock",
         "_stop": true
@@ -66,14 +87,14 @@ Duration: 0.008s
       ],
   ],
   [
-    start => 60,
-    end => 180,
+    start => 64,
+    end => 194,
     landmark => {
         "class": "MultiCommentBlock",
         "_stop": true
     },
     data => {
-        "comment": "*\n * Comment 4\n * nasnasd\n * asdnansd\nlet a \/* asd = 2;\n\nfunction* test() {\n    console.log('asd')\n    let b = 'c'\n}"
+        "comment": "*\r\n * Comment 4\r\n * nasnasd\r\n * asdnansd\r\nlet a \/* asd = 2;\r\n\r\nfunction* test() {\r\n    console.log('asd')\r\n    let b = 'c'\r\n}"
     },
     index => 4,
     parent => script
@@ -82,8 +103,8 @@ Duration: 0.008s
       ],
   ],
   [
-    start => 180,
-    end => 193,
+    start => 194,
+    end => 207,
     landmark => {
         "class": "LetVariableBlock",
         "_stop": true
@@ -98,8 +119,89 @@ Duration: 0.008s
       ],
   ],
   [
-    start => 195,
-    end => 217,
+    start => 210,
+    end => 225,
+    landmark => {
+        "class": "ArrayBlock",
+        "_block": {
+            "map": {
+                "]": {
+                    "_finish": true,
+                    "_stop": true
+                },
+                "[": {
+                    "_skip": true,
+                    "_stop": true
+                }
+            }
+        },
+        "_stop": true
+    },
+    data => [],
+    index => 6,
+    parent => script
+    children => 
+      [
+        [
+          start => 212,
+          end => 217,
+          landmark => {
+              "class": "StringBlock",
+              "_stop": true
+          },
+          data => [],
+          index => 0,
+          parent => parent[6]
+          children => 
+            [
+            ],
+        ],
+        [
+          start => 219,
+          end => 220,
+          landmark => {
+              "class": "ArrayBlock",
+              "_block": {
+                  "map": {
+                      "]": {
+                          "_finish": true,
+                          "_stop": true
+                      },
+                      "[": {
+                          "_skip": true,
+                          "_stop": true
+                      }
+                  }
+              },
+              "_stop": true
+          },
+          data => [],
+          index => 1,
+          parent => parent[6]
+          children => 
+            [
+            ],
+        ],
+        [
+          start => 221,
+          end => 225,
+          landmark => {
+              "_missed": true
+          },
+          data => {
+              "missed": ", bsd"
+          },
+          index => 2,
+          parent => parent[6]
+          children => 
+            [
+            ],
+        ],
+      ],
+  ],
+  [
+    start => 227,
+    end => 250,
     landmark => {
         "class": "ShortIfBlock",
         "_stop": true
@@ -109,15 +211,15 @@ Duration: 0.008s
         "negation": "c",
         "var": "onsole.log\n"
     },
-    index => 6,
+    index => 7,
     parent => script
     children => 
       [
       ],
   ],
   [
-    start => 218,
-    end => 236,
+    start => 252,
+    end => 270,
     landmark => {
         "class": "IfBlock",
         "_block": {
@@ -137,54 +239,7 @@ Duration: 0.008s
     data => {
         "condition": "asda"
     },
-    index => 7,
-    parent => script
-    children => 
-      [
-      ],
-  ],
-  [
-    start => 236,
-    end => 249,
-    landmark => {
-        "class": "LetVariableBlock",
-        "_stop": true
-    },
-    data => {
-        "var": "g = 'df'\n"
-    },
     index => 8,
-    parent => script
-    children => 
-      [
-      ],
-  ],
-  [
-    start => 250,
-    end => 255,
-    landmark => {
-        "_missed": true
-    },
-    data => {
-        "missed": "missed"
-    },
-    index => 9,
-    parent => script
-    children => 
-      [
-      ],
-  ],
-  [
-    start => 256,
-    end => 270,
-    landmark => {
-        "class": "LetVariableBlock",
-        "_stop": true
-    },
-    data => {
-        "var": "a = 'asd'\n"
-    },
-    index => 10,
     parent => script
     children => 
       [
@@ -198,7 +253,38 @@ Duration: 0.008s
         "_stop": true
     },
     data => {
-        "var": "b = 2 +\n3;"
+        "var": "g = 'df'\n"
+    },
+    index => 9,
+    parent => script
+    children => 
+      [
+      ],
+  ],
+  [
+    start => 285,
+    end => 291,
+    landmark => {
+        "_missed": true
+    },
+    data => {
+        "missed": "missed\r"
+    },
+    index => 10,
+    parent => script
+    children => 
+      [
+      ],
+  ],
+  [
+    start => 292,
+    end => 307,
+    landmark => {
+        "class": "LetVariableBlock",
+        "_stop": true
+    },
+    data => {
+        "var": "a = 'asd'\n"
     },
     index => 11,
     parent => script
@@ -207,14 +293,14 @@ Duration: 0.008s
       ],
   ],
   [
-    start => 286,
-    end => 300,
+    start => 307,
+    end => 322,
     landmark => {
         "class": "LetVariableBlock",
         "_stop": true
     },
     data => {
-        "var": "c = 2\n+ 3\n"
+        "var": "b = 2 +\n3;"
     },
     index => 12,
     parent => script
@@ -223,14 +309,14 @@ Duration: 0.008s
       ],
   ],
   [
-    start => 301,
-    end => 315,
+    start => 326,
+    end => 342,
     landmark => {
         "class": "LetVariableBlock",
         "_stop": true
     },
     data => {
-        "var": "d = 2\n+\n3\n"
+        "var": "c = 2\n+ 3\n"
     },
     index => 13,
     parent => script
@@ -239,8 +325,24 @@ Duration: 0.008s
       ],
   ],
   [
-    start => 316,
-    end => 417,
+    start => 344,
+    end => 361,
+    landmark => {
+        "class": "LetVariableBlock",
+        "_stop": true
+    },
+    data => {
+        "var": "d = 2\n+\n3\n"
+    },
+    index => 14,
+    parent => script
+    children => 
+      [
+      ],
+  ],
+  [
+    start => 363,
+    end => 472,
     landmark => {
         "class": "ClassBlock",
         "_block": {
@@ -260,13 +362,13 @@ Duration: 0.008s
     data => {
         "class_name": "ClassName"
     },
-    index => 14,
+    index => 15,
     parent => script
     children => 
       [
         [
-          start => 341,
-          end => 415,
+          start => 390,
+          end => 469,
           landmark => {
               "class": "IfBlock",
               "_block": {
@@ -287,12 +389,12 @@ Duration: 0.008s
               "condition": "true"
           },
           index => 0,
-          parent => parent[14]
+          parent => parent[15]
           children => 
             [
               [
-                start => 356,
-                end => 413,
+                start => 406,
+                end => 466,
                 landmark => {
                     "class": "ClassBlock",
                     "_block": {
@@ -317,8 +419,8 @@ Duration: 0.008s
                 children => 
                   [
                     [
-                      start => 383,
-                      end => 407,
+                      start => 434,
+                      end => 459,
                       landmark => {
                           "class": "IfBlock",
                           "_block": {
@@ -343,8 +445,8 @@ Duration: 0.008s
                       children => 
                         [
                           [
-                            start => 390,
-                            end => 399,
+                            start => 441,
+                            end => 450,
                             landmark => {
                                 "class": "ContinueBlock",
                                 "_stop": true
@@ -365,15 +467,15 @@ Duration: 0.008s
       ],
   ],
   [
-    start => 418,
-    end => 421,
+    start => 473,
+    end => 477,
     landmark => {
         "_missed": true
     },
     data => {
-        "missed": "\nasd"
+        "missed": "\r\nasd"
     },
-    index => 15,
+    index => 16,
     parent => script
     children => 
       [

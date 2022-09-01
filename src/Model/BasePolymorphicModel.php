@@ -60,6 +60,30 @@ class BasePolymorphicModel implements BasePolymorphicModelInterface
                     return $this;
                 };
             }
+
+            if (is_array($value)) {
+                $appender = 'append' . $pascalized;
+                if (!isset($this->_methods[$appender])) {
+                    $this->_methods[$appender] = function ($value, ?string $key = null) use ($camelcased)
+                    {
+                        if (\is_null($key)) {
+                            $this->$camelcased[] = $value;
+                        } else {
+                            $this->$camelcased[$key] = $value;
+                        }
+                        return $this;
+                    };
+                }
+
+                $prepender = 'prepend' . $pascalized;
+                if (!isset($this->_methods[$prepender])) {
+                    $this->_methods[$prepender] = function ($value) use ($camelcased)
+                    {
+                        array_unshift($this->$camelcased, $value);
+                        return $this;
+                    };
+                }
+            }
         }
         return $this;
     }

@@ -74,14 +74,37 @@ return [
         ],
         /* CONST */
         "/s|end\const/s\/varend\\" => [
-            "class" => "LetVariableBlock"
+            "class" => "ConstVariableBlock"
         ],
         /* VAR */
-        "/s|end\var/s\/varend\\" => [
-            "class" => "LetVariableBlock"
+        '/s|end\var/s\/varend\\' => [
+            "class" => "VarVariableBlock"
+        ],
+        /* ARRAY */
+        "[" => [
+            "class" => "ArrayBlock",
+            "_block" => [
+                "end" => "]",
+                "nested" => "[",
+            ]
+        ],
+        "'/strend:\"'\"\\" => [
+            "class" => "StringBlock",
+        ],
+        "`/strend:\"`\"\\" => [
+            "class" => "StringBlock",
+        ],
+        '"/strend:\'"\'\\' => [
+            "class" => "StringBlock",
         ],
     ],
     "methods" => [
+        "strend" => function (CustomMethodEssentialsModel $essentials, string $type): bool
+        {
+            $i = Str::skip($type, $essentials->getI(), $essentials->getContent());
+            $essentials->setI($i);
+            return true;
+        },
         "end" => function (CustomMethodEssentialsModel $essentials, $iter = 0): bool
         {
             $ends = [

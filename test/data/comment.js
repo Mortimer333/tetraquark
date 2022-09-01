@@ -13,7 +13,7 @@ function* test() {
     let b = 'c'
 }
 */let bv = asd;
-
+["sad", [], bsd]
 if (true) console.log
 
 if (asda) {asdasd}let g = 'df'
