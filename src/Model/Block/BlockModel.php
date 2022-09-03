@@ -11,6 +11,8 @@ use Tetraquark\Contract\BlockModelInterface;
  */
 class BlockModel extends BaseBlockModel
 {
+    protected ?int $blockStart = null;
+
     public function __construct(
         protected int $start,
         protected int $end,
@@ -99,13 +101,14 @@ class BlockModel extends BaseBlockModel
         return $this;
     }
 
-    public function toArray(): array
+    public function getBlockStart(): ?int
     {
-        $vars = get_class_vars(get_class($this));
-        $array = [];
-        foreach ($vars as $key => $value) {
-            $array[$key] = $this->$key;
-        }
-        return $array;
+        return $this->blockStart;
+    }
+
+    public function setBlockStart(?int $blockStart): self
+    {
+        $this->blockStart = $blockStart;
+        return $this;
     }
 }

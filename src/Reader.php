@@ -24,6 +24,9 @@ class Reader
     ];
     protected CustomMethodEssentialsModel $essentials;
     protected int $iterations = 0;
+    protected array $notClear = [
+        "_missed" => true,
+    ];
 
     public const SKIP = 'skip';
     public const FINISH = 'finish';
@@ -49,45 +52,45 @@ class Reader
         $content = $this->customPrepare($content);
 
         // echo $content . PHP_EOL;
-        Log::log($content . '');
-        Log::timerStart();
+        Log ::log($content . '');
+        Log ::timerStart();
         $this->map = $this->generateBlocksMap();
         // die(json_encode($this->map, JSON_PRETTY_PRINT));
         $script = new ScriptBlockModel();
         list($this->script, $end) = $this->objectify($content, $this->map, parent: $script);
-        Log::timerEnd();
+        Log ::timerEnd();
         // echo json_encode($this->script, JSON_PRETTY_PRINT);
         $this->displayScriptBlocks($this->script);
     }
 
     public function displayScriptBlocks(array $script): void
     {
-        Log::log('[');
-        Log::increaseIndent();
+        Log ::log('[');
+        Log ::increaseIndent();
         foreach ($script as $block) {
-            Log::log('[');
-            Log::increaseIndent();
+            Log ::log('[');
+            Log ::increaseIndent();
             foreach ($block->toArray() as $key => $value) {
                 if ($key === 'children') {
-                    Log::log($key . ' => ');
-                    Log::increaseIndent();
+                    Log ::log($key . ' => ');
+                    Log ::increaseIndent();
                     $this->displayScriptBlocks($value);
-                    Log::decreaseIndent();
+                    Log ::decreaseIndent();
                 } elseif ($key === 'parent' && !is_null($value)) {
                     if ($value instanceof ScriptBlockModel) {
-                        Log::log($key . ' => script');
+                        Log ::log($key . ' => script');
                     } else {
-                        Log::log($key . ' => parent[' . $value?->getIndex() . ']');
+                        Log ::log($key . ' => parent[' . $value?->getIndex() . ']');
                     }
                 } else {
-                    Log::log($key . ' => ' . json_encode($value, JSON_PRETTY_PRINT) . ',', replaceNewLine: false);
+                    Log ::log($key . ' => ' . json_encode($value, JSON_PRETTY_PRINT) . ',', replaceNewLine: false);
                 }
             }
-            Log::decreaseIndent();
-            Log::log('],');
+            Log ::decreaseIndent();
+            Log ::log('],');
         }
-        Log::decreaseIndent();
-        Log::log('],');
+        Log ::decreaseIndent();
+        Log ::log('],');
     }
 
     public function objectify(Content $content, array $map, int $start = 0, ?BlockModelInterface $parent = null): array
@@ -159,7 +162,7 @@ class Reader
         // @TODO remove this, and think of better fail save
         $this->iterations++;
         if ($this->iterations > 2000) {
-            throw new Error('Inifnite loop');
+            throw new \Error('Inifnite loop');
         }
 
         $content = $resolver->getContent();
@@ -170,7 +173,6 @@ class Reader
         // Don't skip string - $resolver->setI(Str::skip($content->getLetter($i), $i, $content));
         $resolver->setI($i);
         $resolver->setLetter($content->getLetter($i));
-
         if (isset($resolver->getLandmark()[$resolver->getLetter()])) {
             $res = $this->resolveStringLandmark($resolver);
             if ($res) {
@@ -191,6 +193,7 @@ class Reader
         }
 
         $this->clearObjectify($resolver);
+        Log::decreaseIndent();
 
         return false;
     }
@@ -275,7 +278,6 @@ class Reader
 
             if (isset($resolver->getLandmark()['_stop'])) {
                 $this->resolveSettings($resolver);
-                // @PERFORMANCE
                 $this->saveBlock($resolver);
                 $this->clearObjectify($resolver);
                 return true;
@@ -306,6 +308,30 @@ class Reader
         }
     }
 
+    public function clearLandmark(array $landmark): array
+    {
+        foreach ($landmark as $key => $value) {
+            if (
+                ($key[0] === '_' && !isset($this->notClear[$key]))
+                || (is_array($value) && isset($value['_stop']))
+            ) {
+                unset($landmark[$key]);
+                continue;
+            }
+        }
+        return $landmark;
+    }
+
+    public function saveResolver(LandmarkResolverModel $resolver): array
+    {
+        return $resolver->toArray();
+    }
+
+    public function restoreResolver(LandmarkResolverModel $resolver, array $save): void
+    {
+        $resolver->set($save);
+    }
+
     public function saveBlock(LandmarkResolverModel $resolver): void
     {
         $item = new BlockModel(
@@ -317,10 +343,28 @@ class Reader
             parent: $resolver->getParent()
         );
 
-        $block = $resolver->getLandmark()["_block"] ?? false;
+        // Check next letters if we don't have more specified block which matches syntax.
+        // More specified in a way that his definition is longer/more detailed
+        try {
+            $i = $resolver->getI() + 1;
+            // @POSSIBLE_PERFORMANCE_ISSUE
+            $save = $this->saveResolver($resolver);
+            $res = $this->resolve($resolver, $i);
+            if ($res) {
+                return;
+            }
+            $this->restoreResolver($resolver, $save);
+        } catch (\Exception $e) {
+            if ($e->getMessage() !== self::FINISH) {
+                throw $e;
+            }
+        }
+
+        $block = $item->getLandmark()["_block"] ?? false;
 
         if ($block) {
-            list($i, $blocks) = $this->findBlocksEnd($block, $resolver->getContent(), $resolver->getI() + 1, $item);
+            $item->setBlockStart($item->getEnd());
+            list($i, $blocks) = $this->findBlocksEnd($block, $resolver->getContent(), $item->getEnd() + 1, $item);
             $resolver->setI($i);
             $item->setEnd($i);
             $item->setChildren($blocks);
@@ -332,7 +376,7 @@ class Reader
         $resolver->i--;
         $resolver->getParent()->addChild($item);
 
-        // @PERFORMANCE
+        // @POSSIBLE_PERFORMANCE_ISSUE
         $resolver->setScript([...$resolver->getScript(), $item]);
 
         $this->addMissed($resolver);
@@ -349,28 +393,40 @@ class Reader
     {
         $script = $resolver->getScript();
         $scriptLen = \sizeof($script);
-        if ($scriptLen <= 1) {
+
+        if ($scriptLen <= 0) {
             return;
+        } elseif ($scriptLen == 1) {
+            $lastChild = $script[$scriptLen - 1];
+            $end = $lastChild->getStart() - 1;
+            $start = $index = 0;
+        } else {
+            $lastChild = $script[$scriptLen - 1];
+            $secondLastChild = $script[$scriptLen - 2];
+            $start = $secondLastChild->getEnd() + 1;
+            $end = $lastChild->getStart() - 1;
+            $index = $lastChild->getIndex();
         }
-        $lastChild = $script[$scriptLen - 1];
-        $secondLastChild = $script[$scriptLen - 2];
-        if ($lastChild->getStart() - 1 > $secondLastChild->getEnd() + 1) {
-            $data = $this->getMissedData($resolver, $secondLastChild->getEnd() + 1, $lastChild->getStart() - 1);
+
+        if ($end > $start) {
+            $data = $this->getMissedData($resolver, $start, $end);
             if (Validate::isWhitespace($data['missed'])) {
                 return;
             }
 
             $item = new BlockModel(
-                start: $secondLastChild->getEnd() + 1,
-                end: $lastChild->getStart() - 1,
+                start: $start,
+                end: $end,
                 landmark: $this->getMissedLandmark(),
                 data: $data,
-                index: $lastChild->getIndex(),
+                index: $index,
                 parent: $resolver->getParent(),
             );
 
-            array_splice($script, $lastChild->getIndex(), 0, [$item]);
-            $lastChild->setIndex($lastChild->getIndex() + 1);
+            array_splice($script, $index, 0, [$item]);
+            if (isset($lastChild)) {
+                $lastChild->setIndex($index + 1);
+            }
 
             $resolver->setScript($script);
         }
@@ -386,10 +442,12 @@ class Reader
         if (is_null($this->current['caret'])) {
             $this->current['caret'] = 0;
         }
+
         $this->current['caret'] += $start;
         $caretIncr  = $this->current['caret'];
         $newContent = $content->iCutToContent($start, $i - 1);
         $blocks     = [];
+
         if ($newContent->getLength() !== 0) {
             if (!Validate::isWhitespace($newContent->getLetter(0))) {
                 $newContent->prependArrayContent([" "]);
@@ -510,13 +568,37 @@ class Reader
         return $map;
     }
 
-    public function mergeMaps(array $maps, array $merged = []): array
+    // if (isset($merged[$key])) {
+    //     if ($merged[$key]['_stop'] ?? false) {
+    //         $merged[$key] = $this->mergeMaps([$map[$key]], $merged[$key], true);
+    //         continue;
+    //     }
+    //     if ($continue) {
+    //         $continue = false;
+    //         if ($merged[$key]['_stop'] ?? false) {
+    //             $continue = true;
+    //         }
+    //         $merged['_continue'][$key] = $this->mergeMaps([$map[$key]], $merged[$key], $continue);
+    //         continue;
+    //     }
+    //     $merged[$key] = $this->mergeMaps([$map[$key]], $merged[$key]);
+    // } else {
+    //     if ($continue) {
+    //         $merged['_continue'][$key] = $map[$key];
+    //         continue;
+    //     }
+    //     $merged[$key] = $map[$key];
+    // }
+
+    public function mergeMaps(array $maps, array $merged = [], bool $continue = false): array
     {
         foreach ($maps as $map) {
-            $firstKey = array_key_first($map);
             foreach ($map as $key => $value) {
-                if (isset($merged[$key])) {
-                    $merged[$key] = $this->mergeMaps([$map[$key]], $merged[$key]);
+                if (!isset($value['_stop'])) {
+                    $merged[$key] = $this->mergeMaps([$map[$key]], $merged[$key] ?? []);
+                }
+                if (is_array($map[$key])) {
+                    $merged[$key] = array_merge($map[$key], $merged[$key] ?? []);
                 } else {
                     $merged[$key] = $map[$key];
                 }

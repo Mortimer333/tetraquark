@@ -9,7 +9,6 @@ use Tetraquark\Model\BaseBlockModel;
  */
 class ScriptBlockModel extends BaseBlockModel
 {
-    protected int $start = 0;
     protected ?int $end = null;
 
     public function __construct(
@@ -19,13 +18,7 @@ class ScriptBlockModel extends BaseBlockModel
 
     public function getStart(): int
     {
-        return $this->start;
-    }
-
-    public function setStart(int $start): self
-    {
-        $this->start = $start;
-        return $this;
+        return 0; // Script always starts at 0
     }
 
     public function getEnd(): ?int
@@ -48,5 +41,10 @@ class ScriptBlockModel extends BaseBlockModel
     {
         $this->children = $children;
         return $this;
+    }
+
+    public function getBlockStart(): int
+    {
+        return 0; // Script always starts at 0
     }
 }
