@@ -27,6 +27,9 @@ class Reader
     protected array $notClear = [
         "_missed" => true,
     ];
+    protected array $debug = [
+        "path" => []
+    ];
 
     public const SKIP = 'skip';
     public const FINISH = 'finish';
@@ -127,9 +130,13 @@ class Reader
             }
         }
 
-        $last = $resolver->getParent()->getLastChild();
-        if ($last && $last?->getEnd() + 1 != $i - 1) {
-            $this->addMissedEnd($resolver, $last->getEnd() + 1, $i - 1);
+        if ($resolver->getI() === $resolver->getContent()->getLength() - 1) {
+            $last = $resolver->getParent()->getLastChild();
+            if (!$last) {
+                $this->addMissedEnd($resolver, 0, $resolver->getContent()->getLength());
+            } elseif ($last?->getEnd() + 1 != $resolver->getContent()->getLength()) {
+                $this->addMissedEnd($resolver, $last->getEnd() + 1, $resolver->getContent()->getLength());
+            }
         }
 
         return [$resolver->getScript(), $resolver->getI()];
@@ -167,12 +174,14 @@ class Reader
 
         $content = $resolver->getContent();
         if (is_null($content->getLetter($i))) {
+            $resolver->i--;
             throw new Exception(self::FINISH);
         }
 
         // Don't skip string - $resolver->setI(Str::skip($content->getLetter($i), $i, $content));
         $resolver->setI($i);
         $resolver->setLetter($content->getLetter($i));
+        // Log ::log($i . ' Letter: ' . $resolver->getLetter() . ', ' . $resolver->getLmStart());
         if (isset($resolver->getLandmark()[$resolver->getLetter()])) {
             $res = $this->resolveStringLandmark($resolver);
             if ($res) {
@@ -193,7 +202,6 @@ class Reader
         }
 
         $this->clearObjectify($resolver);
-        Log::decreaseIndent();
 
         return false;
     }
@@ -203,14 +211,16 @@ class Reader
         $resolver->setLandmark($resolver->getMap());
         $resolver->setData([]);
         $resolver->setLmStart(null);
+        $this->debug["path"] = [];
     }
 
     public function resolveStringLandmark(LandmarkResolverModel $resolver): bool
     {
+        $this->debug["path"][] = $resolver->getLetter();
         $resolver->setLandmark(
             $resolver->getLandmark()[$resolver->getLetter()]
         );
-
+        // Log ::log('New string lm, oprions: ' . implode(', ', array_keys($resolver->getLandmark())));
         if (is_null($resolver->getLmStart())) {
             $resolver->setLmStart($resolver->getI());
         }
@@ -223,7 +233,13 @@ class Reader
         }
 
         $resolver->i++;
-        return $this->resolve($resolver, $resolver->i);
+        $save = $this->saveResolver($resolver, ["lmStart"]);
+        $res = $this->resolve($resolver, $resolver->i);
+        if ($res) {
+            return true;
+        }
+        $this->restoreResolver($resolver, $save);
+        return false;
     }
 
     public function resolveMethodLandmark(LandmarkResolverModel $resolver): bool
@@ -260,6 +276,12 @@ class Reader
                 continue;
             }
 
+            $this->debug["path"][] = $methodName;
+
+            if (is_null($resolver->getLmStart())) {
+                $resolver->setLmStart($resolver->getI());
+            }
+
             // Update changed essentials
             foreach ($this->essentials as $key => $value) {
                 if ($skipReplace[$key] ?? false) {
@@ -271,10 +293,7 @@ class Reader
             }
 
             $resolver->setLandmark($step);
-
-            if (is_null($resolver->getLmStart())) {
-                $resolver->setLmStart($resolver->getI());
-            }
+            // Log ::log('New method `' . $methodName . '` lm, oprions: ' . implode(', ', array_keys($resolver->getLandmark())));
 
             if (isset($resolver->getLandmark()['_stop'])) {
                 $this->resolveSettings($resolver);
@@ -282,11 +301,14 @@ class Reader
                 $this->clearObjectify($resolver);
                 return true;
             }
+
             $resolver->i++;
+            $save = $this->saveResolver($resolver, ["lmStart"]);
             $res = $this->resolve($resolver, $resolver->i);
             if ($res) {
                 return true;
             }
+            $this->restoreResolver($resolver, $save);
         }
         return false;
     }
@@ -322,9 +344,13 @@ class Reader
         return $landmark;
     }
 
-    public function saveResolver(LandmarkResolverModel $resolver): array
+    public function saveResolver(LandmarkResolverModel $resolver, array $remove = []): array
     {
-        return $resolver->toArray();
+        $save = $resolver->toArray();
+        foreach ($remove as $value) {
+            unset($save[$value]);
+        }
+        return $save;
     }
 
     public function restoreResolver(LandmarkResolverModel $resolver, array $save): void
@@ -369,17 +395,42 @@ class Reader
             $item->setEnd($i);
             $item->setChildren($blocks);
         }
+
         // Variable normally share their end/start:
         // `let a = 'a'\nlet b = 'd'` (variable a is sharing its end (`\n`) with variable b)
         // `let a = 'a';let b = 'd'` (variable a is sharing its end (`;`) with variable b)
         // so we will try to include the last letter once more
-        $resolver->i--;
+        // But we don't do it for Blocks of length 1
+        if ($item->getStart() !== $item->getEnd()) {
+            $resolver->i--;
+        }
         $resolver->getParent()->addChild($item);
 
         // @POSSIBLE_PERFORMANCE_ISSUE
         $resolver->setScript([...$resolver->getScript(), $item]);
 
-        $this->addMissed($resolver);
+        $this->addMissed($resolver, $item);
+
+        // Exception if no child was found
+        if ($block && sizeof($item->getChildren()) === 0) {
+            $start = $item->getBlockStart() + 1;
+            $end = $item->getEnd() - 1;
+            $inside = $resolver->getContent()->iSubStr($start, $end);
+            if (strlen($inside) != 0 && !Validate::isWhitespace($inside)) {
+                $data = $this->getMissedData($resolver, $start, $end);
+
+                $child = new BlockModel(
+                    start: $start,
+                    end: $end,
+                    landmark: $this->getMissedLandmark(),
+                    data: $data,
+                    index: 0,
+                    parent: $resolver->getParent(),
+                );
+
+                $item->addChild($child);
+            }
+        }
     }
 
     public function getMissedLandmark(): array
@@ -389,7 +440,7 @@ class Reader
         ];
     }
 
-    public function addMissed(LandmarkResolverModel $resolver): void
+    public function addMissed(LandmarkResolverModel $resolver, BlockModelInterface $parent): void
     {
         $script = $resolver->getScript();
         $scriptLen = \sizeof($script);
@@ -420,7 +471,7 @@ class Reader
                 landmark: $this->getMissedLandmark(),
                 data: $data,
                 index: $index,
-                parent: $resolver->getParent(),
+                parent: $parent,
             );
 
             array_splice($script, $index, 0, [$item]);
@@ -567,28 +618,6 @@ class Reader
 
         return $map;
     }
-
-    // if (isset($merged[$key])) {
-    //     if ($merged[$key]['_stop'] ?? false) {
-    //         $merged[$key] = $this->mergeMaps([$map[$key]], $merged[$key], true);
-    //         continue;
-    //     }
-    //     if ($continue) {
-    //         $continue = false;
-    //         if ($merged[$key]['_stop'] ?? false) {
-    //             $continue = true;
-    //         }
-    //         $merged['_continue'][$key] = $this->mergeMaps([$map[$key]], $merged[$key], $continue);
-    //         continue;
-    //     }
-    //     $merged[$key] = $this->mergeMaps([$map[$key]], $merged[$key]);
-    // } else {
-    //     if ($continue) {
-    //         $merged['_continue'][$key] = $map[$key];
-    //         continue;
-    //     }
-    //     $merged[$key] = $map[$key];
-    // }
 
     public function mergeMaps(array $maps, array $merged = [], bool $continue = false): array
     {

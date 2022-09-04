@@ -148,17 +148,16 @@ abstract class Str
      * @param  Content $content
      * @return array            First item is found word, next is words start position
      */
-    public static function getPreviousWord(int $start, Content $content): array
+    public static function getPreviousWord(int $start, Content $content, bool $startSearch = false): array
     {
         $letterFound = false;
-        $whitespaceFound = false;
         $word = '';
 
         for ($i=$start; $i >= 0; $i--) {
             $letter = $content->getLetter($i);
             if (Validate::isWhitespace($letter) || Validate::isSpecial($letter)) {
-                if (Validate::isWhitespace($letter) && !$whitespaceFound && !$letterFound) {
-                    $whitespaceFound = true;
+                if (Validate::isWhitespace($letter) && !$startSearch && !$letterFound) {
+                    $startSearch = true;
                 } elseif (Validate::isSpecial($letter) && !$letterFound) {
                     $letterFound = true;
                 } elseif ($letterFound && !Validate::isWhitespace($word)) {
@@ -171,7 +170,7 @@ abstract class Str
                 $word .= $letter;
             }
 
-            if ($whitespaceFound && !$letterFound) {
+            if ($startSearch && !$letterFound) {
                 $word .= $letter;
                 $letterFound = true;
                 continue;
@@ -188,19 +187,18 @@ abstract class Str
      * @param  Content $content
      * @return array            First item is found word, next is words end position
      */
-    public static function getNextWord(int $start, Content $content): array
+    public static function getNextWord(int $start, Content $content, bool $startSearch = false): array
     {
         $letterFound = false;
-        $whitespaceFound = false;
         $word = '';
         for ($i=$start; $i < $content->getLength(); $i++) {
             $letter = $content->getLetter($i);
             if (Validate::isWhitespace($letter) || Validate::isSpecial($letter)) {
-                if (Validate::isWhitespace($letter) && !$whitespaceFound && !$letterFound) {
-                    $whitespaceFound = true;
+                if (Validate::isWhitespace($letter) && !$startSearch && !$letterFound) {
+                    $startSearch = true;
                 } elseif (Validate::isSpecial($letter) && !$letterFound) {
                     $letterFound = true;
-                } elseif ($letterFound && \strlen($word) > 0) {
+                } elseif ($letterFound) {
                     return [$word, $i - 1];
                 }
                 continue;
@@ -210,7 +208,7 @@ abstract class Str
                 $word .= $letter;
             }
 
-            if ($whitespaceFound && !$letterFound) {
+            if ($startSearch && !$letterFound) {
                 $word .= $letter;
                 $letterFound = true;
                 continue;

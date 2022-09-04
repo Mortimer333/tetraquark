@@ -1,33 +1,143 @@
- //comment\n///**/** comment\n//** comment2\n/*/* comment 3 */\n/**\n * Comment 4\n * nasnasd\n * asdnansd\nlet a /* asd = 2;\n\nfunction* test() {\n    console.log('asd')\n    let b = 'c'\n}\n*/let bv = asd;\n["sad", [], bsd]\nif (true) console.log\n\nif (asda) {asdasd}let g = 'df'\nmissed\nlet a = 'asd'\nlet b = 2 +\n3;\n\nlet c = 2\n+ 3\n\nlet d = 2\n+\n3\n\nclass ClassName {\n    {}\nif (true){\n    class ClassName2 {\n        if() {continue\n        }\n    }\n}\n}\nasd\n
-Duration: 0.007s
+ abc = 'var' + 'asd';\nbreak;\ncontinue;\ntry;\ncaller()\ntry {\n    ejtry\n} catch (e) {\n    ejcatch\n} finally {\n    ejfinally\n}\n
+Duration: 0.006s
 [
   [
-    blockStart => null,
+    blockStart => 5,
     start => 1,
-    end => 10,
+    end => 20,
     landmark => {
-        "class": "SingleCommentBlock",
-        "_stop": true
+        "class": "AttributeBlock",
+        "_block": {
+            "map": {
+                "_m": {
+                    "varend": {
+                        "_finish": true,
+                        "_stop": true
+                    }
+                }
+            }
+        },
+        "_stop": true,
+        ">": {
+            "_m": {
+                "s": {
+                    "_m": {
+                        "!{": {
+                            "_m": {
+                                "varend": {
+                                    "class": "ArrowMethodBlock",
+                                    "parenthesis": false,
+                                    "block": false,
+                                    "_stop": true
+                                }
+                            }
+                        }
+                    },
+                    "{": {
+                        "class": "ArrowMethodBlock",
+                        "parenthesis": false,
+                        "block": true,
+                        "_block": {
+                            "map": {
+                                "}": {
+                                    "_finish": true,
+                                    "_stop": true
+                                },
+                                "{": {
+                                    "_skip": true,
+                                    "_stop": true
+                                }
+                            }
+                        },
+                        "_stop": true
+                    }
+                }
+            },
+            "{": {
+                "class": "ArrowMethodBlock",
+                "parenthesis": false,
+                "block": true,
+                "_block": {
+                    "map": {
+                        "}": {
+                            "_finish": true,
+                            "_stop": true
+                        },
+                        "{": {
+                            "_skip": true,
+                            "_stop": true
+                        }
+                    }
+                },
+                "_stop": true
+            }
+        }
     },
     data => {
-        "comment": "comment"
+        "word": "abc"
     },
     index => 0,
     parent => script
     children => 
       [
+        [
+          blockStart => null,
+          start => 7,
+          end => 12,
+          landmark => {
+              "class": "StringBlock",
+              "_stop": true
+          },
+          data => [],
+          index => 0,
+          parent => parent[0]
+          children => 
+            [
+            ],
+        ],
+        [
+          blockStart => null,
+          start => 13,
+          end => 14,
+          landmark => {
+              "_missed": true
+          },
+          data => {
+              "missed": "+ "
+          },
+          index => 1,
+          parent => parent[2]
+          children => 
+            [
+            ],
+        ],
+        [
+          blockStart => null,
+          start => 15,
+          end => 20,
+          landmark => {
+              "class": "StringBlock",
+              "_stop": true
+          },
+          data => [],
+          index => 2,
+          parent => parent[0]
+          children => 
+            [
+            ],
+        ],
       ],
   ],
   [
     blockStart => null,
-    start => 11,
+    start => 20,
     end => 27,
     landmark => {
-        "class": "SingleCommentBlock",
+        "class": "KeywordBlock",
         "_stop": true
     },
     data => {
-        "comment": "\/**\/** comment"
+        "keyword": "break"
     },
     index => 1,
     parent => script
@@ -37,14 +147,14 @@ Duration: 0.007s
   ],
   [
     blockStart => null,
-    start => 28,
-    end => 41,
+    start => 27,
+    end => 37,
     landmark => {
-        "class": "SingleCommentBlock",
+        "class": "KeywordBlock",
         "_stop": true
     },
     data => {
-        "comment": "** comment2"
+        "keyword": "continue"
     },
     index => 2,
     parent => script
@@ -54,31 +164,42 @@ Duration: 0.007s
   ],
   [
     blockStart => null,
-    start => 42,
-    end => 58,
+    start => 38,
+    end => 42,
     landmark => {
-        "class": "MultiCommentBlock",
-        "_stop": true
+        "_missed": true
     },
     data => {
-        "comment": "\/* comment 3"
+        "missed": "\ntry;"
     },
     index => 3,
-    parent => script
+    parent => parent[4]
     children => 
       [
       ],
   ],
   [
-    blockStart => null,
-    start => 60,
-    end => 180,
+    blockStart => 50,
+    start => 43,
+    end => 51,
     landmark => {
-        "class": "MultiCommentBlock",
+        "class": "CallerBlock",
+        "_block": {
+            "map": {
+                ")": {
+                    "_finish": true,
+                    "_stop": true
+                },
+                "(": {
+                    "_skip": true,
+                    "_stop": true
+                }
+            }
+        },
         "_stop": true
     },
     data => {
-        "comment": "*\n * Comment 4\n * nasnasd\n * asdnansd\nlet a \/* asd = 2;\n\nfunction* test() {\n    console.log('asd')\n    let b = 'c'\n}"
+        "word": "caller"
     },
     index => 4,
     parent => script
@@ -87,35 +208,18 @@ Duration: 0.007s
       ],
   ],
   [
-    blockStart => null,
-    start => 180,
-    end => 193,
+    blockStart => 57,
+    start => 52,
+    end => 69,
     landmark => {
-        "class": "LetVariableBlock",
-        "_stop": true
-    },
-    data => {
-        "var": "bv = asd;"
-    },
-    index => 5,
-    parent => script
-    children => 
-      [
-      ],
-  ],
-  [
-    blockStart => 195,
-    start => 195,
-    end => 210,
-    landmark => {
-        "class": "ArrayBlock",
+        "class": "TryBlock",
         "_block": {
             "map": {
-                "]": {
+                "}": {
                     "_finish": true,
                     "_stop": true
                 },
-                "[": {
+                "{": {
                     "_skip": true,
                     "_stop": true
                 }
@@ -124,63 +228,66 @@ Duration: 0.007s
         "_stop": true
     },
     data => [],
+    index => 5,
+    parent => script
+    children => 
+      [
+        [
+          blockStart => null,
+          start => 58,
+          end => 69,
+          landmark => {
+              "_missed": true
+          },
+          data => {
+              "missed": "\n    ejtry\n"
+          },
+          index => 0,
+          parent => parent[5]
+          children => 
+            [
+            ],
+        ],
+      ],
+  ],
+  [
+    blockStart => 81,
+    start => 70,
+    end => 95,
+    landmark => {
+        "class": "CatchBlock",
+        "_block": {
+            "map": {
+                "}": {
+                    "_finish": true,
+                    "_stop": true
+                },
+                "{": {
+                    "_skip": true,
+                    "_stop": true
+                }
+            }
+        },
+        "_stop": true
+    },
+    data => {
+        "exception": "e"
+    },
     index => 6,
     parent => script
     children => 
       [
         [
           blockStart => null,
-          start => 197,
-          end => 202,
-          landmark => {
-              "class": "StringBlock",
-              "_stop": true
-          },
-          data => [],
-          index => 0,
-          parent => parent[6]
-          children => 
-            [
-            ],
-        ],
-        [
-          blockStart => 8,
-          start => 204,
-          end => 205,
-          landmark => {
-              "class": "ArrayBlock",
-              "_block": {
-                  "map": {
-                      "]": {
-                          "_finish": true,
-                          "_stop": true
-                      },
-                      "[": {
-                          "_skip": true,
-                          "_stop": true
-                      }
-                  }
-              },
-              "_stop": true
-          },
-          data => [],
-          index => 1,
-          parent => parent[6]
-          children => 
-            [
-            ],
-        ],
-        [
-          blockStart => null,
-          start => 206,
-          end => 210,
+          start => 82,
+          end => 95,
           landmark => {
               "_missed": true
           },
           data => {
-              "missed": ", bsd"
+              "missed": "\n    ejcatch\n"
           },
-          index => 2,
+          index => 0,
           parent => parent[6]
           children => 
             [
@@ -189,315 +296,46 @@ Duration: 0.007s
       ],
   ],
   [
-    blockStart => null,
-    start => 211,
-    end => 233,
+    blockStart => 105,
+    start => 96,
+    end => 121,
     landmark => {
-        "class": "ShortIfBlock",
+        "class": "FinallyBlock",
+        "_block": {
+            "map": {
+                "}": {
+                    "_finish": true,
+                    "_stop": true
+                },
+                "{": {
+                    "_skip": true,
+                    "_stop": true
+                }
+            }
+        },
         "_stop": true
     },
-    data => {
-        "condition": "true",
-        "negation": "c",
-        "var": "onsole.log\n"
-    },
+    data => [],
     index => 7,
     parent => script
     children => 
       [
-      ],
-  ],
-  [
-    blockStart => 245,
-    start => 234,
-    end => 252,
-    landmark => {
-        "class": "IfBlock",
-        "_block": {
-            "map": {
-                "}": {
-                    "_finish": true,
-                    "_stop": true
-                },
-                "{": {
-                    "_skip": true,
-                    "_stop": true
-                }
-            }
-        },
-        "_stop": true
-    },
-    data => {
-        "condition": "asda"
-    },
-    index => 8,
-    parent => script
-    children => 
-      [
-      ],
-  ],
-  [
-    blockStart => null,
-    start => 252,
-    end => 265,
-    landmark => {
-        "class": "LetVariableBlock",
-        "_stop": true
-    },
-    data => {
-        "var": "g = 'df'\n"
-    },
-    index => 9,
-    parent => script
-    children => 
-      [
-      ],
-  ],
-  [
-    blockStart => null,
-    start => 266,
-    end => 271,
-    landmark => {
-        "_missed": true
-    },
-    data => {
-        "missed": "missed"
-    },
-    index => 10,
-    parent => script
-    children => 
-      [
-      ],
-  ],
-  [
-    blockStart => null,
-    start => 272,
-    end => 286,
-    landmark => {
-        "class": "LetVariableBlock",
-        "_stop": true
-    },
-    data => {
-        "var": "a = 'asd'\n"
-    },
-    index => 11,
-    parent => script
-    children => 
-      [
-      ],
-  ],
-  [
-    blockStart => null,
-    start => 286,
-    end => 300,
-    landmark => {
-        "class": "LetVariableBlock",
-        "_stop": true
-    },
-    data => {
-        "var": "b = 2 +\n3;"
-    },
-    index => 12,
-    parent => script
-    children => 
-      [
-      ],
-  ],
-  [
-    blockStart => null,
-    start => 302,
-    end => 316,
-    landmark => {
-        "class": "LetVariableBlock",
-        "_stop": true
-    },
-    data => {
-        "var": "c = 2\n+ 3\n"
-    },
-    index => 13,
-    parent => script
-    children => 
-      [
-      ],
-  ],
-  [
-    blockStart => null,
-    start => 317,
-    end => 331,
-    landmark => {
-        "class": "LetVariableBlock",
-        "_stop": true
-    },
-    data => {
-        "var": "d = 2\n+\n3\n"
-    },
-    index => 14,
-    parent => script
-    children => 
-      [
-      ],
-  ],
-  [
-    blockStart => 349,
-    start => 332,
-    end => 433,
-    landmark => {
-        "class": "ClassBlock",
-        "_block": {
-            "map": {
-                "}": {
-                    "_finish": true,
-                    "_stop": true
-                },
-                "{": {
-                    "_skip": true,
-                    "_stop": true
-                }
-            }
-        },
-        "_stop": true
-    },
-    data => {
-        "class_name": "ClassName"
-    },
-    index => 15,
-    parent => script
-    children => 
-      [
         [
           blockStart => null,
-          start => 350,
-          end => 356,
+          start => 106,
+          end => 121,
           landmark => {
               "_missed": true
           },
           data => {
-              "missed": "\n    {}"
+              "missed": "\n    ejfinally\n"
           },
           index => 0,
-          parent => parent[15]
+          parent => parent[7]
           children => 
             [
             ],
         ],
-        [
-          blockStart => 17,
-          start => 357,
-          end => 431,
-          landmark => {
-              "class": "IfBlock",
-              "_block": {
-                  "map": {
-                      "}": {
-                          "_finish": true,
-                          "_stop": true
-                      },
-                      "{": {
-                          "_skip": true,
-                          "_stop": true
-                      }
-                  }
-              },
-              "_stop": true
-          },
-          data => {
-              "condition": "true"
-          },
-          index => 1,
-          parent => parent[15]
-          children => 
-            [
-              [
-                blockStart => 22,
-                start => 372,
-                end => 429,
-                landmark => {
-                    "class": "ClassBlock",
-                    "_block": {
-                        "map": {
-                            "}": {
-                                "_finish": true,
-                                "_stop": true
-                            },
-                            "{": {
-                                "_skip": true,
-                                "_stop": true
-                            }
-                        }
-                    },
-                    "_stop": true
-                },
-                data => {
-                    "class_name": "ClassName2"
-                },
-                index => 0,
-                parent => parent[1]
-                children => 
-                  [
-                    [
-                      blockStart => 14,
-                      start => 399,
-                      end => 423,
-                      landmark => {
-                          "class": "IfBlock",
-                          "_block": {
-                              "map": {
-                                  "}": {
-                                      "_finish": true,
-                                      "_stop": true
-                                  },
-                                  "{": {
-                                      "_skip": true,
-                                      "_stop": true
-                                  }
-                              }
-                          },
-                          "_stop": true
-                      },
-                      data => {
-                          "condition": ""
-                      },
-                      index => 0,
-                      parent => parent[0]
-                      children => 
-                        [
-                          [
-                            blockStart => null,
-                            start => 406,
-                            end => 415,
-                            landmark => {
-                                "class": "ContinueBlock",
-                                "_stop": true
-                            },
-                            data => [],
-                            index => 0,
-                            parent => parent[0]
-                            children => 
-                              [
-                              ],
-                          ],
-                        ],
-                    ],
-                  ],
-              ],
-            ],
-        ],
-      ],
-  ],
-  [
-    blockStart => null,
-    start => 434,
-    end => 437,
-    landmark => {
-        "_missed": true
-    },
-    data => {
-        "missed": "\nasd"
-    },
-    index => 16,
-    parent => script
-    children => 
-      [
       ],
   ],
 ],

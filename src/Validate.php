@@ -41,7 +41,7 @@ class Validate
         return self::$special;
     }
 
-    public static function isTakenKeyWord(string $word): bool
+    public static function isJSTakenKeyWord(string $word): bool
     {
         return self::$notAllowedConsts[$word] ?? false;
     }
@@ -51,7 +51,7 @@ class Validate
         return self::$extendingsConsts[$word] ?? false;
     }
 
-    public static function isValidVariable(string $variable): bool
+    public static function isJSValidVariable(string $variable): bool
     {
         $regex = '/^[$_\p{L}][$_\p{L}\p{Mn}\p{Mc}\p{Nd}\p{Pc}\x200C\x200D]*+$/';
         $res = preg_match($regex, $variable);
@@ -59,7 +59,7 @@ class Validate
             return false;
         }
 
-        return !self::isTakenKeyWord($variable);
+        return !self::isJSTakenKeyWord($variable);
     }
 
     public static function isWhitespace(string $letter): bool
