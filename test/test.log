@@ -1,12 +1,48 @@
- abc = 'var' + 'asd';\nbreak;\ncontinue;\ntry;\ncaller()\ntry {\n    ejtry\n} catch (e) {\n    ejcatch\n} finally {\n    ejfinally\n}\n
+ abc.asv.bbb.ggg\n
 Duration: 0.006s
 [
   [
-    blockStart => 5,
-    start => 1,
-    end => 20,
+    blockStart => 7,
+    start => 0,
+    end => 17,
     landmark => {
-        "class": "AttributeBlock",
+        "=": {
+            "_m": {
+                "varend": {
+                    "class": "ChainBlock3",
+                    "first": true,
+                    "var": true,
+                    "_stop": true
+                }
+            }
+        },
+        "_m": {
+            "s": {
+                "=": {
+                    "_m": {
+                        "varend": {
+                            "class": "ChainBlock3",
+                            "first": true,
+                            "var": true,
+                            "_stop": true
+                        }
+                    }
+                }
+            }
+        },
+        "(": {
+            "_m": {
+                "find:\")\":\"(\":\"values_two\"": {
+                    "class": "ChainBlock2",
+                    "first_method": false,
+                    "second_method": true,
+                    "first": true,
+                    "_stop": true
+                }
+            }
+        },
+        "class": "ChainBlock1",
+        "first": true,
         "_block": {
             "map": {
                 "_m": {
@@ -17,323 +53,86 @@ Duration: 0.006s
                 }
             }
         },
-        "_stop": true,
-        ">": {
-            "_m": {
-                "s": {
-                    "_m": {
-                        "!{": {
-                            "_m": {
-                                "varend": {
-                                    "class": "ArrowMethodBlock",
-                                    "parenthesis": false,
-                                    "block": false,
-                                    "_stop": true
-                                }
-                            }
-                        }
-                    },
-                    "{": {
-                        "class": "ArrowMethodBlock",
-                        "parenthesis": false,
-                        "block": true,
-                        "_block": {
-                            "map": {
-                                "}": {
-                                    "_finish": true,
-                                    "_stop": true
-                                },
-                                "{": {
-                                    "_skip": true,
-                                    "_stop": true
-                                }
-                            }
-                        },
-                        "_stop": true
-                    }
-                }
-            },
-            "{": {
-                "class": "ArrowMethodBlock",
-                "parenthesis": false,
-                "block": true,
-                "_block": {
-                    "map": {
-                        "}": {
-                            "_finish": true,
-                            "_stop": true
-                        },
-                        "{": {
-                            "_skip": true,
-                            "_stop": true
-                        }
-                    }
-                },
-                "_stop": true
-            }
-        }
+        "_stop": true
     },
     data => {
-        "word": "abc"
+        "first": "abc",
+        "second": "asv"
     },
     index => 0,
     parent => script
     children => 
       [
         [
-          blockStart => null,
-          start => 7,
-          end => 12,
+          blockStart => 4,
+          start => 9,
+          end => 18,
           landmark => {
-              "class": "StringBlock",
+              "(": {
+                  "_m": {
+                      "find:\")\":\"(\":\"values\"": {
+                          "class": "ChainBlock",
+                          "method": true,
+                          "_stop": true
+                      }
+                  }
+              },
+              "class": "ChainBlock",
+              "_block": {
+                  "map": {
+                      "_m": {
+                          "varend": {
+                              "_finish": true,
+                              "_stop": true
+                          }
+                      }
+                  }
+              },
               "_stop": true
           },
-          data => [],
+          data => {
+              "word": "bbb"
+          },
           index => 0,
           parent => parent[0]
           children => 
             [
-            ],
-        ],
-        [
-          blockStart => null,
-          start => 13,
-          end => 14,
-          landmark => {
-              "_missed": true
-          },
-          data => {
-              "missed": "+ "
-          },
-          index => 1,
-          parent => parent[2]
-          children => 
-            [
-            ],
-        ],
-        [
-          blockStart => null,
-          start => 15,
-          end => 20,
-          landmark => {
-              "class": "StringBlock",
-              "_stop": true
-          },
-          data => [],
-          index => 2,
-          parent => parent[0]
-          children => 
-            [
-            ],
-        ],
-      ],
-  ],
-  [
-    blockStart => null,
-    start => 20,
-    end => 27,
-    landmark => {
-        "class": "KeywordBlock",
-        "_stop": true
-    },
-    data => {
-        "keyword": "break"
-    },
-    index => 1,
-    parent => script
-    children => 
-      [
-      ],
-  ],
-  [
-    blockStart => null,
-    start => 27,
-    end => 37,
-    landmark => {
-        "class": "KeywordBlock",
-        "_stop": true
-    },
-    data => {
-        "keyword": "continue"
-    },
-    index => 2,
-    parent => script
-    children => 
-      [
-      ],
-  ],
-  [
-    blockStart => null,
-    start => 38,
-    end => 42,
-    landmark => {
-        "_missed": true
-    },
-    data => {
-        "missed": "\ntry;"
-    },
-    index => 3,
-    parent => parent[4]
-    children => 
-      [
-      ],
-  ],
-  [
-    blockStart => 50,
-    start => 43,
-    end => 51,
-    landmark => {
-        "class": "CallerBlock",
-        "_block": {
-            "map": {
-                ")": {
-                    "_finish": true,
+              [
+                blockStart => 4,
+                start => 14,
+                end => 19,
+                landmark => {
+                    "(": {
+                        "_m": {
+                            "find:\")\":\"(\":\"values\"": {
+                                "class": "ChainBlock",
+                                "method": true,
+                                "_stop": true
+                            }
+                        }
+                    },
+                    "class": "ChainBlock",
+                    "_block": {
+                        "map": {
+                            "_m": {
+                                "varend": {
+                                    "_finish": true,
+                                    "_stop": true
+                                }
+                            }
+                        }
+                    },
                     "_stop": true
                 },
-                "(": {
-                    "_skip": true,
-                    "_stop": true
-                }
-            }
-        },
-        "_stop": true
-    },
-    data => {
-        "word": "caller"
-    },
-    index => 4,
-    parent => script
-    children => 
-      [
-      ],
-  ],
-  [
-    blockStart => 57,
-    start => 52,
-    end => 69,
-    landmark => {
-        "class": "TryBlock",
-        "_block": {
-            "map": {
-                "}": {
-                    "_finish": true,
-                    "_stop": true
+                data => {
+                    "word": "ggg"
                 },
-                "{": {
-                    "_skip": true,
-                    "_stop": true
-                }
-            }
-        },
-        "_stop": true
-    },
-    data => [],
-    index => 5,
-    parent => script
-    children => 
-      [
-        [
-          blockStart => null,
-          start => 58,
-          end => 69,
-          landmark => {
-              "_missed": true
-          },
-          data => {
-              "missed": "\n    ejtry\n"
-          },
-          index => 0,
-          parent => parent[5]
-          children => 
-            [
-            ],
-        ],
-      ],
-  ],
-  [
-    blockStart => 81,
-    start => 70,
-    end => 95,
-    landmark => {
-        "class": "CatchBlock",
-        "_block": {
-            "map": {
-                "}": {
-                    "_finish": true,
-                    "_stop": true
-                },
-                "{": {
-                    "_skip": true,
-                    "_stop": true
-                }
-            }
-        },
-        "_stop": true
-    },
-    data => {
-        "exception": "e"
-    },
-    index => 6,
-    parent => script
-    children => 
-      [
-        [
-          blockStart => null,
-          start => 82,
-          end => 95,
-          landmark => {
-              "_missed": true
-          },
-          data => {
-              "missed": "\n    ejcatch\n"
-          },
-          index => 0,
-          parent => parent[6]
-          children => 
-            [
-            ],
-        ],
-      ],
-  ],
-  [
-    blockStart => 105,
-    start => 96,
-    end => 121,
-    landmark => {
-        "class": "FinallyBlock",
-        "_block": {
-            "map": {
-                "}": {
-                    "_finish": true,
-                    "_stop": true
-                },
-                "{": {
-                    "_skip": true,
-                    "_stop": true
-                }
-            }
-        },
-        "_stop": true
-    },
-    data => [],
-    index => 7,
-    parent => script
-    children => 
-      [
-        [
-          blockStart => null,
-          start => 106,
-          end => 121,
-          landmark => {
-              "_missed": true
-          },
-          data => {
-              "missed": "\n    ejfinally\n"
-          },
-          index => 0,
-          parent => parent[7]
-          children => 
-            [
+                index => 0,
+                parent => parent[0]
+                children => 
+                  [
+                  ],
+              ],
             ],
         ],
       ],

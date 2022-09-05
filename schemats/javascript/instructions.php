@@ -149,4 +149,59 @@ return [
             "nested" => "{"
         ]
     ],
+    /* FIRST IN CHAIN */
+    '/s|end\/word:"first"\\' => [
+        "_extend" => [
+            './word:"second"\\' => [
+                "class" => "ChainBlock1",
+                "first" => true,
+                "_block" => [
+                    "end" => '/varend\\'
+                ],
+                "_extend" => [
+                    '(/find:")":"(":"values_two"\\' => [
+                        "class" => "ChainBlock2",
+                        "first_method" => false,
+                        "second_method" => true,
+                        "first" => true,
+                    ],
+                    "/s|e\=/varend\\" => [
+                        "class" => "ChainBlock3",
+                        "first" => true,
+                        "var" => true,
+                    ]
+                ]
+            ],
+            '(/find:")":"(":"values"\./word:"second"\\' => [
+                "class" => "ChainBlock4",
+                "first" => true,
+                "first_method" => true,
+                "_extend" => [
+                    '(/find:")":"(":"values_two"\\' => [
+                        "class" => "ChainBlock5",
+                        "first_method" => true,
+                        "second_method" => true,
+                        "first" => true,
+                    ],
+                    "/s|e\=/varend\\" => [
+                        "class" => "ChainBlock6",
+                        "first" => true,
+                        "var" => true,
+                    ]
+                ]
+            ]
+
+        ]
+    ],
+    /* NEXT IN CHAIN */
+    './word\\' => [
+        "class" => "ChainBlock",
+        "_block" => [
+            "end" => '/varend\\'
+        ],
+    ],
+    './word\(/find:")":"(":"values"\\' => [
+        "class" => "ChainBlock",
+        "method" => true,
+    ],
 ];

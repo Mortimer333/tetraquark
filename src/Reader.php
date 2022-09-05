@@ -16,6 +16,18 @@ use Tetraquark\Factory\ClosureFactory;
  */
 class Reader
 {
+    protected array $schemaDefaults = [
+        "shared" => [
+            "ends" => []
+        ],
+        "comments" => [],
+        "remove" => [
+            "comments" => false,
+        ],
+        "instructions" => [],
+        "methods" => [],
+        "prepare" => null,
+    ];
     protected array $methods = [];
     protected array $script = [];
     protected array $map;
@@ -33,10 +45,27 @@ class Reader
 
     public const SKIP = 'skip';
     public const FINISH = 'finish';
+    public const END_OF_FILE = 'end of file';
 
     public function __construct(protected array $schema)
     {
         $this->essentials = new CustomMethodEssentialsModel();
+        $this->schema = $this->schemaSetDefaults($this->schema, $this->schemaDefaults);
+    }
+
+    public function schemaSetDefaults(array $schema, array $defaults): array
+    {
+        foreach ($defaults as $key => $value) {
+            if (isset($schema[$key])) {
+                if (is_array($value)) {
+                    $schema[$key] = $this->schemaSetDefaults($schema[$key], $value);
+                }
+            } else {
+                $schema[$key] = $value;
+            }
+        }
+
+        return $schema;
     }
 
     public function read(string $script, bool $isPath = false)
@@ -125,7 +154,7 @@ class Reader
                 }
             }
         } catch (Exception $e) {
-            if ($e->getMessage() !== self::FINISH) {
+            if ($e->getMessage() !== self::FINISH && $e->getMessage() !== self::END_OF_FILE) {
                 throw $e;
             }
         }
@@ -134,7 +163,7 @@ class Reader
             $last = $resolver->getParent()->getLastChild();
             if (!$last) {
                 $this->addMissedEnd($resolver, 0, $resolver->getContent()->getLength());
-            } elseif ($last?->getEnd() + 1 != $resolver->getContent()->getLength()) {
+            } elseif ($last?->getEnd() + 1 < $resolver->getContent()->getLength()) {
                 $this->addMissedEnd($resolver, $last->getEnd() + 1, $resolver->getContent()->getLength());
             }
         }
@@ -174,14 +203,16 @@ class Reader
 
         $content = $resolver->getContent();
         if (is_null($content->getLetter($i))) {
-            $resolver->i--;
-            throw new Exception(self::FINISH);
+            /* Don't end file with exception but let it slowly get out of foreach */
+            // $resolver->i--;
+            // throw new Exception(self::END_OF_FILE);
+            return false;
         }
 
         // Don't skip string - $resolver->setI(Str::skip($content->getLetter($i), $i, $content));
         $resolver->setI($i);
         $resolver->setLetter($content->getLetter($i));
-        // Log ::log($i . ' Letter: ' . $resolver->getLetter() . ', ' . $resolver->getLmStart());
+        // Log ::log($i . ' Letter: ' . $resolver->getLetter() . ', ' . $resolver->getLmStart() . ', ' . $resolver->getContent()->getLength());
         if (isset($resolver->getLandmark()[$resolver->getLetter()])) {
             $res = $this->resolveStringLandmark($resolver);
             if ($res) {
@@ -195,8 +226,9 @@ class Reader
             return true;
         }
 
-        // If nothing was found but we have descended some steps into the map, try with the same letter from the start
-        if (!is_null($resolver->getLmStart())) {
+        /* @DOUBLE_CHECK this operation might be unnecessary, currently I can't think of example where this helps but it is quite late at night */
+        // If nothing was found but we have descended some steps (more then one) into the map, try with the same letter from the start
+        if (!is_null($resolver->getLmStart()) && sizeof($this->debug['path']) > 1) {
             $i--;
             $resolver->setLetter($content->getLetter($i));
         }
@@ -232,13 +264,10 @@ class Reader
             return true;
         }
 
-        $resolver->i++;
-        $save = $this->saveResolver($resolver, ["lmStart"]);
-        $res = $this->resolve($resolver, $resolver->i);
+        $res = $this->tryToFindHigherHierarchyBlock($resolver);
         if ($res) {
             return true;
         }
-        $this->restoreResolver($resolver, $save);
         return false;
     }
 
@@ -302,14 +331,23 @@ class Reader
                 return true;
             }
 
-            $resolver->i++;
-            $save = $this->saveResolver($resolver, ["lmStart"]);
-            $res = $this->resolve($resolver, $resolver->i);
+            $res = $this->tryToFindHigherHierarchyBlock($resolver);
             if ($res) {
                 return true;
             }
-            $this->restoreResolver($resolver, $save);
         }
+        return false;
+    }
+
+    public function tryToFindHigherHierarchyBlock(LandmarkResolverModel $resolver): bool
+    {
+        $resolver->i++;
+        $save = $this->saveResolver($resolver, ["lmStart"]);
+        $res = $this->resolve($resolver, $resolver->i);
+        if ($res) {
+            return true;
+        }
+        $this->restoreResolver($resolver, $save);
         return false;
     }
 
@@ -360,15 +398,6 @@ class Reader
 
     public function saveBlock(LandmarkResolverModel $resolver): void
     {
-        $item = new BlockModel(
-            start: $resolver->getLmStart(),
-            end: $resolver->getI(),
-            landmark: $resolver->getLandmark(),
-            data: $resolver->getData(),
-            index: \sizeof($resolver->getScript()),
-            parent: $resolver->getParent()
-        );
-
         // Check next letters if we don't have more specified block which matches syntax.
         // More specified in a way that his definition is longer/more detailed
         try {
@@ -381,10 +410,19 @@ class Reader
             }
             $this->restoreResolver($resolver, $save);
         } catch (\Exception $e) {
-            if ($e->getMessage() !== self::FINISH) {
+            if ($e->getMessage() !== self::FINISH && $e->getMessage() !== self::END_OF_FILE) {
                 throw $e;
             }
         }
+
+        $item = new BlockModel(
+            start: $resolver->getLmStart(),
+            end: $resolver->getI(),
+            landmark: $resolver->getLandmark(),
+            data: $resolver->getData(),
+            index: \sizeof($resolver->getScript()),
+            parent: $resolver->getParent()
+        );
 
         $block = $item->getLandmark()["_block"] ?? false;
 
@@ -396,12 +434,19 @@ class Reader
             $item->setChildren($blocks);
         }
 
-        // Variable normally share their end/start:
+        // Some variable normally share their end/start:
         // `let a = 'a'\nlet b = 'd'` (variable a is sharing its end (`\n`) with variable b)
         // `let a = 'a';let b = 'd'` (variable a is sharing its end (`;`) with variable b)
-        // so we will try to include the last letter once more
-        // But we don't do it for Blocks of length 1
-        if ($item->getStart() !== $item->getEnd()) {
+        // so we will try to include the last letter once more.
+        // But we don't do it for Blocks with instruction of length 1
+        if (
+            $item->getStart() !== $item->getEnd()
+            && ($this->schema['shared']['ends'][
+                $resolver->getContent()->getLetter(
+                    $item->getEnd()
+                )
+            ] ?? false)
+        ) {
             $resolver->i--;
         }
         $resolver->getParent()->addChild($item);
@@ -611,6 +656,22 @@ class Reader
         $instructions = $this->schema['instructions'] ?? throw new Exception('Instructions not found', 404);
 
         $maps = [];
+        $instrKeys = array_keys($instructions);
+        for ($i=0; $i < \sizeof($instructions); $i++) {
+            $instr = $instrKeys[$i];
+            $block = $instructions[$instr];
+            if ($block['_extend'] ?? false) {
+                foreach ($block['_extend'] as $subInstr => $subBlock) {
+                    $instructions[$instr . $subInstr] = $subBlock;
+                    $instrKeys[] = $instr . $subInstr;
+                }
+                unset($instructions[$instr]["_extend"]);
+                if (empty($instructions[$instr])) {
+                    unset($instructions[$instr]);
+                }
+            }
+        }
+
         foreach ($instructions as $instr => $block) {
             $maps[] =  $this->sliceIntoSteps($this->translateInstructionToMap($instr), $block);
         }

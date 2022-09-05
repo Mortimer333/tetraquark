@@ -152,7 +152,13 @@ abstract class Str
     {
         $letterFound = false;
         $word = '';
-
+        if ($startSearch) {
+            $letter = $content->getLetter($start);
+            if (!Validate::isWhitespace($letter ?? '')) {
+                $letterFound = true;
+            }
+        }
+        
         for ($i=$start; $i >= 0; $i--) {
             $letter = $content->getLetter($i);
             if (Validate::isWhitespace($letter) || Validate::isSpecial($letter)) {
@@ -190,6 +196,12 @@ abstract class Str
     public static function getNextWord(int $start, Content $content, bool $startSearch = false): array
     {
         $letterFound = false;
+        if ($startSearch) {
+            $letter = $content->getLetter($start);
+            if (!Validate::isWhitespace($letter ?? '')) {
+                $letterFound = true;
+            }
+        }
         $word = '';
         for ($i=$start; $i < $content->getLength(); $i++) {
             $letter = $content->getLetter($i);

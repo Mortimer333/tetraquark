@@ -9,12 +9,12 @@ return [
             "*" => "*/"
         ],
     ],
-    "prepare" => function(Content $content)
+    "prepare" => function(Content $content): Content
     {
         return $content->trim()->prependArrayContent([' ']);
     },
-    "remove" => [
-        "comments" => false,
+    "shared" => [
+        "ends" => ["\n", ";",],
     ],
     "instructions" => require(__DIR__ . '/javascript/instructions.php'),
     "methods" => include(__DIR__ . '/javascript/methods.php'),

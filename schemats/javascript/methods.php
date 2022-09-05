@@ -26,15 +26,14 @@ return [
 
         return false;
     },
-    "word" => function (CustomMethodEssentialsModel $essentials): bool
+    "word" => function (CustomMethodEssentialsModel $essentials, string $name = "word"): bool
     {
         list($word, $i) = Str::getNextWord($essentials->getI(), $essentials->getContent(), true);
-
         if (!Validate::isJSValidVariable($word)) {
             return false;
         }
 
-        $essentials->appendData($word, "word");
+        $essentials->appendData($word, $name);
 
         $essentials->setI($i);
         return true;
@@ -75,13 +74,16 @@ return [
         $i       = $essentials->getI() + 1;
         $content = $essentials->getContent();
 
-
-        if ($essentials->getLetter() === ';') {
+        $letter = $essentials->getLetter();
+        if ($letter === ';') {
             $essentials->appendData($var, "var");
             return true;
         }
-        $var .= $essentials->getLetter();
+        $var .= $letter;
         $essentials->appendData($var, "var");
+        if (is_null($letter)) {
+            return true;
+        }
 
         list($prevLetter, $prevPos) = Str::getPreviousLetter($essentials->getI(), $essentials->getContent());
         if (
@@ -216,7 +218,8 @@ return [
     },
     "s" => function (CustomMethodEssentialsModel $essentials): bool
     {
-        if (!Validate::isWhitespace($essentials->getLetter())) {
+        $letter = $essentials->getLetter();
+        if (!Validate::isWhitespace($letter ?? '')) {
             return false;
         }
         list($letter, $pos) = Str::getNextLetter($essentials->getI(), $essentials->getContent());
