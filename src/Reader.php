@@ -115,7 +115,11 @@ class Reader
                         Log ::log($key . ' => parent[' . $value?->getIndex() . ']');
                     }
                 } else {
-                    Log ::log($key . ' => ' . json_encode($value, JSON_PRETTY_PRINT) . ',', replaceNewLine: false);
+                    if ($key == 'landmark') {
+                        Log ::log($key . ' => ' . json_encode($value['_custom'] ?? [], JSON_PRETTY_PRINT) . ',', replaceNewLine: false);
+                    } else {
+                        Log ::log($key . ' => ' . json_encode($value, JSON_PRETTY_PRINT) . ',', replaceNewLine: false);
+                    }
                 }
             }
             Log ::decreaseIndent();
@@ -135,7 +139,7 @@ class Reader
             "landmark"   => $map,
             "lmStart"    => null,
             "script"     => [],
-            "i"          => null,
+            "i"          => $start,
             "content"    => $content,
             "data"       => [],
             "settings"   => $settings,
@@ -249,22 +253,21 @@ class Reader
     public function resolveStringLandmark(LandmarkResolverModel $resolver): bool
     {
         $this->debug["path"][] = $resolver->getLetter();
-        $resolver->setLandmark(
-            $resolver->getLandmark()[$resolver->getLetter()]
-        );
+        $possibleLandmark = $resolver->getLandmark()[$resolver->getLetter()];
+
         // Log ::log('New string lm, oprions: ' . implode(', ', array_keys($resolver->getLandmark())));
         if (is_null($resolver->getLmStart())) {
             $resolver->setLmStart($resolver->getI());
         }
 
-        if (isset($resolver->getLandmark()['_stop'])) {
+        if (isset($possibleLandmark['_stop'])) {
+            $resolver->setLandmark($possibleLandmark);
             $this->resolveSettings($resolver);
             $this->saveBlock($resolver);
             $this->clearObjectify($resolver);
             return true;
         }
-
-        $res = $this->tryToFindHigherHierarchyBlock($resolver);
+        $res = $this->tryToFindNextMatch($resolver, $possibleLandmark);
         if ($res) {
             return true;
         }
@@ -321,17 +324,17 @@ class Reader
                 $resolver->$setter($this->essentials->$getter());
             }
 
-            $resolver->setLandmark($step);
-            // Log ::log('New method `' . $methodName . '` lm, oprions: ' . implode(', ', array_keys($resolver->getLandmark())));
+            // Log ::log('New method `' . $methodName . '` lm, oprions: ' . implode(', ', array_keys($step)));
 
-            if (isset($resolver->getLandmark()['_stop'])) {
+            if (isset($step['_stop'])) {
+                $resolver->setLandmark($step);
                 $this->resolveSettings($resolver);
                 $this->saveBlock($resolver);
                 $this->clearObjectify($resolver);
                 return true;
             }
 
-            $res = $this->tryToFindHigherHierarchyBlock($resolver);
+            $res = $this->tryToFindNextMatch($resolver, $step);
             if ($res) {
                 return true;
             }
@@ -339,10 +342,11 @@ class Reader
         return false;
     }
 
-    public function tryToFindHigherHierarchyBlock(LandmarkResolverModel $resolver): bool
+    public function tryToFindNextMatch(LandmarkResolverModel $resolver, array $posLandmark): bool
     {
-        $resolver->i++;
         $save = $this->saveResolver($resolver, ["lmStart"]);
+        $resolver->setLandmark($posLandmark);
+        $resolver->i++;
         $res = $this->resolve($resolver, $resolver->i);
         if ($res) {
             return true;
@@ -504,7 +508,7 @@ class Reader
             $index = $lastChild->getIndex();
         }
 
-        if ($end > $start) {
+        if ($end >= $start) {
             $data = $this->getMissedData($resolver, $start, $end);
             if (Validate::isWhitespace($data['missed'])) {
                 return;
@@ -673,11 +677,32 @@ class Reader
         }
 
         foreach ($instructions as $instr => $block) {
-            $maps[] =  $this->sliceIntoSteps($this->translateInstructionToMap($instr), $block);
+            $maps[] = $this->sliceIntoSteps(
+                $this->translateInstructionToMap($instr),
+                $this->encloseCustomData($block)
+            );
         }
         $map = $this->mergeMaps($maps);
 
         return $map;
+    }
+
+    public function encloseCustomData(array $block): array
+    {
+        $toEnclose = [];
+        foreach ($block as $key => $value) {
+            if (is_numeric($key) || $key[0] !== '_') {
+                $toEnclose[$key] = $value;
+                unset($block[$key]);
+            }
+        }
+        $block['_custom'] = $toEnclose;
+        if (isset($block['_expand'])) {
+            foreach ($block['_expand'] as $key => $subBlock) {
+                $block['_expand'][$key] = $this->encloseCustomData($subBlock);
+            }
+        }
+        return $block;
     }
 
     public function mergeMaps(array $maps, array $merged = [], bool $continue = false): array

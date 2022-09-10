@@ -1,140 +1,95 @@
- abc.asv.bbb.ggg\n
-Duration: 0.006s
+ b.c().d\r\nc.d = 'asd'\r\n/*a.b.c.d(asd);\r\nb().c\r\nd.e.f = 'as'\r\ne.f\r\nf.e.g\r\nasd*/\r
+0.VarEnd: .
+Ending letter: \n, i: 9
+0.VarEnd: \r
+0.VarEnd:  
+Ending letter: \n, i: 22
+Duration: 0.005s
 [
   [
-    blockStart => 7,
+    blockStart => 5,
     start => 0,
-    end => 17,
+    end => 9,
     landmark => {
-        "=": {
-            "_m": {
-                "varend": {
-                    "class": "ChainBlock3",
-                    "first": true,
-                    "var": true,
-                    "_stop": true
-                }
-            }
-        },
-        "_m": {
-            "s": {
-                "=": {
-                    "_m": {
-                        "varend": {
-                            "class": "ChainBlock3",
-                            "first": true,
-                            "var": true,
-                            "_stop": true
-                        }
-                    }
-                }
-            }
-        },
-        "(": {
-            "_m": {
-                "find:\")\":\"(\":\"values_two\"": {
-                    "class": "ChainBlock2",
-                    "first_method": false,
-                    "second_method": true,
-                    "first": true,
-                    "_stop": true
-                }
-            }
-        },
-        "class": "ChainBlock1",
-        "first": true,
-        "_block": {
-            "map": {
-                "_m": {
-                    "varend": {
-                        "_finish": true,
-                        "_stop": true
-                    }
-                }
-            }
-        },
-        "_stop": true
+        "class": "ChainBlock",
+        "first_method": false,
+        "second_method": true,
+        "first": true
     },
     data => {
-        "first": "abc",
-        "second": "asv"
+        "first": "b",
+        "second": "c",
+        "values_two": ""
     },
     index => 0,
     parent => script
     children => 
       [
         [
-          blockStart => 4,
-          start => 9,
-          end => 18,
+          blockStart => 2,
+          start => 7,
+          end => 10,
           landmark => {
-              "(": {
-                  "_m": {
-                      "find:\")\":\"(\":\"values\"": {
-                          "class": "ChainBlock",
-                          "method": true,
-                          "_stop": true
-                      }
-                  }
-              },
-              "class": "ChainBlock",
-              "_block": {
-                  "map": {
-                      "_m": {
-                          "varend": {
-                              "_finish": true,
-                              "_stop": true
-                          }
-                      }
-                  }
-              },
-              "_stop": true
+              "class": "SubChainBlock"
           },
           data => {
-              "word": "bbb"
+              "word": "d"
           },
           index => 0,
           parent => parent[0]
           children => 
             [
-              [
-                blockStart => 4,
-                start => 14,
-                end => 19,
-                landmark => {
-                    "(": {
-                        "_m": {
-                            "find:\")\":\"(\":\"values\"": {
-                                "class": "ChainBlock",
-                                "method": true,
-                                "_stop": true
-                            }
-                        }
-                    },
-                    "class": "ChainBlock",
-                    "_block": {
-                        "map": {
-                            "_m": {
-                                "varend": {
-                                    "_finish": true,
-                                    "_stop": true
-                                }
-                            }
-                        }
-                    },
-                    "_stop": true
-                },
-                data => {
-                    "word": "ggg"
-                },
-                index => 0,
-                parent => parent[0]
-                children => 
-                  [
-                  ],
-              ],
             ],
         ],
+      ],
+  ],
+  [
+    blockStart => 14,
+    start => 10,
+    end => 22,
+    landmark => {
+        "class": "ChainBlock",
+        "first": true,
+        "var": true
+    },
+    data => {
+        "first": "c",
+        "second": "d"
+    },
+    index => 1,
+    parent => script
+    children => 
+      [
+        [
+          blockStart => null,
+          start => 16,
+          end => 21,
+          landmark => {
+              "class": "StringBlock"
+          },
+          data => [],
+          index => 0,
+          parent => parent[1]
+          children => 
+            [
+            ],
+        ],
+      ],
+  ],
+  [
+    blockStart => null,
+    start => 23,
+    end => 77,
+    landmark => {
+        "class": "MultiCommentBlock"
+    },
+    data => {
+        "comment": "a.b.c.d(asd);\r\nb().c\r\nd.e.f = 'as'\r\ne.f\r\nf.e.g\r\nasd"
+    },
+    index => 2,
+    parent => script
+    children => 
+      [
       ],
   ],
 ],

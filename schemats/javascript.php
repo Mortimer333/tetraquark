@@ -14,7 +14,10 @@ return [
         return $content->trim()->prependArrayContent([' ']);
     },
     "shared" => [
-        "ends" => ["\n", ";",],
+        "ends" => [
+            "\n" => true,
+            ";" => true,
+        ],
     ],
     "instructions" => require(__DIR__ . '/javascript/instructions.php'),
     "methods" => include(__DIR__ . '/javascript/methods.php'),

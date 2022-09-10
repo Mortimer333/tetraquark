@@ -66,6 +66,8 @@ return [
             die('Stop');
         }
 
+        Log::log($iter . '.VarEnd: ' . $essentials->getLetter());
+
         $var     = $essentials->getData()['var'] ?? '';
         $essentials->getMethods()['find']($essentials, ["\n", ";"], null, 'var');
 
@@ -120,7 +122,7 @@ return [
         }
 
         $essentials->setI($essentials->getI());
-
+        Log::log('Ending letter: ' . $essentials->getContent()->getLetter($essentials->getI()) . ', i: ' . $essentials->getI());
         return true;
     },
     "varendNext" => function (CustomMethodEssentialsModel $essentials, $iter)

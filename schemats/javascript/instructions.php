@@ -153,40 +153,55 @@ return [
     '/s|end\/word:"first"\\' => [
         "_extend" => [
             './word:"second"\\' => [
-                "class" => "ChainBlock1",
+                "class" => "ChainBlock",
                 "first" => true,
                 "_block" => [
                     "end" => '/varend\\'
                 ],
                 "_extend" => [
-                    '(/find:")":"(":"values_two"\\' => [
-                        "class" => "ChainBlock2",
+                    '/s|e\(/find:")":"(":"values_two"\\' => [
+                        "class" => "ChainBlock",
                         "first_method" => false,
                         "second_method" => true,
                         "first" => true,
+                        "_block" => [
+                            "end" => '/varend\\'
+                        ],
                     ],
-                    "/s|e\=/varend\\" => [
-                        "class" => "ChainBlock3",
+                    "/s|e\=" => [
+                        "class" => "ChainBlock",
                         "first" => true,
                         "var" => true,
+                        "_block" => [
+                            "end" => '/varend\\'
+                        ],
                     ]
                 ]
             ],
             '(/find:")":"(":"values"\./word:"second"\\' => [
-                "class" => "ChainBlock4",
+                "class" => "ChainBlock",
                 "first" => true,
                 "first_method" => true,
+                "_block" => [
+                    "end" => '/varend\\'
+                ],
                 "_extend" => [
-                    '(/find:")":"(":"values_two"\\' => [
-                        "class" => "ChainBlock5",
+                    '/s|e\(/find:")":"(":"values_two"\\' => [
+                        "class" => "ChainBlock",
                         "first_method" => true,
                         "second_method" => true,
                         "first" => true,
+                        "_block" => [
+                            "end" => '/varend\\'
+                        ],
                     ],
-                    "/s|e\=/varend\\" => [
-                        "class" => "ChainBlock6",
+                    '/s|e\=' => [
+                        "class" => "ChainBlock",
                         "first" => true,
                         "var" => true,
+                        "_block" => [
+                            "end" => '/varend\\'
+                        ],
                     ]
                 ]
             ]
@@ -195,13 +210,26 @@ return [
     ],
     /* NEXT IN CHAIN */
     './word\\' => [
-        "class" => "ChainBlock",
+        "class" => "SubChainBlock",
         "_block" => [
             "end" => '/varend\\'
         ],
+        "_extend" => [
+            '/s|e\=' => [
+                "class" => "SubChainBlock",
+                "var" => true,
+                "_block" => [
+                    "end" => '/varend\\'
+                ],
+            ],
+            '/s|e\(/find:")":"(":"values"\\' => [
+                "class" => "SubChainBlock",
+                "method" => true,
+                "_block" => [
+                    "end" => '/varend\\'
+                ],
+            ]
+        ]
     ],
-    './word\(/find:")":"(":"values"\\' => [
-        "class" => "ChainBlock",
-        "method" => true,
-    ],
+
 ];
