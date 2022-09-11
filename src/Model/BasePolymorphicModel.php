@@ -83,6 +83,15 @@ class BasePolymorphicModel implements BasePolymorphicModelInterface
                         return $this;
                     };
                 }
+
+                $prepender = 'merge' . $pascalized;
+                if (!isset($this->_methods[$prepender])) {
+                    $this->_methods[$prepender] = function ($value) use ($camelcased)
+                    {
+                        array_merge($this->$camelcased, $value);
+                        return $this;
+                    };
+                }
             }
         }
         return $this;

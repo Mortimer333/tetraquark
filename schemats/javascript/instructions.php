@@ -105,7 +105,8 @@ return [
     '/word\/s|e\=' => [
         "class" => "AttributeBlock",
         "_block" => [
-            "end" => "/varend\\"
+            "end" => "/varend\\",
+            "include_end" => true,
         ]
     ],
     /* KEYWORD */
@@ -118,12 +119,22 @@ return [
         "class" => "KeywordBlock"
     ],
     /* CALLER */
-    '/word\/s|e\(' => [
+    '/word:"name"\/s|e\(' => [
         "class" => "CallerBlock",
         "_block" => [
             "end" => ")",
             "nested" => "("
-        ]
+        ],
+        "_extend" => [
+            /* CLASS METHOD */
+            '/find:")":"(":"arguments"\\/s|e\{' => [
+                "class" => "ClassMethodBlock",
+                "_block" => [
+                    "end" => "}",
+                    "nested" => "{"
+                ],
+            ],
+        ],
     ],
     /* TRY */
     '/s|end\try/s|e\{' => [
@@ -156,7 +167,8 @@ return [
                 "class" => "ChainBlock",
                 "first" => true,
                 "_block" => [
-                    "end" => '/varend\\'
+                    "end" => '/varend\\',
+                    "include_end" => true,
                 ],
                 "_extend" => [
                     '/s|e\(/find:")":"(":"values_two"\\' => [
@@ -165,7 +177,8 @@ return [
                         "second_method" => true,
                         "first" => true,
                         "_block" => [
-                            "end" => '/varend\\'
+                            "end" => '/varend\\',
+                            "include_end" => true,
                         ],
                     ],
                     "/s|e\=" => [
@@ -173,7 +186,8 @@ return [
                         "first" => true,
                         "var" => true,
                         "_block" => [
-                            "end" => '/varend\\'
+                            "end" => '/varend\\',
+                            "include_end" => true,
                         ],
                     ]
                 ]
@@ -183,7 +197,8 @@ return [
                 "first" => true,
                 "first_method" => true,
                 "_block" => [
-                    "end" => '/varend\\'
+                    "end" => '/varend\\',
+                    "include_end" => true,
                 ],
                 "_extend" => [
                     '/s|e\(/find:")":"(":"values_two"\\' => [
@@ -192,7 +207,8 @@ return [
                         "second_method" => true,
                         "first" => true,
                         "_block" => [
-                            "end" => '/varend\\'
+                            "end" => '/varend\\',
+                            "include_end" => true,
                         ],
                     ],
                     '/s|e\=' => [
@@ -200,7 +216,8 @@ return [
                         "first" => true,
                         "var" => true,
                         "_block" => [
-                            "end" => '/varend\\'
+                            "end" => '/varend\\',
+                            "include_end" => true,
                         ],
                     ]
                 ]
@@ -210,26 +227,48 @@ return [
     ],
     /* NEXT IN CHAIN */
     './word\\' => [
-        "class" => "SubChainBlock",
+        "class" => "SubChainBlock1",
         "_block" => [
-            "end" => '/varend\\'
+            "end" => '/varend\\',
+            "include_end" => true,
         ],
         "_extend" => [
             '/s|e\=' => [
-                "class" => "SubChainBlock",
+                "class" => "SubChainBlock2",
                 "var" => true,
                 "_block" => [
-                    "end" => '/varend\\'
+                    "end" => '/varend\\',
+                    "include_end" => true,
                 ],
             ],
             '/s|e\(/find:")":"(":"values"\\' => [
-                "class" => "SubChainBlock",
+                "class" => "SubChainBlock3",
                 "method" => true,
-                "_block" => [
-                    "end" => '/varend\\'
-                ],
             ]
         ]
     ],
+    "==" => [
+        "class" => "EqualBlock",
+        "_extend" => [
+            "=" => [
+                "class" => "ExactBlock",
+            ]
+        ]
+    ],
+    "!=" => [
+        "class" => "DifferentBlock",
+        "_extend" => [
+            "=" => [
+                "class" => "DistinctBlock",
+            ]
+        ]
+    ],
+    '/s|end\do/s|e\{' => [
+        "class" => "DoWhileBlock",
+        "_block" => [
+            "skip" => '/s|end\do/s|e\{',
+            "end" => '}/s|e\while/s|e\(/find:")":"(":"while"\\',
+        ]
+    ]
 
 ];

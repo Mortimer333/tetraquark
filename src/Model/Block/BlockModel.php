@@ -12,6 +12,7 @@ use Tetraquark\Contract\BlockModelInterface;
 class BlockModel extends BaseBlockModel
 {
     protected ?int $blockStart = null;
+    protected ?int $blockEnd = null;
 
     public function __construct(
         protected int $start,
@@ -109,6 +110,17 @@ class BlockModel extends BaseBlockModel
     public function setBlockStart(?int $blockStart): self
     {
         $this->blockStart = $blockStart;
+        return $this;
+    }
+
+    public function getBlockEnd(): ?int
+    {
+        return $this->blockEnd;
+    }
+
+    public function setBlockEnd(?int $blockEnd): self
+    {
+        $this->blockEnd = $blockEnd;
         return $this;
     }
 }

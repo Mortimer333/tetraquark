@@ -368,6 +368,7 @@ class Reader
         }
 
         if (isset($resolver->getLandmark()['_finish'])) {
+            $this->saveBlock($resolver);
             throw new Exception(self::FINISH);
         }
     }
@@ -463,7 +464,7 @@ class Reader
         // Exception if no child was found
         if ($block && sizeof($item->getChildren()) === 0) {
             $start = $item->getBlockStart() + 1;
-            $end = $item->getEnd() - 1;
+            $end = $item->getBlockEnd() - 1;
             $inside = $resolver->getContent()->iSubStr($start, $end);
             if (strlen($inside) != 0 && !Validate::isWhitespace($inside)) {
                 $data = $this->getMissedData($resolver, $start, $end);
@@ -538,16 +539,32 @@ class Reader
         // and we will be able to use this data i.e. to point more then one error at time
 
         // Find the end of block
-        list($tmp, $i) = $this->objectify($content, $blockSet['map'], $start, $parent);
+        list($endBlocks, $i) = $this->objectify($content, $blockSet['map'], $start, $parent);
+
+        if (sizeof($endBlocks) > 0) {
+            $endBlock = $endBlocks[sizeof($endBlocks) - 1];
+            // End of the block's content
+            if (!isset($blockSet["include_end"]) || !$blockSet["include_end"]) {
+                $i = $endBlock->getStart() - 1;
+            }
+            $data = $endBlock->getData();
+            $end = $endBlock->getEnd();
+        } else {
+            $end = $i;
+            $data = [];
+        }
+
+        $parent->setBlockEnd($i);
+        $parent->setData([...$parent->getData(), ...["_end" => $data]]);
+
         if (is_null($this->current['caret'])) {
             $this->current['caret'] = 0;
         }
 
         $this->current['caret'] += $start;
         $caretIncr  = $this->current['caret'];
-        $newContent = $content->iCutToContent($start, $i - 1);
+        $newContent = $content->iCutToContent($start, $i);
         $blocks     = [];
-
         if ($newContent->getLength() !== 0) {
             if (!Validate::isWhitespace($newContent->getLetter(0))) {
                 $newContent->prependArrayContent([" "]);
@@ -561,7 +578,8 @@ class Reader
             }
         }
         $this->current['caret'] = null;
-        return [$i, $blocks];
+        // Real end of the block
+        return [$end, $blocks];
     }
 
     public function customPrepare(Content $content): Content
