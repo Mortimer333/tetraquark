@@ -1,24 +1,110 @@
- b.c().d\r\nc.d = 'asd'\r\na.b.c.d(asd);\r\nb(asd).c\r\nd.e.f = 'as'\r\ne.f\r\nf.e.g\r\nasd\r\n\r\nclass ClassName {\r\n    constructor() {\r\n\r\n    }\r\n}\r\ndo {\r\n    asd\r\n} while (true);\r
-Add missed: \r\n    asd\r
-Duration: 0.011s
+ let a = 'a', b, c = 'a';\n
+  0 Letter: ` `, ``, 26
+  New method `s` lm, oprions: _m, e, d, f, c, t, v, l, i
+  1 Letter: `l`, `0`, 26
+  New string lm, oprions: _m, e, d, f, c, t, v, l, i
+  2 Letter: `e`, `0`, 26
+  New string lm, oprions: e
+  3 Letter: `t`, `0`, 26
+  New string lm, oprions: t
+  4 Letter: ` `, `0`, 26
+  New method `s` lm, oprions: _block, _custom, _stop
+  5 Letter: `a`, `0`, 26
+  Save block - {"class":"LetVariableBlock"}
+    5 Letter: `a`, ``, 26
+    New method `varend:false` lm, oprions: _finish, _stop
+    25 Letter: `\n`, `5`, 26
+    Save block - []
+  Blocks end: 23
+  NEw content: a = 'a', b, c = 'a'
+    0 Letter: ` `, ``, 20
+    New method `s` lm, oprions: _m, e, d, f, c, t, v, l, i
+    1 Letter: `a`, `0`, 20
+    New method `word:"first"` lm, oprions: (, .
+    2 Letter: ` `, `0`, 20
+    New method `word:"name"` lm, oprions: -, _m, +, =, _custom, _stop
+    2 Letter: ` `, `1`, 20
+    New method `s` lm, oprions: -, +, _m, =
+    3 Letter: `=`, `1`, 20
+    New string lm, oprions: -, +, _m, =
+    4 Letter: ` `, `1`, 20
+    Save block - {"class":"VariableInstanceBlock","replace":true}
+      4 Letter: ` `, ``, 20
+      New method `varend` lm, oprions: _finish, _stop
+      9 Letter: ` `, `4`, 20
+      Save block - []
+    Blocks end: 7
+    NEw content:  'a'
+      0 Letter: ` `, ``, 4
+      New method `s` lm, oprions: _m, e, d, f, c, t, v, l, i
+      1 Letter: `'`, `0`, 4
+      1 Letter: `'`, ``, 4
+      New string lm, oprions: /, _m, [, ', `, ", ,, (, ., =, !, }
+      2 Letter: `a`, `1`, 4
+      New method `strend:"'"` lm, oprions: _custom, _stop
+      Save block - {"class":"StringBlock"}
+    8 Letter: `,`, ``, 20
+    New string lm, oprions: /, _m, [, ', `, ", ,, (, ., =, !, }
+    9 Letter: ` `, `8`, 20
+    Save block - {"class":"CommaBlock"}
+    9 Letter: ` `, ``, 20
+    New method `s` lm, oprions: _m, e, d, f, c, t, v, l, i
+    10 Letter: `b`, `9`, 20
+    New method `word:"first"` lm, oprions: (, .
+    11 Letter: `,`, `9`, 20
+    New method `word:"name"` lm, oprions: -, _m, +, =, _custom, _stop
+    11 Letter: `,`, `10`, 20
+    Save block - {"class":"VariableInstanceBlock","empty":true}
+    11 Letter: `,`, ``, 20
+    New string lm, oprions: /, _m, [, ', `, ", ,, (, ., =, !, }
+    12 Letter: ` `, `11`, 20
+    Save block - {"class":"CommaBlock"}
+    12 Letter: ` `, ``, 20
+    New method `s` lm, oprions: _m, e, d, f, c, t, v, l, i
+    13 Letter: `c`, `12`, 20
+    New string lm, oprions: _m, e, d, f, c, t, v, l, i
+    14 Letter: ` `, `12`, 20
+    New method `word:"first"` lm, oprions: (, .
+    14 Letter: ` `, `13`, 20
+    New method `word:"name"` lm, oprions: -, _m, +, =, _custom, _stop
+    14 Letter: ` `, `13`, 20
+    New method `s` lm, oprions: -, +, _m, =
+    15 Letter: `=`, `13`, 20
+    New string lm, oprions: -, +, _m, =
+    16 Letter: ` `, `13`, 20
+    Save block - {"class":"VariableInstanceBlock","replace":true}
+      16 Letter: ` `, ``, 20
+      New method `varend` lm, oprions: _finish, _stop
+      Save block - []
+    Blocks end: 20
+    NEw content:  'a'
+      0 Letter: ` `, ``, 4
+      New method `s` lm, oprions: _m, e, d, f, c, t, v, l, i
+      1 Letter: `'`, `0`, 4
+      1 Letter: `'`, ``, 4
+      New string lm, oprions: /, _m, [, ', `, ", ,, (, ., =, !, }
+      2 Letter: `a`, `1`, 4
+      New method `strend:"'"` lm, oprions: _custom, _stop
+      Save block - {"class":"StringBlock"}
+  24 Letter: `;`, ``, 26
+  New method `end` lm, oprions: _m, d, f, c, t, v, l, i
+  25 Letter: `\n`, `24`, 26
+  25 Letter: `\n`, ``, 26
+  New method `s` lm, oprions: _m, e, d, f, c, t, v, l, i
+Duration: 0.008s
 [
   [
-    blockStart => 5,
-    blockEnd => 8,
+    blockStart => 4,
+    blockEnd => 23,
     start => 0,
-    end => 9,
+    end => 24,
     landmark => {
-        "class": "ChainBlock",
-        "first_method": false,
-        "second_method": true,
-        "first": true
+        "class": "LetVariableBlock"
     },
     data => {
-        "first": "b",
-        "second": "c",
-        "values_two": "",
         "_end": {
-            "var": ".d\n"
+            "var": "a = 'a', b, c = 'a'",
+            "stop": ";"
         }
     },
     index => 0,
@@ -26,194 +112,31 @@ Duration: 0.011s
     children => 
       [
         [
-          blockStart => 2,
-          blockEnd => 3,
-          start => 7,
-          end => 9,
+          blockStart => 3,
+          blockEnd => 7,
+          start => 6,
+          end => 13,
           landmark => {
-              "class": "SubChainBlock1"
+              "class": "VariableInstanceBlock",
+              "replace": true
           },
           data => {
-              "word": "d",
+              "first": "a",
+              "name": "a",
               "_end": {
-                  "var": "\r"
+                  "var": "'a'",
+                  "stop": ","
               }
           },
           index => 0,
           parent => parent[0]
           children => 
             [
-            ],
-        ],
-      ],
-  ],
-  [
-    blockStart => 14,
-    blockEnd => 21,
-    start => 10,
-    end => 22,
-    landmark => {
-        "class": "ChainBlock",
-        "first": true,
-        "var": true
-    },
-    data => {
-        "first": "c",
-        "second": "d",
-        "_end": {
-            "var": "'asd'\n"
-        }
-    },
-    index => 1,
-    parent => script
-    children => 
-      [
-        [
-          blockStart => null,
-          blockEnd => null,
-          start => 16,
-          end => 21,
-          landmark => {
-              "class": "StringBlock"
-          },
-          data => [],
-          index => 0,
-          parent => parent[1]
-          children => 
-            [
-            ],
-        ],
-      ],
-  ],
-  [
-    blockStart => 25,
-    blockEnd => 34,
-    start => 22,
-    end => 35,
-    landmark => {
-        "class": "ChainBlock",
-        "first": true
-    },
-    data => {
-        "first": "a",
-        "second": "b",
-        "_end": {
-            "var": ".c.d(asd)"
-        }
-    },
-    index => 2,
-    parent => script
-    children => 
-      [
-        [
-          blockStart => 2,
-          blockEnd => 9,
-          start => 27,
-          end => 35,
-          landmark => {
-              "class": "SubChainBlock1"
-          },
-          data => {
-              "word": "c",
-              "_end": {
-                  "var": ".d(asd)"
-              }
-          },
-          index => 0,
-          parent => parent[2]
-          children => 
-            [
               [
                 blockStart => null,
                 blockEnd => null,
-                start => 30,
-                end => 36,
-                landmark => {
-                    "class": "SubChainBlock3",
-                    "method": true
-                },
-                data => {
-                    "word": "d",
-                    "values": "asd"
-                },
-                index => 0,
-                parent => parent[0]
-                children => 
-                  [
-                  ],
-              ],
-            ],
-        ],
-      ],
-  ],
-  [
-    blockStart => 45,
-    blockEnd => 46,
-    start => 36,
-    end => 47,
-    landmark => {
-        "class": "ChainBlock",
-        "first": true,
-        "first_method": true
-    },
-    data => {
-        "first": "b",
-        "values": "asd",
-        "second": "c",
-        "_end": {
-            "var": "\n"
-        }
-    },
-    index => 3,
-    parent => script
-    children => 
-      [
-      ],
-  ],
-  [
-    blockStart => 50,
-    blockEnd => 60,
-    start => 48,
-    end => 61,
-    landmark => {
-        "class": "ChainBlock",
-        "first": true
-    },
-    data => {
-        "first": "d",
-        "second": "e",
-        "_end": {
-            "var": ".f = 'as'\n"
-        }
-    },
-    index => 4,
-    parent => script
-    children => 
-      [
-        [
-          blockStart => 4,
-          blockEnd => 10,
-          start => 52,
-          end => 61,
-          landmark => {
-              "class": "SubChainBlock2",
-              "var": true
-          },
-          data => {
-              "word": "f",
-              "_end": {
-                  "var": "'as'\r"
-              }
-          },
-          index => 0,
-          parent => parent[4]
-          children => 
-            [
-              [
-                blockStart => null,
-                blockEnd => null,
-                start => 57,
-                end => 61,
+                start => 10,
+                end => 13,
                 landmark => {
                     "class": "StringBlock"
                 },
@@ -226,171 +149,92 @@ Duration: 0.011s
               ],
             ],
         ],
-      ],
-  ],
-  [
-    blockStart => 64,
-    blockEnd => 65,
-    start => 61,
-    end => 66,
-    landmark => {
-        "class": "ChainBlock",
-        "first": true
-    },
-    data => {
-        "first": "e",
-        "second": "f",
-        "_end": {
-            "var": "\n"
-        }
-    },
-    index => 5,
-    parent => script
-    children => 
-      [
-      ],
-  ],
-  [
-    blockStart => 69,
-    blockEnd => 72,
-    start => 67,
-    end => 73,
-    landmark => {
-        "class": "ChainBlock",
-        "first": true
-    },
-    data => {
-        "first": "f",
-        "second": "e",
-        "_end": {
-            "var": ".g\n"
-        }
-    },
-    index => 6,
-    parent => script
-    children => 
-      [
-        [
-          blockStart => 2,
-          blockEnd => 3,
-          start => 71,
-          end => 73,
-          landmark => {
-              "class": "SubChainBlock1"
-          },
-          data => {
-              "word": "g",
-              "_end": {
-                  "var": "\r"
-              }
-          },
-          index => 0,
-          parent => parent[6]
-          children => 
-            [
-            ],
-        ],
-      ],
-  ],
-  [
-    blockStart => null,
-    blockEnd => null,
-    start => 74,
-    end => 76,
-    landmark => [],
-    data => {
-        "missed": "asd"
-    },
-    index => 7,
-    parent => parent[8]
-    children => 
-      [
-      ],
-  ],
-  [
-    blockStart => 97,
-    blockEnd => 129,
-    start => 77,
-    end => 130,
-    landmark => {
-        "class": "ClassBlock"
-    },
-    data => {
-        "class_name": "ClassName",
-        "_end": []
-    },
-    index => 8,
-    parent => script
-    children => 
-      [
-        [
-          blockStart => 20,
-          blockEnd => 28,
-          start => 103,
-          end => 127,
-          landmark => {
-              "class": "ClassMethodBlock"
-          },
-          data => {
-              "name": "constructor",
-              "arguments": "",
-              "_end": []
-          },
-          index => 0,
-          parent => parent[8]
-          children => 
-            [
-            ],
-        ],
-      ],
-  ],
-  [
-    blockStart => 136,
-    blockEnd => 147,
-    start => 131,
-    end => 161,
-    landmark => {
-        "class": "DoWhileBlock"
-    },
-    data => {
-        "_end": {
-            "while": "true"
-        }
-    },
-    index => 9,
-    parent => script
-    children => 
-      [
         [
           blockStart => null,
           blockEnd => null,
-          start => 137,
-          end => 146,
-          landmark => [],
-          data => {
-              "missed": "\r\n    asd\r"
+          start => 13,
+          end => 13,
+          landmark => {
+              "class": "CommaBlock"
           },
-          index => 0,
-          parent => script
+          data => [],
+          index => 1,
+          parent => parent[0]
           children => 
             [
             ],
         ],
-      ],
-  ],
-  [
-    blockStart => null,
-    blockEnd => null,
-    start => 162,
-    end => 164,
-    landmark => [],
-    data => {
-        "missed": ";\r"
-    },
-    index => 10,
-    parent => script
-    children => 
-      [
+        [
+          blockStart => null,
+          blockEnd => null,
+          start => 15,
+          end => 15,
+          landmark => {
+              "class": "VariableInstanceBlock",
+              "empty": true
+          },
+          data => {
+              "first": "b",
+              "name": "b"
+          },
+          index => 2,
+          parent => parent[0]
+          children => 
+            [
+            ],
+        ],
+        [
+          blockStart => null,
+          blockEnd => null,
+          start => 16,
+          end => 16,
+          landmark => {
+              "class": "CommaBlock"
+          },
+          data => [],
+          index => 3,
+          parent => parent[0]
+          children => 
+            [
+            ],
+        ],
+        [
+          blockStart => 15,
+          blockEnd => 20,
+          start => 18,
+          end => 25,
+          landmark => {
+              "class": "VariableInstanceBlock",
+              "replace": true
+          },
+          data => {
+              "first": "c",
+              "name": "c",
+              "_end": {
+                  "var": "'a'"
+              }
+          },
+          index => 4,
+          parent => parent[0]
+          children => 
+            [
+              [
+                blockStart => null,
+                blockEnd => null,
+                start => 17,
+                end => 20,
+                landmark => {
+                    "class": "StringBlock"
+                },
+                data => [],
+                index => 0,
+                parent => parent[4]
+                children => 
+                  [
+                  ],
+              ],
+            ],
+        ],
       ],
   ],
 ],

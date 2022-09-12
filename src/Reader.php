@@ -146,7 +146,7 @@ class Reader
             "map"        => $map,
             "parent"     => $parent,
         ]);
-
+        Log::increaseIndent();
         try {
             for ($i=$start; $i < $content->getLength(); $i++) {
                 try {
@@ -172,6 +172,7 @@ class Reader
             }
         }
 
+        Log::decreaseIndent();
         return [$resolver->getScript(), $resolver->getI()];
     }
 
@@ -216,7 +217,7 @@ class Reader
         // Don't skip string - $resolver->setI(Str::skip($content->getLetter($i), $i, $content));
         $resolver->setI($i);
         $resolver->setLetter($content->getLetter($i));
-        // Log ::log($i . ' Letter: ' . $resolver->getLetter() . ', ' . $resolver->getLmStart() . ', ' . $resolver->getContent()->getLength());
+        Log ::log($i . ' Letter: `' . $resolver->getLetter() . '`, `' . $resolver->getLmStart() . '`, ' . $resolver->getContent()->getLength());
         if (isset($resolver->getLandmark()[$resolver->getLetter()])) {
             $res = $this->resolveStringLandmark($resolver);
             if ($res) {
@@ -255,7 +256,7 @@ class Reader
         $this->debug["path"][] = $resolver->getLetter();
         $possibleLandmark = $resolver->getLandmark()[$resolver->getLetter()];
 
-        // Log ::log('New string lm, oprions: ' . implode(', ', array_keys($resolver->getLandmark())));
+        Log ::log('New string lm, oprions: ' . implode(', ', array_keys($resolver->getLandmark())));
         if (is_null($resolver->getLmStart())) {
             $resolver->setLmStart($resolver->getI());
         }
@@ -324,7 +325,7 @@ class Reader
                 $resolver->$setter($this->essentials->$getter());
             }
 
-            // Log ::log('New method `' . $methodName . '` lm, oprions: ' . implode(', ', array_keys($step)));
+            Log ::log('New method `' . $methodName . '` lm, oprions: ' . implode(', ', array_keys($step)));
 
             if (isset($step['_stop'])) {
                 $resolver->setLandmark($step);
@@ -420,6 +421,7 @@ class Reader
             }
         }
 
+        Log ::log('Save block - ' . json_encode($resolver->getLandmark()['_custom'] ?? []));
         $item = new BlockModel(
             start: $resolver->getLmStart(),
             end: $resolver->getI(),
@@ -540,7 +542,6 @@ class Reader
 
         // Find the end of block
         list($endBlocks, $i) = $this->objectify($content, $blockSet['map'], $start, $parent);
-
         if (sizeof($endBlocks) > 0) {
             $endBlock = $endBlocks[sizeof($endBlocks) - 1];
             // End of the block's content
@@ -553,6 +554,7 @@ class Reader
             $end = $i;
             $data = [];
         }
+        Log::log('Blocks end: ' . $i);
 
         $parent->setBlockEnd($i);
         $parent->setData([...$parent->getData(), ...["_end" => $data]]);
@@ -565,6 +567,7 @@ class Reader
         $caretIncr  = $this->current['caret'];
         $newContent = $content->iCutToContent($start, $i);
         $blocks     = [];
+        Log::log('NEw content: ' . $newContent);
         if ($newContent->getLength() !== 0) {
             if (!Validate::isWhitespace($newContent->getLetter(0))) {
                 $newContent->prependArrayContent([" "]);
@@ -838,7 +841,10 @@ class Reader
                     $param = null;
                 } elseif (Validate::isStringLandmark($param[0], '')) {
                     $param = trim($param, $param[0]);
+                } else {
+                    $param = $this->transformParam($param);
                 }
+
                 $parameters[] = $param;
                 $lastCutIndex = $i;
             }
@@ -848,7 +854,10 @@ class Reader
         if (strlen($lastPart) > 0) {
             if (Validate::isStringLandmark($lastPart[0], '')) {
                 $lastPart = trim($lastPart, $lastPart[0]);
+            } else {
+                $lastPart = $this->transformParam($lastPart);
             }
+
             if (\strlen($name) == 0) {
                 $name = $lastPart;
             } else {
@@ -860,6 +869,16 @@ class Reader
             "name" => $name,
             "params" => $parameters,
         ];
+    }
+
+    public function transformParam(string $param): mixed
+    {
+        $transformTable = [
+            "false" => false,
+            "true" => true,
+            "null" => null,
+        ];
+        return $transformTable[$param] ?? $param;
     }
 
     public function translateInstructionToMap(string $instr): array

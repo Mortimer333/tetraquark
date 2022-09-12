@@ -17,6 +17,8 @@ return [
         "ends" => [
             "\n" => true,
             ";" => true,
+            "}" => true, // @TODO test this one
+            "," => true, // @TODO test this one
         ],
     ],
     "instructions" => require(__DIR__ . '/javascript/instructions.php'),

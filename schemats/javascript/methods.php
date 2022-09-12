@@ -4,6 +4,55 @@ use \Tetraquark\{Content, Validate, Str, Log};
 use \Tetraquark\Model\CustomMethodEssentialsModel;
 
 return [
+    "assignment" => function (CustomMethodEssentialsModel $essentials): bool
+    {
+        $single = [
+            '-' => true,
+            '+' => true,
+            '*' => true,
+            '/' => true,
+            '%' => true,
+            '^' => true,
+            '|' => true,
+            '&' => true,
+            '=' => true,
+            '~' => true,
+        ];
+
+        $double = [
+            '>>' => true,
+            '<<' => true,
+            '**' => true,
+            '&&' => true,
+            '||' => true,
+            '??' => true,
+        ];
+
+        $triple = [
+            '>>>' => true,
+        ];
+
+        $start = $essentials->getI();
+        $content = $essentials->getContent();
+        $first = $content->getLetter($start);
+        $second = $content->getLetter($start + 1);
+        $last  = $content->getLetter($start + 2);
+        if ($triple[$first . $second . $last] ?? false) {
+            $move = $start + 2;
+            $symbol = $first . $second . $last;
+        } elseif ($double[$second . $last] ?? false) {
+            $move = $start + 1;
+            $symbol = $second . $last;
+        } elseif ($single[$last] ?? false) {
+            $move = $start;
+            $symbol = $last;
+        } else {
+            return false;
+        }
+        $essentials->setI($move);
+        $essentials->appendData($symbol, 'assignment');
+        return true;
+    },
     "taken" => function (CustomMethodEssentialsModel $essentials): bool
     {
         $nonBlockKeywords = [
@@ -60,14 +109,18 @@ return [
 
         return $ends[$essentials->getLetter()] ?? false;
     },
-    "varend" => function (CustomMethodEssentialsModel $essentials, $iter = 0)
+    "varend" => function (CustomMethodEssentialsModel $essentials, bool $comma = true, $iter = 0)
     {
         if ($iter >= 50) {
             die('Stop');
         }
 
-        $var     = $essentials->getData()['var'] ?? '';
-        $essentials->getMethods()['find']($essentials, ["\n", ";"], null, 'var');
+        $var   = $essentials->getData()['var'] ?? '';
+        $stops = ["\n", ";"];
+        if ($comma) {
+            $stops[] = ",";
+        }
+        $essentials->getMethods()['find']($essentials, $stops, null, 'var');
 
         $newVar  = $essentials->getData()['var'];
         $var     = $var . $newVar;
@@ -75,10 +128,13 @@ return [
         $content = $essentials->getContent();
 
         $letter = $essentials->getLetter();
-        if ($letter === ';') {
+
+        if ($letter === ';' || $letter === ',') {
             $essentials->appendData($var, "var");
+            $essentials->appendData($letter, "stop");
             return true;
         }
+
         $var .= $letter;
         $essentials->appendData($var, "var");
         if (is_null($letter)) {

@@ -30,16 +30,62 @@ return [
         ]
     ],
     /* LET */
-    "/s|end\let/s\/varend\\" => [
-        "class" => "LetVariableBlock"
+    "/s|end\let/s\\" => [
+        "class" => "LetVariableBlock",
+        "_block" => [
+            "end" => '/varend:false\\',
+            "include_end" => true,
+        ]
     ],
     /* CONST */
-    "/s|end\const/s\/varend\\" => [
-        "class" => "ConstVariableBlock"
+    "/s|end\const/s\\" => [
+        "class" => "ConstVariableBlock",
+        "_block" => [
+            "end" => '/varend:false\\',
+            "include_end" => true,
+        ]
     ],
     /* VAR */
-    '/s|end\var/s\/varend\\' => [
-        "class" => "VarVariableBlock"
+    '/s|end\var/s\\' => [
+        "class" => "VarVariableBlock",
+        "_block" => [
+            "end" => '/varend:false\\',
+            "include_end" => true,
+        ]
+    ],
+    /* VARIABLE */
+    '/s|end\/word:"name"\\' => [
+        "class" => "VariableInstanceBlock",
+        "empty" => true,
+        "_extend" => [
+            '/s|e\\' => [
+                "_extend" => [
+                    '=' => [
+                        "class" => "VariableInstanceBlock",
+                        "replace" => true,
+                        "_block" => [
+                            "end" => "/varend\\",
+                            "include_end" => true,
+                        ]
+                    ],
+                    '/assignment\\=' => [
+                        "class" => "VariableInstanceBlock",
+                        "_block" => [
+                            "end" => "/varend\\",
+                            "include_end" => true,
+                        ]
+                    ],
+                    '++/varend\\' => [
+                        "class" => "VariableInstanceBlock",
+                        "type" => "addition",
+                    ],
+                    '--/varend\\' => [
+                        "class" => "VariableInstanceBlock",
+                        "type" => "subtraction",
+                    ]
+                ]
+            ]
+        ]
     ],
     /* ARRAY */
     "[" => [
@@ -100,14 +146,6 @@ return [
         "class" => "ArrowMethodBlock",
         "parenthesis" => false,
         "block" => false,
-    ],
-    /* ATTRIBUTE or VARIABLE ASSIGNMENT */
-    '/word\/s|e\=' => [
-        "class" => "AttributeBlock",
-        "_block" => [
-            "end" => "/varend\\",
-            "include_end" => true,
-        ]
     ],
     /* KEYWORD */
     // Ended with ;
@@ -269,6 +307,24 @@ return [
             "skip" => '/s|end\do/s|e\{',
             "end" => '}/s|e\while/s|e\(/find:")":"(":"while"\\',
         ]
-    ]
+    ],
+    '/s|"}"\else' => [
+        "_extend" => [
+            "/s|e\{" => [
+                "class" => "ElseBlock",
+                "_block" => [
+                    "skip" => '{',
+                    "end" => '}',
+                ]
+            ],
+            '/s\if/s|e\(/find:")":"(":"values"\/s|e\{' => [
+                "class" => "ElseIfBlock",
+                "_block" => [
+                    "skip" => '{',
+                    "end" => '}',
+                ]
+            ]
+        ]
+    ],
 
 ];
