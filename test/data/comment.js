@@ -1,1 +1,1 @@
-let a = 'a', b, c = 'a';
+static abd;

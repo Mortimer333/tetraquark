@@ -84,49 +84,49 @@ class Reader
         $content = $this->customPrepare($content);
 
         // echo $content . PHP_EOL;
-        Log ::log($content . '');
-        Log ::timerStart();
+        Log  ::log($content . '');
+        Log  ::timerStart();
         $this->map = $this->generateBlocksMap();
         // die(json_encode($this->map, JSON_PRETTY_PRINT));
         $script = new ScriptBlockModel();
         list($this->script, $end) = $this->objectify($content, $this->map, parent: $script);
-        Log ::timerEnd();
+        Log  ::timerEnd();
         // echo json_encode($this->script, JSON_PRETTY_PRINT);
         $this->displayScriptBlocks($this->script);
     }
 
     public function displayScriptBlocks(array $script): void
     {
-        Log ::log('[');
-        Log ::increaseIndent();
+        Log  ::log('[');
+        Log  ::increaseIndent();
         foreach ($script as $block) {
-            Log ::log('[');
-            Log ::increaseIndent();
+            Log  ::log('[');
+            Log  ::increaseIndent();
             foreach ($block->toArray() as $key => $value) {
                 if ($key === 'children') {
-                    Log ::log($key . ' => ');
-                    Log ::increaseIndent();
+                    Log  ::log($key . ' => ');
+                    Log  ::increaseIndent();
                     $this->displayScriptBlocks($value);
-                    Log ::decreaseIndent();
+                    Log  ::decreaseIndent();
                 } elseif ($key === 'parent' && !is_null($value)) {
                     if ($value instanceof ScriptBlockModel) {
-                        Log ::log($key . ' => script');
+                        Log  ::log($key . ' => script');
                     } else {
-                        Log ::log($key . ' => parent[' . $value?->getIndex() . ']');
+                        Log  ::log($key . ' => parent[' . $value?->getIndex() . ']');
                     }
                 } else {
                     if ($key == 'landmark') {
-                        Log ::log($key . ' => ' . json_encode($value['_custom'] ?? [], JSON_PRETTY_PRINT) . ',', replaceNewLine: false);
+                        Log  ::log($key . ' => ' . json_encode($value['_custom'] ?? [], JSON_PRETTY_PRINT) . ',', replaceNewLine: false);
                     } else {
-                        Log ::log($key . ' => ' . json_encode($value, JSON_PRETTY_PRINT) . ',', replaceNewLine: false);
+                        Log  ::log($key . ' => ' . json_encode($value, JSON_PRETTY_PRINT) . ',', replaceNewLine: false);
                     }
                 }
             }
-            Log ::decreaseIndent();
-            Log ::log('],');
+            Log  ::decreaseIndent();
+            Log  ::log('],');
         }
-        Log ::decreaseIndent();
-        Log ::log('],');
+        Log  ::decreaseIndent();
+        Log  ::log('],');
     }
 
     public function objectify(Content $content, array $map, int $start = 0, ?BlockModelInterface $parent = null): array
@@ -146,7 +146,7 @@ class Reader
             "map"        => $map,
             "parent"     => $parent,
         ]);
-        Log::increaseIndent();
+
         try {
             for ($i=$start; $i < $content->getLength(); $i++) {
                 try {
@@ -172,7 +172,6 @@ class Reader
             }
         }
 
-        Log::decreaseIndent();
         return [$resolver->getScript(), $resolver->getI()];
     }
 
@@ -203,7 +202,7 @@ class Reader
         // @TODO remove this, and think of better fail save
         $this->iterations++;
         if ($this->iterations > 2000) {
-            throw new \Error('Inifnite loop');
+            throw new \Error('Inifinite loop');
         }
 
         $content = $resolver->getContent();
@@ -217,7 +216,7 @@ class Reader
         // Don't skip string - $resolver->setI(Str::skip($content->getLetter($i), $i, $content));
         $resolver->setI($i);
         $resolver->setLetter($content->getLetter($i));
-        Log ::log($i . ' Letter: `' . $resolver->getLetter() . '`, `' . $resolver->getLmStart() . '`, ' . $resolver->getContent()->getLength());
+        // Log ::log($i . ' Letter: `' . $resolver->getLetter() . '`, `' . $resolver->getLmStart() . '`, ' . $resolver->getContent()->getLength());
         if (isset($resolver->getLandmark()[$resolver->getLetter()])) {
             $res = $this->resolveStringLandmark($resolver);
             if ($res) {
@@ -256,7 +255,7 @@ class Reader
         $this->debug["path"][] = $resolver->getLetter();
         $possibleLandmark = $resolver->getLandmark()[$resolver->getLetter()];
 
-        Log ::log('New string lm, oprions: ' . implode(', ', array_keys($resolver->getLandmark())));
+        // Log ::log('New string lm, oprions: ' . implode(', ', array_keys($resolver->getLandmark())));
         if (is_null($resolver->getLmStart())) {
             $resolver->setLmStart($resolver->getI());
         }
@@ -290,6 +289,7 @@ class Reader
             // Set essentials
             $essentials = [
                 "content"  => $resolver->getContent(),
+                "lmStart"  => $resolver->getLmStart(),
                 "letter"   => $resolver->getLetter(),
                 "i"        => $resolver->getI(),
                 "data"     => $resolver->getData(),
@@ -299,6 +299,7 @@ class Reader
             $skipReplace = [
                 "methods" => true,
                 "previous" => true,
+                "lmStart" => true,
             ];
             $this->essentials->set($essentials);
 
@@ -325,7 +326,7 @@ class Reader
                 $resolver->$setter($this->essentials->$getter());
             }
 
-            Log ::log('New method `' . $methodName . '` lm, oprions: ' . implode(', ', array_keys($step)));
+            // Log ::log('New method `' . $methodName . '` lm, oprions: ' . implode(', ', array_keys($step)));
 
             if (isset($step['_stop'])) {
                 $resolver->setLandmark($step);
@@ -345,7 +346,7 @@ class Reader
 
     public function tryToFindNextMatch(LandmarkResolverModel $resolver, array $posLandmark): bool
     {
-        $save = $this->saveResolver($resolver, ["lmStart"]);
+        $save = $this->saveResolver($resolver, []);
         $resolver->setLandmark($posLandmark);
         $resolver->i++;
         $res = $this->resolve($resolver, $resolver->i);
@@ -421,7 +422,7 @@ class Reader
             }
         }
 
-        Log ::log('Save block - ' . json_encode($resolver->getLandmark()['_custom'] ?? []));
+        // Log ::log('Save block - ' . json_encode($resolver->getLandmark()['_custom'] ?? []));
         $item = new BlockModel(
             start: $resolver->getLmStart(),
             end: $resolver->getI(),
@@ -467,6 +468,11 @@ class Reader
         if ($block && sizeof($item->getChildren()) === 0) {
             $start = $item->getBlockStart() + 1;
             $end = $item->getBlockEnd() - 1;
+
+            if ($end < $start) {
+                return;
+            }
+
             $inside = $resolver->getContent()->iSubStr($start, $end);
             if (strlen($inside) != 0 && !Validate::isWhitespace($inside)) {
                 $data = $this->getMissedData($resolver, $start, $end);
@@ -554,7 +560,6 @@ class Reader
             $end = $i;
             $data = [];
         }
-        Log::log('Blocks end: ' . $i);
 
         $parent->setBlockEnd($i);
         $parent->setData([...$parent->getData(), ...["_end" => $data]]);
@@ -567,7 +572,7 @@ class Reader
         $caretIncr  = $this->current['caret'];
         $newContent = $content->iCutToContent($start, $i);
         $blocks     = [];
-        Log::log('NEw content: ' . $newContent);
+
         if ($newContent->getLength() !== 0) {
             if (!Validate::isWhitespace($newContent->getLetter(0))) {
                 $newContent->prependArrayContent([" "]);

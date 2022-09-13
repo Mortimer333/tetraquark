@@ -1,5 +1,41 @@
 <?php declare(strict_types=1);
 
+$arrowMethod = [
+    '(/find:")":"(":"condition"\/s|e\=>/s|e\{' => [
+        "class" => "ArrowMethodBlock",
+        "parenthesis" => true,
+        "block" => true,
+        "_block" => [
+            "end" => "}",
+            "nested" => "{"
+        ]
+    ],
+    '/word\/s|e\=>/s|e\{' => [
+        "class" => "ArrowMethodBlock",
+        "parenthesis" => false,
+        "block" => true,
+        "_block" => [
+            "end" => "}",
+            "nested" => "{"
+        ]
+    ],
+    '(/find:")":"(":"condition"\/s|e\=>/s|e\/"!{"\/varend\\' => [
+        "class" => "ArrowMethodBlock",
+        "parenthesis" => true,
+        "block" => false,
+    ],
+    '/word\/s|e\=>/s|e\/"!{"\/varend\\' => [
+        "class" => "ArrowMethodBlock",
+        "parenthesis" => false,
+        "block" => false,
+    ],
+];
+
+$arrowMethodAsync = [];
+foreach ($arrowMethod as $key => $value) {
+    $arrowMethodAsync[$key] = array_merge($value, ['async' => true]);
+}
+
 return [
     /* SINGLE LINE COMMENT */
     "\/\//find:\n::'comment'\\" => [
@@ -87,6 +123,21 @@ return [
             ]
         ]
     ],
+    /* STATIC VARIABLE */
+    '/s|end\static/s\/word:"name"\\' => [
+        "class" => "StaticVariableInstanceBlock",
+        "empty" => true,
+        "_extend" => [
+            '/s|e\\=' => [
+                "class" => "StaticVariableInstanceBlock",
+                "replace" => true,
+                "_block" => [
+                    "end" => "/varend\\",
+                    "include_end" => true,
+                ]
+            ]
+        ]
+    ],
     /* ARRAY */
     "[" => [
         "class" => "ArrayBlock",
@@ -119,33 +170,11 @@ return [
         - x => x + 1
         - (x) => x + 1
      */
-    '(/find:")":"(":"condition"\/s|e\=>/s|e\{' => [
-        "class" => "ArrowMethodBlock",
-        "parenthesis" => true,
-        "block" => true,
-        "_block" => [
-            "end" => "}",
-            "nested" => "{"
+    ...$arrowMethod,
+    '/s|end\async/s|e\\' => [
+        "_extend" => [
+            ...$arrowMethodAsync
         ]
-    ],
-    '/word\/s|e\=>/s|e\{' => [
-        "class" => "ArrowMethodBlock",
-        "parenthesis" => false,
-        "block" => true,
-        "_block" => [
-            "end" => "}",
-            "nested" => "{"
-        ]
-    ],
-    '(/find:")":"(":"condition"\/s|e\=>/s|e\/"!{"\/varend\\' => [
-        "class" => "ArrowMethodBlock",
-        "parenthesis" => true,
-        "block" => false,
-    ],
-    '/word\/s|e\=>/s|e\/"!{"\/varend\\' => [
-        "class" => "ArrowMethodBlock",
-        "parenthesis" => false,
-        "block" => false,
     ],
     /* KEYWORD */
     // Ended with ;
@@ -157,7 +186,7 @@ return [
         "class" => "KeywordBlock"
     ],
     /* CALLER */
-    '/word:"name"\/s|e\(' => [
+    '/s|end\/word:"name"\/s|e\(' => [
         "class" => "CallerBlock",
         "_block" => [
             "end" => ")",
@@ -165,13 +194,61 @@ return [
         ],
         "_extend" => [
             /* CLASS METHOD */
-            '/find:")":"(":"arguments"\\/s|e\{' => [
+            '/find:")":"(":"arguments"\/s|e\{' => [
                 "class" => "ClassMethodBlock",
                 "_block" => [
                     "end" => "}",
                     "nested" => "{"
                 ],
             ],
+        ],
+    ],
+    /* GETTER */
+    '/s|end\get/s\/word:"getter"\(/find:")":"(":"arguments"\/s|e\{' => [
+        "class" => "GetterClassMethodBlock",
+        "_block" => [
+            "end" => "}",
+            "nested" => "{"
+        ],
+    ],
+    /* SETTER */
+    '/s|end\set/s\/word:"setter"\(/find:")":"(":"arguments"\/s|e\{' => [
+        "class" => "SetterClassMethodBlock",
+        "_block" => [
+            "end" => "}",
+            "nested" => "{"
+        ],
+    ],
+    /* AYNC */
+    '/s|end\async/s\/word:"name"\(/find:")":"(":"arguments"\/s|e\{' => [
+        "class" => "AsyncClassMethodBlock",
+        "_block" => [
+            "end" => "}",
+            "nested" => "{"
+        ],
+    ],
+    /* STATIC GETTER */
+    '/s|end\static/s\get/s\/word:"getter"\(/find:")":"(":"arguments"\/s|e\{' => [
+        "class" => "StaticGetterClassMethodBlock",
+        "_block" => [
+            "end" => "}",
+            "nested" => "{"
+        ],
+    ],
+    /* STATIC SETTER */
+    '/s|end\static/s\set/s\/word:"setter"\(/find:")":"(":"arguments"\/s|e\{' => [
+        "class" => "StaticSetterClassMethodBlock",
+        "_block" => [
+            "end" => "}",
+            "nested" => "{"
+        ],
+    ],
+    /* STATIC AYNC */
+    '/s|end\static/s\async/s\/word:"name"\(/find:")":"(":"arguments"\/s|e\{' => [
+        "class" => "StaticAsyncClassMethodBlock",
+        "_block" => [
+            "end" => "}",
+            "nested" => "{"
         ],
     ],
     /* TRY */
@@ -285,6 +362,7 @@ return [
             ]
         ]
     ],
+    /* EQUAL */
     "==" => [
         "class" => "EqualBlock",
         "_extend" => [
@@ -293,6 +371,7 @@ return [
             ]
         ]
     ],
+    /* UNEQUAL */
     "!=" => [
         "class" => "DifferentBlock",
         "_extend" => [
@@ -301,6 +380,7 @@ return [
             ]
         ]
     ],
+    /* DO WHILE */
     '/s|end\do/s|e\{' => [
         "class" => "DoWhileBlock",
         "_block" => [
@@ -308,6 +388,15 @@ return [
             "end" => '}/s|e\while/s|e\(/find:")":"(":"while"\\',
         ]
     ],
+    /* WHILE */
+    '/s|end\while/s|e\(/find:")":"(":"while"\/s|e\{' => [
+        "class" => "WhileBlock",
+        "_block" => [
+            "skip" => '{',
+            "end" => '}',
+        ]
+    ],
+    /* ELSE / ELSE IF */
     '/s|"}"\else' => [
         "_extend" => [
             "/s|e\{" => [
