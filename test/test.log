@@ -1,37 +1,90 @@
- static abd;\n
-Duration: 0.008s
+ switch (expression) {\n    case expression:\n\n        break;\n    default:\n    schemaSetDefaultsasd\n}\n
+Duration: 0.013s
 [
   [
-    blockStart => null,
-    blockEnd => null,
+    blockStart => 21,
+    blockEnd => 97,
     start => 0,
-    end => 10,
+    end => 98,
     landmark => {
-        "class": "StaticVariableInstanceBlock",
-        "empty": true
+        "class": "SwitchBlock"
     },
     data => {
-        "name": "abd"
+        "values": "expression",
+        "_end": []
     },
     index => 0,
     parent => script
     children => 
       [
-      ],
-  ],
-  [
-    blockStart => null,
-    blockEnd => null,
-    start => 11,
-    end => 13,
-    landmark => [],
-    data => {
-        "missed": ";\n"
-    },
-    index => 1,
-    parent => script
-    children => 
-      [
+        [
+          blockStart => 20,
+          blockEnd => 30,
+          start => 22,
+          end => 57,
+          landmark => {
+              "class": "SwitchCaseBlock"
+          },
+          data => {
+              "case": "expression",
+              "_end": []
+          },
+          index => 0,
+          parent => parent[0]
+          children => 
+            [
+            ],
+        ],
+        [
+          blockStart => null,
+          blockEnd => null,
+          start => 58,
+          end => 58,
+          landmark => [],
+          data => {
+              "missed": ";"
+          },
+          index => 1,
+          parent => parent[2]
+          children => 
+            [
+            ],
+        ],
+        [
+          blockStart => 49,
+          blockEnd => 76,
+          start => 59,
+          end => 98,
+          landmark => {
+              "class": "SwitchDefaultCaseBlock"
+          },
+          data => {
+              "_end": []
+          },
+          index => 2,
+          parent => parent[0]
+          children => 
+            [
+              [
+                blockStart => null,
+                blockEnd => null,
+                start => 50,
+                end => 74,
+                landmark => {
+                    "class": "VariableInstanceBlock",
+                    "empty": true
+                },
+                data => {
+                    "name": "schemaSetDefaultsasd"
+                },
+                index => 0,
+                parent => parent[2]
+                children => 
+                  [
+                  ],
+              ],
+            ],
+        ],
       ],
   ],
 ],

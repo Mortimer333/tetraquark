@@ -163,6 +163,7 @@ class Reader
             }
         }
 
+
         if ($resolver->getI() === $resolver->getContent()->getLength() - 1) {
             $last = $resolver->getParent()->getLastChild();
             if (!$last) {
@@ -255,7 +256,7 @@ class Reader
         $this->debug["path"][] = $resolver->getLetter();
         $possibleLandmark = $resolver->getLandmark()[$resolver->getLetter()];
 
-        // Log ::log('New string lm, oprions: ' . implode(', ', array_keys($resolver->getLandmark())));
+        // Log ::log('New string lm, oprions: ' . implode(', ', array_keys($possibleLandmark)));
         if (is_null($resolver->getLmStart())) {
             $resolver->setLmStart($resolver->getI());
         }
@@ -312,6 +313,8 @@ class Reader
 
             $this->debug["path"][] = $methodName;
 
+            $save = $this->saveResolver($resolver, []);
+
             if (is_null($resolver->getLmStart())) {
                 $resolver->setLmStart($resolver->getI());
             }
@@ -340,6 +343,7 @@ class Reader
             if ($res) {
                 return true;
             }
+            $this->restoreResolver($resolver, $save);
         }
         return false;
     }
@@ -548,13 +552,20 @@ class Reader
 
         // Find the end of block
         list($endBlocks, $i) = $this->objectify($content, $blockSet['map'], $start, $parent);
+
         if (sizeof($endBlocks) > 0) {
             $endBlock = $endBlocks[sizeof($endBlocks) - 1];
+
             // End of the block's content
-            if (!isset($blockSet["include_end"]) || !$blockSet["include_end"]) {
+            if ((!isset($blockSet["include_end"]) || !$blockSet["include_end"]) && !isset($endBlock->getLandmark()['_missed'])) {
                 $i = $endBlock->getStart() - 1;
             }
-            $data = $endBlock->getData();
+
+            $data = [];
+            if (!isset($endBlock->getLandmark()['_missed'])) {
+                $data = $endBlock->getData();
+            }
+
             $end = $endBlock->getEnd();
         } else {
             $end = $i;
@@ -776,8 +787,8 @@ class Reader
                     }
                     if (Validate::isStringLandmark($item['name'][0], '')) {
                         $strLen = \mb_strlen($item['name']);
-                        if ($strLen !== 3 &&$strLen !== 4) {
-                            throw new Exception("OR literal method can be only made from 1 letter at time (optionaly with negation `!`)", 400);
+                        if ($strLen !== 3 && $strLen !== 4) {
+                            throw new Exception("OR literal method can be only made from 1 letter at time (optionaly with negation `!`) " . $item['name'], 400);
                         }
                         $name = trim($item['name'], $item['name'][0]);
                         if ($strLen === 4 && $name[0] === '!') {
@@ -798,20 +809,19 @@ class Reader
             "default" => function () use ($block) {
                 $block["_stop"] = true;
                 if (isset($block["_block"])) {
-                    $block["_block"]['end'] =  $this->sliceIntoSteps(
-                        $this->translateInstructionToMap($block["_block"]['end']),
-                        [
-                            "_finish" => true
-                        ]
-                    );
-                    if (isset($block["_block"]['nested'])) {
-                        $block["_block"]['nested'] =  $this->sliceIntoSteps(
-                            $this->translateInstructionToMap($block["_block"]['nested']),
-                            [
-                                "_skip" => true
-                            ]
-                        );
+
+                    if (is_string($block["_block"]['end'])) {
+                        $block["_block"]['end'] = [$block["_block"]['end']];
                     }
+                    $block["_block"]['end'] = $this->sliceToMap($block["_block"]['end'], ["_finish" => true]);
+
+                    if (isset($block["_block"]['nested'])) {
+                        if (is_string($block["_block"]['nested'])) {
+                            $block["_block"]['nested'] = [$block["_block"]['nested']];
+                        }
+                        $block["_block"]['nested'] = $this->sliceToMap($block["_block"]['nested'], ["_skip" => true]);
+                    }
+
                     $block["_block"]["map"] = [...$block["_block"]['end'], ...($block["_block"]['nested'] ?? [])];
                     unset($block["_block"]['end']);
                     unset($block["_block"]['nested']);
@@ -820,6 +830,18 @@ class Reader
             }
         ];
         return ($types[$map[$stepCounter]['type'] ?? null] ?? $types['default'])($map[$stepCounter] ?? null);
+    }
+
+    public function sliceToMap(array $instructions, array $data): array
+    {
+        $endMaps = [];
+        foreach ($instructions as $value) {
+            $endMaps[] = $this->sliceIntoSteps(
+                $this->translateInstructionToMap($value),
+                $data
+            );
+        }
+        return $this->mergeMaps($endMaps);
     }
 
     public function methodFromString(string $method): array

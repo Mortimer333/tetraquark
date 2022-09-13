@@ -4,6 +4,14 @@ use \Tetraquark\{Content, Validate, Str, Log};
 use \Tetraquark\Model\CustomMethodEssentialsModel;
 
 return [
+    "case" =>  function (CustomMethodEssentialsModel $essentials): bool
+    {
+        $possibleCase = $essentials->getContent()->subStr($essentials->getI() + 1, 4);
+        if ($possibleCase === 'case') {
+            return true;
+        }
+        return false;
+    },
     "assignment" => function (CustomMethodEssentialsModel $essentials): bool
     {
         $single = [
@@ -58,10 +66,10 @@ return [
         $nonBlockKeywords = [
             'break' => true, 'instanceof' => true, 'this' => true,
             'typeof' => true,  'void' => true, 'continue' => true,
-            'debugger' => true, 'true' => true, 'false' => true,
-            'with' => true, 'default' => true, 'delete' => true,
-            'enum' => true, 'super' => true, 'null' => true,
-            'undefined' => true, 'NaN' => true, 'Infinity' => true,
+            'debugger' => true, 'with' => true, 'default' => true,
+            'delete' => true, 'enum' => true, 'super' => true,
+            'null' => true, 'undefined' => true, 'NaN' => true,
+            'Infinity' => true,
         ];
         list($word, $i) = Str::getNextWord($essentials->getI(), $essentials->getContent(), true);
 

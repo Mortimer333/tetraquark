@@ -1,1 +1,7 @@
-static abd;
+switch (expression) {
+    case expression:
+
+        break;
+    default:
+    schemaSetDefaultsasd
+}
