@@ -19,12 +19,12 @@ $arrowMethod = [
             "nested" => "{"
         ]
     ],
-    '(/find:")":"(":"condition"\/s|e\=>/s|e\/"!{"\/varend\\' => [
+    '(/find:")":"(":"condition"\/s|e\=>/nparenthesis>decrease\/varend\\' => [
         "class" => "ArrowMethodBlock",
         "parenthesis" => true,
         "block" => false,
     ],
-    '/word\/s|e\=>/s|e\/"!{"\/varend\\' => [
+    '/word\/s|e\=>/nparenthesis>decrease\/varend\\' => [
         "class" => "ArrowMethodBlock",
         "parenthesis" => false,
         "block" => false,
@@ -54,7 +54,7 @@ return [
         ]
     ],
     /* SHORT IF */
-    "/s|end\if/s|e\(/find:')':'(':'condition'\/s|e\/'!{'\/varend\\" => [
+    "/s|end\if/s|e\(/find:')':'(':'condition'\/nparenthesis>decrease\/varend\\" => [
         "class" => "ShortIfBlock"
     ],
     /* CLASS DEFINITION */
@@ -90,13 +90,13 @@ return [
         ]
     ],
     /* VARIABLE */
-    '/s|end\/word:"name"\\' => [
+    '/s|e\/word:"name"\\' => [
         "class" => "VariableInstanceBlock",
         "empty" => true,
         "_extend" => [
             '/s|e\\' => [
                 "_extend" => [
-                    '=' => [
+                    '=/"!="\\' => [
                         "class" => "VariableInstanceBlock",
                         "replace" => true,
                         "_block" => [
@@ -104,7 +104,7 @@ return [
                             "include_end" => true,
                         ]
                     ],
-                    '/assignment\\=' => [
+                    '/assignment\\=/"!="\\' => [
                         "class" => "VariableInstanceBlock",
                         "_block" => [
                             "end" => "/varend\\",
@@ -423,11 +423,11 @@ return [
         ]
     ],
     /* SHORT WHILE */
-    "/s|end\while/s|e\(/find:')':'(':'condition'\/s|e\/'!{'\/varend\\" => [
+    '/s|end\while/s|e\(/find:")":"(":"condition"\/nparenthesis>decrease\/varend\\' => [
         "class" => "ShortWhileBlock"
     ],
     /* ELSE / ELSE IF */
-    '/s|"}"\else' => [
+    '/s|e\else' => [
         "_extend" => [
             "/s|e\{" => [
                 "class" => "ElseBlock",
@@ -444,56 +444,6 @@ return [
                 ]
             ]
         ]
-    ],
-    /* NEW INSTANCE */
-    '/s|end\new/s\/word\\' => [
-        '_extend' => [
-            '(/find:")":"(":"values"\\' => [
-                "class" => "ClassInstanceBlock",
-                "parenthesis" => true,
-            ],
-        ],
-        "class" => "ClassInstanceBlock",
-    ],
-    /* OBJECT */
-    '{' => [
-        "_block" => [
-            "end" => "}",
-            "skip" => "{",
-        ],
-        "class" => "ObjectBlock",
-    ],
-    ':' => [
-        "class" => "ObjectSeperatorBlock",
-    ],
-    /* SPREAD OBJECT */
-    '.../s|e\{' => [
-        "spread" => true,
-        "class" => "ObjectBlock",
-        "_block" => [
-            "end" => "}",
-            "skip" => "{",
-        ],
-    ],
-    /* RETURN */
-    '/s|end\return/s|symbol>decrease:"a"\\' => [
-        "_block" => [
-            "end" => '/varend\\',
-            "include_end" => true,
-        ],
-        "class" => "ReturnBlock",
-    ],
-    /* SWITCH */
-    '/s|end\switch/s|e\(/find:")":"(":"switch"\/s|e\{' => [
-        "class" => "SwitchBlock",
-        "_block" => [
-            "skip" => '{',
-            "end" => '}',
-        ]
-    ],
-    '/s|end\case/s\/word\:' => [
-        "class" => "SwitchCaseBlock",
-
     ],
     /* FALSE */
     '/s|end\false' => [
@@ -512,7 +462,7 @@ return [
         ]
     ],
     /* SHORT FOR */
-    '/s|end\for/s|e\(/find:")":"(":"condition"\/s|e\/"!{"\/varend\\' => [
+    '/s|end\for/s|e\(/find:")":"(":"condition"\/nparenthesis>decrease\/varend\\' => [
         "class" => "ShortForBlock"
     ],
     /* FUNCTION */
@@ -566,16 +516,22 @@ return [
     ':' => [
         "class" => "ObjectSeperatorBlock"
     ],
+    /* SPREAD OBJECT */
+    '.../s|e\{' => [
+        "spread" => true,
+        "class" => "ObjectBlock",
+        "_block" => [
+            "end" => "}",
+            "skip" => "{",
+        ],
+    ],
     /* RETURN */
-    '/s|end\return' => [
-        "class" => "ReturnBlock",
+    '/s|end\return/s|symbol>decrease\\' => [
         "_block" => [
             "end" => '/varend\\',
             "include_end" => true,
-        ]
-    ],
-    '...' => [
-        "class" => "SpreadBlock"
+        ],
+        "class" => "ReturnBlock",
     ],
     /* STATIC INITIALIZATION */
     '/s|end\static/s|e\{' => [
@@ -608,5 +564,30 @@ return [
             "end" => ['/case\\', 'break'],
             "nested" => '/s|end\default/s|e\:',
         ]
+    ],
+    /* SYMBOL */
+    '/symbol:"first"\\' => [
+        'class' => "SymbolBlock",
+        "type" => "single",
+        "_extend" => [
+            '/symbol:"second"\\' => [
+                'class' => "SymbolBlock",
+                "type" => "double",
+                "_extend" => [
+                    '/symbol:"third"\\' => [
+                        'class' => "SymbolBlock",
+                        "type" => "triple",
+                    ]
+                ]
+            ]
+        ]
+    ],
+    /* YELD */
+    '/s|end\yield/s|symbol>decrease\\' => [
+        "_block" => [
+            "end" => '/varend\\',
+            "include_end" => true,
+        ],
+        "class" => "YeldBlock",
     ],
 ];

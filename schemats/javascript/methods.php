@@ -4,6 +4,25 @@ use \Tetraquark\{Content, Validate, Str, Log};
 use \Tetraquark\Model\CustomMethodEssentialsModel;
 
 return [
+    "nparenthesis" => function (CustomMethodEssentialsModel $essentials): bool
+    {
+        list($nextLetter, $nextPos) = Str::getNextLetter($essentials->getI(), $essentials->getContent());
+        return $nextLetter !== "{";
+    },
+    "symbol" => function (CustomMethodEssentialsModel $essentials, string $name = "symbol"): bool
+    {
+        $skipped = [
+            ";" => true,
+            "}" => true,
+            ")" => true,
+            "/" => true,
+        ];
+        $res = !isset($skipped[$essentials->getLetter()]) && (preg_match("/[\W]+/", $essentials->getLetter()) === 1) && !Validate::isWhitespace($essentials->getLetter());
+        if ($res) {
+            $essentials->appendData($essentials->getLetter(), $name);
+        }
+        return $res;
+    },
     "case" =>  function (CustomMethodEssentialsModel $essentials): bool
     {
         $possibleCase = $essentials->getContent()->subStr($essentials->getI() + 1, 4);
@@ -12,7 +31,7 @@ return [
         }
         return false;
     },
-    "decrease" => function (CustomMethodEssentialsModel $essentials, $var): void
+    "decrease" => function (CustomMethodEssentialsModel $essentials): void
     {
         $essentials->i--;
     },
@@ -105,7 +124,7 @@ return [
         $essentials->setI($i);
         return true;
     },
-    "end" => function (CustomMethodEssentialsModel $essentials, $iter = 0): bool
+    "end" => function (CustomMethodEssentialsModel $essentials): bool
     {
         $ends = [
             ";" => true,
@@ -121,12 +140,8 @@ return [
 
         return $ends[$essentials->getLetter()] ?? false;
     },
-    "varend" => function (CustomMethodEssentialsModel $essentials, bool $comma = true, $iter = 0)
+    "varend" => function (CustomMethodEssentialsModel $essentials, bool $comma = true)
     {
-        if ($iter >= 50) {
-            die('Stop');
-        }
-
         $var   = $essentials->getData()['var'] ?? '';
         $stops = ["\n", ";"];
         if ($comma) {
@@ -142,6 +157,8 @@ return [
         $letter = $essentials->getLetter();
 
         if ($letter === ';' || $letter === ',') {
+            Log::log('Varend: ' . $content->getLetter($i));
+            $essentials->setI($i);
             $essentials->appendData($var, "var");
             $essentials->appendData($letter, "stop");
             return true;
@@ -159,7 +176,7 @@ return [
             && !Validate::isStringLandmark($prevLetter, '')
             && !Validate::isComment($prevPos, $content)
         ) {
-            return $essentials->getMethods()['varendNext']($essentials, $iter);
+            return $essentials->getMethods()['varendNext']($essentials);
         }
 
         list($nextLetter, $nextPos) = Str::getNextLetter($i, $content);
@@ -174,27 +191,25 @@ return [
             && !Validate::isStringLandmark($nextLetter, '')
             && !Validate::isComment($nextPos, $content)
         ) {
-            return $essentials->getMethods()['varendNext']($essentials, $iter);
+            return $essentials->getMethods()['varendNext']($essentials);
         }
 
         list($previousWord) = Str::getPreviousWord($i, $content);
         if (Validate::isExtendingKeyWord($previousWord)) {
-            return $essentials->getMethods()['varendNext']($essentials, $iter);
+            return $essentials->getMethods()['varendNext']($essentials);
         }
 
         list($nextWord) = Str::getNextWord($i, $content);
         if (Validate::isExtendingKeyWord($nextWord)) {
-            return $essentials->getMethods()['varendNext']($essentials, $iter);
+            return $essentials->getMethods()['varendNext']($essentials);
         }
-
-        $essentials->setI($essentials->getI());
 
         return true;
     },
-    "varendNext" => function (CustomMethodEssentialsModel $essentials, $iter)
+    "varendNext" => function (CustomMethodEssentialsModel $essentials): bool
     {
         $essentials->setI($essentials->getI() + 1);
-        return $essentials->getMethods()['varend']($essentials, $iter + 1);
+        return $essentials->getMethods()['varend']($essentials);
     },
     "find" => function (CustomMethodEssentialsModel $essentials, string|array $needle, null|array|string $hayStarter = null, ?string $name = null): bool
     {
@@ -300,8 +315,4 @@ return [
     {
         return $essentials->getLetter() === "\n" || $essentials->getLetter() === "\r";
     },
-    "symbol" => function (CustomMethodEssentialsModel $essentials): bool
-    {
-        return preg_match("/[\W]+/", $essentials->getLetter()) !== false;
-    }
 ];

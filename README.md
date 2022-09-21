@@ -24,3 +24,9 @@ php ./vendor/bin/phpunit test
 php test/test.php > test/test.log 2>&1
 
 Last created block: NewInstanceBlock
+
+@TODO
+1. This throws infite loop: ` yield abs + index++ ;\n`
+2. There is a problem with varends - they don't actually end at their end.
+Check in current log `FunctionBlock > VarVariableBlock > VariableInstanceBlock` has missed block with data `0;` where is should be `0` as ; is the end of the block.
+You can recreate issue with: ` var index = 0;\n`

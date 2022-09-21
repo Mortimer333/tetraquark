@@ -1,21 +1,158 @@
- static {}\n
-Duration: 0.006s
+ function* foo(){\n var index = 0;\n while (index <= 2)\n yield index++;\n}\n
+Get missed: 0, 69 - Start:   End: \n
+GEt end
+Varend: \n
+Get missed: 0, 5 - Start: \n End:  
+GEt end
+Varend: 
+Get missed: 0, 8 - Start:   End:  
+GEt end
+Check missed: 8, 11 - Start:   End: 
+Get missed: 9, 10 - Start: 0 End: ;
+Varend: \n
+Get missed: 0, 43 - Start: \n End:  
+GEt end
+Varend: 
+Get missed: 71, 72 - Start: \n End: 
+Duration: 0.007s
 [
   [
-    blockStart => 8,
-    blockEnd => 8,
+    blockStart => 16,
+    blockEnd => 69,
     start => 0,
-    end => 9,
+    end => 70,
     landmark => {
-        "class": "StaticInitializationBlock"
+        "class": "FunctionBlock",
+        "generator": true
     },
     data => {
+        "name": "foo",
+        "arguments": "",
         "_end": []
     },
     index => 0,
     parent => script
-    children =>
+    children => 
       [
+        [
+          blockStart => 22,
+          blockEnd => 32,
+          start => 17,
+          end => 33,
+          landmark => {
+              "class": "VarVariableBlock"
+          },
+          data => {
+              "_end": {
+                  "var": "index = 0",
+                  "stop": ";"
+              }
+          },
+          index => 0,
+          parent => parent[0]
+          children => 
+            [
+              [
+                blockStart => 31,
+                blockEnd => 34,
+                start => 23,
+                end => 34,
+                landmark => {
+                    "class": "VariableInstanceBlock",
+                    "replace": true
+                },
+                data => {
+                    "name": "index",
+                    "negation": " ",
+                    "_end": {
+                        "var": "0",
+                        "stop": ";"
+                    }
+                },
+                index => 0,
+                parent => parent[0]
+                children => 
+                  [
+                    [
+                      blockStart => null,
+                      blockEnd => null,
+                      start => 9,
+                      end => 10,
+                      landmark => [],
+                      data => {
+                          "missed": "0;"
+                      },
+                      index => 0,
+                      parent => parent[0]
+                      children => 
+                        [
+                        ],
+                    ],
+                  ],
+              ],
+            ],
+        ],
+        [
+          blockStart => null,
+          blockEnd => null,
+          start => 33,
+          end => 53,
+          landmark => {
+              "class": "ShortWhileBlock"
+          },
+          data => {
+              "condition": "index <= 2",
+              "var": "\n"
+          },
+          index => 1,
+          parent => parent[0]
+          children => 
+            [
+            ],
+        ],
+        [
+          blockStart => 60,
+          blockEnd => 68,
+          start => 53,
+          end => 69,
+          landmark => {
+              "class": "YeldBlock"
+          },
+          data => {
+              "_end": {
+                  "var": "index++",
+                  "stop": ";"
+              }
+          },
+          index => 2,
+          parent => parent[0]
+          children => 
+            [
+              [
+                blockStart => null,
+                blockEnd => null,
+                start => 44,
+                end => 53,
+                landmark => {
+                    "class": "VariableInstanceBlock",
+                    "type": "addition"
+                },
+                data => {
+                    "name": "index",
+                    "var": "",
+                    "stop": ";"
+                },
+                index => 0,
+                parent => parent[2]
+                children => 
+                  [
+                  ],
+              ],
+            ],
+        ],
       ],
   ],
 ],
+
+
+

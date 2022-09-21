@@ -11,7 +11,7 @@ return [
     ],
     "prepare" => function(Content $content): Content
     {
-        return $content->trim()->prependArrayContent([' ']);
+        return $content->prependArrayContent([' ']);
     },
     "shared" => [
         "ends" => [

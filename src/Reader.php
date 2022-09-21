@@ -46,6 +46,7 @@ class Reader
     public const SKIP = 'skip';
     public const FINISH = 'finish';
     public const END_OF_FILE = 'end of file';
+    public const EMPTY_METHOD = 'e';
 
     public function __construct(protected array $schema)
     {
@@ -193,6 +194,7 @@ class Reader
 
     public function getMissedData(LandmarkResolverModel $resolver, int $start, int $end): array
     {
+        Log::log('Get missed: ' . $start . ', ' . $end . ' - Start: ' . $resolver->getContent()->getLetter($start) . ' End: ' . $resolver->getContent()->getLetter($end));
         $missed = $resolver->getContent()->iSubStr($start, $end);
         return [
             "missed" => $missed
@@ -218,7 +220,7 @@ class Reader
         // Don't skip string - $resolver->setI(Str::skip($content->getLetter($i), $i, $content));
         $resolver->setI($i);
         $resolver->setLetter($content->getLetter($i));
-        // Log ::log($i . ' Letter: `' . $resolver->getLetter() . '`, `' . $resolver->getLmStart() . '`, ' . $resolver->getContent()->getLength());
+        // // Log ::log($i . ' Letter: `' . $resolver->getLetter() . '`, `' . $resolver->getLmStart() . '`, ' . $resolver->getContent()->getLength() . ', possible: ' . implode(', ', array_keys($resolver->getLandmark())));
         if (isset($resolver->getLandmark()[$resolver->getLetter()])) {
             $res = $this->resolveStringLandmark($resolver);
             if ($res) {
@@ -257,7 +259,7 @@ class Reader
         $this->debug["path"][] = $resolver->getLetter();
         $possibleLandmark = $resolver->getLandmark()[$resolver->getLetter()];
 
-        // Log ::log('New string lm, oprions: ' . implode(', ', array_keys($possibleLandmark)));
+        // // Log ::log('New string lm, oprions: ' . implode(', ', array_keys($possibleLandmark)));
         if (is_null($resolver->getLmStart())) {
             $resolver->setLmStart($resolver->getI());
         }
@@ -266,13 +268,13 @@ class Reader
             $resolver->setLandmark($possibleLandmark);
             $this->resolveSettings($resolver);
             $this->saveBlock($resolver);
-            $this->clearObjectify($resolver);
             return true;
         }
         $res = $this->tryToFindNextMatch($resolver, $possibleLandmark);
         if ($res) {
             return true;
         }
+
         return false;
     }
 
@@ -293,7 +295,6 @@ class Reader
     public function resolveMethodLandmark(LandmarkResolverModel $resolver): bool
     {
         foreach ($resolver->getLandmark()['_m'] as $methodName => $step) {
-
             list($method, $callable) = $this->getMethod($methodName);
             // Set essentials
             $essentials = [
@@ -338,7 +339,7 @@ class Reader
                 $resolver->$setter($this->essentials->$getter());
             }
 
-            // Log ::log('New method `' . $methodName . '` lm, oprions: ' . implode(', ', array_keys($step)));
+            // // Log ::log('New method `' . $methodName . '` lm, oprions: ' . implode(', ', array_keys($step)));
 
             if (isset($step['_stop'])) {
                 $resolver->setLandmark($step);
@@ -430,6 +431,7 @@ class Reader
 
     public function saveBlock(LandmarkResolverModel $resolver): void
     {
+        $debug = $this->debug['path'];
         // Check next letters if we don't have more specified block which matches syntax.
         // More specified in a way that his definition is longer/more detailed
         try {
@@ -446,8 +448,9 @@ class Reader
                 throw $e;
             }
         }
+        $this->debug['path'] = $debug;
 
-        // Log ::log('Save block - ' . json_encode($resolver->getLandmark()['_custom'] ?? []));
+        // // Log ::log('Save block - ' . json_encode($resolver->getLandmark()['_custom'] ?? []) . ", debug: " . implode(' => ', $this->debug['path']));
         $item = new BlockModel(
             start: $resolver->getLmStart(),
             end: $resolver->getI(),
@@ -491,6 +494,7 @@ class Reader
 
         // Exception if no child was found
         if ($block && sizeof($item->getChildren()) === 0) {
+            Log::log('Check missed: ' . $item->getBlockStart() . ', ' . $item->getBlockEnd() . ' - Start: ' . $resolver->getContent()->getLetter($item->getBlockStart()) . ' End: ' . $resolver->getContent()->getLetter($item->getBlockEnd()));
             $start = $item->getBlockStart() + 1;
             $end = $item->getBlockEnd() - 1;
 
@@ -514,6 +518,7 @@ class Reader
                 $item->addChild($child);
             }
         }
+        $this->clearObjectify($resolver);
     }
 
     public function getMissedLandmark(): array
@@ -573,6 +578,12 @@ class Reader
 
         // Find the end of block
         list($endBlocks, $i) = $this->objectify($content, $blockSet['map'], $start, $parent);
+        // if (empty($content->getLetter($i))) {
+        //     Log::log($content->subStr($start));
+        //     Log::log($blockSet['map'], replaceNewLine: false);
+        //     Log::log('Endoffile');
+        //     $i--;
+        // }
 
         if (sizeof($endBlocks) > 0) {
             $endBlock = $endBlocks[sizeof($endBlocks) - 1];
@@ -586,9 +597,10 @@ class Reader
             if (!isset($endBlock->getLandmark()['_missed'])) {
                 $data = $endBlock->getData();
             }
-
+            Log::log('GEt end');
             $end = $endBlock->getEnd();
         } else {
+            Log::log('Set end');
             $end = $i;
             $data = [];
         }
@@ -615,6 +627,10 @@ class Reader
             foreach ($blocks as &$block) {
                 $block->setStart($block->getStart() + $caretIncr);
                 $block->setEnd($block->getEnd() + $caretIncr);
+                if (!is_null($block->getBlockStart()) && !is_null($block->getBlockEnd())) {
+                    $block->setBlockStart($block->getBlockStart() + $caretIncr);
+                    $block->setBlockEnd($block->getBlockEnd() + $caretIncr);
+                }
             }
         }
         $this->current['caret'] = null;
@@ -803,7 +819,11 @@ class Reader
                 foreach ($step['item'] as $item) {
                     $name = $item['method'];
                     // Sepcial method - empty
-                    if ($name === 'e') {
+                    if ($name === self::EMPTY_METHOD) {
+                        if (isset($nextStep["_m"])) {
+                            $methods = array_merge($methods, $nextStep["_m"]);
+                            unset($nextStep["_m"]);
+                        }
                         $steps = array_merge($nextStep, $steps);
                         continue;
                     }
