@@ -14,11 +14,8 @@ Duration: 0.006s
     },
     index => 0,
     parent => script
-    children => 
+    children =>
       [
       ],
   ],
 ],
-
-
-

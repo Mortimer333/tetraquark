@@ -415,12 +415,16 @@ return [
         ]
     ],
     /* WHILE */
-    '/s|end\while/s|e\(/find:")":"(":"while"\/s|e\{' => [
+    '/s|end\while/s|e\(/find:")":"(":"condition"\/s|e\{' => [
         "class" => "WhileBlock",
         "_block" => [
             "skip" => '{',
             "end" => '}',
         ]
+    ],
+    /* SHORT WHILE */
+    "/s|end\while/s|e\(/find:')':'(':'condition'\/s|e\/'!{'\/varend\\" => [
+        "class" => "ShortWhileBlock"
     ],
     /* ELSE / ELSE IF */
     '/s|"}"\else' => [
@@ -489,6 +493,120 @@ return [
     ],
     '/s|end\case/s\/word\:' => [
         "class" => "SwitchCaseBlock",
-        
-    ]
+
+    ],
+    /* FALSE */
+    '/s|end\false' => [
+        "class" => "FalseBlock"
+    ],
+    /* TRUE */
+    '/s|end\true' => [
+        "class" => "TrueBlock"
+    ],
+    /* FOR */
+    '/s|end\for/s|e\(/find:")":"(":"condition"\/s|e\{' => [
+        "class" => "ForBlock",
+        "_block" => [
+            "end" => "}",
+            "nested" => "{"
+        ]
+    ],
+    /* SHORT FOR */
+    '/s|end\for/s|e\(/find:")":"(":"condition"\/s|e\/"!{"\/varend\\' => [
+        "class" => "ShortForBlock"
+    ],
+    /* FUNCTION */
+    '/s|end\function' => [
+        "_extend" => [
+            // GENERATOR
+            '*/s\/word:"name"\(/find:")":"(":"arguments"\/s|e\{' => [
+                "class" => "FunctionBlock",
+                "generator" => true,
+                "_block" => [
+                    "end" => "}",
+                    "nested" => "{"
+                ]
+            ],
+            '/s\/word:"name"\(/find:")":"(":"arguments"\/s|e\{' => [
+                "class" => "FunctionBlock",
+                "_block" => [
+                    "end" => "}",
+                    "nested" => "{"
+                ]
+            ],
+            // ANONYMOUS
+            '/s|e\(/find:")":"(":"arguments"\/s|e\{' => [
+                "class" => "FunctionBlock",
+                "anonymous" => true,
+                "_block" => [
+                    "end" => "}",
+                    "nested" => "{"
+                ]
+            ],
+        ]
+    ],
+    /* NEW INSTANCE */
+    '/s|end\new/s\/word:"class"\\' => [
+        "class" => "NewInstanceBlock",
+        "_extend" => [
+            '/s|e\(/find:")":"(":"values"\\' => [
+                "class" => "NewInstanceBlock",
+                "parenthesis" => true
+            ]
+        ]
+    ],
+    /* OBJECT */
+    '{' => [
+        "class" => "ObjectBlock",
+        "_block" => [
+            "end" => "}",
+            "nested" => "{"
+        ]
+    ],
+    ':' => [
+        "class" => "ObjectSeperatorBlock"
+    ],
+    /* RETURN */
+    '/s|end\return' => [
+        "class" => "ReturnBlock",
+        "_block" => [
+            "end" => '/varend\\',
+            "include_end" => true,
+        ]
+    ],
+    '...' => [
+        "class" => "SpreadBlock"
+    ],
+    /* STATIC INITIALIZATION */
+    '/s|end\static/s|e\{' => [
+        "class" => "StaticInitializationBlock",
+        "_block" => [
+            "end" => "}",
+            "nested" => "{"
+        ],
+    ],
+    /* SWITCH */
+    '/s|end\switch/s|e\(/find:")":"(":"values"\/s|e\{' => [
+        "class" => "SwitchBlock",
+        "_block" => [
+            "end" => "}",
+            "nested" => "{"
+        ],
+    ],
+    /* SWITCH CASE */
+    '/s|end\case/s\/word:"case"\/s|e\:' => [
+        "class" => "SwitchCaseBlock",
+        "_block" => [
+            "end" => ['/case\\', 'break'],
+            "nested" => '/s|end\case/s\/word:"case"\/s|e\:',
+        ]
+    ],
+    /* SWITCH DEFAULT CASE */
+    '/s|end\default/s|e\:' => [
+        "class" => "SwitchDefaultCaseBlock",
+        "_block" => [
+            "end" => ['/case\\', 'break'],
+            "nested" => '/s|end\default/s|e\:',
+        ]
+    ],
 ];
