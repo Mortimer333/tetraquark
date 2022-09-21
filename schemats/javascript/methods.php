@@ -4,6 +4,10 @@ use \Tetraquark\{Content, Validate, Str, Log};
 use \Tetraquark\Model\CustomMethodEssentialsModel;
 
 return [
+    "decrease" => function (CustomMethodEssentialsModel $essentials, $var): void
+    {
+        $essentials->i--;
+    },
     "assignment" => function (CustomMethodEssentialsModel $essentials): bool
     {
         $single = [
@@ -288,4 +292,8 @@ return [
     {
         return $essentials->getLetter() === "\n" || $essentials->getLetter() === "\r";
     },
+    "symbol" => function (CustomMethodEssentialsModel $essentials): bool
+    {
+        return preg_match("/[\W]+/", $essentials->getLetter()) !== false;
+    }
 ];

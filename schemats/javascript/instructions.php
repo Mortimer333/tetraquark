@@ -124,23 +124,49 @@ return [
         ]
     ],
     /* STATIC VARIABLE */
-    '/s|end\static/s\/word:"name"\\' => [
-        "class" => "StaticVariableInstanceBlock",
-        "empty" => true,
+    '/s|end\static' => [
         "_extend" => [
-            '/s|e\\=' => [
-                "class" => "StaticVariableInstanceBlock",
-                "replace" => true,
+            /* STATIC INITIALIZATION */
+            '/s|e\{' => [
+                "class" => "StaticInitializationBlock",
                 "_block" => [
-                    "end" => "/varend\\",
-                    "include_end" => true,
+                    "end" => "}",
+                    "skip" => "{"
+                ],
+            ],
+            '/s\/word:"name"\\' => [
+                "class" => "StaticVariableInstanceBlock",
+                "empty" => true,
+                "_extend" => [
+                    '/s|e\\=' => [
+                        "class" => "StaticVariableInstanceBlock",
+                        "replace" => true,
+                        "_block" => [
+                            "end" => "/varend\\",
+                            "include_end" => true,
+                        ]
+                    ]
                 ]
             ]
         ]
     ],
+    /* SPREAD VARIABLE */
+    '.../s|e\/word:"name"\\' => [
+        "class" => "VariableInstanceBlock",
+        "spread" => true,
+    ],
     /* ARRAY */
-    "[" => [
+    '[' => [
         "class" => "ArrayBlock",
+        "_block" => [
+            "end" => "]",
+            "nested" => "[",
+        ]
+    ],
+    /* SPREAD ARRAY */
+    '.../s|e\[' => [
+        "class" => "ArrayBlock",
+        "spread" => true,
         "_block" => [
             "end" => "]",
             "nested" => "[",
@@ -415,5 +441,54 @@ return [
             ]
         ]
     ],
-
+    /* NEW INSTANCE */
+    '/s|end\new/s\/word\\' => [
+        '_extend' => [
+            '(/find:")":"(":"values"\\' => [
+                "class" => "ClassInstanceBlock",
+                "parenthesis" => true,
+            ],
+        ],
+        "class" => "ClassInstanceBlock",
+    ],
+    /* OBJECT */
+    '{' => [
+        "_block" => [
+            "end" => "}",
+            "skip" => "{",
+        ],
+        "class" => "ObjectBlock",
+    ],
+    ':' => [
+        "class" => "ObjectSeperatorBlock",
+    ],
+    /* SPREAD OBJECT */
+    '.../s|e\{' => [
+        "spread" => true,
+        "class" => "ObjectBlock",
+        "_block" => [
+            "end" => "}",
+            "skip" => "{",
+        ],
+    ],
+    /* RETURN */
+    '/s|end\return/s|symbol>decrease:"a"\\' => [
+        "_block" => [
+            "end" => '/varend\\',
+            "include_end" => true,
+        ],
+        "class" => "ReturnBlock",
+    ],
+    /* SWITCH */
+    '/s|end\switch/s|e\(/find:")":"(":"switch"\/s|e\{' => [
+        "class" => "SwitchBlock",
+        "_block" => [
+            "skip" => '{',
+            "end" => '}',
+        ]
+    ],
+    '/s|end\case/s\/word\:' => [
+        "class" => "SwitchCaseBlock",
+        
+    ]
 ];

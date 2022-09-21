@@ -1,34 +1,18 @@
- static abd;\n
-Duration: 0.008s
+ static {}\n
+Duration: 0.006s
 [
   [
-    blockStart => null,
-    blockEnd => null,
+    blockStart => 8,
+    blockEnd => 8,
     start => 0,
-    end => 10,
+    end => 9,
     landmark => {
-        "class": "StaticVariableInstanceBlock",
-        "empty": true
+        "class": "StaticInitializationBlock"
     },
     data => {
-        "name": "abd"
+        "_end": []
     },
     index => 0,
-    parent => script
-    children => 
-      [
-      ],
-  ],
-  [
-    blockStart => null,
-    blockEnd => null,
-    start => 11,
-    end => 13,
-    landmark => [],
-    data => {
-        "missed": ";\n"
-    },
-    index => 1,
     parent => script
     children => 
       [

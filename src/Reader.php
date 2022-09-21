@@ -87,6 +87,7 @@ class Reader
         Log  ::log($content . '');
         Log  ::timerStart();
         $this->map = $this->generateBlocksMap();
+        // die(json_encode($this->methods, JSON_PRETTY_PRINT));
         // die(json_encode($this->map, JSON_PRETTY_PRINT));
         $script = new ScriptBlockModel();
         list($this->script, $end) = $this->objectify($content, $this->map, parent: $script);
@@ -274,18 +275,25 @@ class Reader
         return false;
     }
 
+    public function getMethod(string $methodName): array
+    {
+        $method = $this->methods[$methodName]
+            ?? throw new Exception("Method " . htmlentities($methodName) . " not found", 404);
+
+        $callable = $this->schema['methods'][$method['name']]
+            ?? throw new Exception("Method " . htmlentities($methodName) . " not defined", 400);
+
+        is_callable($callable)
+            or throw new Exception("Method " . htmlentities($methodName) . " is not callable", 400);
+
+        return [$method, $callable];
+    }
+
     public function resolveMethodLandmark(LandmarkResolverModel $resolver): bool
     {
         foreach ($resolver->getLandmark()['_m'] as $methodName => $step) {
-            $method = $this->methods[$methodName]
-                ?? throw new Exception("Method " . htmlentities($methodName) . " not found", 404);
 
-            $callable = $this->schema['methods'][$method['name']]
-                ?? throw new Exception("Method " . htmlentities($methodName) . " not defined", 400);
-
-            is_callable($callable)
-                or throw new Exception("Method " . htmlentities($methodName) . " is not callable", 400);
-
+            list($method, $callable) = $this->getMethod($methodName);
             // Set essentials
             $essentials = [
                 "content"  => $resolver->getContent(),
@@ -311,6 +319,8 @@ class Reader
             }
 
             $this->debug["path"][] = $methodName;
+
+            $this->resolveThen($this->essentials, $method);
 
             if (is_null($resolver->getLmStart())) {
                 $resolver->setLmStart($resolver->getI());
@@ -342,6 +352,18 @@ class Reader
             }
         }
         return false;
+    }
+
+    public function resolveThen(CustomMethodEssentialsModel $essentials, array $method): void
+    {
+        if (!isset($method["then"])) {
+            return;
+        }
+
+        list($method, $callable) = $this->getMethod($method['then']);
+        $callable($this->essentials, ...$method['params']);
+
+        $this->resolveThen($essentials, $method);
     }
 
     public function tryToFindNextMatch(LandmarkResolverModel $resolver, array $posLandmark): bool
@@ -769,29 +791,35 @@ class Reader
                 $nextStep = $this->sliceIntoSteps($map, $block, $stepCounter + 1);
                 $methods = [];
                 foreach ($step['item'] as $item) {
+                    $name = $item['method'];
                     // Sepcial method - empty
-                    if ($item['name'] === 'e') {
+                    if ($name === 'e') {
                         $steps = array_merge($nextStep, $steps);
                         continue;
                     }
-                    if (Validate::isStringLandmark($item['name'][0], '')) {
-                        $strLen = \mb_strlen($item['name']);
-                        if ($strLen !== 3 &&$strLen !== 4) {
+                    if (Validate::isStringLandmark($name[0], '')) {
+                        $strLen = \mb_strlen($name);
+                        if ($strLen !== 3 && $strLen !== 4) {
                             throw new Exception("OR literal method can be only made from 1 letter at time (optionaly with negation `!`)", 400);
                         }
-                        $name = trim($item['name'], $item['name'][0]);
+                        $name = trim($name, $name[0]);
                         if ($strLen === 4 && $name[0] === '!') {
-                            $methods                [$name] = $nextStep;
-                            $this->methods          [$name] = $this->methodFromString($name);
+                            if (!isset($item['_skip']) || !$item['_skip']) {
+                                $methods                [$name] = $nextStep;
+                            }
+                            $this->methods          [$name] = $item;
                             $this->schema['methods'][$name] = ClosureFactory::generateReversalClosure($name[1]);
                         } else {
                             $steps[$name] = $nextStep;
                         }
                     } else {
-                        $methods[$item['name']] = $nextStep;
-                        $this->methods[$item['name']] = $this->methodFromString($item['name']);
+                        if (!isset($item['_skip']) || !$item['_skip']) {
+                            $methods[$name] = $nextStep;
+                        }
+                        $this->methods[$name] = $item;
                     }
                 }
+
                 $steps['_m'] = $methods;
                 return $steps;
             },
@@ -899,7 +927,6 @@ class Reader
         $map = [];
         $currentItem = '';
         $methods = [];
-        $lastMethodLandmark = '|';
         $inMethod = false;
         for ($i=0; $i < $instr->getLength(); $i++) {
             if ($inMethod) {
@@ -914,9 +941,8 @@ class Reader
             if ($letter === "\\") {
                 if ($inMethod) {
                     if (strlen($currentItem) > 0) {
-                        $methods[] = $this->createMethodMapItem($letter, $lastMethodLandmark, $currentItem);
+                        $methods = array_merge($methods, $this->createMethodMapItems($currentItem));
                     }
-                    $lastMethodLandmark = '|';
 
                     $item = $this->createMapItem($methods, "method");
                     if (!is_null($item)) {
@@ -944,7 +970,7 @@ class Reader
             }
 
             if ($inMethod && $letter === '|') {
-                $methods[] = $this->createMethodMapItem($letter, $lastMethodLandmark, $currentItem);
+                $methods = array_merge($methods, $this->createMethodMapItems($currentItem));
                 $currentItem = '';
                 continue;
             }
@@ -970,18 +996,45 @@ class Reader
         return ["item" => $item, "type" => $type];
     }
 
-    private function createMethodMapItem(string $letter, string &$lastMethodLandmark, string $currentItem): array
+    private function createMethodMapItems(string $currentItem, bool $skip = false): array
     {
-        $types = [
-            '|' => "default",
-            '>' => 'save_output',
+        $specials = [
+            '>' => "then",
         ];
 
-        $type = $types[$lastMethodLandmark] ?? throw new Exception("Method type unknown: " . htmlentities($letter), 400);
-        $lastMethodLandmark = $letter;
-        return [
-            "name" => $currentItem,
-            "type" => $type
+        $content = new Content($currentItem);
+        $name = $currentItem;
+        $rest = '';
+        for ($i=0; $i < $content->getLength(); $i++) {
+            $symbol = $content->getLetter($i);
+            if ($specials[$symbol] ?? null) {
+                $name = $content->iSubStr(0, $i - 1);
+                $rest = $content->subStr($i + 1);
+                $special = $specials[$symbol];
+                break;
+            }
+        }
+
+        $method = $currentItem;
+        if ($skip) {
+            $method .= "_skip";
+        }
+
+        $item = [
+            ...$this->methodFromString($name),
+            "method" => $method,
         ];
+
+        if ($skip) {
+            $item['_skip'] = true;
+        }
+
+        $items = [$item];
+        if (isset($special)) {
+            $item[$special] = $rest . '_skip';
+            $items = [...$this->createMethodMapItems($rest, true), $item];
+        }
+
+        return $items;
     }
 }

@@ -1,1 +1,1 @@
-static abd;
+static {}

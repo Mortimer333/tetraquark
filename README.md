@@ -22,3 +22,5 @@ PHPunit
 
 php ./vendor/bin/phpunit test
 php test/test.php > test/test.log 2>&1
+
+Last created block: NewInstanceBlock
