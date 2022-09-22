@@ -542,14 +542,6 @@ return [
         ],
         "class" => "ReturnBlock",
     ],
-    /* STATIC INITIALIZATION */
-    '/s|end\static/s|e\{' => [
-        "class" => "StaticInitializationBlock",
-        "_block" => [
-            "end" => "}",
-            "nested" => "{"
-        ],
-    ],
     /* SWITCH */
     '/s|end\switch/s|e\(/find:")":"(":"values"\/s|e\{' => [
         "class" => "SwitchBlock",
@@ -597,6 +589,6 @@ return [
             "end" => '/varend\\',
             "include_end" => true,
         ],
-        "class" => "YeldBlock",
+        "class" => "YieldBlock",
     ],
 ];

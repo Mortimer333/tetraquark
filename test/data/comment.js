@@ -1,5 +1,1 @@
-{
-    "asd" : function () {
-
-    }
-}
+variable()

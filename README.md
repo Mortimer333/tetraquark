@@ -23,13 +23,31 @@ PHPunit
 php ./vendor/bin/phpunit test
 php test/test.php > test/test.log 2>&1
 
-- UndefinedBlock - automatic missed data
-- ImportPromiseBlock
-- ExportDefaultBlock
-- ExportAsBlock
-- ExportAllBlock
-- ImportObjectBlock
-- ImportObjectItemBlock
+List of blocks to implement:
+- Import:
+    - ImportPromiseBlock
+    - ImportObjectBlock
+    - ImportObjectItemBlock
+    - ImportAsBlock
+    - ImportAllBlock
+    - ImportFromBlock
+    - ImportItemSeperatorBlock
+    - ImportBlock
+    -
+- Export:
+    - ExportDefaultBlock
+    - ExportAsBlock
+    - ExportAllBlock
+    - ExportFromBlock
+    - ExportObjectItemBlock
+    - ExportObjectBlock
+
+List of blocks which I might not implement:
+~ SemicolonBlock
+~ UndefinedBlock - automatic missed data
+~ ScriptBlock
+
+List of implemented blocks:
 + VariableItemBlock - VariableInstanceBlock
 + WhileBlock
 + DebuggerBlock - KeywordBlock:debugger
@@ -41,51 +59,41 @@ php test/test.php > test/test.log 2>&1
 + StringBlock
 + NewClassBlock - NewClassInstanceBlock
 + VoidBlock - KeywordBlock:void
-+ ObjectValueBlock - 
-ObjectBlock
-ImportAsBlock
-SwitchCaseBlock
-TripleEqualBlock
-DoWhileBlock
-CatchBlock
-ScriptBlock
-ImportAllBlock
-YeldBlock
-AttributeBlock
-ImportFromBlock
-StaticInitializationBlock
-InstanceofBlock
-FinallyBlock
-SpreadBlock
-ExportFromBlock
-DoubleEqualBlock
-ExportBlock
-CallerBlock
-FunctionBlock
-TryBlock
-SemicolonBlock
-SymbolBlock
-ArrayItemSeperatorBlock
-ImportBlock
-ScopeBlock
-BreakBlock
-ElseBlock
-EmptyAttributeBlock
-IfBlock
-FalseBlock
-VariableBlock
-TrueBlock
-ExportObjectItemBlock
-ClassBlock
-ExportObjectBlock
-TypeofBlock
-SwitchBlock
-ForBlock
-ImportItemSeperatorBlock
-ClassMethodBlock
-NanBlock
-ReturnBlock
-ContinueBlock
-ArrowFunctionBlock
-ChainLinkBlock
-ArrayBlock
++ ObjectValueBlock - ObjectValueBlock
++ ObjectBlock
++ SwitchCaseBlock - SwitchCaseBlock
++ TripleEqualBlock - ExactBlock
++ DoWhileBlock
++ CatchBlock
++ YeldBlock - YieldBlock
++ AttributeBlock - VariableInstanceBlock
++ StaticInitializationBlock
++ InstanceofBlock - KeywordBlock:instanceof
++ FinallyBlock
++ SpreadBlock - ObjectBlock:spread, VariableInstanceBlock:spread, ArrayBlock:spread
++ DoubleEqualBlock
++ ExportBlock - EqualBlock
++ CallerBlock - CallerBlock
++ FunctionBlock
++ TryBlock
++ SymbolBlock
++ ArrayItemSeperatorBlock - CommaBlock
++/- ScopeBlock - ObjectBlock
++ BreakBlock -  KeywordBlock:break
++ ElseBlock
++ EmptyAttributeBlock - VariableBlock:empty
++ IfBlock
++ FalseBlock
++ VariableBlock
++ TrueBlock
++ ClassBlock
++ TypeofBlock - KeywordBlock:typeof
++ SwitchBlock
++ ForBlock
++ ClassMethodBlock
++ NanBlock - KeywordBlock:NaN
++ ReturnBlock
++ ContinueBlock - KeywordBlock:continue
++ ArrowFunctionBlock - ArrowMethodBlock
++ ChainLinkBlock - ChainBlock
++ ArrayBlock

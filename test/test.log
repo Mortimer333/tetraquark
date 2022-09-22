@@ -1,58 +1,22 @@
- {\n    "asd" : function () {\n\n    }\n}\n
-Duration: 0.01s
+ variable()\n
+Duration: 0.005s
 [
   [
-    blockStart => 2,
-    blockEnd => 35,
-    start => 1,
-    end => 36,
+    blockStart => 10,
+    blockEnd => 9,
+    start => 0,
+    end => 10,
     landmark => {
-        "class": "ObjectBlock"
+        "class": "CallerBlock"
     },
     data => {
+        "name": "variable",
         "_end": []
     },
     index => 0,
     parent => script
     children => 
       [
-        [
-          blockStart => 14,
-          blockEnd => 36,
-          start => 2,
-          end => 36,
-          landmark => {
-              "class": "ObjectValueBlock"
-          },
-          data => {
-              "_end": []
-          },
-          index => 0,
-          parent => parent[0]
-          children => 
-            [
-              [
-                blockStart => 28,
-                blockEnd => 33,
-                start => 14,
-                end => 34,
-                landmark => {
-                    "class": "FunctionBlock",
-                    "anonymous": true
-                },
-                data => {
-                    "foundkey": ")",
-                    "arguments": "",
-                    "_end": []
-                },
-                index => 0,
-                parent => parent[0]
-                children => 
-                  [
-                  ],
-              ],
-            ],
-        ],
       ],
   ],
 ],
