@@ -23,10 +23,69 @@ PHPunit
 php ./vendor/bin/phpunit test
 php test/test.php > test/test.log 2>&1
 
-Last created block: NewInstanceBlock
-
-@TODO
-1. This throws infite loop: ` yield abs + index++ ;\n`
-2. There is a problem with varends - they don't actually end at their end.
-Check in current log `FunctionBlock > VarVariableBlock > VariableInstanceBlock` has missed block with data `0;` where is should be `0` as ; is the end of the block.
-You can recreate issue with: ` var index = 0;\n`
+- UndefinedBlock - automatic missed data
+- ImportPromiseBlock
+- ExportDefaultBlock
+- ExportAsBlock
+- ExportAllBlock
+- ImportObjectBlock
+- ImportObjectItemBlock
++ VariableItemBlock - VariableInstanceBlock
++ WhileBlock
++ DebuggerBlock - KeywordBlock:debugger
++ ObjectSoloValueBlock - VariableInstanceBlock (parent ObjectBlock)
++ UndefinedValueBlock - KeywordBlock:undefined
++ NullBlock - KeywordBlock:null
++ InfinityBlock - KeywordBlock:Inifinity
++ OperatorBlock - VariableInstanceBlock:addition|subtraction
++ StringBlock
++ NewClassBlock - NewClassInstanceBlock
++ VoidBlock - KeywordBlock:void
++ ObjectValueBlock - 
+ObjectBlock
+ImportAsBlock
+SwitchCaseBlock
+TripleEqualBlock
+DoWhileBlock
+CatchBlock
+ScriptBlock
+ImportAllBlock
+YeldBlock
+AttributeBlock
+ImportFromBlock
+StaticInitializationBlock
+InstanceofBlock
+FinallyBlock
+SpreadBlock
+ExportFromBlock
+DoubleEqualBlock
+ExportBlock
+CallerBlock
+FunctionBlock
+TryBlock
+SemicolonBlock
+SymbolBlock
+ArrayItemSeperatorBlock
+ImportBlock
+ScopeBlock
+BreakBlock
+ElseBlock
+EmptyAttributeBlock
+IfBlock
+FalseBlock
+VariableBlock
+TrueBlock
+ExportObjectItemBlock
+ClassBlock
+ExportObjectBlock
+TypeofBlock
+SwitchBlock
+ForBlock
+ImportItemSeperatorBlock
+ClassMethodBlock
+NanBlock
+ReturnBlock
+ContinueBlock
+ArrowFunctionBlock
+ChainLinkBlock
+ArrayBlock

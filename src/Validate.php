@@ -94,10 +94,10 @@ class Validate
 
     public static function isStringLandmark(string $letter, string $previousLetter = '', bool $inString = false): bool
     {
-        return ($letter === '"' || $letter === "'")
+        return ($letter === '"' || $letter === "'" || $letter === "`")
             && (
                 !$inString
-                || $inString && $previousLetter !== '\\'
+                || ($inString && $previousLetter !== '\\')
             );
     }
 

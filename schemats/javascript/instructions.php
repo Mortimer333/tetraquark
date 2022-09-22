@@ -1,5 +1,12 @@
 <?php declare(strict_types=1);
 
+$objectItemBlock = [
+    "class" => "ObjectValueBlock",
+    "_block" => [
+        "end" => '/objectend\\',
+        "include_end" => true,
+    ],
+];
 $arrowMethod = [
     '(/find:")":"(":"condition"\/s|e\=>/s|e\{' => [
         "class" => "ArrowMethodBlock",
@@ -111,11 +118,11 @@ return [
                             "include_end" => true,
                         ]
                     ],
-                    '++/varend\\' => [
+                    '++' => [
                         "class" => "VariableInstanceBlock",
                         "type" => "addition",
                     ],
-                    '--/varend\\' => [
+                    '--' => [
                         "class" => "VariableInstanceBlock",
                         "type" => "subtraction",
                     ]
@@ -203,12 +210,8 @@ return [
         ]
     ],
     /* KEYWORD */
-    // Ended with ;
-    '/s|end\/taken\/e|s\;' => [
-        "class" => "KeywordBlock"
-    ],
     // Ended with new line
-    '/s|end\/taken\/s\\' => [
+    '/s|end\/taken\/s|";"\\' => [
         "class" => "KeywordBlock"
     ],
     /* CALLER */
@@ -500,7 +503,7 @@ return [
         "class" => "NewInstanceBlock",
         "_extend" => [
             '/s|e\(/find:")":"(":"values"\\' => [
-                "class" => "NewInstanceBlock",
+                "class" => "NewClassInstanceBlock",
                 "parenthesis" => true
             ]
         ]
@@ -513,8 +516,14 @@ return [
             "nested" => "{"
         ]
     ],
-    ':' => [
-        "class" => "ObjectSeperatorBlock"
+    /* OBJECT ITEM */
+    '/s|e|"{"\\' => [
+        "_extend" => [
+            "'/strend:`'`\/s|e\:" => $objectItemBlock,
+            '`/strend:"`"\/s|e\:' => $objectItemBlock,
+            '"/strend:`"`\/s|e\:' => $objectItemBlock,
+            '/word:"name"\/s|e\:' => $objectItemBlock,
+        ]
     ],
     /* SPREAD OBJECT */
     '.../s|e\{' => [

@@ -9,10 +9,16 @@ return [
             "*" => "*/"
         ],
     ],
-    "prepare" => function(Content $content): Content
-    {
-        return $content->prependArrayContent([' ']);
-    },
+    "prepare" => [
+        "content" => function(Content $content): Content
+        {
+            return $content->prependArrayContent([' ']);
+        },
+        "missed" => function(string $missed): string
+        {
+            return trim(rtrim(trim($missed), ';'));
+        }
+    ],
     "shared" => [
         "ends" => [
             "\n" => true,
@@ -22,6 +28,6 @@ return [
         ],
     ],
     "instructions" => require(__DIR__ . '/javascript/instructions.php'),
-    "methods" => include(__DIR__ . '/javascript/methods.php'),
+    "methods" => require(__DIR__ . '/javascript/methods.php'),
     "namespace" => "\Tetraquark\Block\\"
 ];

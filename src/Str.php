@@ -158,7 +158,7 @@ abstract class Str
                 $letterFound = true;
             }
         }
-        
+
         for ($i=$start; $i >= 0; $i--) {
             $letter = $content->getLetter($i);
             if (Validate::isWhitespace($letter) || Validate::isSpecial($letter)) {

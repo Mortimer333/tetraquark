@@ -4,6 +4,64 @@ use \Tetraquark\{Content, Validate, Str, Log};
 use \Tetraquark\Model\CustomMethodEssentialsModel;
 
 return [
+    "objectend" => function (CustomMethodEssentialsModel $essentials): bool
+    {
+        $varend = [
+            "method" => $essentials->getMethods()['varend'],
+            "args" => [false]
+        ];
+        $end = [',' => true, '}' => true];
+        $skip = [
+            "{" => "}",
+            "(" => ")",
+            "[" => "]",
+
+            // we skip does too as they can have let var1, var2, var3;
+            " var "   => $varend,
+            " var\n"  => $varend,
+            "\nvar\n" => $varend,
+            "\nvar "  => $varend,
+
+            " let "   => $varend,
+            " let\n"  => $varend,
+            "\nlet\n" => $varend,
+            "\nlet "  => $varend,
+
+            " const "   => $varend,
+            " const\n"  => $varend,
+            "\nconst\n" => $varend,
+            "\nconst "  => $varend,
+
+            "\/\/" => "\n",
+            "/*" => "*/",
+        ];
+        $data = $essentials->getData();
+        $start = $essentials->getI();
+        $searchables = array_merge(array_keys($skip), array_keys($end));
+        while ($essentials->getI() + 1 < $essentials->getContent()->getLength()) {
+            $essentials->getMethods()['find'](
+                $essentials,
+                $searchables
+            );
+            $key = $essentials->getData()['foundkey'];
+
+            if (is_null($key) || ($end[$key] ?? false)) {
+                break;
+            }
+
+            $search = $skip[$key];
+            if (is_array($search)) {
+                $search["method"]($essentials, ...$search["args"]);
+            } else {
+                $essentials->getMethods()['find']($essentials, $search, $key);
+            }
+            $essentials->i++;
+        }
+
+        // Restore data
+        $essentials->setData($data);
+        return true;
+    },
     "nparenthesis" => function (CustomMethodEssentialsModel $essentials): bool
     {
         list($nextLetter, $nextPos) = Str::getNextLetter($essentials->getI(), $essentials->getContent());
@@ -31,9 +89,9 @@ return [
         }
         return false;
     },
-    "decrease" => function (CustomMethodEssentialsModel $essentials): void
+    "decrease" => function (CustomMethodEssentialsModel $essentials, int $amount = 1): void
     {
-        $essentials->i--;
+        $essentials->i -= $amount;
     },
     "assignment" => function (CustomMethodEssentialsModel $essentials): bool
     {
@@ -157,7 +215,6 @@ return [
         $letter = $essentials->getLetter();
 
         if ($letter === ';' || $letter === ',') {
-            Log::log('Varend: ' . $content->getLetter($i));
             $essentials->setI($i);
             $essentials->appendData($var, "var");
             $essentials->appendData($letter, "stop");
@@ -225,7 +282,7 @@ return [
         if (empty($needle)) {
             throw new Exception("Needle can't be empty", 400);
         }
-
+        // @POTENTIAL_PREFORMANCE_ISSUE
         $tmpNeedle = [];
         foreach ($needle as $value) {
             $heyStarterAr = [];
@@ -271,6 +328,7 @@ return [
                         $straw['skip']--;
                         continue 2;
                     }
+                    $data["foundkey"] = $key;
                     if (!is_null($name)) {
                         $data[$name] = trim($content->iSubStr($index, $i - $straw['len']));
                     }
@@ -287,6 +345,7 @@ return [
         }
 
         if (!$res) {
+            $data["foundkey"] = null;
             if (!is_null($name)) {
                 $data[$name] = trim($content->iSubStr($index, $i - $straw['len'] - 1));
             }

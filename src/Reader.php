@@ -26,7 +26,10 @@ class Reader
         ],
         "instructions" => [],
         "methods" => [],
-        "prepare" => null,
+        "prepare" => [
+            "content" => null,
+            "missed" => null
+        ],
     ];
     protected array $methods = [];
     protected array $script = [];
@@ -182,7 +185,7 @@ class Reader
     {
         $last = $resolver->getParent()->getLastChild();
         $data = $this->getMissedData($resolver, $start, $end);
-        if ($data['missed'] == '' || Validate::isWhitespace($data['missed'])) {
+        if (empty($data['missed'])) {
             return;
         }
         $resolver->setLmStart($start);
@@ -194,8 +197,11 @@ class Reader
 
     public function getMissedData(LandmarkResolverModel $resolver, int $start, int $end): array
     {
-        Log::log('Get missed: ' . $start . ', ' . $end . ' - Start: ' . $resolver->getContent()->getLetter($start) . ' End: ' . $resolver->getContent()->getLetter($end));
         $missed = $resolver->getContent()->iSubStr($start, $end);
+        $prepare = $this->schema['prepare']['missed'] ?? null;
+        if ($prepare && is_callable($prepare)) {
+            $missed = $prepare($missed);
+        }
         return [
             "missed" => $missed
         ];
@@ -220,7 +226,7 @@ class Reader
         // Don't skip string - $resolver->setI(Str::skip($content->getLetter($i), $i, $content));
         $resolver->setI($i);
         $resolver->setLetter($content->getLetter($i));
-        // // Log ::log($i . ' Letter: `' . $resolver->getLetter() . '`, `' . $resolver->getLmStart() . '`, ' . $resolver->getContent()->getLength() . ', possible: ' . implode(', ', array_keys($resolver->getLandmark())));
+        // Log ::log($i . ' Letter: `' . $resolver->getLetter() . '`, `' . $resolver->getLmStart() . '`, ' . $resolver->getContent()->getLength() . ', possible: ' . implode(', ', array_keys($resolver->getLandmark())));
         if (isset($resolver->getLandmark()[$resolver->getLetter()])) {
             $res = $this->resolveStringLandmark($resolver);
             if ($res) {
@@ -259,7 +265,7 @@ class Reader
         $this->debug["path"][] = $resolver->getLetter();
         $possibleLandmark = $resolver->getLandmark()[$resolver->getLetter()];
 
-        // // Log ::log('New string lm, oprions: ' . implode(', ', array_keys($possibleLandmark)));
+        // Log ::log('New string lm, oprions: ' . implode(', ', array_keys($possibleLandmark)));
         if (is_null($resolver->getLmStart())) {
             $resolver->setLmStart($resolver->getI());
         }
@@ -339,7 +345,7 @@ class Reader
                 $resolver->$setter($this->essentials->$getter());
             }
 
-            // // Log ::log('New method `' . $methodName . '` lm, oprions: ' . implode(', ', array_keys($step)));
+            // Log ::log('New method `' . $methodName . '` lm, oprions: ' . implode(', ', array_keys($step)));
 
             if (isset($step['_stop'])) {
                 $resolver->setLandmark($step);
@@ -450,7 +456,7 @@ class Reader
         }
         $this->debug['path'] = $debug;
 
-        // // Log ::log('Save block - ' . json_encode($resolver->getLandmark()['_custom'] ?? []) . ", debug: " . implode(' => ', $this->debug['path']));
+        // Log ::log('Save block - ' . json_encode($resolver->getLandmark()['_custom'] ?? []) . ", debug: " . implode(' => ', $this->debug['path']));
         $item = new BlockModel(
             start: $resolver->getLmStart(),
             end: $resolver->getI(),
@@ -463,7 +469,7 @@ class Reader
         $block = $item->getLandmark()["_block"] ?? false;
 
         if ($block) {
-            $item->setBlockStart($item->getEnd());
+            $item->setBlockStart($item->getEnd() + 1);
             list($i, $blocks) = $this->findBlocksEnd($block, $resolver->getContent(), $item->getEnd() + 1, $item);
             $resolver->setI($i);
             $item->setEnd($i);
@@ -494,18 +500,17 @@ class Reader
 
         // Exception if no child was found
         if ($block && sizeof($item->getChildren()) === 0) {
-            Log::log('Check missed: ' . $item->getBlockStart() . ', ' . $item->getBlockEnd() . ' - Start: ' . $resolver->getContent()->getLetter($item->getBlockStart()) . ' End: ' . $resolver->getContent()->getLetter($item->getBlockEnd()));
-            $start = $item->getBlockStart() + 1;
-            $end = $item->getBlockEnd() - 1;
+            $start = $item->getBlockStart();
+            $end = $item->getBlockEnd();
 
             if ($end < $start) {
                 return;
             }
 
             $inside = $resolver->getContent()->iSubStr($start, $end);
-            if (strlen($inside) != 0 && !Validate::isWhitespace($inside)) {
-                $data = $this->getMissedData($resolver, $start, $end);
+            $data = $this->getMissedData($resolver, $start, $end);
 
+            if (strlen($data["missed"]) != 0) {
                 $child = new BlockModel(
                     start: $start,
                     end: $end,
@@ -549,7 +554,7 @@ class Reader
 
         if ($end >= $start) {
             $data = $this->getMissedData($resolver, $start, $end);
-            if (Validate::isWhitespace($data['missed'])) {
+            if (empty($data["missed"])) {
                 return;
             }
 
@@ -578,12 +583,6 @@ class Reader
 
         // Find the end of block
         list($endBlocks, $i) = $this->objectify($content, $blockSet['map'], $start, $parent);
-        // if (empty($content->getLetter($i))) {
-        //     Log::log($content->subStr($start));
-        //     Log::log($blockSet['map'], replaceNewLine: false);
-        //     Log::log('Endoffile');
-        //     $i--;
-        // }
 
         if (sizeof($endBlocks) > 0) {
             $endBlock = $endBlocks[sizeof($endBlocks) - 1];
@@ -597,10 +596,8 @@ class Reader
             if (!isset($endBlock->getLandmark()['_missed'])) {
                 $data = $endBlock->getData();
             }
-            Log::log('GEt end');
             $end = $endBlock->getEnd();
         } else {
-            Log::log('Set end');
             $end = $i;
             $data = [];
         }
@@ -640,7 +637,7 @@ class Reader
 
     public function customPrepare(Content $content): Content
     {
-        $prepare = $this->schema['prepare'] ?? null;
+        $prepare = $this->schema['prepare']['content'] ?? null;
         if (!isset($prepare) || !is_callable($prepare)) {
             return $content;
         }
