@@ -7,6 +7,13 @@ $objectItemBlock = [
         "include_end" => true,
     ],
 ];
+$importAliasStringItemBlock = [
+    "class" => "ImportAliasBlock",
+    "string" => true,
+];
+$fromItemBlock = [
+    "class" => "FromBlock"
+];
 $arrowMethod = [
     '(/find:")":"(":"condition"\/s|e\=>/s|e\{' => [
         "class" => "ArrowMethodBlock",
@@ -97,7 +104,7 @@ return [
         ]
     ],
     /* VARIABLE */
-    '/s|e\/word:"name"\\' => [
+    '/s|end\/word:"name"\\' => [
         "class" => "VariableInstanceBlock",
         "empty" => true,
         "_extend" => [
@@ -591,4 +598,51 @@ return [
         ],
         "class" => "YieldBlock",
     ],
+    '(' => [
+        "class" => "ScopeBlock",
+        "_block" => [
+            "end" => ")",
+            "nested" => "(",
+        ]
+    ],
+    /* IMPORT */
+    '/s|end\import/s|e\\' => [
+        "_extend" => [
+            '/s|e\(' => [
+                "class" => "CallerBlock",
+                "import" => true,
+                "_block" => [
+                    "end" => ")",
+                    "nested" => "(",
+                ]
+            ],
+            '/s\\' => [
+                "_block" => [
+                    "end" => '/varend:false\\',
+                    "include_end" => true,
+                ],
+                "class" => "ImportBlock",
+            ]
+        ]
+    ],
+    '/s|end\/word:"name"\/s\as/s\/word:"alias"\\' => [
+        "class" => "ImportAliasBlock",
+    ],
+    '\'/strend:`\'`\/s|e\as/s\/word:"alias"\\' => $importAliasStringItemBlock,
+    '`/strend:"`"\/s|e\as/s\/word:"alias"\\' => $importAliasStringItemBlock,
+    '"/strend:`"`\/s|e\as/s\/word:"alias"\\' => $importAliasStringItemBlock,
+    '*/s|e\as/s\/word:"alias"\\' => [
+        "class" => "ImportAllAliasBlock",
+    ],
+    '/s|end\default/s\as/s\/word:"alias"\\' => [
+        "class" => "ImportAliasBlock",
+        "default" => true,
+    ],
+    '/s|end\from/s\\' => [
+        "_extend" => [
+            "'/strend:`'`\\" => $fromItemBlock,
+            '`/strend:"`"\\' => $fromItemBlock,
+            '"/strend:`"`\\' => $fromItemBlock,
+        ]
+    ]
 ];

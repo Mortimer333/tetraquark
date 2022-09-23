@@ -176,9 +176,13 @@ return [
         $essentials->setI($i);
         return true;
     },
-    "strend" => function (CustomMethodEssentialsModel $essentials, string $type): bool
+    "strend" => function (CustomMethodEssentialsModel $essentials, string $type, string $name = 'string'): bool
     {
         $i = Str::skip($type, $essentials->getI(), $essentials->getContent());
+        $essentials->appendData(
+            $essentials->getContent()->iSubStr($essentials->getI(), $i - 2),
+            $name
+        );
         $essentials->setI($i);
         return true;
     },

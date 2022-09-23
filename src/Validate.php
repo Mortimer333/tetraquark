@@ -14,7 +14,7 @@ class Validate
     protected static array $operators = [
         "+" => true, "-" => true, "/" => true, "*" => true, "=" => true, "!" => true, '%' => true, '^' => true,
         ">" => true, "<" => true, '|' => true, '&' => true, '?' => true, "." => true, "(" => true,
-        "{" => true,  "[" => true,
+        "{" => true,  "[" => true, ')' => true, ']' => true, '}' => true, 
     ];
 
     protected static array $notAllowedConsts = [

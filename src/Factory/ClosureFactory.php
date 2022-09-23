@@ -19,4 +19,12 @@ class ClosureFactory extends BaseFactory
             return $res;
         };
     }
+
+    public static function generateEqualClosure(string $letter): \Closure
+    {
+        return function (CustomMethodEssentialsModel $essentials) use ($letter): bool
+        {
+            return $letter == $essentials->getLetter();
+        };
+    }
 }

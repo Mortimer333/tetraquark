@@ -160,6 +160,7 @@ class Reader
                     if ($e->getMessage() !== self::SKIP) {
                         throw $e;
                     }
+                    $this->clearObjectify($resolver);
                 }
             }
         } catch (Exception $e) {
@@ -170,11 +171,16 @@ class Reader
 
 
         if ($resolver->getI() === $resolver->getContent()->getLength() - 1) {
-            $last = $resolver->getParent()->getLastChild();
+            $parent = $resolver->getParent();
+            $last = $parent->getLastChild();
             if (!$last) {
                 $this->addMissedEnd($resolver, 0, $resolver->getContent()->getLength());
             } elseif ($last?->getEnd() + 1 < $resolver->getContent()->getLength()) {
-                $this->addMissedEnd($resolver, $last->getEnd() + 1, $resolver->getContent()->getLength());
+                $start = $last->getEnd() + 1;
+                if ($parent instanceof BlockModelInterface) {
+                    $start += $parent->getBlockStart();
+                }
+                $this->addMissedEnd($resolver, $start, $resolver->getContent()->getLength());
             }
         }
 
@@ -214,12 +220,14 @@ class Reader
         if ($this->iterations > 2000) {
             throw new \Error('Inifinite loop');
         }
+        // Log ::increaseIndent();
 
         $content = $resolver->getContent();
         if (is_null($content->getLetter($i))) {
             /* Don't end file with exception but let it slowly get out of foreach */
             // $resolver->i--;
             // throw new Exception(self::END_OF_FILE);
+            // Log ::decreaseIndent();
             return false;
         }
 
@@ -231,12 +239,14 @@ class Reader
             $res = $this->resolveStringLandmark($resolver);
             if ($res) {
                 $i = $resolver->getI();
+                // Log ::decreaseIndent();
                 return true;
             }
         }
 
         if (isset($resolver->getLandmark()['_m']) && $this->resolveMethodLandmark($resolver)) {
             $i = $resolver->getI();
+            // Log ::decreaseIndent();
             return true;
         }
 
@@ -246,9 +256,10 @@ class Reader
             $i--;
             $resolver->setLetter($content->getLetter($i));
         }
-
+        // Log ::log("Nothign was found!");
         $this->clearObjectify($resolver);
 
+        // Log ::decreaseIndent();
         return false;
     }
 
@@ -289,17 +300,21 @@ class Reader
         $method = $this->methods[$methodName]
             ?? throw new Exception("Method " . htmlentities($methodName) . " not found", 404);
 
+        if (!isset($this->schema['methods'][$method['name']])) {
+            Log::log($method, replaceNewLine: false);
+        }
         $callable = $this->schema['methods'][$method['name']]
-            ?? throw new Exception("Method " . htmlentities($methodName) . " not defined", 400);
+            ?? throw new Exception("Method " . htmlentities($method['name']) . " not defined", 400);
 
         is_callable($callable)
-            or throw new Exception("Method " . htmlentities($methodName) . " is not callable", 400);
+            or throw new Exception("Method " . htmlentities($method['name']) . " is not callable", 400);
 
         return [$method, $callable];
     }
 
     public function resolveMethodLandmark(LandmarkResolverModel $resolver): bool
     {
+        // Log ::log('Method to check: ' . implode(', ', array_keys($resolver->getLandmark()['_m'])));
         foreach ($resolver->getLandmark()['_m'] as $methodName => $step) {
             list($method, $callable) = $this->getMethod($methodName);
             // Set essentials
@@ -825,19 +840,20 @@ class Reader
                         continue;
                     }
                     if (Validate::isStringLandmark($name[0], '')) {
-                        $strLen = \mb_strlen($name);
+                        $nameContent = new Content($name);
+                        $strLen = Str::skip($name[0], 0, $nameContent);
                         if ($strLen !== 3 && $strLen !== 4) {
                             throw new Exception("OR literal method can be only made from 1 letter at time (optionaly with negation `!`)" . $item['name'], 400);
                         }
-                        $name = trim($name, $name[0]);
-                        if ($strLen === 4 && $name[0] === '!') {
-                            if (!isset($item['_skip']) || !$item['_skip']) {
-                                $methods                [$name] = $nextStep;
-                            }
-                            $this->methods          [$name] = $item;
-                            $this->schema['methods'][$name] = ClosureFactory::generateReversalClosure($name[1]);
+                        $methodName = trim($nameContent->subStr(0, $strLen), $name[0]);
+                        if (!isset($item['_skip']) || !$item['_skip']) {
+                            $methods[$name] = $nextStep;
+                        }
+                        $this->methods[$name] = $item;
+                        if ($name[1] === '!') {
+                            $this->schema['methods'][$methodName] = ClosureFactory::generateReversalClosure($name[2]);
                         } else {
-                            $steps[$name] = $nextStep;
+                            $this->schema['methods'][$methodName] = ClosureFactory::generateEqualClosure($name[1]);
                         }
                     } else {
                         if (!isset($item['_skip']) || !$item['_skip']) {

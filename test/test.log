@@ -1,22 +1,932 @@
- variable()\n
-Duration: 0.005s
+ import defaultExport from "module-name";\nimport * as name from "module-name";\nimport { export1 } from "module-name";\nimport { export1 as alias1 } from "module-name";\nimport { default as alias } from "module-name";\nimport { export1, export2 } from "module-name";\nimport { export1, export2 as alias2 } from "module-name";\nimport { "string; name" as alias } from "module-name";\nimport defaultExport, { export1 } from "module-name";\nimport defaultExport, * as name from "module-name";\nimport "module-name";\n\nvar promise = import\n(\n    "test"\n);\n
+Duration: 0.019s
 [
   [
-    blockStart => 10,
-    blockEnd => 9,
+    blockStart => 8,
+    blockEnd => 40,
     start => 0,
-    end => 10,
+    end => 41,
     landmark => {
-        "class": "CallerBlock"
+        "class": "ImportBlock"
     },
     data => {
-        "name": "variable",
-        "_end": []
+        "_end": {
+            "foundkey": ";",
+            "var": "defaultExport from \"module-name\"",
+            "stop": ";"
+        }
     },
     index => 0,
     parent => script
     children => 
       [
+        [
+          blockStart => null,
+          blockEnd => null,
+          start => 8,
+          end => 21,
+          landmark => {
+              "class": "VariableInstanceBlock",
+              "empty": true
+          },
+          data => {
+              "name": "defaultExport"
+          },
+          index => 0,
+          parent => parent[0]
+          children => 
+            [
+            ],
+        ],
+        [
+          blockStart => null,
+          blockEnd => null,
+          start => 22,
+          end => 41,
+          landmark => {
+              "class": "FromBlock"
+          },
+          data => {
+              "string": "module-name"
+          },
+          index => 1,
+          parent => parent[0]
+          children => 
+            [
+            ],
+        ],
+      ],
+  ],
+  [
+    blockStart => 49,
+    blockEnd => 77,
+    start => 41,
+    end => 78,
+    landmark => {
+        "class": "ImportBlock"
+    },
+    data => {
+        "_end": {
+            "foundkey": ";",
+            "var": "* as name from \"module-name\"",
+            "stop": ";"
+        }
+    },
+    index => 1,
+    parent => script
+    children => 
+      [
+        [
+          blockStart => null,
+          blockEnd => null,
+          start => 50,
+          end => 58,
+          landmark => {
+              "class": "ImportAllAliasBlock"
+          },
+          data => {
+              "alias": "name"
+          },
+          index => 0,
+          parent => parent[1]
+          children => 
+            [
+            ],
+        ],
+        [
+          blockStart => null,
+          blockEnd => null,
+          start => 59,
+          end => 78,
+          landmark => {
+              "class": "FromBlock"
+          },
+          data => {
+              "string": "module-name"
+          },
+          index => 1,
+          parent => parent[1]
+          children => 
+            [
+            ],
+        ],
+      ],
+  ],
+  [
+    blockStart => 86,
+    blockEnd => 116,
+    start => 78,
+    end => 117,
+    landmark => {
+        "class": "ImportBlock"
+    },
+    data => {
+        "_end": {
+            "foundkey": ";",
+            "var": "{ export1 } from \"module-name\"",
+            "stop": ";"
+        }
+    },
+    index => 2,
+    parent => script
+    children => 
+      [
+        [
+          blockStart => 88,
+          blockEnd => 96,
+          start => 87,
+          end => 97,
+          landmark => {
+              "class": "ObjectBlock"
+          },
+          data => {
+              "_end": []
+          },
+          index => 0,
+          parent => parent[2]
+          children => 
+            [
+              [
+                blockStart => null,
+                blockEnd => null,
+                start => 88,
+                end => 95,
+                landmark => {
+                    "class": "VariableInstanceBlock",
+                    "empty": true
+                },
+                data => {
+                    "name": "export1"
+                },
+                index => 0,
+                parent => parent[0]
+                children => 
+                  [
+                  ],
+              ],
+            ],
+        ],
+        [
+          blockStart => null,
+          blockEnd => null,
+          start => 98,
+          end => 117,
+          landmark => {
+              "class": "FromBlock"
+          },
+          data => {
+              "string": "module-name"
+          },
+          index => 1,
+          parent => parent[2]
+          children => 
+            [
+            ],
+        ],
+      ],
+  ],
+  [
+    blockStart => 125,
+    blockEnd => 165,
+    start => 117,
+    end => 166,
+    landmark => {
+        "class": "ImportBlock"
+    },
+    data => {
+        "_end": {
+            "foundkey": ";",
+            "var": "{ export1 as alias1 } from \"module-name\"",
+            "stop": ";"
+        }
+    },
+    index => 3,
+    parent => script
+    children => 
+      [
+        [
+          blockStart => 127,
+          blockEnd => 145,
+          start => 126,
+          end => 146,
+          landmark => {
+              "class": "ObjectBlock"
+          },
+          data => {
+              "_end": []
+          },
+          index => 0,
+          parent => parent[3]
+          children => 
+            [
+              [
+                blockStart => null,
+                blockEnd => null,
+                start => 127,
+                end => 144,
+                landmark => {
+                    "class": "ImportAliasBlock"
+                },
+                data => {
+                    "name": "export1",
+                    "alias": "alias1"
+                },
+                index => 0,
+                parent => parent[0]
+                children => 
+                  [
+                  ],
+              ],
+            ],
+        ],
+        [
+          blockStart => null,
+          blockEnd => null,
+          start => 147,
+          end => 166,
+          landmark => {
+              "class": "FromBlock"
+          },
+          data => {
+              "string": "module-name"
+          },
+          index => 1,
+          parent => parent[3]
+          children => 
+            [
+            ],
+        ],
+      ],
+  ],
+  [
+    blockStart => 174,
+    blockEnd => 213,
+    start => 166,
+    end => 214,
+    landmark => {
+        "class": "ImportBlock"
+    },
+    data => {
+        "_end": {
+            "foundkey": ";",
+            "var": "{ default as alias } from \"module-name\"",
+            "stop": ";"
+        }
+    },
+    index => 4,
+    parent => script
+    children => 
+      [
+        [
+          blockStart => 176,
+          blockEnd => 193,
+          start => 175,
+          end => 194,
+          landmark => {
+              "class": "ObjectBlock"
+          },
+          data => {
+              "_end": []
+          },
+          index => 0,
+          parent => parent[4]
+          children => 
+            [
+              [
+                blockStart => null,
+                blockEnd => null,
+                start => 176,
+                end => 192,
+                landmark => {
+                    "class": "ImportAliasBlock",
+                    "default": true
+                },
+                data => {
+                    "alias": "alias"
+                },
+                index => 0,
+                parent => parent[0]
+                children => 
+                  [
+                  ],
+              ],
+            ],
+        ],
+        [
+          blockStart => null,
+          blockEnd => null,
+          start => 195,
+          end => 214,
+          landmark => {
+              "class": "FromBlock"
+          },
+          data => {
+              "string": "module-name"
+          },
+          index => 1,
+          parent => parent[4]
+          children => 
+            [
+            ],
+        ],
+      ],
+  ],
+  [
+    blockStart => 222,
+    blockEnd => 261,
+    start => 214,
+    end => 262,
+    landmark => {
+        "class": "ImportBlock"
+    },
+    data => {
+        "_end": {
+            "foundkey": ";",
+            "var": "{ export1, export2 } from \"module-name\"",
+            "stop": ";"
+        }
+    },
+    index => 5,
+    parent => script
+    children => 
+      [
+        [
+          blockStart => 224,
+          blockEnd => 241,
+          start => 223,
+          end => 242,
+          landmark => {
+              "class": "ObjectBlock"
+          },
+          data => {
+              "_end": []
+          },
+          index => 0,
+          parent => parent[5]
+          children => 
+            [
+              [
+                blockStart => null,
+                blockEnd => null,
+                start => 224,
+                end => 231,
+                landmark => {
+                    "class": "VariableInstanceBlock",
+                    "empty": true
+                },
+                data => {
+                    "name": "export1"
+                },
+                index => 0,
+                parent => parent[0]
+                children => 
+                  [
+                  ],
+              ],
+              [
+                blockStart => null,
+                blockEnd => null,
+                start => 232,
+                end => 232,
+                landmark => {
+                    "class": "CommaBlock"
+                },
+                data => [],
+                index => 1,
+                parent => parent[0]
+                children => 
+                  [
+                  ],
+              ],
+              [
+                blockStart => null,
+                blockEnd => null,
+                start => 233,
+                end => 240,
+                landmark => {
+                    "class": "VariableInstanceBlock",
+                    "empty": true
+                },
+                data => {
+                    "name": "export2"
+                },
+                index => 2,
+                parent => parent[0]
+                children => 
+                  [
+                  ],
+              ],
+            ],
+        ],
+        [
+          blockStart => null,
+          blockEnd => null,
+          start => 243,
+          end => 262,
+          landmark => {
+              "class": "FromBlock"
+          },
+          data => {
+              "string": "module-name"
+          },
+          index => 1,
+          parent => parent[5]
+          children => 
+            [
+            ],
+        ],
+      ],
+  ],
+  [
+    blockStart => 270,
+    blockEnd => 319,
+    start => 262,
+    end => 320,
+    landmark => {
+        "class": "ImportBlock"
+    },
+    data => {
+        "_end": {
+            "foundkey": ";",
+            "var": "{ export1, export2 as alias2 } from \"module-name\"",
+            "stop": ";"
+        }
+    },
+    index => 6,
+    parent => script
+    children => 
+      [
+        [
+          blockStart => 272,
+          blockEnd => 299,
+          start => 271,
+          end => 300,
+          landmark => {
+              "class": "ObjectBlock"
+          },
+          data => {
+              "_end": []
+          },
+          index => 0,
+          parent => parent[6]
+          children => 
+            [
+              [
+                blockStart => null,
+                blockEnd => null,
+                start => 272,
+                end => 279,
+                landmark => {
+                    "class": "VariableInstanceBlock",
+                    "empty": true
+                },
+                data => {
+                    "name": "export1"
+                },
+                index => 0,
+                parent => parent[0]
+                children => 
+                  [
+                  ],
+              ],
+              [
+                blockStart => null,
+                blockEnd => null,
+                start => 280,
+                end => 280,
+                landmark => {
+                    "class": "CommaBlock"
+                },
+                data => [],
+                index => 1,
+                parent => parent[0]
+                children => 
+                  [
+                  ],
+              ],
+              [
+                blockStart => null,
+                blockEnd => null,
+                start => 281,
+                end => 298,
+                landmark => {
+                    "class": "ImportAliasBlock"
+                },
+                data => {
+                    "name": "export2",
+                    "alias": "alias2"
+                },
+                index => 2,
+                parent => parent[0]
+                children => 
+                  [
+                  ],
+              ],
+            ],
+        ],
+        [
+          blockStart => null,
+          blockEnd => null,
+          start => 301,
+          end => 320,
+          landmark => {
+              "class": "FromBlock"
+          },
+          data => {
+              "string": "module-name"
+          },
+          index => 1,
+          parent => parent[6]
+          children => 
+            [
+            ],
+        ],
+      ],
+  ],
+  [
+    blockStart => 328,
+    blockEnd => 374,
+    start => 320,
+    end => 375,
+    landmark => {
+        "class": "ImportBlock"
+    },
+    data => {
+        "_end": {
+            "foundkey": ";",
+            "var": "{ \"string; name\" as alias } from \"module-name\"",
+            "stop": ";"
+        }
+    },
+    index => 7,
+    parent => script
+    children => 
+      [
+        [
+          blockStart => 330,
+          blockEnd => 354,
+          start => 329,
+          end => 355,
+          landmark => {
+              "class": "ObjectBlock"
+          },
+          data => {
+              "_end": []
+          },
+          index => 0,
+          parent => parent[7]
+          children => 
+            [
+              [
+                blockStart => null,
+                blockEnd => null,
+                start => 331,
+                end => 353,
+                landmark => {
+                    "class": "ImportAliasBlock",
+                    "string": true
+                },
+                data => {
+                    "string": "string; name",
+                    "alias": "alias"
+                },
+                index => 0,
+                parent => parent[0]
+                children => 
+                  [
+                  ],
+              ],
+            ],
+        ],
+        [
+          blockStart => null,
+          blockEnd => null,
+          start => 356,
+          end => 375,
+          landmark => {
+              "class": "FromBlock"
+          },
+          data => {
+              "string": "module-name"
+          },
+          index => 1,
+          parent => parent[7]
+          children => 
+            [
+            ],
+        ],
+      ],
+  ],
+  [
+    blockStart => 383,
+    blockEnd => 428,
+    start => 375,
+    end => 429,
+    landmark => {
+        "class": "ImportBlock"
+    },
+    data => {
+        "_end": {
+            "foundkey": ";",
+            "var": "defaultExport, { export1 } from \"module-name\"",
+            "stop": ";"
+        }
+    },
+    index => 8,
+    parent => script
+    children => 
+      [
+        [
+          blockStart => null,
+          blockEnd => null,
+          start => 383,
+          end => 396,
+          landmark => {
+              "class": "VariableInstanceBlock",
+              "empty": true
+          },
+          data => {
+              "name": "defaultExport"
+          },
+          index => 0,
+          parent => parent[8]
+          children => 
+            [
+            ],
+        ],
+        [
+          blockStart => null,
+          blockEnd => null,
+          start => 397,
+          end => 397,
+          landmark => {
+              "class": "CommaBlock"
+          },
+          data => [],
+          index => 1,
+          parent => parent[8]
+          children => 
+            [
+            ],
+        ],
+        [
+          blockStart => 400,
+          blockEnd => 408,
+          start => 399,
+          end => 409,
+          landmark => {
+              "class": "ObjectBlock"
+          },
+          data => {
+              "_end": []
+          },
+          index => 2,
+          parent => parent[8]
+          children => 
+            [
+              [
+                blockStart => null,
+                blockEnd => null,
+                start => 400,
+                end => 407,
+                landmark => {
+                    "class": "VariableInstanceBlock",
+                    "empty": true
+                },
+                data => {
+                    "name": "export1"
+                },
+                index => 0,
+                parent => parent[2]
+                children => 
+                  [
+                  ],
+              ],
+            ],
+        ],
+        [
+          blockStart => null,
+          blockEnd => null,
+          start => 410,
+          end => 429,
+          landmark => {
+              "class": "FromBlock"
+          },
+          data => {
+              "string": "module-name"
+          },
+          index => 3,
+          parent => parent[8]
+          children => 
+            [
+            ],
+        ],
+      ],
+  ],
+  [
+    blockStart => 437,
+    blockEnd => 480,
+    start => 429,
+    end => 481,
+    landmark => {
+        "class": "ImportBlock"
+    },
+    data => {
+        "_end": {
+            "foundkey": ";",
+            "var": "defaultExport, * as name from \"module-name\"",
+            "stop": ";"
+        }
+    },
+    index => 9,
+    parent => script
+    children => 
+      [
+        [
+          blockStart => null,
+          blockEnd => null,
+          start => 437,
+          end => 450,
+          landmark => {
+              "class": "VariableInstanceBlock",
+              "empty": true
+          },
+          data => {
+              "name": "defaultExport"
+          },
+          index => 0,
+          parent => parent[9]
+          children => 
+            [
+            ],
+        ],
+        [
+          blockStart => null,
+          blockEnd => null,
+          start => 451,
+          end => 451,
+          landmark => {
+              "class": "CommaBlock"
+          },
+          data => [],
+          index => 1,
+          parent => parent[9]
+          children => 
+            [
+            ],
+        ],
+        [
+          blockStart => null,
+          blockEnd => null,
+          start => 453,
+          end => 461,
+          landmark => {
+              "class": "ImportAllAliasBlock"
+          },
+          data => {
+              "alias": "name"
+          },
+          index => 2,
+          parent => parent[9]
+          children => 
+            [
+            ],
+        ],
+        [
+          blockStart => null,
+          blockEnd => null,
+          start => 462,
+          end => 481,
+          landmark => {
+              "class": "FromBlock"
+          },
+          data => {
+              "string": "module-name"
+          },
+          index => 3,
+          parent => parent[9]
+          children => 
+            [
+            ],
+        ],
+      ],
+  ],
+  [
+    blockStart => 489,
+    blockEnd => 502,
+    start => 481,
+    end => 503,
+    landmark => {
+        "class": "ImportBlock"
+    },
+    data => {
+        "_end": {
+            "foundkey": ";",
+            "var": "\"module-name\"",
+            "stop": ";"
+        }
+    },
+    index => 10,
+    parent => script
+    children => 
+      [
+        [
+          blockStart => null,
+          blockEnd => null,
+          start => 490,
+          end => 503,
+          landmark => {
+              "class": "StringBlock"
+          },
+          data => {
+              "string": "module-name"
+          },
+          index => 0,
+          parent => parent[10]
+          children => 
+            [
+            ],
+        ],
+      ],
+  ],
+  [
+    blockStart => 509,
+    blockEnd => 540,
+    start => 503,
+    end => 541,
+    landmark => {
+        "class": "VarVariableBlock"
+    },
+    data => {
+        "_end": {
+            "foundkey": ";",
+            "var": "promise = import\n(\n\"test\"\n)",
+            "stop": ";"
+        }
+    },
+    index => 11,
+    parent => script
+    children => 
+      [
+        [
+          blockStart => 520,
+          blockEnd => 542,
+          start => 509,
+          end => 542,
+          landmark => {
+              "class": "VariableInstanceBlock",
+              "replace": true
+          },
+          data => {
+              "name": "promise",
+              "negation": " ",
+              "_end": {
+                  "foundkey": ";",
+                  "var": "import\n(\n\"test\"\n)",
+                  "stop": ";"
+              }
+          },
+          index => 0,
+          parent => parent[11]
+          children => 
+            [
+              [
+                blockStart => 529,
+                blockEnd => 540,
+                start => 520,
+                end => 541,
+                landmark => {
+                    "class": "CallerBlock",
+                    "import": true
+                },
+                data => {
+                    "_end": []
+                },
+                index => 0,
+                parent => parent[0]
+                children => 
+                  [
+                    [
+                      blockStart => null,
+                      blockEnd => null,
+                      start => 534,
+                      end => 540,
+                      landmark => {
+                          "class": "StringBlock"
+                      },
+                      data => {
+                          "string": "test"
+                      },
+                      index => 0,
+                      parent => parent[0]
+                      children => 
+                        [
+                        ],
+                    ],
+                  ],
+              ],
+            ],
+        ],
       ],
   ],
 ],
