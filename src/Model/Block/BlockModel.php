@@ -21,6 +21,7 @@ class BlockModel extends BaseBlockModel
         protected array $data,
         protected int $index,
         protected ?BlockModelInterface $parent = null,
+        protected array $path = [],
         protected array $children = [],
     ) {
     }
@@ -121,6 +122,17 @@ class BlockModel extends BaseBlockModel
     public function setBlockEnd(?int $blockEnd): self
     {
         $this->blockEnd = $blockEnd;
+        return $this;
+    }
+
+    public function getPath(): array
+    {
+        return $this->path;
+    }
+
+    public function setPath(array $path): self
+    {
+        $this->path = $path;
         return $this;
     }
 }

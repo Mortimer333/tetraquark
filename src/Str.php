@@ -229,4 +229,9 @@ abstract class Str
 
         return [$word, $content->getLength()];
     }
+
+    public static function bool(bool $bool): string
+    {
+        return $bool ? 'true' : 'false';
+    }
 }

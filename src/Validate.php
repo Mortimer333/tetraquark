@@ -11,10 +11,9 @@ class Validate
         ';' => true, '.' => true
     ];
 
-    protected static array $operators = [
-        "+" => true, "-" => true, "/" => true, "*" => true, "=" => true, "!" => true, '%' => true, '^' => true,
-        ">" => true, "<" => true, '|' => true, '&' => true, '?' => true, "." => true, "(" => true,
-        "{" => true,  "[" => true, ')' => true, ']' => true, '}' => true, 
+    protected static array $conntectors = [
+        "+" => true, "-" => true, "/" => true, "*" => true, '%' => true, '^' => true, ">" => true,
+        "<" => true, '|' => true, '&' => true, '?' => true, "." => true, "(" => true, ':' => true
     ];
 
     protected static array $notAllowedConsts = [
@@ -111,9 +110,18 @@ class Validate
         return !preg_match('/^[a-zA-Z0-9]*$/', $letter) && !self::isWhitespace($letter);
     }
 
-    public static function isOperator(string $letter): bool
+    public static function isConnector(string $letter): bool
     {
-        return self::$operators[$letter] ?? false;
+        return self::$conntectors[$letter] ?? false;
+    }
+
+    public static function isOperator(string $letter, bool $isNextLine = false): bool
+    {
+        $operators = [...self::$conntectors, "{" => true,  "[" => true, "=" => true, "!" => true, ];
+        if ($isNextLine) {
+            $operators = [...$operators, [ ')' => true, ']' => true, '}' => true, ]];
+        }
+        return $operators[$letter] ?? false;
     }
 
     public static function isComment(int $pos, Content $content): bool

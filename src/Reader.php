@@ -300,9 +300,6 @@ class Reader
         $method = $this->methods[$methodName]
             ?? throw new Exception("Method " . htmlentities($methodName) . " not found", 404);
 
-        if (!isset($this->schema['methods'][$method['name']])) {
-            Log::log($method, replaceNewLine: false);
-        }
         $callable = $this->schema['methods'][$method['name']]
             ?? throw new Exception("Method " . htmlentities($method['name']) . " not defined", 400);
 
@@ -314,6 +311,8 @@ class Reader
 
     public function resolveMethodLandmark(LandmarkResolverModel $resolver): bool
     {
+        $preSave = $this->saveResolver($resolver);
+        $solve = null;
         // Log ::log('Method to check: ' . implode(', ', array_keys($resolver->getLandmark()['_m'])));
         foreach ($resolver->getLandmark()['_m'] as $methodName => $step) {
             list($method, $callable) = $this->getMethod($methodName);
@@ -343,7 +342,7 @@ class Reader
 
             $this->debug["path"][] = $methodName;
 
-            $save = $this->saveResolver($resolver, []);
+            $save = $this->saveResolver($resolver);
             $this->resolveThen($this->essentials, $method);
 
             if (is_null($resolver->getLmStart())) {
@@ -362,19 +361,25 @@ class Reader
 
             // Log ::log('New method `' . $methodName . '` lm, oprions: ' . implode(', ', array_keys($step)));
 
-            if (isset($step['_stop'])) {
-                $resolver->setLandmark($step);
-                $this->resolveSettings($resolver);
-                $this->saveBlock($resolver);
-                $this->clearObjectify($resolver);
-                return true;
-            }
-
             $res = $this->tryToFindNextMatch($resolver, $step);
-            if ($res) {
+            if (!$res && isset($step['_stop'])) {
+                $solve = [
+                    "step" => $step,
+                    "save" => $this->saveResolver($resolver)
+                ];
+            } elseif ($res) {
                 return true;
             }
             $this->restoreResolver($resolver, $save);
+        }
+
+        if ($solve) {
+            $this->restoreResolver($resolver, $solve['save']);
+            $resolver->setLandmark($solve['step']);
+            $this->resolveSettings($resolver);
+            $this->saveBlock($resolver);
+            $this->clearObjectify($resolver);
+            return true;
         }
         return false;
     }
@@ -478,7 +483,8 @@ class Reader
             landmark: $resolver->getLandmark(),
             data: $resolver->getData(),
             index: \sizeof($resolver->getScript()),
-            parent: $resolver->getParent()
+            parent: $resolver->getParent(),
+            path: $debug
         );
 
         $block = $item->getLandmark()["_block"] ?? false;
@@ -750,14 +756,19 @@ class Reader
         for ($i=0; $i < \sizeof($instructions); $i++) {
             $instr = $instrKeys[$i];
             $block = $instructions[$instr];
+
             if ($block['_extend'] ?? false) {
                 foreach ($block['_extend'] as $subInstr => $subBlock) {
                     $instructions[$instr . $subInstr] = $subBlock;
-                    $instrKeys[] = $instr . $subInstr;
+                    array_splice($instrKeys, $i + 1, 0, $instr . $subInstr);
                 }
+
                 unset($instructions[$instr]["_extend"]);
+
                 if (empty($instructions[$instr])) {
                     unset($instructions[$instr]);
+                    array_splice($instrKeys, $i, 1);
+                    $i--;
                 }
             }
         }

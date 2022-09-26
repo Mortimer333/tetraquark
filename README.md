@@ -23,6 +23,10 @@ PHPunit
 php ./vendor/bin/phpunit test
 php test/test.php > test/test.log 2>&1
 
+Test:
+// Check if varend actually properly skips/stops at commas
+word.funcion(a,v,b) = 12 + func(1,23);
+
 List of blocks to implement:
 - Import:
     - ImportPromiseBlock

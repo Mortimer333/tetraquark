@@ -3,6 +3,60 @@
 use \Tetraquark\{Content, Validate, Str, Log};
 use \Tetraquark\Model\CustomMethodEssentialsModel;
 
+class Helpers
+{
+    public static function checkIfValidVarEnd(CustomMethodEssentialsModel $essentials, int $i): bool
+    {
+        $content = $essentials->getContent();
+        list($prevLetter, $prevPos) = Str::getPreviousLetter($i, $essentials->getContent());
+        if (
+            Validate::isOperator($prevLetter)
+            && !Validate::isStringLandmark($prevLetter, '')
+            && !Validate::isComment($prevPos, $content)
+        ) {
+            return false;
+        }
+
+        list($nextLetter, $nextPos) = Str::getNextLetter($i, $content);
+
+        if (strlen($nextLetter) == 0) {
+            // End of file
+            return true;
+        }
+
+        if (
+            Validate::isOperator($nextLetter, true)
+            && !Validate::isStringLandmark($nextLetter, '')
+            && !Validate::isComment($nextPos, $content)
+        ) {
+            return false;
+        }
+
+        list($previousWord) = Str::getPreviousWord($i, $content);
+        if (Validate::isExtendingKeyWord($previousWord)) {
+            return false;
+        }
+
+        list($nextWord) = Str::getNextWord($i, $content);
+        if (Validate::isExtendingKeyWord($nextWord)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public static function finishVarEnd(CustomMethodEssentialsModel $essentials, int $i, ?string $letter): void
+    {
+        $essentials->appendData(
+            $essentials->getContent()->iSubStr($essentials->getI(), $i),
+            "var"
+        );
+        $essentials->setI($i);
+        $essentials->appendData($letter, "stop");
+    }
+}
+
+
 return [
     "objectend" => function (CustomMethodEssentialsModel $essentials): bool
     {
@@ -202,6 +256,7 @@ return [
 
         return $ends[$essentials->getLetter()] ?? false;
     },
+    // @POSSIBLE_PERFORMANCE_ISSUE
     "varend" => function (CustomMethodEssentialsModel $essentials, bool $comma = true)
     {
         $var   = $essentials->getData()['var'] ?? '';
@@ -209,63 +264,62 @@ return [
         if ($comma) {
             $stops[] = ",";
         }
-        $essentials->getMethods()['find']($essentials, $stops, null, 'var');
+        $findNext = [
+            '{' => '}',
+            '[' => ']',
+            '(' => ')',
+        ];
 
-        $newVar  = $essentials->getData()['var'];
-        $var     = $var . $newVar;
-        $i       = $essentials->getI() + 1;
+        // $essentials->getMethods()['find']($essentials, $stops, null, 'var');
         $content = $essentials->getContent();
+        $search = false;
 
-        $letter = $essentials->getLetter();
+        for ($i=$essentials->getI(); $i < $content->getLength(); $i++) {
+            $i = Str::skip($content->getLetter($i), $i, $content);
+            $letter = $content->getLetter($i);
 
-        if ($letter === ';' || $letter === ',') {
-            $essentials->setI($i);
-            $essentials->appendData($var, "var");
-            $essentials->appendData($letter, "stop");
-            return true;
+            if ($search) {
+                if ($search['end'] == $letter) {
+                    if ($search['skip_counter'] > 0) {
+                        $search['skip_counter']--;
+                    }
+                    $search = null;
+                    // If next letter after ), }, ] is not connector (means that there is not operation next)
+                    // finish search for varend
+                    list($nextLetter, $nextPos) = Str::getNextLetter($i + 1, $content);
+
+                    if (!Validate::isOperator($nextLetter)) {
+                        Helpers::finishVarEnd($essentials, $i, $letter);
+                        return true;
+                    }
+                    continue;
+                }
+
+                if ($search['skip'] == $letter) {
+                    $search['skip_counter']++;
+                }
+                continue;
+            }
+
+            if (isset($findNext[$letter])) {
+                $search = [
+                    "end" => $findNext[$letter],
+                    "skip" => $letter,
+                    "skip_counter" => 0
+                ];
+                continue;
+            }
+
+            if (
+                $letter === ';'
+                || ($comma && $letter === ',')
+                || is_null($letter)
+                || ($letter === "\n" && Helpers::checkIfValidVarEnd($essentials, $i))
+            ) {
+                Helpers::finishVarEnd($essentials, $i, $letter);
+                return true;
+            }
         }
-
-        $var .= $letter;
-        $essentials->appendData($var, "var");
-        if (is_null($letter)) {
-            return true;
-        }
-
-        list($prevLetter, $prevPos) = Str::getPreviousLetter($essentials->getI(), $essentials->getContent());
-        if (
-            Validate::isOperator($prevLetter)
-            && !Validate::isStringLandmark($prevLetter, '')
-            && !Validate::isComment($prevPos, $content)
-        ) {
-            return $essentials->getMethods()['varendNext']($essentials);
-        }
-
-        list($nextLetter, $nextPos) = Str::getNextLetter($i, $content);
-
-        if (strlen($nextLetter) == 0) {
-            // End of file
-            return true;
-        }
-
-        if (
-            Validate::isOperator($nextLetter)
-            && !Validate::isStringLandmark($nextLetter, '')
-            && !Validate::isComment($nextPos, $content)
-        ) {
-            return $essentials->getMethods()['varendNext']($essentials);
-        }
-
-        list($previousWord) = Str::getPreviousWord($i, $content);
-        if (Validate::isExtendingKeyWord($previousWord)) {
-            return $essentials->getMethods()['varendNext']($essentials);
-        }
-
-        list($nextWord) = Str::getNextWord($i, $content);
-        if (Validate::isExtendingKeyWord($nextWord)) {
-            return $essentials->getMethods()['varendNext']($essentials);
-        }
-
-        return true;
     },
     "varendNext" => function (CustomMethodEssentialsModel $essentials): bool
     {
@@ -351,9 +405,11 @@ return [
         if (!$res) {
             $data["foundkey"] = null;
             if (!is_null($name)) {
-                $data[$name] = trim($content->iSubStr($index, $i - $straw['len'] - 1));
+                $data[$name] = trim($content->iSubStr($index, $i - 1));
             }
-            $index = $i - 1;
+            Log::log($index);
+            $index = $i;
+            $letter = null;
         }
 
         $essentials->setLetter($letter);

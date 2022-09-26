@@ -1,5 +1,9 @@
 <?php declare(strict_types=1);
 
+$exportAliasStringItemBlock = [
+    "class" => "ExportAliasBlock",
+    "string" => true,
+];
 $objectItemBlock = [
     "class" => "ObjectValueBlock",
     "_block" => [
@@ -110,7 +114,7 @@ return [
         "_extend" => [
             '/s|e\\' => [
                 "_extend" => [
-                    '=/"!="\\' => [
+                    '=/"!=">decrease\\' => [
                         "class" => "VariableInstanceBlock",
                         "replace" => true,
                         "_block" => [
@@ -118,7 +122,7 @@ return [
                             "include_end" => true,
                         ]
                     ],
-                    '/assignment\\=/"!="\\' => [
+                    '/assignment\\=/"!=">decrease\\' => [
                         "class" => "VariableInstanceBlock",
                         "_block" => [
                             "end" => "/varend\\",
@@ -626,7 +630,7 @@ return [
         ]
     ],
     '/s|end\/word:"name"\/s\as/s\/word:"alias"\\' => [
-        "class" => "ImportAliasBlock",
+        "class" => "AliasBlock",
     ],
     '\'/strend:`\'`\/s|e\as/s\/word:"alias"\\' => $importAliasStringItemBlock,
     '`/strend:"`"\/s|e\as/s\/word:"alias"\\' => $importAliasStringItemBlock,
@@ -644,5 +648,76 @@ return [
             '`/strend:"`"\\' => $fromItemBlock,
             '"/strend:`"`\\' => $fromItemBlock,
         ]
-    ]
+    ],
+    /* EXPORT */
+    '/s|end\/word:"name"\/s\as/s|e\\' => [
+        "_extend" => [
+            '`/strend:"`"\\' => $exportAliasStringItemBlock,
+            '\'/strend:`\'`\\' => $exportAliasStringItemBlock,
+            '"/strend:`"`\\' => $exportAliasStringItemBlock,
+        ]
+    ],
+    '/s|end\/word:"alias"\/s\as/s\default' => [
+        "class" => "ExportAliasBlock",
+        "default" => true,
+    ],
+    '/s|end\export' => [
+        "_extend" => [
+            '/s\\' => [
+                "class" => "ExportBlock",
+                "_block" => [
+                    "end" => '/varend:false\\',
+                    "include_end" => true,
+                ],
+                "_extend" => [
+                    'default/s\\' => [
+                        "_block" => [
+                            "end" => '/varend:false\\',
+                            "include_end" => true,
+                        ],
+                        "class" => "ExportBlock",
+                        "default" => true,
+                    ],
+                    '{' => [
+                        "class" => "ExportBlock",
+                        "object" => true,
+                        "_block" => [
+                            "end" => "}",
+                            "nested" => "{",
+                        ]
+                    ],
+                    '*' => [
+                        "_extend" => [
+                            '/s\as/s\/word:"alias"\\' => [
+                                "class" => "ExportBlock",
+                                "all" => true,
+                                "alias" => true
+                            ],
+                        ],
+                        "class" => "ExportBlock",
+                        "all" => true,
+                    ],
+                ]
+            ],
+            '{' => [
+                "class" => "ExportBlock",
+                "object" => true,
+                "_block" => [
+                    "end" => "}",
+                    "nested" => "{",
+                ]
+            ],
+            '*' => [
+                "_extend" => [
+                    '/s\as/s\/word:"alias"\\' => [
+                        "class" => "ExportBlock",
+                        "all" => true,
+                        "alias" => true
+                    ],
+                ],
+                "class" => "ExportBlock",
+                "all" => true,
+            ],
+        ],
+    ],
 ];
