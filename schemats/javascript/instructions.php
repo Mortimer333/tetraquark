@@ -1,5 +1,9 @@
 <?php declare(strict_types=1);
 
+$exportFromBlock = [
+    "class" => "ExportFromBlock",
+    "object" => true,
+];
 $exportAliasStringItemBlock = [
     "class" => "ExportAliasBlock",
     "string" => true,
@@ -507,6 +511,15 @@ return [
                     "nested" => "{"
                 ]
             ],
+            '*/s|e\(/find:")":"(":"arguments"\/s|e\{' => [
+                "class" => "FunctionBlock",
+                "generator" => true,
+                "anonymous" => true,
+                "_block" => [
+                    "end" => "}",
+                    "nested" => "{"
+                ]
+            ],
         ]
     ],
     /* NEW INSTANCE */
@@ -684,6 +697,15 @@ return [
                         "_block" => [
                             "end" => "}",
                             "nested" => "{",
+                        ],
+                        "_extend" => [
+                            '/find:"}":"{":"object"\/s|e\from/s|e\\' => [
+                                "_extend" => [
+                                    '`/strend:"`"\\' => $exportFromBlock,
+                                    '\'/strend:`\'`\\' => $exportFromBlock,
+                                    '"/strend:`"`\\' => $exportFromBlock,
+                                ]
+                            ]
                         ]
                     ],
                     '*' => [
@@ -691,11 +713,19 @@ return [
                             '/s\as/s\/word:"alias"\\' => [
                                 "class" => "ExportBlock",
                                 "all" => true,
-                                "alias" => true
+                                "alias" => true,
+                                "_block" => [
+                                    "end" => '/varend:false\\',
+                                    "include_end" => true,
+                                ],
                             ],
                         ],
                         "class" => "ExportBlock",
                         "all" => true,
+                        "_block" => [
+                            "end" => '/varend:false\\',
+                            "include_end" => true,
+                        ],
                     ],
                 ]
             ],

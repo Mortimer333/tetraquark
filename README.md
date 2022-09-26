@@ -23,9 +23,19 @@ PHPunit
 php ./vendor/bin/phpunit test
 php test/test.php > test/test.log 2>&1
 
-Test:
-// Check if varend actually properly skips/stops at commas
-word.funcion(a,v,b) = 12 + func(1,23);
+TODO:
+1. Some problem with missed in caller block
+word.funcion = 12 + func(1 , 23);
+
+2. Add method which will create children for item (varend>read/objectify)
+3. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator
+4. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
+5. Object with array acces (object['asd'])
+6. yeld* - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/yield*
+7. class - extends
+8. private class attrbitues and method - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields
+9. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+At some point. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols
 
 List of blocks to implement:
 - Import:

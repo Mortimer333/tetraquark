@@ -1,98 +1,126 @@
- name1 as default\n
-  0 Letter: ` `, ``, 18, possible: /, _m, ., [, ', `, ", ,, (, =, !, {, *, e
-  Method to check: s, end, symbol:"first", word:"name", "{", word
-  New method `s` lm, oprions: e, _m, f, i, ", `, ', n, a, s, d, y, c, r, t, w, g, v, l
-    1 Letter: `n`, `0`, 18, possible: e, _m, f, i, ", `, ', n, a, s, d, y, c, r, t, w, g, v, l
-    New string lm, oprions: e
-      2 Letter: `a`, `0`, 18, possible: e
-      Nothign was found!
-    Method to check: word:"name", word:"first", word:"alias", taken
-    New method `word:"name"` lm, oprions: _m, :, (, -, +, =, _custom, _stop
-      6 Letter: ` `, `0`, 18, possible: _m, :, (, -, +, =, _custom, _stop
-      Method to check: s, assignment
-      New method `s` lm, oprions: a, :, (, -, +, _m, =
-        7 Letter: `a`, `0`, 18, possible: a, :, (, -, +, _m, =
-        New string lm, oprions: s
-          8 Letter: `s`, `0`, 18, possible: s
-          New string lm, oprions: ", _m, ', `
-            9 Letter: ` `, `0`, 18, possible: ", _m, ', `
-            Method to check: s
-            New method `s` lm, oprions: ", ', `, _m
-              10 Letter: `d`, `0`, 18, possible: ", ', `, _m
-              Method to check: word:"alias"
-              Nothign was found!
-            Nothign was found!
-          Nothign was found!
-        Method to check: assignment
-        Nothign was found!
-      Nothign was found!
-    New method `word:"first"` lm, oprions: ., (
-      6 Letter: ` `, `0`, 18, possible: ., (
-      Nothign was found!
-    New method `word:"alias"` lm, oprions: _m
-      6 Letter: ` `, `0`, 18, possible: _m
-      Method to check: s
-      New method `s` lm, oprions: a
-        7 Letter: `a`, `0`, 18, possible: a
-        New string lm, oprions: s
-          8 Letter: `s`, `0`, 18, possible: s
-          New string lm, oprions: _m
-            9 Letter: ` `, `0`, 18, possible: _m
-            Method to check: s
-            New method `s` lm, oprions: d
-              10 Letter: `d`, `0`, 18, possible: d
-              New string lm, oprions: e
-                11 Letter: `e`, `0`, 18, possible: e
-                New string lm, oprions: f
-                  12 Letter: `f`, `0`, 18, possible: f
-                  New string lm, oprions: a
-                    13 Letter: `a`, `0`, 18, possible: a
-                    New string lm, oprions: u
-                      14 Letter: `u`, `0`, 18, possible: u
-                      New string lm, oprions: l
-                        15 Letter: `l`, `0`, 18, possible: l
-                        New string lm, oprions: t
-                          16 Letter: `t`, `0`, 18, possible: t
-                          New string lm, oprions: _custom, _stop
-                            17 Letter: `\n`, `0`, 18, possible: _custom, _stop
-                            Nothign was found!
-                          Save block - {"class":"ExportAliasBlock","default":true}, debug: word:"alias" => s => a => s => s => d => e => f => a => u => l => t
-  17 Letter: `\n`, ``, 18, possible: /, _m, ., [, ', `, ", ,, (, =, !, {, *, e
-  Method to check: s, end, symbol:"first", word:"name", "{", word
-  New method `s` lm, oprions: e, _m, f, i, ", `, ', n, a, s, d, y, c, r, t, w, g, v, l
-  Nothign was found!
-Duration: 0.007s
+ word.funcion = 12 + func(1 , 23);\n
+Duration: 0.012s
 [
   [
-    blockStart => null,
-    blockEnd => null,
+    blockStart => 15,
+    blockEnd => 32,
     start => 0,
-    end => 16,
+    end => 32,
     landmark => {
-        "class": "ExportAliasBlock",
-        "default": true
+        "class": "ChainBlock",
+        "first": true,
+        "var": true
     },
     data => {
-        "alias": "name1"
+        "first": "word",
+        "second": "funcion",
+        "_end": {
+            "var": " 12 + func(1 , 23)",
+            "stop": ")"
+        }
     },
     index => 0,
     parent => script
     path => [
-        "word:\"alias\"",
+        "word:\"first\"",
+        ".",
+        "word:\"second\"",
         "s",
-        "a",
-        "s",
-        "s",
-        "d",
-        "e",
-        "f",
-        "a",
-        "u",
-        "l",
-        "t"
+        "="
     ],
     children => 
       [
+        [
+          blockStart => null,
+          blockEnd => null,
+          start => 15,
+          end => 18,
+          landmark => [],
+          data => {
+              "missed": "12"
+          },
+          index => 0,
+          parent => parent[1]
+          path => [],
+          children => 
+            [
+            ],
+        ],
+        [
+          blockStart => null,
+          blockEnd => null,
+          start => 19,
+          end => 19,
+          landmark => {
+              "class": "SymbolBlock",
+              "type": "single"
+          },
+          data => {
+              "first": "+"
+          },
+          index => 1,
+          parent => parent[0]
+          path => [],
+          children => 
+            [
+            ],
+        ],
+        [
+          blockStart => 26,
+          blockEnd => 31,
+          start => 20,
+          end => 32,
+          landmark => {
+              "class": "CallerBlock"
+          },
+          data => {
+              "name": "func",
+              "_end": []
+          },
+          index => 2,
+          parent => parent[0]
+          path => [
+              "word:\"name\"",
+              "("
+          ],
+          children => 
+            [
+              [
+                blockStart => null,
+                blockEnd => null,
+                start => 26,
+                end => 28,
+                landmark => [],
+                data => {
+                    "missed": "1"
+                },
+                index => 0,
+                parent => parent[1]
+                path => [],
+                children => 
+                  [
+                  ],
+              ],
+              [
+                blockStart => null,
+                blockEnd => null,
+                start => 29,
+                end => 29,
+                landmark => {
+                    "class": "CommaBlock"
+                },
+                data => [],
+                index => 1,
+                parent => parent[2]
+                path => [
+                    ","
+                ],
+                children => 
+                  [
+                  ],
+              ],
+            ],
+        ],
       ],
   ],
 ],
