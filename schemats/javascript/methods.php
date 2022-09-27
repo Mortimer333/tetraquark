@@ -58,6 +58,10 @@ class Helpers
 
 
 return [
+    "optionalchain" => function (CustomMethodEssentialsModel $essentials): void
+    {
+        $essentials->appendData(true, 'optional_chain');
+    },
     "read" => function (CustomMethodEssentialsModel $essentials, string $valueName, ?string $name = null): void
     {
         if (is_null($name)) {
@@ -144,7 +148,9 @@ return [
             ")" => true,
             "/" => true,
         ];
-        $res = !isset($skipped[$essentials->getLetter()]) && (preg_match("/[\W]+/", $essentials->getLetter()) === 1) && !Validate::isWhitespace($essentials->getLetter());
+        $res = !isset($skipped[$essentials->getLetter()])
+            && (preg_match("/[\W]+/", $essentials->getLetter()) === 1)
+            && !Validate::isWhitespace($essentials->getLetter());
         if ($res) {
             $essentials->appendData($essentials->getLetter(), $name);
         }

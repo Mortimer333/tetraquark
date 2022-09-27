@@ -326,7 +326,7 @@ return [
     /* FIRST IN CHAIN */
     '/s|end\/word:"first"\\' => [
         "_extend" => [
-            './word:"second"\\' => [
+            '/"?">optionalchain|e\./word:"second"\\' => [
                 "class" => "ChainBlock",
                 "first" => true,
                 "_block" => [
@@ -355,7 +355,7 @@ return [
                     ]
                 ]
             ],
-            '(/find:")":"(":"values"\./word:"second"\\' => [
+            '(/find:")":"(":"values"\/"?">optionalchain|e\./word:"second"\\' => [
                 "class" => "ChainBlock",
                 "first" => true,
                 "first_method" => true,
@@ -389,7 +389,7 @@ return [
         ]
     ],
     /* NEXT IN CHAIN */
-    './word\\' => [
+    '/"?">optionalchain|e\./word\\' => [
         "class" => "SubChainBlock1",
         "_block" => [
             "end" => '/varend\\',

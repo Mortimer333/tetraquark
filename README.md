@@ -24,11 +24,11 @@ php ./vendor/bin/phpunit test
 php test/test.php > test/test.log 2>&1
 
 TODO:
-1. Some problem with missed in caller block
+1. [DONE] Some problem with missed in caller block
 word.funcion = 12 + func(1 , 23);
 
 2. [DONE] Add method which will create children for item (varend>read/objectify)
-3. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator
+3. [DONE] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator - SymbolBlock
 4. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
 5. Object with array acces (object['asd'])
 6. yeld* - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/yield*

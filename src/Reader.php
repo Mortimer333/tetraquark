@@ -202,7 +202,15 @@ class Reader
         try {
             for ($i=$start; $i < $content->getLength(); $i++) {
                 try {
-                    $this->resolve($resolver, $i);
+                    if ($solve = $this->resolve($resolver, $i)) {
+                        $this->restoreResolver($resolver, $solve['save']);
+                        $resolver->setLandmark($solve['step']);
+                        $this->resolveSettings($resolver);
+                        $this->saveBlock($resolver);
+                        $script = $resolver->getScript();
+                        $i = $script[sizeof($script) - 1]->getEnd();
+                        $this->clearObjectify($resolver);
+                    }
                 } catch (Exception $e) {
                     if ($e->getMessage() !== self::SKIP) {
                         throw $e;
@@ -215,7 +223,6 @@ class Reader
                 throw $e;
             }
         }
-
 
         if ($resolver->getI() === $resolver->getContent()->getLength() - 1) {
             $parent = $resolver->getParent();
@@ -262,7 +269,7 @@ class Reader
     {
         // @TODO remove this, and think of better fail save
         $this->iterations++;
-        if ($this->iterations > 2000) {
+        if ($this->iterations > 500) {
             throw new \Error('Inifinite loop');
         }
         // Log ::increaseIndent();
@@ -281,18 +288,18 @@ class Reader
         $resolver->setLetter($content->getLetter($i));
         // Log ::log($i . ' Letter: `' . $resolver->getLetter() . '`, `' . $resolver->getLmStart() . '`, ' . $resolver->getContent()->getLength() . ', possible: ' . implode(', ', array_keys($resolver->getLandmark())));
         if (isset($resolver->getLandmark()[$resolver->getLetter()])) {
-            $res = $this->resolveStringLandmark($resolver);
-            if ($res) {
-                $i = $resolver->getI();
+            $solve = $this->resolveStringLandmark($resolver);
+            if ($solve) {
+                $i = $solve['save']['i'];
                 // Log ::decreaseIndent();
-                return true;
+                return $solve;
             }
         }
 
-        if (isset($resolver->getLandmark()['_m']) && $this->resolveMethodLandmark($resolver)) {
-            $i = $resolver->getI();
+        if (isset($resolver->getLandmark()['_m']) && ($solve = $this->resolveMethodLandmark($resolver))) {
+            $i = $solve['save']['i'];
             // Log ::decreaseIndent();
-            return true;
+            return $solve;
         }
 
         /* @DOUBLE_CHECK this operation might be unnecessary, currently I can't think of example where this helps but it is quite late at night */
@@ -316,7 +323,7 @@ class Reader
         $this->debug["path"] = [];
     }
 
-    public function resolveStringLandmark(LandmarkResolverModel $resolver): bool
+    public function resolveStringLandmark(LandmarkResolverModel $resolver): bool | array
     {
         $this->debug["path"][] = $resolver->getLetter();
         $possibleLandmark = $resolver->getLandmark()[$resolver->getLetter()];
@@ -326,18 +333,21 @@ class Reader
             $resolver->setLmStart($resolver->getI());
         }
 
+        $solve = false;
         if (isset($possibleLandmark['_stop'])) {
-            $resolver->setLandmark($possibleLandmark);
-            $this->resolveSettings($resolver);
-            $this->saveBlock($resolver);
-            return true;
-        }
-        $res = $this->tryToFindNextMatch($resolver, $possibleLandmark);
-        if ($res) {
-            return true;
+            $solve = [
+                "step" => $possibleLandmark,
+                "save" => $this->saveResolver($resolver),
+                "path" => $this->debug["path"]
+            ];
         }
 
-        return false;
+        $res = $this->tryToFindNextMatch($resolver, $possibleLandmark);
+        if ($res) {
+            return $res;
+        }
+
+        return $solve;
     }
 
     public function getMethod(string $methodName): array
@@ -354,7 +364,7 @@ class Reader
         return [$method, $callable];
     }
 
-    public function resolveMethodLandmark(LandmarkResolverModel $resolver): bool
+    public function resolveMethodLandmark(LandmarkResolverModel $resolver): bool | array
     {
         $preSave = $this->saveResolver($resolver);
         $solve = null;
@@ -383,6 +393,7 @@ class Reader
             }
 
             $this->debug["path"][] = $methodName;
+            $debug = $this->debug["path"];
 
             $save = $this->saveResolver($resolver);
             $this->resolveThen($resolver, $essentials, $method);
@@ -400,23 +411,17 @@ class Reader
             if (!$res && isset($step['_stop'])) {
                 $solve = [
                     "step" => $step,
-                    "save" => $this->saveResolver($resolver)
+                    "save" => $this->saveResolver($resolver),
+                    "path" => $debug
                 ];
-            } elseif ($res) {
-                return true;
+            } elseif ($res && sizeof($res['path']) > sizeof($solve['path'] ?? [])) {
+                $solve = $res;
+                // return $res;
             }
             $this->restoreResolver($resolver, $save);
         }
 
-        if ($solve) {
-            $this->restoreResolver($resolver, $solve['save']);
-            $resolver->setLandmark($solve['step']);
-            $this->resolveSettings($resolver);
-            $this->saveBlock($resolver);
-            $this->clearObjectify($resolver);
-            return true;
-        }
-        return false;
+        return $solve ?? false;
     }
 
     public function updateFromEssentials(LandmarkResolverModel $resolver, CustomMethodEssentialsModel $essentials): void
@@ -451,14 +456,14 @@ class Reader
         $this->resolveThen($resolver, $essentials, $method);
     }
 
-    public function tryToFindNextMatch(LandmarkResolverModel $resolver, array $posLandmark): bool
+    public function tryToFindNextMatch(LandmarkResolverModel $resolver, array $posLandmark): bool | array
     {
         $save = $this->saveResolver($resolver, []);
         $resolver->setLandmark($posLandmark);
         $resolver->i++;
         $res = $this->resolve($resolver, $resolver->i);
         if ($res) {
-            return true;
+            return $res;
         }
         $this->restoreResolver($resolver, $save);
         return false;
@@ -515,23 +520,23 @@ class Reader
         $debug = $this->debug['path'];
         // Check next letters if we don't have more specified block which matches syntax.
         // More specified in a way that his definition is longer/more detailed
-        try {
-            $i = $resolver->getI() + 1;
-            // @POSSIBLE_PERFORMANCE_ISSUE
-            $save = $this->saveResolver($resolver);
-            $res = $this->resolve($resolver, $i);
-            if ($res) {
-                return;
-            }
-            $this->restoreResolver($resolver, $save);
-        } catch (\Exception $e) {
-            if ($e->getMessage() !== self::FINISH && $e->getMessage() !== self::END_OF_FILE) {
-                throw $e;
-            }
-        }
-        $this->debug['path'] = $debug;
+        // try {
+        //     $i = $resolver->getI() + 1;
+        //     // @POSSIBLE_PERFORMANCE_ISSUE
+        //     $save = $this->saveResolver($resolver);
+        //     $res = $this->resolve($resolver, $i);
+        //     if ($res) {
+        //         return;
+        //     }
+        //     $this->restoreResolver($resolver, $save);
+        // } catch (\Exception $e) {
+        //     if ($e->getMessage() !== self::FINISH && $e->getMessage() !== self::END_OF_FILE) {
+        //         throw $e;
+        //     }
+        // }
+        // $this->debug['path'] = $debug;
 
-        // Log ::log('Save block - ' . json_encode($resolver->getLandmark()['_custom'] ?? []) . ", debug: " . implode(' => ', $this->debug['path']));
+        Log ::log('Save block - ' . json_encode($resolver->getLandmark()['_custom'] ?? []) . ", debug: " . implode(' => ', $this->debug['path']));
         $item = new BlockModel(
             start: $resolver->getLmStart(),
             end: $resolver->getI(),
@@ -690,7 +695,6 @@ class Reader
         $caretIncr  = $this->current['caret'];
         $newContent = $content->iCutToContent($start, $i);
         $blocks     = [];
-        Log::log('new: '. $newContent);
 
         if ($newContent->getLength() !== 0) {
             if (!Validate::isWhitespace($newContent->getLetter(0))) {

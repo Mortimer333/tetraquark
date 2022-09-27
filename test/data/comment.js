@@ -1,1 +1,1 @@
-word.funcion = 12 + func(1 , 23);
+const dogName = adventurer.dog?.name;
