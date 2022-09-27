@@ -1,126 +1,158 @@
- word.funcion = 12 + func(1 , 23);\n
-Duration: 0.012s
+ if (as + 2 < 4) {\n\n}\n
+ as + 2 < 4
+Duration: 0.003s
 [
   [
-    blockStart => 15,
-    blockEnd => 32,
+    blockStart => 18,
+    blockEnd => 19,
     start => 0,
-    end => 32,
+    end => 20,
     landmark => {
-        "class": "ChainBlock",
-        "first": true,
-        "var": true
+        "class": "IfBlock"
     },
-    data => {
-        "first": "word",
-        "second": "funcion",
-        "_end": {
-            "var": " 12 + func(1 , 23)",
-            "stop": ")"
-        }
-    },
-    index => 0,
-    parent => script
-    path => [
-        "word:\"first\"",
-        ".",
-        "word:\"second\"",
-        "s",
-        "="
-    ],
-    children => 
+      data => 
       [
         [
-          blockStart => null,
-          blockEnd => null,
-          start => 15,
-          end => 18,
-          landmark => [],
-          data => {
-              "missed": "12"
-          },
-          index => 0,
-          parent => parent[1]
-          path => [],
-          children => 
-            [
-            ],
+          foundkey => ")",
         ],
         [
-          blockStart => null,
-          blockEnd => null,
-          start => 19,
-          end => 19,
-          landmark => {
-              "class": "SymbolBlock",
-              "type": "single"
-          },
-          data => {
-              "first": "+"
-          },
-          index => 1,
-          parent => parent[0]
-          path => [],
-          children => 
+          condition => 
+          [
             [
-            ],
-        ],
-        [
-          blockStart => 26,
-          blockEnd => 31,
-          start => 20,
-          end => 32,
-          landmark => {
-              "class": "CallerBlock"
-          },
-          data => {
-              "name": "func",
-              "_end": []
-          },
-          index => 2,
-          parent => parent[0]
-          path => [
-              "word:\"name\"",
-              "("
-          ],
-          children => 
-            [
-              [
-                blockStart => null,
-                blockEnd => null,
-                start => 26,
-                end => 28,
-                landmark => [],
-                data => {
-                    "missed": "1"
-                },
-                index => 0,
-                parent => parent[1]
-                path => [],
-                children => 
+              blockStart => null,
+              blockEnd => null,
+              start => 0,
+              end => 2,
+              landmark => {
+                  "class": "VariableInstanceBlock",
+                  "empty": true
+              },
+                data => 
+                [
                   [
+                    name => "as",
                   ],
-              ],
-              [
-                blockStart => null,
-                blockEnd => null,
-                start => 29,
-                end => 29,
-                landmark => {
-                    "class": "CommaBlock"
-                },
-                data => [],
-                index => 1,
-                parent => parent[2]
-                path => [
-                    ","
                 ],
-                children => 
-                  [
-                  ],
-              ],
+              index => 0,
+              parent => script
+                path => 
+                [
+                ],
+              children => 
+                [
+                ],
             ],
+            [
+              blockStart => null,
+              blockEnd => null,
+              start => 4,
+              end => 4,
+              landmark => {
+                  "class": "SymbolBlock",
+                  "type": "single"
+              },
+                data => 
+                [
+                  [
+                    first => "+",
+                  ],
+                ],
+              index => 1,
+              parent => script
+                path => 
+                [
+                ],
+              children => 
+                [
+                ],
+            ],
+            [
+              blockStart => null,
+              blockEnd => null,
+              start => 5,
+              end => 7,
+              landmark => [],
+                data => 
+                [
+                  [
+                    missed => "2",
+                  ],
+                ],
+              index => 2,
+              parent => parent[3]
+                path => 
+                [
+                ],
+              children => 
+                [
+                ],
+            ],
+            [
+              blockStart => null,
+              blockEnd => null,
+              start => 8,
+              end => 8,
+              landmark => {
+                  "class": "SymbolBlock",
+                  "type": "single"
+              },
+                data => 
+                [
+                  [
+                    first => "<",
+                  ],
+                ],
+              index => 3,
+              parent => script
+                path => 
+                [
+                ],
+              children => 
+                [
+                ],
+            ],
+            [
+              blockStart => null,
+              blockEnd => null,
+              start => 9,
+              end => 11,
+              landmark => [],
+                data => 
+                [
+                  [
+                    missed => "4",
+                  ],
+                ],
+              index => 4,
+              parent => script
+                path => 
+                [
+                ],
+              children => 
+                [
+                ],
+            ],
+          ],
         ],
+        [
+          _end => 
+          [
+          ],
+        ],
+      ],
+    index => 0,
+    parent => script
+      path => 
+      [
+        [
+          0 => "s",
+        ],
+        [
+          1 => "{",
+        ],
+      ],
+    children => 
+      [
       ],
   ],
 ],

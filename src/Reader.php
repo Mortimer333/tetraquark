@@ -31,6 +31,7 @@ class Reader
             "missed" => null
         ],
     ];
+    protected static array $compiled = [];
     protected array $methods = [];
     protected array $script = [];
     protected array $map;
@@ -51,10 +52,28 @@ class Reader
     public const END_OF_FILE = 'end of file';
     public const EMPTY_METHOD = 'e';
 
-    public function __construct(protected array $schema)
-    {
-        $this->essentials = new CustomMethodEssentialsModel();
+    public function __construct(
+        protected string $path,
+        protected bool $cache = true,
+    ) {
+        if (!is_file($path)) {
+            throw new Exception("Given schema doesn't exist", 400);
+        }
+
+        $this->schema = require $path;
         $this->schema = $this->schemaSetDefaults($this->schema, $this->schemaDefaults);
+
+        if ($this->cache && isset(self::$compiled[$this->path])) {
+            $this->map = self::$compiled[$this->path]['map'];
+            $this->methods = self::$compiled[$this->path]['methods'];
+        } else {
+            $this->map = $this->generateBlocksMap();
+            self::$compiled[$this->path]['map'] = $this->map;
+            self::$compiled[$this->path]['methods'] = $this->methods;
+        }
+
+        // die(json_encode($this->methods, JSON_PRETTY_PRINT));
+        // die(json_encode($this->map, JSON_PRETTY_PRINT));
     }
 
     public function schemaSetDefaults(array $schema, array $defaults): array
@@ -72,7 +91,7 @@ class Reader
         return $schema;
     }
 
-    public function read(string $script, bool $isPath = false)
+    public function read(string $script, bool $isPath = false, bool $displayBlocks = false)
     {
         if ($isPath) {
             if (!is_file($script)) {
@@ -83,55 +102,76 @@ class Reader
         }
         // @TODO think this one through
         // $script = str_replace("\r\n", "\n", $script);
+        if ($displayBlocks) {
+            Log  ::timerStart();
+        }
 
         $content = $this->removeCommentsAndAdditional(new Content($script));
         $content = $this->customPrepare($content);
 
         // echo $content . PHP_EOL;
         Log  ::log($content . '');
-        Log  ::timerStart();
-        $this->map = $this->generateBlocksMap();
-        // die(json_encode($this->methods, JSON_PRETTY_PRINT));
-        // die(json_encode($this->map, JSON_PRETTY_PRINT));
         $script = new ScriptBlockModel();
-        list($this->script, $end) = $this->objectify($content, $this->map, parent: $script);
-        Log  ::timerEnd();
-        // echo json_encode($this->script, JSON_PRETTY_PRINT);
-        $this->displayScriptBlocks($this->script);
+        list($script, $end) = $this->objectify($content, $this->map, parent: $script);
+        // echo json_encode($script, JSON_PRETTY_PRINT);
+        if ($displayBlocks) {
+            Log  ::timerEnd();
+            $this->displayScriptBlocks($script);
+        }
+        return $script;
     }
 
     public function displayScriptBlocks(array $script): void
     {
         Log  ::log('[');
         Log  ::increaseIndent();
-        foreach ($script as $block) {
+        foreach ($script as $key => $block) {
             Log  ::log('[');
             Log  ::increaseIndent();
-            foreach ($block->toArray() as $key => $value) {
-                if ($key === 'children') {
-                    Log  ::log($key . ' => ');
-                    Log  ::increaseIndent();
-                    $this->displayScriptBlocks($value);
-                    Log  ::decreaseIndent();
-                } elseif ($key === 'parent' && !is_null($value)) {
-                    if ($value instanceof ScriptBlockModel) {
-                        Log  ::log($key . ' => script');
-                    } else {
-                        Log  ::log($key . ' => parent[' . $value?->getIndex() . ']');
-                    }
-                } else {
-                    if ($key == 'landmark') {
-                        Log  ::log($key . ' => ' . json_encode($value['_custom'] ?? [], JSON_PRETTY_PRINT) . ',', replaceNewLine: false);
-                    } else {
-                        Log  ::log($key . ' => ' . json_encode($value, JSON_PRETTY_PRINT) . ',', replaceNewLine: false);
-                    }
-                }
+
+            if ($block instanceof BlockModel) {
+                $this->displayBlock($block);
+            } else if (is_array($block)) {
+                Log  ::log($key . ' => ');
+                $this->displayScriptBlocks($block);
+            } else {
+                Log  ::log($key . ' => ' . json_encode($block, JSON_PRETTY_PRINT) . ',', replaceNewLine: false);
             }
+
             Log  ::decreaseIndent();
             Log  ::log('],');
         }
         Log  ::decreaseIndent();
         Log  ::log('],');
+    }
+
+    public function displayBlock(BlockModel $block): void
+    {
+        foreach ($block->toArray() as $key => $value) {
+            if ($key === 'children') {
+                Log  ::log($key . ' => ');
+                Log  ::increaseIndent();
+                $this->displayScriptBlocks($value);
+                Log  ::decreaseIndent();
+            } elseif ($key === 'parent' && !is_null($value)) {
+                if ($value instanceof ScriptBlockModel) {
+                    Log  ::log($key . ' => script');
+                } else {
+                    Log  ::log($key . ' => parent[' . $value?->getIndex() . ']');
+                }
+            } else {
+                if ($key == 'landmark') {
+                    Log  ::log($key . ' => ' . json_encode($value['_custom'] ?? [], JSON_PRETTY_PRINT) . ',', replaceNewLine: false);
+                } elseif (is_array($value)) {
+                    Log  ::increaseIndent();
+                    Log  ::log($key . ' => ');
+                    $this->displayScriptBlocks($value);
+                    Log  ::decreaseIndent();
+                } else {
+                    Log  ::log($key . ' => ' . json_encode($value, JSON_PRETTY_PRINT) . ',', replaceNewLine: false);
+                }
+            }
+        }
     }
 
     public function objectify(Content $content, array $map, int $start = 0, ?BlockModelInterface $parent = null): array
@@ -317,7 +357,7 @@ class Reader
         foreach ($resolver->getLandmark()['_m'] as $methodName => $step) {
             list($method, $callable) = $this->getMethod($methodName);
             // Set essentials
-            $essentials = [
+            $essentialsValues = [
                 "content"  => $resolver->getContent(),
                 "lmStart"  => $resolver->getLmStart(),
                 "letter"   => $resolver->getLetter(),
@@ -325,16 +365,13 @@ class Reader
                 "data"     => $resolver->getData(),
                 "previous" => $resolver->getParent()?->getLastChild(),
                 "methods"  => $this->schema['methods'],
+                "reader"   => $this,
             ];
-            $skipReplace = [
-                "methods" => true,
-                "previous" => true,
-                "lmStart" => true,
-            ];
-            $this->essentials->set($essentials);
+            $essentials = new CustomMethodEssentialsModel();
+            $essentials->set($essentialsValues);
 
             // Call method
-            $res = $callable($this->essentials, ...$method['params']);
+            $res = $callable($essentials, ...$method['params']);
 
             if (!$res) {
                 continue;
@@ -343,21 +380,14 @@ class Reader
             $this->debug["path"][] = $methodName;
 
             $save = $this->saveResolver($resolver);
-            $this->resolveThen($this->essentials, $method);
+            $this->resolveThen($resolver, $essentials, $method);
 
             if (is_null($resolver->getLmStart())) {
                 $resolver->setLmStart($resolver->getI());
             }
 
             // Update changed essentials
-            foreach ($this->essentials as $key => $value) {
-                if ($skipReplace[$key] ?? false) {
-                    continue;
-                }
-                $getter = 'get' . Str::pascalize($key);
-                $setter = 'set' . Str::pascalize($key);
-                $resolver->$setter($this->essentials->$getter());
-            }
+            $this->updateFromEssentials($resolver, $essentials);
 
             // Log ::log('New method `' . $methodName . '` lm, oprions: ' . implode(', ', array_keys($step)));
 
@@ -384,16 +414,36 @@ class Reader
         return false;
     }
 
-    public function resolveThen(CustomMethodEssentialsModel $essentials, array $method): void
+    public function updateFromEssentials(LandmarkResolverModel $resolver, CustomMethodEssentialsModel $essentials): void
+    {
+        $skipReplace = [
+            "methods"  => true,
+            "previous" => true,
+            "lmStart"  => true,
+            "reader"   => true,
+        ];
+
+        foreach ($essentials as $key => $value) {
+            if ($skipReplace[$key] ?? false) {
+                continue;
+            }
+            $getter = 'get' . Str::pascalize($key);
+            $setter = 'set' . Str::pascalize($key);
+            $resolver->$setter($essentials->$getter());
+        }
+    }
+
+    public function resolveThen(LandmarkResolverModel $resolver, CustomMethodEssentialsModel $essentials, array $method): void
     {
         if (!isset($method["then"])) {
             return;
         }
 
         list($method, $callable) = $this->getMethod($method['then']);
-        $callable($this->essentials, ...$method['params']);
+        $callable($essentials, ...$method['params']);
+        $this->updateFromEssentials($resolver, $essentials);
 
-        $this->resolveThen($essentials, $method);
+        $this->resolveThen($resolver, $essentials, $method);
     }
 
     public function tryToFindNextMatch(LandmarkResolverModel $resolver, array $posLandmark): bool

@@ -68,16 +68,20 @@ return [
         "class" => "MultiCommentBlock"
     ],
     /* IF */
-    "/s|end\if/s|e\(/find:')':'(':'condition'\/s|e\{" => [
-        "class" => "IfBlock",
-        "_block" => [
-            "end" => "}",
-            "nested" => "{"
+    '/s|end\if/s|e\(/find:")":"(":"condition">read:"condition"\\' => [
+        "_extend" => [
+            '/s|e\{' => [
+                "class" => "IfBlock",
+                "_block" => [
+                    "end" => "}",
+                    "nested" => "{"
+                ]
+            ],
+            /* SHORT IF */
+            '/nparenthesis>decrease\/varend\\' => [
+                "class" => "ShortIfBlock"
+            ],
         ]
-    ],
-    /* SHORT IF */
-    "/s|end\if/s|e\(/find:')':'(':'condition'\/nparenthesis>decrease\/varend\\" => [
-        "class" => "ShortIfBlock"
     ],
     /* CLASS DEFINITION */
     "/s|end\class/s|e\/find:'{'::'class_name'\\" => [

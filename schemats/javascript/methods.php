@@ -58,6 +58,21 @@ class Helpers
 
 
 return [
+    "read" => function (CustomMethodEssentialsModel $essentials, string $valueName, ?string $name = null): void
+    {
+        if (is_null($name)) {
+            $name = $valueName;
+        }
+
+        $data = $essentials->getData();
+        if (!isset($data[$valueName])) {
+            return;
+        }
+
+        $content = $data[$valueName];
+        $blocks = $essentials->reader->read($content);
+        $essentials->appendData($blocks, $name);
+    },
     "objectend" => function (CustomMethodEssentialsModel $essentials): bool
     {
         $varend = [
