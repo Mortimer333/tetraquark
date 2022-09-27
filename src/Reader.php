@@ -123,22 +123,30 @@ class Reader
         return $script;
     }
 
-    public function displayScriptBlocks(array $script): void
+    public function displayScriptBlocks(array $script, bool $item = true): void
     {
         Log  ::increaseIndent();
         foreach ($script as $key => $block) {
+            if (is_array($block) || $block instanceof BlockModel) {
+                Log  ::log('[');
+                Log  ::increaseIndent();
+            }
             if ($block instanceof BlockModel) {
                 $this->displayBlock($block);
             } else if (is_array($block)) {
-                Log  ::log($key . ' => [');
-                $this->displayScriptBlocks($block);
+                Log  ::log('"' . $key . '" => [');
+                $this->displayScriptBlocks($block, true);
                 Log  ::log('],');
             } else {
                 if (is_numeric($key)) {
                     Log  ::log(json_encode($block, JSON_PRETTY_PRINT) . ',', replaceNewLine: false);
                 } else {
-                    Log  ::log($key . ' => ' . json_encode($block, JSON_PRETTY_PRINT) . ',', replaceNewLine: false);
+                    Log  ::log('"' . $key . '" => ' . json_encode($block, JSON_PRETTY_PRINT) . ',', replaceNewLine: false);
                 }
+            }
+            if (is_array($block) || $block instanceof BlockModel) {
+                Log  ::decreaseIndent();
+                Log  ::log('],');
             }
         }
         Log  ::decreaseIndent();
@@ -148,26 +156,26 @@ class Reader
     {
         foreach ($block->toArray() as $key => $value) {
             if ($key === 'children') {
-                Log  ::log($key . ' => [');
+                Log  ::log('"' . $key . '" => [');
                 $this->displayScriptBlocks($value);
                 Log  ::log('],');
             } elseif ($key === 'parent' && !is_null($value)) {
                 if ($value instanceof ScriptBlockModel) {
-                    Log  ::log($key . ' => script');
+                    Log  ::log('"' . $key . '" => script');
                 } else {
-                    Log  ::log($key . ' => parent[' . $value?->getIndex() . ']');
+                    Log  ::log('"' . $key . '" => parent[' . $value?->getIndex() . ']');
                 }
             } else {
                 if ($key == 'landmark') {
-                    Log  ::log($key . ' => [');
+                    Log  ::log('"' . $key . '" => [');
                     $this->displayScriptBlocks($value['_custom'] ?? []);
                     Log  ::log('],');
                 } elseif (is_array($value)) {
-                    Log  ::log($key . ' => [');
+                    Log  ::log('"' . $key . '" => [');
                     $this->displayScriptBlocks($value);
                     Log  ::log('],');
                 } else {
-                    Log  ::log($key . ' => ' . json_encode($value, JSON_PRETTY_PRINT) . ',', replaceNewLine: false);
+                    Log  ::log('"' . $key . '" => ' . json_encode($value, JSON_PRETTY_PRINT) . ',', replaceNewLine: false);
                 }
             }
         }
@@ -216,9 +224,6 @@ class Reader
                 $this->addMissedEnd($resolver, 0, $resolver->getContent()->getLength());
             } elseif ($last?->getEnd() + 1 < $resolver->getContent()->getLength()) {
                 $start = $last->getEnd() + 1;
-                if ($parent instanceof BlockModelInterface) {
-                    $start += $parent->getBlockStart();
-                }
                 $this->addMissedEnd($resolver, $start, $resolver->getContent()->getLength());
             }
         }
@@ -247,6 +252,7 @@ class Reader
         if ($prepare && is_callable($prepare)) {
             $missed = $prepare($missed);
         }
+
         return [
             "missed" => $missed
         ];
@@ -544,6 +550,7 @@ class Reader
             $resolver->setI($i);
             $item->setEnd($i);
             $item->setChildren($blocks);
+
         }
 
         // Some variable normally share their end/start:
@@ -566,7 +573,7 @@ class Reader
         // @POSSIBLE_PERFORMANCE_ISSUE
         $resolver->setScript([...$resolver->getScript(), $item]);
 
-        $this->addMissed($resolver, $item);
+        $this->addMissed($resolver, $resolver->getParent());
 
         // Exception if no child was found
         if ($block && sizeof($item->getChildren()) === 0) {
@@ -683,6 +690,7 @@ class Reader
         $caretIncr  = $this->current['caret'];
         $newContent = $content->iCutToContent($start, $i);
         $blocks     = [];
+        Log::log('new: '. $newContent);
 
         if ($newContent->getLength() !== 0) {
             if (!Validate::isWhitespace($newContent->getLetter(0))) {

@@ -1,114 +1,149 @@
  word.funcion = 12 + func(1 , 23);\n
+new:  12 + func(1 , 23)
+new: 1 , 23
 Duration: 0.003s
 [
-  blockStart => 15,
-  blockEnd => 32,
-  start => 0,
-  end => 32,
-  landmark => [
-    class => "ChainBlock",
-    first => true,
-    var => true,
-  ],
-  data => [
-    first => "word",
-    second => "funcion",
-    _end => [
-      var => " 12 + func(1 , 23)",
-      stop => ")",
+  [
+    "blockStart" => 15,
+    "blockEnd" => 32,
+    "start" => 0,
+    "end" => 32,
+    "landmark" => [
+      "class" => "ChainBlock",
+      "first" => true,
+      "var" => true,
     ],
-  ],
-  index => 0,
-  parent => script
-  path => [
-    "word:\"first\"",
-    ".",
-    "word:\"second\"",
-    "s",
-    "=",
-  ],
-  children => [
-    blockStart => null,
-    blockEnd => null,
-    start => 15,
-    end => 18,
-    landmark => [
-    ],
-    data => [
-      missed => "12",
-    ],
-    index => 0,
-    parent => parent[1]
-    path => [
-    ],
-    children => [
-    ],
-    blockStart => null,
-    blockEnd => null,
-    start => 19,
-    end => 19,
-    landmark => [
-      class => "SymbolBlock",
-      type => "single",
-    ],
-    data => [
-      first => "+",
-    ],
-    index => 1,
-    parent => parent[0]
-    path => [
-    ],
-    children => [
-    ],
-    blockStart => 26,
-    blockEnd => 31,
-    start => 20,
-    end => 32,
-    landmark => [
-      class => "CallerBlock",
-    ],
-    data => [
-      name => "func",
-      _end => [
+    "data" => [
+      "first" => "word",
+      "second" => "funcion",
+      [
+        "_end" => [
+          "var" => " 12 + func(1 , 23)",
+          "stop" => ")",
+        ],
       ],
     ],
-    index => 2,
-    parent => parent[0]
-    path => [
-      "word:\"name\"",
-      "(",
+    "index" => 0,
+    "parent" => script
+    "path" => [
+      "word:\"first\"",
+      ".",
+      "word:\"second\"",
+      "s",
+      "=",
     ],
-    children => [
-      blockStart => null,
-      blockEnd => null,
-      start => 26,
-      end => 28,
-      landmark => [
+    "children" => [
+      [
+        "blockStart" => null,
+        "blockEnd" => null,
+        "start" => 15,
+        "end" => 18,
+        "landmark" => [
+        ],
+        "data" => [
+          "missed" => "12",
+        ],
+        "index" => 0,
+        "parent" => parent[0]
+        "path" => [
+        ],
+        "children" => [
+        ],
       ],
-      data => [
-        missed => "1",
+      [
+        "blockStart" => null,
+        "blockEnd" => null,
+        "start" => 19,
+        "end" => 19,
+        "landmark" => [
+          "class" => "SymbolBlock",
+          "type" => "single",
+        ],
+        "data" => [
+          "first" => "+",
+        ],
+        "index" => 1,
+        "parent" => parent[0]
+        "path" => [
+        ],
+        "children" => [
+        ],
       ],
-      index => 0,
-      parent => parent[1]
-      path => [
-      ],
-      children => [
-      ],
-      blockStart => null,
-      blockEnd => null,
-      start => 29,
-      end => 29,
-      landmark => [
-        class => "CommaBlock",
-      ],
-      data => [
-      ],
-      index => 1,
-      parent => parent[2]
-      path => [
-        ",",
-      ],
-      children => [
+      [
+        "blockStart" => 26,
+        "blockEnd" => 31,
+        "start" => 20,
+        "end" => 32,
+        "landmark" => [
+          "class" => "CallerBlock",
+        ],
+        "data" => [
+          "name" => "func",
+          [
+            "_end" => [
+            ],
+          ],
+        ],
+        "index" => 2,
+        "parent" => parent[0]
+        "path" => [
+          "word:\"name\"",
+          "(",
+        ],
+        "children" => [
+          [
+            "blockStart" => null,
+            "blockEnd" => null,
+            "start" => 26,
+            "end" => 28,
+            "landmark" => [
+            ],
+            "data" => [
+              "missed" => "1",
+            ],
+            "index" => 0,
+            "parent" => parent[2]
+            "path" => [
+            ],
+            "children" => [
+            ],
+          ],
+          [
+            "blockStart" => null,
+            "blockEnd" => null,
+            "start" => 29,
+            "end" => 29,
+            "landmark" => [
+              "class" => "CommaBlock",
+            ],
+            "data" => [
+            ],
+            "index" => 1,
+            "parent" => parent[2]
+            "path" => [
+              ",",
+            ],
+            "children" => [
+            ],
+          ],
+          [
+            "blockStart" => null,
+            "blockEnd" => null,
+            "start" => 30,
+            "end" => 33,
+            "landmark" => [
+            ],
+            "data" => [
+              "missed" => "23",
+            ],
+            "index" => 2,
+            "parent" => parent[2]
+            "path" => [
+            ],
+            "children" => [
+            ],
+          ],
+        ],
       ],
     ],
   ],
