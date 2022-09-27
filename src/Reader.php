@@ -116,43 +116,41 @@ class Reader
         // echo json_encode($script, JSON_PRETTY_PRINT);
         if ($displayBlocks) {
             Log  ::timerEnd();
+            Log  ::log('[');
             $this->displayScriptBlocks($script);
+            Log  ::log(']');
         }
         return $script;
     }
 
     public function displayScriptBlocks(array $script): void
     {
-        Log  ::log('[');
         Log  ::increaseIndent();
         foreach ($script as $key => $block) {
-            Log  ::log('[');
-            Log  ::increaseIndent();
-
             if ($block instanceof BlockModel) {
                 $this->displayBlock($block);
             } else if (is_array($block)) {
-                Log  ::log($key . ' => ');
+                Log  ::log($key . ' => [');
                 $this->displayScriptBlocks($block);
+                Log  ::log('],');
             } else {
-                Log  ::log($key . ' => ' . json_encode($block, JSON_PRETTY_PRINT) . ',', replaceNewLine: false);
+                if (is_numeric($key)) {
+                    Log  ::log(json_encode($block, JSON_PRETTY_PRINT) . ',', replaceNewLine: false);
+                } else {
+                    Log  ::log($key . ' => ' . json_encode($block, JSON_PRETTY_PRINT) . ',', replaceNewLine: false);
+                }
             }
-
-            Log  ::decreaseIndent();
-            Log  ::log('],');
         }
         Log  ::decreaseIndent();
-        Log  ::log('],');
     }
 
     public function displayBlock(BlockModel $block): void
     {
         foreach ($block->toArray() as $key => $value) {
             if ($key === 'children') {
-                Log  ::log($key . ' => ');
-                Log  ::increaseIndent();
+                Log  ::log($key . ' => [');
                 $this->displayScriptBlocks($value);
-                Log  ::decreaseIndent();
+                Log  ::log('],');
             } elseif ($key === 'parent' && !is_null($value)) {
                 if ($value instanceof ScriptBlockModel) {
                     Log  ::log($key . ' => script');
@@ -161,12 +159,13 @@ class Reader
                 }
             } else {
                 if ($key == 'landmark') {
-                    Log  ::log($key . ' => ' . json_encode($value['_custom'] ?? [], JSON_PRETTY_PRINT) . ',', replaceNewLine: false);
+                    Log  ::log($key . ' => [');
+                    $this->displayScriptBlocks($value['_custom'] ?? []);
+                    Log  ::log('],');
                 } elseif (is_array($value)) {
-                    Log  ::increaseIndent();
-                    Log  ::log($key . ' => ');
+                    Log  ::log($key . ' => [');
                     $this->displayScriptBlocks($value);
-                    Log  ::decreaseIndent();
+                    Log  ::log('],');
                 } else {
                     Log  ::log($key . ' => ' . json_encode($value, JSON_PRETTY_PRINT) . ',', replaceNewLine: false);
                 }

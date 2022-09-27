@@ -1,3 +1,1 @@
-if (as + 2 < 4) {
-
-}
+word.funcion = 12 + func(1 , 23);
