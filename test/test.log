@@ -1,58 +1,5 @@
  const dogName = adventurer.dog?.name;\n
-New objectify -  const dogName = adventurer.dog?.name;\n
-  0
-  Save block - {"class":"ConstVariableBlock"}, debug: 
-  New objectify -  const dogName = adventurer.dog?.name;\n
-    7
-    Save block - [], debug: 
-  New objectify -  dogName = adventurer.dog?.name
-    0
-    Save block - {"class":"VariableInstanceBlock","replace":true}, debug: 
-    New objectify -  dogName = adventurer.dog?.name
-      10
-      11
-      12
-      13
-      14
-      15
-      16
-      17
-      18
-      19
-      20
-      21
-      22
-      23
-      24
-      25
-      26
-      27
-      28
-      29
-      30
-    Save block - [], debug: 
-    New objectify -  adventurer.dog?.name
-      0
-      Save block - {"class":"ChainBlock","first":true}, debug: 
-      New objectify -  adventurer.dog?.name
-        15
-        16
-        17
-        18
-        19
-        20
-      Save block - [], debug: 
-      New objectify -  ?.name
-        0
-        1
-        Save block - {"class":"SubChainBlock1"}, debug: "?">optionalchain => . => word
-        New objectify -  ?.name
-        New i: 8
-      New i: 21
-    New i: 31
-  New i: 37
-  38
-Duration: 0.004s
+Duration: 0.003s
 [
   [
     "blockStart" => 7,

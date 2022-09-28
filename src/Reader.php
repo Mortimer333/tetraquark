@@ -408,15 +408,27 @@ class Reader
             // Log ::log('New method `' . $methodName . '` lm, oprions: ' . implode(', ', array_keys($step)));
 
             $res = $this->tryToFindNextMatch($resolver, $step);
-            if (!$res && isset($step['_stop'])) {
+            if (
+                !$res
+                && isset($step['_stop'])
+                && (
+                    !isset($solve['path'])
+                    || sizeof($debug) > sizeof($solve['path'])
+                )
+            ) {
                 $solve = [
                     "step" => $step,
                     "save" => $this->saveResolver($resolver),
                     "path" => $debug
                 ];
-            } elseif ($res && sizeof($res['path']) > sizeof($solve['path'] ?? [])) {
+            } elseif (
+                $res
+                && (
+                    !isset($solve['path'])
+                    || sizeof($res['path']) > sizeof($solve['path'])
+                )
+            ) {
                 $solve = $res;
-                // return $res;
             }
             $this->restoreResolver($resolver, $save);
         }
@@ -517,26 +529,7 @@ class Reader
 
     public function saveBlock(LandmarkResolverModel $resolver): void
     {
-        $debug = $this->debug['path'];
-        // Check next letters if we don't have more specified block which matches syntax.
-        // More specified in a way that his definition is longer/more detailed
-        // try {
-        //     $i = $resolver->getI() + 1;
-        //     // @POSSIBLE_PERFORMANCE_ISSUE
-        //     $save = $this->saveResolver($resolver);
-        //     $res = $this->resolve($resolver, $i);
-        //     if ($res) {
-        //         return;
-        //     }
-        //     $this->restoreResolver($resolver, $save);
-        // } catch (\Exception $e) {
-        //     if ($e->getMessage() !== self::FINISH && $e->getMessage() !== self::END_OF_FILE) {
-        //         throw $e;
-        //     }
-        // }
-        // $this->debug['path'] = $debug;
-
-        Log ::log('Save block - ' . json_encode($resolver->getLandmark()['_custom'] ?? []) . ", debug: " . implode(' => ', $this->debug['path']));
+        // Log ::log('Save block - ' . json_encode($resolver->getLandmark()['_custom'] ?? []) . ", debug: " . implode(' => ', $this->debug['path']));
         $item = new BlockModel(
             start: $resolver->getLmStart(),
             end: $resolver->getI(),
@@ -544,7 +537,7 @@ class Reader
             data: $resolver->getData(),
             index: \sizeof($resolver->getScript()),
             parent: $resolver->getParent(),
-            path: $debug
+            path: $this->debug['path']
         );
 
         $block = $item->getLandmark()["_block"] ?? false;
