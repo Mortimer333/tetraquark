@@ -58,6 +58,14 @@ class Helpers
 
 
 return [
+    "isprivate" => function (CustomMethodEssentialsModel $essentials): void
+    {
+        $essentials->appendData(true, 'private');
+    },
+    "isgenerator" => function (CustomMethodEssentialsModel $essentials): void
+    {
+        $essentials->appendData(true, 'generator');
+    },
     "optionalchain" => function (CustomMethodEssentialsModel $essentials): void
     {
         $essentials->appendData(true, 'optional_chain');
@@ -291,11 +299,14 @@ return [
             '(' => ')',
         ];
 
-        // $essentials->getMethods()['find']($essentials, $stops, null, 'var');
         $content = $essentials->getContent();
-        $search = false;
+        $search  = false;
+        $reader  = $essentials->getReader();
 
         for ($i=$essentials->getI(); $i < $content->getLength(); $i++) {
+            $i = $reader->handleComment($content, $i);
+
+            // Skip string
             $i = Str::skip($content->getLetter($i), $i, $content);
             $letter = $content->getLetter($i);
 
@@ -303,6 +314,7 @@ return [
                 if ($search['end'] == $letter) {
                     if ($search['skip_counter'] > 0) {
                         $search['skip_counter']--;
+                        continue;
                     }
                     $search = null;
                     // If next letter after ), }, ] is not connector (means that there is not operation next)
@@ -353,6 +365,7 @@ return [
         $letter  = $essentials->getLetter();
         $index   = $essentials->getI();
         $data    = $essentials->getData();
+        $reader  = $essentials->getReader();
 
         if (is_string($needle)) {
             $needle = [$needle];
@@ -391,8 +404,12 @@ return [
         $nestedHays = 0;
         $res = false;
         for ($i=$index; $i < $content->getLength(); $i++) {
+            $i = $reader->handleComment($content, $i);
+
+            // Skip strings
             $i = Str::skip($content->getLetter($i), $i, $content);
             $letter = $content->getLetter($i);
+
             foreach ($needle as $key => &$straw) {
                 $straw['haystack'][] = $letter;
 
@@ -428,7 +445,6 @@ return [
             if (!is_null($name)) {
                 $data[$name] = trim($content->iSubStr($index, $i - 1));
             }
-            Log::log($index);
             $index = $i;
             $letter = null;
         }

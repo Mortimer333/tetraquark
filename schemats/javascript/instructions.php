@@ -1,5 +1,32 @@
 <?php declare(strict_types=1);
 
+$arrayChainInstruction = [
+    '/s|e\[/find:"]":"[":"index">read:"index"\\' => [
+        "class" => "ChainBlock",
+        "array" => true,
+        "_block" => [
+            "end" => '/varend\\',
+            "include_end" => true,
+        ],
+        "_extend" => [
+            '/s|e\=/"!=">decrease\\' => [
+                "class" => "ChainBlock",
+                "array" => true,
+                "var" => true,
+                "_block" => [
+                    "end" => '/varend\\',
+                    "include_end" => true,
+                ],
+            ],
+            '/s|e\(/find:")":"(":"values">read:"values"\\' => [
+                "class" => "ChainBlock",
+                "array" => true,
+                "method" => true,
+            ]
+        ]
+    ]
+];
+
 $exportFromBlock = [
     "class" => "ExportFromBlock",
     "object" => true,
@@ -23,7 +50,7 @@ $fromItemBlock = [
     "class" => "FromBlock"
 ];
 $arrowMethod = [
-    '(/find:")":"(":"condition"\/s|e\=>/s|e\{' => [
+    '(/find:")":"(":"condition">read:"condition"\/s|e\=>/s|e\{' => [
         "class" => "ArrowMethodBlock",
         "parenthesis" => true,
         "block" => true,
@@ -41,7 +68,7 @@ $arrowMethod = [
             "nested" => "{"
         ]
     ],
-    '(/find:")":"(":"condition"\/s|e\=>/nparenthesis>decrease\/varend\\' => [
+    '(/find:")":"(":"condition">read:"condition"\/s|e\=>/nparenthesis>decrease\/varend\\' => [
         "class" => "ArrowMethodBlock",
         "parenthesis" => true,
         "block" => false,
@@ -84,11 +111,23 @@ return [
         ]
     ],
     /* CLASS DEFINITION */
-    "/s|end\class/s|e\/find:'{'::'class_name'\\" => [
-        "class" => "ClassBlock",
-        "_block" => [
-            "end" => "}",
-            "nested" => "{"
+    '/s|end\class/s|e\/word:"class_name"\\' => [
+        "_extend" => [
+            '/s|e\{' => [
+                "class" => "ClassBlock",
+                "_block" => [
+                    "end" => "}",
+                    "nested" => "{"
+                ],
+            ],
+            '/s\extends/word:"extends_name"\/s|e\{' => [
+                "class" => "ClassBlock",
+                "extends" => true,
+                "_block" => [
+                    "end" => "}",
+                    "nested" => "{"
+                ],
+            ]
         ]
     ],
     /* LET */
@@ -116,7 +155,7 @@ return [
         ]
     ],
     /* VARIABLE */
-    '/s|end\/word:"name"\\' => [
+    '/s|end\/"#">isprivate|e\/word:"name"\\' => [
         "class" => "VariableInstanceBlock",
         "empty" => true,
         "_extend" => [
@@ -160,7 +199,7 @@ return [
                     "skip" => "{"
                 ],
             ],
-            '/s\/word:"name"\\' => [
+            '/s\/"#">isprivate|e\/word:"name"\\' => [
                 "class" => "StaticVariableInstanceBlock",
                 "empty" => true,
                 "_extend" => [
@@ -171,6 +210,13 @@ return [
                             "end" => "/varend\\",
                             "include_end" => true,
                         ]
+                    ],
+                    '(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
+                        "class" => "StaticClassMethodBlock",
+                        "_block" => [
+                            "end" => "}",
+                            "nested" => "{"
+                        ],
                     ]
                 ]
             ]
@@ -187,6 +233,15 @@ return [
         "_block" => [
             "end" => "]",
             "nested" => "[",
+        ],
+        "_extend" => [
+            '/find:"]":"[":"deconstruction">read:"deconstruction"\/s|e\=' => [
+                "class" => "DeconstructionAssignmentBlock",
+                "_block" => [
+                    "end" => "/varend\\",
+                    "include_end" => true,
+                ]
+            ]
         ]
     ],
     /* SPREAD ARRAY */
@@ -234,7 +289,7 @@ return [
         "class" => "KeywordBlock"
     ],
     /* CALLER */
-    '/s|end\/word:"name"\/s|e\(' => [
+    '/s|end\/"#">isprivate|e\/word:"name"\/s|e\(' => [
         "class" => "CallerBlock",
         "_block" => [
             "end" => ")",
@@ -242,7 +297,7 @@ return [
         ],
         "_extend" => [
             /* CLASS METHOD */
-            '/find:")":"(":"arguments"\/s|e\{' => [
+            '/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
                 "class" => "ClassMethodBlock",
                 "_block" => [
                     "end" => "}",
@@ -252,7 +307,7 @@ return [
         ],
     ],
     /* GETTER */
-    '/s|end\get/s\/word:"getter"\(/find:")":"(":"arguments"\/s|e\{' => [
+    '/s|end\get/s\/"#">isprivate|e\/word:"getter"\(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
         "class" => "GetterClassMethodBlock",
         "_block" => [
             "end" => "}",
@@ -260,7 +315,7 @@ return [
         ],
     ],
     /* SETTER */
-    '/s|end\set/s\/word:"setter"\(/find:")":"(":"arguments"\/s|e\{' => [
+    '/s|end\set/s\/"#">isprivate|e\/word:"setter"\(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
         "class" => "SetterClassMethodBlock",
         "_block" => [
             "end" => "}",
@@ -268,7 +323,7 @@ return [
         ],
     ],
     /* AYNC */
-    '/s|end\async/s\/word:"name"\(/find:")":"(":"arguments"\/s|e\{' => [
+    '/s|end\async/s\/"#">isprivate|e\/word:"name"\(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
         "class" => "AsyncClassMethodBlock",
         "_block" => [
             "end" => "}",
@@ -276,7 +331,7 @@ return [
         ],
     ],
     /* STATIC GETTER */
-    '/s|end\static/s\get/s\/word:"getter"\(/find:")":"(":"arguments"\/s|e\{' => [
+    '/s|end\static/s\get/s\/"#">isprivate|e\/word:"getter"\(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
         "class" => "StaticGetterClassMethodBlock",
         "_block" => [
             "end" => "}",
@@ -284,7 +339,7 @@ return [
         ],
     ],
     /* STATIC SETTER */
-    '/s|end\static/s\set/s\/word:"setter"\(/find:")":"(":"arguments"\/s|e\{' => [
+    '/s|end\static/s\set/s\/"#">isprivate|e\/word:"setter"\(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
         "class" => "StaticSetterClassMethodBlock",
         "_block" => [
             "end" => "}",
@@ -292,7 +347,7 @@ return [
         ],
     ],
     /* STATIC AYNC */
-    '/s|end\static/s\async/s\/word:"name"\(/find:")":"(":"arguments"\/s|e\{' => [
+    '/s|end\static/s\async/s\/"#">isprivate|e\/word:"name"\(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
         "class" => "StaticAsyncClassMethodBlock",
         "_block" => [
             "end" => "}",
@@ -308,7 +363,7 @@ return [
         ]
     ],
     /* CATCH */
-    '/s|end\catch/s|e\(/find:")":"(":"exception"\/s|e\{' => [
+    '/s|end\catch/s|e\(/find:")":"(":"exception">read:"exception"\/s|e\{' => [
         "class" => "CatchBlock",
         "_block" => [
             "end" => "}",
@@ -326,7 +381,7 @@ return [
     /* FIRST IN CHAIN */
     '/s|end\/word:"first"\\' => [
         "_extend" => [
-            '/"?">optionalchain|e\./word:"second"\\' => [
+            '/"?">optionalchain|e\./"#">isprivate|e\/word:"second"\\' => [
                 "class" => "ChainBlock",
                 "first" => true,
                 "_block" => [
@@ -334,7 +389,7 @@ return [
                     "include_end" => true,
                 ],
                 "_extend" => [
-                    '/s|e\(/find:")":"(":"values_two"\\' => [
+                    '/s|e\(/find:")":"(":"values_two">read:"values_two"\\' => [
                         "class" => "ChainBlock",
                         "first_method" => false,
                         "second_method" => true,
@@ -352,10 +407,12 @@ return [
                             "end" => '/varend\\',
                             "include_end" => true,
                         ],
-                    ]
+                    ],
+                    /* CHAIN (ARRAY ACCESS) */
+                    ...$arrayChainInstruction,
                 ]
             ],
-            '(/find:")":"(":"values"\/"?">optionalchain|e\./word:"second"\\' => [
+            '(/find:")":"(":"values">read:"values"\/"?">optionalchain|e\./"#">isprivate|e\/word:"second"\\' => [
                 "class" => "ChainBlock",
                 "first" => true,
                 "first_method" => true,
@@ -364,7 +421,7 @@ return [
                     "include_end" => true,
                 ],
                 "_extend" => [
-                    '/s|e\(/find:")":"(":"values_two"\\' => [
+                    '/s|e\(/find:")":"(":"values_two">read:"values_two"\\' => [
                         "class" => "ChainBlock",
                         "first_method" => true,
                         "second_method" => true,
@@ -384,19 +441,18 @@ return [
                         ],
                     ]
                 ]
-            ]
-
+            ],
         ]
     ],
     /* NEXT IN CHAIN */
-    '/"?">optionalchain|e\./word\\' => [
+    '/"?">optionalchain|e\./"#">isprivate|e\/word\\' => [
         "class" => "SubChainBlock1",
         "_block" => [
             "end" => '/varend\\',
             "include_end" => true,
         ],
         "_extend" => [
-            '/s|e\=' => [
+            '/s|e\=/"!=">decrease\\' => [
                 "class" => "SubChainBlock2",
                 "var" => true,
                 "_block" => [
@@ -404,11 +460,20 @@ return [
                     "include_end" => true,
                 ],
             ],
-            '/s|e\(/find:")":"(":"values"\\' => [
+            '/s|e\(/find:")":"(":"values">read:"values"\\' => [
                 "class" => "SubChainBlock3",
                 "method" => true,
-            ]
+            ],
+            /* CHAIN (ARRAY ACCESS) */
+            ...$arrayChainInstruction,
         ]
+    ],
+    '/s|end\this/".">decrease\\' => [
+        "class" => "ThisBlock",
+        "_block" => [
+            "end" => '/varend\\',
+            "include_end" => true,
+        ],
     ],
     /* EQUAL */
     "==" => [
@@ -433,11 +498,11 @@ return [
         "class" => "DoWhileBlock",
         "_block" => [
             "skip" => '/s|end\do/s|e\{',
-            "end" => '}/s|e\while/s|e\(/find:")":"(":"while"\\',
+            "end" => '}/s|e\while/s|e\(/find:")":"(":"while">read:"while"\\',
         ]
     ],
     /* WHILE */
-    '/s|end\while/s|e\(/find:")":"(":"condition"\/s|e\{' => [
+    '/s|end\while/s|e\(/find:")":"(":"condition">read:"condition"\/s|e\{' => [
         "class" => "WhileBlock",
         "_block" => [
             "skip" => '{',
@@ -445,7 +510,7 @@ return [
         ]
     ],
     /* SHORT WHILE */
-    '/s|end\while/s|e\(/find:")":"(":"condition"\/nparenthesis>decrease\/varend\\' => [
+    '/s|end\while/s|e\(/find:")":"(":"condition">read:"condition"\/nparenthesis>decrease\/varend\\' => [
         "class" => "ShortWhileBlock"
     ],
     /* ELSE / ELSE IF */
@@ -458,7 +523,7 @@ return [
                     "end" => '}',
                 ]
             ],
-            '/s\if/s|e\(/find:")":"(":"values"\/s|e\{' => [
+            '/s\if/s|e\(/find:")":"(":"values">read:"values"\/s|e\{' => [
                 "class" => "ElseIfBlock",
                 "_block" => [
                     "skip" => '{',
@@ -476,7 +541,7 @@ return [
         "class" => "TrueBlock"
     ],
     /* FOR */
-    '/s|end\for/s|e\(/find:")":"(":"condition"\/s|e\{' => [
+    '/s|end\for/s|e\(/find:")":"(":"condition">read:"condition"\/s|e\{' => [
         "class" => "ForBlock",
         "_block" => [
             "end" => "}",
@@ -484,14 +549,14 @@ return [
         ]
     ],
     /* SHORT FOR */
-    '/s|end\for/s|e\(/find:")":"(":"condition"\/nparenthesis>decrease\/varend\\' => [
+    '/s|end\for/s|e\(/find:")":"(":"condition">read:"condition"\/nparenthesis>decrease\/varend\\' => [
         "class" => "ShortForBlock"
     ],
     /* FUNCTION */
     '/s|end\function' => [
         "_extend" => [
             // GENERATOR
-            '*/s\/word:"name"\(/find:")":"(":"arguments"\/s|e\{' => [
+            '*/s\/word:"name"\(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
                 "class" => "FunctionBlock",
                 "generator" => true,
                 "_block" => [
@@ -499,7 +564,7 @@ return [
                     "nested" => "{"
                 ]
             ],
-            '/s\/word:"name"\(/find:")":"(":"arguments"\/s|e\{' => [
+            '/s\/word:"name"\(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
                 "class" => "FunctionBlock",
                 "_block" => [
                     "end" => "}",
@@ -507,7 +572,7 @@ return [
                 ]
             ],
             // ANONYMOUS
-            '/s|e\(/find:")":"(":"arguments"\/s|e\{' => [
+            '/s|e\(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
                 "class" => "FunctionBlock",
                 "anonymous" => true,
                 "_block" => [
@@ -515,7 +580,7 @@ return [
                     "nested" => "{"
                 ]
             ],
-            '*/s|e\(/find:")":"(":"arguments"\/s|e\{' => [
+            '*/s|e\(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
                 "class" => "FunctionBlock",
                 "generator" => true,
                 "anonymous" => true,
@@ -530,9 +595,13 @@ return [
     '/s|end\new/s\/word:"class"\\' => [
         "class" => "NewInstanceBlock",
         "_extend" => [
-            '/s|e\(/find:")":"(":"values"\\' => [
+            '/s|e\(/find:")":"(":"values">read:"values"\\' => [
                 "class" => "NewClassInstanceBlock",
-                "parenthesis" => true
+                "parenthesis" => true,
+                "_block" => [
+                    "end" => '/varend:false\\',
+                    "include_end" => true,
+                ],
             ]
         ]
     ],
@@ -542,6 +611,15 @@ return [
         "_block" => [
             "end" => "}",
             "nested" => "{"
+        ],
+        "_extend" => [
+            '/find:"}":"{":"deconstruction">read:"deconstruction"\/s|e\=' => [
+                "class" => "ObjectDeconstructionAssignmentBlock",
+                "_block" => [
+                    "end" => "/varend\\",
+                    "include_end" => true,
+                ]
+            ]
         ]
     ],
     /* OBJECT ITEM */
@@ -551,6 +629,7 @@ return [
             '`/strend:"`"\/s|e\:' => $objectItemBlock,
             '"/strend:`"`\/s|e\:' => $objectItemBlock,
             '/word:"name"\/s|e\:' => $objectItemBlock,
+            '[/find:"]":"[":"key">read:"key"\/s|e\:' => ["key" => true, ...$objectItemBlock],
         ]
     ],
     /* SPREAD OBJECT */
@@ -571,7 +650,7 @@ return [
         "class" => "ReturnBlock",
     ],
     /* SWITCH */
-    '/s|end\switch/s|e\(/find:")":"(":"values"\/s|e\{' => [
+    '/s|end\switch/s|e\(/find:")":"(":"values">read:"values"\/s|e\{' => [
         "class" => "SwitchBlock",
         "_block" => [
             "end" => "}",
@@ -612,7 +691,7 @@ return [
         ]
     ],
     /* YELD */
-    '/s|end\yield/s|symbol>decrease\\' => [
+    '/s|end\yield/"*">isgenerator|e\/s|symbol>decrease\\' => [
         "_block" => [
             "end" => '/varend\\',
             "include_end" => true,
@@ -703,7 +782,7 @@ return [
                             "nested" => "{",
                         ],
                         "_extend" => [
-                            '/find:"}":"{":"object"\/s|e\from/s|e\\' => [
+                            '/find:"}":"{":"object">read:"object"\/s|e\from/s|e\\' => [
                                 "_extend" => [
                                     '`/strend:"`"\\' => $exportFromBlock,
                                     '\'/strend:`\'`\\' => $exportFromBlock,

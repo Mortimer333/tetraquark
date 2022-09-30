@@ -29,12 +29,15 @@ word.funcion = 12 + func(1 , 23);
 
 2. [DONE] Add method which will create children for item (varend>read/objectify)
 3. [DONE] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator - SymbolBlock
-4. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
-5. Object with array acces (object['asd'])
-6. yeld* - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/yield*
-7. class - extends
-8. private class attrbitues and method - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields
-9. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+4. [DONE] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
+5. [DONE] Object with array acces (object['asd'])
+6. [DONE] yeld* - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/yield*
+7. [DONE] class - extends
+8. [DONE] private class attrbitues and method - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields
+9. [DONE] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+10. [DONE] Object name in brackets: `{[key] : 'as'}`
+11. Skip comments between definition: `let a = /* wel whooops */ 2;`
+12. Figure out how to analize this: `${this.getDate()}-${months[this.getMonth()]}-${this.getFullYear()}`
 At some point. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols
 
 List of blocks to implement:

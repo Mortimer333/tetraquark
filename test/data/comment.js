@@ -1,1 +1,1 @@
-const dogName = adventurer.dog?.name;
+let a/* asd*/ =  2;

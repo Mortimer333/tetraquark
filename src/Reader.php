@@ -46,6 +46,10 @@ class Reader
     protected array $debug = [
         "path" => []
     ];
+    // Comment found inbetween blocks
+    protected array $comments = [];
+    // Retrieve comments and replac ethem with whitespace
+    protected bool $retrieveComments = true;
 
     public const SKIP = 'skip';
     public const FINISH = 'finish';
@@ -110,17 +114,80 @@ class Reader
         $content = $this->customPrepare($content);
 
         // echo $content . PHP_EOL;
-        Log  ::log($content . '');
+        if ($displayBlocks) {
+            Log  ::log($content . '');
+        }
         $script = new ScriptBlockModel();
         list($script, $end) = $this->objectify($content, $this->map, parent: $script);
         // echo json_encode($script, JSON_PRETTY_PRINT);
         if ($displayBlocks) {
             Log  ::timerEnd();
+            $this->displayLandmarks($script);
             Log  ::log('[');
             $this->displayScriptBlocks($script);
             Log  ::log(']');
         }
         return $script;
+    }
+
+    public function displayLandmarks(array $script): void
+    {
+        $landmarks = $this->getLandmarks($script);
+        $this->showLandmark($landmarks);
+    }
+
+    public function showLandmark(array $landmarks): void
+    {
+        Log::log($landmarks['landmark']);
+        if (!empty($landmarks['children'])) {
+            Log::increaseIndent();
+            foreach ($landmarks['children'] as $child) {
+                $this->showLandmark($child);
+            }
+            Log::decreaseIndent();
+        }
+    }
+
+    public function getLandmarks(array $script): array
+    {
+        $landmarks = [
+            "landmark" => '',
+            "children" => []
+        ];
+        foreach ($script as $key => $block) {
+            if ($key == 'parent') {
+                continue;
+            }
+            if ($key === 'landmark') {
+                $landmark = $block['_custom']['class'] ?? 'No class';
+                $landmark .= ' {';
+                unset($block['_custom']['class']);
+                $i = 0;
+                foreach ($block['_custom'] ?? [] as $key => $value) {
+                    if ($i === 0) {
+                        $landmark .= $key . ': ' . $value;
+                    } else {
+                        $landmark .= ', ' . $key . ': ' . $value;
+                    }
+                    $i++;
+                }
+                $landmark .= '}';
+                $landmarks["landmark"] = $landmark ?? 'No class';
+                $block = $block['_custom'] ?? [];
+            }
+            if ($block instanceof BlockModel) {
+                $block = $block->toArray();
+            }
+            if (is_array($block)) {
+                $res = $this->getLandmarks($block);
+                if (empty($res['landmark'])) {
+                    $landmarks["children"] = array_merge($landmarks["children"], $res['children']);
+                } else {
+                    $landmarks["children"][] = $res;
+                }
+            }
+        }
+        return $landmarks;
     }
 
     public function displayScriptBlocks(array $script, bool $item = true): void
@@ -269,50 +336,138 @@ class Reader
     {
         // @TODO remove this, and think of better fail save
         $this->iterations++;
-        if ($this->iterations > 500) {
+        if ($this->iterations > 2500) {
             throw new \Error('Inifinite loop');
         }
-        // Log ::increaseIndent();
+        Log ::increaseIndent();
+
+        $i = $this->handleComment($resolver->getContent(), $i);
 
         $content = $resolver->getContent();
         if (is_null($content->getLetter($i))) {
             /* Don't end file with exception but let it slowly get out of foreach */
             // $resolver->i--;
             // throw new Exception(self::END_OF_FILE);
-            // Log ::decreaseIndent();
+            Log ::decreaseIndent();
             return false;
         }
 
         // Don't skip string - $resolver->setI(Str::skip($content->getLetter($i), $i, $content));
         $resolver->setI($i);
         $resolver->setLetter($content->getLetter($i));
-        // Log ::log($i . ' Letter: `' . $resolver->getLetter() . '`, `' . $resolver->getLmStart() . '`, ' . $resolver->getContent()->getLength() . ', possible: ' . implode(', ', array_keys($resolver->getLandmark())));
+        Log ::log($i . ' Letter: `' . $resolver->getLetter() . '`, `' . $resolver->getLmStart() . '`, ' . $resolver->getContent()->getLength() . ', possible: ' . implode(', ', array_keys($resolver->getLandmark())));
         if (isset($resolver->getLandmark()[$resolver->getLetter()])) {
             $solve = $this->resolveStringLandmark($resolver);
             if ($solve) {
                 $i = $solve['save']['i'];
-                // Log ::decreaseIndent();
+                Log ::decreaseIndent();
                 return $solve;
             }
         }
 
         if (isset($resolver->getLandmark()['_m']) && ($solve = $this->resolveMethodLandmark($resolver))) {
             $i = $solve['save']['i'];
-            // Log ::decreaseIndent();
+            Log ::decreaseIndent();
             return $solve;
         }
 
         /* @DOUBLE_CHECK this operation might be unnecessary, currently I can't think of example where this helps but it is quite late at night */
         // If nothing was found but we have descended some steps (more then one) into the map, try with the same letter from the start
-        if (!is_null($resolver->getLmStart()) && sizeof($this->debug['path']) > 1) {
+        if ($this->isInLandmark($resolver)) {
             $i--;
             $resolver->setLetter($content->getLetter($i));
         }
-        // Log ::log("Nothign was found!");
+        Log ::log("Nothign was found!");
         $this->clearObjectify($resolver);
 
-        // Log ::decreaseIndent();
+        Log ::decreaseIndent();
         return false;
+    }
+
+    public function isInLandmark(LandmarkResolverModel $resolver): bool
+    {
+        return !is_null($resolver->getLmStart()) && sizeof($this->debug['path']) > 1;
+    }
+
+    public function handleComment(Content $content, int $start): int
+    {
+        if (!$this->schema['remove']['comments'] && $this->retrieveComments) {
+            $this->tryToRetrieveComment($content, $start);
+            return $start;
+        }
+
+        if (!$this->schema['remove']['comments'] && !$this->retrieveComments) {
+            return $this->skipComment($content, $start);
+        }
+    }
+
+    public function tryToRetrieveComment(Content $content, int $start, ?int $current = null, ?array $landmarks = null): void
+    {
+        if (is_null($landmarks)) {
+            $landmarks = $this->schema['comments'];
+        }
+
+        if (is_null($current)) {
+            $current = $start;
+        }
+
+        $letter = $content->getLetter($current);
+        $landmark = $landmarks[$letter] ?? null;
+        Log::log('Is landmark - ' . $letter);
+
+        if (is_null($landmark)) {
+            return;
+        }
+
+        if (is_array($landmark)) {
+            $this->tryToRetrieveComment($content, $start, $current + 1, $landmark);
+            return;
+        }
+
+        $end = $content->find($landmark, $current + 1);
+        if ($end === false) {
+            $end = $content->getLength();
+        }
+
+        $comment = $content->iSubStr($start, $end);
+        // Save comment to later add it to the next blok
+        $this->comments[] = [
+            "content" => $comment,
+            "start" => $start,
+            "end" => $end,
+        ];
+
+        // Replace comment with whitespace (except new line)
+        $comment = preg_replace('/[^\n]/', ' ', $comment);
+        $content->iSplice($start, $end, str_split($comment));
+    }
+
+    public function skipComment(Content $content, int $start, ?int $current = null, ?array $landmarks = null): int
+    {
+        if (is_null($landmarks)) {
+            $landmarks = $this->schema['comments'];
+        }
+
+        if (is_null($current)) {
+            $current = $start;
+        }
+
+        $letter = $content->getLetter($current);
+        $landmark = $landmarks[$letter] ?? null;
+
+        if (is_null($landmark)) {
+            return $start;
+        }
+
+        if (is_array($landmark)) {
+            return $this->skipComment($content, $start, $current + 1, $landmark);
+        }
+
+        $end = $content->find($landmark, $current + 1);
+        if ($end === false) {
+            return $content->getLength();
+        }
+        return $end;
     }
 
     private function clearObjectify(LandmarkResolverModel $resolver)
@@ -328,7 +483,7 @@ class Reader
         $this->debug["path"][] = $resolver->getLetter();
         $possibleLandmark = $resolver->getLandmark()[$resolver->getLetter()];
 
-        // Log ::log('New string lm, oprions: ' . implode(', ', array_keys($possibleLandmark)));
+        Log ::log('New string lm, oprions: ' . implode(', ', array_keys($possibleLandmark)));
         if (is_null($resolver->getLmStart())) {
             $resolver->setLmStart($resolver->getI());
         }
@@ -368,7 +523,7 @@ class Reader
     {
         $preSave = $this->saveResolver($resolver);
         $solve = null;
-        // Log ::log('Method to check: ' . implode(', ', array_keys($resolver->getLandmark()['_m'])));
+        Log ::log('Method to check: ' . implode(', ', array_keys($resolver->getLandmark()['_m'])));
         foreach ($resolver->getLandmark()['_m'] as $methodName => $step) {
             list($method, $callable) = $this->getMethod($methodName);
             // Set essentials
@@ -405,7 +560,7 @@ class Reader
             // Update changed essentials
             $this->updateFromEssentials($resolver, $essentials);
 
-            // Log ::log('New method `' . $methodName . '` lm, oprions: ' . implode(', ', array_keys($step)));
+            Log ::log('New method `' . $methodName . '` lm, oprions: ' . implode(', ', array_keys($step)));
 
             $res = $this->tryToFindNextMatch($resolver, $step);
             if (
@@ -529,7 +684,7 @@ class Reader
 
     public function saveBlock(LandmarkResolverModel $resolver): void
     {
-        // Log ::log('Save block - ' . json_encode($resolver->getLandmark()['_custom'] ?? []) . ", debug: " . implode(' => ', $this->debug['path']));
+        Log ::log('Save block - ' . json_encode($resolver->getLandmark()['_custom'] ?? []) . ", debug: " . implode(' => ', $this->debug['path']));
         $item = new BlockModel(
             start: $resolver->getLmStart(),
             end: $resolver->getI(),
@@ -537,18 +692,21 @@ class Reader
             data: $resolver->getData(),
             index: \sizeof($resolver->getScript()),
             parent: $resolver->getParent(),
-            path: $this->debug['path']
+            path: $this->debug['path'],
+            comments: $this->comments
         );
+        $this->comments = [];
 
         $block = $item->getLandmark()["_block"] ?? false;
 
         if ($block) {
             $item->setBlockStart($item->getEnd() + 1);
+            $this->retrieveComments = false;
             list($i, $blocks) = $this->findBlocksEnd($block, $resolver->getContent(), $item->getEnd() + 1, $item);
+            $this->retrieveComments = true;
             $resolver->setI($i);
             $item->setEnd($i);
             $item->setChildren($blocks);
-
         }
 
         // Some variable normally share their end/start:
@@ -774,9 +932,9 @@ class Reader
         $end = $this->findClosestMatch($commentEnd, $content, $currentPos + 1);
         // If returned false then the rest of the script is commented, just remove it
         if ($end === false) {
-            $content->remove($start, null);
+            $content->splice($start, null);
         } else {
-            $content->remove($start, $end + 1 - $start);
+            $content->splice($start, $end + 1 - $start);
         }
 
         // moving back by two is make sure that we didn't miss anything for additional checks

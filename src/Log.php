@@ -2,7 +2,7 @@
 
 namespace Tetraquark;
 
-class Log
+abstract class Log
 {
     static protected int     $indent        = 0;
     static protected int     $verbose       = 0;
@@ -13,11 +13,7 @@ class Log
     static protected bool    $addClass      = false;
     static protected bool    $addFunction   = false;
     static protected string  $oldFunction   = '';
-
-    function __construct()
-    {
-    }
-
+    
     static public function timerStart(): void
     {
         self::$timeStart[] = microtime();

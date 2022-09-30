@@ -23,6 +23,7 @@ class BlockModel extends BaseBlockModel
         protected ?BlockModelInterface $parent = null,
         protected array $path = [],
         protected array $children = [],
+        protected array $comments = [],
     ) {
     }
 

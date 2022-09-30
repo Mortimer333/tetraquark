@@ -278,10 +278,29 @@ class Content
         return $this->contents[$this->contentPointer]['size'] = \sizeof($this->contents[$this->contentPointer]['content']);
     }
 
-    public function remove(int $start, ?int $length = 1): self
+    public function splice(int $start, ?int $length = 1, array $items = []): self
     {
-        array_splice($this->contents[$this->contentPointer]['content'], $start, $length);
+        array_splice($this->contents[$this->contentPointer]['content'], $start, $length, $items);
         $this->resize();
         return $this;
+    }
+
+    public function iSplice(int $start, int $end, array $items = []): self
+    {
+        array_splice($this->contents[$this->contentPointer]['content'], $start, $end + 1 - $start, $items);
+        $this->resize();
+        return $this;
+    }
+
+    public function find(string $needle, int $start = 0): int
+    {
+        $len = \mb_strlen($needle);
+        for ($i=$start; $i < $this->getLength(); $i++) {
+            $hit = $this->subStr($i, $len);
+            if ($hit == $needle) {
+                return $i + $len - 1;
+            }
+        }
+        return false;
     }
 }
