@@ -38,7 +38,7 @@ word.funcion = 12 + func(1 , 23);
 10. [DONE] Object name in brackets: `{[key] : 'as'}`
 11. [DONE] Skip comments between definition: `let a = /* wel whooops */ 2;`
 12. [DONE] Figure out how to analize this: `${this.getDate()}-${months[this.getMonth()]}-${this.getFullYear()}`
-13. Add NumberBlock
+13. [DONE] Add NumberBlock
 At some point. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols
 
 List of blocks to implement:

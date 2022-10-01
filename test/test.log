@@ -1,96 +1,25 @@
- `a${cas.asd}sdas`\n
-"a" cas.asd "sdas"
-"a" cas.asd "sdas"
-"a" cas.asd "sdas"
+ let number = 22 + 'asd';\n
 Duration: 0.004s
 
-  StringBlock {}
-    StringBlock {}
-    ChainBlock {first: 1}
+  LetVariableBlock {}
+    VariableInstanceBlock {replace: 1}
+      NumberBlock {}
+      SymbolBlock {type: single}
       StringBlock {}
 [
   [
-    "blockStart" => null,
-    "blockEnd" => null,
-    "start" => 1,
-    "end" => 17,
+    "blockStart" => 5,
+    "blockEnd" => 23,
+    "start" => 0,
+    "end" => 24,
     "landmark" => [
-      "class" => "StringBlock",
+      "class" => "LetVariableBlock",
     ],
     "data" => [
       [
-        "template" => [
-          [
-            "blockStart" => null,
-            "blockEnd" => null,
-            "start" => 1,
-            "end" => 3,
-            "landmark" => [
-              "class" => "StringBlock",
-            ],
-            "data" => [
-              "string" => "a",
-            ],
-            "index" => 0,
-            "parent" => script
-            "path" => [
-            ],
-            "children" => [
-            ],
-            "comments" => [
-            ],
-          ],
-          [
-            "blockStart" => 12,
-            "blockEnd" => 19,
-            "start" => 4,
-            "end" => 19,
-            "landmark" => [
-              "class" => "ChainBlock",
-              "first" => true,
-            ],
-            "data" => [
-              "first" => "cas",
-              "second" => "asd",
-              [
-                "_end" => [
-                  "var" => " \"sdas\"",
-                  "stop" => null,
-                ],
-              ],
-            ],
-            "index" => 1,
-            "parent" => script
-            "path" => [
-            ],
-            "children" => [
-              [
-                "blockStart" => null,
-                "blockEnd" => null,
-                "start" => 13,
-                "end" => 18,
-                "landmark" => [
-                  "class" => "StringBlock",
-                ],
-                "data" => [
-                  "string" => "sdas",
-                ],
-                "index" => 0,
-                "parent" => parent[1]
-                "path" => [
-                  "\"",
-                  "strend:`\"`",
-                  "strend:'\"'",
-                ],
-                "children" => [
-                ],
-                "comments" => [
-                ],
-              ],
-            ],
-            "comments" => [
-            ],
-          ],
+        "_end" => [
+          "var" => "number = 22 + 'asd';",
+          "stop" => ";",
         ],
       ],
     ],
@@ -99,6 +28,98 @@ Duration: 0.004s
     "path" => [
     ],
     "children" => [
+      [
+        "blockStart" => 14,
+        "blockEnd" => 25,
+        "start" => 5,
+        "end" => 25,
+        "landmark" => [
+          "class" => "VariableInstanceBlock",
+          "replace" => true,
+        ],
+        "data" => [
+          "name" => "number",
+          "negation" => " ",
+          [
+            "_end" => [
+              "var" => " 22 + 'asd'",
+              "stop" => null,
+            ],
+          ],
+        ],
+        "index" => 0,
+        "parent" => parent[0]
+        "path" => [
+        ],
+        "children" => [
+          [
+            "blockStart" => null,
+            "blockEnd" => null,
+            "start" => 15,
+            "end" => 16,
+            "landmark" => [
+              "class" => "NumberBlock",
+            ],
+            "data" => [
+              "number" => "22",
+            ],
+            "index" => 0,
+            "parent" => parent[0]
+            "path" => [
+            ],
+            "children" => [
+            ],
+            "comments" => [
+            ],
+          ],
+          [
+            "blockStart" => null,
+            "blockEnd" => null,
+            "start" => 18,
+            "end" => 18,
+            "landmark" => [
+              "class" => "SymbolBlock",
+              "type" => "single",
+            ],
+            "data" => [
+              "first" => "+",
+            ],
+            "index" => 1,
+            "parent" => parent[0]
+            "path" => [
+            ],
+            "children" => [
+            ],
+            "comments" => [
+            ],
+          ],
+          [
+            "blockStart" => null,
+            "blockEnd" => null,
+            "start" => 20,
+            "end" => 24,
+            "landmark" => [
+              "class" => "StringBlock",
+            ],
+            "data" => [
+              "string" => "asd",
+            ],
+            "index" => 2,
+            "parent" => parent[0]
+            "path" => [
+              "'",
+              "strend:`'`",
+              "strend:\"'\"",
+            ],
+            "children" => [
+            ],
+            "comments" => [
+            ],
+          ],
+        ],
+        "comments" => [
+        ],
+      ],
     ],
     "comments" => [
     ],

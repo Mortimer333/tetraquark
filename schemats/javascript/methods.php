@@ -60,6 +60,23 @@ class Helpers
 
 
 return [
+    "number" => function (CustomMethodEssentialsModel $essentials): bool
+    {
+        if (is_numeric($essentials->getLetter())) {
+            $end = $essentials->getContent()->getLength() - 1;
+            for ($i=$essentials->getI() + 1; $i < $essentials->getContent()->getLength(); $i++) {
+                $letter = $essentials->getContent()->getLetter($i);
+                if (!is_numeric($letter) && $letter != '.') {
+                    $end = $i - 1;
+                    break;
+                }
+            }
+            $essentials->appendData($essentials->getContent()->iSubStr($essentials->getI(), $end), "number");
+            $essentials->setI($end);
+            return true;
+        }
+        return false;
+    },
     "templateliteral" => function (CustomMethodEssentialsModel $essentials, string $name = "template"): void
     {
         $string = $essentials->getData()[$name]

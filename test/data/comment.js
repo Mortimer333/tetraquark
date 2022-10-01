@@ -1,1 +1,1 @@
-`a${cas.asd}sdas`
+let number = 22 + 'asd';

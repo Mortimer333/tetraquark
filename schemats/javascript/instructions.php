@@ -833,4 +833,7 @@ return [
             ],
         ],
     ],
+    "/number\\" => [
+        "class" => "NumberBlock"
+    ]
 ];
