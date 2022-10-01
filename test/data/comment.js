@@ -1,1 +1,2 @@
-let a/* asd*/ =  2;
+let a =  2; // asd
+asd

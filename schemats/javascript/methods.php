@@ -303,8 +303,8 @@ return [
         $search  = false;
         $reader  = $essentials->getReader();
 
-        for ($i=$essentials->getI(); $i < $content->getLength(); $i++) {
-            $i = $reader->handleComment($content, $i);
+        for ($i = $essentials->getI(); $i < $content->getLength(); $i++) {
+            $i = $reader->handleComment($essentials, $i);
 
             // Skip string
             $i = Str::skip($content->getLetter($i), $i, $content);
@@ -404,7 +404,7 @@ return [
         $nestedHays = 0;
         $res = false;
         for ($i=$index; $i < $content->getLength(); $i++) {
-            $i = $reader->handleComment($content, $i);
+            $i = $reader->handleComment($essentials, $i);
 
             // Skip strings
             $i = Str::skip($content->getLetter($i), $i, $content);

@@ -1,134 +1,23 @@
- let a/* asd*/ =  2;\n
-  Is landmark -  
-  0 Letter: ` `, ``, 21, possible: /, _m, ., [, ', `, ", ,, (, =, !, {, *, e
-  Method to check: s, end, symbol:"first", "{", word:"name", "?">optionalchain, word
-  New method `s` lm, oprions: e, _m, f, i, [, ", `, ', n, a, s, c, d, y, r, t, w, g, v, l
-    Is landmark - l
-    1 Letter: `l`, `0`, 21, possible: e, _m, f, i, [, ", `, ', n, a, s, c, d, y, r, t, w, g, v, l
-    New string lm, oprions: e
-      Is landmark - e
-      2 Letter: `e`, `0`, 21, possible: e
-      New string lm, oprions: t
-        Is landmark - t
-        3 Letter: `t`, `0`, 21, possible: t
-        New string lm, oprions: _m
-          Is landmark -  
-          4 Letter: ` `, `0`, 21, possible: _m
-          Method to check: s
-          New method `s` lm, oprions: _block, _custom, _stop
-            Is landmark - a
-            5 Letter: `a`, `0`, 21, possible: _block, _custom, _stop
-            Nothign was found!
-Save block - {"class":"LetVariableBlock"}, debug: 
-  5 Letter: `a`, ``, 21, possible: _m
-  Method to check: varend:false
-  New method `varend:false` lm, oprions: _finish, _stop
-    20 Letter: `\n`, `5`, 21, possible: _finish, _stop
-    Nothign was found!
-Save block - [], debug: 
-  0 Letter: ` `, ``, 15, possible: /, _m, ., [, ', `, ", ,, (, =, !, {, *, e
-  Method to check: s, end, symbol:"first", "{", word:"name", "?">optionalchain, word
-  New method `s` lm, oprions: e, _m, f, i, [, ", `, ', n, a, s, c, d, y, r, t, w, g, v, l
-    1 Letter: `a`, `0`, 15, possible: e, _m, f, i, [, ", `, ', n, a, s, c, d, y, r, t, w, g, v, l
-    New string lm, oprions: s
-      9 Letter: `/`, `0`, 15, possible: s
-      Nothign was found!
-    Method to check: word:"name", word:"first", "#">isprivate, word:"alias", taken
-    New method `word:"name"` lm, oprions: _m, :, (, -, +, =, _custom, _stop
-      9 Letter: `/`, `0`, 15, possible: _m, :, (, -, +, =, _custom, _stop
-      Method to check: s, assignment
-      New method `assignment` lm, oprions: =
-        10 Letter: ` `, `0`, 15, possible: =
-        Nothign was found!
-      Nothign was found!
-    New method `word:"first"` lm, oprions: ., _m, (
-      9 Letter: `/`, `0`, 15, possible: ., _m, (
-      Method to check: "?">optionalchain
-      Nothign was found!
-    New method `word:"alias"` lm, oprions: _m
-      9 Letter: `/`, `0`, 15, possible: _m
-      Method to check: s
-      Nothign was found!
-  New method `word:"name"` lm, oprions: :, _m
-    9 Letter: `/`, `0`, 15, possible: :, _m
-    Method to check: s
-    Nothign was found!
-  New method `word` lm, oprions: =, _m
-    9 Letter: `/`, `0`, 15, possible: =, _m
-    Method to check: s
-    Nothign was found!
-Save block - {"class":"VariableInstanceBlock","empty":true}, debug: 
-  9 Letter: `/`, ``, 15, possible: /, _m, ., [, ', `, ", ,, (, =, !, {, *, e
-  New string lm, oprions: *, /
-    10 Letter: ` `, `9`, 15, possible: *, /
-    Nothign was found!
-  Method to check: s, end, symbol:"first", "{", word:"name", "?">optionalchain, word
-  New method `end` lm, oprions: e, _m, f, i, n, a, s, c, d, y, r, t, w, g, v, l
-    10 Letter: ` `, `9`, 15, possible: e, _m, f, i, n, a, s, c, d, y, r, t, w, g, v, l
-    Method to check: word:"name", word:"first", "#">isprivate, word:"alias", taken
-    Nothign was found!
-  Nothign was found!
-  10 Letter: ` `, ``, 15, possible: /, _m, ., [, ', `, ", ,, (, =, !, {, *, e
-  Method to check: s, end, symbol:"first", "{", word:"name", "?">optionalchain, word
-  New method `s` lm, oprions: e, _m, f, i, [, ", `, ', n, a, s, c, d, y, r, t, w, g, v, l
-    11 Letter: `=`, `10`, 15, possible: e, _m, f, i, [, ", `, ', n, a, s, c, d, y, r, t, w, g, v, l
-    Method to check: word:"name", word:"first", "#">isprivate, word:"alias", taken
-    Nothign was found!
-  Nothign was found!
-  11 Letter: `=`, ``, 15, possible: /, _m, ., [, ', `, ", ,, (, =, !, {, *, e
-  New string lm, oprions: =
-    12 Letter: ` `, `11`, 15, possible: =
-    Nothign was found!
-  Method to check: s, end, symbol:"first", "{", word:"name", "?">optionalchain, word
-  New method `symbol:"first"` lm, oprions: _m, _custom, _stop
-    12 Letter: ` `, `11`, 15, possible: _m, _custom, _stop
-    Method to check: symbol:"second"
-    Nothign was found!
-Save block - {"class":"SymbolBlock","type":"single"}, debug: 
-  12 Letter: ` `, ``, 15, possible: /, _m, ., [, ', `, ", ,, (, =, !, {, *, e
-  Method to check: s, end, symbol:"first", "{", word:"name", "?">optionalchain, word
-  New method `s` lm, oprions: e, _m, f, i, [, ", `, ', n, a, s, c, d, y, r, t, w, g, v, l
-    14 Letter: `2`, `12`, 15, possible: e, _m, f, i, [, ", `, ', n, a, s, c, d, y, r, t, w, g, v, l
-    Method to check: word:"name", word:"first", "#">isprivate, word:"alias", taken
-    Nothign was found!
-  Nothign was found!
-  13 Letter: ` `, ``, 15, possible: /, _m, ., [, ', `, ", ,, (, =, !, {, *, e
-  Method to check: s, end, symbol:"first", "{", word:"name", "?">optionalchain, word
-  New method `s` lm, oprions: e, _m, f, i, [, ", `, ', n, a, s, c, d, y, r, t, w, g, v, l
-    14 Letter: `2`, `13`, 15, possible: e, _m, f, i, [, ", `, ', n, a, s, c, d, y, r, t, w, g, v, l
-    Method to check: word:"name", word:"first", "#">isprivate, word:"alias", taken
-    Nothign was found!
-  Nothign was found!
-  14 Letter: `2`, ``, 15, possible: /, _m, ., [, ', `, ", ,, (, =, !, {, *, e
-  Method to check: s, end, symbol:"first", "{", word:"name", "?">optionalchain, word
-  Nothign was found!
-Save block - [], debug: 
-  Is landmark - \n
-  20 Letter: `\n`, ``, 21, possible: /, _m, ., [, ', `, ", ,, (, =, !, {, *, e
-  Method to check: s, end, symbol:"first", "{", word:"name", "?">optionalchain, word
-  New method `s` lm, oprions: e, _m, f, i, [, ", `, ', n, a, s, c, d, y, r, t, w, g, v, l
-    Is landmark - 
-  Nothign was found!
-Duration: 0.004s
+ let a =  2; // asd\nasd\n
+Duration: 0.003s
 
   LetVariableBlock {}
-    VariableInstanceBlock {empty: 1}
-    No class {}
-    SymbolBlock {type: single}
-    No class {}
+    VariableInstanceBlock {replace: 1}
+      No class {}
+  VariableInstanceBlock {empty: 1}
 [
   [
     "blockStart" => 5,
-    "blockEnd" => 18,
+    "blockEnd" => 10,
     "start" => 0,
-    "end" => 19,
+    "end" => 11,
     "landmark" => [
       "class" => "LetVariableBlock",
     ],
     "data" => [
       [
         "_end" => [
-          "var" => "a\/* asd*\/ =  2;",
+          "var" => "a =  2;",
           "stop" => ";",
         ],
       ],
@@ -139,85 +28,78 @@ Duration: 0.004s
     ],
     "children" => [
       [
-        "blockStart" => null,
-        "blockEnd" => null,
+        "blockStart" => 9,
+        "blockEnd" => 12,
         "start" => 5,
-        "end" => 6,
+        "end" => 12,
         "landmark" => [
           "class" => "VariableInstanceBlock",
-          "empty" => true,
+          "replace" => true,
         ],
         "data" => [
           "name" => "a",
+          "negation" => " ",
+          [
+            "_end" => [
+            ],
+          ],
         ],
         "index" => 0,
         "parent" => parent[0]
         "path" => [
         ],
         "children" => [
+          [
+            "blockStart" => null,
+            "blockEnd" => null,
+            "start" => 4,
+            "end" => 7,
+            "landmark" => [
+            ],
+            "data" => [
+              "missed" => "2",
+            ],
+            "index" => 0,
+            "parent" => parent[0]
+            "path" => [
+            ],
+            "children" => [
+            ],
+            "comments" => [
+            ],
+          ],
         ],
         "comments" => [
         ],
       ],
+    ],
+    "comments" => [
       [
-        "blockStart" => null,
-        "blockEnd" => null,
-        "start" => 7,
-        "end" => 15,
-        "landmark" => [
-        ],
-        "data" => [
-          "missed" => "\/* asd*\/",
-        ],
-        "index" => 1,
-        "parent" => parent[0]
-        "path" => [
-        ],
-        "children" => [
-        ],
-        "comments" => [
+        "0" => [
+          "content" => "\/\/ asd\n",
+          "start" => 13,
+          "end" => 19,
         ],
       ],
-      [
-        "blockStart" => null,
-        "blockEnd" => null,
-        "start" => 16,
-        "end" => 16,
-        "landmark" => [
-          "class" => "SymbolBlock",
-          "type" => "single",
-        ],
-        "data" => [
-          "first" => "=",
-        ],
-        "index" => 2,
-        "parent" => parent[0]
-        "path" => [
-        ],
-        "children" => [
-        ],
-        "comments" => [
-        ],
-      ],
-      [
-        "blockStart" => null,
-        "blockEnd" => null,
-        "start" => 17,
-        "end" => 20,
-        "landmark" => [
-        ],
-        "data" => [
-          "missed" => "2",
-        ],
-        "index" => 3,
-        "parent" => parent[0]
-        "path" => [
-        ],
-        "children" => [
-        ],
-        "comments" => [
-        ],
-      ],
+    ],
+  ],
+  [
+    "blockStart" => null,
+    "blockEnd" => null,
+    "start" => 13,
+    "end" => 22,
+    "landmark" => [
+      "class" => "VariableInstanceBlock",
+      "empty" => true,
+    ],
+    "data" => [
+      "name" => "asd",
+    ],
+    "index" => 1,
+    "parent" => script
+    "path" => [
+    ],
+    "children" => [
     ],
     "comments" => [
     ],

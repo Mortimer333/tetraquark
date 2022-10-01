@@ -136,4 +136,15 @@ class BlockModel extends BaseBlockModel
         $this->path = $path;
         return $this;
     }
+
+    public function getComments(): array
+    {
+        return $this->comments;
+    }
+
+    public function setComments(array $comments): self
+    {
+        $this->comments = $comments;
+        return $this;
+    }
 }

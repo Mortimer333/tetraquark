@@ -36,8 +36,9 @@ word.funcion = 12 + func(1 , 23);
 8. [DONE] private class attrbitues and method - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields
 9. [DONE] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
 10. [DONE] Object name in brackets: `{[key] : 'as'}`
-11. Skip comments between definition: `let a = /* wel whooops */ 2;`
+11. [DONE] Skip comments between definition: `let a = /* wel whooops */ 2;`
 12. Figure out how to analize this: `${this.getDate()}-${months[this.getMonth()]}-${this.getFullYear()}`
+13. Add NumberBlock
 At some point. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols
 
 List of blocks to implement:
