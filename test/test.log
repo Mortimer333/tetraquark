@@ -1,66 +1,38 @@
- let a =  2; // asd\nasd\n
-Duration: 0.003s
+ `a${cas.asd}sdas`\n
+"a" cas.asd "sdas"
+"a" cas.asd "sdas"
+"a" cas.asd "sdas"
+Duration: 0.004s
 
-  LetVariableBlock {}
-    VariableInstanceBlock {replace: 1}
-      No class {}
-  VariableInstanceBlock {empty: 1}
+  StringBlock {}
+    StringBlock {}
+    ChainBlock {first: 1}
+      StringBlock {}
 [
   [
-    "blockStart" => 5,
-    "blockEnd" => 10,
-    "start" => 0,
-    "end" => 11,
+    "blockStart" => null,
+    "blockEnd" => null,
+    "start" => 1,
+    "end" => 17,
     "landmark" => [
-      "class" => "LetVariableBlock",
+      "class" => "StringBlock",
     ],
     "data" => [
       [
-        "_end" => [
-          "var" => "a =  2;",
-          "stop" => ";",
-        ],
-      ],
-    ],
-    "index" => 0,
-    "parent" => script
-    "path" => [
-    ],
-    "children" => [
-      [
-        "blockStart" => 9,
-        "blockEnd" => 12,
-        "start" => 5,
-        "end" => 12,
-        "landmark" => [
-          "class" => "VariableInstanceBlock",
-          "replace" => true,
-        ],
-        "data" => [
-          "name" => "a",
-          "negation" => " ",
-          [
-            "_end" => [
-            ],
-          ],
-        ],
-        "index" => 0,
-        "parent" => parent[0]
-        "path" => [
-        ],
-        "children" => [
+        "template" => [
           [
             "blockStart" => null,
             "blockEnd" => null,
-            "start" => 4,
-            "end" => 7,
+            "start" => 1,
+            "end" => 3,
             "landmark" => [
+              "class" => "StringBlock",
             ],
             "data" => [
-              "missed" => "2",
+              "string" => "a",
             ],
             "index" => 0,
-            "parent" => parent[0]
+            "parent" => script
             "path" => [
             ],
             "children" => [
@@ -68,34 +40,61 @@ Duration: 0.003s
             "comments" => [
             ],
           ],
-        ],
-        "comments" => [
+          [
+            "blockStart" => 12,
+            "blockEnd" => 19,
+            "start" => 4,
+            "end" => 19,
+            "landmark" => [
+              "class" => "ChainBlock",
+              "first" => true,
+            ],
+            "data" => [
+              "first" => "cas",
+              "second" => "asd",
+              [
+                "_end" => [
+                  "var" => " \"sdas\"",
+                  "stop" => null,
+                ],
+              ],
+            ],
+            "index" => 1,
+            "parent" => script
+            "path" => [
+            ],
+            "children" => [
+              [
+                "blockStart" => null,
+                "blockEnd" => null,
+                "start" => 13,
+                "end" => 18,
+                "landmark" => [
+                  "class" => "StringBlock",
+                ],
+                "data" => [
+                  "string" => "sdas",
+                ],
+                "index" => 0,
+                "parent" => parent[1]
+                "path" => [
+                  "\"",
+                  "strend:`\"`",
+                  "strend:'\"'",
+                ],
+                "children" => [
+                ],
+                "comments" => [
+                ],
+              ],
+            ],
+            "comments" => [
+            ],
+          ],
         ],
       ],
     ],
-    "comments" => [
-      [
-        "0" => [
-          "content" => "\/\/ asd\n",
-          "start" => 13,
-          "end" => 19,
-        ],
-      ],
-    ],
-  ],
-  [
-    "blockStart" => null,
-    "blockEnd" => null,
-    "start" => 13,
-    "end" => 22,
-    "landmark" => [
-      "class" => "VariableInstanceBlock",
-      "empty" => true,
-    ],
-    "data" => [
-      "name" => "asd",
-    ],
-    "index" => 1,
+    "index" => 0,
     "parent" => script
     "path" => [
     ],

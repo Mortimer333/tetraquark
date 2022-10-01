@@ -19,7 +19,7 @@ class BlockModel extends BaseBlockModel
         protected int $end,
         protected array $landmark,
         protected array $data,
-        protected int $index,
+        protected ?int $index = null,
         protected ?BlockModelInterface $parent = null,
         protected array $path = [],
         protected array $children = [],

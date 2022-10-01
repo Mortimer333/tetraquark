@@ -1,2 +1,1 @@
-let a =  2; // asd
-asd
+`a${cas.asd}sdas`

@@ -3,6 +3,8 @@
 use \Tetraquark\{Content, Validate, Str, Log};
 use \Tetraquark\Model\CustomMethodEssentialsModel;
 
+require_once __DIR__ . '/landmark.php';
+
 class Helpers
 {
     public static function checkIfValidVarEnd(CustomMethodEssentialsModel $essentials, int $i): bool
@@ -58,6 +60,39 @@ class Helpers
 
 
 return [
+    "templateliteral" => function (CustomMethodEssentialsModel $essentials, string $name = "template"): void
+    {
+        $string = $essentials->getData()[$name]
+            ?? throw new \Exception("Couldn't find template literal in data with name: " . htmlentities($name));
+        // $content = new Content($string);
+        $pos = 0;
+        $addEnd = true;
+        $string = '"' . $string;
+        while ($pos !== false) {
+            $pos = strpos($string, '${', $pos);
+            if ($pos !== false) {
+                $start = $pos;
+                $end = strpos($string, '}', $start + 2);
+                if ($end === false) {
+                    $pos = false;
+                    $addEnd = false;
+                } else {
+                    $pre = substr($string, 0, $end);
+                    $after = substr($string, $end + 1);
+                    $string = $pre . ' "' . $after;
+                    $pos = $end + 1;
+                }
+                $string[$start] = '"';
+                $string[$start + 1] = ' ';
+
+            }
+        }
+        if ($addEnd) {
+            $string .= '"';
+        }
+
+        $essentials->appendData($string, $name);
+    },
     "isprivate" => function (CustomMethodEssentialsModel $essentials): void
     {
         $essentials->appendData(true, 'private');
@@ -158,6 +193,7 @@ return [
         ];
         $res = !isset($skipped[$essentials->getLetter()])
             && (preg_match("/[\W]+/", $essentials->getLetter()) === 1)
+            && !Validate::isStringLandmark($essentials->getLetter())
             && !Validate::isWhitespace($essentials->getLetter());
         if ($res) {
             $essentials->appendData($essentials->getLetter(), $name);
@@ -266,7 +302,7 @@ return [
             $essentials->getContent()->iSubStr($essentials->getI(), $i - 2),
             $name
         );
-        $essentials->setI($i);
+        $essentials->setI($i - 1);
         return true;
     },
     "end" => function (CustomMethodEssentialsModel $essentials): bool

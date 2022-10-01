@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+require_once __DIR__ . '/landmark.php';
+
 $arrayChainInstruction = [
     '/s|e\[/find:"]":"[":"index">read:"index"\\' => [
         "class" => "ChainBlock",
@@ -254,11 +256,9 @@ return [
         ]
     ],
     /* STRING ' */
-    "'/strend:\"'\"\\" => [
-        "class" => "StringBlock",
-    ],
+    "'/strend:\"'\"\\" => JsLandmark::STRING_LANDMARK,
     /* STRING ` */
-    "`/strend:\"`\"\\" => [
+    '`/strend:"`":"template">templateliteral:"template">read:"template"\\' => [
         "class" => "StringBlock",
     ],
     /* STRING " */
@@ -379,7 +379,7 @@ return [
         ]
     ],
     /* FIRST IN CHAIN */
-    '/s|end\/word:"first"\\' => [
+    '/word:"first"\\' => [
         "_extend" => [
             '/"?">optionalchain|e\./"#">isprivate|e\/word:"second"\\' => [
                 "class" => "ChainBlock",
@@ -468,7 +468,7 @@ return [
             ...$arrayChainInstruction,
         ]
     ],
-    '/s|end\this/".">decrease\\' => [
+    'this/".">decrease\\' => [
         "class" => "ThisBlock",
         "_block" => [
             "end" => '/varend\\',
@@ -626,7 +626,7 @@ return [
     '/s|e|"{"\\' => [
         "_extend" => [
             "'/strend:`'`\/s|e\:" => $objectItemBlock,
-            '`/strend:"`"\/s|e\:' => $objectItemBlock,
+            '`/strend:"`":"template">templateliteral\/s|e\:' => $objectItemBlock,
             '"/strend:`"`\/s|e\:' => $objectItemBlock,
             '/word:"name"\/s|e\:' => $objectItemBlock,
             '[/find:"]":"[":"key">read:"key"\/s|e\:' => ["key" => true, ...$objectItemBlock],
@@ -729,7 +729,7 @@ return [
         "class" => "AliasBlock",
     ],
     '\'/strend:`\'`\/s|e\as/s\/word:"alias"\\' => $importAliasStringItemBlock,
-    '`/strend:"`"\/s|e\as/s\/word:"alias"\\' => $importAliasStringItemBlock,
+    '`/strend:"`":"template">templateliteral\/s|e\as/s\/word:"alias"\\' => $importAliasStringItemBlock,
     '"/strend:`"`\/s|e\as/s\/word:"alias"\\' => $importAliasStringItemBlock,
     '*/s|e\as/s\/word:"alias"\\' => [
         "class" => "ImportAllAliasBlock",
@@ -741,15 +741,15 @@ return [
     '/s|end\from/s\\' => [
         "_extend" => [
             "'/strend:`'`\\" => $fromItemBlock,
-            '`/strend:"`"\\' => $fromItemBlock,
+            '`/strend:"`":"template">templateliteral\\' => $fromItemBlock,
             '"/strend:`"`\\' => $fromItemBlock,
         ]
     ],
     /* EXPORT */
     '/s|end\/word:"name"\/s\as/s|e\\' => [
         "_extend" => [
-            '`/strend:"`"\\' => $exportAliasStringItemBlock,
-            '\'/strend:`\'`\\' => $exportAliasStringItemBlock,
+            '`/strend:"`":"template">templateliteral\\' => $exportAliasStringItemBlock,
+            '\'/strend:// Log ::\'// Log ::\\' => $exportAliasStringItemBlock,
             '"/strend:`"`\\' => $exportAliasStringItemBlock,
         ]
     ],
@@ -784,7 +784,7 @@ return [
                         "_extend" => [
                             '/find:"}":"{":"object">read:"object"\/s|e\from/s|e\\' => [
                                 "_extend" => [
-                                    '`/strend:"`"\\' => $exportFromBlock,
+                                    '`/strend:"`":"template">templateliteral\\' => $exportFromBlock,
                                     '\'/strend:`\'`\\' => $exportFromBlock,
                                     '"/strend:`"`\\' => $exportFromBlock,
                                 ]
