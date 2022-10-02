@@ -1,25 +1,143 @@
- let number = 22 + 'asd';\n
+ for (var variable in iterable) {\n\n}\n
+  0 Letter: ` `, ``, 37, possible: /, _m, ., [, ', `, ", ,, (, t, =, !, {, *, e
+  Method to check: s, end, symbol:"first", "{", word:"name", "(", "?">optionalchain, word:"first", number, word
+  New method `s` lm, oprions: e, _m, f, i, [, ", `, ', n, c, l, v, a, s, d, y, r, t, w, g
+    1 Letter: `f`, `0`, 37, possible: e, _m, f, i, [, ", `, ', n, c, l, v, a, s, d, y, r, t, w, g
+    New string lm, oprions: r, u, o, a, i
+      2 Letter: `o`, `0`, 37, possible: r, u, o, a, i
+      New string lm, oprions: r
+        3 Letter: `r`, `0`, 37, possible: r
+        New string lm, oprions: (, _m
+          4 Letter: ` `, `0`, 37, possible: (, _m
+          Method to check: s
+          New method `s` lm, oprions: (
+            5 Letter: `(`, `0`, 37, possible: (
+            New string lm, oprions: _m
+              6 Letter: `v`, `0`, 37, possible: _m
+              Method to check: find:")":"(":"condition">read:"condition"
+                0 Letter: ` `, ``, 25, possible: /, _m, ., [, ', `, ", ,, (, t, =, !, {, *, e
+                Method to check: s, end, symbol:"first", "{", word:"name", "(", "?">optionalchain, word:"first", number, word
+                New method `s` lm, oprions: e, _m, f, i, [, ", `, ', n, c, l, v, a, s, d, y, r, t, w, g
+                  1 Letter: `v`, `0`, 25, possible: e, _m, f, i, [, ", `, ', n, c, l, v, a, s, d, y, r, t, w, g
+                  New string lm, oprions: a
+                    2 Letter: `a`, `0`, 25, possible: a
+                    New string lm, oprions: r
+                      3 Letter: `r`, `0`, 25, possible: r
+                      New string lm, oprions: _m
+                        4 Letter: ` `, `0`, 25, possible: _m
+                        Method to check: s
+                        New method `s` lm, oprions: _m, _block, _custom, _stop
+                          5 Letter: `v`, `0`, 25, possible: _m, _block, _custom, _stop
+                          Method to check: word:"var"
+                          New method `word:"var"` lm, oprions: _m
+                            13 Letter: ` `, `0`, 25, possible: _m
+                            Method to check: s
+                            New method `s` lm, oprions: i, o
+                              14 Letter: `i`, `0`, 25, possible: i, o
+                              New string lm, oprions: n
+                                15 Letter: `n`, `0`, 25, possible: n
+                                New string lm, oprions: _m
+                                  16 Letter: ` `, `0`, 25, possible: _m
+                                  Method to check: s
+                                  New method `s` lm, oprions: _m
+                                    17 Letter: `i`, `0`, 25, possible: _m
+                                    Method to check: word:"iterable"
+                                    New method `word:"iterable"` lm, oprions: _custom, _stop
+              Save block - {"type":"var","class":"InConditionBlock"}, debug: s => f => o => r => s => ( => find:")":"(":"condition">read:"condition" => s => v => a => r => s => word:"var" => s => i => n => s => word:"iterable"
+              New method `find:")":"(":"condition">read:"condition"` lm, oprions: _m, {
+                31 Letter: ` `, `0`, 37, possible: _m, {
+                Method to check: nparenthesis>decrease, s
+                New method `s` lm, oprions: {
+                  32 Letter: `{`, `0`, 37, possible: {
+                  New string lm, oprions: _block, _custom, _stop
+                    33 Letter: `\n`, `0`, 37, possible: _block, _custom, _stop
+                    Nothign was found!
+Save block - {"class":"ForBlock"}, debug: 
+  33 Letter: `\n`, ``, 37, possible: }, {
+  Nothign was found!
+  34 Letter: `\n`, ``, 37, possible: }, {
+  Nothign was found!
+  35 Letter: `}`, ``, 37, possible: }, {
+  New string lm, oprions: _finish, _stop
+    36 Letter: `\n`, `35`, 37, possible: _finish, _stop
+    Nothign was found!
+Save block - [], debug: 
+  0 Letter: `\n`, ``, 2, possible: /, _m, ., [, ', `, ", ,, (, t, =, !, {, *, e
+  Method to check: s, end, symbol:"first", "{", word:"name", "(", "?">optionalchain, word:"first", number, word
+  New method `s` lm, oprions: e, _m, f, i, [, ", `, ', n, c, l, v, a, s, d, y, r, t, w, g
+    1 Letter: `\n`, `0`, 2, possible: e, _m, f, i, [, ", `, ', n, c, l, v, a, s, d, y, r, t, w, g
+    Method to check: word:"name", word:"var", "#">isprivate, word:"alias", taken
+    Nothign was found!
+  Nothign was found!
+  1 Letter: `\n`, ``, 2, possible: /, _m, ., [, ', `, ", ,, (, t, =, !, {, *, e
+  Method to check: s, end, symbol:"first", "{", word:"name", "(", "?">optionalchain, word:"first", number, word
+  New method `s` lm, oprions: e, _m, f, i, [, ", `, ', n, c, l, v, a, s, d, y, r, t, w, g
+  Nothign was found!
+  36 Letter: `\n`, ``, 37, possible: /, _m, ., [, ', `, ", ,, (, t, =, !, {, *, e
+  Method to check: s, end, symbol:"first", "{", word:"name", "(", "?">optionalchain, word:"first", number, word
+  New method `s` lm, oprions: e, _m, f, i, [, ", `, ', n, c, l, v, a, s, d, y, r, t, w, g
+  Nothign was found!
 Duration: 0.004s
 
-  LetVariableBlock {}
-    VariableInstanceBlock {replace: 1}
-      NumberBlock {}
-      SymbolBlock {type: single}
-      StringBlock {}
+  ForBlock {}
+    InConditionBlock {type: var}
 [
   [
-    "blockStart" => 5,
-    "blockEnd" => 23,
+    "blockStart" => 33,
+    "blockEnd" => 34,
     "start" => 0,
-    "end" => 24,
+    "end" => 35,
     "landmark" => [
-      "class" => "LetVariableBlock",
+      "class" => "ForBlock",
     ],
     "data" => [
+      "foundkey" => ")",
+      [
+        "condition" => [
+          [
+            "blockStart" => null,
+            "blockEnd" => null,
+            "start" => 0,
+            "end" => 25,
+            "landmark" => [
+              "type" => "var",
+              "class" => "InConditionBlock",
+            ],
+            "data" => [
+              "var" => "variable",
+              "iterable" => "iterable",
+            ],
+            "index" => 0,
+            "parent" => script
+            "path" => [
+              "s",
+              "f",
+              "o",
+              "r",
+              "s",
+              "(",
+              "find:\")\":\"(\":\"condition\">read:\"condition\"",
+              "s",
+              "v",
+              "a",
+              "r",
+              "s",
+              "word:\"var\"",
+              "s",
+              "i",
+              "n",
+              "s",
+              "word:\"iterable\"",
+            ],
+            "children" => [
+            ],
+            "comments" => [
+            ],
+          ],
+        ],
+      ],
       [
         "_end" => [
-          "var" => "number = 22 + 'asd';",
-          "stop" => ";",
         ],
       ],
     ],
@@ -28,98 +146,6 @@ Duration: 0.004s
     "path" => [
     ],
     "children" => [
-      [
-        "blockStart" => 14,
-        "blockEnd" => 25,
-        "start" => 5,
-        "end" => 25,
-        "landmark" => [
-          "class" => "VariableInstanceBlock",
-          "replace" => true,
-        ],
-        "data" => [
-          "name" => "number",
-          "negation" => " ",
-          [
-            "_end" => [
-              "var" => " 22 + 'asd'",
-              "stop" => null,
-            ],
-          ],
-        ],
-        "index" => 0,
-        "parent" => parent[0]
-        "path" => [
-        ],
-        "children" => [
-          [
-            "blockStart" => null,
-            "blockEnd" => null,
-            "start" => 15,
-            "end" => 16,
-            "landmark" => [
-              "class" => "NumberBlock",
-            ],
-            "data" => [
-              "number" => "22",
-            ],
-            "index" => 0,
-            "parent" => parent[0]
-            "path" => [
-            ],
-            "children" => [
-            ],
-            "comments" => [
-            ],
-          ],
-          [
-            "blockStart" => null,
-            "blockEnd" => null,
-            "start" => 18,
-            "end" => 18,
-            "landmark" => [
-              "class" => "SymbolBlock",
-              "type" => "single",
-            ],
-            "data" => [
-              "first" => "+",
-            ],
-            "index" => 1,
-            "parent" => parent[0]
-            "path" => [
-            ],
-            "children" => [
-            ],
-            "comments" => [
-            ],
-          ],
-          [
-            "blockStart" => null,
-            "blockEnd" => null,
-            "start" => 20,
-            "end" => 24,
-            "landmark" => [
-              "class" => "StringBlock",
-            ],
-            "data" => [
-              "string" => "asd",
-            ],
-            "index" => 2,
-            "parent" => parent[0]
-            "path" => [
-              "'",
-              "strend:`'`",
-              "strend:\"'\"",
-            ],
-            "children" => [
-            ],
-            "comments" => [
-            ],
-          ],
-        ],
-        "comments" => [
-        ],
-      ],
     ],
     "comments" => [
     ],

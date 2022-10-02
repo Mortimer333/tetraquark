@@ -1,1 +1,3 @@
-let number = 22 + 'asd';
+for (var variable in iterable) {
+
+}

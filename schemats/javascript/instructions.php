@@ -2,6 +2,14 @@
 
 require_once __DIR__ . '/landmark.php';
 
+$forOfConditionBlock = [
+    "class" => "OfConditionBlock"
+];
+
+$forInConditionBlock = [
+    "class" => "InConditionBlock"
+];
+
 $arrayChainInstruction = [
     '/s|e\[/find:"]":"[":"index">read:"index"\\' => [
         "class" => "ChainBlock",
@@ -546,6 +554,38 @@ return [
         "_block" => [
             "end" => "}",
             "nested" => "{"
+        ]
+    ],
+    /* FOR OF AND IN CONDITION*/
+    '/s|end|"("\\' => [
+        "_extend" => [
+            'const/s\/word:"var"\/s\\' => [
+                "_extend" => [
+                    'of/s\/word:"iterable"\\' => ["type" => "const", ...$forOfConditionBlock],
+                    'in/s\/word:"iterable"\\' => ["type" => "const", ...$forInConditionBlock],
+                ]
+            ],
+
+            'let/s\/word:"var"\/s\\' => [
+                "_extend" => [
+                    'of/s\/word:"iterable"\\' => ["type" => "let", ...$forOfConditionBlock],
+                    'in/s\/word:"iterable"\\' => ["type" => "let", ...$forInConditionBlock],
+                ]
+            ],
+
+            'var/s\/word:"var"\/s\\' => [
+                "_extend" => [
+                    'of/s\/word:"iterable"\\' => ["type" => "var", ...$forOfConditionBlock],
+                    'in/s\/word:"iterable"\\' => ["type" => "var", ...$forInConditionBlock],
+                ]
+            ],
+
+            '/word:"var"\/s\\' => [
+                "_extend" => [
+                    'of/s\/word:"iterable"\\' => ["type" => "empty", ...$forOfConditionBlock],
+                    'in/s\/word:"iterable"\\' => ["type" => "empty", ...$forInConditionBlock],
+                ]
+            ],
         ]
     ],
     /* SHORT FOR */

@@ -39,22 +39,15 @@ word.funcion = 12 + func(1 , 23);
 11. [DONE] Skip comments between definition: `let a = /* wel whooops */ 2;`
 12. [DONE] Figure out how to analize this: `${this.getDate()}-${months[this.getMonth()]}-${this.getFullYear()}`
 13. [DONE] Add NumberBlock
-At some point. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols:
+14. [DONE] For in
+15. [DONE] For of
+16. This weird shit - At some point. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols:
 ```js
 // Method defined as this
 [Symbol.iterator] () {
     return this;
-},
-
-// Special for - in
-for (const property in object) {
-  console.log(`${property}: ${object[property]}`);
 }
 
-// Special for - of
-for (const element of array1) {
-  console.log(element);
-}
 ```
 
 List of blocks to implement:
