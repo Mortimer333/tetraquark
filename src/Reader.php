@@ -48,8 +48,10 @@ class Reader
     ];
     // Comment found inbetween blocks
     protected array $comments = [];
-    // Retrieve comments and replac ethem with whitespace
+    // Retrieve comments and replace them with whitespace
     protected bool $retrieveComments = true;
+    // Save retrieved comments
+    protected bool $setRetrievedComments = true;
 
     public const SKIP = 'skip';
     public const FINISH = 'finish';
@@ -136,6 +138,39 @@ class Reader
             Log  ::log(']');
         }
         return $script;
+    }
+
+    public function setRerieveComments(bool $retrieveComments): self
+    {
+        $this->retrieveComments = $retrieveComments;
+        return $this;
+    }
+
+    public function getRerieveComments(): bool
+    {
+        return $this->retrieveComments;
+    }
+
+    public function setSaveRerievedComments(bool $setRetrievedComments): self
+    {
+        $this->setRetrievedComments = $setRetrievedComments;
+        return $this;
+    }
+
+    public function getSaveRerievedComments(): bool
+    {
+        return $this->setRetrievedComments;
+    }
+
+    public function setComments(array $comments): self
+    {
+        $this->comments = $comments;
+        return $this;
+    }
+
+    public function getComments(): array
+    {
+        return $this->comments;
     }
 
     public function displayLandmarks(array $script): void
@@ -358,7 +393,7 @@ class Reader
         // if ($this->iterations > 2500) {
         //     throw new \Error('Infinite loop');
         // }
-        // Log ::: increaseIndent();
+        // Log ::increaseIndent();
 
         $i = $this->handleComment($resolver, $i);
 
@@ -367,26 +402,26 @@ class Reader
             /* Don't end file with exception but let it slowly get out of foreach */
             // $resolver->i--;
             // throw new Exception(self::END_OF_FILE);
-            // Log ::: decreaseIndent();
+            // Log ::decreaseIndent();
             return false;
         }
 
         // Don't skip string - $resolver->setI(Str::skip($content->getLetter($i), $i, $content));
         $resolver->setI($i);
         $resolver->setLetter($content->getLetter($i));
-        // Log ::: log($i . ' Letter: `' . $resolver->getLetter() . '`, `' . $resolver->getLmStart() . '`, ' . $resolver->getContent()->getLength() . ', possible: ' . implode(', ', array_keys($resolver->getLandmark())));
+        // Log ::log($i . ' Letter: `' . $resolver->getLetter() . '`, `' . $resolver->getLmStart() . '`, ' . $resolver->getContent()->getLength() . ', possible: ' . implode(', ', array_keys($resolver->getLandmark())));
         if (isset($resolver->getLandmark()[$resolver->getLetter()])) {
             $solve = $this->resolveStringLandmark($resolver);
             if ($solve) {
                 $i = $solve['save']['i'];
-                // Log ::: decreaseIndent();
+                // Log ::decreaseIndent();
                 return $solve;
             }
         }
 
         if (isset($resolver->getLandmark()['_m']) && ($solve = $this->resolveMethodLandmark($resolver))) {
             $i = $solve['save']['i'];
-            // Log ::: decreaseIndent();
+            // Log ::decreaseIndent();
             return $solve;
         }
 
@@ -396,10 +431,10 @@ class Reader
             $i--;
             $resolver->setLetter($content->getLetter($i));
         }
-        // Log ::: log("Nothign was found!");
+        // Log ::log("Nothign was found!");
         $this->clearObjectify($resolver);
 
-        // Log ::: decreaseIndent();
+        // Log ::decreaseIndent();
         return false;
     }
 
@@ -468,17 +503,20 @@ class Reader
             $betweenComment = $content->iSubStr($pos, $start - 1);
             // If it's in the same line, try to attach to the last block
             if (strpos($betweenComment, "\n") === false) {
+                if ($resolver->getParent() instanceof ScriptBlockModel) {
+                    // This mean we are at the top of the file
+                    return;
+                }
+
                 if ($resolver instanceof CustomMethodEssentialsModel) {
                     $block = $resolver->getPrevious();
                 } else {
-                    if (is_null($resolver->getParent())) {
-                        // This mean we are at the top of the file
-                        return;
-                    }
                     $block = $resolver->getParent()->getLastChild();
                 }
 
-                $block->setComments(array_merge($block->getComments(), $this->comments));
+                if ($block) {
+                    $block->setComments(array_merge($block->getComments(), $this->comments));
+                }
                 $this->comments = [];
             }
         }
@@ -525,7 +563,7 @@ class Reader
         $this->debug["path"][] = $resolver->getLetter();
         $possibleLandmark = $resolver->getLandmark()[$resolver->getLetter()];
 
-        // Log ::: log('New string lm, oprions: ' . implode(', ', array_keys($possibleLandmark)));
+        // Log ::log('New string lm, oprions: ' . implode(', ', array_keys($possibleLandmark)));
         if (is_null($resolver->getLmStart())) {
             $resolver->setLmStart($resolver->getI());
         }
@@ -565,7 +603,7 @@ class Reader
     {
         $preSave = $this->saveResolver($resolver);
         $solve = null;
-        // Log ::: log('Method to check: ' . implode(', ', array_keys($resolver->getLandmark()['_m'])));
+        // Log ::log('Method to check: ' . implode(', ', array_keys($resolver->getLandmark()['_m'])));
         foreach ($resolver->getLandmark()['_m'] as $methodName => $step) {
             list($method, $callable) = $this->getMethod($methodName);
             // @TODO figure out if it's not better to pass Resolver and just restore save state after failure
@@ -603,7 +641,7 @@ class Reader
             // Update changed essentials
             $this->updateFromEssentials($resolver, $essentials);
 
-            // Log ::: log('New method `' . $methodName . '` lm, oprions: ' . implode(', ', array_keys($step)));
+            // Log ::log('New method `' . $methodName . '` lm, oprions: ' . implode(', ', array_keys($step)));
 
             $res = $this->tryToFindNextMatch($resolver, $step);
             if (
@@ -728,7 +766,8 @@ class Reader
 
     public function saveBlock(LandmarkResolverModel $resolver): void
     {
-        // Log ::: log('Save block - ' . json_encode($resolver->getLandmark()['_custom'] ?? []) . ", debug: " . implode(' => ', $this->debug['path']));
+        // Log ::log('Save block - ' . json_encode($resolver->getLandmark()['_custom'] ?? []) . ", debug: " . implode(' => ', $this->debug['path']));
+
         $item = new BlockModel(
             start: $resolver->getLmStart(),
             end: $resolver->getI(),

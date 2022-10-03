@@ -1,5 +1,5 @@
-# tetraquark
-PHP Library for minifying javascript
+# Tetraquark
+PHP <del>Library</del>Tool for <del>minifying javascript</del>mapping out scripts
 
 # Draft
 1. You can point main file and minifier will minify it and try to make it a single file and smallest possible. Might want to get functions or whole files from imports to make this independed file.
@@ -23,6 +23,32 @@ PHPunit
 php ./vendor/bin/phpunit test
 php test/test.php > test/test.log 2>&1
 
+Plan:
+0. Merge it to master and create new branch
+1. Save somewhere how I figured out Import and Export (ImportBlock and ExportBlock - `let Ī = {};Ī.y = Ī => {};`) - we are moving JS handle
+   to `schemats/` as part of transforming this to being a tool not dedicated solution.
+2. Clean old code:
+   - Block
+   - Trait
+   - Fundation
+   - Few root classes I don't use
+3. Move Log class to seperate project and explain the future of it with Attributes
+4. Maybe move Content class out (too) as it is surprisingly useful
+5. Recreate Validate as something used for JS sytax schema `/schemats/javascript` and copy used methods by Reader to it or in Str (probably in Str)
+   - Quick test it
+6. Create integration tests - one for each syntax (probably generate map and use it as reference)
+   - each test should have seperate file with test data
+   - each test have to check:
+     - with formal syntax - `const a = 'a';`
+     - with lazy syntax - `const a='a'`
+     - with weird syntax - `const a\n\t=\n\t\t'a'`
+   - all of them should be inside tests/Integration folder
+7. Create unit tests (`test/Unit`) for each public method (probably all of them) for:
+   - Str
+   - Content (if not moved)
+   - Reader
+   - *Model
+
 TODO:
 1. [DONE] Some problem with missed in caller block -word.funcion = 12 + func(1 , 23);
 2. [DONE] Add method which will create children for item (varend>read/objectify)
@@ -40,6 +66,7 @@ TODO:
 14. [DONE] For in
 15. [DONE] For of
 16. [DONE] This weird shit - At some point. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols:
+17. [DONE] Is it possible to have multiple call ont he same method - `caller(1)(2)(3)`
 
 List of blocks which I might not implement:
 ~ SemicolonBlock - not needed

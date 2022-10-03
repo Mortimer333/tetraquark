@@ -84,10 +84,24 @@ class Helpers
 
 
 return [
+    "consecutivecaller" => function (CustomMethodEssentialsModel $essentials): bool
+    {
+        $previous = $essentials->getContent()->getLetter($essentials->getI() - 2);
+        if ($previous == ")") {
+            return true;
+        }
+        return false;
+    },
     "chainend" => function (CustomMethodEssentialsModel $essentials): bool
     {
         $start = $essentials->getI();
-        $essentials->setI(Helpers::getNextChain($essentials, $essentials->getI()));
+        $end = Helpers::getNextChain($essentials, $essentials->getI());
+        if ($start != $end) {
+            $i = $end;
+        } else {
+            $i = $end - 1;
+        }
+        $essentials->setI($i);
         return true;
     },
     "this" => function (CustomMethodEssentialsModel $essentials): bool
@@ -168,7 +182,11 @@ return [
         }
 
         $content = $data[$valueName];
+        $comments = $essentials->reader->getComments();
+        $essentials->reader->setComments([]);
         $blocks = $essentials->reader->read($content);
+        $essentials->reader->setComments($comments);
+
         $essentials->appendData($blocks, $name);
     },
     "objectend" => function (CustomMethodEssentialsModel $essentials): bool
@@ -336,7 +354,7 @@ return [
     "word" => function (CustomMethodEssentialsModel $essentials, string $name = "word", bool $varValidation = true): bool
     {
         list($word, $i) = Str::getNextWord($essentials->getI(), $essentials->getContent(), true);
-        if ($varValidation && !Validate::isJSValidVariable($word)) {
+        if (empty($word) || ($varValidation && !Validate::isJSValidVariable($word))) {
             return false;
         }
 

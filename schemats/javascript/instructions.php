@@ -96,14 +96,14 @@ foreach ($arrowMethod as $key => $value) {
 }
 
 return [
-    /* SINGLE LINE COMMENT */
-    "\/\//find:\n::'comment'\\" => [
-        "class" => "SingleCommentBlock"
-    ],
-    /* MULTI LINE COMMENT */
-    "\/*/find:'*/'::'comment'\\" => [
-        "class" => "MultiCommentBlock"
-    ],
+    // /* SINGLE LINE COMMENT */
+    // "\/\//find:\n::'comment'\\" => [
+    //     "class" => "SingleCommentBlock"
+    // ],
+    // /* MULTI LINE COMMENT */
+    // "\/*/find:'*/'::'comment'\\" => [
+    //     "class" => "MultiCommentBlock"
+    // ],
     /* IF */
     '/s|end\if/s|e\(/find:")":"(":"condition">read:"condition"\\' => [
         "_extend" => [
@@ -348,6 +348,14 @@ return [
             ],
         ]
     ],
+    '(/consecutivecaller>decrease\\' => [
+        "class" => "CallerBlock",
+        "consecutive" => true,
+        "_block" => [
+            "end" => ")",
+            "nested" => "("
+        ],
+    ],
     /* GETTER */
     '/s|end\get/s\/"#">isprivate|e\/word:"getter"\(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
         "class" => "GetterClassMethodBlock",
@@ -423,7 +431,7 @@ return [
     /* FIRST IN CHAIN */
     '/s|end|e\/word:"first":false\/s|e\\' => [
         "_extend" => [
-            '/"?">optionalchain|e\./"#">isprivate|e\/word:"second"\\' => [
+            '/"?">optionalchain|e\/s|e\./s|e\/"#">isprivate|e\/word:"second"\\' => [
                 "class" => "ChainBlock",
                 "first" => true,
                 "_block" => [
@@ -454,7 +462,7 @@ return [
                     ...$arrayChainInstruction,
                 ]
             ],
-            '(/find:")":"(":"values">read:"values"\/"?">optionalchain|e\./"#">isprivate|e\/word:"second"\\' => [
+            '(/find:")":"(":"values">read:"values"\/s|e\/"?">optionalchain|e\/s|e\./s|e\/"#">isprivate|e\/word:"second"\\' => [
                 "class" => "ChainBlock",
                 "first" => true,
                 "first_method" => true,
@@ -487,7 +495,7 @@ return [
         ]
     ],
     /* NEXT IN CHAIN */
-    '/"?">optionalchain|e\./"#">isprivate|e\/word\\' => [
+    '/"?">optionalchain|s|e\./s|e\/"#">isprivate|e\/word\\' => [
         "class" => "SubChainBlock1",
         "_block" => [
             "end" => '/chainend\\',

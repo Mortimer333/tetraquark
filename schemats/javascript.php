@@ -25,6 +25,7 @@ return [
             ";" => true,
             "}" => true, // @TODO test this one
             "," => true, // @TODO test this one
+            ")" => true,
         ],
     ],
     "instructions" => require(__DIR__ . '/javascript/instructions.php'),
