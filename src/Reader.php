@@ -95,8 +95,11 @@ class Reader
         return $schema;
     }
 
-    public function read(string $script, bool $isPath = false, bool $displayBlocks = false)
+    public function read(string $script, bool $isPath = false, bool $displayBlocks = false, ?bool $short = null)
     {
+        if (is_null($short)) {
+            $short = $displayBlocks;
+        }
         if ($isPath) {
             if (!is_file($script)) {
                 throw new Exception("Passed file was not found", 404);
@@ -106,13 +109,12 @@ class Reader
         }
         // @TODO think this one through
         // $script = str_replace("\r\n", "\n", $script);
-        if ($displayBlocks) {
+        if ($displayBlocks || $short) {
             Log  ::timerStart();
         }
 
         $content = $this->removeCommentsAndAdditional(new Content($script));
         $content = $this->customPrepare($content);
-
         // echo $content . PHP_EOL;
         if ($displayBlocks) {
             Log  ::log($content . '');
@@ -120,9 +122,15 @@ class Reader
         $script = new ScriptBlockModel();
         list($script, $end) = $this->objectify($content, $this->map, parent: $script);
         // echo json_encode($script, JSON_PRETTY_PRINT);
-        if ($displayBlocks) {
+        if ($displayBlocks || $short) {
             Log  ::timerEnd();
+        }
+
+        if ($short) {
             $this->displayLandmarks($script);
+        }
+
+        if ($displayBlocks) {
             Log  ::log('[');
             $this->displayScriptBlocks($script);
             Log  ::log(']');
@@ -152,8 +160,16 @@ class Reader
     {
         $landmarks = [
             "landmark" => '',
+            "data" => [],
             "children" => []
         ];
+
+        foreach ($script['data'] ?? [] as $key => $value) {
+            if (!is_array($value)) {
+                $landmarks["data"][] = $key . ': `' . $value . '`';
+            }
+        }
+
         foreach ($script as $key => $block) {
             if ($key == 'parent') {
                 continue;
@@ -186,6 +202,9 @@ class Reader
                     $landmarks["children"][] = $res;
                 }
             }
+        }
+        if (!empty($landmarks['data'])) {
+            $landmarks['landmark'] .= ' [' . implode(', ', $landmarks['data']) . ']';
         }
         return $landmarks;
     }
@@ -336,10 +355,10 @@ class Reader
     {
         // @TODO remove this, and think of better fail save
         $this->iterations++;
-        if ($this->iterations > 2500) {
-            throw new \Error('Inifinite loop');
-        }
-        Log :: increaseIndent();
+        // if ($this->iterations > 2500) {
+        //     throw new \Error('Infinite loop');
+        // }
+        // Log ::: increaseIndent();
 
         $i = $this->handleComment($resolver, $i);
 
@@ -348,26 +367,26 @@ class Reader
             /* Don't end file with exception but let it slowly get out of foreach */
             // $resolver->i--;
             // throw new Exception(self::END_OF_FILE);
-            Log :: decreaseIndent();
+            // Log ::: decreaseIndent();
             return false;
         }
 
         // Don't skip string - $resolver->setI(Str::skip($content->getLetter($i), $i, $content));
         $resolver->setI($i);
         $resolver->setLetter($content->getLetter($i));
-        Log :: log($i . ' Letter: `' . $resolver->getLetter() . '`, `' . $resolver->getLmStart() . '`, ' . $resolver->getContent()->getLength() . ', possible: ' . implode(', ', array_keys($resolver->getLandmark())));
+        // Log ::: log($i . ' Letter: `' . $resolver->getLetter() . '`, `' . $resolver->getLmStart() . '`, ' . $resolver->getContent()->getLength() . ', possible: ' . implode(', ', array_keys($resolver->getLandmark())));
         if (isset($resolver->getLandmark()[$resolver->getLetter()])) {
             $solve = $this->resolveStringLandmark($resolver);
             if ($solve) {
                 $i = $solve['save']['i'];
-                Log :: decreaseIndent();
+                // Log ::: decreaseIndent();
                 return $solve;
             }
         }
 
         if (isset($resolver->getLandmark()['_m']) && ($solve = $this->resolveMethodLandmark($resolver))) {
             $i = $solve['save']['i'];
-            Log :: decreaseIndent();
+            // Log ::: decreaseIndent();
             return $solve;
         }
 
@@ -377,10 +396,10 @@ class Reader
             $i--;
             $resolver->setLetter($content->getLetter($i));
         }
-        Log :: log("Nothign was found!");
+        // Log ::: log("Nothign was found!");
         $this->clearObjectify($resolver);
 
-        Log :: decreaseIndent();
+        // Log ::: decreaseIndent();
         return false;
     }
 
@@ -506,7 +525,7 @@ class Reader
         $this->debug["path"][] = $resolver->getLetter();
         $possibleLandmark = $resolver->getLandmark()[$resolver->getLetter()];
 
-        Log :: log('New string lm, oprions: ' . implode(', ', array_keys($possibleLandmark)));
+        // Log ::: log('New string lm, oprions: ' . implode(', ', array_keys($possibleLandmark)));
         if (is_null($resolver->getLmStart())) {
             $resolver->setLmStart($resolver->getI());
         }
@@ -516,7 +535,7 @@ class Reader
             $solve = [
                 "step" => $possibleLandmark,
                 "save" => $this->saveResolver($resolver),
-                "path" => $this->debug["path"]
+                "end"  => $resolver->getI()
             ];
         }
 
@@ -546,7 +565,7 @@ class Reader
     {
         $preSave = $this->saveResolver($resolver);
         $solve = null;
-        Log :: log('Method to check: ' . implode(', ', array_keys($resolver->getLandmark()['_m'])));
+        // Log ::: log('Method to check: ' . implode(', ', array_keys($resolver->getLandmark()['_m'])));
         foreach ($resolver->getLandmark()['_m'] as $methodName => $step) {
             list($method, $callable) = $this->getMethod($methodName);
             // @TODO figure out if it's not better to pass Resolver and just restore save state after failure
@@ -584,27 +603,28 @@ class Reader
             // Update changed essentials
             $this->updateFromEssentials($resolver, $essentials);
 
-            Log :: log('New method `' . $methodName . '` lm, oprions: ' . implode(', ', array_keys($step)));
+            // Log ::: log('New method `' . $methodName . '` lm, oprions: ' . implode(', ', array_keys($step)));
 
             $res = $this->tryToFindNextMatch($resolver, $step);
             if (
                 !$res
                 && isset($step['_stop'])
                 && (
-                    !isset($solve['path'])
-                    || sizeof($debug) > sizeof($solve['path'])
+                    !isset($solve['end'])
+                    || !isset($res['end'])
+                    || $res['end'] > $solve['end']
                 )
             ) {
                 $solve = [
                     "step" => $step,
                     "save" => $this->saveResolver($resolver),
-                    "path" => $debug
+                    "end" => $resolver->getI()
                 ];
             } elseif (
                 $res
                 && (
-                    !isset($solve['path'])
-                    || sizeof($res['path']) > sizeof($solve['path'])
+                    !isset($solve['end'])
+                    || $res['end'] > $solve['end']
                 )
             ) {
                 $solve = $res;
@@ -708,7 +728,7 @@ class Reader
 
     public function saveBlock(LandmarkResolverModel $resolver): void
     {
-        Log :: log('Save block - ' . json_encode($resolver->getLandmark()['_custom'] ?? []) . ", debug: " . implode(' => ', $this->debug['path']));
+        // Log ::: log('Save block - ' . json_encode($resolver->getLandmark()['_custom'] ?? []) . ", debug: " . implode(' => ', $this->debug['path']));
         $item = new BlockModel(
             start: $resolver->getLmStart(),
             end: $resolver->getI(),

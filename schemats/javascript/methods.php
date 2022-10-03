@@ -56,10 +56,44 @@ class Helpers
         $essentials->setI($i);
         $essentials->appendData($letter, "stop");
     }
+
+    public static function getNextChain(CustomMethodEssentialsModel $essentials, int $pos): int
+    {
+        $content = $essentials->getContent();
+        list($letter, $newPos) = Str::getNextLetter($pos, $content);
+
+        if ($letter == '.') {
+            list($nextWord, $wordPos) = Str::getNextWord($newPos + 1, $content, !Validate::isWhitespace($content->getLetter($newPos + 1)));
+            return Helpers::getNextChain($essentials, $wordPos + 1);
+        } elseif ($letter == "=") {
+            $data = $essentials->getData();
+            $essentials->getMethods()['varend']($essentials);
+            $essentials->setData($data);
+            return $essentials->getI();
+        } elseif ($letter == "(") {
+            $data = $essentials->getData();
+            $essentials->setI($newPos + 1);
+            $essentials->getMethods()['find']($essentials, ")", "(", "find");
+            $essentials->setData($data);
+            return Helpers::getNextChain($essentials, $essentials->getI() + 1);
+        }
+
+        return $pos;
+    }
 }
 
 
 return [
+    "chainend" => function (CustomMethodEssentialsModel $essentials): bool
+    {
+        $start = $essentials->getI();
+        $essentials->setI(Helpers::getNextChain($essentials, $essentials->getI()));
+        return true;
+    },
+    "this" => function (CustomMethodEssentialsModel $essentials): bool
+    {
+        return $essentials->getContent()->subStr($essentials->getI(), 4) == 'this';
+    },
     "number" => function (CustomMethodEssentialsModel $essentials): bool
     {
         if (is_numeric($essentials->getLetter())) {
@@ -81,7 +115,7 @@ return [
     {
         $string = $essentials->getData()[$name]
             ?? throw new \Exception("Couldn't find template literal in data with name: " . htmlentities($name));
-        // $content = new Content($string);
+
         $pos = 0;
         $addEnd = true;
         $string = '"' . $string;
@@ -206,7 +240,7 @@ return [
             ";" => true,
             "}" => true,
             ")" => true,
-            "/" => true,
+            // "/" => true,
         ];
         $res = !isset($skipped[$essentials->getLetter()])
             && (preg_match("/[\W]+/", $essentials->getLetter()) === 1)
@@ -281,7 +315,7 @@ return [
     "taken" => function (CustomMethodEssentialsModel $essentials): bool
     {
         $nonBlockKeywords = [
-            'break' => true, 'instanceof' => true, 'this' => true,
+            'break' => true, 'instanceof' => true, // 'this' => true,
             'typeof' => true,  'void' => true, 'continue' => true,
             'debugger' => true, 'with' => true, 'default' => true,
             'delete' => true, 'enum' => true, 'super' => true,
@@ -289,7 +323,6 @@ return [
             'Infinity' => true,
         ];
         list($word, $i) = Str::getNextWord($essentials->getI(), $essentials->getContent(), true);
-
         $res = $nonBlockKeywords[$word] ?? false;
 
         if ($res) {
@@ -300,10 +333,10 @@ return [
 
         return false;
     },
-    "word" => function (CustomMethodEssentialsModel $essentials, string $name = "word"): bool
+    "word" => function (CustomMethodEssentialsModel $essentials, string $name = "word", bool $varValidation = true): bool
     {
         list($word, $i) = Str::getNextWord($essentials->getI(), $essentials->getContent(), true);
-        if (!Validate::isJSValidVariable($word)) {
+        if ($varValidation && !Validate::isJSValidVariable($word)) {
             return false;
         }
 
@@ -314,12 +347,17 @@ return [
     },
     "strend" => function (CustomMethodEssentialsModel $essentials, string $type, string $name = 'string'): bool
     {
-        $i = Str::skip($type, $essentials->getI(), $essentials->getContent());
+        $i = Str::skip($type, $essentials->getI() - 1, $essentials->getContent());
         $essentials->appendData(
             $essentials->getContent()->iSubStr($essentials->getI(), $i - 2),
             $name
         );
-        $essentials->setI($i - 1);
+
+        if ($essentials->getContent()->getLength() == $i + 1) {
+            $essentials->setI($i);
+        } else {
+            $essentials->setI($i - 1);
+        }
         return true;
     },
     "end" => function (CustomMethodEssentialsModel $essentials): bool

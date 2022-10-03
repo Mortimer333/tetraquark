@@ -209,27 +209,39 @@ return [
                     "skip" => "{"
                 ],
             ],
-            '/s\/"#">isprivate|e\/word:"name"\\' => [
-                "class" => "StaticVariableInstanceBlock",
-                "empty" => true,
+            '/s\/"#">isprivate|e\\' => [
                 "_extend" => [
-                    '/s|e\\=' => [
-                        "class" => "StaticVariableInstanceBlock",
-                        "replace" => true,
-                        "_block" => [
-                            "end" => "/varend\\",
-                            "include_end" => true,
-                        ]
-                    ],
-                    '(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
+                    '[/find:"]":"[":"name">read:"name"\/s|e\(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
                         "class" => "StaticClassMethodBlock",
+                        "constant_name" => true,
                         "_block" => [
                             "end" => "}",
                             "nested" => "{"
                         ],
+                    ],
+                    '/word:"name"\/s|e\\' => [
+                        "class" => "StaticVariableInstanceBlock",
+                        "empty" => true,
+                        "_extend" => [
+                            '=/"!=">decrease\\' => [
+                                "class" => "StaticVariableInstanceBlock",
+                                "replace" => true,
+                                "_block" => [
+                                    "end" => "/varend\\",
+                                    "include_end" => true,
+                                ]
+                            ],
+                            '(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
+                                "class" => "StaticClassMethodBlock",
+                                "_block" => [
+                                    "end" => "}",
+                                    "nested" => "{"
+                                ],
+                            ]
+                        ]
                     ]
                 ]
-            ]
+            ],
         ]
     ],
     /* SPREAD VARIABLE */
@@ -293,26 +305,48 @@ return [
     ],
     /* KEYWORD */
     // Ended with new line
-    '/s|end\/taken\/s|";"\\' => [
+    '/s|end\/taken\/s|";"|e\\' => [
         "class" => "KeywordBlock"
     ],
-    /* CALLER */
-    '/s|end\/"#">isprivate|e\/word:"name"\/s|e\(' => [
-        "class" => "CallerBlock",
+    /* CLASS CONSTANT GENERATOR */
+    '*[/find:"]":"[":"name">read:"name"\/s|e\(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
+        "class" => "ClassMethodBlock",
+        "generator" => true,
+        "constant_name" => true,
         "_block" => [
-            "end" => ")",
-            "nested" => "("
+            "end" => "}",
+            "nested" => "{"
         ],
+    ],
+    /* CALLER */
+    '/s|end\/"#">isprivate|e\\' => [
         "_extend" => [
-            /* CLASS METHOD */
-            '/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
+            '[/find:"]":"[":"name">read:"name"\/s|e\(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
                 "class" => "ClassMethodBlock",
+                "constant_name" => true,
                 "_block" => [
                     "end" => "}",
                     "nested" => "{"
                 ],
             ],
-        ],
+            '/word:"name"\/s|e\(' => [
+                "class" => "CallerBlock",
+                "_block" => [
+                    "end" => ")",
+                    "nested" => "("
+                ],
+                "_extend" => [
+                    /* CLASS METHOD */
+                    '/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
+                        "class" => "ClassMethodBlock",
+                        "_block" => [
+                            "end" => "}",
+                            "nested" => "{"
+                        ],
+                    ],
+                ],
+            ],
+        ]
     ],
     /* GETTER */
     '/s|end\get/s\/"#">isprivate|e\/word:"getter"\(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
@@ -387,13 +421,13 @@ return [
         ]
     ],
     /* FIRST IN CHAIN */
-    '/word:"first"\\' => [
+    '/s|end|e\/word:"first":false\/s|e\\' => [
         "_extend" => [
             '/"?">optionalchain|e\./"#">isprivate|e\/word:"second"\\' => [
                 "class" => "ChainBlock",
                 "first" => true,
                 "_block" => [
-                    "end" => '/varend\\',
+                    "end" => '/chainend\\',
                     "include_end" => true,
                 ],
                 "_extend" => [
@@ -403,11 +437,11 @@ return [
                         "second_method" => true,
                         "first" => true,
                         "_block" => [
-                            "end" => '/varend\\',
+                            "end" => '/chainend\\',
                             "include_end" => true,
                         ],
                     ],
-                    "/s|e\=" => [
+                    '/s|e\=/"!=">decrease\\' => [
                         "class" => "ChainBlock",
                         "first" => true,
                         "var" => true,
@@ -425,7 +459,7 @@ return [
                 "first" => true,
                 "first_method" => true,
                 "_block" => [
-                    "end" => '/varend\\',
+                    "end" => '/chainend\\',
                     "include_end" => true,
                 ],
                 "_extend" => [
@@ -435,11 +469,11 @@ return [
                         "second_method" => true,
                         "first" => true,
                         "_block" => [
-                            "end" => '/varend\\',
+                            "end" => '/chainend\\',
                             "include_end" => true,
                         ],
                     ],
-                    '/s|e\=' => [
+                    '/s|e\=/"!=">decrease\\' => [
                         "class" => "ChainBlock",
                         "first" => true,
                         "var" => true,
@@ -456,7 +490,7 @@ return [
     '/"?">optionalchain|e\./"#">isprivate|e\/word\\' => [
         "class" => "SubChainBlock1",
         "_block" => [
-            "end" => '/varend\\',
+            "end" => '/chainend\\',
             "include_end" => true,
         ],
         "_extend" => [

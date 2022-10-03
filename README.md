@@ -24,9 +24,7 @@ php ./vendor/bin/phpunit test
 php test/test.php > test/test.log 2>&1
 
 TODO:
-1. [DONE] Some problem with missed in caller block
-word.funcion = 12 + func(1 , 23);
-
+1. [DONE] Some problem with missed in caller block -word.funcion = 12 + func(1 , 23);
 2. [DONE] Add method which will create children for item (varend>read/objectify)
 3. [DONE] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator - SymbolBlock
 4. [DONE] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
@@ -41,40 +39,32 @@ word.funcion = 12 + func(1 , 23);
 13. [DONE] Add NumberBlock
 14. [DONE] For in
 15. [DONE] For of
-16. This weird shit - At some point. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols:
-```js
-// Method defined as this
-[Symbol.iterator] () {
-    return this;
-}
-
-```
-
-List of blocks to implement:
-- Import:
-    - ImportPromiseBlock
-    - ImportObjectBlock
-    - ImportObjectItemBlock
-    - ImportAsBlock
-    - ImportAllBlock
-    - ImportFromBlock
-    - ImportItemSeperatorBlock
-    - ImportBlock
-    -
-- Export:
-    - ExportDefaultBlock
-    - ExportAsBlock
-    - ExportAllBlock
-    - ExportFromBlock
-    - ExportObjectItemBlock
-    - ExportObjectBlock
+16. [DONE] This weird shit - At some point. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols:
 
 List of blocks which I might not implement:
-~ SemicolonBlock
+~ SemicolonBlock - not needed
 ~ UndefinedBlock - automatic missed data
-~ ScriptBlock
+~ ScriptBlock - its implemented automatically
 
 List of implemented blocks:
++ Import:
+    + ImportPromiseBlock
+    + ImportObjectBlock
+    + ImportObjectItemBlock
+    + ImportAsBlock
+    + ImportAllBlock
+    + ImportFromBlock
+    + ImportItemSeperatorBlock
+    + ImportBlock
+
++ Export:
+    + ExportDefaultBlock
+    + ExportAsBlock
+    + ExportAllBlock
+    + ExportFromBlock
+    + ExportObjectItemBlock
+    + ExportObjectBlock
+
 + VariableItemBlock - VariableInstanceBlock
 + WhileBlock
 + DebuggerBlock - KeywordBlock:debugger
