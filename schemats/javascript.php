@@ -1,5 +1,6 @@
 <?php
-use \Tetraquark\{Content, Validate, Str, Log};
+use \Orator\Log;
+use \Tetraquark\{Content, Validate, Str};
 use \Tetraquark\Model\CustomMethodEssentialsModel;
 
 return [

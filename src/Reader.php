@@ -2,6 +2,7 @@
 
 namespace Tetraquark;
 
+use Orator\Log;
 use Tetraquark\Model\{
     CustomMethodEssentialsModel,
     LandmarkResolverModel,

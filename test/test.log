@@ -1,5 +1,5 @@
  (caller()()()\n)\n
-Duration: 0.004s
+Duration: 0.005s
 
   ScopeBlock {}
     CallerBlock {} [name: `caller`]
