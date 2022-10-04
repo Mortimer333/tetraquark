@@ -1,7 +1,6 @@
 <?php
 namespace Tetraquark;
 require 'vendor/autoload.php';
-$tetra = new Tetraquark();
 $reader = new Reader(__DIR__ . '/../schemats/javascript.php');
 $reader->read(__DIR__ . '/data/comment.js', true, true);
 // $minified = $tetra->minify(__DIR__ . '/data/array.js');

@@ -24,10 +24,10 @@ php ./vendor/bin/phpunit test
 php test/test.php > test/test.log 2>&1
 
 Plan:
-0. Merge it to master and create new branch
-1. Save somewhere how I figured out Import and Export (ImportBlock and ExportBlock - `let Ī = {};Ī.y = Ī => {};`) - we are moving JS handle
+0. [DONE] Merge it to master and create new branch
+1. [DONE] Save somewhere how I figured out Import and Export (ImportBlock and ExportBlock - `let Ī = {};Ī.y = Ī => {};`) - we are moving JS handle
    to `schemats/` as part of transforming this to being a tool not dedicated solution.
-2. Clean old code:
+2. [DONE] Clean old code:
    - Block
    - Trait
    - Fundation

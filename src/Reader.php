@@ -1043,7 +1043,6 @@ class Reader
 
     public function generateBlocksMap(): array
     {
-        $namespace    = $this->schema['namespace'   ] ?? throw new Exception('Namespace not found'   , 404);
         $instructions = $this->schema['instructions'] ?? throw new Exception('Instructions not found', 404);
 
         $maps = [];

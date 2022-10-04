@@ -30,5 +30,4 @@ return [
     ],
     "instructions" => require(__DIR__ . '/javascript/instructions.php'),
     "methods" => require(__DIR__ . '/javascript/methods.php'),
-    "namespace" => "\Tetraquark\Block\\"
 ];
