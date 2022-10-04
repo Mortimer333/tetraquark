@@ -1,88 +1,12 @@
 <?php declare(strict_types=1);
 
-use \Orator\Log;
-use \Tetraquark\{Validate, Str};
-use \Tetraquark\Model\CustomMethodEssentialsModel;
+use Orator\Log;
+use Tetraquark\{Validate, Str};
+use Tetraquark\Model\CustomMethodEssentialsModel;
 
 require_once __DIR__ . '/landmark.php';
-
-class Helpers
-{
-    public static function checkIfValidVarEnd(CustomMethodEssentialsModel $essentials, int $i): bool
-    {
-        $content = $essentials->getContent();
-        list($prevLetter, $prevPos) = Str::getPreviousLetter($i, $essentials->getContent());
-        if (
-            Validate::isOperator($prevLetter)
-            && !Validate::isStringLandmark($prevLetter, '')
-            && !Validate::isComment($prevPos, $content)
-        ) {
-            return false;
-        }
-
-        list($nextLetter, $nextPos) = Str::getNextLetter($i, $content);
-
-        if (strlen($nextLetter) == 0) {
-            // End of file
-            return true;
-        }
-
-        if (
-            Validate::isOperator($nextLetter, true)
-            && !Validate::isStringLandmark($nextLetter, '')
-            && !Validate::isComment($nextPos, $content)
-        ) {
-            return false;
-        }
-
-        list($previousWord) = Str::getPreviousWord($i, $content);
-        if (Validate::isExtendingKeyWord($previousWord)) {
-            return false;
-        }
-
-        list($nextWord) = Str::getNextWord($i, $content);
-        if (Validate::isExtendingKeyWord($nextWord)) {
-            return false;
-        }
-
-        return true;
-    }
-
-    public static function finishVarEnd(CustomMethodEssentialsModel $essentials, int $i, ?string $letter): void
-    {
-        $essentials->appendData(
-            $essentials->getContent()->iSubStr($essentials->getI(), $i),
-            "var"
-        );
-        $essentials->setI($i);
-        $essentials->appendData($letter, "stop");
-    }
-
-    public static function getNextChain(CustomMethodEssentialsModel $essentials, int $pos): int
-    {
-        $content = $essentials->getContent();
-        list($letter, $newPos) = Str::getNextLetter($pos, $content);
-
-        if ($letter == '.') {
-            list($nextWord, $wordPos) = Str::getNextWord($newPos + 1, $content, !Validate::isWhitespace($content->getLetter($newPos + 1)));
-            return Helpers::getNextChain($essentials, $wordPos + 1);
-        } elseif ($letter == "=") {
-            $data = $essentials->getData();
-            $essentials->getMethods()['varend']($essentials);
-            $essentials->setData($data);
-            return $essentials->getI();
-        } elseif ($letter == "(") {
-            $data = $essentials->getData();
-            $essentials->setI($newPos + 1);
-            $essentials->getMethods()['find']($essentials, ")", "(", "find");
-            $essentials->setData($data);
-            return Helpers::getNextChain($essentials, $essentials->getI() + 1);
-        }
-
-        return $pos;
-    }
-}
-
+require_once __DIR__ . '/validate.php';
+require_once __DIR__ . '/helper.php';
 
 return [
     "consecutivecaller" => function (CustomMethodEssentialsModel $essentials): bool
@@ -96,7 +20,7 @@ return [
     "chainend" => function (CustomMethodEssentialsModel $essentials): bool
     {
         $start = $essentials->getI();
-        $end = Helpers::getNextChain($essentials, $essentials->getI());
+        $end = Helper::getNextChain($essentials, $essentials->getI());
         if ($start != $end) {
             $i = $end;
         } else {
@@ -355,7 +279,7 @@ return [
     "word" => function (CustomMethodEssentialsModel $essentials, string $name = "word", bool $varValidation = true): bool
     {
         list($word, $i) = Str::getNextWord($essentials->getI(), $essentials->getContent(), true);
-        if (empty($word) || ($varValidation && !Validate::isJSValidVariable($word))) {
+        if (empty($word) || ($varValidation && !JsValidate::isJSValidVariable($word))) {
             return false;
         }
 
@@ -431,8 +355,8 @@ return [
                     // finish search for varend
                     list($nextLetter, $nextPos) = Str::getNextLetter($i + 1, $content);
 
-                    if (!Validate::isOperator($nextLetter)) {
-                        Helpers::finishVarEnd($essentials, $i, $letter);
+                    if (!JsValidate::isOperator($nextLetter)) {
+                        Helper::finishVarEnd($essentials, $i, $letter);
                         return true;
                     }
                     continue;
@@ -457,9 +381,9 @@ return [
                 $letter === ';'
                 || ($comma && $letter === ',')
                 || is_null($letter)
-                || ($letter === "\n" && Helpers::checkIfValidVarEnd($essentials, $i))
+                || ($letter === "\n" && Helper::checkIfValidVarEnd($essentials, $i))
             ) {
-                Helpers::finishVarEnd($essentials, $i, $letter);
+                Helper::finishVarEnd($essentials, $i, $letter);
                 return true;
             }
         }

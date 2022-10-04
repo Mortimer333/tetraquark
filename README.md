@@ -34,7 +34,7 @@ Plan:
    - Few root classes I don't use
 3. [DONE] Move Log class to seperate project and explain the future of it with Attributes
 4. [DONE] Maybe move Content class out (too) as it is surprisingly useful
-5. Recreate Validate as something used for JS sytax schema `/schemats/javascript` and copy used methods by Reader to it or in Str (probably in Str)
+5. [DONE] Recreate Validate as something used for JS sytax schema `/schemats/javascript` and copy used methods by Reader to it or in Str (probably in Str)
    - Quick test it
 6. Create integration tests - one for each syntax (probably generate map and use it as reference)
    - each test should have seperate file with test data
@@ -48,6 +48,7 @@ Plan:
    - Content (if not moved)
    - Reader
    - *Model
+8. Figure out better schema handling and extending (as current setup have to be upgraded a lot)
 
 TODO:
 1. [DONE] Some problem with missed in caller block -word.funcion = 12 + func(1 , 23);
