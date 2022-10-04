@@ -1,7 +1,8 @@
 <?php
-use \Orator\Log;
-use \Tetraquark\{Content, Validate, Str};
-use \Tetraquark\Model\CustomMethodEssentialsModel;
+use Orator\Log;
+use Content\Utf8 as Content;
+use Tetraquark\{Validate, Str};
+use Tetraquark\Model\CustomMethodEssentialsModel;
 
 return [
     "comments" => [

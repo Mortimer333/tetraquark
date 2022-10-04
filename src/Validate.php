@@ -2,6 +2,8 @@
 
 namespace Tetraquark;
 
+use Content\Utf8 as Content;
+
 class Validate
 {
     protected static array $special = [

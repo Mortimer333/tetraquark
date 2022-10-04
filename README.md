@@ -32,8 +32,8 @@ Plan:
    - Trait
    - Fundation
    - Few root classes I don't use
-3. Move Log class to seperate project and explain the future of it with Attributes
-4. Maybe move Content class out (too) as it is surprisingly useful
+3. [DONE] Move Log class to seperate project and explain the future of it with Attributes
+4. [DONE] Maybe move Content class out (too) as it is surprisingly useful
 5. Recreate Validate as something used for JS sytax schema `/schemats/javascript` and copy used methods by Reader to it or in Str (probably in Str)
    - Quick test it
 6. Create integration tests - one for each syntax (probably generate map and use it as reference)

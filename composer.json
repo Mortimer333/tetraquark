@@ -1,12 +1,13 @@
 {
-    "name": "tetraquark/tetraquark",
-    "description": "Javascript minifier",
+    "name": "mortimer333/tetraquark",
+    "description": "Tool for code analyze",
     "type": "library",
     "require": {
         "php": ">=8.1",
         "ext-mbstring": "*",
         "mortimer333/orator": "dev-master",
-        "phpunit/phpunit": "10.0.x-dev"
+        "phpunit/phpunit": "10.0.x-dev",
+        "mortimer333/content": "dev-master"
     },
     "autoload": {
         "psr-4": {
@@ -15,7 +16,7 @@
     },
     "authors": [
         {
-            "name": "michal.dzierzbicki",
+            "name": "Michał Dzierzbicki",
             "email": "michal.dzierzbicki@vp.pl"
         }
     ],

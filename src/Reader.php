@@ -3,6 +3,7 @@
 namespace Tetraquark;
 
 use Orator\Log;
+use Content\Utf8 as Content;
 use Tetraquark\Model\{
     CustomMethodEssentialsModel,
     LandmarkResolverModel,
