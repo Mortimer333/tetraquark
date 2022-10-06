@@ -6,8 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 class RootTest extends TestCase
 {
-    public function __construct()
+    public function setUp(): void
     {
-        parent::__construct();
     }
 }

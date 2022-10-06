@@ -396,98 +396,28 @@ return [
     "find" => function (CustomMethodEssentialsModel $essentials, string|array $needle, null|array|string $hayStarter = null, ?string $name = null): bool
     {
         $content = $essentials->getContent();
-        $letter  = $essentials->getLetter();
         $index   = $essentials->getI();
         $data    = $essentials->getData();
-        $reader  = $essentials->getReader();
 
-        if (is_string($needle)) {
-            $needle = [$needle];
+        list($pos, $foundkey) = Str::skipBlock($needle, $index, $content, $hayStarter);
+
+        if (is_null($foundkey)) {
+            return false;
         }
 
-        if (empty($needle)) {
-            throw new Exception("Needle can't be empty", 400);
-        }
-        // @POTENTIAL_PREFORMANCE_ISSUE
-        $tmpNeedle = [];
-        foreach ($needle as $value) {
-            $heyStarterAr = [];
-            if (is_array($hayStarter)) {
-                $heyStarterItem = $hayStarter[$value] ?? null;
-                if (is_string($heyStarterItem)) {
-                    $heyStarterAr[$heyStarterItem] = true;
-                } elseif (is_array($heyStarterItem)) {
-                    foreach ($heyStarterItem as $starterNeedle) {
-                        $heyStarterAr[$starterNeedle] = true;
-                    }
-                }
-            } elseif (is_string($hayStarter)) {
-                $heyStarterAr[$hayStarter] = true;
-            }
+        $data["foundkey"] = $foundkey;
 
-            $tmpNeedle[$value] = [
-                "needle" => $value,
-                "len" => mb_strlen($value),
-                "haystack" => [],
-                "hayStarter" => $heyStarterAr,
-                "skip" => 0,
-            ];
-        }
-        $needle = $tmpNeedle;
-
-        $nestedHays = 0;
-        $res = false;
-        for ($i=$index; $i < $content->getLength(); $i++) {
-            $i = $reader->handleComment($essentials, $i);
-
-            // Skip strings
-            $i = Str::skip($content->getLetter($i), $i, $content);
-            $letter = $content->getLetter($i);
-
-            foreach ($needle as $key => &$straw) {
-                $straw['haystack'][] = $letter;
-
-                if (sizeof($straw['haystack']) > $straw['len']) {
-                    array_shift($straw['haystack']);
-                }
-
-                $posNeedle = implode('', $straw['haystack']);
-
-                if ($posNeedle === $key) {
-                    if ($straw['skip'] > 0) {
-                        $straw['skip']--;
-                        continue 2;
-                    }
-                    $data["foundkey"] = $key;
-                    if (!is_null($name)) {
-                        $data[$name] = trim($content->iSubStr($index, $i - $straw['len']));
-                    }
-                    $index = $i;
-                    $res = true;
-                    break 2;
-                }
-
-                if ($straw["hayStarter"][$posNeedle] ?? false) {
-                    $straw['skip']++;
-                    continue;
-                }
-            }
+        if (!is_null($name)) {
+            $data[$name] = trim($content->iSubStr($index, $pos - \mb_strlen($foundkey)));
         }
 
-        if (!$res) {
-            $data["foundkey"] = null;
-            if (!is_null($name)) {
-                $data[$name] = trim($content->iSubStr($index, $i - 1));
-            }
-            $index = $i;
-            $letter = null;
-        }
+        $letter = $content->getLetter($pos);
 
         $essentials->setLetter($letter);
-        $essentials->setI($index);
+        $essentials->setI($pos);
         $essentials->setData($data);
 
-        return $res;
+        return true;
     },
     "s" => function (CustomMethodEssentialsModel $essentials): bool
     {

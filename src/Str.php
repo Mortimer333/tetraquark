@@ -3,24 +3,80 @@
 namespace Tetraquark;
 
 use Content\Utf8 as Content;
+use Orator\Log;
 
 abstract class Str
 {
     public static function utf8rev(string $text): string
     {
-        $str = iconv('UTF-8','windows-1251', $text);
-        $string = strrev($str);
-        $str = iconv('windows-1251', 'UTF-8', $string);
-        return $str;
+        return (new Content($text))->reverse() . '';
     }
 
-    public static function getFile(string $path)
+    public static function skipBlock(string|array $needle, int $start, Content $content, null|array|string $hayStarter = null): array
     {
-        if (!\is_file($path)) {
-            throw new Exception('Passed file `' . htmlentities($path) . '` not found, did you provide absolute path?', 404);
+        if (is_string($needle)) {
+            $needle = [$needle];
         }
 
-        return \file_get_contents($path);
+        if (is_string($hayStarter)) {
+            $hayStarter = [$hayStarter];
+        }
+
+        if (empty($needle)) {
+            throw new Exception("Needle can't be empty", 400);
+        }
+
+        $hayStartes = [];
+        foreach ($hayStarter ?? [] as $value) {
+            $hayStartes[$value] = [
+                "needle" => $value,
+                "len" => mb_strlen($value),
+            ];
+        }
+
+        // @POTENTIAL_PREFORMANCE_ISSUE
+        $tmpNeedle = [];
+        foreach ($needle as $value) {
+            $tmpNeedle[$value] = [
+                "needle" => $value,
+                "len" => mb_strlen($value),
+            ];
+        }
+        $needle = $tmpNeedle;
+        $skip   = 0;
+
+        for ($i = $start; $i < $content->getLength(); $i++) {
+            $i = self::skip($content->getLetter($i), $i, $content);
+            $letter = $content->getLetter($i);
+
+            foreach ($hayStartes as $key => &$starter) {
+                if ($letter == $key[0]) {
+                    $posNeedle = $content->subStr($i, $starter['len']);
+                    if ($posNeedle === $key) {
+                        $i += $starter['len'] - 1;
+                        $skip++;
+                        continue 2;
+                    }
+                }
+            }
+
+            foreach ($needle as $key => &$straw) {
+                if ($letter == $key[0]) {
+                    $posNeedle = $content->subStr($i, $straw['len']);
+                    if ($posNeedle === $key) {
+                        if ($skip > 0) {
+                            $skip--;
+                            continue 2;
+                        }
+
+                        $i += $straw['len'] - 1;
+                        return [$i + 1, $key];
+                    }
+                }
+            }
+        }
+
+        return [$content->getLength(), null];
     }
 
     public static function skip(string $strLandmark, int $start, Content $content, bool $reverse = false): int
@@ -32,22 +88,41 @@ abstract class Str
             return $start;
         }
 
-        $modifier = (((int)!$reverse) * 2) - 1;
-        for ($i=$start + 1; (!$reverse && $i < $content->getLength()) || ($reverse && $i >= 0); $i += $modifier) {
+        if ($reverse) {
+            $content = $content->reverse();
+        }
+
+
+        $preLetter = '';
+        for ($i=$start + 1; $i < $content->getLength(); $i++) {
             $letter = $content->getLetter($i);
-            if (
+            if ($isTemplate) {
+                if ((
+                    !$reverse && $preLetter . $letter == '${'
+                ) || (
+                    $reverse && $preLetter . $letter == '{$'
+                )) {
+                    list($i) = self::skipBlock("}", $i + 1, $content, "{");
+                    $letter = $content->getLetter($i);
+                }
+            }
+
+            if ((
                 $isTemplate
                 && Validate::isTemplateLiteralLandmark($letter, $content->getLetter($i - 1) ?? '', true)
                 && $letter === $strLandmark
-            ) {
-                return $i + $modifier;
-            } elseif (
+            ) || (
                 !$isTemplate
                 && Validate::isStringLandmark($letter, $content->getLetter($i - 1) ?? '', true)
                 && $letter === $strLandmark
-            ) {
-                return $i + $modifier;
+            )) {
+                if ($reverse) {
+                    return $content->getLength() - $i - 2;
+                }
+                return $i + 1;
             }
+
+            $preLetter = $letter;
         }
         return $i;
     }

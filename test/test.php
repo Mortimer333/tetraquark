@@ -1,8 +1,16 @@
 <?php
 namespace Tetraquark;
 require 'vendor/autoload.php';
-$reader = new Reader(__DIR__ . '/../schemats/javascript.php');
-$reader->read(__DIR__ . '/data/comment.js', true, true);
+use Content\Utf8 as Content;
+use Orator\Log;
+$testCase = '[code] { ${ ...multi needles... }# }$ [more code]';
+$landmarkPos = 23;
+
+$content = new Content($testCase);
+$pos = Str::skipBlock(['}#', '}$', '}'], 8, $content, '${');
+Log::log('Pos: ' . $pos);
+// $reader = new Reader(__DIR__ . '/../schemats/javascript.php');
+// $reader->read(__DIR__ . '/data/comment.js', true, true);
 // $minified = $tetra->minify(__DIR__ . '/data/array.js');
 // $minified = $tetra->minify(__DIR__ . '/data/arrowFunction.js');
 // $minified = $tetra->minify(__DIR__ . '/data/attribute.js');

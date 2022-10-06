@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "381930bc649a7a43039022047e9d6722",
+    "content-hash": "82d373cc302d882d257bdf2de5df9abe",
     "packages": [
         {
             "name": "mortimer333/content",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Mortimer333/Content.git",
-                "reference": "6132b01e7ee07ecf8da4b13076870de560c7a473"
+                "reference": "29c8424a9d387e873a57a20c5b96e46e878faf35"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Mortimer333/Content/zipball/6132b01e7ee07ecf8da4b13076870de560c7a473",
-                "reference": "6132b01e7ee07ecf8da4b13076870de560c7a473",
+                "url": "https://api.github.com/repos/Mortimer333/Content/zipball/29c8424a9d387e873a57a20c5b96e46e878faf35",
+                "reference": "29c8424a9d387e873a57a20c5b96e46e878faf35",
                 "shasum": ""
             },
             "require": {
@@ -44,7 +44,7 @@
                 "issues": "https://github.com/Mortimer333/Content/issues",
                 "source": "https://github.com/Mortimer333/Content/tree/master"
             },
-            "time": "2022-10-04T18:45:38+00:00"
+            "time": "2022-10-06T17:39:55+00:00"
         },
         {
             "name": "mortimer333/orator",
@@ -52,12 +52,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Mortimer333/Orator.git",
-                "reference": "11b78b3e6dbdba9017fe263d09d7769c5d385686"
+                "reference": "67c65bd08e82ea2d4327251864243b3e666e684b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Mortimer333/Orator/zipball/11b78b3e6dbdba9017fe263d09d7769c5d385686",
-                "reference": "11b78b3e6dbdba9017fe263d09d7769c5d385686",
+                "url": "https://api.github.com/repos/Mortimer333/Orator/zipball/67c65bd08e82ea2d4327251864243b3e666e684b",
+                "reference": "67c65bd08e82ea2d4327251864243b3e666e684b",
                 "shasum": ""
             },
             "require": {
@@ -77,15 +77,15 @@
             ],
             "authors": [
                 {
-                    "name": "michal.dzierzbicki",
-                    "email": "michal.dzierzbicki@thehutgroup.com"
+                    "name": "Michal Dzierzbicki",
+                    "email": "michal.dzierzbicki@vp.pl"
                 }
             ],
             "support": {
                 "issues": "https://github.com/Mortimer333/Orator/issues",
                 "source": "https://github.com/Mortimer333/Orator/tree/master"
             },
-            "time": "2022-10-04T17:35:29+00:00"
+            "time": "2022-10-04T18:03:35+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -651,12 +651,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "802b91a979fb79f39ac8f87def3996913a7fef11"
+                "reference": "5dc58991fde8d253534cbdecb04e7850e9c4365f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/802b91a979fb79f39ac8f87def3996913a7fef11",
-                "reference": "802b91a979fb79f39ac8f87def3996913a7fef11",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/5dc58991fde8d253534cbdecb04e7850e9c4365f",
+                "reference": "5dc58991fde8d253534cbdecb04e7850e9c4365f",
                 "shasum": ""
             },
             "require": {
@@ -743,7 +743,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-09-29T09:22:55+00:00"
+            "time": "2022-10-05T07:49:33+00:00"
         },
         {
             "name": "sebastian/cli-parser",

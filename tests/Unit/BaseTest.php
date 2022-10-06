@@ -6,4 +6,8 @@ use Tests\RootTest;
 
 class BaseTest extends RootTest
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+    }
 }

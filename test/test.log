@@ -1,107 +1,122 @@
- (caller()()()\n)\n
-Duration: 0.005s
-
-  ScopeBlock {}
-    CallerBlock {} [name: `caller`]
-    CallerBlock {consecutive: 1}
-    CallerBlock {consecutive: 1}
-[
-  [
-    "blockStart" => 2,
-    "blockEnd" => 14,
-    "start" => 1,
-    "end" => 15,
-    "landmark" => [
-      "class" => "ScopeBlock",
-    ],
-    "data" => [
-      [
-        "_end" => [
-        ],
-      ],
-    ],
-    "index" => 0,
-    "parent" => script
-    "path" => [
-    ],
-    "children" => [
-      [
-        "blockStart" => 10,
-        "blockEnd" => 9,
-        "start" => 2,
-        "end" => 10,
-        "landmark" => [
-          "class" => "CallerBlock",
-        ],
-        "data" => [
-          "name" => "caller",
-          [
-            "_end" => [
-            ],
-          ],
-        ],
-        "index" => 0,
-        "parent" => parent[0]
-        "path" => [
-        ],
-        "children" => [
-        ],
-        "comments" => [
-        ],
-      ],
-      [
-        "blockStart" => 12,
-        "blockEnd" => 11,
-        "start" => 11,
-        "end" => 12,
-        "landmark" => [
-          "class" => "CallerBlock",
-          "consecutive" => true,
-        ],
-        "data" => [
-          [
-            "_end" => [
-            ],
-          ],
-        ],
-        "index" => 1,
-        "parent" => parent[0]
-        "path" => [
-        ],
-        "children" => [
-        ],
-        "comments" => [
-        ],
-      ],
-      [
-        "blockStart" => 14,
-        "blockEnd" => 13,
-        "start" => 13,
-        "end" => 14,
-        "landmark" => [
-          "class" => "CallerBlock",
-          "consecutive" => true,
-        ],
-        "data" => [
-          [
-            "_end" => [
-            ],
-          ],
-        ],
-        "index" => 2,
-        "parent" => parent[0]
-        "path" => [
-        ],
-        "children" => [
-        ],
-        "comments" => [
-        ],
-      ],
-    ],
-    "comments" => [
-    ],
-  ],
-]
+{
+    "}#": {
+        "needle": "}#",
+        "len": 2
+    },
+    "}$": {
+        "needle": "}$",
+        "len": 2
+    },
+    "}": {
+        "needle": "}",
+        "len": 1
+    }
+}
+Letter:  
+  New needle: }#
+  New needle: }$
+  New needle: }
+Letter: $
+  Add skip!
+Letter:  
+  New needle: }#
+  New needle: }$
+  New needle: }
+Letter: .
+  New needle: }#
+  New needle: }$
+  New needle: }
+Letter: .
+  New needle: }#
+  New needle: }$
+  New needle: }
+Letter: .
+  New needle: }#
+  New needle: }$
+  New needle: }
+Letter: m
+  New needle: }#
+  New needle: }$
+  New needle: }
+Letter: u
+  New needle: }#
+  New needle: }$
+  New needle: }
+Letter: l
+  New needle: }#
+  New needle: }$
+  New needle: }
+Letter: t
+  New needle: }#
+  New needle: }$
+  New needle: }
+Letter: i
+  New needle: }#
+  New needle: }$
+  New needle: }
+Letter:  
+  New needle: }#
+  New needle: }$
+  New needle: }
+Letter: n
+  New needle: }#
+  New needle: }$
+  New needle: }
+Letter: e
+  New needle: }#
+  New needle: }$
+  New needle: }
+Letter: e
+  New needle: }#
+  New needle: }$
+  New needle: }
+Letter: d
+  New needle: }#
+  New needle: }$
+  New needle: }
+Letter: l
+  New needle: }#
+  New needle: }$
+  New needle: }
+Letter: e
+  New needle: }#
+  New needle: }$
+  New needle: }
+Letter: s
+  New needle: }#
+  New needle: }$
+  New needle: }
+Letter: .
+  New needle: }#
+  New needle: }$
+  New needle: }
+Letter: .
+  New needle: }#
+  New needle: }$
+  New needle: }
+Letter: .
+  New needle: }#
+  New needle: }$
+  New needle: }
+Letter:  
+  New needle: }#
+  New needle: }$
+  New needle: }
+Letter: }
+  New needle: }#
+    Skip...
+Letter: #
+  New needle: }#
+  New needle: }$
+  New needle: }
+Letter:  
+  New needle: }#
+  New needle: }$
+  New needle: }
+Letter: }
+  New needle: }#
+  New needle: }$
+    Pos: 37
 
 
 
