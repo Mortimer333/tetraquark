@@ -8,23 +8,23 @@ use Content\Utf8 as Content;
 class StrTest extends BaseTest
 {
     protected array $skipTestBlock = [
-        "normal" => '[code] { ...something... } [more code]',
-        "nested" => '[code] { { ...nested... } } [more code]',
-        "multi" => '[code] ${ ...multi... }$ [more code]',
-        "multiNested" => '[code] ${ ${...multi nested...}$ }$ [more code]',
-        "multiNestedNeedle" => '[code] { ${ ...multi needles... }# }$ [more code]',
+        "normal"                         => '[code] { ...something... } [more code]',
+        "nested"                         => '[code] { { ...nested... } } [more code]',
+        "multi"                          => '[code] ${ ...multi... }$ [more code]',
+        "multiNested"                    => '[code] ${ ${...multi nested...}$ }$ [more code]',
+        "multiNestedNeedle"              => '[code] { ${ ...multi needles... }# }$ [more code]',
         "multiNestedNeedleAndHayStarter" => '[code] { #{ { ...multi needles and hayStarters... }# }$ }$ [more code]',
     ];
 
     protected array $skipTestString = [
-        "normal" => '[code] "string oj string" [more code]',
-        "escape" => '[code] "string \"oj string" [more code]',
-        "normalSingleApostrophe" => "[code] 'string oj string' [more code]",
-        "escapeSingleApostrophe" => "[code] 'string \'oj string' [more code]",
-        "templateLiteral" => '[code] `string ${var} string` [more code]',
-        "templateLiteralEscape" => '[code] `string \` ${var} string` [more code]',
-        "templateLiteralStrict" => '[code] `string ${object[`key`]} string` [more code]',
-        "templateLiteralDoubleBrackets" => '[code] `asd ${(() => {return 2 + 2})()} `  [more code]',
+        "normal"                          => '[code] "string oj string" [more code]',
+        "escape"                          => '[code] "string \"oj string" [more code]',
+        "normalSingleApostrophe"          => "[code] 'string oj string' [more code]",
+        "escapeSingleApostrophe"          => "[code] 'string \'oj string' [more code]",
+        "templateLiteral"                 => '[code] `string ${var} string` [more code]',
+        "templateLiteralEscape"           => '[code] `string \` ${var} string` [more code]',
+        "templateLiteralStrict"           => '[code] `string ${object[`key`]} string` [more code]',
+        "templateLiteralDoubleBrackets"   => '[code] `asd ${(() => {return 2 + 2})()} `  [more code]',
         "templateLiteralStringInTemplate" => '[code] `asd ${ " my string -> ` "} `  [more code]',
     ];
 
@@ -94,7 +94,7 @@ class StrTest extends BaseTest
     public function testIfSnakeCaseIsProperlyPascalized(): void
     {
         $nameBefore = "snake_case_name";
-        $nameAfter = "SnakeCaseName";
+        $nameAfter  = "SnakeCaseName";
         $pascalized = Str::pascalize($nameBefore);
         $this->assertEquals($nameAfter, $pascalized);
     }
@@ -102,7 +102,7 @@ class StrTest extends BaseTest
     public function testIfCamelCaseIsProperlyPascalized(): void
     {
         $nameBefore = "camelCaseName";
-        $nameAfter = "CamelCaseName";
+        $nameAfter  = "CamelCaseName";
         $pascalized = Str::pascalize($nameBefore);
         $this->assertEquals($nameAfter, $pascalized);
     }
@@ -117,58 +117,42 @@ class StrTest extends BaseTest
         $this->assertEquals('false', Str::bool(false));
     }
 
-    public function testIfNextLetterIsFoundIfThereIsNoSpaceBetween(): void
+    /**
+     * @dataProvider getNextLetterTestCases
+     */
+    public function testIfNextLetterIsFoundProperly(string $case, int $posStart, string $expectedLetter, int $expectedPos): void
     {
-        $case = new Content(' startend ');
-        $posStart = 6;
-        list($letter, $pos) = Str::getNextLetter($posStart, $case);
-        $this->assertEquals('e', $letter);
-        $this->assertEquals($posStart, $pos);
+        list($letter, $pos) = Str::getNextLetter($posStart, new Content($case));
+        $this->assertEquals($expectedLetter, $letter);
+        $this->assertEquals($expectedPos, $pos);
     }
 
-    public function testIfNextLetterIsFoundWithSpaceBetween(): void
+    public function getNextLetterTestCases(): array
     {
-        $case = new Content(' start end ');
-        $posStart = 6;
-        list($letter, $pos) = Str::getNextLetter($posStart, $case);
-        $this->assertEquals('e', $letter);
-        $this->assertEquals($posStart + 1, $pos);
+        return [
+            [' startend ', 6, 'e', 6],
+            [' start end ', 6, 'e', 7],
+            [" start \n end ", 6, 'e', 9],
+        ];
     }
 
-    public function testIfNextLetterIsFoundWithMultipleSpaceBetween(): void
+    /**
+     * @dataProvider getPreviousLetterTestCases
+     */
+    public function testIfPreviousLetterIsFoundIProperly(string $case, int $posStart, string $expectedLetter, int $expectedPos): void
     {
-        $case = new Content(" start \n end ");
-        $posStart = 6;
-        list($letter, $pos) = Str::getNextLetter($posStart, $case);
-        $this->assertEquals('e', $letter);
-        $this->assertEquals(9, $pos);
+        list($letter, $pos) = Str::getPreviousLetter($posStart, new Content($case));
+        $this->assertEquals($expectedLetter, $letter);
+        $this->assertEquals($expectedPos, $pos);
     }
 
-    public function testIfPreviousLetterIsFoundIfThereIsNoSpaceBetween(): void
+    public function getPreviousLetterTestCases(): array
     {
-        $case = new Content(' startend ');
-        $posStart = 5;
-        list($letter, $pos) = Str::getPreviousLetter($posStart, $case);
-        $this->assertEquals('t', $letter);
-        $this->assertEquals($posStart, $pos);
-    }
-
-    public function testIfPreviousLetterIsFoundWithSpaceBetween(): void
-    {
-        $case = new Content(' start end ');
-        $posStart = 6;
-        list($letter, $pos) = Str::getPreviousLetter($posStart, $case);
-        $this->assertEquals('t', $letter);
-        $this->assertEquals($posStart - 1, $pos);
-    }
-
-    public function testIfPreviousetterIsFoundWithMultipleSpaceBetween(): void
-    {
-        $case = new Content(" start \n end ");
-        $posStart = 8;
-        list($letter, $pos) = Str::getPreviousLetter($posStart, $case);
-        $this->assertEquals('t', $letter);
-        $this->assertEquals(5, $pos);
+        return [
+            [' startend ', 5, 't', 5],
+            [' start end ', 6, 't', 5],
+            [" start \n end ", 8, 't', 5],
+        ];
     }
 
     /**
