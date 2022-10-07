@@ -20,7 +20,7 @@ PHP <del>Library</del>Tool for <del>minifying javascript</del>mapping out script
 
 PHPunit
 
-php ./vendor/bin/phpunit test
+php ./vendor/bin/phpunit tests
 php test/test.php > test/test.log 2>&1
 
 Plan:

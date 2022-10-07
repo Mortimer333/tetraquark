@@ -116,4 +116,102 @@ class StrTest extends BaseTest
     {
         $this->assertEquals('false', Str::bool(false));
     }
+
+    public function testIfNextLetterIsFoundIfThereIsNoSpaceBetween(): void
+    {
+        $case = new Content(' startend ');
+        $posStart = 6;
+        list($letter, $pos) = Str::getNextLetter($posStart, $case);
+        $this->assertEquals('e', $letter);
+        $this->assertEquals($posStart, $pos);
+    }
+
+    public function testIfNextLetterIsFoundWithSpaceBetween(): void
+    {
+        $case = new Content(' start end ');
+        $posStart = 6;
+        list($letter, $pos) = Str::getNextLetter($posStart, $case);
+        $this->assertEquals('e', $letter);
+        $this->assertEquals($posStart + 1, $pos);
+    }
+
+    public function testIfNextLetterIsFoundWithMultipleSpaceBetween(): void
+    {
+        $case = new Content(" start \n end ");
+        $posStart = 6;
+        list($letter, $pos) = Str::getNextLetter($posStart, $case);
+        $this->assertEquals('e', $letter);
+        $this->assertEquals(9, $pos);
+    }
+
+    public function testIfPreviousLetterIsFoundIfThereIsNoSpaceBetween(): void
+    {
+        $case = new Content(' startend ');
+        $posStart = 5;
+        list($letter, $pos) = Str::getPreviousLetter($posStart, $case);
+        $this->assertEquals('t', $letter);
+        $this->assertEquals($posStart, $pos);
+    }
+
+    public function testIfPreviousLetterIsFoundWithSpaceBetween(): void
+    {
+        $case = new Content(' start end ');
+        $posStart = 6;
+        list($letter, $pos) = Str::getPreviousLetter($posStart, $case);
+        $this->assertEquals('t', $letter);
+        $this->assertEquals($posStart - 1, $pos);
+    }
+
+    public function testIfPreviousetterIsFoundWithMultipleSpaceBetween(): void
+    {
+        $case = new Content(" start \n end ");
+        $posStart = 8;
+        list($letter, $pos) = Str::getPreviousLetter($posStart, $case);
+        $this->assertEquals('t', $letter);
+        $this->assertEquals(5, $pos);
+    }
+
+    /**
+     * @dataProvider getPreviousWordCases
+     */
+    public function testIfPreviousWordIsFoundProperly(int $start, string $case, bool $startSearch, string $expectedWord, int $expectedPos): void
+    {
+        list($word, $pos) = Str::getPreviousWord($start, new Content($case), $startSearch);
+        $this->assertEquals($expectedWord, $word);
+        $this->assertEquals($expectedPos, $pos);
+    }
+
+    public function getPreviousWordCases(): array
+    {
+        return [
+            [10, 'word1 word2' , false, 'word1', 0],
+            [ 9, 'word1 word2' , true , 'word' , 6],
+            [ 6, ' word1 word2', false, 'word1', 1],
+            [ 5, 'word1 word2' , false, 'word1', 0],
+            [ 8, 'wo.rd1 word2', false, 'rd1'  , 3],
+            [ 6, 'wo.rd1 word2', true , 'rd1'  , 3],
+        ];
+    }
+
+    /**
+     * @dataProvider getNextWordCases
+     */
+    public function testIfNextWordIsFoundProperly(int $start, string $case, bool $startSearch, string $expectedWord, int $expectedPos): void
+    {
+        list($word, $pos) = Str::getNextWord($start, new Content($case), $startSearch);
+        $this->assertEquals($expectedWord, $word);
+        $this->assertEquals($expectedPos, $pos);
+    }
+
+    public function getNextWordCases(): array
+    {
+        return [
+            [3, 'word1 word2' , false, 'word2', 10],
+            [1, 'word1 word2' , true , 'ord1' , 4 ],
+            [3, 'word1 word2 ', false, 'word2', 10],
+            [5, 'word1 word2' , false, 'word2', 10],
+            [3, 'word1 wor.d2', false, 'wor'  , 8 ],
+            [5, 'word1 wor.d2', true , 'wor'  , 8 ],
+        ];
+    }
 }

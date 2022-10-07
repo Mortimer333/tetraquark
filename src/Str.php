@@ -204,7 +204,8 @@ abstract class Str
                 } elseif (Validate::isSpecial($letter) && !$letterFound) {
                     $letterFound = true;
                 } elseif ($letterFound && !Validate::isWhitespace($word)) {
-                    return [Str::rev($word), $i];
+                    Log::log('Last letter: ' . $letter);
+                    return [Str::utf8rev($word), $i + 1];
                 }
                 continue;
             }
@@ -220,7 +221,7 @@ abstract class Str
             }
         }
 
-        return [Str::rev($word), 0];
+        return [Str::utf8rev($word), 0];
     }
 
     /**
@@ -264,7 +265,7 @@ abstract class Str
             }
         }
 
-        return [$word, $content->getLength()];
+        return [$word, $content->getLength() - 1];
     }
 
     public static function bool(bool $bool): string
