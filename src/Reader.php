@@ -933,7 +933,7 @@ class Reader
         $blocks     = [];
 
         if ($newContent->getLength() !== 0) {
-            if (!Validate::isWhitespace($newContent->getLetter(0))) {
+            if (!Content::isWhitespace($newContent->getLetter(0))) {
                 $newContent->prependArrayContent([" "]);
             }
             // Generate blocks

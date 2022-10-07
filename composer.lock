@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Mortimer333/Content.git",
-                "reference": "29c8424a9d387e873a57a20c5b96e46e878faf35"
+                "reference": "9531900cd6ffb8f9b7cb77c3a502b9576ad3dfed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Mortimer333/Content/zipball/29c8424a9d387e873a57a20c5b96e46e878faf35",
-                "reference": "29c8424a9d387e873a57a20c5b96e46e878faf35",
+                "url": "https://api.github.com/repos/Mortimer333/Content/zipball/9531900cd6ffb8f9b7cb77c3a502b9576ad3dfed",
+                "reference": "9531900cd6ffb8f9b7cb77c3a502b9576ad3dfed",
                 "shasum": ""
             },
             "require": {
@@ -44,7 +44,7 @@
                 "issues": "https://github.com/Mortimer333/Content/issues",
                 "source": "https://github.com/Mortimer333/Content/tree/master"
             },
-            "time": "2022-10-06T17:39:55+00:00"
+            "time": "2022-10-07T17:42:56+00:00"
         },
         {
             "name": "mortimer333/orator",

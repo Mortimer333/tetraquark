@@ -1,5 +1,7 @@
 <?php
 
+use Content\Utf8 as Content;
+
 abstract class JsValidate
 {
     protected static array $conntectors = [
@@ -51,12 +53,12 @@ abstract class JsValidate
     {
         $undefinedEnds = ["\n" => true, ";" => true, "}" => true];
         $undefined = trim($undefined);
-        return \mb_strlen($undefined) > 0 && !Validate::isWhitespace($undefined) && !isset($undefinedEnds[$undefined]);
+        return \mb_strlen($undefined) > 0 && !Content::isWhitespace($undefined) && !isset($undefinedEnds[$undefined]);
     }
 
     public static function isSymbol(string $letter): bool
     {
-        return !preg_match('/^[a-zA-Z0-9]*$/', $letter) && !Validate::isWhitespace($letter);
+        return !preg_match('/^[a-zA-Z0-9]*$/', $letter) && !Content::isWhitespace($letter);
     }
 
     public static function isConnector(string $letter): bool

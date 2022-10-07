@@ -152,7 +152,7 @@ abstract class Str
     {
         for ($i=$start; $i < $content->getLength(); $i++) {
             $letter = $content->getLetter($i);
-            if (!Validate::isWhitespace($letter)) {
+            if (!Content::isWhitespace($letter)) {
                 return [$letter, $i];
             }
         }
@@ -170,7 +170,7 @@ abstract class Str
     {
         for ($i=$start; $i >= 0; $i--) {
             $letter = $content->getLetter($i);
-            if (!Validate::isWhitespace($letter)) {
+            if (!Content::isWhitespace($letter)) {
                 return [$letter, $i];
             }
         }
@@ -191,19 +191,19 @@ abstract class Str
         $word = '';
         if ($startSearch) {
             $letter = $content->getLetter($start);
-            if (!Validate::isWhitespace($letter ?? '')) {
+            if (!Content::isWhitespace($letter ?? '')) {
                 $letterFound = true;
             }
         }
 
         for ($i=$start; $i >= 0; $i--) {
             $letter = $content->getLetter($i);
-            if (Validate::isWhitespace($letter) || Validate::isSpecial($letter)) {
-                if (Validate::isWhitespace($letter) && !$startSearch && !$letterFound) {
+            if (Content::isWhitespace($letter) || Validate::isSpecial($letter)) {
+                if (Content::isWhitespace($letter) && !$startSearch && !$letterFound) {
                     $startSearch = true;
                 } elseif (Validate::isSpecial($letter) && !$letterFound) {
                     $letterFound = true;
-                } elseif ($letterFound && !Validate::isWhitespace($word)) {
+                } elseif ($letterFound && !Content::isWhitespace($word)) {
                     Log::log('Last letter: ' . $letter);
                     return [Str::utf8rev($word), $i + 1];
                 }
@@ -236,15 +236,15 @@ abstract class Str
         $letterFound = false;
         if ($startSearch) {
             $letter = $content->getLetter($start);
-            if (!Validate::isWhitespace($letter ?? '')) {
+            if (!Content::isWhitespace($letter ?? '')) {
                 $letterFound = true;
             }
         }
         $word = '';
         for ($i=$start; $i < $content->getLength(); $i++) {
             $letter = $content->getLetter($i);
-            if (Validate::isWhitespace($letter) || Validate::isSpecial($letter)) {
-                if (Validate::isWhitespace($letter) && !$startSearch && !$letterFound) {
+            if (Content::isWhitespace($letter) || Validate::isSpecial($letter)) {
+                if (Content::isWhitespace($letter) && !$startSearch && !$letterFound) {
                     $startSearch = true;
                 } elseif (Validate::isSpecial($letter) && !$letterFound) {
                     $letterFound = true;
@@ -271,5 +271,15 @@ abstract class Str
     public static function bool(bool $bool): string
     {
         return $bool ? 'true' : 'false';
+    }
+
+    public static function utf8ToUnicode(string $letter): string
+    {
+        return sprintf('U+%04X', \IntlChar::ord($letter));
+    }
+
+    public static function unicodeToUtf8(string $letter): string
+    {
+        return html_entity_decode(preg_replace("/U\+([0-9A-F]{4})/", "&#x\\1;", $letter), ENT_NOQUOTES, 'UTF-8');
     }
 }

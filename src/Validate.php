@@ -23,11 +23,6 @@ abstract class Validate
         return self::$special[$letter] ?? false;
     }
 
-    public static function isWhitespace(string $letter): bool
-    {
-        return ctype_space($letter);
-    }
-
     public static function isTemplateLiteralLandmark(string $letter, string $previousLetter, bool $inString = false): bool
     {
         return $letter === '`' && (

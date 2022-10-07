@@ -3,6 +3,7 @@
 require_once __DIR__ . '/validate.php';
 
 use Tetraquark\Validate;
+use Content\Utf8 as Content;
 
 class Helper
 {
@@ -62,7 +63,7 @@ class Helper
         list($letter, $newPos) = Str::getNextLetter($pos, $content);
 
         if ($letter == '.') {
-            list($nextWord, $wordPos) = Str::getNextWord($newPos + 1, $content, !Validate::isWhitespace($content->getLetter($newPos + 1)));
+            list($nextWord, $wordPos) = Str::getNextWord($newPos + 1, $content, !Content::isWhitespace($content->getLetter($newPos + 1)));
             return self::getNextChain($essentials, $wordPos + 1);
         } elseif ($letter == "=") {
             $data = $essentials->getData();

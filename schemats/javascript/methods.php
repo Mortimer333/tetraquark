@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 
 use Orator\Log;
+use Content\Utf8 as Content;
 use Tetraquark\{Validate, Str};
 use Tetraquark\Model\CustomMethodEssentialsModel;
 
@@ -188,7 +189,7 @@ return [
         $res = !isset($skipped[$essentials->getLetter()])
             && (preg_match("/[\W]+/", $essentials->getLetter()) === 1)
             && !Validate::isStringLandmark($essentials->getLetter())
-            && !Validate::isWhitespace($essentials->getLetter());
+            && !Content::isWhitespace($essentials->getLetter());
         if ($res) {
             $essentials->appendData($essentials->getLetter(), $name);
         }
@@ -422,7 +423,7 @@ return [
     "s" => function (CustomMethodEssentialsModel $essentials): bool
     {
         $letter = $essentials->getLetter();
-        if (!Validate::isWhitespace($letter ?? '')) {
+        if (!Content::isWhitespace($letter ?? '')) {
             return false;
         }
         list($letter, $pos) = Str::getNextLetter($essentials->getI(), $essentials->getContent());
