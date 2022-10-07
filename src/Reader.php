@@ -388,7 +388,7 @@ class Reader
         ];
     }
 
-    private function resolve(LandmarkResolverModel $resolver, int &$i)
+    public function resolve(LandmarkResolverModel $resolver, int &$i)
     {
         // @TODO remove this, and think of better fail save
         $this->iterations++;
@@ -552,7 +552,7 @@ class Reader
         return $end;
     }
 
-    private function clearObjectify(LandmarkResolverModel $resolver)
+    public function clearObjectify(LandmarkResolverModel $resolver)
     {
         $resolver->setLandmark($resolver->getMap());
         $resolver->setData([]);
@@ -752,6 +752,7 @@ class Reader
         return $landmark;
     }
 
+    // @TODO Move to LandmarkResolverModel
     public function saveResolver(LandmarkResolverModel $resolver, array $remove = []): array
     {
         $save = $resolver->toArray();
@@ -761,6 +762,7 @@ class Reader
         return $save;
     }
 
+    // @TODO Move to LandmarkResolverModel
     public function restoreResolver(LandmarkResolverModel $resolver, array $save): void
     {
         $resolver->set($save);
@@ -1349,7 +1351,7 @@ class Reader
         return $map;
     }
 
-    private function createMapItem(string|array $item, string $type): ?array
+    public function createMapItem(string|array $item, string $type): ?array
     {
         if (empty($item)) {
             return null;
@@ -1357,7 +1359,7 @@ class Reader
         return ["item" => $item, "type" => $type];
     }
 
-    private function createMethodMapItems(string $currentItem, bool $skip = false): array
+    public function createMethodMapItems(string $currentItem, bool $skip = false): array
     {
         $specials = [
             '>' => "then",

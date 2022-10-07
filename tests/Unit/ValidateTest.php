@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use Tetraquark\Validate;
+use Tests\BaseTest;
 
 class ValidateTest extends BaseTest
 {

@@ -37,8 +37,8 @@ Plan:
 5. [DONE] Recreate Validate as something used for JS sytax schema `/schemats/javascript` and copy used methods by Reader to it or in Str (probably in Str)
    - Quick test it
 6. Create unit tests (`test/Unit`) for each public method (probably all of them) for:
-   - Str
-   - Content (if not moved)
+   - [DONE] Str
+   - [DONE] Content (if not moved)
    - Reader
    - *Model
 7. Create integration tests - one for each syntax (probably generate map and use it as reference)

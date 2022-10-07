@@ -2,9 +2,9 @@
 
 namespace Tests\Unit;
 
-use Tests\RootTest;
+use Tests\BaseTest;
 
-class BaseTest extends RootTest
+class BaseClassModelTest extends BaseTest
 {
     public function setUp(): void
     {

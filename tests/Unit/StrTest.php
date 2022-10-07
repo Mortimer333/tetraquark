@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use Tests\BaseTest;
 use Tetraquark\Str;
 use Content\Utf8 as Content;
 
