@@ -204,7 +204,6 @@ abstract class Str
                 } elseif (Validate::isSpecial($letter) && !$letterFound) {
                     $letterFound = true;
                 } elseif ($letterFound && !Content::isWhitespace($word)) {
-                    Log::log('Last letter: ' . $letter);
                     return [Str::utf8rev($word), $i + 1];
                 }
                 continue;

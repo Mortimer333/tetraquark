@@ -6,6 +6,10 @@ use Tests\BaseTest;
 use Tetraquark\Str;
 use Content\Utf8 as Content;
 
+/**
+ * @covers \Tetraquark\Str
+ * @covers \Tetraquark\Validate
+ */
 class StrTest extends BaseTest
 {
     protected array $skipTestBlock = [

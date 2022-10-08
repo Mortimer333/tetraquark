@@ -21,6 +21,7 @@ PHP <del>Library</del>Tool for <del>minifying javascript</del>mapping out script
 PHPunit
 
 php ./vendor/bin/phpunit tests
+XDEBUG_MODE=coverage php ./vendor/bin/phpunit tests --coverage-text XDEBUG_MODE=coverage
 php test/test.php > test/test.log 2>&1
 
 Plan:

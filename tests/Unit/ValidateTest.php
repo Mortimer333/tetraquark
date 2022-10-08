@@ -5,6 +5,9 @@ namespace Tests\Unit;
 use Tetraquark\Validate;
 use Tests\BaseTest;
 
+/**
+ * @covers \Tetraquark\Validate
+ */
 class ValidateTest extends BaseTest
 {
     /**

@@ -7,6 +7,14 @@ use Tetraquark\{Reader, Exception};
 use Content\Utf8 as Content;
 use Tetraquark\Model\{LandmarkResolverModel, CustomMethodEssentialsModel, SettingsModel};
 
+/**
+ * @covers \Tetraquark\Reader
+ * @covers \Tetraquark\Model\BasePolymorphicModel
+ * @covers \Tetraquark\Str::pascalize
+ * @uses \Tetraquark\Model\LandmarkResolverModel
+ * @uses \Tetraquark\Model\CustomMethodEssentialsModel
+ * @uses \Tetraquark\Model\SettingsModel
+ */
 class ReaderTest extends BaseTest
 {
     public function testSettingDefaultsInSchemat(): void
