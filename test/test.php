@@ -3,11 +3,11 @@ namespace Tetraquark;
 require 'vendor/autoload.php';
 use Content\Utf8 as Content;
 use Orator\Log;
-$schemat = '/var/www/html/tetraquark-js/tests/Integration/schemat/settings.php';
-$script ='/var/www/html/tetraquark-js/tests/Integration/script/settings';
+$schemat = '/var/www/html/tetraquark-js/tests/Integration/schemat/comments.php';
+$script ='/var/www/html/tetraquark-js/tests/Integration/script/comments';
 
 $reader = new Reader($schemat);
-$map = $reader->getMap();
+$map = $reader->getMethods();
 Log::log($map);
 $analysis = $reader->read($script, true, displayBlocks: false);
 json_encode($analysis);

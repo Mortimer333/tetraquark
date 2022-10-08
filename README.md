@@ -44,6 +44,13 @@ Plan:
    - [DONE] *Model
 7. Create integration tests - one for each syntax (probably generate map and use it as reference)
    - each test should have seperate file with test data
+   - Do generic tests:
+     - [DONE] Simple - just normal data
+     - [DONE] Extend - with extended instructions
+     - [DONE] Methods - with all default methods
+     - [DONE] Settings - with all settings (comments remove)
+     - Comments - with leave comments
+     - Blocks - with blocks (children)
    - each test have to check:
      - with formal syntax - `const a = 'a';`
      - with lazy syntax - `const a='a'`

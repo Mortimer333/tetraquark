@@ -541,10 +541,7 @@ class Reader
             $betweenComment = $content->iSubStr($pos, $start - 1);
             // If it's in the same line, try to attach to the last block
             if (strpos($betweenComment, "\n") === false) {
-                if ($resolver->getParent() instanceof ScriptBlockModel) {
-                    // This mean we are at the top of the file
-                    return;
-                }
+                Log::log('In between comments');
 
                 if ($resolver instanceof CustomMethodEssentialsModel) {
                     $block = $resolver->getPrevious();
@@ -552,9 +549,11 @@ class Reader
                     $block = $resolver->getParent()->getLastChild();
                 }
 
-                if ($block) {
-                    $block->setComments(array_merge($block->getComments(), $this->comments));
+                if (!$block) {
+                    return;
                 }
+                
+                $block->setComments(array_merge($block->getComments(), $this->comments));
                 $this->comments = [];
             }
         }
