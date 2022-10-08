@@ -253,4 +253,17 @@ class ReaderTest extends BaseUnit
             ["", []]
         ];
     }
+
+    /**
+     * @covers \Tetraquark\Reader::getDefaultMethods
+     */
+    public function testRetrivalDfeaultMethods(): void
+    {
+        $reader = new Reader();
+        $defaultMethods = $reader->getDefaultMethods();
+        foreach ($defaultMethods as $key => $value) {
+            $this->assertEquals(true, ctype_alpha($key));
+            $this->assertEquals(true, is_callable($value));
+        }
+    }
 }

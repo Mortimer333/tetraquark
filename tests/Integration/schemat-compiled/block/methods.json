@@ -1,0 +1,23 @@
+{
+    "s": {
+        "name": "s",
+        "params": [],
+        "method": "s"
+    },
+    "find:\")\":\"(\":\"condition\"": {
+        "name": "find",
+        "params": [
+            ")",
+            "(",
+            "condition"
+        ],
+        "method": "find:\")\":\"(\":\"condition\""
+    },
+    "find:\"=\"": {
+        "name": "find",
+        "params": [
+            "="
+        ],
+        "method": "find:\"=\""
+    }
+}

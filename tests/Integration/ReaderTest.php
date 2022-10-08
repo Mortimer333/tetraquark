@@ -2,12 +2,10 @@
 
 namespace Tests\Integration;
 
-use Tetraquark\{Reader, Exception};
-use Content\Utf8 as Content;
-use Tetraquark\Model\{LandmarkResolverModel, CustomMethodEssentialsModel, SettingsModel};
+use Tetraquark\Reader;
 
 /**
- * Those tests are check integration of all modules as they alle were made for this class
+ * Those tests are check integration of all modules as they all were made for this class
  * @covers \Tetraquark\Reader
  * @covers \Tetraquark\Str
  * @covers \Tetraquark\Validate
@@ -43,7 +41,7 @@ class ReaderTest extends BaseIntegration
 
     public function provideSetups(): array
     {
-        $types = ["simple", "method", "extend", "comments"];
+        $types = ["simple", "method", "extend", "settings", "comments", "block"];
         $cases = [];
         foreach ($types as $type) {
             $cases[] = [$type, $type, $type . '/instruction', $type. '/methods', $type . '/analysis'];

@@ -82,21 +82,33 @@ class Reader
         // die(json_encode($this->map, JSON_PRETTY_PRINT));
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getMap(): array
     {
         return $this->map;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getSchema(): array
     {
         return $this->schema;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getPath(): array
     {
         return $this->path;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getMethods(): array
     {
         return $this->methods;
@@ -111,6 +123,7 @@ class Reader
             "comments" => [],
             "remove" => [
                 "comments" => false,
+                "additional" => false,
             ],
             "instructions" => [],
             "methods" => $this->getDefaultMethods(),
@@ -179,45 +192,68 @@ class Reader
         return $script;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function setRerieveComments(bool $retrieveComments): self
     {
         $this->retrieveComments = $retrieveComments;
         return $this;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getRerieveComments(): bool
     {
         return $this->retrieveComments;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function setSaveRerievedComments(bool $setRetrievedComments): self
     {
         $this->setRetrievedComments = $setRetrievedComments;
         return $this;
     }
 
-    public function getSaveRerievedComments(): bool
+    /**
+     * @codeCoverageIgnore
+     */function getSaveRerievedComments(): bool
     {
         return $this->setRetrievedComments;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function setComments(array $comments): self
     {
         $this->comments = $comments;
         return $this;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getComments(): array
     {
         return $this->comments;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function displayLandmarks(array $script): void
     {
         $landmarks = $this->getLandmarks($script);
         $this->showLandmark($landmarks);
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function showLandmark(array $landmarks): void
     {
         Log  ::log($landmarks['landmark']);
@@ -230,6 +266,9 @@ class Reader
         }
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getLandmarks(array $script): array
     {
         $landmarks = [
@@ -283,6 +322,9 @@ class Reader
         return $landmarks;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function displayScriptBlocks(array $script, bool $item = true): void
     {
         Log  ::increaseIndent();
@@ -312,6 +354,9 @@ class Reader
         Log  ::decreaseIndent();
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function displayBlock(BlockModel $block): void
     {
         foreach ($block->toArray() as $key => $value) {
@@ -541,8 +586,6 @@ class Reader
             $betweenComment = $content->iSubStr($pos, $start - 1);
             // If it's in the same line, try to attach to the last block
             if (strpos($betweenComment, "\n") === false) {
-                Log::log('In between comments');
-
                 if ($resolver instanceof CustomMethodEssentialsModel) {
                     $block = $resolver->getPrevious();
                 } else {
@@ -552,7 +595,7 @@ class Reader
                 if (!$block) {
                     return;
                 }
-                
+
                 $block->setComments(array_merge($block->getComments(), $this->comments));
                 $this->comments = [];
             }
@@ -819,7 +862,7 @@ class Reader
         );
         $this->comments = [];
 
-        $block = $item->getLandmark()["_block"] ?? false;
+        $block = $resolver->getLandmark()["_block"] ?? false;
 
         if ($block) {
             $item->setBlockStart($item->getEnd() + 1);

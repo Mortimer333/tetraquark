@@ -1,71 +1,61 @@
-[]
-In between comments
-In between comments
-[
-    {
-        "blockStart": null,
-        "blockEnd": null,
-        "start": 17,
-        "end": 20,
-        "landmark": {
-            "type": "Test"
-        },
-        "data": [],
-        "index": 0,
-        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
-        "path": [],
-        "children": [],
-        "comments": [
-            {
-                "content": "\/\/ Comment Above\n",
-                "start": 0,
-                "end": 16
-            }
-        ]
+{
+    "shared": {
+        "ends": {
+            ";": true
+        }
     },
-    {
-        "blockStart": null,
-        "blockEnd": null,
-        "start": 23,
-        "end": 26,
-        "landmark": {
-            "type": "Test"
-        },
-        "data": [],
-        "index": 1,
-        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
-        "path": [],
-        "children": [],
-        "comments": [
-            {
-                "content": "\/\/ Comment after\n",
-                "start": 28,
-                "end": 44
-            }
-        ]
+    "comments": {
+        "\/": {
+            "*": "*\/"
+        }
     },
-    {
-        "blockStart": null,
-        "blockEnd": null,
-        "start": 77,
-        "end": 80,
-        "landmark": {
-            "type": "Test"
-        },
-        "data": [],
-        "index": 2,
-        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
-        "path": [],
-        "children": [],
-        "comments": [
-            {
-                "content": "\/*\n    Multi comment above\n *\/",
-                "start": 46,
-                "end": 75
-            }
-        ]
+    "remove": {
+        "comments": true,
+        "additional": {}
+    },
+    "instructions": {
+        "\/s\\debugger": {
+            "type": "Debugger"
+        }
+    },
+    "prepare": {
+        "content": {},
+        "missed": {}
+    },
+    "methods": {
+        "s": {},
+        "find": {}
     }
-]
+}
+{
+    "shared": {
+        "ends": {
+            ";": true
+        }
+    },
+    "comments": {
+        "\/": {
+            "*": "*\/"
+        }
+    },
+    "remove": {
+        "comments": true,
+        "additional": {}
+    },
+    "instructions": {
+        "\/s\\debugger": {
+            "type": "Debugger"
+        }
+    },
+    "prepare": {
+        "content": {},
+        "missed": {}
+    },
+    "methods": {
+        "s": {},
+        "find": {}
+    }
+}
 
 
 

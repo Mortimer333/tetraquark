@@ -1,0 +1,147 @@
+[
+    {
+        "blockStart": 10,
+        "blockEnd": 71,
+        "start": 0,
+        "end": 72,
+        "landmark": {
+            "type": "If"
+        },
+        "data": {
+            "foundkey": ")",
+            "condition": "con",
+            "_end": []
+        },
+        "index": 0,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": 22,
+                "blockEnd": 24,
+                "start": 15,
+                "end": 24,
+                "landmark": {
+                    "type": "Var"
+                },
+                "data": {
+                    "foundkey": "=",
+                    "_end": []
+                },
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 12,
+                        "end": 14,
+                        "landmark": {
+                            "_missed": true
+                        },
+                        "data": {
+                            "missed": "2;"
+                        },
+                        "index": 0,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    }
+                ],
+                "comments": []
+            },
+            {
+                "blockStart": 37,
+                "blockEnd": 71,
+                "start": 30,
+                "end": 71,
+                "landmark": {
+                    "type": "Var"
+                },
+                "data": {
+                    "foundkey": "=",
+                    "_end": []
+                },
+                "index": 1,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 27,
+                        "end": 32,
+                        "landmark": {
+                            "_missed": true
+                        },
+                        "data": {
+                            "missed": "1 + ("
+                        },
+                        "index": 0,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    },
+                    {
+                        "blockStart": 40,
+                        "blockEnd": 44,
+                        "start": 33,
+                        "end": 44,
+                        "landmark": {
+                            "type": "Var"
+                        },
+                        "data": {
+                            "foundkey": "=",
+                            "_end": []
+                        },
+                        "index": 1,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [
+                            {
+                                "blockStart": null,
+                                "blockEnd": null,
+                                "start": 13,
+                                "end": 17,
+                                "landmark": {
+                                    "_missed": true
+                                },
+                                "data": {
+                                    "missed": "asd;"
+                                },
+                                "index": 0,
+                                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                                "path": [],
+                                "children": [],
+                                "comments": []
+                            }
+                        ],
+                        "comments": []
+                    },
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 45,
+                        "end": 62,
+                        "landmark": {
+                            "_missed": true
+                        },
+                        "data": {
+                            "missed": ") - (let d = 3;)"
+                        },
+                        "index": 2,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    }
+                ],
+                "comments": []
+            }
+        ],
+        "comments": []
+    }
+]

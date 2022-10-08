@@ -15,6 +15,10 @@ return [
     ],
     "remove" => [
         "comments" => true,
+        "additional" => function(int $i, Content $content, string $letter, ?string $nextLetter, array $schema)
+        {
+            // Do nothing
+        }
     ],
     "instructions" => [
         "/s\debugger" => [
