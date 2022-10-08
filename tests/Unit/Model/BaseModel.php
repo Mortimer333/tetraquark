@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit;
+namespace Tests\Unit\Model;
 
-use Tests\BaseTest;
+use Tests\Unit\BaseUnit;
 
-class BaseModelTest extends BaseTest
+abstract class BaseModel extends BaseUnit
 {
     public function setUp(): void
     {

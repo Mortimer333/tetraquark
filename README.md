@@ -37,11 +37,11 @@ Plan:
 4. [DONE] Maybe move Content class out (too) as it is surprisingly useful
 5. [DONE] Recreate Validate as something used for JS sytax schema `/schemats/javascript` and copy used methods by Reader to it or in Str (probably in Str)
    - Quick test it
-6. Create unit tests (`test/Unit`) for each public method (probably all of them) for:
+6. [DONE] Create unit tests (`test/Unit`) for each public method (probably all of them) for:
    - [DONE] Str
    - [DONE] Content (if not moved)
-   - Reader
-   - *Model
+   - [DONE] Reader
+   - [DONE] *Model
 7. Create integration tests - one for each syntax (probably generate map and use it as reference)
    - each test should have seperate file with test data
    - each test have to check:

@@ -4,7 +4,7 @@ namespace Tests;
 
 use PHPUnit\Framework\TestCase;
 
-class BaseTest extends TestCase
+abstract class Base extends TestCase
 {
     public function setUp(): void
     {

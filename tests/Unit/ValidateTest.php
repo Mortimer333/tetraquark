@@ -3,12 +3,11 @@
 namespace Tests\Unit;
 
 use Tetraquark\Validate;
-use Tests\BaseTest;
 
 /**
  * @covers \Tetraquark\Validate
  */
-class ValidateTest extends BaseTest
+class ValidateTest extends BaseUnit
 {
     /**
      * @dataProvider provideStringChars

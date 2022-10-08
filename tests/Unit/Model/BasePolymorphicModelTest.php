@@ -2,7 +2,6 @@
 
 namespace Tests\Unit\Model;
 
-use Tests\Unit\BaseModelTest;
 use Tetraquark\Model\CustomMethodEssentialsModel;
 use Tetraquark\Exception;
 
@@ -12,7 +11,7 @@ use Tetraquark\Exception;
  * @covers \Tetraquark\Model\LandmarkResolverModel
  * @covers \Tetraquark\Str::pascalize
  */
-class BasePolymorphicModelTest extends BaseModelTest
+class BasePolymorphicModelTest extends BaseModel
 {
     public function testSetMethodCorrectlyCreatesMethods()
     {

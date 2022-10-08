@@ -2,7 +2,6 @@
 
 namespace Tests\Unit;
 
-use Tests\BaseTest;
 use Tetraquark\Str;
 use Content\Utf8 as Content;
 
@@ -10,7 +9,7 @@ use Content\Utf8 as Content;
  * @covers \Tetraquark\Str
  * @covers \Tetraquark\Validate
  */
-class StrTest extends BaseTest
+class StrTest extends BaseUnit
 {
     protected array $skipTestBlock = [
         "normal"                         => '[code] { ...something... } [more code]',

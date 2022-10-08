@@ -2,7 +2,6 @@
 
 namespace Tests\Unit;
 
-use Tests\BaseTest;
 use Tetraquark\{Reader, Exception};
 use Content\Utf8 as Content;
 use Tetraquark\Model\{LandmarkResolverModel, CustomMethodEssentialsModel, SettingsModel};
@@ -15,7 +14,7 @@ use Tetraquark\Model\{LandmarkResolverModel, CustomMethodEssentialsModel, Settin
  * @uses \Tetraquark\Model\CustomMethodEssentialsModel
  * @uses \Tetraquark\Model\SettingsModel
  */
-class ReaderTest extends BaseTest
+class ReaderTest extends BaseUnit
 {
     public function testSettingDefaultsInSchemat(): void
     {
