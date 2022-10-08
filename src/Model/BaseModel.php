@@ -2,7 +2,7 @@
 
 namespace Tetraquark\Model;
 
-use Tetraquark\{Str, Validate, Log, Exception};
+use Tetraquark\{Str, Validate, Exception};
 use Tetraquark\Contract\BaseModelInterface;
 
 /**

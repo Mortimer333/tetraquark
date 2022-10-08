@@ -4,10 +4,7 @@ require 'vendor/autoload.php';
 use Content\Utf8 as Content;
 use Orator\Log;
 
-// [10, 'word1 word2' , false, 'word1', 0],
-list($word, $pos) = Str::getPreviousWord(10, new Content('word1 word2'));
-Log::log($word . ', ' . $pos);
-// $reader = new Reader(__DIR__ . '/../schemats/javascript.php');
+$reader = new Reader(__DIR__ . '/../schemats/javascript.php');
 // $reader->read(__DIR__ . '/data/comment.js', true, true);
 // $minified = $tetra->minify(__DIR__ . '/data/array.js');
 // $minified = $tetra->minify(__DIR__ . '/data/arrowFunction.js');

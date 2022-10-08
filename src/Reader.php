@@ -8,7 +8,8 @@ use Tetraquark\Model\{
     CustomMethodEssentialsModel,
     LandmarkResolverModel,
     Block\BlockModel,
-    Block\ScriptBlockModel
+    Block\ScriptBlockModel,
+    SettingsModel
 };
 use Tetraquark\Contract\BlockModelInterface;
 use Tetraquark\Factory\ClosureFactory;
@@ -55,19 +56,31 @@ class Reader
     // Save retrieved comments
     protected bool $setRetrievedComments = true;
 
+    public const FLAG_SKIP = '_skip';
+    public const FLAG_FINISH = '_finish';
     public const SKIP = 'skip';
     public const FINISH = 'finish';
     public const END_OF_FILE = 'end of file';
     public const EMPTY_METHOD = 'e';
 
     public function __construct(
-        protected string $path,
+        ?string $path = null,
         protected bool $cache = true,
     ) {
+        if (is_null($path)) {
+            return;
+        }
+
+        $this->compile($path);
+    }
+
+    public function compile(string $path)
+    {
         if (!is_file($path)) {
             throw new Exception("Given schema doesn't exist", 400);
         }
 
+        $this->path   = $path;
         $this->schema = require $path;
         $this->schema = $this->schemaSetDefaults($this->schema, $this->schemaDefaults);
 
@@ -81,7 +94,7 @@ class Reader
         }
 
         // die(json_encode($this->methods, JSON_PRETTY_PRINT));
-        // die(json_encode($this->map, JSON_PRETTY_PRINT));
+        die(json_encode($this->map, JSON_PRETTY_PRINT));
     }
 
     public function schemaSetDefaults(array $schema, array $defaults): array
@@ -306,9 +319,6 @@ class Reader
 
     public function objectify(Content $content, array $map, int $start = 0, ?BlockModelInterface $parent = null): array
     {
-        $settings = new \stdClass();
-        $settings->skip = 0;
-
         $resolver = new LandmarkResolverModel([
             "letter"     => null,
             "landmark"   => $map,
@@ -317,7 +327,7 @@ class Reader
             "i"          => $start,
             "content"    => $content,
             "data"       => [],
-            "settings"   => $settings,
+            "settings"   => new SettingsModel(),
             "map"        => $map,
             "parent"     => $parent,
         ]);
@@ -722,17 +732,17 @@ class Reader
 
     public function resolveSettings(LandmarkResolverModel $resolver): void
     {
-        if (isset($resolver->getLandmark()['_skip'])) {
-            $resolver->getSettings()->skip++;
+        if (isset($resolver->getLandmark()[self::FLAG_SKIP])) {
+            $resolver->getSettings()->increaseSkip();
             throw new Exception(self::SKIP);
         }
 
-        if ($resolver->getSettings()->skip > 0) {
-            $resolver->getSettings()->skip--;
+        if ($resolver->getSettings()->getSkip() > 0) {
+            $resolver->getSettings()->decreaseSkip();
             throw new Exception(self::SKIP);
         }
 
-        if (isset($resolver->getLandmark()['_finish'])) {
+        if (isset($resolver->getLandmark()[self::FLAG_FINISH])) {
             $this->saveBlock($resolver);
             throw new Exception(self::FINISH);
         }
@@ -1039,7 +1049,7 @@ class Reader
 
             $match = $content->subStr($i, $needleSize);
             if ($needle == $match) {
-                return $i + ($needleSize - 1);
+                return $i + $needleSize - 1;
             }
         }
         return false;
@@ -1092,15 +1102,16 @@ class Reader
             }
         }
         $block['_custom'] = $toEnclose;
-        if (isset($block['_expand'])) {
-            foreach ($block['_expand'] as $key => $subBlock) {
-                $block['_expand'][$key] = $this->encloseCustomData($subBlock);
-            }
-        }
+        // @DEPRICATED
+        // if (isset($block['_expand'])) {
+        //     foreach ($block['_expand'] as $key => $subBlock) {
+        //         $block['_expand'][$key] = $this->encloseCustomData($subBlock);
+        //     }
+        // }
         return $block;
     }
 
-    public function mergeMaps(array $maps, array $merged = [], bool $continue = false): array
+    public function mergeMaps(array $maps, array $merged = []): array
     {
         foreach ($maps as $map) {
             foreach ($map as $key => $value) {

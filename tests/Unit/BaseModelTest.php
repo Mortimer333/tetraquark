@@ -4,7 +4,7 @@ namespace Tests\Unit;
 
 use Tests\BaseTest;
 
-class BaseClassModelTest extends BaseTest
+class BaseModelTest extends BaseTest
 {
     public function setUp(): void
     {

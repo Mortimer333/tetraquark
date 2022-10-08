@@ -1,4 +1,36 @@
-word1, 0
+[{"a":{"b":{"c":{"_custom":{"class":1},"_stop":true}}}},{"a":{"b":{"e":{"_custom":{"class":2},"_stop":true}}}},{"a":{"c":{"b":{"e":{"_custom":{"class":3},"_stop":true}}}}},{"a":{"c":{"b":{"d":{"_custom":{"class":4},"_stop":true}}}}}]
 
-
-
+{
+    "a": {
+        "c": {
+            "b": {
+                "d": {
+                    "_custom": {
+                        "class": 4
+                    },
+                    "_stop": true
+                },
+                "e": {
+                    "_custom": {
+                        "class": 3
+                    },
+                    "_stop": true
+                }
+            }
+        },
+        "b": {
+            "e": {
+                "_custom": {
+                    "class": 2
+                },
+                "_stop": true
+            },
+            "c": {
+                "_custom": {
+                    "class": 1
+                },
+                "_stop": true
+            }
+        }
+    }
+}

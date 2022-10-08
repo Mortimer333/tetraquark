@@ -8,7 +8,7 @@ use Tetraquark\Contract\BasePolymorphicModelInterface;
 /**
  * Base model containing all shared functionality between polymorphic models
  */
-class BasePolymorphicModel implements BasePolymorphicModelInterface
+abstract class BasePolymorphicModel implements BasePolymorphicModelInterface
 {
     protected $_methods = [];
 
@@ -30,15 +30,11 @@ class BasePolymorphicModel implements BasePolymorphicModelInterface
      */
     public function set(array $args): self
     {
-        $taken = ["_methods" => true];
         foreach ($args as $key => $value) {
             if (!is_string($key)) {
-                throw new Exception('Array passed into BaseModel::set method should contains only associative items.', 400);
+                throw new Exception('Array passed into BasePolymorphicModel::set method should contains only associative items.', 400);
             }
 
-            if ($taken[$key] ?? false) {
-                throw new Exception('The name of variable you are trying to use (' . $key . ') is taken.', 400);
-            }
             $pascalized = Str::pascalize($key);
             $camelcased = lcfirst($pascalized);
             $this->$camelcased = $value;
