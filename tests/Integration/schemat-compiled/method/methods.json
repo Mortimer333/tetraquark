@@ -1,0 +1,22 @@
+{
+    "addtest_skip": {
+        "name": "addtest",
+        "params": [],
+        "method": "addtest_skip",
+        "_skip": true
+    },
+    "find:\")\":\"(\">addtest": {
+        "name": "find",
+        "params": [
+            ")",
+            "("
+        ],
+        "method": "find:\")\":\"(\">addtest",
+        "then": "addtest_skip"
+    },
+    "s": {
+        "name": "s",
+        "params": [],
+        "method": "s"
+    }
+}

@@ -3,9 +3,9 @@
         "blockStart": null,
         "blockEnd": null,
         "start": 0,
-        "end": 6,
+        "end": 4,
         "landmark": {
-            "type": "console"
+            "type": "Chain"
         },
         "data": [],
         "index": 0,
@@ -17,10 +17,10 @@
     {
         "blockStart": null,
         "blockEnd": null,
-        "start": 7,
-        "end": 7,
+        "start": 5,
+        "end": 16,
         "landmark": {
-            "type": "dot"
+            "type": "DotChain"
         },
         "data": [],
         "index": 1,
@@ -32,10 +32,10 @@
     {
         "blockStart": null,
         "blockEnd": null,
-        "start": 8,
-        "end": 10,
+        "start": 17,
+        "end": 29,
         "landmark": {
-            "type": "log"
+            "type": "ArrowChain"
         },
         "data": [],
         "index": 2,
@@ -47,8 +47,8 @@
     {
         "blockStart": null,
         "blockEnd": null,
-        "start": 11,
-        "end": 12,
+        "start": 30,
+        "end": 31,
         "landmark": {
             "_missed": true
         },

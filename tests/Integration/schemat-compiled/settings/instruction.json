@@ -24,23 +24,3 @@
         }
     }
 }
-[
-    {
-        "blockStart": null,
-        "blockEnd": null,
-        "start": 0,
-        "end": 8,
-        "landmark": {
-            "type": "Debugger"
-        },
-        "data": [],
-        "index": 0,
-        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
-        "path": [],
-        "children": [],
-        "comments": []
-    }
-]
-
-
-

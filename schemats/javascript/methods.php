@@ -277,18 +277,6 @@ return [
 
         return false;
     },
-    "word" => function (CustomMethodEssentialsModel $essentials, string $name = "word", bool $varValidation = true): bool
-    {
-        list($word, $i) = Str::getNextWord($essentials->getI(), $essentials->getContent(), true);
-        if (empty($word) || ($varValidation && !JsValidate::isJSValidVariable($word))) {
-            return false;
-        }
-
-        $essentials->appendData($word, $name);
-
-        $essentials->setI($i);
-        return true;
-    },
     "strend" => function (CustomMethodEssentialsModel $essentials, string $type, string $name = 'string'): bool
     {
         $i = Str::skip($type, $essentials->getI() - 1, $essentials->getContent());
@@ -394,42 +382,16 @@ return [
         $essentials->setI($essentials->getI() + 1);
         return $essentials->getMethods()['varend']($essentials);
     },
-    "find" => function (CustomMethodEssentialsModel $essentials, string|array $needle, null|array|string $hayStarter = null, ?string $name = null): bool
+    "word" => function (CustomMethodEssentialsModel $essentials, string $name = "word", bool $varValidation = true): bool
     {
-        $content = $essentials->getContent();
-        $index   = $essentials->getI();
-        $data    = $essentials->getData();
-
-        list($pos, $foundkey) = Str::skipBlock($needle, $index, $content, $hayStarter);
-
-        if (is_null($foundkey)) {
+        list($word, $i) = Str::getNextWord($essentials->getI(), $essentials->getContent(), true);
+        if (empty($word) || ($varValidation && !JsValidate::isJSValidVariable($word))) {
             return false;
         }
 
-        $data["foundkey"] = $foundkey;
+        $essentials->appendData($word, $name);
 
-        if (!is_null($name)) {
-            $data[$name] = trim($content->iSubStr($index, $pos - \mb_strlen($foundkey)));
-        }
-
-        $letter = $content->getLetter($pos);
-
-        $essentials->setLetter($letter);
-        $essentials->setI($pos);
-        $essentials->setData($data);
-
-        return true;
-    },
-    "s" => function (CustomMethodEssentialsModel $essentials): bool
-    {
-        $letter = $essentials->getLetter();
-        if (!Content::isWhitespace($letter ?? '')) {
-            return false;
-        }
-        list($letter, $pos) = Str::getNextLetter($essentials->getI(), $essentials->getContent());
-        if (strlen($letter) !== 0) {
-            $essentials->setI($pos - 1);
-        }
+        $essentials->setI($i);
         return true;
     },
     "n" => function (CustomMethodEssentialsModel $essentials): bool

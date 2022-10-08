@@ -39,7 +39,7 @@ abstract class BaseIntegration extends Base
         }
 
         $json = json_decode(file_get_contents($path), true);
-        if (!$json && !empty($json)) {
+        if (is_null($json ) || (!$json && !empty($json))) {
             throw new \Exception(sprintf('Compiled schemat %s is malformed', $path));
         }
 
@@ -54,7 +54,7 @@ abstract class BaseIntegration extends Base
         }
 
         $json = json_decode(file_get_contents($path), true);
-        if (!$json && !empty($json)) {
+        if (is_null($json ) || (!$json && !empty($json))) {
             throw new \Exception(sprintf('Analysis %s is malformed', $path));
         }
 

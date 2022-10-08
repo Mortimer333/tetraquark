@@ -19,21 +19,6 @@ use Tetraquark\Factory\ClosureFactory;
  */
 class Reader
 {
-    protected array $schemaDefaults = [
-        "shared" => [
-            "ends" => []
-        ],
-        "comments" => [],
-        "remove" => [
-            "comments" => false,
-        ],
-        "instructions" => [],
-        "methods" => [],
-        "prepare" => [
-            "content" => null,
-            "missed" => null
-        ],
-    ];
     protected static array $compiled = [];
     protected array $methods = [];
     protected array $script = [];
@@ -82,7 +67,7 @@ class Reader
 
         $this->path   = $path;
         $this->schema = require $path;
-        $this->schema = $this->schemaSetDefaults($this->schema, $this->schemaDefaults);
+        $this->schema = $this->schemaSetDefaults($this->schema, $this->getSchemaDefaults());
 
         if ($this->cache && isset(self::$compiled[$this->path])) {
             $this->map = self::$compiled[$this->path]['map'];
@@ -115,6 +100,25 @@ class Reader
     public function getMethods(): array
     {
         return $this->methods;
+    }
+
+    public function getSchemaDefaults(): array
+    {
+        return [
+            "shared" => [
+                "ends" => []
+            ],
+            "comments" => [],
+            "remove" => [
+                "comments" => false,
+            ],
+            "instructions" => [],
+            "methods" => $this->getDefaultMethods(),
+            "prepare" => [
+                "content" => null,
+                "missed" => null
+            ],
+        ];
     }
 
     public function schemaSetDefaults(array $schema, array $defaults): array
@@ -486,6 +490,8 @@ class Reader
         if (!$this->schema['remove']['comments'] && !$this->retrieveComments) {
             return $this->skipComment($resolver->getContent(), $start);
         }
+
+        return $start;
     }
 
     public function tryToRetrieveComment(
@@ -802,14 +808,14 @@ class Reader
     {
         // Log ::log('Save block - ' . json_encode($resolver->getLandmark()['_custom'] ?? []) . ", debug: " . implode(' => ', $this->debug['path']));
 
+        $landmark = ($resolver->getLandmark()['_missed'] ?? false) ? $resolver->getLandmark() : ($resolver->getLandmark()['_custom'] ?? []);
         $item = new BlockModel(
             start: $resolver->getLmStart(),
             end: $resolver->getI(),
-            landmark: $resolver->getLandmark(),
+            landmark: $landmark,
             data: $resolver->getData(),
             index: \sizeof($resolver->getScript()),
             parent: $resolver->getParent(),
-            path: $this->debug['path'],
             comments: $this->comments
         );
         $this->comments = [];
@@ -1430,5 +1436,50 @@ class Reader
         }
 
         return $items;
+    }
+
+    public function getDefaultMethods(): array
+    {
+        return [
+            "s" => function (CustomMethodEssentialsModel $essentials): bool
+            {
+                $letter = $essentials->getLetter();
+                if (!Content::isWhitespace($letter ?? '')) {
+                    return false;
+                }
+                list($letter, $pos) = Str::getNextLetter($essentials->getI(), $essentials->getContent());
+                if (strlen($letter) !== 0) {
+                    $essentials->setI($pos - 1);
+                }
+                return true;
+            },
+            "find" => function (CustomMethodEssentialsModel $essentials, string|array $needle, null|array|string $hayStarter = null, ?string $name = null): bool
+            {
+                $content = $essentials->getContent();
+                $index   = $essentials->getI();
+                $data    = $essentials->getData();
+
+                list($pos, $foundkey) = Str::skipBlock($needle, $index, $content, $hayStarter);
+                $pos--;
+
+                if (is_null($foundkey)) {
+                    return false;
+                }
+
+                $data["foundkey"] = $foundkey;
+
+                if (!is_null($name)) {
+                    $data[$name] = trim($content->iSubStr($index, $pos - \mb_strlen($foundkey)));
+                }
+
+                $letter = $content->getLetter($pos);
+
+                $essentials->setLetter($letter);
+                $essentials->setI($pos);
+                $essentials->setData($data);
+
+                return true;
+            },
+        ];
     }
 }
