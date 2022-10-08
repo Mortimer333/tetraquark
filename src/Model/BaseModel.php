@@ -8,7 +8,7 @@ use Tetraquark\Contract\BaseModelInterface;
 /**
  * Base model containing all shared functionality between models
  */
-abstract class BaseModel implements BaseModelInterface
+abstract class BaseModel implements BaseModelInterface, \JsonSerializable
 {
     public function toArray(): array
     {
@@ -18,5 +18,16 @@ abstract class BaseModel implements BaseModelInterface
             $array[$key] = $this->$key;
         }
         return $array;
+    }
+
+    public function jsonSerialize(): mixed
+    {
+        $res = $this->toArray();
+        foreach ($res as $key => $value) {
+            if ($value instanceof BaseModelInterface) {
+                $res[$key] = $value::class;
+            }
+        }
+        return $res;
     }
 }

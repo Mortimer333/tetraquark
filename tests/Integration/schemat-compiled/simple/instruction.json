@@ -1,0 +1,36 @@
+{
+    "c": {
+        "o": {
+            "n": {
+                "s": {
+                    "o": {
+                        "l": {
+                            "e": {
+                                "_custom": {
+                                    "type": "console"
+                                },
+                                "_stop": true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    ".": {
+        "_custom": {
+            "type": "dot"
+        },
+        "_stop": true
+    },
+    "l": {
+        "o": {
+            "g": {
+                "_custom": {
+                    "type": "log"
+                },
+                "_stop": true
+            }
+        }
+    }
+}

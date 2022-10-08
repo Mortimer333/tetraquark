@@ -94,7 +94,27 @@ class Reader
         }
 
         // die(json_encode($this->methods, JSON_PRETTY_PRINT));
-        die(json_encode($this->map, JSON_PRETTY_PRINT));
+        // die(json_encode($this->map, JSON_PRETTY_PRINT));
+    }
+
+    public function getMap(): array
+    {
+        return $this->map;
+    }
+
+    public function getSchema(): array
+    {
+        return $this->schema;
+    }
+
+    public function getPath(): array
+    {
+        return $this->path;
+    }
+
+    public function getMethods(): array
+    {
+        return $this->methods;
     }
 
     public function schemaSetDefaults(array $schema, array $defaults): array
