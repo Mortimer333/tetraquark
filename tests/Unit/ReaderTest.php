@@ -8,14 +8,15 @@ use Tetraquark\Model\{LandmarkResolverModel, CustomMethodEssentialsModel, Settin
 
 /**
  * @covers \Tetraquark\Reader
- * @covers \Tetraquark\Model\BasePolymorphicModel
- * @covers \Tetraquark\Str::pascalize
  * @uses \Tetraquark\Model\LandmarkResolverModel
  * @uses \Tetraquark\Model\CustomMethodEssentialsModel
  * @uses \Tetraquark\Model\SettingsModel
  */
 class ReaderTest extends BaseUnit
 {
+    /**
+     * @covers \Tetraquark\Reader::schemaSetDefaults
+     */
     public function testSettingDefaultsInSchemat(): void
     {
         $defaults = [
@@ -52,6 +53,11 @@ class ReaderTest extends BaseUnit
         $this->assertEquals($expectedResult, $schema);
     }
 
+    /**
+     * @covers \Tetraquark\Reader::updateFromEssentials
+     * @uses \Tetraquark\Model\BasePolymorphicModel
+     * @uses \Tetraquark\Str::pascalize
+     */
     public function testResolverGetsProperlyUpdatedWithEssentials(): void
     {
         $beforeMethods  = true;
@@ -86,8 +92,12 @@ class ReaderTest extends BaseUnit
         $this->assertEquals($afterData, $landmark->getData());
         $this->assertEquals($afterName, $landmark->getName());
     }
-    // resolveSettings
 
+    /**
+     * @covers \Tetraquark\Reader::resolveSettings
+     * @uses \Tetraquark\Model\BasePolymorphicModel
+     * @uses \Tetraquark\Str::pascalize
+     */
     public function testSkipFromSettingsIsThrownWhenLandmarkIsSkipable(): void
     {
         $settings = new SettingsModel(0);
@@ -104,6 +114,11 @@ class ReaderTest extends BaseUnit
         $reader->resolveSettings($landmark);
     }
 
+    /**
+     * @covers \Tetraquark\Reader::resolveSettings
+     * @uses \Tetraquark\Model\BasePolymorphicModel
+     * @uses \Tetraquark\Str::pascalize
+     */
     public function testSkipFromSettingsIsThrownWhenSkipIsHigerThenZero(): void
     {
         $settings = new SettingsModel(1);
@@ -118,6 +133,9 @@ class ReaderTest extends BaseUnit
         $reader->resolveSettings($landmark);
     }
 
+    /**
+     * @covers \Tetraquark\Reader::clearLandmark
+     */
     public function testLandmarkIsCleared(): void
     {
         $dirty = [
@@ -139,6 +157,7 @@ class ReaderTest extends BaseUnit
 
     /**
      * @dataProvider providerClosestMatch
+     * @covers \Tetraquark\Reader::findClosestMatch
      */
     public function testClosestMatchIsProperlyFound(string $needle, string $content, int $start, bool | int $excepted): void
     {
@@ -157,7 +176,9 @@ class ReaderTest extends BaseUnit
         ];
     }
 
-    // encloseCustomData
+    /**
+     * @covers \Tetraquark\Reader::encloseCustomData
+     */
     public function testRemovesFlagsProperlyFromLandmark(): void
     {
         $landmark = [
@@ -181,6 +202,7 @@ class ReaderTest extends BaseUnit
 
     /**
      * @dataProvider provideMapsToMerge
+     * @covers \Tetraquark\Reader::mergeMaps
      */
     public function testMapsAreMergedProperly(array $map, array $merged, array $excepted): void
     {
@@ -207,6 +229,7 @@ class ReaderTest extends BaseUnit
 
     /**
      * @dataProvider provideWellCases
+     * @covers \Tetraquark\Reader::createWell
      */
     public function testWellCreation(array|string $well, array $excepted): void
     {

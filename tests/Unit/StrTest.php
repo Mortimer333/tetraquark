@@ -7,7 +7,9 @@ use Content\Utf8 as Content;
 
 /**
  * @covers \Tetraquark\Str
- * @covers \Tetraquark\Validate
+ * @uses \Tetraquark\Validate::isStringLandmark
+ * @uses \Tetraquark\Validate::isTemplateLiteralLandmark
+ * @uses \Tetraquark\Validate::isSpecial
  */
 class StrTest extends BaseUnit
 {
