@@ -41,10 +41,16 @@ class ReaderTest extends BaseIntegration
 
     public function provideSetups(): array
     {
+        $prefix = 'generic/';
         $types = ["simple", "method", "extend", "settings", "comments", "block"];
         $cases = [];
         foreach ($types as $type) {
-            $cases[] = [$type, $type, $type . '/instruction', $type. '/methods', $type . '/analysis'];
+            $cases[] = [
+                $prefix . $type,
+                $prefix . $type,
+                $prefix . $type . '/instruction',
+                $prefix . $type. '/methods',
+                $prefix . $type . '/analysis'];
         }
         return $cases;
     }

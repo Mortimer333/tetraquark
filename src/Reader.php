@@ -114,6 +114,9 @@ class Reader
         return $this->methods;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getSchemaDefaults(): array
     {
         return [
@@ -151,9 +154,12 @@ class Reader
 
     public function read(string $script, bool $isPath = false, bool $displayBlocks = false, ?bool $short = null)
     {
+        // @codeCoverageIgnoreStart
         if (is_null($short)) {
             $short = $displayBlocks;
         }
+        // @codeCoverageIgnoreEnd
+
         if ($isPath) {
             if (!is_file($script)) {
                 throw new Exception("Passed file was not found", 404);
@@ -161,21 +167,26 @@ class Reader
 
             $script = file_get_contents($script);
         }
-        // @TODO think this one through
-        // $script = str_replace("\r\n", "\n", $script);
+
+        // @codeCoverageIgnoreStart
         if ($displayBlocks || $short) {
             Log  ::timerStart();
         }
+        // @codeCoverageIgnoreEnd
 
         $content = $this->removeCommentsAndAdditional(new Content($script));
         $content = $this->customPrepare($content);
-        // echo $content . PHP_EOL;
+
+        // @codeCoverageIgnoreStart
         if ($displayBlocks) {
             Log  ::log($content . '');
         }
+        // @codeCoverageIgnoreEnd
+
         $script = new ScriptBlockModel();
         list($script, $end) = $this->objectify($content, $this->map, parent: $script);
-        // echo json_encode($script, JSON_PRETTY_PRINT);
+
+        // @codeCoverageIgnoreStart
         if ($displayBlocks || $short) {
             Log  ::timerEnd();
         }
@@ -189,6 +200,8 @@ class Reader
             $this->displayScriptBlocks($script);
             Log  ::log(']');
         }
+        // @codeCoverageIgnoreEnd
+
         return $script;
     }
 
