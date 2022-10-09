@@ -4,6 +4,9 @@ namespace Tetraquark\Analyzer\JavaScript;
 
 use Tetraquark\Analyzer\JavaScript\Util\LandmarkStorage;
 
+/**
+ * @codeCoverageIgnore
+ */
 abstract class Instruction
 {
     public static function get(): array

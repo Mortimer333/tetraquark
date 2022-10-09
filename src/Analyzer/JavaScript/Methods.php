@@ -2,6 +2,7 @@
 
 namespace Tetraquark\Analyzer\JavaScript;
 
+use Orator\Log;
 use Content\Utf8 as Content;
 use Tetraquark\{Str, Validate};
 use Tetraquark\Analyzer\JavaScript\Validate as JsValidate;
@@ -12,7 +13,17 @@ abstract class Methods
 {
     public static function get(array $settings = []): array
     {
-        $functions = [
+        $functions = self::getDefinitions();
+
+        foreach ($functions as $key => $value) {
+            $functions[$key] = fn (...$args) => self::$value(...$args);
+        }
+        return $functions;
+    }
+
+    public static function getDefinitions(): array
+    {
+        return [
             "n" => "isNewLine",
             "end" => "end",
             "word" => "word",
@@ -41,22 +52,26 @@ abstract class Methods
             //     return $essentials->getMethods()['varend']($essentials);
             // },
         ];
-
-        foreach ($functions as $key => $value) {
-            $functions[$key] = fn (...$args) => self::$value(...$args);
-        }
-        return $functions;
     }
 
     public static function consecutiveCaller(CustomMethodEssentialsModel $essentials): bool
     {
-        $previous = $essentials->getContent()->getLetter($essentials->getI() - 2);
+        $i = $essentials->getI() - 2;
+        if (is_null($essentials->getContent()->getLetter($i))) {
+            return false;
+        }
+
+        list($previous) = Str::getPreviousLetter($i, $essentials->getContent());
         if ($previous == ")") {
             return true;
         }
         return false;
     }
 
+    /**
+     * @codeCoverageIgnore
+     * Its covered by Helper::getNextChain
+     */
     public static function chainEnd(CustomMethodEssentialsModel $essentials): bool
     {
         $start = $essentials->getI();
@@ -77,16 +92,21 @@ abstract class Methods
 
     public static function number(CustomMethodEssentialsModel $essentials): bool
     {
+        $content = $essentials->getContent();
         if (is_numeric($essentials->getLetter())) {
-            $end = $essentials->getContent()->getLength() - 1;
-            for ($i=$essentials->getI() + 1; $i < $essentials->getContent()->getLength(); $i++) {
-                $letter = $essentials->getContent()->getLetter($i);
+            $end = $content->getLength() - 1;
+            for ($i=$essentials->getI() + 1; $i < $content->getLength(); $i++) {
+                $letter = $content->getLetter($i);
                 if (!is_numeric($letter) && $letter != '.') {
                     $end = $i - 1;
                     break;
                 }
             }
-            $essentials->appendData($essentials->getContent()->iSubStr($essentials->getI(), $end), "number");
+            // If number is constructed like this `2.` then it's not a number
+            if ($content->getLetter($end) === '.') {
+                return false;
+            }
+            $essentials->appendData($content->iSubStr($essentials->getI(), $end), "number");
             $essentials->setI($end);
             return true;
         }
@@ -127,21 +147,34 @@ abstract class Methods
         $essentials->appendData($string, $name);
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public static function isPrivate(CustomMethodEssentialsModel $essentials): void
     {
         $essentials->appendData(true, 'private');
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public static function isGenerator(CustomMethodEssentialsModel $essentials): void
     {
         $essentials->appendData(true, 'generator');
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public static function optionalChain(CustomMethodEssentialsModel $essentials): void
     {
         $essentials->appendData(true, 'optional_chain');
     }
 
+    /**
+     * @codeCoverageIgnore
+     * Is covered by ReaderGenericTest
+     */
     public static function read(CustomMethodEssentialsModel $essentials, string $valueName, ?string $name = null): void
     {
         if (is_null($name)) {
@@ -190,7 +223,7 @@ abstract class Methods
             "\nconst\n" => $varend,
             "\nconst "  => $varend,
 
-            "\/\/" => "\n",
+            "//" => "\n",
             "/*" => "*/",
         ];
         $data = $essentials->getData();
@@ -201,8 +234,7 @@ abstract class Methods
                 $essentials,
                 $searchables
             );
-            $key = $essentials->getData()['foundkey'];
-
+            $key = $essentials->getData()['foundkey'] ?? null;
             if (is_null($key) || ($end[$key] ?? false)) {
                 break;
             }
@@ -211,16 +243,24 @@ abstract class Methods
             if (is_array($search)) {
                 $search["method"]($essentials, ...$search["args"]);
             } else {
+                $essentials->i++;
                 $essentials->getMethods()['find']($essentials, $search, $key);
             }
             $essentials->i++;
         }
-
+        $lastLetter = $essentials->getContent()->getLetter($essentials->getI());
+        if ($end[$lastLetter] ?? false) {
+            $essentials->i--;
+        }
         // Restore data
         $essentials->setData($data);
         return true;
     }
 
+    /**
+     * @codeCoverageIgnore
+     * Is covered by Str::getNextLetter test
+     */
     public static function notParenthesis(CustomMethodEssentialsModel $essentials): bool
     {
         list($nextLetter, $nextPos) = Str::getNextLetter($essentials->getI(), $essentials->getContent());
@@ -236,7 +276,7 @@ abstract class Methods
             // "/" => true,
         ];
         $res = !isset($skipped[$essentials->getLetter()])
-            && (preg_match("/[\W]+/", $essentials->getLetter()) === 1)
+            && (preg_match("/[\W]+/", $essentials->getLetter() ?? '') === 1)
             && !Validate::isStringLandmark($essentials->getLetter())
             && !Content::isWhitespace($essentials->getLetter());
         if ($res) {
@@ -245,6 +285,9 @@ abstract class Methods
         return $res;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public static function case(CustomMethodEssentialsModel $essentials): bool
     {
         $possibleCase = $essentials->getContent()->subStr($essentials->getI() + 1, 4);
@@ -254,6 +297,9 @@ abstract class Methods
         return false;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public static function decrease(CustomMethodEssentialsModel $essentials, int $amount = 1): void
     {
         $essentials->i -= $amount;
@@ -295,12 +341,12 @@ abstract class Methods
         if ($triple[$first . $second . $last] ?? false) {
             $move = $start + 2;
             $symbol = $first . $second . $last;
-        } elseif ($double[$second . $last] ?? false) {
+        } elseif ($double[$first . $second] ?? false) {
             $move = $start + 1;
-            $symbol = $second . $last;
-        } elseif ($single[$last] ?? false) {
+            $symbol = $first . $second;
+        } elseif ($single[$first] ?? false) {
             $move = $start;
-            $symbol = $last;
+            $symbol = $first;
         } else {
             return false;
         }
@@ -309,6 +355,9 @@ abstract class Methods
         return true;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public static function taken(CustomMethodEssentialsModel $essentials): bool
     {
         $nonBlockKeywords = [
@@ -331,6 +380,9 @@ abstract class Methods
         return false;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public static function strEnd(CustomMethodEssentialsModel $essentials, string $type, string $name = 'string'): bool
     {
         $i = Str::skip($type, $essentials->getI() - 1, $essentials->getContent());
@@ -347,6 +399,9 @@ abstract class Methods
         return true;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public static function end(CustomMethodEssentialsModel $essentials): bool
     {
         $ends = [
@@ -364,7 +419,9 @@ abstract class Methods
         return $ends[$essentials->getLetter()] ?? false;
     }
 
-    // @POSSIBLE_PERFORMANCE_ISSUE
+    /**
+     * @POSSIBLE_PERFORMANCE_ISSUE
+     */
     public static function varEnd(CustomMethodEssentialsModel $essentials, bool $comma = true): bool
     {
         $var   = $essentials->getData()['var'] ?? '';
@@ -432,21 +489,28 @@ abstract class Methods
                 return true;
             }
         }
+        return false;
     }
 
     public static function word(CustomMethodEssentialsModel $essentials, string $name = "word", bool $varValidation = true): bool
     {
+        if ($essentials->getI() >= $essentials->getContent()->getLength() || $essentials->getI() < 0) {
+            return false;
+        }
+
         list($word, $i) = Str::getNextWord($essentials->getI(), $essentials->getContent(), true);
         if (empty($word) || ($varValidation && !JsValidate::isJSValidVariable($word))) {
             return false;
         }
 
         $essentials->appendData($word, $name);
-
         $essentials->setI($i);
         return true;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public static function isNewLine(CustomMethodEssentialsModel $essentials): bool
     {
         return $essentials->getLetter() === "\n" || $essentials->getLetter() === "\r";
