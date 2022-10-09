@@ -8,6 +8,7 @@ use Tetraquark\Contract\BlockModelInterface;
 
 /**
  * Data model of the single block
+ * @codeCoverageIgnore
  */
 class BlockModel extends BaseBlockModel
 {

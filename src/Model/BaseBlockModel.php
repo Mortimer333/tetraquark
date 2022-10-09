@@ -6,6 +6,7 @@ use Tetraquark\Contract\BlockModelInterface;
 
 /**
  * Data model of the single block
+ * @codeCoverageIgnore
  */
 abstract class BaseBlockModel extends BaseModel implements BlockModelInterface
 {

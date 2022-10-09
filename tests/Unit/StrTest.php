@@ -204,4 +204,18 @@ class StrTest extends BaseUnit
             [5, 'word1 wor.d2', true , 'wor'  , 8 ],
         ];
     }
+
+    public function testTransformingUtf8ToUnicode(): void
+    {
+        $utf8 = "\n";
+        $unicode = Str::utf8ToUnicode($utf8);
+        $this->assertEquals('U+000A', $unicode);
+    }
+
+    public function testTransformingUnicodeToUtf8(): void
+    {
+        $unicode = 'U+000A';
+        $utf8 = Str::unicodeToUtf8($unicode);
+        $this->assertEquals("\n", $utf8);
+    }
 }

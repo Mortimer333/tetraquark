@@ -6,6 +6,7 @@ use Tetraquark\Model\BaseBlockModel;
 
 /**
  * Data model of the single block
+ * @codeCoverageIgnore
  */
 class ScriptBlockModel extends BaseBlockModel
 {

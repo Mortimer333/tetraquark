@@ -13,11 +13,17 @@ abstract class Validate
         ';' => true, '.' => true
     ];
 
+    /**
+     * @codeCoverageIgnore
+     */
     public static function getSpecial(): array
     {
         return self::$special;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public static function isSpecial(string $letter): bool
     {
         return self::$special[$letter] ?? false;

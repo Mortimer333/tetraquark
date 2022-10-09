@@ -4,6 +4,9 @@ namespace Tetraquark\Model;
 
 use Tetraquark\{Str, Validate, Exception};
 
+/**
+ * @codeCoverageIgnore
+ */
 class SettingsModel extends BaseModel
 {
     public function __construct(protected int $skip = 0)

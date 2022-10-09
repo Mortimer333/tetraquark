@@ -7,7 +7,6 @@ use Tetraquark\Model\CustomMethodEssentialsModel;
 
 class ClosureFactory extends BaseFactory
 {
-
     public static function generateReversalClosure(string $letter): \Closure
     {
         return function (CustomMethodEssentialsModel $essentials) use ($letter): bool
