@@ -1,11 +1,11 @@
-<?php
+<?php declare(strict_types=1);
 
-require_once __DIR__ . '/validate.php';
+namespace Tetraquark\Analyzer\JavaScript\Util;
 
 use Tetraquark\Validate;
 use Content\Utf8 as Content;
 
-class Helper
+abstract class Helper
 {
     public static function checkIfValidVarEnd(CustomMethodEssentialsModel $essentials, int $i): bool
     {

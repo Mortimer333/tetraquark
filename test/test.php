@@ -3,12 +3,14 @@ namespace Tetraquark;
 require 'vendor/autoload.php';
 use Content\Utf8 as Content;
 use Orator\Log;
-$schemat = '/var/www/html/tetraquark-js/tests/Integration/schemat/settings.php';
-$script ='/var/www/html/tetraquark-js/tests/Integration/script/settings';
+use Tetraquark\Analyzer\JavaScriptAnalyzerAbstract;
+$schemat = '/var/www/html/tetraquark-js/tests/Integration/schemat/generic/settings.php';
+$script ='/var/www/html/tetraquark-js/tests/Integration/script/generic/settings';
 
-$reader = new Reader($schemat);
+$reader = new Reader(JavaScriptAnalyzerAbstract::class);
 $map = $reader->getMethods();
 $analysis = $reader->read($script, true, displayBlocks: false);
+Log::log($analysis);
 
 // $reader = new Reader(__DIR__ . '/../schemats/javascript.php');
 // $reader->read(__DIR__ . '/data/comment.js', true, true);

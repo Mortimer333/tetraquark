@@ -11,7 +11,7 @@ use Tetraquark\Model\{
     Block\ScriptBlockModel,
     SettingsModel
 };
-use Tetraquark\Contract\BlockModelInterface;
+use Tetraquark\Contract\{BlockModelInterface, AnalyzerInterface};
 use Tetraquark\Factory\ClosureFactory;
 
 /**
@@ -47,35 +47,42 @@ class Reader
     public const FINISH = 'finish';
     public const END_OF_FILE = 'end of file';
     public const EMPTY_METHOD = 'e';
+    public const EMPTY = '_empty';
 
     public function __construct(
-        ?string $path = null,
+        ?string $analyzerClass = null,
         protected bool $cache = true,
     ) {
-        if (is_null($path)) {
+        if (is_null($analyzerClass)) {
             return;
         }
 
-        $this->compile($path);
+        $this->compile($analyzerClass);
     }
 
-    public function compile(string $path)
+    public function compile(?string $analyzer): void
     {
-        if (!is_file($path)) {
-            throw new Exception("Given schema doesn't exist", 400);
+        if (!class_exists($analyzer)) {
+            throw new Exception(sprintf("Class %s doesn't exists, can't compile settings", $analyzer), 500);
+        }
+        $implemented = class_implements($analyzer);
+        if (!isset($implemented[AnalyzerInterface::class])) {
+            throw new Exception(sprintf("Class %s is not implementing Analyzer interface", $analyzer), 500);
         }
 
-        $this->path   = $path;
-        $this->schema = require $path;
-        $this->schema = $this->schemaSetDefaults($this->schema, $this->getSchemaDefaults());
+        $this->schema = $this->schemaSetDefaults($analyzer::getSchema(), $this->getSchemaDefaults());
+        $this->name   = $analyzer::getName();
+        $compiled     = self::$compiled[$this->name] ?? null;
 
-        if ($this->cache && isset(self::$compiled[$this->path])) {
-            $this->map = self::$compiled[$this->path]['map'];
-            $this->methods = self::$compiled[$this->path]['methods'];
+        if ($this->cache && isset($compiled)) {
+            $this->map     = $compiled['map'];
+            $this->methods = $compiled['methods'];
         } else {
             $this->map = $this->generateBlocksMap();
-            self::$compiled[$this->path]['map'] = $this->map;
-            self::$compiled[$this->path]['methods'] = $this->methods;
+            self::$compiled[$this->name] = [
+                "map" => $this->map,
+                "methods" => $this->methods,
+            ];
         }
 
         // die(json_encode($this->methods, JSON_PRETTY_PRINT));

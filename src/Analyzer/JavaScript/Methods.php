@@ -1,24 +1,63 @@
 <?php declare(strict_types=1);
 
-use Orator\Log;
+namespace Tetraquark\Analyzer\JavaScript;
+
 use Content\Utf8 as Content;
-use Tetraquark\{Validate, Str};
+use Tetraquark\{Str, Validate};
+use Tetraquark\Analyzer\JavaScript\Validate as JsValidate;
+use Tetraquark\Analyzer\JavaScript\Util\Helper;
 use Tetraquark\Model\CustomMethodEssentialsModel;
 
-require_once __DIR__ . '/landmark.php';
-require_once __DIR__ . '/validate.php';
-require_once __DIR__ . '/helper.php';
+abstract class Methods
+{
+    public static function get(array $settings = []): array
+    {
+        $functions = [
+            "n" => "isNewLine",
+            "end" => "end",
+            "word" => "word",
+            "this" => "this",
+            "read" => "read",
+            "case" => "case",
+            "taken" => "taken",
+            "number" => "number",
+            "symbol" => "symbol",
+            "strend" => "strEnd",
+            "varend" => "varEnd",
+            "chainend" => "chainEnd",
+            "decrease" => "decrease",
+            "isprivate" => "isPrivate",
+            "objectend" => "objectEnd",
+            "assignment" => "assignment",
+            "isgenerator" => "isGenerator",
+            "nparenthesis" => "notParenthesis",
+            "optionalchain" => "optionalChain",
+            "templateliteral" => "templateLiteral",
+            "consecutivecaller" => "consecutiveCaller",
+            // @DEPRICATED
+            // "varendNext" => function (CustomMethodEssentialsModel $essentials): bool
+            // {
+            //     $essentials->setI($essentials->getI() + 1);
+            //     return $essentials->getMethods()['varend']($essentials);
+            // },
+        ];
 
-return [
-    "consecutivecaller" => function (CustomMethodEssentialsModel $essentials): bool
+        foreach ($functions as $key => $value) {
+            $functions[$key] = fn (...$args) => self::$value(...$args);
+        }
+        return $functions;
+    }
+
+    public static function consecutiveCaller(CustomMethodEssentialsModel $essentials): bool
     {
         $previous = $essentials->getContent()->getLetter($essentials->getI() - 2);
         if ($previous == ")") {
             return true;
         }
         return false;
-    },
-    "chainend" => function (CustomMethodEssentialsModel $essentials): bool
+    }
+
+    public static function chainEnd(CustomMethodEssentialsModel $essentials): bool
     {
         $start = $essentials->getI();
         $end = Helper::getNextChain($essentials, $essentials->getI());
@@ -29,12 +68,14 @@ return [
         }
         $essentials->setI($i);
         return true;
-    },
-    "this" => function (CustomMethodEssentialsModel $essentials): bool
+    }
+
+    public static function this(CustomMethodEssentialsModel $essentials): bool
     {
         return $essentials->getContent()->subStr($essentials->getI(), 4) == 'this';
-    },
-    "number" => function (CustomMethodEssentialsModel $essentials): bool
+    }
+
+    public static function number(CustomMethodEssentialsModel $essentials): bool
     {
         if (is_numeric($essentials->getLetter())) {
             $end = $essentials->getContent()->getLength() - 1;
@@ -50,8 +91,9 @@ return [
             return true;
         }
         return false;
-    },
-    "templateliteral" => function (CustomMethodEssentialsModel $essentials, string $name = "template"): void
+    }
+
+    public static function templateLiteral(CustomMethodEssentialsModel $essentials, string $name = "template"): void
     {
         $string = $essentials->getData()[$name]
             ?? throw new \Exception("Couldn't find template literal in data with name: " . htmlentities($name));
@@ -83,20 +125,24 @@ return [
         }
 
         $essentials->appendData($string, $name);
-    },
-    "isprivate" => function (CustomMethodEssentialsModel $essentials): void
+    }
+
+    public static function isPrivate(CustomMethodEssentialsModel $essentials): void
     {
         $essentials->appendData(true, 'private');
-    },
-    "isgenerator" => function (CustomMethodEssentialsModel $essentials): void
+    }
+
+    public static function isGenerator(CustomMethodEssentialsModel $essentials): void
     {
         $essentials->appendData(true, 'generator');
-    },
-    "optionalchain" => function (CustomMethodEssentialsModel $essentials): void
+    }
+
+    public static function optionalChain(CustomMethodEssentialsModel $essentials): void
     {
         $essentials->appendData(true, 'optional_chain');
-    },
-    "read" => function (CustomMethodEssentialsModel $essentials, string $valueName, ?string $name = null): void
+    }
+
+    public static function read(CustomMethodEssentialsModel $essentials, string $valueName, ?string $name = null): void
     {
         if (is_null($name)) {
             $name = $valueName;
@@ -114,8 +160,9 @@ return [
         $essentials->reader->setComments($comments);
 
         $essentials->appendData($blocks, $name);
-    },
-    "objectend" => function (CustomMethodEssentialsModel $essentials): bool
+    }
+
+    public static function objectEnd(CustomMethodEssentialsModel $essentials): bool
     {
         $varend = [
             "method" => $essentials->getMethods()['varend'],
@@ -172,13 +219,15 @@ return [
         // Restore data
         $essentials->setData($data);
         return true;
-    },
-    "nparenthesis" => function (CustomMethodEssentialsModel $essentials): bool
+    }
+
+    public static function notParenthesis(CustomMethodEssentialsModel $essentials): bool
     {
         list($nextLetter, $nextPos) = Str::getNextLetter($essentials->getI(), $essentials->getContent());
         return $nextLetter !== "{";
-    },
-    "symbol" => function (CustomMethodEssentialsModel $essentials, string $name = "symbol"): bool
+    }
+
+    public static function symbol(CustomMethodEssentialsModel $essentials, string $name = "symbol"): bool
     {
         $skipped = [
             ";" => true,
@@ -194,20 +243,23 @@ return [
             $essentials->appendData($essentials->getLetter(), $name);
         }
         return $res;
-    },
-    "case" =>  function (CustomMethodEssentialsModel $essentials): bool
+    }
+
+    public static function case(CustomMethodEssentialsModel $essentials): bool
     {
         $possibleCase = $essentials->getContent()->subStr($essentials->getI() + 1, 4);
         if ($possibleCase === 'case') {
             return true;
         }
         return false;
-    },
-    "decrease" => function (CustomMethodEssentialsModel $essentials, int $amount = 1): void
+    }
+
+    public static function decrease(CustomMethodEssentialsModel $essentials, int $amount = 1): void
     {
         $essentials->i -= $amount;
-    },
-    "assignment" => function (CustomMethodEssentialsModel $essentials): bool
+    }
+
+    public static function assignment(CustomMethodEssentialsModel $essentials): bool
     {
         $single = [
             '-' => true,
@@ -255,8 +307,9 @@ return [
         $essentials->setI($move);
         $essentials->appendData($symbol, 'assignment');
         return true;
-    },
-    "taken" => function (CustomMethodEssentialsModel $essentials): bool
+    }
+
+    public static function taken(CustomMethodEssentialsModel $essentials): bool
     {
         $nonBlockKeywords = [
             'break' => true, 'instanceof' => true, // 'this' => true,
@@ -276,8 +329,9 @@ return [
         }
 
         return false;
-    },
-    "strend" => function (CustomMethodEssentialsModel $essentials, string $type, string $name = 'string'): bool
+    }
+
+    public static function strEnd(CustomMethodEssentialsModel $essentials, string $type, string $name = 'string'): bool
     {
         $i = Str::skip($type, $essentials->getI() - 1, $essentials->getContent());
         $essentials->appendData(
@@ -291,8 +345,9 @@ return [
             $essentials->setI($i - 1);
         }
         return true;
-    },
-    "end" => function (CustomMethodEssentialsModel $essentials): bool
+    }
+
+    public static function end(CustomMethodEssentialsModel $essentials): bool
     {
         $ends = [
             ";" => true,
@@ -307,9 +362,10 @@ return [
         }
 
         return $ends[$essentials->getLetter()] ?? false;
-    },
+    }
+
     // @POSSIBLE_PERFORMANCE_ISSUE
-    "varend" => function (CustomMethodEssentialsModel $essentials, bool $comma = true)
+    public static function varEnd(CustomMethodEssentialsModel $essentials, bool $comma = true): bool
     {
         $var   = $essentials->getData()['var'] ?? '';
         $stops = ["\n", ";"];
@@ -376,13 +432,9 @@ return [
                 return true;
             }
         }
-    },
-    "varendNext" => function (CustomMethodEssentialsModel $essentials): bool
-    {
-        $essentials->setI($essentials->getI() + 1);
-        return $essentials->getMethods()['varend']($essentials);
-    },
-    "word" => function (CustomMethodEssentialsModel $essentials, string $name = "word", bool $varValidation = true): bool
+    }
+
+    public static function word(CustomMethodEssentialsModel $essentials, string $name = "word", bool $varValidation = true): bool
     {
         list($word, $i) = Str::getNextWord($essentials->getI(), $essentials->getContent(), true);
         if (empty($word) || ($varValidation && !JsValidate::isJSValidVariable($word))) {
@@ -393,9 +445,10 @@ return [
 
         $essentials->setI($i);
         return true;
-    },
-    "n" => function (CustomMethodEssentialsModel $essentials): bool
+    }
+
+    public static function isNewLine(CustomMethodEssentialsModel $essentials): bool
     {
         return $essentials->getLetter() === "\n" || $essentials->getLetter() === "\r";
-    },
-];
+    }
+}

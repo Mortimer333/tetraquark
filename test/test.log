@@ -1,61 +1,28 @@
-{
-    "shared": {
-        "ends": {
-            ";": true
-        }
-    },
-    "comments": {
-        "\/": {
-            "*": "*\/"
-        }
-    },
-    "remove": {
-        "comments": true,
-        "additional": {}
-    },
-    "instructions": {
-        "\/s\\debugger": {
-            "type": "Debugger"
-        }
-    },
-    "prepare": {
-        "content": {},
-        "missed": {}
-    },
-    "methods": {
-        "s": {},
-        "find": {}
+[
+    {
+        "blockStart": null,
+        "blockEnd": null,
+        "start": 1,
+        "end": 22,
+        "landmark": {
+            "class": "KeywordBlock"
+        },
+        "data": {
+            "keyword": "debugger"
+        },
+        "index": 0,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": [
+            {
+                "content": "\/* comment *\/",
+                "start": 1,
+                "end": 13
+            }
+        ]
     }
-}
-{
-    "shared": {
-        "ends": {
-            ";": true
-        }
-    },
-    "comments": {
-        "\/": {
-            "*": "*\/"
-        }
-    },
-    "remove": {
-        "comments": true,
-        "additional": {}
-    },
-    "instructions": {
-        "\/s\\debugger": {
-            "type": "Debugger"
-        }
-    },
-    "prepare": {
-        "content": {},
-        "missed": {}
-    },
-    "methods": {
-        "s": {},
-        "find": {}
-    }
-}
+]
 
 
 

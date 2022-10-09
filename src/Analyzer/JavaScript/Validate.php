@@ -1,8 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 
-use Content\Utf8 as Content;
+namespace Tetraquark\Analyzer\JavaScript;
 
-abstract class JsValidate
+abstract class Validate
 {
     protected static array $conntectors = [
         "+" => true, "-" => true, "/" => true, "*" => true, '%' => true, '^' => true, ">" => true,
