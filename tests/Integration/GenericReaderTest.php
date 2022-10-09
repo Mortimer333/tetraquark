@@ -3,15 +3,6 @@
 namespace Tests\Integration;
 
 use Tetraquark\Reader;
-use Tetraquark\Analyzer\BaseAnalyzerAbstract;
-
-abstract class TestAnalyzer extends BaseAnalyzerAbstract {
-    public static array $schemat = [];
-    public static function getSchema(array $settings = []): array
-    {
-        return self::$schemat;
-    }
-}
 
 /**
  * Those tests are check integration of all modules as they all were made for this class
@@ -35,8 +26,7 @@ class GenericReaderTest extends BaseIntegration
     public function testSetup(string $schemat, string $script, string $instruction, string $methodsPath, string $analysisPath): void
     {
         $script  = $this->getScriptPath($script);
-        TestAnalyzer::$schemat = require BaseIntegration::getSchematPath($schemat);
-        $reader  = new Reader(TestAnalyzer::class, cache: false);
+        $reader  = $this->getReaderWithTestAnalyzer($schemat);
         $map     = $reader->getMap();
         $methods = $reader->getMethods();
         $this->assertEquals($this->getCompiled($instruction), $map);

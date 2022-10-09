@@ -489,7 +489,7 @@ abstract class Methods
                 return true;
             }
         }
-        return false;
+        return true;
     }
 
     public static function word(CustomMethodEssentialsModel $essentials, string $name = "word", bool $varValidation = true): bool

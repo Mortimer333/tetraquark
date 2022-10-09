@@ -3,6 +3,7 @@
 namespace Tests\Integration;
 
 use Tests\Base;
+use Tetraquark\Reader;
 
 abstract class BaseIntegration extends Base
 {
@@ -59,5 +60,15 @@ abstract class BaseIntegration extends Base
         }
 
         return $json;
+    }
+
+    public function getReaderWithTestAnalyzer(string|array $schemat): Reader
+    {
+        if (is_string($schemat)) {
+            TestAnalyzer::$schemat = require BaseIntegration::getSchematPath($schemat);
+        } else {
+            TestAnalyzer::$schemat = $schemat;
+        }
+        return new Reader(TestAnalyzer::class, cache: false);
     }
 }
