@@ -4,13 +4,15 @@ require 'vendor/autoload.php';
 use Content\Utf8 as Content;
 use Orator\Log;
 use Tetraquark\Analyzer\JavaScriptAnalyzerAbstract;
-$schemat = '/var/www/html/tetraquark-js/tests/Integration/schemat/generic/settings.php';
-$script ='/var/www/html/tetraquark-js/tests/Integration/script/generic/settings';
+// $schemat = '/var/www/html/tetraquark-js/tests/Integration/schemat/generic/settings.php';
+// $script ='/var/www/html/tetraquark-js/tests/Integration/script/generic/settings';
+//
+// $reader = new Reader(JavaScriptAnalyzerAbstract::class);
+// $map = $reader->getMethods();
+// $analysis = $reader->read($script, true, displayBlocks: false);
+// Log::log($analysis);
 
-$reader = new Reader(JavaScriptAnalyzerAbstract::class);
-$map = $reader->getMethods();
-$analysis = $reader->read($script, true, displayBlocks: false);
-Log::log($analysis);
+Log::log(Log::boolToStr(preg_match_all('/[a-zA-Z0-9]/', "()")));
 
 // $reader = new Reader(__DIR__ . '/../schemats/javascript.php');
 // $reader->read(__DIR__ . '/data/comment.js', true, true);

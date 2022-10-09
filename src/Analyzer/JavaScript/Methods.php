@@ -61,12 +61,12 @@ abstract class Methods
     {
         $start = $essentials->getI();
         $end = Helper::getNextChain($essentials, $essentials->getI());
-        if ($start != $end) {
-            $i = $end;
-        } else {
-            $i = $end - 1;
-        }
-        $essentials->setI($i);
+        // if ($start != $end) {
+        //     $i = $end;
+        // } else {
+        //     $i = $end - 1;
+        // }
+        $essentials->setI($end);
         return true;
     }
 

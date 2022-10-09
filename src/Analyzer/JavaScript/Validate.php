@@ -2,6 +2,8 @@
 
 namespace Tetraquark\Analyzer\JavaScript;
 
+use Content\Utf8 as Content;
+
 abstract class Validate
 {
     protected static array $conntectors = [
@@ -28,11 +30,17 @@ abstract class Validate
         'from' => true, 'new' => true
     ];
 
+    /**
+     * @codeCoverageIgnore
+     */
     public static function isJSTakenKeyWord(string $word): bool
     {
         return self::$notAllowedConsts[$word] ?? false;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public static function isExtendingKeyWord(string $word): bool
     {
         return self::$extendingsConsts[$word] ?? false;
@@ -49,18 +57,14 @@ abstract class Validate
         return !self::isJSTakenKeyWord($variable);
     }
 
-    public static function isValidUndefined(string $undefined): bool
-    {
-        $undefinedEnds = ["\n" => true, ";" => true, "}" => true];
-        $undefined = trim($undefined);
-        return \mb_strlen($undefined) > 0 && !Content::isWhitespace($undefined) && !isset($undefinedEnds[$undefined]);
-    }
-
     public static function isSymbol(string $letter): bool
     {
-        return !preg_match('/^[a-zA-Z0-9]*$/', $letter) && !Content::isWhitespace($letter);
+        return (!preg_match_all('/[a-zA-Z0-9]/', $letter)) && (!Content::isWhitespace($letter));
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public static function isConnector(string $letter): bool
     {
         return self::$conntectors[$letter] ?? false;
@@ -70,7 +74,7 @@ abstract class Validate
     {
         $operators = [...self::$conntectors, "{" => true,  "[" => true, "=" => true, "!" => true, ];
         if ($isNextLine) {
-            $operators = [...$operators, [ ')' => true, ']' => true, '}' => true, ]];
+            $operators = [...$operators, ')' => true, ']' => true, '}' => true, ];
         }
         return $operators[$letter] ?? false;
     }

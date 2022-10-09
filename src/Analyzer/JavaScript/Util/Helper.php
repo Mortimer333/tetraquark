@@ -2,22 +2,17 @@
 
 namespace Tetraquark\Analyzer\JavaScript\Util;
 
-use Tetraquark\Validate;
+use Orator\Log;
+use Tetraquark\{Validate, Str};
+use Tetraquark\Analyzer\JavaScript\Validate as JSValidate;
 use Content\Utf8 as Content;
+use Tetraquark\Model\CustomMethodEssentialsModel;
 
 abstract class Helper
 {
     public static function checkIfValidVarEnd(CustomMethodEssentialsModel $essentials, int $i): bool
     {
         $content = $essentials->getContent();
-        list($prevLetter, $prevPos) = Str::getPreviousLetter($i, $essentials->getContent());
-        if (
-            Validate::isOperator($prevLetter)
-            && !Validate::isStringLandmark($prevLetter, '')
-            && !JsValidate::isComment($prevPos, $content)
-        ) {
-            return false;
-        }
 
         list($nextLetter, $nextPos) = Str::getNextLetter($i, $content);
 
@@ -25,11 +20,19 @@ abstract class Helper
             // End of file
             return true;
         }
-
         if (
-            Validate::isOperator($nextLetter, true)
+            JsValidate::isOperator($nextLetter, true)
             && !Validate::isStringLandmark($nextLetter, '')
             && !JsValidate::isComment($nextPos, $content)
+        ) {
+            return false;
+        }
+
+        list($prevLetter, $prevPos) = Str::getPreviousLetter($i, $essentials->getContent());
+        if (
+            JsValidate::isOperator($prevLetter)
+            && !Validate::isStringLandmark($prevLetter, '')
+            && !JsValidate::isComment($prevPos, $content)
         ) {
             return false;
         }
@@ -60,6 +63,10 @@ abstract class Helper
     public static function getNextChain(CustomMethodEssentialsModel $essentials, int $pos): int
     {
         $content = $essentials->getContent();
+        if ($pos >= $content->getLength()) {
+            return $pos - 1;
+        }
+
         list($letter, $newPos) = Str::getNextLetter($pos, $content);
 
         if ($letter == '.') {
