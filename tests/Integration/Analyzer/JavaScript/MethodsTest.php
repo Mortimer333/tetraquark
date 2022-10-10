@@ -2,7 +2,6 @@
 
 namespace Tests\Integration\Analyzer\JavaScript;
 
-use Tests\Integration\TestAnalyzerAbstract;
 use Tetraquark\Reader;
 use Tetraquark\Analyzer\JavaScript\Methods;
 use Content\Utf8 as Content;
