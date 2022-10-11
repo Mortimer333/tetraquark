@@ -2,6 +2,9 @@
 
 namespace Tetraquark\Analyzer\JavaScript\Util;
 
+/**
+ * @codeCoverageIgnore
+ */
 abstract class LandmarkStorage
 {
     public const _BLOCK_VAREND = [
@@ -21,7 +24,7 @@ abstract class LandmarkStorage
 
     public const _BLOCK_PARENTHESIS = [
         "end" => ")",
-        "nested" => "("
+        "nested" => "(",
     ];
 
     public const APOSTROPHE_SEGMENT = '\'/strend:"\'"\\';
@@ -46,8 +49,8 @@ abstract class LandmarkStorage
                     "class" => "ChainBlock",
                     "array" => true,
                     "method" => true,
-                ]
-            ]
+                ],
+            ],
         ]
     ];
 
@@ -62,7 +65,7 @@ abstract class LandmarkStorage
                     ],
                     /* SHORT IF */
                     '/nparenthesis>decrease\/varend\\' => [
-                        "class" => "ShortIfBlock"
+                        "class" => "ShortIfBlock",
                     ],
                 ]
             ]
@@ -1024,7 +1027,7 @@ abstract class LandmarkStorage
         return self::genFind(')', '(', $name);
     }
 
-    protected function genFind(string $needle, string $skip = '', string $name = ''): string
+    protected static function genFind(string $needle, string $skip = '', string $name = ''): string
     {
         $find = '/find:';
         $find .= self::encloseInString($needle);
@@ -1041,6 +1044,7 @@ abstract class LandmarkStorage
             $find .= ':' . self::encloseInString($name);
         }
         $find .= '\\';
+        return $find;
     }
 
     protected static function encloseInString(string $str): string

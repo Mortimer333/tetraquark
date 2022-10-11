@@ -412,7 +412,7 @@ abstract class Methods
         /** @var ?BlockModel */
         $previous = $essentials->getPrevious();
         // If previous was block
-        if (!is_null($previous) && ($previous->getLandmark()['_block'] ?? false)) {
+        if (!is_null($previous) && $previous->getIsBlock()) {
             $ends['}'] = true;
         }
 

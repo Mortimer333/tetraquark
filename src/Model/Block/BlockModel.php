@@ -20,6 +20,7 @@ class BlockModel extends BaseBlockModel
         protected int $end,
         protected array $landmark,
         protected array $data,
+        protected bool $isBlock,
         protected ?int $index = null,
         protected ?BlockModelInterface $parent = null,
         protected array $path = [],
@@ -69,6 +70,17 @@ class BlockModel extends BaseBlockModel
     public function setData(array $data): self
     {
         $this->data = $data;
+        return $this;
+    }
+
+    public function getIsBlock(): bool
+    {
+        return $this->isBlock;
+    }
+
+    public function setIsBlock(bool $isBlock): self
+    {
+        $this->isBlock = $isBlock;
         return $this;
     }
 

@@ -12,10 +12,10 @@ use Tetraquark\Analyzer\JavaScriptAnalyzerAbstract;
 // $analysis = $reader->read($script, true, displayBlocks: false);
 // Log::log($analysis);
 
-Log::log(Log::boolToStr(preg_match_all('/[a-zA-Z0-9]/', "()")));
 
-// $reader = new Reader(__DIR__ . '/../schemats/javascript.php');
-// $reader->read(__DIR__ . '/data/comment.js', true, true);
+$reader = new Reader(JavaScriptAnalyzerAbstract::class);
+$analysis = $reader->read(__DIR__ . '/data/comment.js', true, false);
+Log::log($analysis);
 // $minified = $tetra->minify(__DIR__ . '/data/array.js');
 // $minified = $tetra->minify(__DIR__ . '/data/arrowFunction.js');
 // $minified = $tetra->minify(__DIR__ . '/data/attribute.js');

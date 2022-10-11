@@ -22,7 +22,7 @@ abstract class BaseIntegration extends Base
         return $path;
     }
 
-    protected function getScriptPath(string $path)
+    protected function getScriptPath(string $path): string
     {
         $path = __DIR__ . '/script/' . ltrim($path, '/');
         if (!is_file($path)) {
@@ -55,7 +55,7 @@ abstract class BaseIntegration extends Base
         }
 
         $json = json_decode(file_get_contents($path), true);
-        if (is_null($json ) || (!$json && !empty($json))) {
+        if (is_null($json) || (!$json && !empty($json))) {
             throw new \Exception(sprintf('Analysis %s is malformed', $path));
         }
 

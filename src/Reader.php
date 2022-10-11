@@ -13,6 +13,7 @@ use Tetraquark\Model\{
 };
 use Tetraquark\Contract\{BlockModelInterface, AnalyzerInterface};
 use Tetraquark\Factory\ClosureFactory;
+use Tetraquark\Trait\ReaderDisplayTrait;
 
 /**
  *  Class for reading script and seperating it into managable blocks
@@ -48,6 +49,8 @@ class Reader
     public const END_OF_FILE = 'end of file';
     public const EMPTY_METHOD = 'e';
     public const EMPTY = '_empty';
+
+    use ReaderDisplayTrait;
 
     public function __construct(
         ?string $analyzerClass = null,
@@ -262,150 +265,6 @@ class Reader
         return $this->comments;
     }
 
-    /**
-     * @codeCoverageIgnore
-     */
-    public function displayLandmarks(array $script): void
-    {
-        $landmarks = $this->getLandmarks($script);
-        $this->showLandmark($landmarks);
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    public function showLandmark(array $landmarks): void
-    {
-        Log  ::log($landmarks['landmark']);
-        if (!empty($landmarks['children'])) {
-            Log  ::increaseIndent();
-            foreach ($landmarks['children'] as $child) {
-                $this->showLandmark($child);
-            }
-            Log  ::decreaseIndent();
-        }
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    public function getLandmarks(array $script): array
-    {
-        $landmarks = [
-            "landmark" => '',
-            "data" => [],
-            "children" => []
-        ];
-
-        foreach ($script['data'] ?? [] as $key => $value) {
-            if (!is_array($value)) {
-                $landmarks["data"][] = $key . ': `' . $value . '`';
-            }
-        }
-
-        foreach ($script as $key => $block) {
-            if ($key == 'parent') {
-                continue;
-            }
-            if ($key === 'landmark') {
-                $landmark = $block['_custom']['class'] ?? 'No class';
-                $landmark .= ' {';
-                unset($block['_custom']['class']);
-                $i = 0;
-                foreach ($block['_custom'] ?? [] as $key => $value) {
-                    if ($i === 0) {
-                        $landmark .= $key . ': ' . $value;
-                    } else {
-                        $landmark .= ', ' . $key . ': ' . $value;
-                    }
-                    $i++;
-                }
-                $landmark .= '}';
-                $landmarks["landmark"] = $landmark ?? 'No class';
-                $block = $block['_custom'] ?? [];
-            }
-            if ($block instanceof BlockModel) {
-                $block = $block->toArray();
-            }
-            if (is_array($block)) {
-                $res = $this->getLandmarks($block);
-                if (empty($res['landmark'])) {
-                    $landmarks["children"] = array_merge($landmarks["children"], $res['children']);
-                } else {
-                    $landmarks["children"][] = $res;
-                }
-            }
-        }
-        if (!empty($landmarks['data'])) {
-            $landmarks['landmark'] .= ' [' . implode(', ', $landmarks['data']) . ']';
-        }
-        return $landmarks;
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    public function displayScriptBlocks(array $script, bool $item = true): void
-    {
-        Log  ::increaseIndent();
-        foreach ($script as $key => $block) {
-            if (is_array($block) || $block instanceof BlockModel) {
-                Log  ::log('[');
-                Log  ::increaseIndent();
-            }
-            if ($block instanceof BlockModel) {
-                $this->displayBlock($block);
-            } else if (is_array($block)) {
-                Log  ::log('"' . $key . '" => [');
-                $this->displayScriptBlocks($block, true);
-                Log  ::log('],');
-            } else {
-                if (is_numeric($key)) {
-                    Log  ::log(json_encode($block, JSON_PRETTY_PRINT) . ',', replaceNewLine: false);
-                } else {
-                    Log  ::log('"' . $key . '" => ' . json_encode($block, JSON_PRETTY_PRINT) . ',', replaceNewLine: false);
-                }
-            }
-            if (is_array($block) || $block instanceof BlockModel) {
-                Log  ::decreaseIndent();
-                Log  ::log('],');
-            }
-        }
-        Log  ::decreaseIndent();
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    public function displayBlock(BlockModel $block): void
-    {
-        foreach ($block->toArray() as $key => $value) {
-            if ($key === 'children') {
-                Log  ::log('"' . $key . '" => [');
-                $this->displayScriptBlocks($value);
-                Log  ::log('],');
-            } elseif ($key === 'parent' && !is_null($value)) {
-                if ($value instanceof ScriptBlockModel) {
-                    Log  ::log('"' . $key . '" => script');
-                } else {
-                    Log  ::log('"' . $key . '" => parent[' . $value?->getIndex() . ']');
-                }
-            } else {
-                if ($key == 'landmark') {
-                    Log  ::log('"' . $key . '" => [');
-                    $this->displayScriptBlocks($value['_custom'] ?? []);
-                    Log  ::log('],');
-                } elseif (is_array($value)) {
-                    Log  ::log('"' . $key . '" => [');
-                    $this->displayScriptBlocks($value);
-                    Log  ::log('],');
-                } else {
-                    Log  ::log('"' . $key . '" => ' . json_encode($value, JSON_PRETTY_PRINT) . ',', replaceNewLine: false);
-                }
-            }
-        }
-    }
-
     public function objectify(Content $content, array $map, int $start = 0, ?BlockModelInterface $parent = null): array
     {
         $resolver = new LandmarkResolverModel([
@@ -430,8 +289,27 @@ class Reader
                         $this->resolveSettings($resolver);
                         $this->saveBlock($resolver);
                         $script = $resolver->getScript();
-                        $i = $script[sizeof($script) - 1]->getEnd();
+                        $item = $script[sizeof($script) - 1];
+                        $i = $item->getEnd();
                         $this->clearObjectify($resolver);
+
+                        // Some variables normally share their end/start:
+                        // `let a = 'a'\nlet b = 'd'` (variable a is sharing its end (`\n`) with variable b)
+                        // `let a = 'a';let b = 'd'` (variable a is sharing its end (`;`) with variable b)
+                        // or `if(true){}var a = 'b'` (`if` is shraing its end (`}`) wth variable a)
+                        // so we will try to include the last letter once more.
+                        // But we don't do it for Blocks with instruction of length 1
+                        if (
+                            $item->getStart() !== $item->getEnd()
+                            && ($this->schema['shared']['ends'][
+                                $resolver->getContent()->getLetter(
+                                    $item->getEnd()
+                                )
+                            ] ?? false)
+                        ) {
+                            $i--;
+                        }
+
                     }
                 } catch (Exception $e) {
                     if ($e->getMessage() !== self::SKIP) {
@@ -871,18 +749,19 @@ class Reader
         // Log ::log('Save block - ' . json_encode($resolver->getLandmark()['_custom'] ?? []) . ", debug: " . implode(' => ', $this->debug['path']));
 
         $landmark = ($resolver->getLandmark()['_missed'] ?? false) ? $resolver->getLandmark() : ($resolver->getLandmark()['_custom'] ?? []);
+        $block = $resolver->getLandmark()["_block"] ?? false;
         $item = new BlockModel(
             start: $resolver->getLmStart(),
             end: $resolver->getI(),
             landmark: $landmark,
             data: $resolver->getData(),
+            isBlock: ($block === false ? false : true),
             index: \sizeof($resolver->getScript()),
             parent: $resolver->getParent(),
             comments: $this->comments
         );
         $this->comments = [];
 
-        $block = $resolver->getLandmark()["_block"] ?? false;
 
         if ($block) {
             $item->setBlockStart($item->getEnd() + 1);
@@ -892,21 +771,6 @@ class Reader
             $item->setChildren($blocks);
         }
 
-        // Some variable normally share their end/start:
-        // `let a = 'a'\nlet b = 'd'` (variable a is sharing its end (`\n`) with variable b)
-        // `let a = 'a';let b = 'd'` (variable a is sharing its end (`;`) with variable b)
-        // so we will try to include the last letter once more.
-        // But we don't do it for Blocks with instruction of length 1
-        if (
-            $item->getStart() !== $item->getEnd()
-            && ($this->schema['shared']['ends'][
-                $resolver->getContent()->getLetter(
-                    $item->getEnd()
-                )
-            ] ?? false)
-        ) {
-            $resolver->i--;
-        }
         $resolver->getParent()->addChild($item);
 
         // @POSSIBLE_PERFORMANCE_ISSUE
@@ -932,6 +796,7 @@ class Reader
                     end: $end,
                     landmark: $this->getMissedLandmark(),
                     data: $data,
+                    isBlock: false,
                     index: 0,
                     parent: $resolver->getParent(),
                 );
@@ -979,6 +844,7 @@ class Reader
                 end: $end,
                 landmark: $this->getMissedLandmark(),
                 data: $data,
+                isBlock: false,
                 index: $index,
                 parent: $parent,
             );

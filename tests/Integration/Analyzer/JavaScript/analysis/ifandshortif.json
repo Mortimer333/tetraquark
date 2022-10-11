@@ -1,0 +1,764 @@
+[
+    {
+        "blockStart": 12,
+        "blockEnd": 13,
+        "start": 0,
+        "end": 14,
+        "landmark": {
+            "class": "IfBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "condition": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 4,
+                    "landmark": {
+                        "class": "TrueBlock"
+                    },
+                    "data": [],
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 0,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 27,
+        "blockEnd": 28,
+        "start": 15,
+        "end": 29,
+        "landmark": {
+            "class": "IfBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "condition": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 4,
+                    "landmark": {
+                        "class": "TrueBlock"
+                    },
+                    "data": [],
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 1,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 41,
+        "blockEnd": 42,
+        "start": 30,
+        "end": 43,
+        "landmark": {
+            "class": "IfBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "condition": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 4,
+                    "landmark": {
+                        "class": "TrueBlock"
+                    },
+                    "data": [],
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 2,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 55,
+        "blockEnd": 55,
+        "start": 44,
+        "end": 56,
+        "landmark": {
+            "class": "IfBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "condition": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 4,
+                    "landmark": {
+                        "class": "TrueBlock"
+                    },
+                    "data": [],
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 3,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 68,
+        "blockEnd": 67,
+        "start": 57,
+        "end": 68,
+        "landmark": {
+            "class": "IfBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "condition": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 4,
+                    "landmark": {
+                        "class": "TrueBlock"
+                    },
+                    "data": [],
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 4,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 76,
+        "blockEnd": 75,
+        "start": 69,
+        "end": 76,
+        "landmark": {
+            "class": "IfBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "condition": [],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 5,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 84,
+        "blockEnd": 83,
+        "start": 77,
+        "end": 84,
+        "landmark": {
+            "class": "IfBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "condition": [],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 6,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 90,
+        "blockEnd": 89,
+        "start": 84,
+        "end": 90,
+        "landmark": {
+            "class": "IfBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "condition": [],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 7,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 102,
+        "blockEnd": 103,
+        "start": 91,
+        "end": 104,
+        "landmark": {
+            "class": "IfBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "condition": [],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 8,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": [
+            {
+                "content": "\/\/ Comment over\n",
+                "start": 107,
+                "end": 122
+            },
+            {
+                "content": "\/* comment between *\/",
+                "start": 126,
+                "end": 146
+            },
+            {
+                "content": "\/\/ comment after\n",
+                "start": 155,
+                "end": 171
+            }
+        ]
+    },
+    {
+        "blockStart": 173,
+        "blockEnd": 174,
+        "start": 107,
+        "end": 175,
+        "landmark": {
+            "class": "IfBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "condition": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 4,
+                    "landmark": {
+                        "class": "TrueBlock"
+                    },
+                    "data": [],
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 9,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 195,
+        "blockEnd": 196,
+        "start": 176,
+        "end": 197,
+        "landmark": {
+            "class": "IfBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "condition": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 1,
+                    "landmark": {
+                        "class": "VariableInstanceBlock",
+                        "empty": true
+                    },
+                    "data": {
+                        "name": "a"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 3,
+                    "end": 3,
+                    "landmark": {
+                        "class": "SymbolBlock",
+                        "type": "single"
+                    },
+                    "data": {
+                        "first": "+"
+                    },
+                    "isBlock": false,
+                    "index": 1,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": 9,
+                    "blockEnd": 9,
+                    "start": 4,
+                    "end": 9,
+                    "landmark": {
+                        "class": "VariableInstanceBlock"
+                    },
+                    "data": {
+                        "name": "b",
+                        "assignment": "=",
+                        "negation": " ",
+                        "_end": []
+                    },
+                    "isBlock": true,
+                    "index": 2,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 10,
+                    "end": 10,
+                    "landmark": {
+                        "class": "NumberBlock"
+                    },
+                    "data": {
+                        "number": "3"
+                    },
+                    "isBlock": false,
+                    "index": 3,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 10,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": null,
+        "blockEnd": null,
+        "start": 198,
+        "end": 220,
+        "landmark": {
+            "class": "ShortIfBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "condition": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 4,
+                    "landmark": {
+                        "class": "TrueBlock"
+                    },
+                    "data": [],
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "var": " return 'a';",
+            "stop": ";"
+        },
+        "isBlock": false,
+        "index": 11,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": null,
+        "blockEnd": null,
+        "start": 221,
+        "end": 231,
+        "landmark": {
+            "class": "ShortIfBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "condition": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 4,
+                    "landmark": {
+                        "class": "TrueBlock"
+                    },
+                    "data": [],
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "var": "\n",
+            "stop": "\n"
+        },
+        "isBlock": false,
+        "index": 12,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 239,
+        "blockEnd": 242,
+        "start": 231,
+        "end": 242,
+        "landmark": {
+            "class": "ReturnBlock"
+        },
+        "data": {
+            "_end": {
+                "var": "'a';",
+                "stop": ";"
+            }
+        },
+        "isBlock": true,
+        "index": 13,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 240,
+                "end": 243,
+                "landmark": {
+                    "class": "StringBlock"
+                },
+                "data": {
+                    "string": "a"
+                },
+                "isBlock": false,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": null,
+        "blockEnd": null,
+        "start": 243,
+        "end": 260,
+        "landmark": {
+            "class": "ShortIfBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "condition": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 4,
+                    "landmark": {
+                        "class": "TrueBlock"
+                    },
+                    "data": [],
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "var": "\n",
+            "stop": "\n"
+        },
+        "isBlock": false,
+        "index": 14,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 268,
+        "blockEnd": 271,
+        "start": 260,
+        "end": 271,
+        "landmark": {
+            "class": "ReturnBlock"
+        },
+        "data": {
+            "_end": {
+                "var": "'a'\n",
+                "stop": "\n"
+            }
+        },
+        "isBlock": true,
+        "index": 15,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 269,
+                "end": 272,
+                "landmark": {
+                    "class": "StringBlock"
+                },
+                "data": {
+                    "string": "a"
+                },
+                "isBlock": false,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": null,
+        "blockEnd": null,
+        "start": 271,
+        "end": 296,
+        "landmark": {
+            "class": "ShortIfBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "condition": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 4,
+                    "landmark": {
+                        "class": "TrueBlock"
+                    },
+                    "data": [],
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "var": " if(false) {\n\n}",
+            "stop": "}"
+        },
+        "isBlock": false,
+        "index": 16,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 310,
+        "blockEnd": 353,
+        "start": 297,
+        "end": 354,
+        "landmark": {
+            "class": "IfBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "condition": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 4,
+                    "landmark": {
+                        "class": "TrueBlock"
+                    },
+                    "data": [],
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 17,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 310,
+                "end": 320,
+                "landmark": {
+                    "class": "VariableInstanceBlock",
+                    "empty": true
+                },
+                "data": {
+                    "name": "child1"
+                },
+                "isBlock": false,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            },
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 321,
+                "end": 331,
+                "landmark": {
+                    "class": "VariableInstanceBlock",
+                    "empty": true
+                },
+                "data": {
+                    "name": "child2"
+                },
+                "isBlock": false,
+                "index": 1,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            },
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 332,
+                "end": 353,
+                "landmark": {
+                    "class": "ShortIfBlock"
+                },
+                "data": {
+                    "foundkey": ")",
+                    "condition": [
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 0,
+                            "end": 5,
+                            "landmark": {
+                                "class": "FalseBlock"
+                            },
+                            "data": [],
+                            "isBlock": false,
+                            "index": 0,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        }
+                    ],
+                    "var": " child1\n",
+                    "stop": "\n"
+                },
+                "isBlock": false,
+                "index": 2,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            }
+        ],
+        "comments": []
+    }
+]

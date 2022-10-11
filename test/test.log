@@ -1,4 +1,61 @@
-true
+New letter:  
+New letter:  
+New letter:  
+New letter: }
+End letter of block: }
+Letter down? To: {
+New letter: }
+Check parenthesis also
+New letter:  
+New letter: }
+End letter of block: }
+Letter down? To: {
+New letter: }
+Check parenthesis also
+New letter: \n
+Check parenthesis also
+[
+    {
+        "blockStart": 6,
+        "blockEnd": 5,
+        "start": 0,
+        "end": 6,
+        "landmark": {
+            "class": "IfBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "condition": [],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 0,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 12,
+        "blockEnd": 11,
+        "start": 6,
+        "end": 12,
+        "landmark": {
+            "class": "IfBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "condition": [],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 1,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    }
+]
 
 
 

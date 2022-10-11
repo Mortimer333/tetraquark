@@ -48,4 +48,9 @@ class ScriptBlockModel extends BaseBlockModel
     {
         return 0; // Script always starts at 0
     }
+
+    public function getIsBlock(): bool
+    {
+        return true;
+    }
 }

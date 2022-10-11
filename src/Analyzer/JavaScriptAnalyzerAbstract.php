@@ -9,9 +9,6 @@ use Tetraquark\Analyzer\JavaScript\{Instruction, Validate as JsValidate, Methods
 use Tetraquark\Analyzer\JavaScript\Util\Helper;
 use Tetraquark\Model\CustomMethodEssentialsModel;
 
-/**
- * @codeCoverageIgnore
- */
 abstract class JavaScriptAnalyzerAbstract extends BaseAnalyzerAbstract
 {
     public static function getCommentsMap(array $settings = []): array
