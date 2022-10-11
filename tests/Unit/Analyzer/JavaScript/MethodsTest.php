@@ -162,7 +162,8 @@ class MethodsTest extends BaseJavaScript
                 '${(function() {return `string in function in string`})()}str${var}str',
                 ["template" => '"" (function() {return `string in function in string`})() "str" var "str"']
             ],
-            ['with "double" quotes', ["template" => '"with \"double\" quotes"']]
+            ['with "double" quotes', ["template" => '"with \"double\" quotes"']],
+            ["template 'with' single", ["template" => '"template \'with\' single"']]
         ];
     }
 
