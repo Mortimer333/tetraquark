@@ -136,6 +136,8 @@ class MethodsTest extends BaseJavaScript
     /**
      * @covers \Tetraquark\Analyzer\JavaScript\Methods::templateLiteral
      * @dataProvider provideTemplateLiterals
+     * @uses Tetraquark\Str
+     * @uses Tetraquark\Validate
      */
     public function testTemplateLiteralIsProperlyTransformed(string $template, array $eData): void
     {
@@ -156,6 +158,11 @@ class MethodsTest extends BaseJavaScript
             ['str${var}str', ["template" => '"str" var "str"']],
             ['str${var}str${var2}', ["template" => '"str" var "str" var2 ""']],
             ['${var2}str${var}str', ["template" => '"" var2 "str" var "str"']],
+            [
+                '${(function() {return `string in function in string`})()}str${var}str',
+                ["template" => '"" (function() {return `string in function in string`})() "str" var "str"']
+            ],
+            ['with "double" quotes', ["template" => '"with \"double\" quotes"']]
         ];
     }
 

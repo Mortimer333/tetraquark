@@ -5,6 +5,7 @@ namespace Tetraquark;
 use Orator\Log;
 use Content\Utf8 as Content;
 use Tetraquark\Model\{
+    BasePolymorphicModel,
     CustomMethodEssentialsModel,
     LandmarkResolverModel,
     Block\BlockModel,
@@ -41,6 +42,8 @@ class Reader
     protected bool $retrieveComments = true;
     // Save retrieved comments
     protected bool $setRetrievedComments = true;
+    protected bool $failsave = true;
+    protected int $recursionLimit = 2500;
 
     public const FLAG_SKIP = '_skip';
     public const FLAG_FINISH = '_finish';
@@ -145,6 +148,28 @@ class Reader
                 "missed" => null
             ],
         ];
+    }
+
+    public function setFailsave(bool $failsave): self
+    {
+        $this->failsave = $failsave;
+        return $this;
+    }
+
+    public function getFailsave(): bool
+    {
+        return $this->failsave;
+    }
+
+    public function setRecursionLimit(int $recursionLimit): self
+    {
+        $this->recursionLimit = $recursionLimit;
+        return $this;
+    }
+
+    public function getRecursionLimit(): int
+    {
+        return $this->recursionLimit;
     }
 
     public function schemaSetDefaults(array $schema, array $defaults): array
@@ -267,6 +292,10 @@ class Reader
 
     public function objectify(Content $content, array $map, int $start = 0, ?BlockModelInterface $parent = null): array
     {
+        $failsave = new \stdClass();
+        $failsave->counter = 0;
+        $failsave->limit = $this->getRecursionLimit();
+        $failsave->stop = $this->getFailsave();
         $resolver = new LandmarkResolverModel([
             "letter"     => null,
             "landmark"   => $map,
@@ -278,11 +307,15 @@ class Reader
             "settings"   => new SettingsModel(),
             "map"        => $map,
             "parent"     => $parent,
+            "failsave"   => clone $failsave,
         ]);
 
         try {
             for ($i=$start; $i < $content->getLength(); $i++) {
                 try {
+                    // Log::log('I: ' . $i . ", Letter: " . $resolver->getContent()->getLetter(
+                    //     $i
+                    // ));
                     if ($solve = $this->resolve($resolver, $i)) {
                         $this->restoreResolver($resolver, $solve['save']);
                         $resolver->setLandmark($solve['step']);
@@ -310,6 +343,7 @@ class Reader
                             $i--;
                         }
 
+                        $resolver->setFailsave(clone $failsave);
                     }
                 } catch (Exception $e) {
                     if ($e->getMessage() !== self::SKIP) {
@@ -367,11 +401,11 @@ class Reader
 
     public function resolve(LandmarkResolverModel $resolver, int &$i)
     {
-        // @TODO remove this, and think of better fail save
-        $this->iterations++;
-        // if ($this->iterations > 2500) {
-        //     throw new \Error('Infinite loop');
-        // }
+        $failsave = $resolver->getFailsave();
+        $failsave->counter++;
+        if ($failsave->stop && $failsave->limit < $failsave->counter) {
+            throw new \Error('Infinite loop', 500);
+        }
         // Log ::increaseIndent();
 
         $i = $this->handleComment($resolver, $i);
@@ -406,10 +440,10 @@ class Reader
 
         /* @DOUBLE_CHECK this operation might be unnecessary, currently I can't think of example where this helps but it is quite late at night */
         // If nothing was found but we have descended some steps (more then one) into the map, try with the same letter from the start
-        if ($this->isInLandmark($resolver->getLmStart())) {
-            $i--;
-            $resolver->setLetter($content->getLetter($i));
-        }
+        // if ($this->isInLandmark($resolver->getLmStart())) {
+        //     $i--;
+        //     $resolver->setLetter($content->getLetter($i));
+        // }
         // Log ::log("Nothign was found!");
         $this->clearObjectify($resolver);
 
@@ -731,6 +765,7 @@ class Reader
     // @TODO Move to LandmarkResolverModel
     public function saveResolver(LandmarkResolverModel $resolver, array $remove = []): array
     {
+        $remove = array_merge($remove, ['recursion']);
         $save = $resolver->toArray();
         foreach ($remove as $value) {
             unset($save[$value]);

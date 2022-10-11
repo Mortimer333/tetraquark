@@ -120,31 +120,30 @@ abstract class Methods
 
         $pos = 0;
         $addEnd = true;
-        $string = '"' . $string;
+        $string = str_replace('"', '\"', $string);
+        $content = new Content('"' . $string);
         while ($pos !== false) {
-            $pos = strpos($string, '${', $pos);
+            $pos = $content->find('${', $pos);
             if ($pos !== false) {
                 $start = $pos;
-                $end = strpos($string, '}', $start + 2);
-                if ($end === false) {
+                list($end, $foundkey) = Str::skipBlock('}', $pos + 2, $content, "{");
+                $content->splice($start - 1, 1, ['"']);
+                $content->splice($start, 1, [' ']);
+                if (is_null($foundkey)) {
                     $pos = false;
                     $addEnd = false;
                 } else {
-                    $pre = substr($string, 0, $end);
-                    $after = substr($string, $end + 1);
-                    $string = $pre . ' "' . $after;
+                    $pre = $content->subStr(0, $end - 1);
+                    $after = $content->subStr($end);
+                    $content->splice($end - 1, 1, [' "']);
                     $pos = $end + 1;
                 }
-                $string[$start] = '"';
-                $string[$start + 1] = ' ';
-
             }
         }
         if ($addEnd) {
-            $string .= '"';
+            $content->apendArrayContent(['"']);
         }
-
-        $essentials->appendData($string, $name);
+        $essentials->appendData($content . '', $name);
     }
 
     /**

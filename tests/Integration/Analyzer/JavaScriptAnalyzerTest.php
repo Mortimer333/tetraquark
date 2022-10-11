@@ -31,19 +31,68 @@ use Tetraquark\Model\CustomMethodEssentialsModel;
  */
 class JavaScriptAnalyzerTest extends BaseAnalyzer
 {
-    public function testIfAndShortIf(): void
+    public function testJavaScriptSettings(): void
     {
-        $test = 'ifandshortif';
-        $script = $this->getJsScriptPath($test);
+        $settings = [
+            "comments" => [
+                "/" => [
+                    "/" => "\n",
+                    "*" => "*/"
+                ],
+            ],
+            "prepare" => [
+                "content" => fn() => null,
+                "missed" => fn() => null,
+            ],
+            "shared" => [
+                "ends" => [
+                    "\n" => true,
+                    ";" => true,
+                    "}" => true,
+                    "," => true,
+                    ")" => true,
+                ],
+            ],
+            "remove" => [
+                "comments" => false,
+                "additional" => false,
+            ],
+        ];
+
         $reader = $this->getJsReader();
+        $schema = $reader->getSchema() ?? []; // loosing reference by null coalescening operator
+        $settings['instructions'] = $schema['instructions'];
+        $settings['methods'] = $schema['methods'];
+        $this->assertEquals($schema, $settings);
+    }
+
+    /**
+     * @dataProvider provideScripts
+     */
+    public function testIfAndShortIf(string $name, Reader $reader, bool $show = false): void
+    {
+        $script = $this->getJsScriptPath($name);
         $analysis = $reader->read($script, true, displayBlocks: false);
-        // $this->log(json_encode($analysis, JSON_PRETTY_PRINT));
-        $this->assertEquals($this->getAnalysis($test), json_decode(json_encode($analysis), true));
+        if ($show) {
+            $this->log(json_encode($analysis, JSON_PRETTY_PRINT));
+        }
+        $this->assertEquals($this->getAnalysis($name), json_decode(json_encode($analysis), true));
+    }
+
+    public function provideScripts(): array
+    {
+        $reader = $this->getJsReader();
+        return [
+            "string" => ['string', $reader],
+            "if and short if" => ['ifandshortif', $reader],
+            "class definition" => ['classdefinition', $reader],
+        ];
     }
 
     protected function getJsReader(): Reader
     {
-        return new Reader(JavaScriptAnalyzerAbstract::class); // allow caching - will make tests finish quicker
+        // allow caching - will make tests finish quicker
+        return (new Reader(JavaScriptAnalyzerAbstract::class))->setFailsave(true);
     }
 
     protected function getJsScriptPath(string $name): string
