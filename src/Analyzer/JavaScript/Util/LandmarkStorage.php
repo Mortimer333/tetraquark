@@ -64,8 +64,9 @@ abstract class LandmarkStorage
                         "_block" => self::_BLOCK_OBJECT,
                     ],
                     /* SHORT IF */
-                    '/nparenthesis>decrease\/varend\\' => [
+                    '/nparenthesis>decrease\\' => [
                         "class" => "ShortIfBlock",
+                        "_block" => self::_BLOCK_VAREND,
                     ],
                 ]
             ]

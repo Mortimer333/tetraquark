@@ -12,6 +12,7 @@
         "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
         "path": [],
         "children": [],
-        "comments": []
+        "comments": [],
+        "isBlock": false
     }
 ]

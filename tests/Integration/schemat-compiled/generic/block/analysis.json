@@ -47,10 +47,12 @@
                         "parent": "Tetraquark\\Model\\Block\\BlockModel",
                         "path": [],
                         "children": [],
-                        "comments": []
+                        "comments": [],
+                        "isBlock": false
                     }
                 ],
-                "comments": []
+                "comments": [],
+                "isBlock": true
             },
             {
                 "blockStart": 37,
@@ -83,7 +85,8 @@
                         "parent": "Tetraquark\\Model\\Block\\BlockModel",
                         "path": [],
                         "children": [],
-                        "comments": []
+                        "comments": [],
+                        "isBlock": false
                     },
                     {
                         "blockStart": 40,
@@ -116,10 +119,12 @@
                                 "parent": "Tetraquark\\Model\\Block\\BlockModel",
                                 "path": [],
                                 "children": [],
-                                "comments": []
+                                "comments": [],
+                                "isBlock": false
                             }
                         ],
-                        "comments": []
+                        "comments": [],
+                        "isBlock": true
                     },
                     {
                         "blockStart": null,
@@ -136,12 +141,15 @@
                         "parent": "Tetraquark\\Model\\Block\\BlockModel",
                         "path": [],
                         "children": [],
-                        "comments": []
+                        "comments": [],
+                        "isBlock": false
                     }
                 ],
-                "comments": []
+                "comments": [],
+                "isBlock": true
             }
         ],
-        "comments": []
+        "comments": [],
+        "isBlock": true
     }
 ]

@@ -26,6 +26,8 @@ use Tetraquark\Model\CustomMethodEssentialsModel;
  * @covers \Tetraquark\Model\SettingsModel
  * @covers \Tetraquark\Model\Block\BlockModel
  * @covers \Tetraquark\Model\Block\ScriptBlockModel
+ * @covers \Tetraquark\Factory\ClosureFactory
+ * @covers \Tetraquark\Factory\ClosureFactory
  */
 class JavaScriptAnalyzerTest extends BaseAnalyzer
 {
@@ -35,8 +37,8 @@ class JavaScriptAnalyzerTest extends BaseAnalyzer
         $script = $this->getJsScriptPath($test);
         $reader = $this->getJsReader();
         $analysis = $reader->read($script, true, displayBlocks: false);
-        $this->log(json_encode($analysis, JSON_PRETTY_PRINT));
-        $this->assertEquals($this->getAnalysis($test), $analysis);
+        // $this->log(json_encode($analysis, JSON_PRETTY_PRINT));
+        $this->assertEquals($this->getAnalysis($test), json_decode(json_encode($analysis), true));
     }
 
     protected function getJsReader(): Reader

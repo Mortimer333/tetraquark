@@ -1,19 +1,19 @@
-if (true) {
+if () {
 
 }
 
-if(true) {
+if() {
 
 }
 
-if(true){
+if(){
 
 }
 
-if(true){
+if(){
 }
 
-if(true){}
+if(){}
 
 if(){}
 
@@ -27,32 +27,23 @@ if
 
 }
 
-// Comment over
-if /* comment between */ (true) // comment after
-{
+if () {
 
 }
 
-if (a + b == 3) {
-
-}
-
-if (true) return 'a';
-if (true)
-return 'a';
+if () ;
+if ()
+;
 
 if
 (
-    true
 )
-return 'a'
 
-if (true) if(false) {
+
+if () if() {
 
 }
 
-if (true) {
-    child1
-    child2
-    if(false) child1
+if () {
+    if() 
 }
