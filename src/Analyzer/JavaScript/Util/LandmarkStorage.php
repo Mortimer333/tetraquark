@@ -4,23 +4,43 @@ namespace Tetraquark\Analyzer\JavaScript\Util;
 
 abstract class LandmarkStorage
 {
+    public const _BLOCK_VAREND = [
+        "end" => '/varend\\',
+        "include_end" => true,
+    ];
+
+    public const _BLOCK_VAREND_NO_COMMA = [
+        "end" => '/varend:false\\',
+        "include_end" => true,
+    ];
+
+    public const _BLOCK_OBJECT = [
+        "end" => "}",
+        "nested" => "{",
+    ];
+
+    public const _BLOCK_PARENTHESIS = [
+        "end" => ")",
+        "nested" => "("
+    ];
+
+    public const APOSTROPHE_SEGMENT = '\'/strend:"\'"\\';
+    public const TEMPLATE_LITERAL_SEGMENT = '`/strend:"`":"template">templateliteral:"template">read:"template"\\';
+    public const QUOTE_SEGMENT = '"/strend:\'"\'\\';
+    public const WORD_SEPERATOR_SEGMENT = '/s|end\\';
+    public const PRIVATE_SEGMENT = '/"#">isprivate|e\\';
+
     public const ARRAY_CHAIN_INSTRUCTION = [
         '/s|e\[/find:"]":"[":"index">read:"index"\\' => [
             "class" => "ChainBlock",
             "array" => true,
-            "_block" => [
-                "end" => '/varend\\',
-                "include_end" => true,
-            ],
+            "_block" => self::_BLOCK_VAREND,
             "_extend" => [
                 '/s|e\=/"!=">decrease\\' => [
                     "class" => "ChainBlock",
                     "array" => true,
                     "var" => true,
-                    "_block" => [
-                        "end" => '/varend\\',
-                        "include_end" => true,
-                    ],
+                    "_block" => self::_BLOCK_VAREND,
                 ],
                 '/s|e\(/find:")":"(":"values">read:"values"\\' => [
                     "class" => "ChainBlock",
@@ -34,14 +54,11 @@ abstract class LandmarkStorage
     public static function getIfAndShortIf(): array
     {
         return [
-            '/s|end\if/s|e\(/find:")":"(":"condition">read:"condition"\\' =>  [
+            self::WORD_SEPERATOR_SEGMENT . 'if/s|e\(' . self::genFindParenthesis() =>  [
                 "_extend" => [
                     '/s|e\{' => [
                         "class" => "IfBlock",
-                        "_block" => [
-                            "end" => "}",
-                            "nested" => "{"
-                        ]
+                        "_block" => self::_BLOCK_OBJECT,
                     ],
                     /* SHORT IF */
                     '/nparenthesis>decrease\/varend\\' => [
@@ -54,23 +71,18 @@ abstract class LandmarkStorage
 
     public static function getClassDefinition(): array
     {
+        $class = "ClassBlock";
         return [
-            '/s|end\class/s|e\/word:"class_name"\\' => [
+            self::WORD_SEPERATOR_SEGMENT . 'class/s|e\/word:"class_name"\\' => [
                 "_extend" => [
                     '/s|e\{' => [
-                        "class" => "ClassBlock",
-                        "_block" => [
-                            "end" => "}",
-                            "nested" => "{"
-                        ],
+                        "class" => $class,
+                        "_block" => self::_BLOCK_OBJECT,
                     ],
                     '/s\extends/word:"extends_name"\/s|e\{' => [
-                        "class" => "ClassBlock",
+                        "class" => $class,
                         "extends" => true,
-                        "_block" => [
-                            "end" => "}",
-                            "nested" => "{"
-                        ],
+                        "_block" => self::_BLOCK_OBJECT,
                     ]
                 ]
             ]
@@ -81,28 +93,19 @@ abstract class LandmarkStorage
     {
         return [
             /* LET */
-            "/s|end\let/s\\" => [
+            self::WORD_SEPERATOR_SEGMENT . 'let/s\\' => [
                 "class" => "LetVariableBlock",
-                "_block" => [
-                    "end" => '/varend:false\\',
-                    "include_end" => true,
-                ]
+                "_block" => self::_BLOCK_VAREND_NO_COMMA,
             ],
             /* CONST */
-            "/s|end\const/s\\" => [
+            self::WORD_SEPERATOR_SEGMENT . 'const/s\\' => [
                 "class" => "ConstVariableBlock",
-                "_block" => [
-                    "end" => '/varend:false\\',
-                    "include_end" => true,
-                ]
+                "_block" => self::_BLOCK_VAREND_NO_COMMA,
             ],
             /* VAR */
-            '/s|end\var/s\\' => [
+            self::WORD_SEPERATOR_SEGMENT . 'var/s\\' => [
                 "class" => "VarVariableBlock",
-                "_block" => [
-                    "end" => '/varend:false\\',
-                    "include_end" => true,
-                ]
+                "_block" => self::_BLOCK_VAREND_NO_COMMA,
             ],
         ];
     }
@@ -111,7 +114,7 @@ abstract class LandmarkStorage
     {
         $class = "VariableInstanceBlock";
         return [
-            '/s|end\/"#">isprivate|e\/word:"name"\\' => [
+            self::WORD_SEPERATOR_SEGMENT . self::PRIVATE_SEGMENT . '/word:"name"\\' => [
                 "class" => $class,
                 "empty" => true,
                 "_extend" => [
@@ -120,17 +123,11 @@ abstract class LandmarkStorage
                             '=/"!=">decrease\\' => [
                                 "class" => $class,
                                 "replace" => true,
-                                "_block" => [
-                                    "end" => "/varend\\",
-                                    "include_end" => true,
-                                ]
+                                "_block" => self::_BLOCK_VAREND,
                             ],
                             '/assignment\\=/"!=">decrease\\' => [
                                 "class" => $class,
-                                "_block" => [
-                                    "end" => "/varend\\",
-                                    "include_end" => true,
-                                ]
+                                "_block" => self::_BLOCK_VAREND,
                             ],
                             '++' => [
                                 "class" => $class,
@@ -150,25 +147,19 @@ abstract class LandmarkStorage
     public static function getStaticVariable(): array
     {
         return [
-            '/s|end\static' => [
+            self::WORD_SEPERATOR_SEGMENT . 'static' => [
                 "_extend" => [
                     /* STATIC INITIALIZATION */
                     '/s|e\{' => [
                         "class" => "StaticInitializationBlock",
-                        "_block" => [
-                            "end" => "}",
-                            "skip" => "{"
-                        ],
+                        "_block" => self::_BLOCK_OBJECT,
                     ],
-                    '/s\/"#">isprivate|e\\' => [
+                    '/s\\' . self::PRIVATE_SEGMENT => [
                         "_extend" => [
-                            '[/find:"]":"[":"name">read:"name"\/s|e\(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
+                            '[/find:"]":"[":"name">read:"name"\/s|e\(' . self::genFindParenthesis('arguments') . '/s|e\{' => [
                                 "class" => "StaticClassMethodBlock",
                                 "constant_name" => true,
-                                "_block" => [
-                                    "end" => "}",
-                                    "nested" => "{"
-                                ],
+                                "_block" => self::_BLOCK_OBJECT,
                             ],
                             '/word:"name"\/s|e\\' => [
                                 "class" => "StaticVariableInstanceBlock",
@@ -177,17 +168,11 @@ abstract class LandmarkStorage
                                     '=/"!=">decrease\\' => [
                                         "class" => "StaticVariableInstanceBlock",
                                         "replace" => true,
-                                        "_block" => [
-                                            "end" => "/varend\\",
-                                            "include_end" => true,
-                                        ]
+                                        "_block" => self::_BLOCK_VAREND,
                                     ],
-                                    '(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
+                                    '(' . self::genFindParenthesis('arguments') . '/s|e\{' => [
                                         "class" => "StaticClassMethodBlock",
-                                        "_block" => [
-                                            "end" => "}",
-                                            "nested" => "{"
-                                        ],
+                                        "_block" => self::_BLOCK_OBJECT,
                                     ]
                                 ]
                             ]
@@ -220,10 +205,7 @@ abstract class LandmarkStorage
                 "_extend" => [
                     '/find:"]":"[":"deconstruction">read:"deconstruction"\/s|e\=' => [
                         "class" => "DeconstructionAssignmentBlock",
-                        "_block" => [
-                            "end" => "/varend\\",
-                            "include_end" => true,
-                        ]
+                        "_block" => self::_BLOCK_VAREND,
                     ]
                 ]
             ]
@@ -247,7 +229,7 @@ abstract class LandmarkStorage
     public static function getApostrophe(): array
     {
         return [
-            "'/strend:\"'\"\\" => [
+            self::APOSTROPHE_SEGMENT => [
                 "class" => "StringBlock",
             ]
         ];
@@ -257,7 +239,7 @@ abstract class LandmarkStorage
     public static function getTemplateLiteral(): array
     {
         return [
-            '`/strend:"`":"template">templateliteral:"template">read:"template"\\' => [
+            self::TEMPLATE_LITERAL_SEGMENT => [
                 "class" => "StringBlock",
             ]
         ];
@@ -267,7 +249,7 @@ abstract class LandmarkStorage
     public static function getQuote(): array
     {
         return [
-            '"/strend:\'"\'\\' => [
+            self::QUOTE_SEGMENT => [
                 "class" => "StringBlock",
             ]
         ];
@@ -285,25 +267,19 @@ abstract class LandmarkStorage
     public static function getArrowFunctionWithAsync(): array
     {
         $arrowMethodInstruction = [
-            '(/find:")":"(":"condition">read:"condition"\/s|e\=>/s|e\{' => [
+            '(' . self::genFindParenthesis() . '/s|e\=>/s|e\{' => [
                 "class" => "ArrowMethodBlock",
                 "parenthesis" => true,
                 "block" => true,
-                "_block" => [
-                    "end" => "}",
-                    "nested" => "{"
-                ]
+                "_block" => self::_BLOCK_OBJECT,
             ],
             '/word\/s|e\=>/s|e\{' => [
                 "class" => "ArrowMethodBlock",
                 "parenthesis" => false,
                 "block" => true,
-                "_block" => [
-                    "end" => "}",
-                    "nested" => "{"
-                ]
+                "_block" => self::_BLOCK_OBJECT,
             ],
-            '(/find:")":"(":"condition">read:"condition"\/s|e\=>/nparenthesis>decrease\/varend\\' => [
+            '(' . self::genFindParenthesis('arguments') . '/s|e\=>/nparenthesis>decrease\/varend\\' => [
                 "class" => "ArrowMethodBlock",
                 "parenthesis" => true,
                 "block" => false,
@@ -320,7 +296,7 @@ abstract class LandmarkStorage
         }
         return [
             ...$arrowMethodInstruction,
-            '/s|end\async/s|e\\' => [
+            self::WORD_SEPERATOR_SEGMENT . 'async/s|e\\' => [
                 "_extend" => [
                     ...$arrowMethodAsync
                 ]
@@ -331,7 +307,7 @@ abstract class LandmarkStorage
     public static function getKeyword(): array
     {
         return [
-            '/s|end\/taken\/s|";"|e\\' => [
+            self::WORD_SEPERATOR_SEGMENT . '/taken\/s|";"|e\\' => [
                 "class" => "KeywordBlock"
             ]
         ];
@@ -340,14 +316,11 @@ abstract class LandmarkStorage
     public static function getClassGenerator(): array
     {
         return [
-            '*[/find:"]":"[":"name">read:"name"\/s|e\(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
+            '*[/find:"]":"[":"name">read:"name"\/s|e\(' . self::genFindParenthesis('arguments') . '/s|e\{' => [
                 "class" => "ClassMethodBlock",
                 "generator" => true,
                 "constant_name" => true,
-                "_block" => [
-                    "end" => "}",
-                    "nested" => "{"
-                ],
+                "_block" => self::_BLOCK_OBJECT,
             ]
         ];
     }
@@ -355,30 +328,21 @@ abstract class LandmarkStorage
     public static function getMethodAndCaller(): array
     {
         return [
-            '/s|end\/"#">isprivate|e\\' => [
+            self::WORD_SEPERATOR_SEGMENT . self::PRIVATE_SEGMENT => [
                 "_extend" => [
-                    '[/find:"]":"[":"name">read:"name"\/s|e\(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
+                    '[/find:"]":"[":"name">read:"name"\/s|e\(' . self::genFindParenthesis('arguments') . '/s|e\{' => [
                         "class" => "ClassMethodBlock",
                         "constant_name" => true,
-                        "_block" => [
-                            "end" => "}",
-                            "nested" => "{"
-                        ],
+                        "_block" => self::_BLOCK_OBJECT,
                     ],
                     '/word:"name"\/s|e\(' => [
                         "class" => "CallerBlock",
-                        "_block" => [
-                            "end" => ")",
-                            "nested" => "("
-                        ],
+                        "_block" => self::_BLOCK_PARENTHESIS,
                         "_extend" => [
                             /* CLASS METHOD */
-                            '/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
+                            self::genFindParenthesis('arguments') . '/s|e\{' => [
                                 "class" => "ClassMethodBlock",
-                                "_block" => [
-                                    "end" => "}",
-                                    "nested" => "{"
-                                ],
+                                "_block" => self::_BLOCK_OBJECT,
                             ],
                         ],
                     ],
@@ -393,10 +357,7 @@ abstract class LandmarkStorage
             '(/consecutivecaller>decrease\\' => [
                 "class" => "CallerBlock",
                 "consecutive" => true,
-                "_block" => [
-                    "end" => ")",
-                    "nested" => "("
-                ],
+                "_block" => self::_BLOCK_PARENTHESIS,
             ]
         ];
     }
@@ -404,12 +365,9 @@ abstract class LandmarkStorage
     public static function getGetter(): array
     {
         return [
-            '/s|end\get/s\/"#">isprivate|e\/word:"getter"\(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
+            self::WORD_SEPERATOR_SEGMENT . 'get' . self::getEttersFinish('getter') => [
                 "class" => "GetterClassMethodBlock",
-                "_block" => [
-                    "end" => "}",
-                    "nested" => "{"
-                ],
+                "_block" => self::_BLOCK_OBJECT,
             ]
         ];
     }
@@ -417,12 +375,9 @@ abstract class LandmarkStorage
     public static function getSetter(): array
     {
         return [
-            '/s|end\set/s\/"#">isprivate|e\/word:"setter"\(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
+            self::WORD_SEPERATOR_SEGMENT . 'set' . self::getEttersFinish('setter') => [
                 "class" => "SetterClassMethodBlock",
-                "_block" => [
-                    "end" => "}",
-                    "nested" => "{"
-                ],
+                "_block" => self::_BLOCK_OBJECT,
             ]
         ];
     }
@@ -430,12 +385,9 @@ abstract class LandmarkStorage
     public static function getAsync(): array
     {
         return [
-            '/s|end\async/s\/"#">isprivate|e\/word:"name"\(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
+            self::WORD_SEPERATOR_SEGMENT . 'async' . self::getEttersFinish('name') => [
                 "class" => "AsyncClassMethodBlock",
-                "_block" => [
-                    "end" => "}",
-                    "nested" => "{"
-                ],
+                "_block" => self::_BLOCK_OBJECT,
             ]
         ];
     }
@@ -443,12 +395,9 @@ abstract class LandmarkStorage
     public static function getStaticGetter(): array
     {
         return [
-            '/s|end\static/s\get/s\/"#">isprivate|e\/word:"getter"\(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
+            self::WORD_SEPERATOR_SEGMENT . 'static/s\get' . self::getEttersFinish('getter') => [
                 "class" => "StaticGetterClassMethodBlock",
-                "_block" => [
-                    "end" => "}",
-                    "nested" => "{"
-                ],
+                "_block" => self::_BLOCK_OBJECT,
             ]
         ];
     }
@@ -456,12 +405,9 @@ abstract class LandmarkStorage
     public static function getStaticSetter(): array
     {
         return [
-            '/s|end\static/s\set/s\/"#">isprivate|e\/word:"setter"\(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
+            self::WORD_SEPERATOR_SEGMENT . 'static/s\set' . self::getEttersFinish('setter') => [
                 "class" => "StaticSetterClassMethodBlock",
-                "_block" => [
-                    "end" => "}",
-                    "nested" => "{"
-                ],
+                "_block" => self::_BLOCK_OBJECT,
             ]
         ];
     }
@@ -469,12 +415,9 @@ abstract class LandmarkStorage
     public static function getStaticAsync(): array
     {
         return [
-            '/s|end\static/s\async/s\/"#">isprivate|e\/word:"name"\(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
+            self::WORD_SEPERATOR_SEGMENT . 'static/s\async' . self::getEttersFinish('name') => [
                 "class" => "StaticAsyncClassMethodBlock",
-                "_block" => [
-                    "end" => "}",
-                    "nested" => "{"
-                ],
+                "_block" => self::_BLOCK_OBJECT,
             ],
         ];
     }
@@ -482,12 +425,9 @@ abstract class LandmarkStorage
     public static function getTry(): array
     {
         return [
-            '/s|end\try/s|e\{' => [
+            self::WORD_SEPERATOR_SEGMENT . 'try/s|e\{' => [
                 "class" => "TryBlock",
-                "_block" => [
-                    "end" => "}",
-                    "nested" => "{"
-                ]
+                "_block" => self::_BLOCK_OBJECT,
             ],
         ];
     }
@@ -495,12 +435,9 @@ abstract class LandmarkStorage
     public static function getCatch(): array
     {
         return [
-            '/s|end\catch/s|e\(/find:")":"(":"exception">read:"exception"\/s|e\{' => [
+            self::WORD_SEPERATOR_SEGMENT . 'catch/s|e\(' . self::genFindParenthesis('exception') . '/s|e\{' => [
                 "class" => "CatchBlock",
-                "_block" => [
-                    "end" => "}",
-                    "nested" => "{"
-                ]
+                "_block" => self::_BLOCK_OBJECT,
             ],
         ];
     }
@@ -508,12 +445,9 @@ abstract class LandmarkStorage
     public static function getFinally(): array
     {
         return [
-            '/s|end\finally/s|e\{' => [
+            self::WORD_SEPERATOR_SEGMENT . 'finally/s|e\{' => [
                 "class" => "FinallyBlock",
-                "_block" => [
-                    "end" => "}",
-                    "nested" => "{"
-                ]
+                "_block" => self::_BLOCK_OBJECT,
             ],
         ];
     }
@@ -523,7 +457,7 @@ abstract class LandmarkStorage
         return [
             '/s|end|e\/word:"first":false\/s|e\\' => [
                 "_extend" => [
-                    '/"?">optionalchain|e\/s|e\./s|e\/"#">isprivate|e\/word:"second"\\' => [
+                    '/"?">optionalchain|e\/s|e\./s|e\\' . self::PRIVATE_SEGMENT . '/word:"second"\\' => [
                         "class" => "ChainBlock",
                         "first" => true,
                         "_block" => [
@@ -531,7 +465,7 @@ abstract class LandmarkStorage
                             "include_end" => true,
                         ],
                         "_extend" => [
-                            '/s|e\(/find:")":"(":"values_two">read:"values_two"\\' => [
+                            '/s|e\(' . self::genFindParenthesis('values_two') => [
                                 "class" => "ChainBlock",
                                 "first_method" => false,
                                 "second_method" => true,
@@ -545,16 +479,13 @@ abstract class LandmarkStorage
                                 "class" => "ChainBlock",
                                 "first" => true,
                                 "var" => true,
-                                "_block" => [
-                                    "end" => '/varend\\',
-                                    "include_end" => true,
-                                ],
+                                "_block" => self::_BLOCK_VAREND,
                             ],
                             /* CHAIN (ARRAY ACCESS) */
                             ...self::ARRAY_CHAIN_INSTRUCTION,
                         ]
                     ],
-                    '(/find:")":"(":"values">read:"values"\/s|e\/"?">optionalchain|e\/s|e\./s|e\/"#">isprivate|e\/word:"second"\\' => [
+                    '(' . self::genFindParenthesis('values') . '/s|e\/"?">optionalchain|e\/s|e\./s|e\\' . self::PRIVATE_SEGMENT . '/word:"second"\\' => [
                         "class" => "ChainBlock",
                         "first" => true,
                         "first_method" => true,
@@ -563,7 +494,7 @@ abstract class LandmarkStorage
                             "include_end" => true,
                         ],
                         "_extend" => [
-                            '/s|e\(/find:")":"(":"values_two">read:"values_two"\\' => [
+                            '/s|e\(' . self::genFindParenthesis('values_two') => [
                                 "class" => "ChainBlock",
                                 "first_method" => true,
                                 "second_method" => true,
@@ -577,10 +508,7 @@ abstract class LandmarkStorage
                                 "class" => "ChainBlock",
                                 "first" => true,
                                 "var" => true,
-                                "_block" => [
-                                    "end" => '/varend\\',
-                                    "include_end" => true,
-                                ],
+                                "_block" => self::_BLOCK_VAREND,
                             ]
                         ]
                     ],
@@ -592,7 +520,7 @@ abstract class LandmarkStorage
     public static function getNextInChain(): array
     {
         return [
-            '/"?">optionalchain|s|e\./s|e\/"#">isprivate|e\/word\\' => [
+            '/"?">optionalchain|s|e\./s|e\\' . self::PRIVATE_SEGMENT . '/word\\' => [
                 "class" => "SubChainBlock1",
                 "_block" => [
                     "end" => '/chainend\\',
@@ -602,12 +530,9 @@ abstract class LandmarkStorage
                     '/s|e\=/"!=">decrease\\' => [
                         "class" => "SubChainBlock2",
                         "var" => true,
-                        "_block" => [
-                            "end" => '/varend\\',
-                            "include_end" => true,
-                        ],
+                        "_block" => self::_BLOCK_VAREND,
                     ],
-                    '/s|e\(/find:")":"(":"values">read:"values"\\' => [
+                    '/s|e\(' . self::genFindParenthesis('values') => [
                         "class" => "SubChainBlock3",
                         "method" => true,
                     ],
@@ -623,10 +548,7 @@ abstract class LandmarkStorage
         return [
             'this/".">decrease\\' => [
                 "class" => "ThisBlock",
-                "_block" => [
-                    "end" => '/varend\\',
-                    "include_end" => true,
-                ],
+                "_block" => self::_BLOCK_VAREND,
             ],
         ];
     }
@@ -662,11 +584,11 @@ abstract class LandmarkStorage
     public static function getDoWhile(): array
     {
         return [
-            '/s|end\do/s|e\{' => [
+            self::WORD_SEPERATOR_SEGMENT . 'do/s|e\{' => [
                 "class" => "DoWhileBlock",
                 "_block" => [
-                    "skip" => '/s|end\do/s|e\{',
-                    "end" => '}/s|e\while/s|e\(/find:")":"(":"while">read:"while"\\',
+                    "skip" => self::WORD_SEPERATOR_SEGMENT . 'do/s|e\{',
+                    "end" => '}/s|e\while/s|e\(' . self::genFindParenthesis('while'),
                 ]
             ],
         ];
@@ -675,14 +597,11 @@ abstract class LandmarkStorage
     public static function getWhileAndShortWhile(): array
     {
         return [
-            '/s|end\while/s|e\(/find:")":"(":"condition">read:"condition"\/s|e\{' => [
+            self::WORD_SEPERATOR_SEGMENT . 'while/s|e\(' . self::genFindParenthesis('condition') . '/s|e\{' => [
                 "class" => "WhileBlock",
-                "_block" => [
-                    "skip" => '{',
-                    "end" => '}',
-                ]
+                "_block" => self::_BLOCK_OBJECT,
             ],
-            '/s|end\while/s|e\(/find:")":"(":"condition">read:"condition"\/nparenthesis>decrease\/varend\\' => [
+            self::WORD_SEPERATOR_SEGMENT . 'while/s|e\(' . self::genFindParenthesis('condition') . '/nparenthesis>decrease\/varend\\' => [
                 "class" => "ShortWhileBlock"
             ],
         ];
@@ -691,21 +610,15 @@ abstract class LandmarkStorage
     public static function getElseAndElseIf(): array
     {
         return [
-            '/s|e\else' => [
+            self::WORD_SEPERATOR_SEGMENT . 'else' => [
                 "_extend" => [
                     "/s|e\{" => [
                         "class" => "ElseBlock",
-                        "_block" => [
-                            "skip" => '{',
-                            "end" => '}',
-                        ]
+                        "_block" => self::_BLOCK_OBJECT,
                     ],
-                    '/s\if/s|e\(/find:")":"(":"values">read:"values"\/s|e\{' => [
+                    '/s\if/s|e\(' . self::genFindParenthesis('values') . '/s|e\{' => [
                         "class" => "ElseIfBlock",
-                        "_block" => [
-                            "skip" => '{',
-                            "end" => '}',
-                        ]
+                        "_block" => self::_BLOCK_OBJECT,
                     ]
                 ]
             ],
@@ -715,7 +628,7 @@ abstract class LandmarkStorage
     public static function getFalse(): array
     {
         return [
-            '/s|end\false' => [
+            self::WORD_SEPERATOR_SEGMENT . 'false' => [
                 "class" => "FalseBlock"
             ],
         ];
@@ -724,7 +637,7 @@ abstract class LandmarkStorage
     public static function getTrue(): array
     {
         return [
-            '/s|end\true' => [
+            self::WORD_SEPERATOR_SEGMENT . 'true' => [
                 "class" => "TrueBlock"
             ],
         ];
@@ -733,15 +646,13 @@ abstract class LandmarkStorage
     public static function getForAndShortFor(): array
     {
         return [
-            '/s|end\for/s|e\(/find:")":"(":"condition">read:"condition"\/s|e\{' => [
+            self::WORD_SEPERATOR_SEGMENT . 'for/s|e\(' . self::genFindParenthesis('condition') . '/s|e\{' => [
                 "class" => "ForBlock",
-                "_block" => [
-                    "end" => "}",
-                    "nested" => "{"
-                ]
+                "_block" => self::_BLOCK_OBJECT,
             ],
-            '/s|end\for/s|e\(/find:")":"(":"condition">read:"condition"\/nparenthesis>decrease\/varend\\' => [
-                "class" => "ShortForBlock"
+            self::WORD_SEPERATOR_SEGMENT . 'for/s|e\(' . self::genFindParenthesis('condition') . '/nparenthesis>decrease\\' => [
+                "class" => "ShortForBlock",
+                "_block" => self::_BLOCK_VAREND,
             ],
         ];
     }
@@ -795,42 +706,32 @@ abstract class LandmarkStorage
 
     public static function getFunctionAndGenerator(): array
     {
+        $parenthesis = '(' . self::genFindParenthesis('arguments') . '/s|e\{';
+        $class = "FunctionBlock";
         return [
-            '/s|end\function' => [
+            self::WORD_SEPERATOR_SEGMENT . 'function' => [
                 "_extend" => [
                     // GENERATOR
-                    '*/s\/word:"name"\(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
-                        "class" => "FunctionBlock",
+                    '*/s\/word:"name"\\' . $parenthesis => [
+                        "class" => $class,
                         "generator" => true,
-                        "_block" => [
-                            "end" => "}",
-                            "nested" => "{"
-                        ]
+                        "_block" => self::_BLOCK_OBJECT,
                     ],
-                    '/s\/word:"name"\(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
-                        "class" => "FunctionBlock",
-                        "_block" => [
-                            "end" => "}",
-                            "nested" => "{"
-                        ]
+                    '/s\/word:"name"\\' . $parenthesis => [
+                        "class" => $class,
+                        "_block" => self::_BLOCK_OBJECT,
                     ],
                     // ANONYMOUS
-                    '/s|e\(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
-                        "class" => "FunctionBlock",
+                    '/s|e\\' . $parenthesis => [
+                        "class" => $class,
                         "anonymous" => true,
-                        "_block" => [
-                            "end" => "}",
-                            "nested" => "{"
-                        ]
+                        "_block" => self::_BLOCK_OBJECT,
                     ],
-                    '*/s|e\(/find:")":"(":"arguments">read:"arguments"\/s|e\{' => [
-                        "class" => "FunctionBlock",
+                    '*/s|e\\' . $parenthesis => [
+                        "class" => $class,
                         "generator" => true,
                         "anonymous" => true,
-                        "_block" => [
-                            "end" => "}",
-                            "nested" => "{"
-                        ]
+                        "_block" => self::_BLOCK_OBJECT,
                     ],
                 ]
             ],
@@ -840,16 +741,13 @@ abstract class LandmarkStorage
     public static function getNewInstance(): array
     {
         return [
-            '/s|end\new/s\/word:"class"\\' => [
+            self::WORD_SEPERATOR_SEGMENT . 'new/s\/word:"class"\\' => [
                 "class" => "NewInstanceBlock",
                 "_extend" => [
-                    '/s|e\(/find:")":"(":"values">read:"values"\\' => [
+                    '/s|e\(' . self::genFindParenthesis('values') => [
                         "class" => "NewClassInstanceBlock",
                         "parenthesis" => true,
-                        "_block" => [
-                            "end" => '/varend:false\\',
-                            "include_end" => true,
-                        ],
+                        "_block" => self::_BLOCK_VAREND_NO_COMMA,
                     ]
                 ]
             ],
@@ -868,10 +766,7 @@ abstract class LandmarkStorage
         return [
             '{' => [
                 "class" => "ObjectBlock",
-                "_block" => [
-                    "end" => "}",
-                    "nested" => "{"
-                ],
+                "_block" => self::_BLOCK_OBJECT,
                 "_extend" => [
                     '/find:"}":"{":"deconstruction">read:"deconstruction"\/s|e\=' => [
                         "class" => "ObjectDeconstructionAssignmentBlock",
@@ -884,9 +779,9 @@ abstract class LandmarkStorage
             ],
             '/s|e|"{"\\' => [
                 "_extend" => [
-                    "'/strend:`'`\/s|e\:" => $objectItemBlock,
-                    '`/strend:"`":"template">templateliteral\/s|e\:' => $objectItemBlock,
-                    '"/strend:`"`\/s|e\:' => $objectItemBlock,
+                    self::APOSTROPHE_SEGMENT . '/s|e\:' => $objectItemBlock,
+                    self::TEMPLATE_LITERAL_SEGMENT . '/s|e\:' => $objectItemBlock,
+                    self::QUOTE_SEGMENT . '/s|e\:' => $objectItemBlock,
                     '/word:"name"\/s|e\:' => $objectItemBlock,
                     '[/find:"]":"[":"key">read:"key"\/s|e\:' => ["key" => true, ...$objectItemBlock],
                 ]
@@ -894,10 +789,7 @@ abstract class LandmarkStorage
             '.../s|e\{' => [
                 "spread" => true,
                 "class" => "ObjectBlock",
-                "_block" => [
-                    "end" => "}",
-                    "skip" => "{",
-                ],
+                "_block" => self::_BLOCK_OBJECT,
             ],
         ];
     }
@@ -905,11 +797,8 @@ abstract class LandmarkStorage
     public static function getReturn(): array
     {
         return [
-            '/s|end\return/s|symbol>decrease\\' => [
-                "_block" => [
-                    "end" => '/varend\\',
-                    "include_end" => true,
-                ],
+            self::WORD_SEPERATOR_SEGMENT . 'return/s|symbol>decrease\\' => [
+                "_block" => self::_BLOCK_VAREND,
                 "class" => "ReturnBlock",
             ],
         ];
@@ -918,25 +807,22 @@ abstract class LandmarkStorage
     public static function getSwitchAndCases(): array
     {
         return [
-            '/s|end\switch/s|e\(/find:")":"(":"values">read:"values"\/s|e\{' => [
+            self::WORD_SEPERATOR_SEGMENT . 'switch/s|e\(' . self::genFindParenthesis('values') . '/s|e\{' => [
                 "class" => "SwitchBlock",
-                "_block" => [
-                    "end" => "}",
-                    "nested" => "{"
-                ],
+                "_block" => self::_BLOCK_OBJECT,
             ],
-            '/s|end\case/s\/word:"case"\/s|e\:' => [
+            self::WORD_SEPERATOR_SEGMENT . 'case/s\/word:"case"\/s|e\:' => [
                 "class" => "SwitchCaseBlock",
                 "_block" => [
                     "end" => ['/case\\', 'break'],
-                    "nested" => '/s|end\case/s\/word:"case"\/s|e\:',
+                    "nested" => self::WORD_SEPERATOR_SEGMENT . 'case/s\/word:"case"\/s|e\:',
                 ]
             ],
-            '/s|end\default/s|e\:' => [
+            self::WORD_SEPERATOR_SEGMENT . 'default/s|e\:' => [
                 "class" => "SwitchDefaultCaseBlock",
                 "_block" => [
                     "end" => ['/case\\', 'break'],
-                    "nested" => '/s|end\default/s|e\:',
+                    "nested" => self::WORD_SEPERATOR_SEGMENT . 'default/s|e\:',
                 ]
             ],
         ];
@@ -967,11 +853,8 @@ abstract class LandmarkStorage
     public static function getYeld(): array
     {
         return [
-            '/s|end\yield/"*">isgenerator|e\/s|symbol>decrease\\' => [
-                "_block" => [
-                    "end" => '/varend\\',
-                    "include_end" => true,
-                ],
+            self::WORD_SEPERATOR_SEGMENT . 'yield/"*">isgenerator|e\/s|symbol>decrease\\' => [
+                "_block" => self::_BLOCK_VAREND,
                 "class" => "YieldBlock",
             ],
         ];
@@ -982,10 +865,7 @@ abstract class LandmarkStorage
         return [
             '(' => [
                 "class" => "ScopeBlock",
-                "_block" => [
-                    "end" => ")",
-                    "nested" => "(",
-                ]
+                "_block" => self::_BLOCK_PARENTHESIS,
             ],
         ];
     }
@@ -1002,43 +882,37 @@ abstract class LandmarkStorage
         ];
 
         return [
-            '/s|end\import/s|e\\' => [
+            self::WORD_SEPERATOR_SEGMENT . 'import/s|e\\' => [
                 "_extend" => [
                     '/s|e\(' => [
                         "class" => "CallerBlock",
                         "import" => true,
-                        "_block" => [
-                            "end" => ")",
-                            "nested" => "(",
-                        ]
+                        "_block" => self::_BLOCK_PARENTHESIS,
                     ],
                     '/s\\' => [
-                        "_block" => [
-                            "end" => '/varend:false\\',
-                            "include_end" => true,
-                        ],
+                        "_block" => self::_BLOCK_VAREND_NO_COMMA,
                         "class" => "ImportBlock",
                     ]
                 ]
             ],
-            '/s|end\/word:"name"\/s\as/s\/word:"alias"\\' => [
+            self::WORD_SEPERATOR_SEGMENT . '/word:"name"\/s\as/s\/word:"alias"\\' => [
                 "class" => "AliasBlock",
             ],
-            '\'/strend:`\'`\/s|e\as/s\/word:"alias"\\' => $importAliasStringItemBlock,
-            '`/strend:"`":"template">templateliteral\/s|e\as/s\/word:"alias"\\' => $importAliasStringItemBlock,
-            '"/strend:`"`\/s|e\as/s\/word:"alias"\\' => $importAliasStringItemBlock,
+            self::APOSTROPHE_SEGMENT . '/s|e\as/s\/word:"alias"\\' => $importAliasStringItemBlock,
+            self::TEMPLATE_LITERAL_SEGMENT . '/s|e\as/s\/word:"alias"\\' => $importAliasStringItemBlock,
+            self::QUOTE_SEGMENT . '/s|e\as/s\/word:"alias"\\' => $importAliasStringItemBlock,
             '*/s|e\as/s\/word:"alias"\\' => [
                 "class" => "ImportAllAliasBlock",
             ],
-            '/s|end\default/s\as/s\/word:"alias"\\' => [
+            self::WORD_SEPERATOR_SEGMENT . 'default/s\as/s\/word:"alias"\\' => [
                 "class" => "ImportAliasBlock",
                 "default" => true,
             ],
-            '/s|end\from/s\\' => [
+            self::WORD_SEPERATOR_SEGMENT . 'from/s\\' => [
                 "_extend" => [
-                    "'/strend:`'`\\" => $fromItemBlock,
-                    '`/strend:"`":"template">templateliteral\\' => $fromItemBlock,
-                    '"/strend:`"`\\' => $fromItemBlock,
+                    self::APOSTROPHE_SEGMENT => $fromItemBlock,
+                    self::TEMPLATE_LITERAL_SEGMENT => $fromItemBlock,
+                    self::QUOTE_SEGMENT => $fromItemBlock,
                 ]
             ],
         ];
@@ -1056,48 +930,41 @@ abstract class LandmarkStorage
             "string" => true,
         ];
 
+        $class = "ExportBlock";
+
         return [
-            '/s|end\/word:"name"\/s\as/s|e\\' => [
+            self::WORD_SEPERATOR_SEGMENT . '/word:"name"\/s\as/s|e\\' => [
                 "_extend" => [
-                    '`/strend:"`":"template">templateliteral\\' => $exportAliasStringBlock,
-                    '\'/strend:// Log ::\'// Log ::\\' => $exportAliasStringBlock,
-                    '"/strend:`"`\\' => $exportAliasStringBlock,
+                    self::TEMPLATE_LITERAL_SEGMENT => $exportAliasStringBlock,
+                    self::APOSTROPHE_SEGMENT => $exportAliasStringBlock,
+                    self::QUOTE_SEGMENT => $exportAliasStringBlock,
                 ]
             ],
-            '/s|end\/word:"alias"\/s\as/s\default' => [
+            self::WORD_SEPERATOR_SEGMENT . '/word:"alias"\/s\as/s\default' => [
                 "class" => "ExportAliasBlock",
                 "default" => true,
             ],
-            '/s|end\export' => [
+            self::WORD_SEPERATOR_SEGMENT . 'export' => [
                 "_extend" => [
                     '/s\\' => [
-                        "class" => "ExportBlock",
-                        "_block" => [
-                            "end" => '/varend:false\\',
-                            "include_end" => true,
-                        ],
+                        "class" => $class,
+                        "_block" => self::_BLOCK_VAREND_NO_COMMA,
                         "_extend" => [
                             'default/s\\' => [
-                                "_block" => [
-                                    "end" => '/varend:false\\',
-                                    "include_end" => true,
-                                ],
-                                "class" => "ExportBlock",
+                                "_block" => self::_BLOCK_VAREND_NO_COMMA,
+                                "class" => $class,
                                 "default" => true,
                             ],
                             '{' => [
-                                "class" => "ExportBlock",
+                                "class" => $class,
                                 "object" => true,
-                                "_block" => [
-                                    "end" => "}",
-                                    "nested" => "{",
-                                ],
+                                "_block" => self::_BLOCK_OBJECT,
                                 "_extend" => [
                                     '/find:"}":"{":"object">read:"object"\/s|e\from/s|e\\' => [
                                         "_extend" => [
-                                            '`/strend:"`":"template">templateliteral\\' => $exportFromBlock,
-                                            '\'/strend:`\'`\\' => $exportFromBlock,
-                                            '"/strend:`"`\\' => $exportFromBlock,
+                                            self::TEMPLATE_LITERAL_SEGMENT => $exportFromBlock,
+                                            self::APOSTROPHE_SEGMENT => $exportFromBlock,
+                                            self::QUOTE_SEGMENT => $exportFromBlock,
                                         ]
                                     ]
                                 ]
@@ -1105,41 +972,32 @@ abstract class LandmarkStorage
                             '*' => [
                                 "_extend" => [
                                     '/s\as/s\/word:"alias"\\' => [
-                                        "class" => "ExportBlock",
+                                        "class" => $class,
                                         "all" => true,
                                         "alias" => true,
-                                        "_block" => [
-                                            "end" => '/varend:false\\',
-                                            "include_end" => true,
-                                        ],
+                                        "_block" => self::_BLOCK_VAREND_NO_COMMA,
                                     ],
                                 ],
-                                "class" => "ExportBlock",
+                                "class" => $class,
                                 "all" => true,
-                                "_block" => [
-                                    "end" => '/varend:false\\',
-                                    "include_end" => true,
-                                ],
+                                "_block" => self::_BLOCK_VAREND_NO_COMMA,
                             ],
                         ]
                     ],
                     '{' => [
-                        "class" => "ExportBlock",
+                        "class" => $class,
                         "object" => true,
-                        "_block" => [
-                            "end" => "}",
-                            "nested" => "{",
-                        ]
+                        "_block" => self::_BLOCK_OBJECT,
                     ],
                     '*' => [
                         "_extend" => [
                             '/s\as/s\/word:"alias"\\' => [
-                                "class" => "ExportBlock",
+                                "class" => $class,
                                 "all" => true,
                                 "alias" => true
                             ],
                         ],
-                        "class" => "ExportBlock",
+                        "class" => $class,
                         "all" => true,
                     ],
                 ],
@@ -1150,9 +1008,46 @@ abstract class LandmarkStorage
     public static function getNumber(): array
     {
         return [
-            "/number\\" => [
+            '/number\\' => [
                 "class" => "NumberBlock"
             ]
         ];
+    }
+
+    protected static function getEttersFinish(string $wordName): string
+    {
+        return '/s\\' . self::PRIVATE_SEGMENT . '/word:"' . $wordName . '"\(' . self::genFindParenthesis('arguments') . '/s|e\{';
+    }
+
+    protected static function genFindParenthesis(string $name = 'condition'): string
+    {
+        return self::genFind(')', '(', $name);
+    }
+
+    protected function genFind(string $needle, string $skip = '', string $name = ''): string
+    {
+        $find = '/find:';
+        $find .= self::encloseInString($needle);
+        $find .= ':';
+        if (!empty($skip)) {
+            $find .= self::encloseInString($skip);
+        }
+        $find .= ':';
+        if (!empty($name)) {
+            $find .= self::encloseInString($name);
+        }
+        $find .= '>read';
+        if (!empty($name)) {
+            $find .= ':' . self::encloseInString($name);
+        }
+        $find .= '\\';
+    }
+
+    protected static function encloseInString(string $str): string
+    {
+        if (strpos($str, '"') === false) {
+            return '"' . $str . '"';
+        }
+        return '`' . $str . '`';
     }
 }
