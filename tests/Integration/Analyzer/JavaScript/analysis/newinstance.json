@@ -1,0 +1,186 @@
+[
+    {
+        "blockStart": 16,
+        "blockEnd": 16,
+        "start": 0,
+        "end": 16,
+        "landmark": {
+            "class": "NewClassInstanceBlock",
+            "parenthesis": true
+        },
+        "data": {
+            "class": "className",
+            "foundkey": ")",
+            "values": [],
+            "_end": {
+                "var": ";",
+                "stop": ";"
+            }
+        },
+        "isBlock": true,
+        "index": 0,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": null,
+        "blockEnd": null,
+        "start": 17,
+        "end": 30,
+        "landmark": {
+            "class": "NewInstanceBlock"
+        },
+        "data": {
+            "class": "className"
+        },
+        "isBlock": false,
+        "index": 1,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 56,
+        "blockEnd": 56,
+        "start": 32,
+        "end": 56,
+        "landmark": {
+            "class": "NewClassInstanceBlock",
+            "parenthesis": true
+        },
+        "data": {
+            "class": "className",
+            "foundkey": ")",
+            "values": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 3,
+                    "landmark": {
+                        "class": "VariableInstanceBlock",
+                        "empty": true
+                    },
+                    "data": {
+                        "name": "asd"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 4,
+                    "end": 4,
+                    "landmark": {
+                        "class": "CommaBlock"
+                    },
+                    "data": [],
+                    "isBlock": false,
+                    "index": 1,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 5,
+                    "end": 8,
+                    "landmark": {
+                        "class": "VariableInstanceBlock",
+                        "empty": true
+                    },
+                    "data": {
+                        "name": "asd"
+                    },
+                    "isBlock": false,
+                    "index": 2,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": {
+                "var": ";",
+                "stop": ";"
+            }
+        },
+        "isBlock": true,
+        "index": 2,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": null,
+        "blockEnd": null,
+        "start": 57,
+        "end": 70,
+        "landmark": {
+            "class": "NewInstanceBlock"
+        },
+        "data": {
+            "class": "className"
+        },
+        "isBlock": false,
+        "index": 3,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": null,
+        "blockEnd": null,
+        "start": 71,
+        "end": 88,
+        "landmark": {
+            "class": "NewInstanceBlock"
+        },
+        "data": {
+            "class": "className"
+        },
+        "isBlock": false,
+        "index": 4,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 121,
+        "blockEnd": 121,
+        "start": 89,
+        "end": 121,
+        "landmark": {
+            "class": "NewClassInstanceBlock",
+            "parenthesis": true
+        },
+        "data": {
+            "class": "className",
+            "foundkey": ")",
+            "values": [],
+            "_end": {
+                "var": "\n",
+                "stop": "\n"
+            }
+        },
+        "isBlock": true,
+        "index": 5,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    }
+]

@@ -1,0 +1,136 @@
+[
+    {
+        "blockStart": null,
+        "blockEnd": null,
+        "start": 1,
+        "end": 6,
+        "landmark": {
+            "class": "VariableInstanceBlock",
+            "spread": true
+        },
+        "data": {
+            "name": "asd"
+        },
+        "isBlock": false,
+        "index": 0,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": null,
+        "blockEnd": null,
+        "start": 8,
+        "end": 14,
+        "landmark": {
+            "class": "VariableInstanceBlock",
+            "spread": true
+        },
+        "data": {
+            "name": "asd"
+        },
+        "isBlock": false,
+        "index": 1,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": null,
+        "blockEnd": null,
+        "start": 16,
+        "end": 16,
+        "landmark": {
+            "class": "SymbolBlock",
+            "type": "single"
+        },
+        "data": {
+            "first": "."
+        },
+        "isBlock": false,
+        "index": 2,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": null,
+        "blockEnd": null,
+        "start": 18,
+        "end": 19,
+        "landmark": {
+            "class": "SymbolBlock",
+            "type": "double"
+        },
+        "data": {
+            "first": ".",
+            "second": "."
+        },
+        "isBlock": false,
+        "index": 3,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": null,
+        "blockEnd": null,
+        "start": 20,
+        "end": 24,
+        "landmark": {
+            "_missed": true
+        },
+        "data": {
+            "missed": "asd"
+        },
+        "isBlock": false,
+        "index": 4,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": null,
+        "blockEnd": null,
+        "start": 25,
+        "end": 26,
+        "landmark": {
+            "class": "SymbolBlock",
+            "type": "double"
+        },
+        "data": {
+            "first": ".",
+            "second": "."
+        },
+        "isBlock": false,
+        "index": 5,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 32,
+        "blockEnd": 32,
+        "start": 27,
+        "end": 32,
+        "landmark": {
+            "class": "SubChainBlock1"
+        },
+        "data": {
+            "word": "asd",
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 6,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    }
+]

@@ -274,5 +274,85 @@
         "path": [],
         "children": [],
         "comments": []
+    },
+    {
+        "blockStart": 380,
+        "blockEnd": 380,
+        "start": 358,
+        "end": 381,
+        "landmark": {
+            "anonymouse": true,
+            "class": "ClassBlock",
+            "extends": true
+        },
+        "data": {
+            "extends_name": "Base",
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 13,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 403,
+        "blockEnd": 402,
+        "start": 382,
+        "end": 403,
+        "landmark": {
+            "anonymouse": true,
+            "class": "ClassBlock",
+            "extends": true
+        },
+        "data": {
+            "extends_name": "Base",
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 14,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 413,
+        "blockEnd": 414,
+        "start": 404,
+        "end": 415,
+        "landmark": {
+            "anonymouse": true,
+            "class": "ClassBlock"
+        },
+        "data": {
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 15,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 424,
+        "blockEnd": 423,
+        "start": 416,
+        "end": 424,
+        "landmark": {
+            "anonymouse": true,
+            "class": "ClassBlock"
+        },
+        "data": {
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 16,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
     }
 ]

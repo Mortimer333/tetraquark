@@ -76,20 +76,30 @@ abstract class LandmarkStorage
     public static function getClassDefinition(): array
     {
         $class = "ClassBlock";
+        $classExtendBlock = [
+            '/s|e\{' => [
+                "class" => $class,
+                "_block" => self::_BLOCK_OBJECT,
+            ],
+            '/s\extends/word:"extends_name"\/s|e\{' => [
+                "class" => $class,
+                "extends" => true,
+                "_block" => self::_BLOCK_OBJECT,
+            ]
+        ];
+        $anonymousClasses = [];
+        foreach ($classExtendBlock as $key => $value) {
+            $anonymousClasses[$key] = ["anonymouse" => true, ...$value];
+        }
         return [
-            self::WORD_SEPERATOR_SEGMENT . 'class/s|e\/word:"class_name"\\' => [
-                "_extend" => [
-                    '/s|e\{' => [
-                        "class" => $class,
-                        "_block" => self::_BLOCK_OBJECT,
-                    ],
-                    '/s\extends/word:"extends_name"\/s|e\{' => [
-                        "class" => $class,
-                        "extends" => true,
-                        "_block" => self::_BLOCK_OBJECT,
+            self::WORD_SEPERATOR_SEGMENT . 'class' => [
+                '_extend' => [
+                    ...$anonymousClasses,
+                    '/s\/word:"class_name"\\' => [
+                        "_extend" => $classExtendBlock
                     ]
                 ]
-            ]
+            ],
         ];
     }
 
@@ -118,7 +128,7 @@ abstract class LandmarkStorage
     {
         $class = "VariableInstanceBlock";
         return [
-            self::WORD_SEPERATOR_SEGMENT . self::PRIVATE_SEGMENT . '/word:"name"\\' => [
+            self::PRIVATE_SEGMENT . '/word:"name"\\' => [
                 "class" => $class,
                 "empty" => true,
                 "_extend" => [
@@ -317,7 +327,7 @@ abstract class LandmarkStorage
         ];
     }
 
-    public static function getClassGenerator(): array
+    public static function getClassMethodGeneratorFromConstant(): array
     {
         return [
             '*[/find:"]":"[":"name">read:"name"\/s|e\(' . self::genFindParenthesis('arguments') . '/s|e\{' => [
@@ -550,7 +560,7 @@ abstract class LandmarkStorage
     public static function getThis(): array
     {
         return [
-            'this/".">decrease\\' => [
+            'this/s|e\.' => [
                 "class" => "ThisBlock",
                 "_block" => self::_BLOCK_VAREND,
             ],
@@ -857,7 +867,7 @@ abstract class LandmarkStorage
     public static function getYeld(): array
     {
         return [
-            self::WORD_SEPERATOR_SEGMENT . 'yield/"*">isgenerator|e\/s|symbol>decrease\\' => [
+            self::WORD_SEPERATOR_SEGMENT . 'yield/"*">isgenerator|e\\' => [
                 "_block" => self::_BLOCK_VAREND,
                 "class" => "YieldBlock",
             ],

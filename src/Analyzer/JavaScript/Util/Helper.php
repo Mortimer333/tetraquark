@@ -20,6 +20,12 @@ abstract class Helper
             // End of file
             return true;
         }
+
+        // If its empty from the begining and current letter is not an semicolon then it's not the end
+        if (Content::isWhitespace($content->iSubStr($essentials->getI(), $nextPos - 1)) && $nextLetter != ';') {
+            return false;
+        }
+
         if (
             JsValidate::isOperator($nextLetter, true)
             && !Validate::isStringLandmark($nextLetter, '')

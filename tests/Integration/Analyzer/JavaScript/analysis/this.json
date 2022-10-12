@@ -1,0 +1,44 @@
+[
+    {
+        "blockStart": 6,
+        "blockEnd": 6,
+        "start": 1,
+        "end": 6,
+        "landmark": {
+            "class": "ThisBlock"
+        },
+        "data": {
+            "_end": {
+                "var": ";",
+                "stop": ";"
+            }
+        },
+        "isBlock": true,
+        "index": 0,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 14,
+        "blockEnd": 14,
+        "start": 8,
+        "end": 14,
+        "landmark": {
+            "class": "ThisBlock"
+        },
+        "data": {
+            "_end": {
+                "var": ";",
+                "stop": ";"
+            }
+        },
+        "isBlock": true,
+        "index": 1,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    }
+]

@@ -270,8 +270,12 @@ abstract class Methods
     {
         $skipped = [
             ";" => true,
+            "{" => true,
             "}" => true,
+            "(" => true,
             ")" => true,
+            "[" => true,
+            "]" => true,
             // "/" => true,
         ];
         $res = !isset($skipped[$essentials->getLetter()])

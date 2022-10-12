@@ -26,10 +26,11 @@ class HelperTest extends BaseUtil
      * @uses \Tetraquark\Analyzer\JavaScript\Validate::isExtendingKeyWord
      * @dataProvider provideVarEnds
      */
-    public function testIVarEndIsProperlyValidated(string $content, int $start, bool $expected): void
+    public function testIVarEndIsProperlyValidated(string $content, int $start, int $i, bool $expected): void
     {
         $essentails = new CustomMethodEssentialsModel([
-            "content" => new Content($content)
+            "content" => new Content($content),
+            "i"       => $i
         ]);
         $this->assertEquals($expected, Helper::checkIfValidVarEnd($essentails, $start));
     }
@@ -38,15 +39,16 @@ class HelperTest extends BaseUtil
     {
         $complicated = "var name = (\n\tfunc(1, 2, 3) - var2\n) + 'text\nmore text';";
         return [
-            ["var name = 1 + 2\nlet b = c;", 16, true],
-            ["var name = 1 + 2\n + c;", 16, false],
-            ["var name = 1 + 2 +\n c;", 18, false],
-            [$complicated, 12, false],
-            [$complicated, 34, false],
-            [$complicated, 55, true],
-            ["var abc = class instanceof\n ClassName;", 26, false],
-            ["var abc = class \ninstanceof ClassName;", 16, false],
-            ["var abc = a", 11, true],
+            ["var name = 1 + 2\nlet b = c;", 16, 10, true],
+            ["var name = 1 + 2\n + c;", 16, 10, false],
+            ["var name = 1 + 2 +\n c;", 18, 10, false],
+            [$complicated, 12, 10, false],
+            [$complicated, 34, 10, false],
+            [$complicated, 55, 10, true],
+            ["var abc = class instanceof\n ClassName;", 26, 9, false],
+            ["var abc = class \ninstanceof ClassName;", 16, 9, false],
+            ["var abc = a", 11, 9, true],
+            ["var abc =\n 'a'", 12, 9, true],
         ];
     }
 

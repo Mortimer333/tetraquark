@@ -1,0 +1,36 @@
+[
+    {
+        "blockStart": null,
+        "blockEnd": null,
+        "start": 1,
+        "end": 1,
+        "landmark": {
+            "class": "CommaBlock"
+        },
+        "data": [],
+        "isBlock": false,
+        "index": 0,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": null,
+        "blockEnd": null,
+        "start": 3,
+        "end": 6,
+        "landmark": {
+            "class": "StringBlock"
+        },
+        "data": {
+            "string": ","
+        },
+        "isBlock": false,
+        "index": 1,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    }
+]
