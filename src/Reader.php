@@ -589,6 +589,7 @@ class Reader
 
         $solve = false;
         if (isset($possibleLandmark['_stop'])) {
+            // Log ::log('1 New solve:' . implode(', ', array_values($possibleLandmark['_custom'] ?? [])));
             $solve = [
                 "step" => $possibleLandmark,
                 "save" => $this->saveResolver($resolver),
@@ -661,8 +662,6 @@ class Reader
             // Update changed essentials
             $this->updateFromEssentials($resolver, $essentials);
 
-            // Log ::log('New method `' . $methodName . '` lm, oprions: ' . implode(', ', array_keys($step)));
-
             $res = $this->tryToFindNextMatch($resolver, $step);
             if (
                 !$res
@@ -670,11 +669,12 @@ class Reader
                 && (
                     !isset($solve['end'])
                     || (
-                        isset($res['end'])
-                        && $res['end'] > $solve['end']
+                        isset($solve['end'])
+                        && $resolver->getI() > $solve['end']
                     )
                 )
             ) {
+                // Log ::log('2 New solve:' . implode(', ', array_values($step['_custom'] ?? [])));
                 $solve = [
                     "step" => $step,
                     "save" => $this->saveResolver($resolver),
@@ -687,7 +687,7 @@ class Reader
                     || $res['end'] > $solve['end']
                 )
             ) {
-                // Log ::log('3 New solve:' . implode(', ', array_values($res['step']['_custom'])));
+                // Log ::log('3 New solve:' . implode(', ', array_values($res['step']['_custom'] ?? [])));
                 $solve = $res;
             }
             $this->restoreResolver($resolver, $save);

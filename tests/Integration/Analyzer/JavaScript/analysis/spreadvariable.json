@@ -80,12 +80,13 @@
         "blockStart": null,
         "blockEnd": null,
         "start": 20,
-        "end": 24,
+        "end": 22,
         "landmark": {
-            "_missed": true
+            "class": "VariableInstanceBlock",
+            "empty": true
         },
         "data": {
-            "missed": "asd"
+            "name": "asd"
         },
         "isBlock": false,
         "index": 4,
