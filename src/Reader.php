@@ -290,8 +290,9 @@ class Reader
         return $this->comments;
     }
 
-    public function objectify(Content $content, array $map, int $start = 0, ?BlockModelInterface $parent = null): array
-    {
+    public function genNewResolverAndFailsave(
+        Content $content, array $map, int $start, ?BlockModelInterface $parent
+    ): array {
         $failsave = new \stdClass();
         $failsave->counter = 0;
         $failsave->limit = $this->getRecursionLimit();
@@ -309,6 +310,12 @@ class Reader
             "parent"     => $parent,
             "failsave"   => clone $failsave,
         ]);
+        return [$resolver, $failsave];
+    }
+
+    public function objectify(Content $content, array $map, int $start = 0, ?BlockModelInterface $parent = null): array
+    {
+        list($resolver, $failsave) = $this->genNewResolverAndFailsave($content, $map, $start, $parent);
 
         try {
             for ($i=$start; $i < $content->getLength(); $i++) {
@@ -626,6 +633,7 @@ class Reader
                 "letter"   => $resolver->getLetter(),
                 "i"        => $resolver->getI(),
                 "data"     => $resolver->getData(),
+                "parent"   => $resolver->getParent(),
                 "previous" => $resolver->getParent()?->getLastChild(),
                 "methods"  => $this->schema['methods'],
                 "reader"   => $this,
@@ -661,8 +669,10 @@ class Reader
                 && isset($step['_stop'])
                 && (
                     !isset($solve['end'])
-                    || !isset($res['end'])
-                    || $res['end'] > $solve['end']
+                    || (
+                        isset($res['end'])
+                        && $res['end'] > $solve['end']
+                    )
                 )
             ) {
                 $solve = [
@@ -677,6 +687,7 @@ class Reader
                     || $res['end'] > $solve['end']
                 )
             ) {
+                // Log ::log('3 New solve:' . implode(', ', array_values($res['step']['_custom'])));
                 $solve = $res;
             }
             $this->restoreResolver($resolver, $save);
@@ -692,6 +703,7 @@ class Reader
             "previous" => true,
             "lmStart"  => true,
             "reader"   => true,
+            "parent"   => true,
         ];
 
         foreach ($essentials as $key => $value) {

@@ -24,6 +24,9 @@ php ./vendor/bin/phpunit tests
 XDEBUG_MODE=coverage php ./vendor/bin/phpunit tests --coverage-text XDEBUG_MODE=coverage
 php test/test.php > test/test.log 2>&1
 
+New Plan:
+1. Allow method to mark themself as cacheable. Some of them do the same operation every time (symbol), we could just cache them
+
 Plan:
 0. [DONE] Merge it to master and create new branch
 1. [DONE] Save somewhere how I figured out Import and Export (ImportBlock and ExportBlock - `let Ī = {};Ī.y = Ī => {};`) - we are moving JS handle

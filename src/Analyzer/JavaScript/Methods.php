@@ -7,7 +7,7 @@ use Content\Utf8 as Content;
 use Tetraquark\{Str, Validate};
 use Tetraquark\Analyzer\JavaScript\Validate as JsValidate;
 use Tetraquark\Analyzer\JavaScript\Util\Helper;
-use Tetraquark\Model\CustomMethodEssentialsModel;
+use Tetraquark\Model\{CustomMethodEssentialsModel, Block\BlockModel};
 
 abstract class Methods
 {
@@ -35,6 +35,7 @@ abstract class Methods
             "symbol" => "symbol",
             "strend" => "strEnd",
             "varend" => "varEnd",
+            "getnext" => "getNextInstruction",
             "chainend" => "chainEnd",
             "decrease" => "decrease",
             "isprivate" => "isPrivate",
@@ -423,7 +424,9 @@ abstract class Methods
             $ends['}'] = true;
         }
 
-        return $ends[$essentials->getLetter()] ?? false;
+        // If we are on symbol and there is no whitespace next
+        return ($ends[$essentials->getLetter()] ?? false)
+            && !Content::isWhitespace($essentials->getContent()->getLetter($essentials->getI() + 1) ?? '');
     }
 
     /**
@@ -521,5 +524,51 @@ abstract class Methods
     public static function isNewLine(CustomMethodEssentialsModel $essentials): bool
     {
         return $essentials->getLetter() === "\n" || $essentials->getLetter() === "\r";
+    }
+
+    // @REAL_PERFORMANCE_ISSUE but I can't figure out any other way to find end for short ifs and fors...
+    public static function getNextInstruction(CustomMethodEssentialsModel $essentials): bool
+    {
+        $reader  = $essentials->reader;
+        $start   = $essentials->getI();
+        $parent  = $essentials->getParent();
+        $content = $essentials->getContent()->iCutToContent($parent->getBlockStart(), $essentials->getContent()->getLength() - 1);
+        $map     = $reader->getMap();
+        $map[';'] = [
+            "_stop" => true,
+            "_custom" => [
+                "semicolon" => true,
+            ]
+        ];
+        list($resolver, $failsave) = $reader->genNewResolverAndFailsave($content, $map, $start, $parent);
+
+        $solve = null;
+        for ($i=0; $i < $content->getLength(); $i++) {
+            if ($solve = $reader->resolve($resolver, $i)) {
+                $reader->restoreResolver($resolver, $solve['save']);
+                $resolver->setLandmark($solve['step']);
+                $reader->saveBlock($resolver);
+                break;
+            }
+        }
+        if (!$solve) {
+            $reader->addMissedEnd($resolver, $start, $content->getLength());
+            $resolver->setI($content->getLength() - 1);
+        }
+
+        $script = $resolver->getScript();
+        $last = $script[sizeof($script) - 1] ?? null;
+        if ($last) {
+            $essentials->setI($last->getEnd() + $parent->getBlockStart());
+            if ($last->getLandmark()['semicolon'] ?? false) {
+                array_splice($script, sizeof($script) - 1, 1);
+                $resolver->setScript($script);
+            }
+        } else {
+            $essentials->setI($resolver->getI() + $parent->getBlockStart());
+        }
+        $essentials->appendData($resolver->getScript(), 'children');
+
+        return true;
     }
 }

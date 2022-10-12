@@ -27,6 +27,10 @@ abstract class LandmarkStorage
         "nested" => "(",
     ];
 
+    public const _BLOCK_SHORT = [
+        "end" => "/getnext\\",
+    ];
+
     public const APOSTROPHE_SEGMENT = '\'/strend:"\'"\\';
     public const TEMPLATE_LITERAL_SEGMENT = '`/strend:"`":"template">templateliteral:"template">read:"template"\\';
     public const QUOTE_SEGMENT = '"/strend:\'"\'\\';
@@ -66,7 +70,7 @@ abstract class LandmarkStorage
                     /* SHORT IF */
                     '/nparenthesis>decrease\\' => [
                         "class" => "ShortIfBlock",
-                        "_block" => self::_BLOCK_VAREND,
+                        "_block" => self::_BLOCK_SHORT,
                     ],
                 ]
             ]
@@ -312,7 +316,7 @@ abstract class LandmarkStorage
                 "_block" => self::_BLOCK_VAREND,
             ],
             ...$arrowMethodInstruction,
-            '/s|end\async' => [
+            self::WORD_SEPERATOR_SEGMENT . 'async' => [
                 "_extend" => [
                     '/s\/word\/s|e\=>/s|e\{' => [
                         "class" => "ArrowMethodBlock",
@@ -631,8 +635,9 @@ abstract class LandmarkStorage
                 "class" => "WhileBlock",
                 "_block" => self::_BLOCK_OBJECT,
             ],
-            self::WORD_SEPERATOR_SEGMENT . 'while/s|e\(' . self::genFindParenthesis('condition') . '/nparenthesis>decrease\/varend\\' => [
-                "class" => "ShortWhileBlock"
+            self::WORD_SEPERATOR_SEGMENT . 'while/s|e\(' . self::genFindParenthesis('condition') . '/nparenthesis>decrease\\' => [
+                "class" => "ShortWhileBlock",
+                "_block" => self::_BLOCK_SHORT,
             ],
         ];
     }
@@ -682,7 +687,7 @@ abstract class LandmarkStorage
             ],
             self::WORD_SEPERATOR_SEGMENT . 'for/s|e\(' . self::genFindParenthesis('condition') . '/nparenthesis>decrease\\' => [
                 "class" => "ShortForBlock",
-                "_block" => self::_BLOCK_VAREND,
+                "_block" => self::_BLOCK_SHORT,
             ],
         ];
     }

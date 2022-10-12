@@ -69,7 +69,7 @@ class JavaScriptAnalyzerTest extends BaseAnalyzer
     /**
      * @dataProvider provideScripts
      */
-    public function testIfAndShortIf(string $name, Reader $reader, bool $save = false): void
+    public function testScripts(string $name, Reader $reader, bool $save = false): void
     {
         $script = $this->getJsScriptPath($name);
         $analysis = $reader->read($script, true, displayBlocks: false);
@@ -88,7 +88,7 @@ class JavaScriptAnalyzerTest extends BaseAnalyzer
         return [
             // "true false" => ['truefalse', $reader],
             // "string" => ['string', $reader],
-            // "if and short if" => ['ifandshortif', $reader],
+            "if and short if" => ['ifandshortif', $reader, true],
             // "class definition" => ['classdefinition', $reader],
             // "comma" => ['comma', $reader],
             // "key word" => ['keyword', $reader],
@@ -105,7 +105,7 @@ class JavaScriptAnalyzerTest extends BaseAnalyzer
             // "scope" => ['scope', $reader],
             // "number" => ['number', $reader],
             // "staticvar" => ['staticvar', $reader],
-            "arrow method (async)" => ['arrowmethod', $reader, true],
+            // "arrow method (async)" => ['arrowmethod', $reader],
         ];
     }
 
