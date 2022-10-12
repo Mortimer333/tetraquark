@@ -115,7 +115,8 @@ class MethodsTest extends BaseJavaScript
             ["", 2, false, [], 2],
             ["here: 2", 6, true, ["number" => "2"], 6],
             ["here: 2.2", 6, true, ["number" => "2.2"], 8],
-            ["here: 2.", 6, false, [], 6],
+            ["here: .2", 6, true, ["number" => ".2"], 7],
+            ["here: 2.", 6, true, ["number" => "2"], 6],
             ["here: 2.2 asd", 6, true, ["number" => "2.2"], 8],
         ];
     }

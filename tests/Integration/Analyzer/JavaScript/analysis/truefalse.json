@@ -1,0 +1,34 @@
+[
+    {
+        "blockStart": null,
+        "blockEnd": null,
+        "start": 0,
+        "end": 4,
+        "landmark": {
+            "class": "TrueBlock"
+        },
+        "data": [],
+        "isBlock": false,
+        "index": 0,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": null,
+        "blockEnd": null,
+        "start": 5,
+        "end": 10,
+        "landmark": {
+            "class": "FalseBlock"
+        },
+        "data": [],
+        "isBlock": false,
+        "index": 1,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    }
+]

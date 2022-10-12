@@ -93,7 +93,8 @@ abstract class Methods
     public static function number(CustomMethodEssentialsModel $essentials): bool
     {
         $content = $essentials->getContent();
-        if (is_numeric($essentials->getLetter())) {
+        $letter = $essentials->getLetter();
+        if (is_numeric($letter) || $letter == '.') {
             $end = $content->getLength() - 1;
             for ($i=$essentials->getI() + 1; $i < $content->getLength(); $i++) {
                 $letter = $content->getLetter($i);
@@ -102,9 +103,12 @@ abstract class Methods
                     break;
                 }
             }
-            // If number is constructed like this `2.` then it's not a number
-            if ($content->getLetter($end) === '.') {
+            if ($end == $essentials->getI() && $essentials->getLetter() == '.') {
                 return false;
+            }
+            // If number is constructed like this `2.` then it's not a number
+            if (is_numeric($content->getLetter($end - 1)) && $content->getLetter($end) === '.') {
+                $end--;
             }
             $essentials->appendData($content->iSubStr($essentials->getI(), $end), "number");
             $essentials->setI($end);

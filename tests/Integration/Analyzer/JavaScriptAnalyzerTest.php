@@ -86,6 +86,7 @@ class JavaScriptAnalyzerTest extends BaseAnalyzer
     {
         $reader = $this->getJsReader();
         return [
+            // "true false" => ['truefalse', $reader],
             // "string" => ['string', $reader],
             // "if and short if" => ['ifandshortif', $reader],
             // "class definition" => ['classdefinition', $reader],
@@ -99,7 +100,12 @@ class JavaScriptAnalyzerTest extends BaseAnalyzer
             // "spread array" => ['spreadarray', $reader],
             // "new instance" => ['newinstance', $reader],
             // "symbol" => ['symbol', $reader],
-            "yield" => ['yield', $reader, true],
+            // "yield" => ['yield', $reader],
+            // "variable definition" => ['variabledefinition', $reader],
+            // "scope" => ['scope', $reader],
+            // "number" => ['number', $reader],
+            // "staticvar" => ['staticvar', $reader],
+            "arrow method (async)" => ['arrowmethod', $reader, true],
         ];
     }
 

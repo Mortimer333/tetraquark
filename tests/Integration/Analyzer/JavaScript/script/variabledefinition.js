@@ -1,18 +1,18 @@
 let a = 'let variable';
 var a = 'var variable';
-const a = 'let variable';
+const a = 'const variable';
 
 
 let a = 'let variable'
 var a = 'var variable'
-const a = 'let variable'
+const a = 'const variable'
 
 let a =
 'let variable'
 var a =
 'var variable'
 const a =
-'let variable'
+'const variable'
 
 let
 a
@@ -25,7 +25,7 @@ a
 const
 a
 =
-'let variable'
+'const variable'
 
 
-let a = 'let variable';var a = 'var variable';const a = 'let variable';
+let a = 'let variable';var a = 'var variable';const a = 'const variable';

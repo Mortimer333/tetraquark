@@ -164,31 +164,31 @@ abstract class LandmarkStorage
             self::WORD_SEPERATOR_SEGMENT . 'static' => [
                 "_extend" => [
                     /* STATIC INITIALIZATION */
-                    '/s|e\{' => [
-                        "class" => "StaticInitializationBlock",
-                        "_block" => self::_BLOCK_OBJECT,
-                    ],
-                    '/s\\' . self::PRIVATE_SEGMENT => [
+                    '/s|e\\' => [
                         "_extend" => [
-                            '[/find:"]":"[":"name">read:"name"\/s|e\(' . self::genFindParenthesis('arguments') . '/s|e\{' => [
+                            '{' => [
+                                "class" => "StaticInitializationBlock",
+                                "_block" => self::_BLOCK_OBJECT,
+                            ],
+                            self::PRIVATE_SEGMENT . '[/find:"]":"[":"name">read:"name"\/s|e\(' . self::genFindParenthesis('arguments') . '/s|e\{' => [
                                 "class" => "StaticClassMethodBlock",
                                 "constant_name" => true,
                                 "_block" => self::_BLOCK_OBJECT,
                             ],
-                            '/word:"name"\/s|e\\' => [
+                        ]
+                    ],
+                    '/s\\' . self::PRIVATE_SEGMENT . '/word:"name"\/s|e\\' => [
+                        "class" => "StaticVariableInstanceBlock",
+                        "empty" => true,
+                        "_extend" => [
+                            '=/"!=">decrease\\' => [
                                 "class" => "StaticVariableInstanceBlock",
-                                "empty" => true,
-                                "_extend" => [
-                                    '=/"!=">decrease\\' => [
-                                        "class" => "StaticVariableInstanceBlock",
-                                        "replace" => true,
-                                        "_block" => self::_BLOCK_VAREND,
-                                    ],
-                                    '(' . self::genFindParenthesis('arguments') . '/s|e\{' => [
-                                        "class" => "StaticClassMethodBlock",
-                                        "_block" => self::_BLOCK_OBJECT,
-                                    ]
-                                ]
+                                "replace" => true,
+                                "_block" => self::_BLOCK_VAREND,
+                            ],
+                            '(' . self::genFindParenthesis('arguments') . '/s|e\{' => [
+                                "class" => "StaticClassMethodBlock",
+                                "_block" => self::_BLOCK_OBJECT,
                             ]
                         ]
                     ],
@@ -281,27 +281,17 @@ abstract class LandmarkStorage
     public static function getArrowFunctionWithAsync(): array
     {
         $arrowMethodInstruction = [
-            '(' . self::genFindParenthesis() . '/s|e\=>/s|e\{' => [
+            '/s|e\(' . self::genFindParenthesis() . '/s|e\=>/s|e\{' => [
                 "class" => "ArrowMethodBlock",
                 "parenthesis" => true,
                 "block" => true,
                 "_block" => self::_BLOCK_OBJECT,
             ],
-            '/word\/s|e\=>/s|e\{' => [
-                "class" => "ArrowMethodBlock",
-                "parenthesis" => false,
-                "block" => true,
-                "_block" => self::_BLOCK_OBJECT,
-            ],
-            '(' . self::genFindParenthesis('arguments') . '/s|e\=>/nparenthesis>decrease\/varend\\' => [
+            '/s|e\(' . self::genFindParenthesis('arguments') . '/s|e\=>/nparenthesis>decrease\\' => [
                 "class" => "ArrowMethodBlock",
                 "parenthesis" => true,
                 "block" => false,
-            ],
-            '/word\/s|e\=>/nparenthesis>decrease\/varend\\' => [
-                "class" => "ArrowMethodBlock",
-                "parenthesis" => false,
-                "block" => false,
+                "_block" => self::_BLOCK_VAREND,
             ],
         ];
         $arrowMethodAsync = [];
@@ -309,10 +299,36 @@ abstract class LandmarkStorage
             $arrowMethodAsync[$key] = array_merge($value, ['async' => true]);
         }
         return [
+            self::WORD_SEPERATOR_SEGMENT. '/word\/s|e\=>/s|e\{' => [
+                "class" => "ArrowMethodBlock",
+                "parenthesis" => false,
+                "block" => true,
+                "_block" => self::_BLOCK_OBJECT,
+            ],
+            self::WORD_SEPERATOR_SEGMENT . '/word\/s|e\=>/nparenthesis>decrease\\' => [
+                "class" => "ArrowMethodBlock",
+                "parenthesis" => false,
+                "block" => false,
+                "_block" => self::_BLOCK_VAREND,
+            ],
             ...$arrowMethodInstruction,
-            self::WORD_SEPERATOR_SEGMENT . 'async/s|e\\' => [
+            '/s|end\async' => [
                 "_extend" => [
-                    ...$arrowMethodAsync
+                    '/s\/word\/s|e\=>/s|e\{' => [
+                        "class" => "ArrowMethodBlock",
+                        "parenthesis" => false,
+                        "block" => true,
+                        'async' => true,
+                        "_block" => self::_BLOCK_OBJECT,
+                    ],
+                    '/s\/word\/s|e\=>/nparenthesis>decrease\\' => [
+                        "class" => "ArrowMethodBlock",
+                        "parenthesis" => false,
+                        'async' => true,
+                        "block" => false,
+                        "_block" => self::_BLOCK_VAREND,
+                    ],
+                    ...$arrowMethodAsync,
                 ]
             ]
         ];

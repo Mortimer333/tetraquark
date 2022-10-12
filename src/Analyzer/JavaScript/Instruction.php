@@ -20,6 +20,8 @@ abstract class Instruction
             // "\/*/find:'*/'::'comment'\\" => [
             //     "class" => "MultiCommentBlock"
             // ],
+            ...LandmarkStorage::getFalse(),
+            ...LandmarkStorage::getTrue(),
             ...LandmarkStorage::getIfAndShortIf(),
             ...LandmarkStorage::getClassDefinition(),
             ...LandmarkStorage::getApostrophe(),
@@ -59,8 +61,6 @@ abstract class Instruction
             ...LandmarkStorage::getDoWhile(),
             ...LandmarkStorage::getWhileAndShortWhile(),
             ...LandmarkStorage::getElseAndElseIf(),
-            ...LandmarkStorage::getFalse(),
-            ...LandmarkStorage::getTrue(),
             ...LandmarkStorage::getForAndShortFor(),
             ...LandmarkStorage::getForOfAndInCondition(),
             ...LandmarkStorage::getFunctionAndGenerator(),
