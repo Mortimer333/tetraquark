@@ -204,10 +204,12 @@ class ReaderTest extends BaseUnit
      * @dataProvider provideMapsToMerge
      * @covers \Tetraquark\Reader::mergeMaps
      */
-    public function testMapsAreMergedProperly(array $map, array $merged, array $excepted): void
+    public function testMapsAreMergedProperly(array $maps, array $merged, array $excepted): void
     {
         $reader = new Reader();
-        $merged = $reader->mergeMaps($map, $merged);
+        foreach ($maps as $map) {
+            $merged = $reader->mergeMaps($map, $merged);
+        }
         $this->assertEquals($excepted, $merged);
     }
 

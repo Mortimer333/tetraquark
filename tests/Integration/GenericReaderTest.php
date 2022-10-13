@@ -48,7 +48,8 @@ class GenericReaderTest extends BaseIntegration
                 $prefix . $type,
                 $prefix . $type . '/instruction',
                 $prefix . $type. '/methods',
-                $prefix . $type . '/analysis'];
+                $prefix . $type . '/analysis'
+            ];
         }
         return $cases;
     }

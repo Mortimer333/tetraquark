@@ -1,17 +1,44 @@
-found number: .2
 [
     {
-        "blockStart": null,
-        "blockEnd": null,
-        "start": 1,
-        "end": 2,
+        "blockStart": 48,
+        "blockEnd": 49,
+        "start": 0,
+        "end": 50,
         "landmark": {
-            "class": "NumberBlock"
+            "class": "ClassMethodBlock",
+            "constant_name": true
         },
         "data": {
-            "number": ".2"
+            "generator": true,
+            "private": true,
+            "foundkey": ")",
+            "name": [
+                {
+                    "blockStart": 37,
+                    "blockEnd": 37,
+                    "start": 0,
+                    "end": 37,
+                    "landmark": {
+                        "class": "ChainBlock",
+                        "first": true
+                    },
+                    "data": {
+                        "first": "constant",
+                        "second": "privateGeneratorClassMethod",
+                        "_end": []
+                    },
+                    "isBlock": true,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "arguments": [],
+            "_end": []
         },
-        "isBlock": false,
+        "isBlock": true,
         "index": 0,
         "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
         "path": [],

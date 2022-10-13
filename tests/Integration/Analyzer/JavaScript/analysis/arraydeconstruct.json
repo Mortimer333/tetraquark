@@ -1,0 +1,2579 @@
+[
+    {
+        "blockStart": 9,
+        "blockEnd": 17,
+        "start": 1,
+        "end": 17,
+        "landmark": {
+            "class": "DeconstructionAssignmentBlock"
+        },
+        "data": {
+            "foundkey": "]",
+            "deconstruction": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 1,
+                    "landmark": {
+                        "class": "VariableInstanceBlock",
+                        "empty": true
+                    },
+                    "data": {
+                        "name": "a"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 2,
+                    "end": 2,
+                    "landmark": {
+                        "class": "CommaBlock"
+                    },
+                    "data": [],
+                    "isBlock": false,
+                    "index": 1,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 3,
+                    "end": 4,
+                    "landmark": {
+                        "class": "VariableInstanceBlock",
+                        "empty": true
+                    },
+                    "data": {
+                        "name": "b"
+                    },
+                    "isBlock": false,
+                    "index": 2,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": {
+                "var": " [10, 20]",
+                "stop": "]"
+            }
+        },
+        "isBlock": true,
+        "index": 0,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": 11,
+                "blockEnd": 16,
+                "start": 10,
+                "end": 17,
+                "landmark": {
+                    "class": "ArrayBlock"
+                },
+                "data": {
+                    "_end": []
+                },
+                "isBlock": true,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 12,
+                        "end": 13,
+                        "landmark": {
+                            "class": "NumberBlock"
+                        },
+                        "data": {
+                            "number": "10"
+                        },
+                        "isBlock": false,
+                        "index": 0,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    },
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 14,
+                        "end": 14,
+                        "landmark": {
+                            "class": "CommaBlock"
+                        },
+                        "data": [],
+                        "isBlock": false,
+                        "index": 1,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    },
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 16,
+                        "end": 17,
+                        "landmark": {
+                            "class": "NumberBlock"
+                        },
+                        "data": {
+                            "number": "20"
+                        },
+                        "isBlock": false,
+                        "index": 2,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    }
+                ],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 37,
+        "blockEnd": 57,
+        "start": 20,
+        "end": 57,
+        "landmark": {
+            "class": "DeconstructionAssignmentBlock"
+        },
+        "data": {
+            "foundkey": "]",
+            "deconstruction": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 1,
+                    "landmark": {
+                        "class": "VariableInstanceBlock",
+                        "empty": true
+                    },
+                    "data": {
+                        "name": "a"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 2,
+                    "end": 2,
+                    "landmark": {
+                        "class": "CommaBlock"
+                    },
+                    "data": [],
+                    "isBlock": false,
+                    "index": 1,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 3,
+                    "end": 4,
+                    "landmark": {
+                        "class": "VariableInstanceBlock",
+                        "empty": true
+                    },
+                    "data": {
+                        "name": "b"
+                    },
+                    "isBlock": false,
+                    "index": 2,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 5,
+                    "end": 5,
+                    "landmark": {
+                        "class": "CommaBlock"
+                    },
+                    "data": [],
+                    "isBlock": false,
+                    "index": 3,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 7,
+                    "end": 13,
+                    "landmark": {
+                        "class": "VariableInstanceBlock",
+                        "spread": true
+                    },
+                    "data": {
+                        "name": "rest"
+                    },
+                    "isBlock": false,
+                    "index": 4,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": {
+                "var": " [10, 20, 30, 40, 50]",
+                "stop": "]"
+            }
+        },
+        "isBlock": true,
+        "index": 1,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": 39,
+                "blockEnd": 56,
+                "start": 38,
+                "end": 57,
+                "landmark": {
+                    "class": "ArrayBlock"
+                },
+                "data": {
+                    "_end": []
+                },
+                "isBlock": true,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 40,
+                        "end": 41,
+                        "landmark": {
+                            "class": "NumberBlock"
+                        },
+                        "data": {
+                            "number": "10"
+                        },
+                        "isBlock": false,
+                        "index": 0,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    },
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 42,
+                        "end": 42,
+                        "landmark": {
+                            "class": "CommaBlock"
+                        },
+                        "data": [],
+                        "isBlock": false,
+                        "index": 1,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    },
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 44,
+                        "end": 45,
+                        "landmark": {
+                            "class": "NumberBlock"
+                        },
+                        "data": {
+                            "number": "20"
+                        },
+                        "isBlock": false,
+                        "index": 2,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    },
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 46,
+                        "end": 46,
+                        "landmark": {
+                            "class": "CommaBlock"
+                        },
+                        "data": [],
+                        "isBlock": false,
+                        "index": 3,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    },
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 48,
+                        "end": 49,
+                        "landmark": {
+                            "class": "NumberBlock"
+                        },
+                        "data": {
+                            "number": "30"
+                        },
+                        "isBlock": false,
+                        "index": 4,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    },
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 50,
+                        "end": 50,
+                        "landmark": {
+                            "class": "CommaBlock"
+                        },
+                        "data": [],
+                        "isBlock": false,
+                        "index": 5,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    },
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 52,
+                        "end": 53,
+                        "landmark": {
+                            "class": "NumberBlock"
+                        },
+                        "data": {
+                            "number": "40"
+                        },
+                        "isBlock": false,
+                        "index": 6,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    },
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 54,
+                        "end": 54,
+                        "landmark": {
+                            "class": "CommaBlock"
+                        },
+                        "data": [],
+                        "isBlock": false,
+                        "index": 7,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    },
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 56,
+                        "end": 57,
+                        "landmark": {
+                            "class": "NumberBlock"
+                        },
+                        "data": {
+                            "number": "50"
+                        },
+                        "isBlock": false,
+                        "index": 8,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    }
+                ],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 67,
+        "blockEnd": 81,
+        "start": 59,
+        "end": 81,
+        "landmark": {
+            "class": "ConstVariableBlock"
+        },
+        "data": {
+            "_end": {
+                "var": "[a, b] = array;",
+                "stop": ";"
+            }
+        },
+        "isBlock": true,
+        "index": 2,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": 76,
+                "blockEnd": 82,
+                "start": 68,
+                "end": 82,
+                "landmark": {
+                    "class": "DeconstructionAssignmentBlock"
+                },
+                "data": {
+                    "foundkey": "]",
+                    "deconstruction": [
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 0,
+                            "end": 1,
+                            "landmark": {
+                                "class": "VariableInstanceBlock",
+                                "empty": true
+                            },
+                            "data": {
+                                "name": "a"
+                            },
+                            "isBlock": false,
+                            "index": 0,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        },
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 2,
+                            "end": 2,
+                            "landmark": {
+                                "class": "CommaBlock"
+                            },
+                            "data": [],
+                            "isBlock": false,
+                            "index": 1,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        },
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 3,
+                            "end": 4,
+                            "landmark": {
+                                "class": "VariableInstanceBlock",
+                                "empty": true
+                            },
+                            "data": {
+                                "name": "b"
+                            },
+                            "isBlock": false,
+                            "index": 2,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        }
+                    ],
+                    "_end": {
+                        "var": " array;",
+                        "stop": ";"
+                    }
+                },
+                "isBlock": true,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 76,
+                        "end": 81,
+                        "landmark": {
+                            "class": "VariableInstanceBlock",
+                            "empty": true
+                        },
+                        "data": {
+                            "name": "array"
+                        },
+                        "isBlock": false,
+                        "index": 0,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    }
+                ],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 89,
+        "blockEnd": 105,
+        "start": 82,
+        "end": 105,
+        "landmark": {
+            "class": "ConstVariableBlock"
+        },
+        "data": {
+            "_end": {
+                "var": "[a, , b] = array;",
+                "stop": ";"
+            }
+        },
+        "isBlock": true,
+        "index": 3,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": 100,
+                "blockEnd": 106,
+                "start": 90,
+                "end": 106,
+                "landmark": {
+                    "class": "DeconstructionAssignmentBlock"
+                },
+                "data": {
+                    "foundkey": "]",
+                    "deconstruction": [
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 0,
+                            "end": 1,
+                            "landmark": {
+                                "class": "VariableInstanceBlock",
+                                "empty": true
+                            },
+                            "data": {
+                                "name": "a"
+                            },
+                            "isBlock": false,
+                            "index": 0,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        },
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 2,
+                            "end": 2,
+                            "landmark": {
+                                "class": "CommaBlock"
+                            },
+                            "data": [],
+                            "isBlock": false,
+                            "index": 1,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        },
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 4,
+                            "end": 4,
+                            "landmark": {
+                                "class": "CommaBlock"
+                            },
+                            "data": [],
+                            "isBlock": false,
+                            "index": 2,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        },
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 5,
+                            "end": 6,
+                            "landmark": {
+                                "class": "VariableInstanceBlock",
+                                "empty": true
+                            },
+                            "data": {
+                                "name": "b"
+                            },
+                            "isBlock": false,
+                            "index": 3,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        }
+                    ],
+                    "_end": {
+                        "var": " array;",
+                        "stop": ";"
+                    }
+                },
+                "isBlock": true,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 100,
+                        "end": 105,
+                        "landmark": {
+                            "class": "VariableInstanceBlock",
+                            "empty": true
+                        },
+                        "data": {
+                            "name": "array"
+                        },
+                        "isBlock": false,
+                        "index": 0,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    }
+                ],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 113,
+        "blockEnd": 138,
+        "start": 106,
+        "end": 138,
+        "landmark": {
+            "class": "ConstVariableBlock"
+        },
+        "data": {
+            "_end": {
+                "var": "[a = aDefault, b] = array;",
+                "stop": ";"
+            }
+        },
+        "isBlock": true,
+        "index": 4,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": 133,
+                "blockEnd": 139,
+                "start": 114,
+                "end": 139,
+                "landmark": {
+                    "class": "DeconstructionAssignmentBlock"
+                },
+                "data": {
+                    "foundkey": "]",
+                    "deconstruction": [
+                        {
+                            "blockStart": 4,
+                            "blockEnd": 12,
+                            "start": 0,
+                            "end": 12,
+                            "landmark": {
+                                "class": "VariableInstanceBlock",
+                                "replace": true
+                            },
+                            "data": {
+                                "name": "a",
+                                "negation": " ",
+                                "_end": {
+                                    "var": " aDefault",
+                                    "stop": ","
+                                }
+                            },
+                            "isBlock": true,
+                            "index": 0,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [
+                                {
+                                    "blockStart": null,
+                                    "blockEnd": null,
+                                    "start": 4,
+                                    "end": 12,
+                                    "landmark": {
+                                        "class": "VariableInstanceBlock",
+                                        "empty": true
+                                    },
+                                    "data": {
+                                        "name": "aDefault"
+                                    },
+                                    "isBlock": false,
+                                    "index": 0,
+                                    "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                                    "path": [],
+                                    "children": [],
+                                    "comments": []
+                                }
+                            ],
+                            "comments": []
+                        },
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 13,
+                            "end": 13,
+                            "landmark": {
+                                "class": "CommaBlock"
+                            },
+                            "data": [],
+                            "isBlock": false,
+                            "index": 1,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        },
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 14,
+                            "end": 15,
+                            "landmark": {
+                                "class": "VariableInstanceBlock",
+                                "empty": true
+                            },
+                            "data": {
+                                "name": "b"
+                            },
+                            "isBlock": false,
+                            "index": 2,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        }
+                    ],
+                    "_end": {
+                        "var": " array;",
+                        "stop": ";"
+                    }
+                },
+                "isBlock": true,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 20,
+                        "end": 25,
+                        "landmark": {
+                            "class": "VariableInstanceBlock",
+                            "empty": true
+                        },
+                        "data": {
+                            "name": "array"
+                        },
+                        "isBlock": false,
+                        "index": 0,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    }
+                ],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 146,
+        "blockEnd": 169,
+        "start": 139,
+        "end": 169,
+        "landmark": {
+            "class": "ConstVariableBlock"
+        },
+        "data": {
+            "_end": {
+                "var": "[a, b, ...rest] = array;",
+                "stop": ";"
+            }
+        },
+        "isBlock": true,
+        "index": 5,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": 164,
+                "blockEnd": 170,
+                "start": 147,
+                "end": 170,
+                "landmark": {
+                    "class": "DeconstructionAssignmentBlock"
+                },
+                "data": {
+                    "foundkey": "]",
+                    "deconstruction": [
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 0,
+                            "end": 1,
+                            "landmark": {
+                                "class": "VariableInstanceBlock",
+                                "empty": true
+                            },
+                            "data": {
+                                "name": "a"
+                            },
+                            "isBlock": false,
+                            "index": 0,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        },
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 2,
+                            "end": 2,
+                            "landmark": {
+                                "class": "CommaBlock"
+                            },
+                            "data": [],
+                            "isBlock": false,
+                            "index": 1,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        },
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 3,
+                            "end": 4,
+                            "landmark": {
+                                "class": "VariableInstanceBlock",
+                                "empty": true
+                            },
+                            "data": {
+                                "name": "b"
+                            },
+                            "isBlock": false,
+                            "index": 2,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        },
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 5,
+                            "end": 5,
+                            "landmark": {
+                                "class": "CommaBlock"
+                            },
+                            "data": [],
+                            "isBlock": false,
+                            "index": 3,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        },
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 7,
+                            "end": 13,
+                            "landmark": {
+                                "class": "VariableInstanceBlock",
+                                "spread": true
+                            },
+                            "data": {
+                                "name": "rest"
+                            },
+                            "isBlock": false,
+                            "index": 4,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        }
+                    ],
+                    "_end": {
+                        "var": " array;",
+                        "stop": ";"
+                    }
+                },
+                "isBlock": true,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 164,
+                        "end": 169,
+                        "landmark": {
+                            "class": "VariableInstanceBlock",
+                            "empty": true
+                        },
+                        "data": {
+                            "name": "array"
+                        },
+                        "isBlock": false,
+                        "index": 0,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    }
+                ],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 177,
+        "blockEnd": 202,
+        "start": 170,
+        "end": 202,
+        "landmark": {
+            "class": "ConstVariableBlock"
+        },
+        "data": {
+            "_end": {
+                "var": "[a, , b, ...rest] = array;",
+                "stop": ";"
+            }
+        },
+        "isBlock": true,
+        "index": 6,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": 197,
+                "blockEnd": 203,
+                "start": 178,
+                "end": 203,
+                "landmark": {
+                    "class": "DeconstructionAssignmentBlock"
+                },
+                "data": {
+                    "foundkey": "]",
+                    "deconstruction": [
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 0,
+                            "end": 1,
+                            "landmark": {
+                                "class": "VariableInstanceBlock",
+                                "empty": true
+                            },
+                            "data": {
+                                "name": "a"
+                            },
+                            "isBlock": false,
+                            "index": 0,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        },
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 2,
+                            "end": 2,
+                            "landmark": {
+                                "class": "CommaBlock"
+                            },
+                            "data": [],
+                            "isBlock": false,
+                            "index": 1,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        },
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 4,
+                            "end": 4,
+                            "landmark": {
+                                "class": "CommaBlock"
+                            },
+                            "data": [],
+                            "isBlock": false,
+                            "index": 2,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        },
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 5,
+                            "end": 6,
+                            "landmark": {
+                                "class": "VariableInstanceBlock",
+                                "empty": true
+                            },
+                            "data": {
+                                "name": "b"
+                            },
+                            "isBlock": false,
+                            "index": 3,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        },
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 7,
+                            "end": 7,
+                            "landmark": {
+                                "class": "CommaBlock"
+                            },
+                            "data": [],
+                            "isBlock": false,
+                            "index": 4,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        },
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 9,
+                            "end": 15,
+                            "landmark": {
+                                "class": "VariableInstanceBlock",
+                                "spread": true
+                            },
+                            "data": {
+                                "name": "rest"
+                            },
+                            "isBlock": false,
+                            "index": 5,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        }
+                    ],
+                    "_end": {
+                        "var": " array;",
+                        "stop": ";"
+                    }
+                },
+                "isBlock": true,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 197,
+                        "end": 202,
+                        "landmark": {
+                            "class": "VariableInstanceBlock",
+                            "empty": true
+                        },
+                        "data": {
+                            "name": "array"
+                        },
+                        "isBlock": false,
+                        "index": 0,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    }
+                ],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 210,
+        "blockEnd": 242,
+        "start": 203,
+        "end": 242,
+        "landmark": {
+            "class": "ConstVariableBlock"
+        },
+        "data": {
+            "_end": {
+                "var": "[a, b, ...{ pop, push }] = array;",
+                "stop": ";"
+            }
+        },
+        "isBlock": true,
+        "index": 7,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": 237,
+                "blockEnd": 243,
+                "start": 211,
+                "end": 243,
+                "landmark": {
+                    "class": "DeconstructionAssignmentBlock"
+                },
+                "data": {
+                    "foundkey": "]",
+                    "deconstruction": [
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 0,
+                            "end": 1,
+                            "landmark": {
+                                "class": "VariableInstanceBlock",
+                                "empty": true
+                            },
+                            "data": {
+                                "name": "a"
+                            },
+                            "isBlock": false,
+                            "index": 0,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        },
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 2,
+                            "end": 2,
+                            "landmark": {
+                                "class": "CommaBlock"
+                            },
+                            "data": [],
+                            "isBlock": false,
+                            "index": 1,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        },
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 3,
+                            "end": 4,
+                            "landmark": {
+                                "class": "VariableInstanceBlock",
+                                "empty": true
+                            },
+                            "data": {
+                                "name": "b"
+                            },
+                            "isBlock": false,
+                            "index": 2,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        },
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 5,
+                            "end": 5,
+                            "landmark": {
+                                "class": "CommaBlock"
+                            },
+                            "data": [],
+                            "isBlock": false,
+                            "index": 3,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        },
+                        {
+                            "blockStart": 11,
+                            "blockEnd": 21,
+                            "start": 7,
+                            "end": 22,
+                            "landmark": {
+                                "spread": true,
+                                "class": "ObjectBlock"
+                            },
+                            "data": {
+                                "_end": []
+                            },
+                            "isBlock": true,
+                            "index": 4,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [
+                                {
+                                    "blockStart": null,
+                                    "blockEnd": null,
+                                    "start": 11,
+                                    "end": 14,
+                                    "landmark": {
+                                        "class": "VariableInstanceBlock",
+                                        "empty": true
+                                    },
+                                    "data": {
+                                        "name": "pop"
+                                    },
+                                    "isBlock": false,
+                                    "index": 0,
+                                    "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                                    "path": [],
+                                    "children": [],
+                                    "comments": []
+                                },
+                                {
+                                    "blockStart": null,
+                                    "blockEnd": null,
+                                    "start": 15,
+                                    "end": 15,
+                                    "landmark": {
+                                        "class": "CommaBlock"
+                                    },
+                                    "data": [],
+                                    "isBlock": false,
+                                    "index": 1,
+                                    "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                                    "path": [],
+                                    "children": [],
+                                    "comments": []
+                                },
+                                {
+                                    "blockStart": null,
+                                    "blockEnd": null,
+                                    "start": 16,
+                                    "end": 20,
+                                    "landmark": {
+                                        "class": "VariableInstanceBlock",
+                                        "empty": true
+                                    },
+                                    "data": {
+                                        "name": "push"
+                                    },
+                                    "isBlock": false,
+                                    "index": 2,
+                                    "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                                    "path": [],
+                                    "children": [],
+                                    "comments": []
+                                }
+                            ],
+                            "comments": []
+                        }
+                    ],
+                    "_end": {
+                        "var": " array;",
+                        "stop": ";"
+                    }
+                },
+                "isBlock": true,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 27,
+                        "end": 32,
+                        "landmark": {
+                            "class": "VariableInstanceBlock",
+                            "empty": true
+                        },
+                        "data": {
+                            "name": "array"
+                        },
+                        "isBlock": false,
+                        "index": 0,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    }
+                ],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 250,
+        "blockEnd": 275,
+        "start": 243,
+        "end": 275,
+        "landmark": {
+            "class": "ConstVariableBlock"
+        },
+        "data": {
+            "_end": {
+                "var": "[a, b, ...[c, d]] = array;",
+                "stop": ";"
+            }
+        },
+        "isBlock": true,
+        "index": 8,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": 270,
+                "blockEnd": 276,
+                "start": 251,
+                "end": 276,
+                "landmark": {
+                    "class": "DeconstructionAssignmentBlock"
+                },
+                "data": {
+                    "foundkey": "]",
+                    "deconstruction": [
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 0,
+                            "end": 1,
+                            "landmark": {
+                                "class": "VariableInstanceBlock",
+                                "empty": true
+                            },
+                            "data": {
+                                "name": "a"
+                            },
+                            "isBlock": false,
+                            "index": 0,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        },
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 2,
+                            "end": 2,
+                            "landmark": {
+                                "class": "CommaBlock"
+                            },
+                            "data": [],
+                            "isBlock": false,
+                            "index": 1,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        },
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 3,
+                            "end": 4,
+                            "landmark": {
+                                "class": "VariableInstanceBlock",
+                                "empty": true
+                            },
+                            "data": {
+                                "name": "b"
+                            },
+                            "isBlock": false,
+                            "index": 2,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        },
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 5,
+                            "end": 5,
+                            "landmark": {
+                                "class": "CommaBlock"
+                            },
+                            "data": [],
+                            "isBlock": false,
+                            "index": 3,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        },
+                        {
+                            "blockStart": 11,
+                            "blockEnd": 14,
+                            "start": 7,
+                            "end": 15,
+                            "landmark": {
+                                "class": "ArrayBlock",
+                                "spread": true
+                            },
+                            "data": {
+                                "_end": []
+                            },
+                            "isBlock": true,
+                            "index": 4,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [
+                                {
+                                    "blockStart": null,
+                                    "blockEnd": null,
+                                    "start": 11,
+                                    "end": 12,
+                                    "landmark": {
+                                        "class": "VariableInstanceBlock",
+                                        "empty": true
+                                    },
+                                    "data": {
+                                        "name": "c"
+                                    },
+                                    "isBlock": false,
+                                    "index": 0,
+                                    "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                                    "path": [],
+                                    "children": [],
+                                    "comments": []
+                                },
+                                {
+                                    "blockStart": null,
+                                    "blockEnd": null,
+                                    "start": 13,
+                                    "end": 13,
+                                    "landmark": {
+                                        "class": "CommaBlock"
+                                    },
+                                    "data": [],
+                                    "isBlock": false,
+                                    "index": 1,
+                                    "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                                    "path": [],
+                                    "children": [],
+                                    "comments": []
+                                },
+                                {
+                                    "blockStart": null,
+                                    "blockEnd": null,
+                                    "start": 14,
+                                    "end": 15,
+                                    "landmark": {
+                                        "class": "VariableInstanceBlock",
+                                        "empty": true
+                                    },
+                                    "data": {
+                                        "name": "d"
+                                    },
+                                    "isBlock": false,
+                                    "index": 2,
+                                    "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                                    "path": [],
+                                    "children": [],
+                                    "comments": []
+                                }
+                            ],
+                            "comments": []
+                        }
+                    ],
+                    "_end": {
+                        "var": " array;",
+                        "stop": ";"
+                    }
+                },
+                "isBlock": true,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 20,
+                        "end": 25,
+                        "landmark": {
+                            "class": "VariableInstanceBlock",
+                            "empty": true
+                        },
+                        "data": {
+                            "name": "array"
+                        },
+                        "isBlock": false,
+                        "index": 0,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    }
+                ],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 286,
+        "blockEnd": 292,
+        "start": 278,
+        "end": 292,
+        "landmark": {
+            "class": "DeconstructionAssignmentBlock"
+        },
+        "data": {
+            "foundkey": "]",
+            "deconstruction": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 1,
+                    "landmark": {
+                        "class": "VariableInstanceBlock",
+                        "empty": true
+                    },
+                    "data": {
+                        "name": "a"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 2,
+                    "end": 2,
+                    "landmark": {
+                        "class": "CommaBlock"
+                    },
+                    "data": [],
+                    "isBlock": false,
+                    "index": 1,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 3,
+                    "end": 4,
+                    "landmark": {
+                        "class": "VariableInstanceBlock",
+                        "empty": true
+                    },
+                    "data": {
+                        "name": "b"
+                    },
+                    "isBlock": false,
+                    "index": 2,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": {
+                "var": " array;",
+                "stop": ";"
+            }
+        },
+        "isBlock": true,
+        "index": 9,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 286,
+                "end": 291,
+                "landmark": {
+                    "class": "VariableInstanceBlock",
+                    "empty": true
+                },
+                "data": {
+                    "name": "array"
+                },
+                "isBlock": false,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 304,
+        "blockEnd": 310,
+        "start": 294,
+        "end": 310,
+        "landmark": {
+            "class": "DeconstructionAssignmentBlock"
+        },
+        "data": {
+            "foundkey": "]",
+            "deconstruction": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 1,
+                    "landmark": {
+                        "class": "VariableInstanceBlock",
+                        "empty": true
+                    },
+                    "data": {
+                        "name": "a"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 2,
+                    "end": 2,
+                    "landmark": {
+                        "class": "CommaBlock"
+                    },
+                    "data": [],
+                    "isBlock": false,
+                    "index": 1,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 4,
+                    "end": 4,
+                    "landmark": {
+                        "class": "CommaBlock"
+                    },
+                    "data": [],
+                    "isBlock": false,
+                    "index": 2,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 5,
+                    "end": 6,
+                    "landmark": {
+                        "class": "VariableInstanceBlock",
+                        "empty": true
+                    },
+                    "data": {
+                        "name": "b"
+                    },
+                    "isBlock": false,
+                    "index": 3,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": {
+                "var": " array;",
+                "stop": ";"
+            }
+        },
+        "isBlock": true,
+        "index": 10,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 304,
+                "end": 309,
+                "landmark": {
+                    "class": "VariableInstanceBlock",
+                    "empty": true
+                },
+                "data": {
+                    "name": "array"
+                },
+                "isBlock": false,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 331,
+        "blockEnd": 337,
+        "start": 312,
+        "end": 337,
+        "landmark": {
+            "class": "DeconstructionAssignmentBlock"
+        },
+        "data": {
+            "foundkey": "]",
+            "deconstruction": [
+                {
+                    "blockStart": 4,
+                    "blockEnd": 12,
+                    "start": 0,
+                    "end": 12,
+                    "landmark": {
+                        "class": "VariableInstanceBlock",
+                        "replace": true
+                    },
+                    "data": {
+                        "name": "a",
+                        "negation": " ",
+                        "_end": {
+                            "var": " aDefault",
+                            "stop": ","
+                        }
+                    },
+                    "isBlock": true,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 4,
+                            "end": 12,
+                            "landmark": {
+                                "class": "VariableInstanceBlock",
+                                "empty": true
+                            },
+                            "data": {
+                                "name": "aDefault"
+                            },
+                            "isBlock": false,
+                            "index": 0,
+                            "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        }
+                    ],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 13,
+                    "end": 13,
+                    "landmark": {
+                        "class": "CommaBlock"
+                    },
+                    "data": [],
+                    "isBlock": false,
+                    "index": 1,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 14,
+                    "end": 15,
+                    "landmark": {
+                        "class": "VariableInstanceBlock",
+                        "empty": true
+                    },
+                    "data": {
+                        "name": "b"
+                    },
+                    "isBlock": false,
+                    "index": 2,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": {
+                "var": " array;",
+                "stop": ";"
+            }
+        },
+        "isBlock": true,
+        "index": 11,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 331,
+                "end": 336,
+                "landmark": {
+                    "class": "VariableInstanceBlock",
+                    "empty": true
+                },
+                "data": {
+                    "name": "array"
+                },
+                "isBlock": false,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 356,
+        "blockEnd": 362,
+        "start": 339,
+        "end": 362,
+        "landmark": {
+            "class": "DeconstructionAssignmentBlock"
+        },
+        "data": {
+            "foundkey": "]",
+            "deconstruction": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 1,
+                    "landmark": {
+                        "class": "VariableInstanceBlock",
+                        "empty": true
+                    },
+                    "data": {
+                        "name": "a"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 2,
+                    "end": 2,
+                    "landmark": {
+                        "class": "CommaBlock"
+                    },
+                    "data": [],
+                    "isBlock": false,
+                    "index": 1,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 3,
+                    "end": 4,
+                    "landmark": {
+                        "class": "VariableInstanceBlock",
+                        "empty": true
+                    },
+                    "data": {
+                        "name": "b"
+                    },
+                    "isBlock": false,
+                    "index": 2,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 5,
+                    "end": 5,
+                    "landmark": {
+                        "class": "CommaBlock"
+                    },
+                    "data": [],
+                    "isBlock": false,
+                    "index": 3,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 7,
+                    "end": 13,
+                    "landmark": {
+                        "class": "VariableInstanceBlock",
+                        "spread": true
+                    },
+                    "data": {
+                        "name": "rest"
+                    },
+                    "isBlock": false,
+                    "index": 4,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": {
+                "var": " array;",
+                "stop": ";"
+            }
+        },
+        "isBlock": true,
+        "index": 12,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 356,
+                "end": 361,
+                "landmark": {
+                    "class": "VariableInstanceBlock",
+                    "empty": true
+                },
+                "data": {
+                    "name": "array"
+                },
+                "isBlock": false,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 383,
+        "blockEnd": 389,
+        "start": 364,
+        "end": 389,
+        "landmark": {
+            "class": "DeconstructionAssignmentBlock"
+        },
+        "data": {
+            "foundkey": "]",
+            "deconstruction": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 1,
+                    "landmark": {
+                        "class": "VariableInstanceBlock",
+                        "empty": true
+                    },
+                    "data": {
+                        "name": "a"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 2,
+                    "end": 2,
+                    "landmark": {
+                        "class": "CommaBlock"
+                    },
+                    "data": [],
+                    "isBlock": false,
+                    "index": 1,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 4,
+                    "end": 4,
+                    "landmark": {
+                        "class": "CommaBlock"
+                    },
+                    "data": [],
+                    "isBlock": false,
+                    "index": 2,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 5,
+                    "end": 6,
+                    "landmark": {
+                        "class": "VariableInstanceBlock",
+                        "empty": true
+                    },
+                    "data": {
+                        "name": "b"
+                    },
+                    "isBlock": false,
+                    "index": 3,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 7,
+                    "end": 7,
+                    "landmark": {
+                        "class": "CommaBlock"
+                    },
+                    "data": [],
+                    "isBlock": false,
+                    "index": 4,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 9,
+                    "end": 15,
+                    "landmark": {
+                        "class": "VariableInstanceBlock",
+                        "spread": true
+                    },
+                    "data": {
+                        "name": "rest"
+                    },
+                    "isBlock": false,
+                    "index": 5,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": {
+                "var": " array;",
+                "stop": ";"
+            }
+        },
+        "isBlock": true,
+        "index": 13,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 383,
+                "end": 388,
+                "landmark": {
+                    "class": "VariableInstanceBlock",
+                    "empty": true
+                },
+                "data": {
+                    "name": "array"
+                },
+                "isBlock": false,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 417,
+        "blockEnd": 423,
+        "start": 391,
+        "end": 423,
+        "landmark": {
+            "class": "DeconstructionAssignmentBlock"
+        },
+        "data": {
+            "foundkey": "]",
+            "deconstruction": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 1,
+                    "landmark": {
+                        "class": "VariableInstanceBlock",
+                        "empty": true
+                    },
+                    "data": {
+                        "name": "a"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 2,
+                    "end": 2,
+                    "landmark": {
+                        "class": "CommaBlock"
+                    },
+                    "data": [],
+                    "isBlock": false,
+                    "index": 1,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 3,
+                    "end": 4,
+                    "landmark": {
+                        "class": "VariableInstanceBlock",
+                        "empty": true
+                    },
+                    "data": {
+                        "name": "b"
+                    },
+                    "isBlock": false,
+                    "index": 2,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 5,
+                    "end": 5,
+                    "landmark": {
+                        "class": "CommaBlock"
+                    },
+                    "data": [],
+                    "isBlock": false,
+                    "index": 3,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": 11,
+                    "blockEnd": 21,
+                    "start": 7,
+                    "end": 22,
+                    "landmark": {
+                        "spread": true,
+                        "class": "ObjectBlock"
+                    },
+                    "data": {
+                        "_end": []
+                    },
+                    "isBlock": true,
+                    "index": 4,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 11,
+                            "end": 14,
+                            "landmark": {
+                                "class": "VariableInstanceBlock",
+                                "empty": true
+                            },
+                            "data": {
+                                "name": "pop"
+                            },
+                            "isBlock": false,
+                            "index": 0,
+                            "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        },
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 15,
+                            "end": 15,
+                            "landmark": {
+                                "class": "CommaBlock"
+                            },
+                            "data": [],
+                            "isBlock": false,
+                            "index": 1,
+                            "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        },
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 16,
+                            "end": 20,
+                            "landmark": {
+                                "class": "VariableInstanceBlock",
+                                "empty": true
+                            },
+                            "data": {
+                                "name": "push"
+                            },
+                            "isBlock": false,
+                            "index": 2,
+                            "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        }
+                    ],
+                    "comments": []
+                }
+            ],
+            "_end": {
+                "var": " array;",
+                "stop": ";"
+            }
+        },
+        "isBlock": true,
+        "index": 14,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 417,
+                "end": 422,
+                "landmark": {
+                    "class": "VariableInstanceBlock",
+                    "empty": true
+                },
+                "data": {
+                    "name": "array"
+                },
+                "isBlock": false,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 444,
+        "blockEnd": 450,
+        "start": 425,
+        "end": 450,
+        "landmark": {
+            "class": "DeconstructionAssignmentBlock"
+        },
+        "data": {
+            "foundkey": "]",
+            "deconstruction": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 1,
+                    "landmark": {
+                        "class": "VariableInstanceBlock",
+                        "empty": true
+                    },
+                    "data": {
+                        "name": "a"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 2,
+                    "end": 2,
+                    "landmark": {
+                        "class": "CommaBlock"
+                    },
+                    "data": [],
+                    "isBlock": false,
+                    "index": 1,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 3,
+                    "end": 4,
+                    "landmark": {
+                        "class": "VariableInstanceBlock",
+                        "empty": true
+                    },
+                    "data": {
+                        "name": "b"
+                    },
+                    "isBlock": false,
+                    "index": 2,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 5,
+                    "end": 5,
+                    "landmark": {
+                        "class": "CommaBlock"
+                    },
+                    "data": [],
+                    "isBlock": false,
+                    "index": 3,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                },
+                {
+                    "blockStart": 11,
+                    "blockEnd": 14,
+                    "start": 7,
+                    "end": 15,
+                    "landmark": {
+                        "class": "ArrayBlock",
+                        "spread": true
+                    },
+                    "data": {
+                        "_end": []
+                    },
+                    "isBlock": true,
+                    "index": 4,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 11,
+                            "end": 12,
+                            "landmark": {
+                                "class": "VariableInstanceBlock",
+                                "empty": true
+                            },
+                            "data": {
+                                "name": "c"
+                            },
+                            "isBlock": false,
+                            "index": 0,
+                            "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        },
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 13,
+                            "end": 13,
+                            "landmark": {
+                                "class": "CommaBlock"
+                            },
+                            "data": [],
+                            "isBlock": false,
+                            "index": 1,
+                            "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        },
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 14,
+                            "end": 15,
+                            "landmark": {
+                                "class": "VariableInstanceBlock",
+                                "empty": true
+                            },
+                            "data": {
+                                "name": "d"
+                            },
+                            "isBlock": false,
+                            "index": 2,
+                            "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        }
+                    ],
+                    "comments": []
+                }
+            ],
+            "_end": {
+                "var": " array;",
+                "stop": ";"
+            }
+        },
+        "isBlock": true,
+        "index": 15,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 444,
+                "end": 449,
+                "landmark": {
+                    "class": "VariableInstanceBlock",
+                    "empty": true
+                },
+                "data": {
+                    "name": "array"
+                },
+                "isBlock": false,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            }
+        ],
+        "comments": []
+    }
+]

@@ -495,6 +495,9 @@ abstract class Methods
                 || is_null($letter)
                 || ($letter === "\n" && Helper::checkIfValidVarEnd($essentials, $i))
             ) {
+                if ($letter == ',') {
+                    $i--;
+                }
                 Helper::finishVarEnd($essentials, $i, $letter);
                 return true;
             }

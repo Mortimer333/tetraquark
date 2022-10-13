@@ -4,6 +4,118 @@
             "a": {
                 "i": {
                     "n": {
+                        "_custom": {
+                            "type": "Chain"
+                        },
+                        "_stop": true,
+                        ".": {
+                            "c": {
+                                "h": {
+                                    "a": {
+                                        "i": {
+                                            "n": {
+                                                "_custom": {
+                                                    "type": "DotChain"
+                                                },
+                                                "_stop": true
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "_m": {
+                                "s": {
+                                    "c": {
+                                        "h": {
+                                            "a": {
+                                                "i": {
+                                                    "n": {
+                                                        "_custom": {
+                                                            "type": "DotChain"
+                                                        },
+                                                        "_stop": true
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "_m": {
+                            "s": {
+                                ".": {
+                                    "c": {
+                                        "h": {
+                                            "a": {
+                                                "i": {
+                                                    "n": {
+                                                        "_custom": {
+                                                            "type": "DotChain"
+                                                        },
+                                                        "_stop": true
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "_m": {
+                                        "s": {
+                                            "c": {
+                                                "h": {
+                                                    "a": {
+                                                        "i": {
+                                                            "n": {
+                                                                "_custom": {
+                                                                    "type": "DotChain"
+                                                                },
+                                                                "_stop": true
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "-": {
+                                    ">": {
+                                        "c": {
+                                            "h": {
+                                                "a": {
+                                                    "i": {
+                                                        "n": {
+                                                            "_custom": {
+                                                                "type": "ArrowChain"
+                                                            },
+                                                            "_stop": true
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "_m": {
+                                            "s": {
+                                                "c": {
+                                                    "h": {
+                                                        "a": {
+                                                            "i": {
+                                                                "n": {
+                                                                    "_custom": {
+                                                                        "type": "ArrowChain"
+                                                                    },
+                                                                    "_stop": true
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
                         "-": {
                             ">": {
                                 "c": {
@@ -39,45 +151,23 @@
                                     }
                                 }
                             }
-                        },
-                        "_m": {
-                            "s": {
-                                "-": {
-                                    ">": {
-                                        "c": {
-                                            "h": {
-                                                "a": {
-                                                    "i": {
-                                                        "n": {
-                                                            "_custom": {
-                                                                "type": "ArrowChain"
-                                                            },
-                                                            "_stop": true
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        "_m": {
-                                            "s": {
-                                                "c": {
-                                                    "h": {
-                                                        "a": {
-                                                            "i": {
-                                                                "n": {
-                                                                    "_custom": {
-                                                                        "type": "ArrowChain"
-                                                                    },
-                                                                    "_stop": true
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "_m": {
+        "s": {
+            "c": {
+                "h": {
+                    "a": {
+                        "i": {
+                            "n": {
+                                "_custom": {
+                                    "type": "Chain"
                                 },
+                                "_stop": true,
                                 ".": {
                                     "c": {
                                         "h": {
@@ -111,97 +201,43 @@
                                             }
                                         }
                                     }
-                                }
-                            }
-                        },
-                        ".": {
-                            "c": {
-                                "h": {
-                                    "a": {
-                                        "i": {
-                                            "n": {
-                                                "_custom": {
-                                                    "type": "DotChain"
-                                                },
-                                                "_stop": true
-                                            }
-                                        }
-                                    }
-                                }
-                            },
-                            "_m": {
-                                "s": {
-                                    "c": {
-                                        "h": {
-                                            "a": {
-                                                "i": {
-                                                    "n": {
-                                                        "_custom": {
-                                                            "type": "DotChain"
-                                                        },
-                                                        "_stop": true
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "_custom": {
-                            "type": "Chain"
-                        },
-                        "_stop": true
-                    }
-                }
-            }
-        }
-    },
-    "_m": {
-        "s": {
-            "c": {
-                "h": {
-                    "a": {
-                        "i": {
-                            "n": {
-                                "-": {
-                                    ">": {
-                                        "c": {
-                                            "h": {
-                                                "a": {
-                                                    "i": {
-                                                        "n": {
-                                                            "_custom": {
-                                                                "type": "ArrowChain"
-                                                            },
-                                                            "_stop": true
+                                },
+                                "_m": {
+                                    "s": {
+                                        ".": {
+                                            "c": {
+                                                "h": {
+                                                    "a": {
+                                                        "i": {
+                                                            "n": {
+                                                                "_custom": {
+                                                                    "type": "DotChain"
+                                                                },
+                                                                "_stop": true
+                                                            }
                                                         }
                                                     }
                                                 }
-                                            }
-                                        },
-                                        "_m": {
-                                            "s": {
-                                                "c": {
-                                                    "h": {
-                                                        "a": {
-                                                            "i": {
-                                                                "n": {
-                                                                    "_custom": {
-                                                                        "type": "ArrowChain"
-                                                                    },
-                                                                    "_stop": true
+                                            },
+                                            "_m": {
+                                                "s": {
+                                                    "c": {
+                                                        "h": {
+                                                            "a": {
+                                                                "i": {
+                                                                    "n": {
+                                                                        "_custom": {
+                                                                            "type": "DotChain"
+                                                                        },
+                                                                        "_stop": true
+                                                                    }
                                                                 }
                                                             }
                                                         }
                                                     }
                                                 }
                                             }
-                                        }
-                                    }
-                                },
-                                "_m": {
-                                    "s": {
+                                        },
                                         "-": {
                                             ">": {
                                                 "c": {
@@ -237,34 +273,36 @@
                                                     }
                                                 }
                                             }
-                                        },
-                                        ".": {
-                                            "c": {
-                                                "h": {
-                                                    "a": {
-                                                        "i": {
-                                                            "n": {
-                                                                "_custom": {
-                                                                    "type": "DotChain"
-                                                                },
-                                                                "_stop": true
-                                                            }
+                                        }
+                                    }
+                                },
+                                "-": {
+                                    ">": {
+                                        "c": {
+                                            "h": {
+                                                "a": {
+                                                    "i": {
+                                                        "n": {
+                                                            "_custom": {
+                                                                "type": "ArrowChain"
+                                                            },
+                                                            "_stop": true
                                                         }
                                                     }
                                                 }
-                                            },
-                                            "_m": {
-                                                "s": {
-                                                    "c": {
-                                                        "h": {
-                                                            "a": {
-                                                                "i": {
-                                                                    "n": {
-                                                                        "_custom": {
-                                                                            "type": "DotChain"
-                                                                        },
-                                                                        "_stop": true
-                                                                    }
+                                            }
+                                        },
+                                        "_m": {
+                                            "s": {
+                                                "c": {
+                                                    "h": {
+                                                        "a": {
+                                                            "i": {
+                                                                "n": {
+                                                                    "_custom": {
+                                                                        "type": "ArrowChain"
+                                                                    },
+                                                                    "_stop": true
                                                                 }
                                                             }
                                                         }
@@ -273,45 +311,7 @@
                                             }
                                         }
                                     }
-                                },
-                                ".": {
-                                    "c": {
-                                        "h": {
-                                            "a": {
-                                                "i": {
-                                                    "n": {
-                                                        "_custom": {
-                                                            "type": "DotChain"
-                                                        },
-                                                        "_stop": true
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    },
-                                    "_m": {
-                                        "s": {
-                                            "c": {
-                                                "h": {
-                                                    "a": {
-                                                        "i": {
-                                                            "n": {
-                                                                "_custom": {
-                                                                    "type": "DotChain"
-                                                                },
-                                                                "_stop": true
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                },
-                                "_custom": {
-                                    "type": "Chain"
-                                },
-                                "_stop": true
+                                }
                             }
                         }
                     }

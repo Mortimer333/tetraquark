@@ -52,6 +52,8 @@ class Reader
     public const END_OF_FILE = 'end of file';
     public const EMPTY_METHOD = 'e';
     public const EMPTY = '_empty';
+    public const EMPTY_MARKER = '@e';
+    public const METHOD_NAME = '_method';
 
     use ReaderDisplayTrait;
 
@@ -623,8 +625,9 @@ class Reader
     {
         $preSave = $this->saveResolver($resolver);
         $solve = null;
-        // Log ::log('Method to check: ' . implode(', ', array_keys($resolver->getLandmark()['_m'])));
+        // Log ::log('Methods to check: ' . implode(', ', array_column($resolver->getLandmark()['_m'], self::METHOD_NAME)));
         foreach ($resolver->getLandmark()['_m'] as $methodName => $step) {
+            $methodName = explode('@', $methodName)[0];
             list($method, $callable) = $this->getMethod($methodName);
             // @TODO figure out if it's not better to pass Resolver and just restore save state after failure
             // Set essentials
@@ -1088,9 +1091,11 @@ class Reader
                 $this->encloseCustomData($block)
             );
         }
-        $map = $this->mergeMaps($maps);
-
-        return $map;
+        $merged = [];
+        foreach ($maps as $map) {
+            $merged = $this->mergeMaps($map, $merged);
+        }
+        return $merged;
     }
 
     public function encloseCustomData(array $block): array
@@ -1114,18 +1119,40 @@ class Reader
 
     public function mergeMaps(array $maps, array $merged = []): array
     {
-        foreach ($maps as $map) {
-            foreach ($map as $key => $value) {
-                if (!isset($value['_stop'])) {
-                    $merged[$key] = $this->mergeMaps([$map[$key]], $merged[$key] ?? []);
+        foreach ($maps as $key => $map) {
+            // if ($key == '_m') {
+            //     $merged[$key] = array_merge($map, $merged[$key] ?? []);
+            //     continue;
+            // }
+            if (is_array($map)) {
+                if (isset($map['_stop'])) {
+                    $merged[$key] = array_merge($map, $merged[$key] ?? []);
+                    continue;
                 }
-                if (is_array($map[$key])) {
-                    $merged[$key] = array_merge($map[$key], $merged[$key] ?? []);
-                } else {
-                    $merged[$key] = $map[$key];
-                }
+                $merged[$key] = $this->mergeMaps($map, $merged[$key] ?? []);
+                continue;
             }
+            $merged[$key] = $map;
         }
+        // foreach ($maps as $map) {
+        //     if (!is_array($map)) {
+        //         continue;
+        //     }
+        //     foreach ($map as $key => $value) {
+        //         if (is_numeric($key)) {
+        //             continue;
+        //         }
+        //         if (!isset($value['_stop']) && is_array($value)) {
+        //             Log::log('Another map!');
+        //             $merged[$key] = $this->mergeMaps($value, $merged[$key] ?? []);
+        //         }
+        //         if (is_array($map[$key])) {
+        //             $merged[$key] = array_merge($map[$key], $merged[$key] ?? []);
+        //         } else {
+        //             $merged[$key] = $map[$key];
+        //         }
+        //     }
+        // }
         return $merged;
     }
 
@@ -1154,6 +1181,11 @@ class Reader
                     // Sepcial method - empty
                     if ($name === self::EMPTY_METHOD) {
                         if (isset($nextStep["_m"])) {
+                            foreach ($nextStep["_m"] as $key => $value) {
+                                unset($nextStep["_m"][$key]);
+                                $key = explode(self::EMPTY_MARKER, $key)[0];
+                                $nextStep["_m"][$key . self::EMPTY_MARKER . $stepCounter] = $value;
+                            }
                             $methods = array_merge($methods, $nextStep["_m"]);
                             unset($nextStep["_m"]);
                         }
@@ -1222,7 +1254,11 @@ class Reader
                 $data
             );
         }
-        return $this->mergeMaps($endMaps);
+        $merged = [];
+        foreach ($endMaps as $map) {
+            $merged = $this->mergeMaps($map, $merged);
+        }
+        return $merged;
     }
 
     public function methodFromString(string $method): array

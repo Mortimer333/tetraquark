@@ -347,24 +347,13 @@ abstract class LandmarkStorage
         ];
     }
 
-    public static function getClassMethodGeneratorFromConstant(): array
+    public static function getConstantMethodAndClassMethodAndCaller(): array
     {
         return [
-            '*[/find:"]":"[":"name">read:"name"\/s|e\(' . self::genFindParenthesis('arguments') . '/s|e\{' => [
-                "class" => "ClassMethodBlock",
-                "generator" => true,
-                "constant_name" => true,
-                "_block" => self::_BLOCK_OBJECT,
-            ]
-        ];
-    }
-
-    public static function getMethodAndCaller(): array
-    {
-        return [
-            self::WORD_SEPERATOR_SEGMENT . self::PRIVATE_SEGMENT => [
+            // '/"#">isprivate|e\\'
+            self::WORD_SEPERATOR_SEGMENT . '/"*">isgenerator|e\/s|e\\' . self::PRIVATE_SEGMENT => [
                 "_extend" => [
-                    '[/find:"]":"[":"name">read:"name"\/s|e\(' . self::genFindParenthesis('arguments') . '/s|e\{' => [
+                    '/s|e\[/find:"]":"[":"name">read:"name"\/s|e\(' . self::genFindParenthesis('arguments') . '/s|e\{' => [
                         "class" => "ClassMethodBlock",
                         "constant_name" => true,
                         "_block" => self::_BLOCK_OBJECT,

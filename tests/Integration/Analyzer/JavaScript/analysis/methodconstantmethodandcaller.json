@@ -1,0 +1,576 @@
+[
+    {
+        "blockStart": 8,
+        "blockEnd": 7,
+        "start": 0,
+        "end": 8,
+        "landmark": {
+            "class": "CallerBlock"
+        },
+        "data": {
+            "name": "caller",
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 0,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 18,
+        "blockEnd": 23,
+        "start": 9,
+        "end": 24,
+        "landmark": {
+            "class": "CallerBlock"
+        },
+        "data": {
+            "name": "caller",
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 1,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 41,
+        "blockEnd": 42,
+        "start": 25,
+        "end": 43,
+        "landmark": {
+            "class": "ClassMethodBlock"
+        },
+        "data": {
+            "name": "classMethod",
+            "foundkey": ")",
+            "arguments": [],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 2,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 63,
+        "blockEnd": 64,
+        "start": 44,
+        "end": 65,
+        "landmark": {
+            "class": "ClassMethodBlock"
+        },
+        "data": {
+            "name": "classMethod",
+            "foundkey": ")",
+            "arguments": [],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 3,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 93,
+        "blockEnd": 94,
+        "start": 66,
+        "end": 95,
+        "landmark": {
+            "class": "ClassMethodBlock",
+            "constant_name": true
+        },
+        "data": {
+            "foundkey": ")",
+            "name": [
+                {
+                    "blockStart": 21,
+                    "blockEnd": 21,
+                    "start": 0,
+                    "end": 21,
+                    "landmark": {
+                        "class": "ChainBlock",
+                        "first": true
+                    },
+                    "data": {
+                        "first": "constant",
+                        "second": "classMethod",
+                        "_end": []
+                    },
+                    "isBlock": true,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "arguments": [],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 4,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 124,
+        "blockEnd": 125,
+        "start": 96,
+        "end": 126,
+        "landmark": {
+            "class": "ClassMethodBlock",
+            "constant_name": true
+        },
+        "data": {
+            "foundkey": ")",
+            "name": [
+                {
+                    "blockStart": 21,
+                    "blockEnd": 21,
+                    "start": 0,
+                    "end": 21,
+                    "landmark": {
+                        "class": "ChainBlock",
+                        "first": true
+                    },
+                    "data": {
+                        "first": "constant",
+                        "second": "classMethod",
+                        "_end": []
+                    },
+                    "isBlock": true,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "arguments": [],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 5,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 153,
+        "blockEnd": 154,
+        "start": 127,
+        "end": 155,
+        "landmark": {
+            "class": "ClassMethodBlock"
+        },
+        "data": {
+            "generator": true,
+            "name": "generatorClassMethod",
+            "foundkey": ")",
+            "arguments": [],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 6,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 183,
+        "blockEnd": 184,
+        "start": 156,
+        "end": 185,
+        "landmark": {
+            "class": "ClassMethodBlock"
+        },
+        "data": {
+            "generator": true,
+            "name": "generatorClassMethod",
+            "foundkey": ")",
+            "arguments": [],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 7,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 223,
+        "blockEnd": 224,
+        "start": 186,
+        "end": 225,
+        "landmark": {
+            "class": "ClassMethodBlock",
+            "constant_name": true
+        },
+        "data": {
+            "generator": true,
+            "foundkey": ")",
+            "name": [
+                {
+                    "blockStart": 30,
+                    "blockEnd": 30,
+                    "start": 0,
+                    "end": 30,
+                    "landmark": {
+                        "class": "ChainBlock",
+                        "first": true
+                    },
+                    "data": {
+                        "first": "constant",
+                        "second": "generatorClassMethod",
+                        "_end": []
+                    },
+                    "isBlock": true,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "arguments": [],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 8,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 270,
+        "blockEnd": 271,
+        "start": 226,
+        "end": 272,
+        "landmark": {
+            "class": "ClassMethodBlock",
+            "constant_name": true
+        },
+        "data": {
+            "generator": true,
+            "foundkey": ")",
+            "name": [
+                {
+                    "blockStart": 30,
+                    "blockEnd": 30,
+                    "start": 0,
+                    "end": 30,
+                    "landmark": {
+                        "class": "ChainBlock",
+                        "first": true
+                    },
+                    "data": {
+                        "first": "constant",
+                        "second": "generatorClassMethod",
+                        "_end": []
+                    },
+                    "isBlock": true,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "arguments": [],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 9,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 297,
+        "blockEnd": 298,
+        "start": 273,
+        "end": 299,
+        "landmark": {
+            "class": "ClassMethodBlock"
+        },
+        "data": {
+            "private": true,
+            "name": "privateClassMethod",
+            "foundkey": ")",
+            "arguments": [],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 10,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 335,
+        "blockEnd": 336,
+        "start": 300,
+        "end": 337,
+        "landmark": {
+            "class": "ClassMethodBlock",
+            "constant_name": true
+        },
+        "data": {
+            "private": true,
+            "foundkey": ")",
+            "name": [
+                {
+                    "blockStart": 28,
+                    "blockEnd": 28,
+                    "start": 0,
+                    "end": 28,
+                    "landmark": {
+                        "class": "ChainBlock",
+                        "first": true
+                    },
+                    "data": {
+                        "first": "constant",
+                        "second": "privateClassMethod",
+                        "_end": []
+                    },
+                    "isBlock": true,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "arguments": [],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 11,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 363,
+        "blockEnd": 364,
+        "start": 338,
+        "end": 365,
+        "landmark": {
+            "class": "ClassMethodBlock"
+        },
+        "data": {
+            "private": true,
+            "name": "privateClassMethod",
+            "foundkey": ")",
+            "arguments": [],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 12,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 402,
+        "blockEnd": 403,
+        "start": 366,
+        "end": 404,
+        "landmark": {
+            "class": "ClassMethodBlock",
+            "constant_name": true
+        },
+        "data": {
+            "private": true,
+            "foundkey": ")",
+            "name": [
+                {
+                    "blockStart": 28,
+                    "blockEnd": 28,
+                    "start": 0,
+                    "end": 28,
+                    "landmark": {
+                        "class": "ChainBlock",
+                        "first": true
+                    },
+                    "data": {
+                        "first": "constant",
+                        "second": "privateClassMethod",
+                        "_end": []
+                    },
+                    "isBlock": true,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "arguments": [],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 13,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 439,
+        "blockEnd": 440,
+        "start": 405,
+        "end": 441,
+        "landmark": {
+            "class": "ClassMethodBlock"
+        },
+        "data": {
+            "generator": true,
+            "private": true,
+            "name": "privateGeneratorClassMethod",
+            "foundkey": ")",
+            "arguments": [],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 14,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 478,
+        "blockEnd": 479,
+        "start": 442,
+        "end": 480,
+        "landmark": {
+            "class": "ClassMethodBlock"
+        },
+        "data": {
+            "generator": true,
+            "private": true,
+            "name": "privateGeneratorClassMethod",
+            "foundkey": ")",
+            "arguments": [],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 15,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 526,
+        "blockEnd": 527,
+        "start": 481,
+        "end": 528,
+        "landmark": {
+            "class": "ClassMethodBlock",
+            "constant_name": true
+        },
+        "data": {
+            "generator": true,
+            "private": true,
+            "foundkey": ")",
+            "name": [
+                {
+                    "blockStart": 37,
+                    "blockEnd": 37,
+                    "start": 0,
+                    "end": 37,
+                    "landmark": {
+                        "class": "ChainBlock",
+                        "first": true
+                    },
+                    "data": {
+                        "first": "constant",
+                        "second": "privateGeneratorClassMethod",
+                        "_end": []
+                    },
+                    "isBlock": true,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "arguments": [],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 16,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 576,
+        "blockEnd": 577,
+        "start": 529,
+        "end": 578,
+        "landmark": {
+            "class": "ClassMethodBlock",
+            "constant_name": true
+        },
+        "data": {
+            "generator": true,
+            "private": true,
+            "foundkey": ")",
+            "name": [
+                {
+                    "blockStart": 37,
+                    "blockEnd": 37,
+                    "start": 0,
+                    "end": 37,
+                    "landmark": {
+                        "class": "ChainBlock",
+                        "first": true
+                    },
+                    "data": {
+                        "first": "constant",
+                        "second": "privateGeneratorClassMethod",
+                        "_end": []
+                    },
+                    "isBlock": true,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "arguments": [],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 17,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    }
+]

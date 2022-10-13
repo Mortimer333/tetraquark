@@ -106,6 +106,8 @@ class JavaScriptAnalyzerTest extends BaseAnalyzer
             "number" => ['number', $reader],
             "staticvar" => ['staticvar', $reader],
             "arrow method (async)" => ['arrowmethod', $reader],
+            "array deconstruct" => ['arraydeconstruct', $reader],
+            "method, constant method and caller" => ['methodconstantmethodandcaller', $reader, true],
         ];
     }
 

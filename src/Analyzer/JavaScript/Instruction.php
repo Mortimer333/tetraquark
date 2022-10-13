@@ -33,7 +33,7 @@ abstract class Instruction
             ...LandmarkStorage::getEqual(),
             ...LandmarkStorage::getUnequal(),
             ...LandmarkStorage::getSpreadVariable(),
-            ...LandmarkStorage::getArrayAndDeconstructionAssignment(), // @TODO add deconstruction later
+            ...LandmarkStorage::getArrayAndDeconstructionAssignment(),
             ...LandmarkStorage::getSpreadArray(),
             ...LandmarkStorage::getNewInstance(),
             ...LandmarkStorage::getSymbol(),
@@ -44,8 +44,7 @@ abstract class Instruction
             ...LandmarkStorage::getNumber(),
             ...LandmarkStorage::getStaticVariable(),
             ...LandmarkStorage::getArrowFunctionWithAsync(),
-            ...LandmarkStorage::getMethodAndCaller(),
-            ...LandmarkStorage::getClassMethodGeneratorFromConstant(),
+            ...LandmarkStorage::getConstantMethodAndClassMethodAndCaller(), // <-
             ...LandmarkStorage::getConsecutiveCaller(),
             ...LandmarkStorage::getGetter(),
             ...LandmarkStorage::getSetter(),
