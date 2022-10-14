@@ -470,8 +470,8 @@
                     {
                         "blockStart": null,
                         "blockEnd": null,
-                        "start": 77,
-                        "end": 78,
+                        "start": 76,
+                        "end": 77,
                         "landmark": {
                             "class": "VariableInstanceBlock",
                             "empty": true
@@ -540,8 +540,8 @@
                             {
                                 "blockStart": null,
                                 "blockEnd": null,
-                                "start": 8,
-                                "end": 9,
+                                "start": 7,
+                                "end": 8,
                                 "landmark": {
                                     "class": "VariableInstanceBlock",
                                     "empty": true

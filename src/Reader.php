@@ -26,7 +26,9 @@ class Reader
     protected array $script = [];
     protected array $map;
     protected array $current = [
-        "caret" => null
+        "caret" => null,
+        "scripts" => [],
+        "script" => null,
     ];
     protected CustomMethodEssentialsModel $essentials;
     protected int $iterations = 0;
@@ -95,6 +97,14 @@ class Reader
 
         // die(json_encode($this->methods, JSON_PRETTY_PRINT));
         // die(json_encode($this->map, JSON_PRETTY_PRINT));
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function getCurrent(): array
+    {
+        return $this->current;
     }
 
     /**
@@ -205,6 +215,7 @@ class Reader
             $script = file_get_contents($script);
         }
 
+
         // @codeCoverageIgnoreStart
         if ($displayBlocks || $short) {
             Log  ::timerStart();
@@ -213,6 +224,8 @@ class Reader
 
         $content = $this->removeCommentsAndAdditional(new Content($script));
         $content = $this->customPrepare($content);
+        $this->current['scripts'][] = $content;
+        $this->current['script'] = $content;
 
         // @codeCoverageIgnoreStart
         if ($displayBlocks) {
@@ -238,6 +251,9 @@ class Reader
             Log  ::log(']');
         }
         // @codeCoverageIgnoreEnd
+
+        array_pop($this->current['scripts']);
+        $this->current['script'] = $this->current['scripts'][sizeof($this->current['scripts']) - 1] ?? null;
 
         return $script;
     }
@@ -341,14 +357,7 @@ class Reader
                         // or `if(true){}var a = 'b'` (`if` is shraing its end (`}`) wth variable a)
                         // so we will try to include the last letter once more.
                         // But we don't do it for Blocks with instruction of length 1
-                        if (
-                            $item->getStart() !== $item->getEnd()
-                            && ($this->schema['shared']['ends'][
-                                $resolver->getContent()->getLetter(
-                                    $item->getEnd()
-                                )
-                            ] ?? false)
-                        ) {
+                        if ($this->endIsSharable($resolver->getContent(), $item->getStart(), $item->getEnd())) {
                             $i--;
                         }
 
@@ -379,6 +388,16 @@ class Reader
         }
 
         return [$resolver->getScript(), $resolver->getI()];
+    }
+
+    public function endIsSharable(Content $content, int $start, int $end): bool
+    {
+        return $start !== $end
+            && (
+                $this->schema['shared']['ends'][
+                    $content->getLetter($end)
+                ] ?? false
+            );
     }
 
     public function addMissedEnd(LandmarkResolverModel $resolver, int $start, int $end): void
@@ -940,10 +959,10 @@ class Reader
         $parent->setData([...$parent->getData(), ...["_end" => $data]]);
 
         if (is_null($this->current['caret'])) {
-            $this->current['caret'] = 0;
+            $this->current['caret'] = 1;
         }
 
-        $this->current['caret'] += $start;
+        $this->current['caret'] += $start - 1;
         $caretIncr  = $this->current['caret'];
         $newContent = $content->iCutToContent($start, $i);
         $blocks     = [];

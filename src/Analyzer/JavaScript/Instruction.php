@@ -57,6 +57,7 @@ abstract class Instruction
             ...LandmarkStorage::getFinally(), // <-
             ...LandmarkStorage::getFirstInChain(),
             ...LandmarkStorage::getNextInChain(),
+            ...LandmarkStorage::getArrayChain(),
             ...LandmarkStorage::getDoWhile(),
             ...LandmarkStorage::getWhileAndShortWhile(),
             ...LandmarkStorage::getElseAndElseIf(),

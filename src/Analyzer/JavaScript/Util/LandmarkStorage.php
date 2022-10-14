@@ -31,29 +31,40 @@ abstract class LandmarkStorage
         "end" => "/getnext\\",
     ];
 
+    public const _BLOCK_CHAINEND = [
+        "end" => '/chainend\\',
+        "include_end" => true,
+    ];
+
     public const APOSTROPHE_SEGMENT = '\'/strend:"\'"\\';
     public const TEMPLATE_LITERAL_SEGMENT = '`/strend:"`":"template">templateliteral:"template">read:"template"\\';
     public const QUOTE_SEGMENT = '"/strend:\'"\'\\';
     public const WORD_SEPERATOR_SEGMENT = '/s|end\\';
     public const PRIVATE_SEGMENT = '/"#">isprivate|e\\';
+    public const ARRAY_CHAIN_SEGMENT = '/s|e\[/find:"]":"[":"index">read:"index"\\';
 
-    public const ARRAY_CHAIN_INSTRUCTION = [
-        '/s|e\[/find:"]":"[":"index">read:"index"\\' => [
+    public const ARRAY_CHAIN_CHUNK = [
+        '/s|e\=/"!=">decrease\\' => [
             "class" => "ChainBlock",
             "array" => true,
-            "_block" => self::_BLOCK_VAREND,
+            "var" => true,
+            "_block" => self::_BLOCK_CHAINEND,
+        ],
+        '/s|e\(/find:")":"(":"values">read:"values"\\' => [
+            "class" => "ChainBlock",
+            "array" => true,
+            "method" => true,
+            "_block" => self::_BLOCK_CHAINEND,
+        ],
+    ];
+
+    public const ARRAY_CHAIN_INSTRUCTION = [
+        self::ARRAY_CHAIN_SEGMENT => [
+            "class" => "ChainBlock",
+            "array" => true,
+            "_block" => self::_BLOCK_CHAINEND,
             "_extend" => [
-                '/s|e\=/"!=">decrease\\' => [
-                    "class" => "ChainBlock",
-                    "array" => true,
-                    "var" => true,
-                    "_block" => self::_BLOCK_VAREND,
-                ],
-                '/s|e\(/find:")":"(":"values">read:"values"\\' => [
-                    "class" => "ChainBlock",
-                    "array" => true,
-                    "method" => true,
-                ],
+                ...self::ARRAY_CHAIN_CHUNK,
             ],
         ]
     ];
@@ -531,6 +542,7 @@ abstract class LandmarkStorage
                                 "class" => "ChainBlock",
                                 "first" => true,
                                 "var" => true,
+                                "first_method" => true,
                                 "_block" => self::_BLOCK_VAREND,
                             ]
                         ]
@@ -558,11 +570,30 @@ abstract class LandmarkStorage
                     '/s|e\(' . self::genFindParenthesis('values') => [
                         "class" => "SubChainBlock3",
                         "method" => true,
+                        "_block" => [
+                            "end" => '/chainend\\',
+                            "include_end" => true,
+                        ],
                     ],
                     /* CHAIN (ARRAY ACCESS) */
                     ...self::ARRAY_CHAIN_INSTRUCTION,
                 ]
             ],
+        ];
+    }
+
+    public static function getArrayChain(): array
+    {
+        return [
+            '/word:"variable"\\' . self::ARRAY_CHAIN_SEGMENT => self::ARRAY_CHAIN_INSTRUCTION[self::ARRAY_CHAIN_SEGMENT],
+            '/parentischainable>decrease\\' . self::ARRAY_CHAIN_SEGMENT => [
+                "class" => "ChainBlock",
+                "array" => true,
+                "_block" => self::_BLOCK_CHAINEND,
+                "_extend" => [
+                    ...self::ARRAY_CHAIN_CHUNK,
+                ]
+            ]
         ];
     }
 

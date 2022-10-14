@@ -1,33 +1,29 @@
 [
     {
-        "blockStart": 48,
-        "blockEnd": 49,
+        "blockStart": 15,
+        "blockEnd": 15,
         "start": 0,
-        "end": 50,
+        "end": 15,
         "landmark": {
-            "class": "ClassMethodBlock",
-            "constant_name": true
+            "class": "ChainBlock",
+            "array": true
         },
         "data": {
-            "generator": true,
-            "private": true,
-            "foundkey": ")",
-            "name": [
+            "variable": "chain",
+            "foundkey": "]",
+            "index": [
                 {
-                    "blockStart": 37,
-                    "blockEnd": 37,
-                    "start": 0,
-                    "end": 37,
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 1,
+                    "end": 7,
                     "landmark": {
-                        "class": "ChainBlock",
-                        "first": true
+                        "class": "StringBlock"
                     },
                     "data": {
-                        "first": "constant",
-                        "second": "privateGeneratorClassMethod",
-                        "_end": []
+                        "string": "array"
                     },
-                    "isBlock": true,
+                    "isBlock": false,
                     "index": 0,
                     "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
                     "path": [],
@@ -35,11 +31,679 @@
                     "comments": []
                 }
             ],
-            "arguments": [],
             "_end": []
         },
         "isBlock": true,
         "index": 0,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 30,
+        "blockEnd": 36,
+        "start": 15,
+        "end": 36,
+        "landmark": {
+            "class": "ChainBlock",
+            "array": true
+        },
+        "data": {
+            "variable": "chain",
+            "foundkey": "]",
+            "index": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 1,
+                    "end": 7,
+                    "landmark": {
+                        "class": "StringBlock"
+                    },
+                    "data": {
+                        "string": "array"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 1,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": 37,
+                "blockEnd": 37,
+                "start": 30,
+                "end": 37,
+                "landmark": {
+                    "class": "SubChainBlock1"
+                },
+                "data": {
+                    "word": "chain",
+                    "_end": []
+                },
+                "isBlock": true,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 51,
+        "blockEnd": 58,
+        "start": 36,
+        "end": 58,
+        "landmark": {
+            "class": "ChainBlock",
+            "array": true
+        },
+        "data": {
+            "variable": "chain",
+            "foundkey": "]",
+            "index": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 1,
+                    "end": 7,
+                    "landmark": {
+                        "class": "StringBlock"
+                    },
+                    "data": {
+                        "string": "array"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 2,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": 59,
+                "blockEnd": 59,
+                "start": 50,
+                "end": 59,
+                "landmark": {
+                    "class": "ChainBlock",
+                    "array": true
+                },
+                "data": {
+                    "foundkey": "]",
+                    "index": [
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 0,
+                            "end": 5,
+                            "landmark": {
+                                "class": "VariableInstanceBlock",
+                                "empty": true
+                            },
+                            "data": {
+                                "name": "chain"
+                            },
+                            "isBlock": false,
+                            "index": 0,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        }
+                    ],
+                    "_end": []
+                },
+                "isBlock": true,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 75,
+        "blockEnd": 75,
+        "start": 58,
+        "end": 75,
+        "landmark": {
+            "class": "ChainBlock",
+            "array": true,
+            "method": true
+        },
+        "data": {
+            "variable": "chain",
+            "foundkey": ")",
+            "index": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 1,
+                    "end": 7,
+                    "landmark": {
+                        "class": "StringBlock"
+                    },
+                    "data": {
+                        "string": "array"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "values": [],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 3,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 90,
+        "blockEnd": 105,
+        "start": 75,
+        "end": 105,
+        "landmark": {
+            "class": "ChainBlock",
+            "array": true
+        },
+        "data": {
+            "variable": "chain",
+            "foundkey": "]",
+            "index": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 1,
+                    "end": 7,
+                    "landmark": {
+                        "class": "StringBlock"
+                    },
+                    "data": {
+                        "string": "array"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 4,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": 100,
+                "blockEnd": 106,
+                "start": 89,
+                "end": 106,
+                "landmark": {
+                    "class": "ChainBlock",
+                    "array": true,
+                    "method": true
+                },
+                "data": {
+                    "foundkey": ")",
+                    "index": [
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 0,
+                            "end": 5,
+                            "landmark": {
+                                "class": "VariableInstanceBlock",
+                                "empty": true
+                            },
+                            "data": {
+                                "name": "chain"
+                            },
+                            "isBlock": false,
+                            "index": 0,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        }
+                    ],
+                    "values": [],
+                    "_end": []
+                },
+                "isBlock": true,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [
+                    {
+                        "blockStart": 106,
+                        "blockEnd": 106,
+                        "start": 99,
+                        "end": 106,
+                        "landmark": {
+                            "class": "SubChainBlock1"
+                        },
+                        "data": {
+                            "word": "chain",
+                            "_end": []
+                        },
+                        "isBlock": true,
+                        "index": 0,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    }
+                ],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 120,
+        "blockEnd": 138,
+        "start": 105,
+        "end": 138,
+        "landmark": {
+            "class": "ChainBlock",
+            "array": true
+        },
+        "data": {
+            "variable": "chain",
+            "foundkey": "]",
+            "index": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 1,
+                    "end": 7,
+                    "landmark": {
+                        "class": "StringBlock"
+                    },
+                    "data": {
+                        "string": "array"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 5,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": 130,
+                "blockEnd": 139,
+                "start": 119,
+                "end": 139,
+                "landmark": {
+                    "class": "ChainBlock",
+                    "array": true,
+                    "method": true
+                },
+                "data": {
+                    "foundkey": ")",
+                    "index": [
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 0,
+                            "end": 5,
+                            "landmark": {
+                                "class": "VariableInstanceBlock",
+                                "empty": true
+                            },
+                            "data": {
+                                "name": "chain"
+                            },
+                            "isBlock": false,
+                            "index": 0,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        }
+                    ],
+                    "values": [],
+                    "_end": []
+                },
+                "isBlock": true,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [
+                    {
+                        "blockStart": 139,
+                        "blockEnd": 139,
+                        "start": 128,
+                        "end": 139,
+                        "landmark": {
+                            "class": "ChainBlock",
+                            "array": true
+                        },
+                        "data": {
+                            "foundkey": "]",
+                            "index": [
+                                {
+                                    "blockStart": null,
+                                    "blockEnd": null,
+                                    "start": 1,
+                                    "end": 7,
+                                    "landmark": {
+                                        "class": "StringBlock"
+                                    },
+                                    "data": {
+                                        "string": "chain"
+                                    },
+                                    "isBlock": false,
+                                    "index": 0,
+                                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                                    "path": [],
+                                    "children": [],
+                                    "comments": []
+                                }
+                            ],
+                            "_end": []
+                        },
+                        "isBlock": true,
+                        "index": 0,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    }
+                ],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 160,
+        "blockEnd": 166,
+        "start": 138,
+        "end": 166,
+        "landmark": {
+            "class": "ChainBlock",
+            "array": true
+        },
+        "data": {
+            "first": "chain",
+            "second": "second",
+            "foundkey": "]",
+            "index": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 1,
+                    "end": 7,
+                    "landmark": {
+                        "class": "StringBlock"
+                    },
+                    "data": {
+                        "string": "array"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 6,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": 167,
+                "blockEnd": 167,
+                "start": 160,
+                "end": 167,
+                "landmark": {
+                    "class": "SubChainBlock1"
+                },
+                "data": {
+                    "word": "chain",
+                    "_end": []
+                },
+                "isBlock": true,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 188,
+        "blockEnd": 197,
+        "start": 166,
+        "end": 197,
+        "landmark": {
+            "class": "ChainBlock",
+            "array": true
+        },
+        "data": {
+            "first": "chain",
+            "second": "second",
+            "foundkey": "]",
+            "index": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 1,
+                    "end": 7,
+                    "landmark": {
+                        "class": "StringBlock"
+                    },
+                    "data": {
+                        "string": "array"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 7,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": 198,
+                "blockEnd": 198,
+                "start": 187,
+                "end": 198,
+                "landmark": {
+                    "class": "ChainBlock",
+                    "array": true
+                },
+                "data": {
+                    "foundkey": "]",
+                    "index": [
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 1,
+                            "end": 7,
+                            "landmark": {
+                                "class": "StringBlock"
+                            },
+                            "data": {
+                                "string": "chain"
+                            },
+                            "isBlock": false,
+                            "index": 0,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        }
+                    ],
+                    "_end": []
+                },
+                "isBlock": true,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 219,
+        "blockEnd": 234,
+        "start": 197,
+        "end": 234,
+        "landmark": {
+            "class": "ChainBlock",
+            "array": true
+        },
+        "data": {
+            "first": "chain",
+            "second": "second",
+            "foundkey": "]",
+            "index": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 1,
+                    "end": 7,
+                    "landmark": {
+                        "class": "StringBlock"
+                    },
+                    "data": {
+                        "string": "array"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 8,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": 235,
+                "blockEnd": 235,
+                "start": 219,
+                "end": 235,
+                "landmark": {
+                    "class": "ChainBlock",
+                    "array": true
+                },
+                "data": {
+                    "word": "chain",
+                    "foundkey": "]",
+                    "index": [
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 1,
+                            "end": 7,
+                            "landmark": {
+                                "class": "StringBlock"
+                            },
+                            "data": {
+                                "string": "chain"
+                            },
+                            "isBlock": false,
+                            "index": 0,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        }
+                    ],
+                    "_end": []
+                },
+                "isBlock": true,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 249,
+        "blockEnd": 249,
+        "start": 234,
+        "end": 249,
+        "landmark": {
+            "class": "ChainBlock",
+            "first": true
+        },
+        "data": {
+            "first": "chain",
+            "private": true,
+            "second": "second",
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 9,
         "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
         "path": [],
         "children": [],

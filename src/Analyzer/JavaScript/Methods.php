@@ -46,6 +46,7 @@ abstract class Methods
             "optionalchain" => "optionalChain",
             "templateliteral" => "templateLiteral",
             "consecutivecaller" => "consecutiveCaller",
+            "parentischainable" => "parentIsChainable", // @TODO Unit tests
             // @DEPRICATED
             // "varendNext" => function (CustomMethodEssentialsModel $essentials): bool
             // {
@@ -308,9 +309,9 @@ abstract class Methods
     /**
      * @codeCoverageIgnore
      */
-    public static function decrease(CustomMethodEssentialsModel $essentials, int $amount = 1): void
+    public static function decrease(CustomMethodEssentialsModel $essentials, int|string $amount = 1): void
     {
-        $essentials->i -= $amount;
+        $essentials->i -= (int) $amount;
     }
 
     public static function assignment(CustomMethodEssentialsModel $essentials): bool
@@ -573,5 +574,28 @@ abstract class Methods
         $essentials->appendData($resolver->getScript(), 'children');
 
         return true;
+    }
+
+    public static function parentIsChainable(CustomMethodEssentialsModel $essentials): bool
+    {
+        $parent = $essentials->getParent();
+        $reader = $essentials->getReader();
+        if (!($parent instanceof BlockModel)) {
+            return false;
+        }
+        $script = $reader->getCurrent()['script'];
+        $previousPos = $reader->getCurrent()['caret'] - 1;
+        if (is_null($script) || is_null($script->getLetter($previousPos))) {
+            return false;
+        }
+        list($startOfBlock, $pos) = Str::getPreviousLetter($previousPos, $script);
+        $chainable = [
+            ")" => true,
+            "]" => true,
+        ];
+        if ($chainable[$startOfBlock] ?? false) {
+            return true;
+        }
+        return false;
     }
 }

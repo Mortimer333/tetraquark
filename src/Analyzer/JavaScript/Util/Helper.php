@@ -83,12 +83,22 @@ abstract class Helper
             $essentials->getMethods()['varend']($essentials);
             $essentials->setData($data);
             return $essentials->getI();
-        } elseif ($letter == "(") {
+        } elseif ($letter == "(" || $letter == "[") {
             $data = $essentials->getData();
             $essentials->setI($newPos + 1);
-            $essentials->getMethods()['find']($essentials, ")", "(", "find");
+            if ($letter == "(") {
+                $essentials->getMethods()['find']($essentials, ")", "(", "find");
+            } else {
+                $essentials->getMethods()['find']($essentials, "]", "[", "find");
+            }
             $essentials->setData($data);
             return self::getNextChain($essentials, $essentials->getI() + 1);
+        } elseif ($letter == '?') {
+            list($letter, $dotPos) = Str::getNextLetter($newPos + 1, $content);
+            if ($letter == '.') {
+                list($nextWord, $wordPos) = Str::getNextWord($dotPos + 1, $content, !Content::isWhitespace($content->getLetter($dotPos + 1)));
+                return self::getNextChain($essentials, $wordPos + 1);
+            }
         }
 
         return $pos;
