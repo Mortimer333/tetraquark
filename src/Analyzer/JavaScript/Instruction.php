@@ -37,7 +37,7 @@ abstract class Instruction
             ...LandmarkStorage::getSpreadArray(),
             ...LandmarkStorage::getNewInstance(),
             ...LandmarkStorage::getSymbol(),
-            ...LandmarkStorage::getYeld(),
+            ...LandmarkStorage::getYield(),
             ...LandmarkStorage::getVariableDefinitions(),
             ...LandmarkStorage::getVariable(),
             ...LandmarkStorage::getScope(),
@@ -54,10 +54,10 @@ abstract class Instruction
             ...LandmarkStorage::getStaticAsync(),
             ...LandmarkStorage::getTry(),
             ...LandmarkStorage::getCatch(),
-            ...LandmarkStorage::getFinally(), // <-
+            ...LandmarkStorage::getFinally(),
             ...LandmarkStorage::getFirstInChain(),
             ...LandmarkStorage::getNextInChain(),
-            ...LandmarkStorage::getArrayChain(),
+            ...LandmarkStorage::getArrayChain(), // <-
             ...LandmarkStorage::getDoWhile(),
             ...LandmarkStorage::getWhileAndShortWhile(),
             ...LandmarkStorage::getElseAndElseIf(),

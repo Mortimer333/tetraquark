@@ -905,7 +905,7 @@ abstract class LandmarkStorage
         ];
     }
 
-    public static function getYeld(): array
+    public static function getYield(): array
     {
         return [
             self::WORD_SEPERATOR_SEGMENT . 'yield/"*">isgenerator|e\\' => [
