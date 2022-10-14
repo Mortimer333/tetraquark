@@ -44,7 +44,7 @@ abstract class Instruction
             ...LandmarkStorage::getNumber(),
             ...LandmarkStorage::getStaticVariable(),
             ...LandmarkStorage::getArrowFunctionWithAsync(),
-            ...LandmarkStorage::getConstantMethodAndClassMethodAndCaller(), // <-
+            ...LandmarkStorage::getConstantMethodAndClassMethodAndCaller(),
             ...LandmarkStorage::getConsecutiveCaller(),
             ...LandmarkStorage::getGetter(),
             ...LandmarkStorage::getSetter(),
@@ -54,7 +54,7 @@ abstract class Instruction
             ...LandmarkStorage::getStaticAsync(),
             ...LandmarkStorage::getTry(),
             ...LandmarkStorage::getCatch(),
-            ...LandmarkStorage::getFinally(),
+            ...LandmarkStorage::getFinally(), // <-
             ...LandmarkStorage::getFirstInChain(),
             ...LandmarkStorage::getNextInChain(),
             ...LandmarkStorage::getDoWhile(),

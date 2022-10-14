@@ -377,7 +377,7 @@ abstract class LandmarkStorage
     public static function getConsecutiveCaller(): array
     {
         return [
-            '(/consecutivecaller>decrease\\' => [
+            ')/s|e\(/consecutivecaller>decrease\\' => [
                 "class" => "CallerBlock",
                 "consecutive" => true,
                 "_block" => self::_BLOCK_PARENTHESIS,
