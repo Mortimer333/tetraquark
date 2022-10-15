@@ -294,9 +294,6 @@ abstract class Methods
         return $res;
     }
 
-    /**
-     * @codeCoverageIgnore
-     */
     public static function case(CustomMethodEssentialsModel $essentials): bool
     {
         $skip = [
@@ -520,9 +517,9 @@ abstract class Methods
                     $search = null;
                     // If next letter after ), }, ] is not connector (means that there is not operation next)
                     // finish search for varend
-                    list($nextLetter, $nextPos) = Str::getNextLetter($i + 1, $content);
+                    // list($nextLetter, $nextPos) = Str::getNextLetter($i + 1, $content);
 
-                    if (!JsValidate::isOperator($nextLetter)) {
+                    if (Helper::checkIfValidVarEnd($essentials, $i + 1)) {
                         Helper::finishVarEnd($essentials, $i, $letter);
                         return true;
                     }

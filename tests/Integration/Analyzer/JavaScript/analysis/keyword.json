@@ -5,11 +5,9 @@
         "start": 0,
         "end": 6,
         "landmark": {
-            "class": "KeywordBlock"
+            "class": "BreakBlock"
         },
-        "data": {
-            "keyword": "break"
-        },
+        "data": {},
         "isBlock": false,
         "index": 0,
         "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",

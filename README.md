@@ -26,6 +26,7 @@ php test/test.php > test/test.log 2>&1
 
 New Plan:
 1. Allow method to mark themself as cacheable. Some of them do the same operation every time (symbol), we could just cache them
+2. Allow for "after methods" (>) to be marked as to be done after the script founds block
 
 Plan:
 0. [DONE] Merge it to master and create new branch
@@ -52,14 +53,14 @@ Plan:
      - [DONE] Extend - with extended instructions
      - [DONE] Methods - with all default methods
      - [DONE] Settings - with all settings (comments remove)
-     - Comments - with leave comments
-     - Blocks - with blocks (children)
+     - [DONE] Comments - with leave comments
+     - [DONE] Blocks - with blocks (children)
    - each test have to check:
      - with formal syntax - `const a = 'a';`
      - with lazy syntax - `const a='a'`
      - with weird syntax - `const a\n\t=\n\t\t'a'`
-   - all of them should be inside tests/Integration folder
-8. Figure out better schema handling and extending (as current setup have to be upgraded a lot)
+     - all of them should be inside tests/Integration folder
+8. [DONE] Figure out better schema handling and extending (as current setup have to be upgraded a lot)
 
 TODO:
 1. [DONE] Some problem with missed in caller block -word.funcion = 12 + func(1 , 23);

@@ -63,10 +63,10 @@ abstract class Instruction
             ...LandmarkStorage::getElseAndElseIf(),
             ...LandmarkStorage::getForAndShortFor(),
             ...LandmarkStorage::getForOfAndInCondition(),
-            ...LandmarkStorage::getFunctionAndGenerator(), // <-
+            ...LandmarkStorage::getFunctionAndGenerator(),
             ...LandmarkStorage::getObjectAndSpreadObject(),
             ...LandmarkStorage::getReturn(),
-            ...LandmarkStorage::getSwitchAndCases(),
+            ...LandmarkStorage::getSwitchAndCases(), // <-
             ...LandmarkStorage::getImport(),
             ...LandmarkStorage::getExport(),
         ];

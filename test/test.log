@@ -1,36 +1,17 @@
 [
     {
-        "blockStart": 17,
-        "blockEnd": 119,
+        "blockStart": 8,
+        "blockEnd": 53,
         "start": 0,
-        "end": 120,
+        "end": 53,
         "landmark": {
-            "class": "SwitchBlock"
+            "class": "ImportBlock2"
         },
         "data": {
-            "foundkey": ")",
-            "values": [
-                {
-                    "blockStart": null,
-                    "blockEnd": null,
-                    "start": 0,
-                    "end": 5,
-                    "landmark": {
-                        "class": "VariableInstanceBlock",
-                        "empty": true
-                    },
-                    "data": {
-                        "name": "case2"
-                    },
-                    "isBlock": false,
-                    "index": 0,
-                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
-                    "path": [],
-                    "children": [],
-                    "comments": []
-                }
-            ],
-            "_end": []
+            "_end": {
+                "var": "defaultExport, { export1 } from \"module-name\";",
+                "stop": ";"
+            }
         },
         "isBlock": true,
         "index": 0,
@@ -38,104 +19,47 @@
         "path": [],
         "children": [
             {
-                "blockStart": 28,
-                "blockEnd": 46,
-                "start": 16,
-                "end": 46,
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 7,
+                "end": 20,
                 "landmark": {
-                    "class": "SwitchCaseBlock"
+                    "class": "VariableInstanceBlock",
+                    "empty": true
                 },
                 "data": {
-                    "case": "1",
-                    "_end": []
+                    "name": "defaultExport"
                 },
-                "isBlock": true,
+                "isBlock": false,
                 "index": 0,
                 "parent": "Tetraquark\\Model\\Block\\BlockModel",
                 "path": [],
-                "children": [
-                    {
-                        "blockStart": null,
-                        "blockEnd": null,
-                        "start": 36,
-                        "end": 41,
-                        "landmark": {
-                            "class": "StringBlock"
-                        },
-                        "data": {
-                            "string": "case"
-                        },
-                        "isBlock": false,
-                        "index": 0,
-                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
-                        "path": [],
-                        "children": [],
-                        "comments": []
-                    }
-                ],
+                "children": [],
                 "comments": []
             },
             {
-                "blockStart": 55,
-                "blockEnd": 86,
-                "start": 47,
-                "end": 86,
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 21,
+                "end": 21,
                 "landmark": {
-                    "class": "SwitchCaseBlock"
+                    "class": "CommaBlock"
                 },
-                "data": {
-                    "case": "2",
-                    "_end": []
-                },
-                "isBlock": true,
+                "data": [],
+                "isBlock": false,
                 "index": 1,
                 "parent": "Tetraquark\\Model\\Block\\BlockModel",
                 "path": [],
-                "children": [
-                    {
-                        "blockStart": null,
-                        "blockEnd": null,
-                        "start": 47,
-                        "end": 54,
-                        "landmark": {
-                            "class": "StringBlock"
-                        },
-                        "data": {
-                            "string": "case 2"
-                        },
-                        "isBlock": false,
-                        "index": 0,
-                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
-                        "path": [],
-                        "children": [],
-                        "comments": []
-                    },
-                    {
-                        "blockStart": null,
-                        "blockEnd": null,
-                        "start": 55,
-                        "end": 69,
-                        "landmark": {
-                            "class": "BreakCaseBlock"
-                        },
-                        "data": [],
-                        "isBlock": false,
-                        "index": 1,
-                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
-                        "path": [],
-                        "children": [],
-                        "comments": []
-                    }
-                ],
+                "children": [],
                 "comments": []
             },
             {
-                "blockStart": 100,
-                "blockEnd": 118,
-                "start": 87,
-                "end": 118,
+                "blockStart": 24,
+                "blockEnd": 32,
+                "start": 23,
+                "end": 33,
                 "landmark": {
-                    "class": "SwitchDefaultCaseBlock"
+                    "class": "ObjectBlock"
                 },
                 "data": {
                     "_end": []
@@ -148,13 +72,14 @@
                     {
                         "blockStart": null,
                         "blockEnd": null,
-                        "start": 92,
-                        "end": 101,
+                        "start": 23,
+                        "end": 30,
                         "landmark": {
-                            "class": "StringBlock"
+                            "class": "VariableInstanceBlock",
+                            "empty": true
                         },
                         "data": {
-                            "string": "default"
+                            "name": "export1"
                         },
                         "isBlock": false,
                         "index": 0,
@@ -164,6 +89,24 @@
                         "comments": []
                     }
                 ],
+                "comments": []
+            },
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 34,
+                "end": 53,
+                "landmark": {
+                    "class": "FromBlock"
+                },
+                "data": {
+                    "string": "module-name"
+                },
+                "isBlock": false,
+                "index": 3,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
                 "comments": []
             }
         ],

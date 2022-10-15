@@ -966,7 +966,7 @@ abstract class LandmarkStorage
         ];
 
         return [
-            self::WORD_SEPERATOR_SEGMENT . 'import/s|e\\' => [
+            self::WORD_SEPERATOR_SEGMENT . 'import' => [
                 "_extend" => [
                     '/s|e\(' => [
                         "class" => "CallerBlock",
@@ -976,7 +976,7 @@ abstract class LandmarkStorage
                     '/s\\' => [
                         "_block" => self::_BLOCK_VAREND_NO_COMMA,
                         "class" => "ImportBlock",
-                    ]
+                    ],
                 ]
             ],
             self::WORD_SEPERATOR_SEGMENT . '/word:"name"\/s\as/s\/word:"alias"\\' => [
@@ -992,7 +992,7 @@ abstract class LandmarkStorage
                 "class" => "ImportAliasBlock",
                 "default" => true,
             ],
-            self::WORD_SEPERATOR_SEGMENT . 'from/s\\' => [
+            self::WORD_SEPERATOR_SEGMENT . 'from/s|e\\' => [
                 "_extend" => [
                     self::APOSTROPHE_SEGMENT => $fromItemBlock,
                     self::TEMPLATE_LITERAL_SEGMENT => $fromItemBlock,
