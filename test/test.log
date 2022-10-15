@@ -1,28 +1,26 @@
 [
     {
-        "blockStart": 18,
-        "blockEnd": 22,
+        "blockStart": 17,
+        "blockEnd": 119,
         "start": 0,
-        "end": 22,
+        "end": 120,
         "landmark": {
-            "class": "ChainBlock",
-            "array": true,
-            "var": true
+            "class": "SwitchBlock"
         },
         "data": {
-            "word": "chain",
-            "foundkey": "]",
-            "index": [
+            "foundkey": ")",
+            "values": [
                 {
                     "blockStart": null,
                     "blockEnd": null,
-                    "start": 1,
-                    "end": 7,
+                    "start": 0,
+                    "end": 5,
                     "landmark": {
-                        "class": "StringBlock"
+                        "class": "VariableInstanceBlock",
+                        "empty": true
                     },
                     "data": {
-                        "string": "chain"
+                        "name": "case2"
                     },
                     "isBlock": false,
                     "index": 0,
@@ -32,11 +30,7 @@
                     "comments": []
                 }
             ],
-            "negation": " ",
-            "_end": {
-                "var": " 'a'\n",
-                "stop": "\n"
-            }
+            "_end": []
         },
         "isBlock": true,
         "index": 0,
@@ -44,21 +38,132 @@
         "path": [],
         "children": [
             {
-                "blockStart": null,
-                "blockEnd": null,
-                "start": 18,
-                "end": 21,
+                "blockStart": 28,
+                "blockEnd": 46,
+                "start": 16,
+                "end": 46,
                 "landmark": {
-                    "class": "StringBlock"
+                    "class": "SwitchCaseBlock"
                 },
                 "data": {
-                    "string": "a"
+                    "case": "1",
+                    "_end": []
                 },
-                "isBlock": false,
+                "isBlock": true,
                 "index": 0,
                 "parent": "Tetraquark\\Model\\Block\\BlockModel",
                 "path": [],
-                "children": [],
+                "children": [
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 36,
+                        "end": 41,
+                        "landmark": {
+                            "class": "StringBlock"
+                        },
+                        "data": {
+                            "string": "case"
+                        },
+                        "isBlock": false,
+                        "index": 0,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    }
+                ],
+                "comments": []
+            },
+            {
+                "blockStart": 55,
+                "blockEnd": 86,
+                "start": 47,
+                "end": 86,
+                "landmark": {
+                    "class": "SwitchCaseBlock"
+                },
+                "data": {
+                    "case": "2",
+                    "_end": []
+                },
+                "isBlock": true,
+                "index": 1,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 47,
+                        "end": 54,
+                        "landmark": {
+                            "class": "StringBlock"
+                        },
+                        "data": {
+                            "string": "case 2"
+                        },
+                        "isBlock": false,
+                        "index": 0,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    },
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 55,
+                        "end": 69,
+                        "landmark": {
+                            "class": "BreakCaseBlock"
+                        },
+                        "data": [],
+                        "isBlock": false,
+                        "index": 1,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    }
+                ],
+                "comments": []
+            },
+            {
+                "blockStart": 100,
+                "blockEnd": 118,
+                "start": 87,
+                "end": 118,
+                "landmark": {
+                    "class": "SwitchDefaultCaseBlock"
+                },
+                "data": {
+                    "_end": []
+                },
+                "isBlock": true,
+                "index": 2,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 92,
+                        "end": 101,
+                        "landmark": {
+                            "class": "StringBlock"
+                        },
+                        "data": {
+                            "string": "default"
+                        },
+                        "isBlock": false,
+                        "index": 0,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    }
+                ],
                 "comments": []
             }
         ],

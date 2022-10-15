@@ -1,0 +1,231 @@
+[
+    {
+        "blockStart": 8,
+        "blockEnd": 11,
+        "start": 0,
+        "end": 11,
+        "landmark": {
+            "class": "ReturnBlock"
+        },
+        "data": {
+            "_end": {
+                "var": "'a'\n",
+                "stop": "\n"
+            }
+        },
+        "isBlock": true,
+        "index": 0,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 8,
+                "end": 11,
+                "landmark": {
+                    "class": "StringBlock"
+                },
+                "data": {
+                    "string": "a"
+                },
+                "isBlock": false,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 19,
+        "blockEnd": 34,
+        "start": 11,
+        "end": 34,
+        "landmark": {
+            "class": "ReturnBlock"
+        },
+        "data": {
+            "_end": {
+                "var": "function () {\n\n}",
+                "stop": "}"
+            }
+        },
+        "isBlock": true,
+        "index": 1,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": 32,
+                "blockEnd": 33,
+                "start": 18,
+                "end": 34,
+                "landmark": {
+                    "class": "FunctionBlock",
+                    "anonymous": true
+                },
+                "data": {
+                    "foundkey": ")",
+                    "arguments": [],
+                    "_end": []
+                },
+                "isBlock": true,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 43,
+        "blockEnd": 51,
+        "start": 35,
+        "end": 51,
+        "landmark": {
+            "class": "ReturnBlock"
+        },
+        "data": {
+            "_end": {
+                "var": "2 +3 \/54\n",
+                "stop": "\n"
+            }
+        },
+        "isBlock": true,
+        "index": 2,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 43,
+                "end": 43,
+                "landmark": {
+                    "class": "NumberBlock"
+                },
+                "data": {
+                    "number": "2"
+                },
+                "isBlock": false,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            },
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 45,
+                "end": 45,
+                "landmark": {
+                    "class": "SymbolBlock",
+                    "type": "single"
+                },
+                "data": {
+                    "first": "+"
+                },
+                "isBlock": false,
+                "index": 1,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            },
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 46,
+                "end": 46,
+                "landmark": {
+                    "class": "NumberBlock"
+                },
+                "data": {
+                    "number": "3"
+                },
+                "isBlock": false,
+                "index": 2,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            },
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 48,
+                "end": 48,
+                "landmark": {
+                    "class": "SymbolBlock",
+                    "type": "single"
+                },
+                "data": {
+                    "first": "\/"
+                },
+                "isBlock": false,
+                "index": 3,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            },
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 49,
+                "end": 50,
+                "landmark": {
+                    "class": "NumberBlock"
+                },
+                "data": {
+                    "number": "54"
+                },
+                "isBlock": false,
+                "index": 4,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": null,
+        "blockEnd": null,
+        "start": 51,
+        "end": 59,
+        "landmark": {
+            "class": "ReturnBlock"
+        },
+        "data": [],
+        "isBlock": false,
+        "index": 3,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": null,
+        "blockEnd": null,
+        "start": 60,
+        "end": 68,
+        "landmark": {
+            "class": "ReturnBlock"
+        },
+        "data": [],
+        "isBlock": false,
+        "index": 4,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    }
+]

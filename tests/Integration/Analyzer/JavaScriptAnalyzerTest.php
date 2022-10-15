@@ -118,7 +118,9 @@ class JavaScriptAnalyzerTest extends BaseAnalyzer
             // "for and short for" => ['forandshortfor', $reader],
             // "for in for of" => ['forinforof', $reader],
             // "function and generator" => ['functionandgenerator', $reader],
-            "" => ['', $reader, true],
+            // "object and spread object" => ['objectandspreadobject', $reader],
+            // "return" => ['return', $reader],
+            "switch and cases" => ['switchandcases', $reader, true],
         ];
     }
 

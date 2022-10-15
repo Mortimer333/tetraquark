@@ -1,0 +1,546 @@
+[
+    {
+        "blockStart": 22,
+        "blockEnd": 73,
+        "start": 0,
+        "end": 74,
+        "landmark": {
+            "class": "SwitchBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "values": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 10,
+                    "landmark": {
+                        "class": "VariableInstanceBlock",
+                        "empty": true
+                    },
+                    "data": {
+                        "name": "expression"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 0,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": 42,
+                "blockEnd": 57,
+                "start": 21,
+                "end": 57,
+                "landmark": {
+                    "class": "SwitchCaseBlock"
+                },
+                "data": {
+                    "case": "expression",
+                    "_end": []
+                },
+                "isBlock": true,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 41,
+                        "end": 56,
+                        "landmark": {
+                            "class": "BreakBlock"
+                        },
+                        "data": [],
+                        "isBlock": false,
+                        "index": 0,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    }
+                ],
+                "comments": []
+            },
+            {
+                "blockStart": 71,
+                "blockEnd": 72,
+                "start": 58,
+                "end": 72,
+                "landmark": {
+                    "class": "SwitchDefaultCaseBlock"
+                },
+                "data": {
+                    "_end": []
+                },
+                "isBlock": true,
+                "index": 1,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 86,
+        "blockEnd": 85,
+        "start": 75,
+        "end": 86,
+        "landmark": {
+            "class": "SwitchBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "values": [],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 1,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 104,
+        "blockEnd": 206,
+        "start": 87,
+        "end": 207,
+        "landmark": {
+            "class": "SwitchBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "values": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 5,
+                    "landmark": {
+                        "class": "VariableInstanceBlock",
+                        "empty": true
+                    },
+                    "data": {
+                        "name": "case2"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 2,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": 115,
+                "blockEnd": 133,
+                "start": 103,
+                "end": 133,
+                "landmark": {
+                    "class": "SwitchCaseBlock"
+                },
+                "data": {
+                    "case": "1",
+                    "_end": []
+                },
+                "isBlock": true,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 123,
+                        "end": 128,
+                        "landmark": {
+                            "class": "StringBlock"
+                        },
+                        "data": {
+                            "string": "case"
+                        },
+                        "isBlock": false,
+                        "index": 0,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    }
+                ],
+                "comments": []
+            },
+            {
+                "blockStart": 142,
+                "blockEnd": 173,
+                "start": 134,
+                "end": 173,
+                "landmark": {
+                    "class": "SwitchCaseBlock"
+                },
+                "data": {
+                    "case": "2",
+                    "_end": []
+                },
+                "isBlock": true,
+                "index": 1,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 47,
+                        "end": 54,
+                        "landmark": {
+                            "class": "StringBlock"
+                        },
+                        "data": {
+                            "string": "case 2"
+                        },
+                        "isBlock": false,
+                        "index": 0,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    },
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 55,
+                        "end": 69,
+                        "landmark": {
+                            "class": "BreakBlock"
+                        },
+                        "data": [],
+                        "isBlock": false,
+                        "index": 1,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    }
+                ],
+                "comments": []
+            },
+            {
+                "blockStart": 187,
+                "blockEnd": 205,
+                "start": 174,
+                "end": 205,
+                "landmark": {
+                    "class": "SwitchDefaultCaseBlock"
+                },
+                "data": {
+                    "_end": []
+                },
+                "isBlock": true,
+                "index": 2,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 92,
+                        "end": 101,
+                        "landmark": {
+                            "class": "StringBlock"
+                        },
+                        "data": {
+                            "string": "default"
+                        },
+                        "isBlock": false,
+                        "index": 0,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    }
+                ],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 231,
+        "blockEnd": 458,
+        "start": 208,
+        "end": 459,
+        "landmark": {
+            "class": "SwitchBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "values": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 10,
+                    "landmark": {
+                        "class": "VariableInstanceBlock",
+                        "empty": true
+                    },
+                    "data": {
+                        "name": "expression"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 3,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": 251,
+                "blockEnd": 442,
+                "start": 230,
+                "end": 442,
+                "landmark": {
+                    "class": "SwitchCaseBlock"
+                },
+                "data": {
+                    "case": "expression",
+                    "_end": []
+                },
+                "isBlock": true,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [
+                    {
+                        "blockStart": 263,
+                        "blockEnd": 426,
+                        "start": 250,
+                        "end": 426,
+                        "landmark": {
+                            "class": "LetVariableBlock"
+                        },
+                        "data": {
+                            "_end": {
+                                "var": "a = function () {\n            switch (expression2) {\n                case expression2:\n\n                    break;\n                default:\n\n            }\n        }",
+                                "stop": "}"
+                            }
+                        },
+                        "isBlock": true,
+                        "index": 0,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [
+                            {
+                                "blockStart": 266,
+                                "blockEnd": 426,
+                                "start": 262,
+                                "end": 426,
+                                "landmark": {
+                                    "class": "VariableInstanceBlock",
+                                    "replace": true
+                                },
+                                "data": {
+                                    "name": "a",
+                                    "negation": " ",
+                                    "_end": {
+                                        "var": " function () {\n            switch (expression2) {\n                case expression2:\n\n                    break;\n                default:\n\n            }\n        }",
+                                        "stop": "}"
+                                    }
+                                },
+                                "isBlock": true,
+                                "index": 0,
+                                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                                "path": [],
+                                "children": [
+                                    {
+                                        "blockStart": 279,
+                                        "blockEnd": 424,
+                                        "start": 265,
+                                        "end": 425,
+                                        "landmark": {
+                                            "class": "FunctionBlock",
+                                            "anonymous": true
+                                        },
+                                        "data": {
+                                            "foundkey": ")",
+                                            "arguments": [],
+                                            "_end": []
+                                        },
+                                        "isBlock": true,
+                                        "index": 0,
+                                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                                        "path": [],
+                                        "children": [
+                                            {
+                                                "blockStart": 313,
+                                                "blockEnd": 413,
+                                                "start": 278,
+                                                "end": 414,
+                                                "landmark": {
+                                                    "class": "SwitchBlock"
+                                                },
+                                                "data": {
+                                                    "foundkey": ")",
+                                                    "values": [
+                                                        {
+                                                            "blockStart": null,
+                                                            "blockEnd": null,
+                                                            "start": 0,
+                                                            "end": 11,
+                                                            "landmark": {
+                                                                "class": "VariableInstanceBlock",
+                                                                "empty": true
+                                                            },
+                                                            "data": {
+                                                                "name": "expression2"
+                                                            },
+                                                            "isBlock": false,
+                                                            "index": 0,
+                                                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                                                            "path": [],
+                                                            "children": [],
+                                                            "comments": []
+                                                        }
+                                                    ],
+                                                    "_end": []
+                                                },
+                                                "isBlock": true,
+                                                "index": 0,
+                                                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                                                "path": [],
+                                                "children": [
+                                                    {
+                                                        "blockStart": 346,
+                                                        "blockEnd": 373,
+                                                        "start": 312,
+                                                        "end": 373,
+                                                        "landmark": {
+                                                            "class": "SwitchCaseBlock"
+                                                        },
+                                                        "data": {
+                                                            "case": "expression2",
+                                                            "_end": []
+                                                        },
+                                                        "isBlock": true,
+                                                        "index": 0,
+                                                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                                                        "path": [],
+                                                        "children": [
+                                                            {
+                                                                "blockStart": null,
+                                                                "blockEnd": null,
+                                                                "start": 345,
+                                                                "end": 372,
+                                                                "landmark": {
+                                                                    "class": "BreakBlock"
+                                                                },
+                                                                "data": [],
+                                                                "isBlock": false,
+                                                                "index": 0,
+                                                                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                                                                "path": [],
+                                                                "children": [],
+                                                                "comments": []
+                                                            }
+                                                        ],
+                                                        "comments": []
+                                                    },
+                                                    {
+                                                        "blockStart": 399,
+                                                        "blockEnd": 412,
+                                                        "start": 374,
+                                                        "end": 412,
+                                                        "landmark": {
+                                                            "class": "SwitchDefaultCaseBlock"
+                                                        },
+                                                        "data": {
+                                                            "_end": []
+                                                        },
+                                                        "isBlock": true,
+                                                        "index": 1,
+                                                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                                                        "path": [],
+                                                        "children": [],
+                                                        "comments": []
+                                                    }
+                                                ],
+                                                "comments": []
+                                            }
+                                        ],
+                                        "comments": []
+                                    }
+                                ],
+                                "comments": []
+                            }
+                        ],
+                        "comments": []
+                    },
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 427,
+                        "end": 441,
+                        "landmark": {
+                            "class": "BreakBlock"
+                        },
+                        "data": [],
+                        "isBlock": false,
+                        "index": 1,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    }
+                ],
+                "comments": []
+            },
+            {
+                "blockStart": 456,
+                "blockEnd": 457,
+                "start": 443,
+                "end": 457,
+                "landmark": {
+                    "class": "SwitchDefaultCaseBlock"
+                },
+                "data": {
+                    "_end": []
+                },
+                "isBlock": true,
+                "index": 1,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            }
+        ],
+        "comments": []
+    }
+]

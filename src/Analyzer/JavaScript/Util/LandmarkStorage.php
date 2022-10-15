@@ -826,7 +826,7 @@ abstract class LandmarkStorage
         $objectItemBlock = [
             "class" => "ObjectValueBlock",
             "_block" => [
-                "end" => '/objectend\\',
+                "end" => '/varend\\',
                 "include_end" => true,
             ],
         ];
@@ -864,34 +864,51 @@ abstract class LandmarkStorage
     public static function getReturn(): array
     {
         return [
-            self::WORD_SEPERATOR_SEGMENT . 'return/s|symbol>decrease\\' => [
-                "_block" => self::_BLOCK_VAREND,
-                "class" => "ReturnBlock",
+            self::WORD_SEPERATOR_SEGMENT . 'return' => [
+                "_extend" => [
+                    '/s|symbol>decrease\\' => [
+                        "_block" => self::_BLOCK_VAREND,
+                        "class" => "ReturnBlock",
+                    ],
+                    '/s|e\;' => [
+                        "class" => "ReturnBlock",
+                    ]
+                ]
             ],
         ];
     }
 
     public static function getSwitchAndCases(): array
     {
+        $case = self::WORD_SEPERATOR_SEGMENT . 'case/s>decrease:6\\';
         return [
-            self::WORD_SEPERATOR_SEGMENT . 'switch/s|e\(' . self::genFindParenthesis('values') . '/s|e\{' => [
-                "class" => "SwitchBlock",
-                "_block" => self::_BLOCK_OBJECT,
-            ],
-            self::WORD_SEPERATOR_SEGMENT . 'case/s\/word:"case"\/s|e\:' => [
-                "class" => "SwitchCaseBlock",
-                "_block" => [
-                    "end" => ['/case\\', 'break'],
-                    "nested" => self::WORD_SEPERATOR_SEGMENT . 'case/s\/word:"case"\/s|e\:',
+            self::WORD_SEPERATOR_SEGMENT => [
+                "_extend" => [
+                    'switch/s|e\(' . self::genFindParenthesis('values') . '/s|e\{' => [
+                        "class" => "SwitchBlock",
+                        "_block" => self::_BLOCK_OBJECT,
+                    ],
+                    'case/s\/word:"case"|number:"case"\/s|e\:' => [
+                        "class" => "SwitchCaseBlock",
+                        "_block" => [
+                            "end" => ['/case\\'],
+                            "include_end" => true,
+                        ]
+                    ],
+                    'default/s|e\:' => [
+                        "class" => "SwitchDefaultCaseBlock",
+                        "_block" => [
+                            "end" => ['/case\\'],
+                            "include_end" => true,
+                        ]
+                    ],
+                    'break/";"|s|"}"|e\\' => [
+                        "class" => "BreakBlock",
+
+                    ]
                 ]
             ],
-            self::WORD_SEPERATOR_SEGMENT . 'default/s|e\:' => [
-                "class" => "SwitchDefaultCaseBlock",
-                "_block" => [
-                    "end" => ['/case\\', 'break'],
-                    "nested" => self::WORD_SEPERATOR_SEGMENT . 'default/s|e\:',
-                ]
-            ],
+
         ];
     }
 

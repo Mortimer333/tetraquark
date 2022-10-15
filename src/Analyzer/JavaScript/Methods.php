@@ -92,7 +92,7 @@ abstract class Methods
         return $essentials->getContent()->subStr($essentials->getI(), 4) == 'this';
     }
 
-    public static function number(CustomMethodEssentialsModel $essentials): bool
+    public static function number(CustomMethodEssentialsModel $essentials, string $name = "number"): bool
     {
         $content = $essentials->getContent();
         $letter = $essentials->getLetter();
@@ -112,7 +112,7 @@ abstract class Methods
             if (is_numeric($content->getLetter($end - 1)) && $content->getLetter($end) === '.') {
                 $end--;
             }
-            $essentials->appendData($content->iSubStr($essentials->getI(), $end), "number");
+            $essentials->appendData($content->iSubStr($essentials->getI(), $end), $name);
             $essentials->setI($end);
             return true;
         }
@@ -299,11 +299,65 @@ abstract class Methods
      */
     public static function case(CustomMethodEssentialsModel $essentials): bool
     {
-        $possibleCase = $essentials->getContent()->subStr($essentials->getI() + 1, 4);
-        if ($possibleCase === 'case') {
-            return true;
+        $skip = [
+            "{" => "}",
+            "(" => ")",
+            "[" => "]",
+            "//" => "\n",
+            "/*" => "*/",
+        ];
+        $data = $essentials->getData();
+        $start = $essentials->getI();
+        $search = null;
+        while ($essentials->getI() + 1 < $essentials->getContent()->getLength()) {
+            $letter = $essentials->getContent()->getLetter($essentials->getI());
+            $nextLetter = $essentials->getContent()->getLetter($essentials->getI() + 1);
+            if ($skip[$letter] ?? false) {
+                $key = $letter;
+                $search = $skip[$letter];
+            } elseif ($skip[$letter . $nextLetter] ?? false) {
+                $key = $letter . $nextLetter;
+                $search = $skip[$letter . $nextLetter];
+            } else {
+                $key = null;
+                $search = null;
+            }
+
+            if ($search) {
+                $essentials->i += strlen($key);
+                $essentials->getMethods()['find']($essentials, $search, $key);
+                $essentials->i++;
+                $letter = $essentials->getContent()->getLetter($essentials->getI());
+            }
+
+            if ($essentials->getMethods()['end']($essentials) || Content::isWhitespace($letter)) {
+                $case = $essentials->getContent()->iSubStr($essentials->getI() + 1, $essentials->getI() + 4);
+                $caseEnd = $essentials->getContent()->getLetter($essentials->getI() + 5);
+                if ($case == 'case' && (is_null($caseEnd) || Content::isWhitespace($caseEnd))) {
+                    $essentials->i--;
+                    break;
+                }
+                $break = $essentials->getContent()->iSubStr($essentials->getI() + 1, $essentials->getI() + 5);
+                $breakEnd = $essentials->getContent()->getLetter($essentials->getI() + 6);
+                if ($break == 'break' && (is_null($breakEnd) || $breakEnd == ';' || Content::isWhitespace($breakEnd))) {
+                    $essentials->i += 6;
+                    break;
+                }
+
+                $default = $essentials->getContent()->iSubStr($essentials->getI() + 1, $essentials->getI() + 7);
+                $defaultEnd = $essentials->getContent()->getLetter($essentials->getI() + 8);
+                if ($default == 'default' && (is_null($defaultEnd) || Content::isWhitespace($defaultEnd))) {
+                    $essentials->i--;
+                    break;
+                }
+            }
+            $essentials->i++;
         }
-        return false;
+
+        // Restore data
+        $essentials->setData($data);
+        $essentials->setLetter($essentials->getContent()->getLetter($essentials->getI()));
+        return true;
     }
 
     /**
