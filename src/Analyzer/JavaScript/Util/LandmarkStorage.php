@@ -667,13 +667,25 @@ abstract class LandmarkStorage
         return [
             self::WORD_SEPERATOR_SEGMENT . 'else' => [
                 "_extend" => [
-                    "/s|e\{" => [
+                    '/nparenthesis>decrease\\' => [
+                        "class" => "ShortElseBlock",
+                        "_block" => self::_BLOCK_SHORT,
+                    ],
+                    '/s|e\{' => [
                         "class" => "ElseBlock",
                         "_block" => self::_BLOCK_OBJECT,
                     ],
-                    '/s\if/s|e\(' . self::genFindParenthesis('values') . '/s|e\{' => [
-                        "class" => "ElseIfBlock",
-                        "_block" => self::_BLOCK_OBJECT,
+                    '/s\if/s|e\(' . self::genFindParenthesis('values') => [
+                        "_extend" => [
+                            '/s|e\{' => [
+                                "class" => "ElseIfBlock",
+                                "_block" => self::_BLOCK_OBJECT,
+                            ],
+                            '/nparenthesis>decrease\\' => [
+                                "class" => "ShortElseIfBlock",
+                                "_block" => self::_BLOCK_SHORT,
+                            ],
+                        ]
                     ]
                 ]
             ],

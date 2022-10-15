@@ -112,7 +112,11 @@ class JavaScriptAnalyzerTest extends BaseAnalyzer
             // "get set async with static" => ['getsetasyncstatic', $reader],
             // "try catch finally" => ['trycatchfinally', $reader],
             // "chain" => ['chain', $reader],
-            "dowhile" => ['dowhile', $reader, true],
+            // "do while" => ['dowhile', $reader],
+            // "while and short while" => ['whileandshortwhile', $reader],
+            // "while and short while" => ['elseifelse', $reader],
+            // "for and short for" => ['forandshortfor', $reader],
+            "for and short for" => ['forandshortfor', $reader, true],
         ];
     }
 

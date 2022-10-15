@@ -23,7 +23,7 @@ abstract class JavaScriptAnalyzerAbstract extends BaseAnalyzerAbstract
 
     public static function getPrepareMissed(array $settings = []): \Closure
     {
-        return fn(string $missed) => trim(rtrim(trim($missed), ';'));
+        return fn(string $missed) => trim(trim(trim($missed), ';'));
     }
 
     public static function getPrepareContent(array $settings = []): \Closure
