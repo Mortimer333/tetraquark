@@ -12,12 +12,14 @@ $analysis = $reader->read(__DIR__ . '/foo.js', true);
 Based on which analyser you use, your script will be categorized in blocks readable by other script and allowing you to automate any code related flow (like minifying).
 Currently, available analysers:
 - JavaScript - `Tetraquark\Analyzer\JavaScriptAnalyzerAbstract`
+
 You can also write your own analysers in quite easy way (that's why it's called a tool).
 
 # Write your own analyser
 Firstly your analyser must implement `Tetraquark\Contract\AnalyzerInterface` and must include those methods:
 - `getSchema` - this method must return the schema/settings of your analyser
 - `getName` - should return unique name of your analyser. It will be used as key for your compiled instructions, so in case of creation of new instance of `Reader` we can use cached map instead of generating it again.
+
 ## Recommendation
 It's recommended to extend `Tetraquark\Analyzer\BaseAnalyzerAbstract` as it already implements said interface and provides simplified solution for creating settings. By default, it doesn't require you to provide any setting with all of them set to default values (even name defaults to the name of the class `static::class`).
 After extending it you may choose which methods you want to replace and which leave to their default:
@@ -30,6 +32,7 @@ After extending it you may choose which methods you want to replace and which le
 - `getSharedEnds`
 - `getInstruction`
 - `getMethods`
+
 More on each setting in the next paragraph.
 **Each method requires from you to allow passing array into first parameter:**
 ```php
@@ -120,6 +123,7 @@ Created method must accept `string` as its first argument.
 Some of your instructions might start and end on the same letter. To accommodate it script allows passing which letters should be taken into consideration twice if they appear on the end of instruction. For example `let foo = 'bar';let bar = 'foo'` the semicolon here is actually part of the two of the instructions here:
 - it defines where `foo` ends
 - it tells us that there is a space between next `let` and other words and allows us to catalogue it as definition of variable.
+
 ```php
     public static function getSharedEnds(array $settings = []): array
     {
@@ -162,6 +166,7 @@ You are provided with following values to allow you identifying not needed part 
 - `string $letter` - current letter
 - `string $nextLetter` - next letter (just to make this easier for you)
 - `array $schema` - settings from your analyser
+
 ### `instructions`
 Most important part of the settings, actual definition of syntax. This value will hold all instructions for `Reader` to actually catalogue code into blocks which other scripts will understand. Just like with `comments` it uses trie map but in more _comfortable_ way:
 ```php
@@ -216,6 +221,7 @@ Array of functions which can be used in `instructions` to identify not obvious p
 - `s` - whitespace checker
 - `find` - finds passed strings
 - `read` - converts string into analysed blocks
+
 All of them are little more advanced than it seems, but I will describe them in details a little later.
 As it was said, methods can be used to catalogue more demanding syntaxes (method is depth are described after this example):
 Script:
@@ -277,6 +283,7 @@ Analysis:
 Break down:
 - `for/s|e\(` - `s` method checks if letter is whitespace and `e` method makes it optional, so whitespace might be there or not. This means that `for(` is valid, `for (` is valid or even `for \n\t (` is valid.
 - `/find:")":"(":"condition">read:"condition"\` - this tells script to search for `)` letter and if encounters `(` to skip another hit (which in this case would be `)`). Find can save skipped content into variable in `data` if we provide name for it (in our case it's `condition`) and thanks to this feature we can later analyse skipped part with `read` methods which we queued with `>` symbol. We also had to tell `read` what it should analyse by passing to it `condition`
+
 With this example in mind let's talk more in depth:
 
 #### OR symbol
@@ -299,6 +306,7 @@ You can also notice that I placed two colons next to each other. That means that
 Custom method must be:
 - named only using letter in lowercase
 - first parameter accepts `Tetraquark\Model\CustomMethodEssentialsModel`
+
 ```php
     "methods" => [
         "isprivate" =>  function (CustomMethodEssentialsModel $essentials): void
@@ -324,6 +332,7 @@ This model consists of (`current` is an important keyword which we will better u
 - `Tetraquark\Model\Block\BlockModel|null previous` -  previous sibling of the block
 - `array methods` - default and custom methods
 - `Reader reader` - the actual `Reader`
+
 All of those values can be accessed without use of any functions (as the model is dynamically generated (partially)) but for convenience each value has its own `getter` and `setter`. Also, array have `append` and `prepend` methods for easier management (so `data` and `methods`):
 ```php
     $essentials->getData(); // data array
@@ -336,6 +345,7 @@ And those values are actually linked and will be updated in the main object:
 - `letter`
 - `i`
 - `data`
+
 If you want to give option for additional parameters just define them in method:
 ```php
 "isnewline" => function (CustomMethodEssentialsModel $essentials, bool $checkR = false): bool
