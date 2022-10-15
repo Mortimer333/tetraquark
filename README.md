@@ -184,7 +184,7 @@ for (;;) {
 }
 ```
 with settings only containing `instructions` analysis will become (representation simplified):
-```json
+```
 [
     {
         "_missed": true,
@@ -236,7 +236,7 @@ Instruction:
     ];
 ```
 Analysis:
-```json
+```
 [
     {
         "landmark": {
