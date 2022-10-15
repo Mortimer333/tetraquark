@@ -19,10 +19,10 @@
         "path": [],
         "children": [
             {
-                "blockStart": 9,
-                "blockEnd": 24,
-                "start": 5,
-                "end": 24,
+                "blockStart": 8,
+                "blockEnd": 23,
+                "start": 4,
+                "end": 23,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "replace": true
@@ -43,8 +43,8 @@
                     {
                         "blockStart": null,
                         "blockEnd": null,
-                        "start": 9,
-                        "end": 23,
+                        "start": 8,
+                        "end": 22,
                         "landmark": {
                             "class": "StringBlock"
                         },
@@ -84,10 +84,10 @@
         "path": [],
         "children": [
             {
-                "blockStart": 33,
-                "blockEnd": 48,
-                "start": 29,
-                "end": 48,
+                "blockStart": 32,
+                "blockEnd": 47,
+                "start": 28,
+                "end": 47,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "replace": true
@@ -108,8 +108,8 @@
                     {
                         "blockStart": null,
                         "blockEnd": null,
-                        "start": 33,
-                        "end": 47,
+                        "start": 32,
+                        "end": 46,
                         "landmark": {
                             "class": "StringBlock"
                         },
@@ -149,10 +149,10 @@
         "path": [],
         "children": [
             {
-                "blockStart": 59,
-                "blockEnd": 76,
-                "start": 55,
-                "end": 76,
+                "blockStart": 58,
+                "blockEnd": 75,
+                "start": 54,
+                "end": 75,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "replace": true
@@ -173,8 +173,8 @@
                     {
                         "blockStart": null,
                         "blockEnd": null,
-                        "start": 59,
-                        "end": 75,
+                        "start": 58,
+                        "end": 74,
                         "landmark": {
                             "class": "StringBlock"
                         },
@@ -214,10 +214,10 @@
         "path": [],
         "children": [
             {
-                "blockStart": 87,
-                "blockEnd": 102,
-                "start": 83,
-                "end": 102,
+                "blockStart": 86,
+                "blockEnd": 101,
+                "start": 82,
+                "end": 101,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "replace": true
@@ -238,8 +238,8 @@
                     {
                         "blockStart": null,
                         "blockEnd": null,
-                        "start": 87,
-                        "end": 101,
+                        "start": 86,
+                        "end": 100,
                         "landmark": {
                             "class": "StringBlock"
                         },
@@ -279,10 +279,10 @@
         "path": [],
         "children": [
             {
-                "blockStart": 110,
-                "blockEnd": 125,
-                "start": 106,
-                "end": 125,
+                "blockStart": 109,
+                "blockEnd": 124,
+                "start": 105,
+                "end": 124,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "replace": true
@@ -303,8 +303,8 @@
                     {
                         "blockStart": null,
                         "blockEnd": null,
-                        "start": 110,
-                        "end": 124,
+                        "start": 109,
+                        "end": 123,
                         "landmark": {
                             "class": "StringBlock"
                         },
@@ -344,10 +344,10 @@
         "path": [],
         "children": [
             {
-                "blockStart": 135,
-                "blockEnd": 152,
-                "start": 131,
-                "end": 152,
+                "blockStart": 134,
+                "blockEnd": 151,
+                "start": 130,
+                "end": 151,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "replace": true
@@ -368,8 +368,8 @@
                     {
                         "blockStart": null,
                         "blockEnd": null,
-                        "start": 135,
-                        "end": 151,
+                        "start": 134,
+                        "end": 150,
                         "landmark": {
                             "class": "StringBlock"
                         },
@@ -409,10 +409,10 @@
         "path": [],
         "children": [
             {
-                "blockStart": 161,
-                "blockEnd": 176,
-                "start": 157,
-                "end": 176,
+                "blockStart": 160,
+                "blockEnd": 175,
+                "start": 156,
+                "end": 175,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "replace": true
@@ -433,8 +433,8 @@
                     {
                         "blockStart": null,
                         "blockEnd": null,
-                        "start": 161,
-                        "end": 175,
+                        "start": 160,
+                        "end": 174,
                         "landmark": {
                             "class": "StringBlock"
                         },
@@ -474,10 +474,10 @@
         "path": [],
         "children": [
             {
-                "blockStart": 184,
-                "blockEnd": 199,
-                "start": 180,
-                "end": 199,
+                "blockStart": 183,
+                "blockEnd": 198,
+                "start": 179,
+                "end": 198,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "replace": true
@@ -498,8 +498,8 @@
                     {
                         "blockStart": null,
                         "blockEnd": null,
-                        "start": 184,
-                        "end": 198,
+                        "start": 183,
+                        "end": 197,
                         "landmark": {
                             "class": "StringBlock"
                         },
@@ -539,10 +539,10 @@
         "path": [],
         "children": [
             {
-                "blockStart": 209,
-                "blockEnd": 226,
-                "start": 205,
-                "end": 226,
+                "blockStart": 208,
+                "blockEnd": 225,
+                "start": 204,
+                "end": 225,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "replace": true
@@ -563,8 +563,8 @@
                     {
                         "blockStart": null,
                         "blockEnd": null,
-                        "start": 209,
-                        "end": 225,
+                        "start": 208,
+                        "end": 224,
                         "landmark": {
                             "class": "StringBlock"
                         },
@@ -604,10 +604,10 @@
         "path": [],
         "children": [
             {
-                "blockStart": 235,
-                "blockEnd": 250,
-                "start": 231,
-                "end": 250,
+                "blockStart": 234,
+                "blockEnd": 249,
+                "start": 230,
+                "end": 249,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "replace": true
@@ -628,8 +628,8 @@
                     {
                         "blockStart": null,
                         "blockEnd": null,
-                        "start": 235,
-                        "end": 249,
+                        "start": 234,
+                        "end": 248,
                         "landmark": {
                             "class": "StringBlock"
                         },
@@ -669,10 +669,10 @@
         "path": [],
         "children": [
             {
-                "blockStart": 258,
-                "blockEnd": 273,
-                "start": 254,
-                "end": 273,
+                "blockStart": 257,
+                "blockEnd": 272,
+                "start": 253,
+                "end": 272,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "replace": true
@@ -693,8 +693,8 @@
                     {
                         "blockStart": null,
                         "blockEnd": null,
-                        "start": 258,
-                        "end": 272,
+                        "start": 257,
+                        "end": 271,
                         "landmark": {
                             "class": "StringBlock"
                         },
@@ -734,10 +734,10 @@
         "path": [],
         "children": [
             {
-                "blockStart": 283,
-                "blockEnd": 300,
-                "start": 279,
-                "end": 300,
+                "blockStart": 282,
+                "blockEnd": 299,
+                "start": 278,
+                "end": 299,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "replace": true
@@ -758,8 +758,8 @@
                     {
                         "blockStart": null,
                         "blockEnd": null,
-                        "start": 283,
-                        "end": 299,
+                        "start": 282,
+                        "end": 298,
                         "landmark": {
                             "class": "StringBlock"
                         },
@@ -799,10 +799,10 @@
         "path": [],
         "children": [
             {
-                "blockStart": 310,
-                "blockEnd": 325,
-                "start": 306,
-                "end": 325,
+                "blockStart": 309,
+                "blockEnd": 324,
+                "start": 305,
+                "end": 324,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "replace": true
@@ -823,8 +823,8 @@
                     {
                         "blockStart": null,
                         "blockEnd": null,
-                        "start": 310,
-                        "end": 324,
+                        "start": 309,
+                        "end": 323,
                         "landmark": {
                             "class": "StringBlock"
                         },
@@ -864,10 +864,10 @@
         "path": [],
         "children": [
             {
-                "blockStart": 333,
-                "blockEnd": 348,
-                "start": 329,
-                "end": 348,
+                "blockStart": 332,
+                "blockEnd": 347,
+                "start": 328,
+                "end": 347,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "replace": true
@@ -888,8 +888,8 @@
                     {
                         "blockStart": null,
                         "blockEnd": null,
-                        "start": 333,
-                        "end": 347,
+                        "start": 332,
+                        "end": 346,
                         "landmark": {
                             "class": "StringBlock"
                         },
@@ -929,10 +929,10 @@
         "path": [],
         "children": [
             {
-                "blockStart": 358,
-                "blockEnd": 375,
-                "start": 354,
-                "end": 375,
+                "blockStart": 357,
+                "blockEnd": 374,
+                "start": 353,
+                "end": 374,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "replace": true
@@ -953,8 +953,8 @@
                     {
                         "blockStart": null,
                         "blockEnd": null,
-                        "start": 358,
-                        "end": 374,
+                        "start": 357,
+                        "end": 373,
                         "landmark": {
                             "class": "StringBlock"
                         },
@@ -996,8 +996,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 381,
-                "end": 382,
+                "start": 380,
+                "end": 381,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "empty": true
@@ -1015,8 +1015,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 383,
-                "end": 383,
+                "start": 382,
+                "end": 382,
                 "landmark": {
                     "class": "CommaBlock"
                 },
@@ -1031,8 +1031,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 384,
-                "end": 385,
+                "start": 383,
+                "end": 384,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "empty": true
@@ -1050,8 +1050,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 386,
-                "end": 386,
+                "start": 385,
+                "end": 385,
                 "landmark": {
                     "class": "CommaBlock"
                 },
@@ -1066,8 +1066,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 387,
-                "end": 389,
+                "start": 386,
+                "end": 388,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "empty": true
@@ -1107,8 +1107,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 397,
-                "end": 398,
+                "start": 396,
+                "end": 397,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "empty": true
@@ -1126,8 +1126,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 399,
-                "end": 399,
+                "start": 398,
+                "end": 398,
                 "landmark": {
                     "class": "CommaBlock"
                 },
@@ -1142,8 +1142,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 400,
-                "end": 401,
+                "start": 399,
+                "end": 400,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "empty": true
@@ -1161,8 +1161,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 402,
-                "end": 402,
+                "start": 401,
+                "end": 401,
                 "landmark": {
                     "class": "CommaBlock"
                 },
@@ -1177,8 +1177,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 403,
-                "end": 405,
+                "start": 402,
+                "end": 404,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "empty": true
@@ -1218,8 +1218,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 411,
-                "end": 412,
+                "start": 410,
+                "end": 411,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "empty": true
@@ -1237,8 +1237,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 413,
-                "end": 413,
+                "start": 412,
+                "end": 412,
                 "landmark": {
                     "class": "CommaBlock"
                 },
@@ -1253,8 +1253,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 414,
-                "end": 415,
+                "start": 413,
+                "end": 414,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "empty": true
@@ -1272,8 +1272,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 416,
-                "end": 416,
+                "start": 415,
+                "end": 415,
                 "landmark": {
                     "class": "CommaBlock"
                 },
@@ -1288,8 +1288,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 417,
-                "end": 419,
+                "start": 416,
+                "end": 418,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "empty": true
@@ -1327,228 +1327,69 @@
         "path": [],
         "children": [
             {
-                "blockStart": 430,
-                "blockEnd": 433,
-                "start": 426,
+                "blockStart": 429,
+                "blockEnd": 432,
+                "start": 425,
+                "end": 432,
+                "landmark": {
+                    "class": "VariableInstanceBlock",
+                    "replace": true
+                },
+                "data": {
+                    "name": "a",
+                    "negation": " ",
+                    "_end": {
+                        "var": " 'a'",
+                        "stop": ","
+                    }
+                },
+                "isBlock": true,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 429,
+                        "end": 431,
+                        "landmark": {
+                            "class": "StringBlock"
+                        },
+                        "data": {
+                            "string": "a"
+                        },
+                        "isBlock": false,
+                        "index": 0,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    }
+                ],
+                "comments": []
+            },
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 433,
                 "end": 433,
                 "landmark": {
-                    "class": "VariableInstanceBlock",
-                    "replace": true
+                    "class": "CommaBlock"
                 },
-                "data": {
-                    "name": "a",
-                    "negation": " ",
-                    "_end": {
-                        "var": " 'a'",
-                        "stop": ","
-                    }
-                },
-                "isBlock": true,
-                "index": 0,
+                "data": [],
+                "isBlock": false,
+                "index": 1,
                 "parent": "Tetraquark\\Model\\Block\\BlockModel",
                 "path": [],
-                "children": [
-                    {
-                        "blockStart": null,
-                        "blockEnd": null,
-                        "start": 430,
-                        "end": 432,
-                        "landmark": {
-                            "class": "StringBlock"
-                        },
-                        "data": {
-                            "string": "a"
-                        },
-                        "isBlock": false,
-                        "index": 0,
-                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
-                        "path": [],
-                        "children": [],
-                        "comments": []
-                    }
-                ],
+                "children": [],
                 "comments": []
             },
             {
-                "blockStart": null,
-                "blockEnd": null,
+                "blockStart": 438,
+                "blockEnd": 441,
                 "start": 434,
-                "end": 434,
-                "landmark": {
-                    "class": "CommaBlock"
-                },
-                "data": [],
-                "isBlock": false,
-                "index": 1,
-                "parent": "Tetraquark\\Model\\Block\\BlockModel",
-                "path": [],
-                "children": [],
-                "comments": []
-            },
-            {
-                "blockStart": 439,
-                "blockEnd": 442,
-                "start": 435,
-                "end": 442,
-                "landmark": {
-                    "class": "VariableInstanceBlock",
-                    "replace": true
-                },
-                "data": {
-                    "name": "b",
-                    "negation": " ",
-                    "_end": {
-                        "var": " 'a'",
-                        "stop": ","
-                    }
-                },
-                "isBlock": true,
-                "index": 2,
-                "parent": "Tetraquark\\Model\\Block\\BlockModel",
-                "path": [],
-                "children": [
-                    {
-                        "blockStart": null,
-                        "blockEnd": null,
-                        "start": 14,
-                        "end": 16,
-                        "landmark": {
-                            "class": "StringBlock"
-                        },
-                        "data": {
-                            "string": "a"
-                        },
-                        "isBlock": false,
-                        "index": 0,
-                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
-                        "path": [],
-                        "children": [],
-                        "comments": []
-                    }
-                ],
-                "comments": []
-            },
-            {
-                "blockStart": null,
-                "blockEnd": null,
-                "start": 443,
-                "end": 443,
-                "landmark": {
-                    "class": "CommaBlock"
-                },
-                "data": [],
-                "isBlock": false,
-                "index": 3,
-                "parent": "Tetraquark\\Model\\Block\\BlockModel",
-                "path": [],
-                "children": [],
-                "comments": []
-            },
-            {
-                "blockStart": null,
-                "blockEnd": null,
-                "start": 444,
-                "end": 446,
-                "landmark": {
-                    "class": "VariableInstanceBlock",
-                    "empty": true
-                },
-                "data": {
-                    "name": "a1"
-                },
-                "isBlock": false,
-                "index": 4,
-                "parent": "Tetraquark\\Model\\Block\\BlockModel",
-                "path": [],
-                "children": [],
-                "comments": []
-            }
-        ],
-        "comments": []
-    },
-    {
-        "blockStart": 454,
-        "blockEnd": 473,
-        "start": 447,
-        "end": 473,
-        "landmark": {
-            "class": "ConstVariableBlock"
-        },
-        "data": {
-            "_end": {
-                "var": "a = 'a', b= 'a', a1;",
-                "stop": ";"
-            }
-        },
-        "isBlock": true,
-        "index": 19,
-        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
-        "path": [],
-        "children": [
-            {
-                "blockStart": 458,
-                "blockEnd": 461,
-                "start": 454,
-                "end": 461,
-                "landmark": {
-                    "class": "VariableInstanceBlock",
-                    "replace": true
-                },
-                "data": {
-                    "name": "a",
-                    "negation": " ",
-                    "_end": {
-                        "var": " 'a'",
-                        "stop": ","
-                    }
-                },
-                "isBlock": true,
-                "index": 0,
-                "parent": "Tetraquark\\Model\\Block\\BlockModel",
-                "path": [],
-                "children": [
-                    {
-                        "blockStart": null,
-                        "blockEnd": null,
-                        "start": 458,
-                        "end": 460,
-                        "landmark": {
-                            "class": "StringBlock"
-                        },
-                        "data": {
-                            "string": "a"
-                        },
-                        "isBlock": false,
-                        "index": 0,
-                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
-                        "path": [],
-                        "children": [],
-                        "comments": []
-                    }
-                ],
-                "comments": []
-            },
-            {
-                "blockStart": null,
-                "blockEnd": null,
-                "start": 462,
-                "end": 462,
-                "landmark": {
-                    "class": "CommaBlock"
-                },
-                "data": [],
-                "isBlock": false,
-                "index": 1,
-                "parent": "Tetraquark\\Model\\Block\\BlockModel",
-                "path": [],
-                "children": [],
-                "comments": []
-            },
-            {
-                "blockStart": 466,
-                "blockEnd": 469,
-                "start": 463,
-                "end": 469,
+                "end": 441,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "replace": true
@@ -1590,8 +1431,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 470,
-                "end": 470,
+                "start": 442,
+                "end": 442,
                 "landmark": {
                     "class": "CommaBlock"
                 },
@@ -1606,8 +1447,167 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 471,
-                "end": 473,
+                "start": 443,
+                "end": 445,
+                "landmark": {
+                    "class": "VariableInstanceBlock",
+                    "empty": true
+                },
+                "data": {
+                    "name": "a1"
+                },
+                "isBlock": false,
+                "index": 4,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 454,
+        "blockEnd": 473,
+        "start": 447,
+        "end": 473,
+        "landmark": {
+            "class": "ConstVariableBlock"
+        },
+        "data": {
+            "_end": {
+                "var": "a = 'a', b= 'a', a1;",
+                "stop": ";"
+            }
+        },
+        "isBlock": true,
+        "index": 19,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": 457,
+                "blockEnd": 460,
+                "start": 453,
+                "end": 460,
+                "landmark": {
+                    "class": "VariableInstanceBlock",
+                    "replace": true
+                },
+                "data": {
+                    "name": "a",
+                    "negation": " ",
+                    "_end": {
+                        "var": " 'a'",
+                        "stop": ","
+                    }
+                },
+                "isBlock": true,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 457,
+                        "end": 459,
+                        "landmark": {
+                            "class": "StringBlock"
+                        },
+                        "data": {
+                            "string": "a"
+                        },
+                        "isBlock": false,
+                        "index": 0,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    }
+                ],
+                "comments": []
+            },
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 461,
+                "end": 461,
+                "landmark": {
+                    "class": "CommaBlock"
+                },
+                "data": [],
+                "isBlock": false,
+                "index": 1,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            },
+            {
+                "blockStart": 465,
+                "blockEnd": 468,
+                "start": 462,
+                "end": 468,
+                "landmark": {
+                    "class": "VariableInstanceBlock",
+                    "replace": true
+                },
+                "data": {
+                    "name": "b",
+                    "negation": " ",
+                    "_end": {
+                        "var": " 'a'",
+                        "stop": ","
+                    }
+                },
+                "isBlock": true,
+                "index": 2,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 12,
+                        "end": 14,
+                        "landmark": {
+                            "class": "StringBlock"
+                        },
+                        "data": {
+                            "string": "a"
+                        },
+                        "isBlock": false,
+                        "index": 0,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    }
+                ],
+                "comments": []
+            },
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 469,
+                "end": 469,
+                "landmark": {
+                    "class": "CommaBlock"
+                },
+                "data": [],
+                "isBlock": false,
+                "index": 3,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            },
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 470,
+                "end": 472,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "empty": true
@@ -1645,10 +1645,10 @@
         "path": [],
         "children": [
             {
-                "blockStart": 483,
-                "blockEnd": 486,
-                "start": 479,
-                "end": 486,
+                "blockStart": 482,
+                "blockEnd": 485,
+                "start": 478,
+                "end": 485,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "replace": true
@@ -1669,8 +1669,8 @@
                     {
                         "blockStart": null,
                         "blockEnd": null,
-                        "start": 483,
-                        "end": 485,
+                        "start": 482,
+                        "end": 484,
                         "landmark": {
                             "class": "StringBlock"
                         },
@@ -1690,8 +1690,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 487,
-                "end": 487,
+                "start": 486,
+                "end": 486,
                 "landmark": {
                     "class": "CommaBlock"
                 },
@@ -1704,10 +1704,10 @@
                 "comments": []
             },
             {
-                "blockStart": 492,
-                "blockEnd": 495,
-                "start": 488,
-                "end": 495,
+                "blockStart": 491,
+                "blockEnd": 494,
+                "start": 487,
+                "end": 494,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "replace": true
@@ -1728,8 +1728,8 @@
                     {
                         "blockStart": null,
                         "blockEnd": null,
-                        "start": 14,
-                        "end": 16,
+                        "start": 13,
+                        "end": 15,
                         "landmark": {
                             "class": "StringBlock"
                         },
@@ -1749,8 +1749,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 496,
-                "end": 496,
+                "start": 495,
+                "end": 495,
                 "landmark": {
                     "class": "CommaBlock"
                 },
@@ -1765,8 +1765,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 497,
-                "end": 499,
+                "start": 496,
+                "end": 498,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "empty": true
@@ -1806,8 +1806,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 506,
-                "end": 507,
+                "start": 505,
+                "end": 506,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "empty": true
@@ -1825,8 +1825,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 508,
-                "end": 508,
+                "start": 507,
+                "end": 507,
                 "landmark": {
                     "class": "CommaBlock"
                 },
@@ -1839,10 +1839,10 @@
                 "comments": []
             },
             {
-                "blockStart": 513,
-                "blockEnd": 516,
-                "start": 509,
-                "end": 516,
+                "blockStart": 512,
+                "blockEnd": 515,
+                "start": 508,
+                "end": 515,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "replace": true
@@ -1863,8 +1863,8 @@
                     {
                         "blockStart": null,
                         "blockEnd": null,
-                        "start": 513,
-                        "end": 515,
+                        "start": 512,
+                        "end": 514,
                         "landmark": {
                             "class": "StringBlock"
                         },
@@ -1884,8 +1884,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 517,
-                "end": 517,
+                "start": 516,
+                "end": 516,
                 "landmark": {
                     "class": "CommaBlock"
                 },
@@ -1900,8 +1900,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 518,
-                "end": 520,
+                "start": 517,
+                "end": 519,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "empty": true
@@ -1941,8 +1941,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 528,
-                "end": 529,
+                "start": 527,
+                "end": 528,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "empty": true
@@ -1960,8 +1960,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 530,
-                "end": 530,
+                "start": 529,
+                "end": 529,
                 "landmark": {
                     "class": "CommaBlock"
                 },
@@ -1974,10 +1974,10 @@
                 "comments": []
             },
             {
-                "blockStart": 535,
-                "blockEnd": 538,
-                "start": 531,
-                "end": 538,
+                "blockStart": 534,
+                "blockEnd": 537,
+                "start": 530,
+                "end": 537,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "replace": true
@@ -1998,8 +1998,8 @@
                     {
                         "blockStart": null,
                         "blockEnd": null,
-                        "start": 535,
-                        "end": 537,
+                        "start": 534,
+                        "end": 536,
                         "landmark": {
                             "class": "StringBlock"
                         },
@@ -2019,8 +2019,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 539,
-                "end": 539,
+                "start": 538,
+                "end": 538,
                 "landmark": {
                     "class": "CommaBlock"
                 },
@@ -2035,8 +2035,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 540,
-                "end": 542,
+                "start": 539,
+                "end": 541,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "empty": true
@@ -2076,8 +2076,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 548,
-                "end": 549,
+                "start": 547,
+                "end": 548,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "empty": true
@@ -2095,8 +2095,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 550,
-                "end": 550,
+                "start": 549,
+                "end": 549,
                 "landmark": {
                     "class": "CommaBlock"
                 },
@@ -2109,10 +2109,10 @@
                 "comments": []
             },
             {
-                "blockStart": 555,
-                "blockEnd": 558,
-                "start": 551,
-                "end": 558,
+                "blockStart": 554,
+                "blockEnd": 557,
+                "start": 550,
+                "end": 557,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "replace": true
@@ -2133,8 +2133,8 @@
                     {
                         "blockStart": null,
                         "blockEnd": null,
-                        "start": 555,
-                        "end": 557,
+                        "start": 554,
+                        "end": 556,
                         "landmark": {
                             "class": "StringBlock"
                         },
@@ -2154,8 +2154,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 559,
-                "end": 559,
+                "start": 558,
+                "end": 558,
                 "landmark": {
                     "class": "CommaBlock"
                 },
@@ -2170,8 +2170,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 560,
-                "end": 562,
+                "start": 559,
+                "end": 561,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "empty": true
@@ -2211,28 +2211,28 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 569,
+                "start": 568,
+                "end": 569,
+                "landmark": {
+                    "class": "VariableInstanceBlock",
+                    "empty": true
+                },
+                "data": {
+                    "name": "a"
+                },
+                "isBlock": false,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            },
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 570,
                 "end": 570,
                 "landmark": {
-                    "class": "VariableInstanceBlock",
-                    "empty": true
-                },
-                "data": {
-                    "name": "a"
-                },
-                "isBlock": false,
-                "index": 0,
-                "parent": "Tetraquark\\Model\\Block\\BlockModel",
-                "path": [],
-                "children": [],
-                "comments": []
-            },
-            {
-                "blockStart": null,
-                "blockEnd": null,
-                "start": 571,
-                "end": 571,
-                "landmark": {
                     "class": "CommaBlock"
                 },
                 "data": [],
@@ -2244,228 +2244,69 @@
                 "comments": []
             },
             {
-                "blockStart": 576,
-                "blockEnd": 579,
-                "start": 572,
+                "blockStart": 575,
+                "blockEnd": 578,
+                "start": 571,
+                "end": 578,
+                "landmark": {
+                    "class": "VariableInstanceBlock",
+                    "replace": true
+                },
+                "data": {
+                    "name": "b",
+                    "negation": " ",
+                    "_end": {
+                        "var": " 'a'",
+                        "stop": ","
+                    }
+                },
+                "isBlock": true,
+                "index": 2,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 575,
+                        "end": 577,
+                        "landmark": {
+                            "class": "StringBlock"
+                        },
+                        "data": {
+                            "string": "a"
+                        },
+                        "isBlock": false,
+                        "index": 0,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    }
+                ],
+                "comments": []
+            },
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 579,
                 "end": 579,
                 "landmark": {
-                    "class": "VariableInstanceBlock",
-                    "replace": true
+                    "class": "CommaBlock"
                 },
-                "data": {
-                    "name": "b",
-                    "negation": " ",
-                    "_end": {
-                        "var": " 'a'",
-                        "stop": ","
-                    }
-                },
-                "isBlock": true,
-                "index": 2,
+                "data": [],
+                "isBlock": false,
+                "index": 3,
                 "parent": "Tetraquark\\Model\\Block\\BlockModel",
                 "path": [],
-                "children": [
-                    {
-                        "blockStart": null,
-                        "blockEnd": null,
-                        "start": 576,
-                        "end": 578,
-                        "landmark": {
-                            "class": "StringBlock"
-                        },
-                        "data": {
-                            "string": "a"
-                        },
-                        "isBlock": false,
-                        "index": 0,
-                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
-                        "path": [],
-                        "children": [],
-                        "comments": []
-                    }
-                ],
+                "children": [],
                 "comments": []
             },
             {
-                "blockStart": null,
-                "blockEnd": null,
+                "blockStart": 585,
+                "blockEnd": 589,
                 "start": 580,
-                "end": 580,
-                "landmark": {
-                    "class": "CommaBlock"
-                },
-                "data": [],
-                "isBlock": false,
-                "index": 3,
-                "parent": "Tetraquark\\Model\\Block\\BlockModel",
-                "path": [],
-                "children": [],
-                "comments": []
-            },
-            {
-                "blockStart": 586,
-                "blockEnd": 590,
-                "start": 581,
-                "end": 590,
-                "landmark": {
-                    "class": "VariableInstanceBlock",
-                    "replace": true
-                },
-                "data": {
-                    "name": "a1",
-                    "negation": " ",
-                    "_end": {
-                        "var": " 'a';",
-                        "stop": ";"
-                    }
-                },
-                "isBlock": true,
-                "index": 4,
-                "parent": "Tetraquark\\Model\\Block\\BlockModel",
-                "path": [],
-                "children": [
-                    {
-                        "blockStart": null,
-                        "blockEnd": null,
-                        "start": 18,
-                        "end": 21,
-                        "landmark": {
-                            "class": "StringBlock"
-                        },
-                        "data": {
-                            "string": "a"
-                        },
-                        "isBlock": false,
-                        "index": 0,
-                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
-                        "path": [],
-                        "children": [],
-                        "comments": []
-                    }
-                ],
-                "comments": []
-            }
-        ],
-        "comments": []
-    },
-    {
-        "blockStart": 597,
-        "blockEnd": 616,
-        "start": 590,
-        "end": 616,
-        "landmark": {
-            "class": "ConstVariableBlock"
-        },
-        "data": {
-            "_end": {
-                "var": "a, b= 'a', a1 = 'a';",
-                "stop": ";"
-            }
-        },
-        "isBlock": true,
-        "index": 25,
-        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
-        "path": [],
-        "children": [
-            {
-                "blockStart": null,
-                "blockEnd": null,
-                "start": 597,
-                "end": 598,
-                "landmark": {
-                    "class": "VariableInstanceBlock",
-                    "empty": true
-                },
-                "data": {
-                    "name": "a"
-                },
-                "isBlock": false,
-                "index": 0,
-                "parent": "Tetraquark\\Model\\Block\\BlockModel",
-                "path": [],
-                "children": [],
-                "comments": []
-            },
-            {
-                "blockStart": null,
-                "blockEnd": null,
-                "start": 599,
-                "end": 599,
-                "landmark": {
-                    "class": "CommaBlock"
-                },
-                "data": [],
-                "isBlock": false,
-                "index": 1,
-                "parent": "Tetraquark\\Model\\Block\\BlockModel",
-                "path": [],
-                "children": [],
-                "comments": []
-            },
-            {
-                "blockStart": 603,
-                "blockEnd": 606,
-                "start": 600,
-                "end": 606,
-                "landmark": {
-                    "class": "VariableInstanceBlock",
-                    "replace": true
-                },
-                "data": {
-                    "name": "b",
-                    "negation": " ",
-                    "_end": {
-                        "var": " 'a'",
-                        "stop": ","
-                    }
-                },
-                "isBlock": true,
-                "index": 2,
-                "parent": "Tetraquark\\Model\\Block\\BlockModel",
-                "path": [],
-                "children": [
-                    {
-                        "blockStart": null,
-                        "blockEnd": null,
-                        "start": 603,
-                        "end": 605,
-                        "landmark": {
-                            "class": "StringBlock"
-                        },
-                        "data": {
-                            "string": "a"
-                        },
-                        "isBlock": false,
-                        "index": 0,
-                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
-                        "path": [],
-                        "children": [],
-                        "comments": []
-                    }
-                ],
-                "comments": []
-            },
-            {
-                "blockStart": null,
-                "blockEnd": null,
-                "start": 607,
-                "end": 607,
-                "landmark": {
-                    "class": "CommaBlock"
-                },
-                "data": [],
-                "isBlock": false,
-                "index": 3,
-                "parent": "Tetraquark\\Model\\Block\\BlockModel",
-                "path": [],
-                "children": [],
-                "comments": []
-            },
-            {
-                "blockStart": 613,
-                "blockEnd": 617,
-                "start": 608,
-                "end": 617,
+                "end": 589,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "replace": true
@@ -2508,6 +2349,165 @@
         "comments": []
     },
     {
+        "blockStart": 597,
+        "blockEnd": 616,
+        "start": 590,
+        "end": 616,
+        "landmark": {
+            "class": "ConstVariableBlock"
+        },
+        "data": {
+            "_end": {
+                "var": "a, b= 'a', a1 = 'a';",
+                "stop": ";"
+            }
+        },
+        "isBlock": true,
+        "index": 25,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 596,
+                "end": 597,
+                "landmark": {
+                    "class": "VariableInstanceBlock",
+                    "empty": true
+                },
+                "data": {
+                    "name": "a"
+                },
+                "isBlock": false,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            },
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 598,
+                "end": 598,
+                "landmark": {
+                    "class": "CommaBlock"
+                },
+                "data": [],
+                "isBlock": false,
+                "index": 1,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            },
+            {
+                "blockStart": 602,
+                "blockEnd": 605,
+                "start": 599,
+                "end": 605,
+                "landmark": {
+                    "class": "VariableInstanceBlock",
+                    "replace": true
+                },
+                "data": {
+                    "name": "b",
+                    "negation": " ",
+                    "_end": {
+                        "var": " 'a'",
+                        "stop": ","
+                    }
+                },
+                "isBlock": true,
+                "index": 2,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 602,
+                        "end": 604,
+                        "landmark": {
+                            "class": "StringBlock"
+                        },
+                        "data": {
+                            "string": "a"
+                        },
+                        "isBlock": false,
+                        "index": 0,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    }
+                ],
+                "comments": []
+            },
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 606,
+                "end": 606,
+                "landmark": {
+                    "class": "CommaBlock"
+                },
+                "data": [],
+                "isBlock": false,
+                "index": 3,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            },
+            {
+                "blockStart": 612,
+                "blockEnd": 616,
+                "start": 607,
+                "end": 616,
+                "landmark": {
+                    "class": "VariableInstanceBlock",
+                    "replace": true
+                },
+                "data": {
+                    "name": "a1",
+                    "negation": " ",
+                    "_end": {
+                        "var": " 'a';",
+                        "stop": ";"
+                    }
+                },
+                "isBlock": true,
+                "index": 4,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 16,
+                        "end": 19,
+                        "landmark": {
+                            "class": "StringBlock"
+                        },
+                        "data": {
+                            "string": "a"
+                        },
+                        "isBlock": false,
+                        "index": 0,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    }
+                ],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
         "blockStart": 622,
         "blockEnd": 642,
         "start": 617,
@@ -2529,8 +2529,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 622,
-                "end": 623,
+                "start": 621,
+                "end": 622,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "empty": true
@@ -2548,8 +2548,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 624,
-                "end": 624,
+                "start": 623,
+                "end": 623,
                 "landmark": {
                     "class": "CommaBlock"
                 },
@@ -2562,10 +2562,10 @@
                 "comments": []
             },
             {
-                "blockStart": 629,
-                "blockEnd": 632,
-                "start": 625,
-                "end": 632,
+                "blockStart": 628,
+                "blockEnd": 631,
+                "start": 624,
+                "end": 631,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "replace": true
@@ -2586,8 +2586,8 @@
                     {
                         "blockStart": null,
                         "blockEnd": null,
-                        "start": 629,
-                        "end": 631,
+                        "start": 628,
+                        "end": 630,
                         "landmark": {
                             "class": "StringBlock"
                         },
@@ -2607,8 +2607,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 633,
-                "end": 633,
+                "start": 632,
+                "end": 632,
                 "landmark": {
                     "class": "CommaBlock"
                 },
@@ -2621,10 +2621,10 @@
                 "comments": []
             },
             {
-                "blockStart": 639,
-                "blockEnd": 643,
-                "start": 634,
-                "end": 643,
+                "blockStart": 638,
+                "blockEnd": 642,
+                "start": 633,
+                "end": 642,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "replace": true
@@ -2645,8 +2645,8 @@
                     {
                         "blockStart": null,
                         "blockEnd": null,
-                        "start": 18,
-                        "end": 21,
+                        "start": 17,
+                        "end": 20,
                         "landmark": {
                             "class": "StringBlock"
                         },
@@ -2688,8 +2688,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 649,
-                "end": 650,
+                "start": 648,
+                "end": 649,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "empty": true
@@ -2707,8 +2707,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 651,
-                "end": 651,
+                "start": 650,
+                "end": 650,
                 "landmark": {
                     "class": "CommaBlock"
                 },
@@ -2723,8 +2723,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 652,
-                "end": 653,
+                "start": 651,
+                "end": 652,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "empty": true
@@ -2742,8 +2742,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 654,
-                "end": 654,
+                "start": 653,
+                "end": 653,
                 "landmark": {
                     "class": "CommaBlock"
                 },
@@ -2756,10 +2756,10 @@
                 "comments": []
             },
             {
-                "blockStart": 660,
-                "blockEnd": 664,
-                "start": 655,
-                "end": 664,
+                "blockStart": 659,
+                "blockEnd": 663,
+                "start": 654,
+                "end": 663,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "replace": true
@@ -2780,8 +2780,8 @@
                     {
                         "blockStart": null,
                         "blockEnd": null,
-                        "start": 660,
-                        "end": 663,
+                        "start": 659,
+                        "end": 662,
                         "landmark": {
                             "class": "StringBlock"
                         },
@@ -2823,8 +2823,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 671,
-                "end": 672,
+                "start": 670,
+                "end": 671,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "empty": true
@@ -2842,8 +2842,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 673,
-                "end": 673,
+                "start": 672,
+                "end": 672,
                 "landmark": {
                     "class": "CommaBlock"
                 },
@@ -2858,8 +2858,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 674,
-                "end": 675,
+                "start": 673,
+                "end": 674,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "empty": true
@@ -2877,8 +2877,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 676,
-                "end": 676,
+                "start": 675,
+                "end": 675,
                 "landmark": {
                     "class": "CommaBlock"
                 },
@@ -2891,10 +2891,10 @@
                 "comments": []
             },
             {
-                "blockStart": 682,
-                "blockEnd": 686,
-                "start": 677,
-                "end": 686,
+                "blockStart": 681,
+                "blockEnd": 685,
+                "start": 676,
+                "end": 685,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "replace": true
@@ -2915,8 +2915,8 @@
                     {
                         "blockStart": null,
                         "blockEnd": null,
-                        "start": 682,
-                        "end": 685,
+                        "start": 681,
+                        "end": 684,
                         "landmark": {
                             "class": "StringBlock"
                         },
@@ -2958,8 +2958,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 691,
-                "end": 692,
+                "start": 690,
+                "end": 691,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "empty": true
@@ -2977,8 +2977,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 693,
-                "end": 693,
+                "start": 692,
+                "end": 692,
                 "landmark": {
                     "class": "CommaBlock"
                 },
@@ -2993,8 +2993,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 694,
-                "end": 695,
+                "start": 693,
+                "end": 694,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "empty": true
@@ -3012,8 +3012,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 696,
-                "end": 696,
+                "start": 695,
+                "end": 695,
                 "landmark": {
                     "class": "CommaBlock"
                 },
@@ -3026,10 +3026,10 @@
                 "comments": []
             },
             {
-                "blockStart": 702,
-                "blockEnd": 706,
-                "start": 697,
-                "end": 706,
+                "blockStart": 701,
+                "blockEnd": 705,
+                "start": 696,
+                "end": 705,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "replace": true
@@ -3050,8 +3050,8 @@
                     {
                         "blockStart": null,
                         "blockEnd": null,
-                        "start": 702,
-                        "end": 705,
+                        "start": 701,
+                        "end": 704,
                         "landmark": {
                             "class": "StringBlock"
                         },

@@ -111,8 +111,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 18,
-                "end": 22,
+                "start": 17,
+                "end": 21,
                 "landmark": {
                     "class": "StringBlock"
                 },
@@ -129,8 +129,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 23,
-                "end": 23,
+                "start": 22,
+                "end": 22,
                 "landmark": {
                     "class": "CommaBlock"
                 },
@@ -145,8 +145,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 24,
-                "end": 27,
+                "start": 23,
+                "end": 26,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "empty": true

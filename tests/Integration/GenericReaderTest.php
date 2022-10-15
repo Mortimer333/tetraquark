@@ -33,6 +33,9 @@ class GenericReaderTest extends BaseIntegration
         $this->assertEquals($this->getCompiled($methodsPath), $methods);
 
         $analysis = $reader->read($script, true, displayBlocks: false);
+        // if ($schemat == 'disabled') {
+        //     $this->log(json_encode($analysis, JSON_PRETTY_PRINT));
+        // }
         $analysisArray = json_decode(json_encode($analysis), true);
         $this->assertEquals($this->getCompiled($analysisPath), $analysisArray);
     }
@@ -43,7 +46,7 @@ class GenericReaderTest extends BaseIntegration
         $types = ["simple", "method", "extend", "settings", "comments", "block"];
         $cases = [];
         foreach ($types as $type) {
-            $cases[] = [
+            $cases[$type] = [
                 $prefix . $type,
                 $prefix . $type,
                 $prefix . $type . '/instruction',

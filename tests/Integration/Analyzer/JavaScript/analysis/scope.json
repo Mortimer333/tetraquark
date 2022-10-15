@@ -18,8 +18,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 6,
-                "end": 9,
+                "start": 5,
+                "end": 8,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "empty": true
@@ -35,10 +35,10 @@
                 "comments": []
             },
             {
-                "blockStart": 26,
-                "blockEnd": 31,
-                "start": 10,
-                "end": 32,
+                "blockStart": 25,
+                "blockEnd": 30,
+                "start": 9,
+                "end": 31,
                 "landmark": {
                     "class": "IfBlock"
                 },
@@ -74,8 +74,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 37,
-                "end": 45,
+                "start": 36,
+                "end": 44,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "empty": true
@@ -131,8 +131,8 @@
             {
                 "blockStart": null,
                 "blockEnd": null,
-                "start": 52,
-                "end": 57,
+                "start": 51,
+                "end": 56,
                 "landmark": {
                     "class": "VariableInstanceBlock",
                     "empty": true

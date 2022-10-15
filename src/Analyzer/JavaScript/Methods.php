@@ -584,8 +584,8 @@ abstract class Methods
             return false;
         }
         $script = $reader->getCurrent()['script'];
-        $previousPos = $reader->getCurrent()['caret'] - 1;
-        if (is_null($script) || is_null($script->getLetter($previousPos))) {
+        $previousPos = $reader->getCurrent()['caret'];
+        if (is_null($script) || !$previousPos || is_null($script->getLetter($previousPos))) {
             return false;
         }
         list($startOfBlock, $pos) = Str::getPreviousLetter($previousPos, $script);

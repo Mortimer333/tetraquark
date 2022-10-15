@@ -447,10 +447,10 @@
                     "path": [],
                     "children": [
                         {
-                            "blockStart": 18,
-                            "blockEnd": 54,
-                            "start": 5,
-                            "end": 55,
+                            "blockStart": 17,
+                            "blockEnd": 53,
+                            "start": 4,
+                            "end": 54,
                             "landmark": {
                                 "class": "FunctionBlock",
                                 "anonymous": true
@@ -466,10 +466,10 @@
                             "path": [],
                             "children": [
                                 {
-                                    "blockStart": 25,
-                                    "blockEnd": 55,
-                                    "start": 17,
-                                    "end": 55,
+                                    "blockStart": 24,
+                                    "blockEnd": 54,
+                                    "start": 16,
+                                    "end": 54,
                                     "landmark": {
                                         "class": "ReturnBlock"
                                     },
@@ -487,8 +487,8 @@
                                         {
                                             "blockStart": null,
                                             "blockEnd": null,
-                                            "start": 25,
-                                            "end": 54,
+                                            "start": 24,
+                                            "end": 53,
                                             "landmark": {
                                                 "class": "StringBlock"
                                             },

@@ -232,7 +232,6 @@ class Reader
             Log  ::log($content . '');
         }
         // @codeCoverageIgnoreEnd
-
         $script = new ScriptBlockModel();
         list($script, $end) = $this->objectify($content, $this->map, parent: $script);
 
@@ -338,9 +337,6 @@ class Reader
         try {
             for ($i=$start; $i < $content->getLength(); $i++) {
                 try {
-                    // Log::log('I: ' . $i . ", Letter: " . $resolver->getContent()->getLetter(
-                    //     $i
-                    // ));
                     if ($solve = $this->resolve($resolver, $i)) {
                         $this->restoreResolver($resolver, $solve['save']);
                         $resolver->setLandmark($solve['step']);
@@ -834,7 +830,7 @@ class Reader
 
         if ($block) {
             $item->setBlockStart($item->getEnd() + 1);
-            list($i, $blocks) = $this->findBlocksEnd($block, $resolver->getContent(), $item->getEnd() + 1, $item);
+            list($i, $blocks) = $this->findBlocksEnd($block, $resolver->getContent(), $item->getEnd(), $item);
             $resolver->setI($i);
             $item->setEnd($i);
             $item->setChildren($blocks);
@@ -934,7 +930,7 @@ class Reader
 
         // Find the end of block
         $this->retrieveComments = false;
-        list($endBlocks, $i) = $this->objectify($content, $blockSet['map'], $start, $parent);
+        list($endBlocks, $i) = $this->objectify($content, $blockSet['map'], $start + 1, $parent);
         $this->retrieveComments = true;
 
         if (sizeof($endBlocks) > 0) {
@@ -959,12 +955,12 @@ class Reader
         $parent->setData([...$parent->getData(), ...["_end" => $data]]);
 
         if (is_null($this->current['caret'])) {
-            $this->current['caret'] = 1;
+            $this->current['caret'] = 0;
         }
 
-        $this->current['caret'] += $start - 1;
+        $this->current['caret'] += $start;
         $caretIncr  = $this->current['caret'];
-        $newContent = $content->iCutToContent($start, $i);
+        $newContent = $content->iCutToContent($start + 1, $i);
         $blocks     = [];
 
         if ($newContent->getLength() !== 0) {
@@ -1153,25 +1149,6 @@ class Reader
             }
             $merged[$key] = $map;
         }
-        // foreach ($maps as $map) {
-        //     if (!is_array($map)) {
-        //         continue;
-        //     }
-        //     foreach ($map as $key => $value) {
-        //         if (is_numeric($key)) {
-        //             continue;
-        //         }
-        //         if (!isset($value['_stop']) && is_array($value)) {
-        //             Log::log('Another map!');
-        //             $merged[$key] = $this->mergeMaps($value, $merged[$key] ?? []);
-        //         }
-        //         if (is_array($map[$key])) {
-        //             $merged[$key] = array_merge($map[$key], $merged[$key] ?? []);
-        //         } else {
-        //             $merged[$key] = $map[$key];
-        //         }
-        //     }
-        // }
         return $merged;
     }
 

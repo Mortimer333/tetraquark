@@ -80,10 +80,10 @@
         "path": [],
         "children": [
             {
-                "blockStart": 37,
-                "blockEnd": 37,
-                "start": 30,
-                "end": 37,
+                "blockStart": 36,
+                "blockEnd": 36,
+                "start": 29,
+                "end": 36,
                 "landmark": {
                     "class": "SubChainBlock1"
                 },
@@ -141,10 +141,10 @@
         "path": [],
         "children": [
             {
-                "blockStart": 59,
-                "blockEnd": 59,
-                "start": 50,
-                "end": 59,
+                "blockStart": 58,
+                "blockEnd": 58,
+                "start": 49,
+                "end": 58,
                 "landmark": {
                     "class": "ChainBlock",
                     "array": true
@@ -267,10 +267,10 @@
         "path": [],
         "children": [
             {
-                "blockStart": 100,
-                "blockEnd": 106,
-                "start": 89,
-                "end": 106,
+                "blockStart": 99,
+                "blockEnd": 105,
+                "start": 88,
+                "end": 105,
                 "landmark": {
                     "class": "ChainBlock",
                     "array": true,
@@ -308,10 +308,10 @@
                 "path": [],
                 "children": [
                     {
-                        "blockStart": 106,
-                        "blockEnd": 106,
-                        "start": 99,
-                        "end": 106,
+                        "blockStart": 105,
+                        "blockEnd": 105,
+                        "start": 98,
+                        "end": 105,
                         "landmark": {
                             "class": "SubChainBlock1"
                         },
@@ -372,10 +372,10 @@
         "path": [],
         "children": [
             {
-                "blockStart": 130,
-                "blockEnd": 139,
-                "start": 119,
-                "end": 139,
+                "blockStart": 129,
+                "blockEnd": 138,
+                "start": 118,
+                "end": 138,
                 "landmark": {
                     "class": "ChainBlock",
                     "array": true,
@@ -413,10 +413,10 @@
                 "path": [],
                 "children": [
                     {
-                        "blockStart": 139,
-                        "blockEnd": 139,
-                        "start": 128,
-                        "end": 139,
+                        "blockStart": 138,
+                        "blockEnd": 138,
+                        "start": 127,
+                        "end": 138,
                         "landmark": {
                             "class": "ChainBlock",
                             "array": true
@@ -499,10 +499,10 @@
         "path": [],
         "children": [
             {
-                "blockStart": 167,
-                "blockEnd": 167,
-                "start": 160,
-                "end": 167,
+                "blockStart": 166,
+                "blockEnd": 166,
+                "start": 159,
+                "end": 166,
                 "landmark": {
                     "class": "SubChainBlock1"
                 },
@@ -561,10 +561,10 @@
         "path": [],
         "children": [
             {
-                "blockStart": 198,
-                "blockEnd": 198,
-                "start": 187,
-                "end": 198,
+                "blockStart": 197,
+                "blockEnd": 197,
+                "start": 186,
+                "end": 197,
                 "landmark": {
                     "class": "ChainBlock",
                     "array": true
@@ -644,10 +644,10 @@
         "path": [],
         "children": [
             {
-                "blockStart": 235,
-                "blockEnd": 235,
-                "start": 219,
-                "end": 235,
+                "blockStart": 234,
+                "blockEnd": 234,
+                "start": 218,
+                "end": 234,
                 "landmark": {
                     "class": "ChainBlock",
                     "array": true
@@ -685,28 +685,6 @@
                 "comments": []
             }
         ],
-        "comments": []
-    },
-    {
-        "blockStart": 249,
-        "blockEnd": 249,
-        "start": 234,
-        "end": 249,
-        "landmark": {
-            "class": "ChainBlock",
-            "first": true
-        },
-        "data": {
-            "first": "chain",
-            "private": true,
-            "second": "second",
-            "_end": []
-        },
-        "isBlock": true,
-        "index": 9,
-        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
-        "path": [],
-        "children": [],
         "comments": []
     }
 ]
