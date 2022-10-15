@@ -1487,6 +1487,31 @@ class Reader
 
                 return true;
             },
+            "read" => fn (...$args) => $this->readSyntaxMethod(...$args),
         ];
+    }
+
+    /**
+     * @codeCoverageIgnore
+     * Is covered by ReaderGenericTest
+     */
+    public function readSyntaxMethod(CustomMethodEssentialsModel $essentials, string $valueName, ?string $name = null): void
+    {
+        if (is_null($name)) {
+            $name = $valueName;
+        }
+
+        $data = $essentials->getData();
+        if (!isset($data[$valueName])) {
+            return;
+        }
+
+        $content = $data[$valueName];
+        $comments = $essentials->reader->getComments();
+        $essentials->reader->setComments([]);
+        $blocks = $essentials->reader->read($content);
+        $essentials->reader->setComments($comments);
+
+        $essentials->appendData($blocks, $name);
     }
 }

@@ -25,8 +25,9 @@ XDEBUG_MODE=coverage php ./vendor/bin/phpunit tests --coverage-text XDEBUG_MODE=
 php test/test.php > test/test.log 2>&1
 
 New Plan:
-1. Allow method to mark themself as cacheable. Some of them do the same operation every time (symbol), we could just cache them
-2. Allow for "after methods" (>) to be marked as to be done after the script founds block
+1. Change `comments` part of settings to be compiled and not created by hand 
+2. Allow method to mark themself as cacheable. Some of them do the same operation every time (symbol), we could just cache them
+3. Allow for "after methods" (>) to be marked as to be done after the script founds block
 
 Plan:
 0. [DONE] Merge it to master and create new branch

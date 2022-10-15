@@ -28,7 +28,6 @@ abstract class Methods
             "end" => "end",
             "word" => "word",
             "this" => "this",
-            "read" => "read",
             "case" => "case",
             "taken" => "taken",
             "number" => "number",
@@ -174,30 +173,6 @@ abstract class Methods
     public static function optionalChain(CustomMethodEssentialsModel $essentials): void
     {
         $essentials->appendData(true, 'optional_chain');
-    }
-
-    /**
-     * @codeCoverageIgnore
-     * Is covered by ReaderGenericTest
-     */
-    public static function read(CustomMethodEssentialsModel $essentials, string $valueName, ?string $name = null): void
-    {
-        if (is_null($name)) {
-            $name = $valueName;
-        }
-
-        $data = $essentials->getData();
-        if (!isset($data[$valueName])) {
-            return;
-        }
-
-        $content = $data[$valueName];
-        $comments = $essentials->reader->getComments();
-        $essentials->reader->setComments([]);
-        $blocks = $essentials->reader->read($content);
-        $essentials->reader->setComments($comments);
-
-        $essentials->appendData($blocks, $name);
     }
 
     public static function objectEnd(CustomMethodEssentialsModel $essentials): bool
