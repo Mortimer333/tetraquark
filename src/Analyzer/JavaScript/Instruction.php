@@ -58,12 +58,12 @@ abstract class Instruction
             ...LandmarkStorage::getFirstInChain(),
             ...LandmarkStorage::getNextInChain(),
             ...LandmarkStorage::getArrayChain(),
-            ...LandmarkStorage::getDoWhile(), // <-
+            ...LandmarkStorage::getDoWhile(),
             ...LandmarkStorage::getWhileAndShortWhile(),
             ...LandmarkStorage::getElseAndElseIf(),
             ...LandmarkStorage::getForAndShortFor(),
             ...LandmarkStorage::getForOfAndInCondition(),
-            ...LandmarkStorage::getFunctionAndGenerator(),
+            ...LandmarkStorage::getFunctionAndGenerator(), // <-
             ...LandmarkStorage::getObjectAndSpreadObject(),
             ...LandmarkStorage::getReturn(),
             ...LandmarkStorage::getSwitchAndCases(),

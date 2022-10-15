@@ -1,0 +1,574 @@
+[
+    {
+        "blockStart": 31,
+        "blockEnd": 43,
+        "start": 0,
+        "end": 44,
+        "landmark": {
+            "class": "ForBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "condition": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 22,
+                    "landmark": {
+                        "type": "var",
+                        "class": "InConditionBlock"
+                    },
+                    "data": {
+                        "var": "variable",
+                        "iterable": "object"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 0,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 35,
+                "end": 42,
+                "landmark": {
+                    "class": "StringBlock"
+                },
+                "data": {
+                    "string": "block"
+                },
+                "isBlock": false,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 65,
+        "blockEnd": 64,
+        "start": 45,
+        "end": 65,
+        "landmark": {
+            "class": "ForBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "condition": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 12,
+                    "landmark": {
+                        "type": "var",
+                        "class": "InConditionBlock"
+                    },
+                    "data": {
+                        "var": "i",
+                        "iterable": "obj"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 1,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 85,
+        "blockEnd": 84,
+        "start": 66,
+        "end": 85,
+        "landmark": {
+            "class": "ForBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "condition": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 12,
+                    "landmark": {
+                        "type": "let",
+                        "class": "InConditionBlock"
+                    },
+                    "data": {
+                        "var": "i",
+                        "iterable": "obj"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 2,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 107,
+        "blockEnd": 106,
+        "start": 86,
+        "end": 107,
+        "landmark": {
+            "class": "ForBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "condition": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 14,
+                    "landmark": {
+                        "type": "const",
+                        "class": "OfConditionBlock"
+                    },
+                    "data": {
+                        "var": "i",
+                        "iterable": "obj"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 3,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 130,
+        "blockEnd": 131,
+        "start": 108,
+        "end": 132,
+        "landmark": {
+            "class": "ForBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "condition": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 12,
+                    "landmark": {
+                        "type": "var",
+                        "class": "InConditionBlock"
+                    },
+                    "data": {
+                        "var": "i",
+                        "iterable": "obj"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 4,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 151,
+        "blockEnd": 150,
+        "start": 133,
+        "end": 157,
+        "landmark": {
+            "class": "ShortForBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "condition": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 12,
+                    "landmark": {
+                        "type": "var",
+                        "class": "InConditionBlock"
+                    },
+                    "data": {
+                        "var": "i",
+                        "iterable": "obj"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": {
+                "children": [
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 0,
+                        "end": 6,
+                        "landmark": {
+                            "class": "StringBlock"
+                        },
+                        "data": {
+                            "string": "short"
+                        },
+                        "isBlock": false,
+                        "index": 0,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    }
+                ]
+            }
+        },
+        "isBlock": true,
+        "index": 5,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 190,
+        "blockEnd": 202,
+        "start": 158,
+        "end": 203,
+        "landmark": {
+            "class": "ForBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "condition": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 22,
+                    "landmark": {
+                        "type": "var",
+                        "class": "OfConditionBlock"
+                    },
+                    "data": {
+                        "var": "variable",
+                        "iterable": "object"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 6,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 194,
+                "end": 201,
+                "landmark": {
+                    "class": "StringBlock"
+                },
+                "data": {
+                    "string": "block"
+                },
+                "isBlock": false,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 224,
+        "blockEnd": 223,
+        "start": 204,
+        "end": 224,
+        "landmark": {
+            "class": "ForBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "condition": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 12,
+                    "landmark": {
+                        "type": "var",
+                        "class": "OfConditionBlock"
+                    },
+                    "data": {
+                        "var": "i",
+                        "iterable": "obj"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 7,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 244,
+        "blockEnd": 243,
+        "start": 225,
+        "end": 244,
+        "landmark": {
+            "class": "ForBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "condition": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 12,
+                    "landmark": {
+                        "type": "let",
+                        "class": "OfConditionBlock"
+                    },
+                    "data": {
+                        "var": "i",
+                        "iterable": "obj"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 8,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 266,
+        "blockEnd": 265,
+        "start": 245,
+        "end": 266,
+        "landmark": {
+            "class": "ForBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "condition": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 14,
+                    "landmark": {
+                        "type": "const",
+                        "class": "OfConditionBlock"
+                    },
+                    "data": {
+                        "var": "i",
+                        "iterable": "obj"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 9,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 289,
+        "blockEnd": 290,
+        "start": 267,
+        "end": 291,
+        "landmark": {
+            "class": "ForBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "condition": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 12,
+                    "landmark": {
+                        "type": "var",
+                        "class": "OfConditionBlock"
+                    },
+                    "data": {
+                        "var": "i",
+                        "iterable": "obj"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 10,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    },
+    {
+        "blockStart": 310,
+        "blockEnd": 309,
+        "start": 292,
+        "end": 317,
+        "landmark": {
+            "class": "ShortForBlock"
+        },
+        "data": {
+            "foundkey": ")",
+            "condition": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 0,
+                    "end": 12,
+                    "landmark": {
+                        "type": "var",
+                        "class": "OfConditionBlock"
+                    },
+                    "data": {
+                        "var": "i",
+                        "iterable": "obj"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": {
+                "children": [
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 0,
+                        "end": 7,
+                        "landmark": {
+                            "class": "StringBlock"
+                        },
+                        "data": {
+                            "string": "short"
+                        },
+                        "isBlock": false,
+                        "index": 0,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    }
+                ]
+            }
+        },
+        "isBlock": true,
+        "index": 11,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [],
+        "comments": []
+    }
+]

@@ -4257,10 +4257,356 @@
         "comments": []
     },
     {
-        "blockStart": 1866,
-        "blockEnd": 1866,
+        "blockStart": 1868,
+        "blockEnd": 1872,
         "start": 1851,
-        "end": 1866,
+        "end": 1872,
+        "landmark": {
+            "class": "ChainBlock",
+            "array": true,
+            "var": true
+        },
+        "data": {
+            "variable": "chain",
+            "foundkey": "]",
+            "index": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 1,
+                    "end": 7,
+                    "landmark": {
+                        "class": "StringBlock"
+                    },
+                    "data": {
+                        "string": "array"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "negation": " ",
+            "_end": {
+                "var": " 'a'\n",
+                "stop": "\n"
+            }
+        },
+        "isBlock": true,
+        "index": 70,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 1868,
+                "end": 1871,
+                "landmark": {
+                    "class": "StringBlock"
+                },
+                "data": {
+                    "string": "a"
+                },
+                "isBlock": false,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 1887,
+        "blockEnd": 1900,
+        "start": 1872,
+        "end": 1900,
+        "landmark": {
+            "class": "ChainBlock",
+            "array": true
+        },
+        "data": {
+            "variable": "chain",
+            "foundkey": "]",
+            "index": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 1,
+                    "end": 7,
+                    "landmark": {
+                        "class": "StringBlock"
+                    },
+                    "data": {
+                        "string": "array"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 71,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": 1896,
+                "blockEnd": 1900,
+                "start": 1885,
+                "end": 1900,
+                "landmark": {
+                    "class": "ChainBlock",
+                    "array": true,
+                    "var": true
+                },
+                "data": {
+                    "foundkey": "]",
+                    "index": [
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 0,
+                            "end": 5,
+                            "landmark": {
+                                "class": "VariableInstanceBlock",
+                                "empty": true
+                            },
+                            "data": {
+                                "name": "chain"
+                            },
+                            "isBlock": false,
+                            "index": 0,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        }
+                    ],
+                    "negation": " ",
+                    "_end": {
+                        "var": " 'a'\n",
+                        "stop": "\n"
+                    }
+                },
+                "isBlock": true,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 1896,
+                        "end": 1899,
+                        "landmark": {
+                            "class": "StringBlock"
+                        },
+                        "data": {
+                            "string": "a"
+                        },
+                        "isBlock": false,
+                        "index": 0,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    }
+                ],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 1924,
+        "blockEnd": 1928,
+        "start": 1900,
+        "end": 1928,
+        "landmark": {
+            "class": "ChainBlock",
+            "array": true,
+            "var": true
+        },
+        "data": {
+            "first": "chain",
+            "second": "second",
+            "foundkey": "]",
+            "index": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 1,
+                    "end": 7,
+                    "landmark": {
+                        "class": "StringBlock"
+                    },
+                    "data": {
+                        "string": "array"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "negation": " ",
+            "_end": {
+                "var": " 'a'\n",
+                "stop": "\n"
+            }
+        },
+        "isBlock": true,
+        "index": 72,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": null,
+                "blockEnd": null,
+                "start": 1924,
+                "end": 1927,
+                "landmark": {
+                    "class": "StringBlock"
+                },
+                "data": {
+                    "string": "a"
+                },
+                "isBlock": false,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 1950,
+        "blockEnd": 1971,
+        "start": 1928,
+        "end": 1971,
+        "landmark": {
+            "class": "ChainBlock",
+            "array": true
+        },
+        "data": {
+            "first": "chain",
+            "second": "second",
+            "foundkey": "]",
+            "index": [
+                {
+                    "blockStart": null,
+                    "blockEnd": null,
+                    "start": 1,
+                    "end": 7,
+                    "landmark": {
+                        "class": "StringBlock"
+                    },
+                    "data": {
+                        "string": "array"
+                    },
+                    "isBlock": false,
+                    "index": 0,
+                    "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                    "path": [],
+                    "children": [],
+                    "comments": []
+                }
+            ],
+            "_end": []
+        },
+        "isBlock": true,
+        "index": 73,
+        "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+        "path": [],
+        "children": [
+            {
+                "blockStart": 1967,
+                "blockEnd": 1971,
+                "start": 1949,
+                "end": 1971,
+                "landmark": {
+                    "class": "ChainBlock",
+                    "array": true,
+                    "var": true
+                },
+                "data": {
+                    "word": "chain",
+                    "foundkey": "]",
+                    "index": [
+                        {
+                            "blockStart": null,
+                            "blockEnd": null,
+                            "start": 1,
+                            "end": 7,
+                            "landmark": {
+                                "class": "StringBlock"
+                            },
+                            "data": {
+                                "string": "chain"
+                            },
+                            "isBlock": false,
+                            "index": 0,
+                            "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
+                            "path": [],
+                            "children": [],
+                            "comments": []
+                        }
+                    ],
+                    "negation": " ",
+                    "_end": {
+                        "var": " 'a'\n",
+                        "stop": "\n"
+                    }
+                },
+                "isBlock": true,
+                "index": 0,
+                "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                "path": [],
+                "children": [
+                    {
+                        "blockStart": null,
+                        "blockEnd": null,
+                        "start": 1967,
+                        "end": 1970,
+                        "landmark": {
+                            "class": "StringBlock"
+                        },
+                        "data": {
+                            "string": "a"
+                        },
+                        "isBlock": false,
+                        "index": 0,
+                        "parent": "Tetraquark\\Model\\Block\\BlockModel",
+                        "path": [],
+                        "children": [],
+                        "comments": []
+                    }
+                ],
+                "comments": []
+            }
+        ],
+        "comments": []
+    },
+    {
+        "blockStart": 1986,
+        "blockEnd": 1986,
+        "start": 1971,
+        "end": 1986,
         "landmark": {
             "class": "ChainBlock",
             "first": true
@@ -4272,7 +4618,7 @@
             "_end": []
         },
         "isBlock": true,
-        "index": 70,
+        "index": 74,
         "parent": "Tetraquark\\Model\\Block\\ScriptBlockModel",
         "path": [],
         "children": [],

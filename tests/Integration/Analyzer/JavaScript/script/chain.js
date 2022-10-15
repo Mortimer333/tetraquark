@@ -87,5 +87,9 @@ chain['array'][chain]()['chain']
 chain.second['array'].chain
 chain.second['array']['chain']
 chain.second['array'].chain['chain']
+chain['array'] = 'a'
+chain['array'][chain] = 'a'
+chain.second['array'] = 'a'
+chain.second['array'].chain['chain'] = 'a'
 
 chain.#second

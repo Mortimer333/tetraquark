@@ -48,7 +48,7 @@ abstract class LandmarkStorage
             "class" => "ChainBlock",
             "array" => true,
             "var" => true,
-            "_block" => self::_BLOCK_CHAINEND,
+            "_block" => self::_BLOCK_VAREND,
         ],
         '/s|e\(/find:")":"(":"values">read:"values"\\' => [
             "class" => "ChainBlock",
@@ -773,13 +773,13 @@ abstract class LandmarkStorage
 
     public static function getFunctionAndGenerator(): array
     {
-        $parenthesis = '(' . self::genFindParenthesis('arguments') . '/s|e\{';
+        $parenthesis = '/s|e\(' . self::genFindParenthesis('arguments') . '/s|e\{';
         $class = "FunctionBlock";
         return [
             self::WORD_SEPERATOR_SEGMENT . 'function' => [
                 "_extend" => [
                     // GENERATOR
-                    '*/s\/word:"name"\\' . $parenthesis => [
+                    '*/s|e\/word:"name"\\' . $parenthesis => [
                         "class" => $class,
                         "generator" => true,
                         "_block" => self::_BLOCK_OBJECT,

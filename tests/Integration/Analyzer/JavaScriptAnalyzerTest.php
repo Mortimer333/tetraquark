@@ -116,7 +116,9 @@ class JavaScriptAnalyzerTest extends BaseAnalyzer
             // "while and short while" => ['whileandshortwhile', $reader],
             // "while and short while" => ['elseifelse', $reader],
             // "for and short for" => ['forandshortfor', $reader],
-            "for and short for" => ['forandshortfor', $reader, true],
+            // "for in for of" => ['forinforof', $reader],
+            // "function and generator" => ['functionandgenerator', $reader],
+            "" => ['', $reader, true],
         ];
     }
 
