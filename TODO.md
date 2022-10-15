@@ -1,152 +1,156 @@
-# TO DO
+# Tetraquark
+PHP <del>Library</del>Tool for <del>minifying javascript</del>mapping out scripts
 
-## Aliasing
+# Draft
+1. You can point main file and minifier will minify it and try to make it a single file and smallest possible. Might want to get functions or whole files from imports to make this independed file.
+2. It will iterate over code and try to:
+  - Replace all variables with single letters (if letters are all used start again but with two for example: last variable was `z` next will be `aa`)
+  - Try to replace methods with single letters (same rule as above)
+  - Remove all whitespace added for readability and add semicolomns instead of end line char (if there isn't already semicolomn present)
+  - Replace `if` statments with only one line in them with braceless - if (true) { console.log('One liner'); } if (true) console.log('One liner');
+    - Check if it won't be better to try and replace them with `?:` or `??`
+  - Create its own variables for strings used multiple times or big numbers
+  - Create variables for same calls of the function (for example `Object.keys` saved into `as` and would be called like this: `as(object)`)
+3. You can:
+  - Indicate if script should change the name of upper functions and global attrbiutes:
+    - Which means if class `Foo` has attrbitue `name` (`Foo.name`) it won't get changed into `a`, same goes for method `getName` (`Foo.getName`) but all variables inside `getName` will be changed into letters. TL;TR; All functions and attrbiutes available for usage won't get changed, anything scoped inside function (which can't be accessed) will be.
+  - Designate some methods and attributes for minifying or designate some methods and attributes which can't be minified (one or anothe; can't use both)
+  - Choose to not include (copy the content) of its imports
+  - Choose to not include one or more of imports or choose to include one or more of imports (try to allow for choosing specific functions, like copy all other stuff into this file but leave this method call like it was (so copy method `render.content()` into `ab()` but leave `render.clear()` without changes))
 
-This is supposed to be a minifier and obfuscator in one. But due to project with higher priority the obfuscator functionality won't be finished and this library will be only joining and minifing files. There is about 50% work done on obfuscator but this is still not usable.
+PHPunit
 
-# Fixes
+php ./vendor/bin/phpunit tests
+XDEBUG_MODE=coverage php ./vendor/bin/phpunit tests --coverage-text XDEBUG_MODE=coverage
+php test/test.php > test/test.log 2>&1
 
-## Add the rest of taken keywords
-- 'instanceof' => true,
-- 'typeof' => true,
-- 'undefined' => true,
-- 'void' => true,
-- 'debugger' => true,
-- 'yield' => true, // only generators
-- 'false' => true,
-- 'true' => true,
-- 'null' => true,
-- 'NaN' => true,
-- 'Infinity' => true
+New Plan:
+1. Allow method to mark themself as cacheable. Some of them do the same operation every time (symbol), we could just cache them
+2. Allow for "after methods" (>) to be marked as to be done after the script founds block
 
-- 'super' => null, // I don't think we need block for this one
-- 'in' => null, // I don't think we need block for this one
-- 'enum' => null, // ? actually not existing, can be skipped
+Plan:
+0. [DONE] Merge it to master and create new branch
+1. [DONE] Save somewhere how I figured out Import and Export (ImportBlock and ExportBlock - `let Ī = {};Ī.y = Ī => {};`) - we are moving JS handle
+   to `schemats/` as part of transforming this to being a tool not dedicated solution.
+2. [DONE] Clean old code:
+   - Block
+   - Trait
+   - Fundation
+   - Few root classes I don't use
+3. [DONE] Move Log class to seperate project and explain the future of it with Attributes
+4. [DONE] Maybe move Content class out (too) as it is surprisingly useful
+5. [DONE] Recreate Validate as something used for JS sytax schema `/schemats/javascript` and copy used methods by Reader to it or in Str (probably in Str)
+   - Quick test it
+6. [DONE] Create unit tests (`test/Unit`) for each public method (probably all of them) for:
+   - [DONE] Str
+   - [DONE] Content (if not moved)
+   - [DONE] Reader
+   - [DONE] *Model
+7. Create integration tests - one for each syntax (probably generate map and use it as reference)
+   - each test should have seperate file with test data
+   - Do generic tests:
+     - [DONE] Simple - just normal data
+     - [DONE] Extend - with extended instructions
+     - [DONE] Methods - with all default methods
+     - [DONE] Settings - with all settings (comments remove)
+     - [DONE] Comments - with leave comments
+     - [DONE] Blocks - with blocks (children)
+   - each test have to check:
+     - with formal syntax - `const a = 'a';`
+     - with lazy syntax - `const a='a'`
+     - with weird syntax - `const a\n\t=\n\t\t'a'`
+     - all of them should be inside tests/Integration folder
+8. [DONE] Figure out better schema handling and extending (as current setup have to be upgraded a lot)
 
-- 'break' => true,
-- 'do' => true,
-- 'case' => true,
-- 'else' => true,
-- 'new' => true,
-- 'var' => true,
-- 'catch' => true,
-- 'finally' => true,
-- 'return' => true,
-- 'continue' => true,
-- 'for' => true,
-- 'switch' => true,
-- 'while' => true,
-- 'function' => true,
-- 'this' => true,
-- 'with' => true,
-- 'default' => true,
-- 'if' => true,
-- 'throw' => true,
-- 'delete' => true,
-- 'try' => true,
-- 'class' => true,
-- 'extends' => true,
-- 'const' => true,
-- 'export' => true,
-- 'import' => true,
-- 'let' => true,
-- 'static' => true,
-- 'from' => true
+TODO:
+1. [DONE] Some problem with missed in caller block -word.funcion = 12 + func(1 , 23);
+2. [DONE] Add method which will create children for item (varend>read/objectify)
+3. [DONE] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator - SymbolBlock
+4. [DONE] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
+5. [DONE] Object with array acces (object['asd'])
+6. [DONE] yeld* - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/yield*
+7. [DONE] class - extends
+8. [DONE] private class attrbitues and method - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields
+9. [DONE] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+10. [DONE] Object name in brackets: `{[key] : 'as'}`
+11. [DONE] Skip comments between definition: `let a = /* wel whooops */ 2;`
+12. [DONE] Figure out how to analize this: `${this.getDate()}-${months[this.getMonth()]}-${this.getFullYear()}`
+13. [DONE] Add NumberBlock
+14. [DONE] For in
+15. [DONE] For of
+16. [DONE] This weird shit - At some point. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols:
+17. [DONE] Is it possible to have multiple call ont he same method - `caller(1)(2)(3)`
 
-## Define where semicolon should be placed. This can be decided on when joining subblocks via the table. We can define which variable has which schemat (for example typeof will have variable after its definition)
-## Add to variables Deconstructed assignment - https://medium.com/swlh/javascript-best-practices-renaming-imports-and-proper-variable-declaration-aa405c191bee
-## If CallerBlock try to get caller name
-## Upgrade fixScript as it doesn't reamove all not needed space example: do{ whileLooped--; console.log(whileLooped);}
-## Fix performance -  we take so much time on few script (like 15s)
-## Put imports not in seperate attributes (Ī.y = Ī => {) but inside the object (let Ī={y:Ī=>{}};). This way we will save 2n letter per n imports (so with 10 imports 20 letters)
+List of blocks which I might not implement:
+~ SemicolonBlock - not needed
+~ UndefinedBlock - automatic missed data
+~ ScriptBlock - its implemented automatically
 
-# Improvments - probably name searching when creating exports takes a lot of time
+List of implemented blocks:
++ Import:
+    + ImportPromiseBlock
+    + ImportObjectBlock
+    + ImportObjectItemBlock
+    + ImportAsBlock
+    + ImportAllBlock
+    + ImportFromBlock
+    + ImportItemSeperatorBlock
+    + ImportBlock
 
-# replace ifs with short if:
++ Export:
+    + ExportDefaultBlock
+    + ExportAsBlock
+    + ExportAllBlock
+    + ExportFromBlock
+    + ExportObjectItemBlock
+    + ExportObjectBlock
 
-"bind" != n && this[n].map(e => e.textContent = e.text);
-is equivalent of
-if ("bind" != n) {
-  this[n].map(e => e.textContent = e.text);
-}
-
-## function in function replacment
-
-const t = t => n => n.textContent = n.textContent.split("{" + t + "}").join(e[t]);
-is equivalent of
-
-const t = function (t) {
-  return function (n) {
-    n.textContent = n.textContent.split("{" + t + "}").join(e[t]);
-  }
-}
-
-## If script will be slow look into setting all values for functions in one iteration (instead of ~2,5)
-
-## Setting to allow changing anonymous functions `function () {}` into array functions `() => {}`
-
-## Next stage - check for any useless statements
-- not resolved methemtical equasions - 2 +2 (or more realisticly 60\*60\*24)
-- variables only containing strings and number - 'asd' + 'vxc' + 2 (but look out for those - 'asd' + (2+3))
-- if `IfBlock` and with `return` but the next one is else then remove else completely
-  - maybe if if ends with empty return it might be better to remove `return;` and extend if with `else{}`? this might be less symbols in the end (7 to 6 (or 4 if its single instruction))
-- remove not used variables (scope required)
-
-## Handle
-- [DONE] import, export
-- [DONE] ?: conditions
-- [DONE] array (used like object)
-- [DONE] notes
-- [DONE] chain linking with square brackets (if bracet is prefixed with `:` or `=` then its array)
-- [DONE] Object,
-- [DONE] if (removing brackets if it contains only one instruction),
-- [DONE] for (replace vars in brackets),
-- [DONE] while and do while,
-- [DONE] Switch
-- [DONE] passing anonymous functions,
-
-# Known bugs
-
-1. Arrow Method inside parenthesis:
-(x => x + 1)
-
-2. When someone uses double spaces as in a value name:
-let obj = {};
-obj['a  b'] = 'v';
-This: obj['a  b'] will become this obj['a b'] in process which might cause some problems with script.
-
-# Problems:
-
-## 0. If
-```js
-let obj = {
-    'asd' :2,
-    33 : 'sad'
-};
-
-function fuc() {
-    return {
-        'asd' : 123
-    };
-}
-```
-
-## Accessing object with generated names
-
-My alias replacer for globally scoped vars will not work for anything that accessed them dynamically, example:
-```js
-class Test1 {
-    varOne = 'one';
-    varTwo = 'two';
-}
-
-const newTest = new Test1();
-['One', 'Two'].forEach(suffix => {
-    console.log(newTest['var' + suffix]);
-});
-```
-Its going to be translated into something like this:
-```js
-class a{b='one';c='two';}const d=new a;['One', 'Two'].forEach(e=>{console.log(d['var' + e]);}
-``
-Which will result in error `varOne doesn't exist` because varOne got replaced with `b`.
++ VariableItemBlock - VariableInstanceBlock
++ WhileBlock
++ DebuggerBlock - KeywordBlock:debugger
++ ObjectSoloValueBlock - VariableInstanceBlock (parent ObjectBlock)
++ UndefinedValueBlock - KeywordBlock:undefined
++ NullBlock - KeywordBlock:null
++ InfinityBlock - KeywordBlock:Inifinity
++ OperatorBlock - VariableInstanceBlock:addition|subtraction
++ StringBlock
++ NewClassBlock - NewClassInstanceBlock
++ VoidBlock - KeywordBlock:void
++ ObjectValueBlock - ObjectValueBlock
++ ObjectBlock
++ SwitchCaseBlock - SwitchCaseBlock
++ TripleEqualBlock - ExactBlock
++ DoWhileBlock
++ CatchBlock
++ YeldBlock - YieldBlock
++ AttributeBlock - VariableInstanceBlock
++ StaticInitializationBlock
++ InstanceofBlock - KeywordBlock:instanceof
++ FinallyBlock
++ SpreadBlock - ObjectBlock:spread, VariableInstanceBlock:spread, ArrayBlock:spread
++ DoubleEqualBlock
++ ExportBlock - EqualBlock
++ CallerBlock - CallerBlock
++ FunctionBlock
++ TryBlock
++ SymbolBlock
++ ArrayItemSeperatorBlock - CommaBlock
++/- ScopeBlock - ObjectBlock
++ BreakBlock -  KeywordBlock:break
++ ElseBlock
++ EmptyAttributeBlock - VariableBlock:empty
++ IfBlock
++ FalseBlock
++ VariableBlock
++ TrueBlock
++ ClassBlock
++ TypeofBlock - KeywordBlock:typeof
++ SwitchBlock
++ ForBlock
++ ClassMethodBlock
++ NanBlock - KeywordBlock:NaN
++ ReturnBlock
++ ContinueBlock - KeywordBlock:continue
++ ArrowFunctionBlock - ArrowMethodBlock
++ ChainLinkBlock - ChainBlock
++ ArrayBlock
