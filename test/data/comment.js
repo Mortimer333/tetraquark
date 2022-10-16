@@ -1,1 +1,1 @@
-import defaultExport, { export1 } from "module-name";
+let foo = "bar";
