@@ -11,7 +11,7 @@ It helps with tasks such as:
 - etc.
 
 # Real life example
-Let's take for example that you were tasked to write beautifier for project but the language you are writing in doesn't have any available beautifier that follows rules set in your project. Now instead of wasting time on writing basic functionality for your project you might want to pick up this library that will analyse code for you and output code ready for beautifying. Or, if the language in which your project is written is doesn't have analyser you might use it core functionality to write it by yourself, still saving a lot of time and effort.
+Let's imagine that you were tasked to write beautifier for project but the language you are writing in doesn't have any available beautifier that follows rules set for your project. Now instead of wasting time on writing basic functionality to analyze code and transform it into something other scripts can understand you might want to pick up this library. It will provide you with basic functionallity for code analysing speeding up the process. Or, if the language in which your project is written doesn't have analyser you might use it core functionality to write it by yourself, still saving a lot of time and effort.
 
 It resolves issues like:
 - UTF-8 multibyte characters - thanks to `Content` library retrieving letters and string manipulation is quite easy, quick and will never return trash characters
