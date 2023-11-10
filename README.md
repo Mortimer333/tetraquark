@@ -1,5 +1,5 @@
 # Tetraquark
-Tetraquark is PHP library that helps analyse code (file has to be in UTF-8).
+Tetraquark allows you to analyze code with your custom schema in Trie fashion.
 
 # Overview
 The main purpose of this library is to provide basic functionality to help with code analysis. By code analysing I mean turning lines of code into objects that other scripts/libraries can understand.
